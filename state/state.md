@@ -48,3 +48,4 @@
   - builder-B (沉浸派): demos/v1-B-immersive/
   - builder-C (探索派): demos/v1-C-explorer/
 [2026-05-20 H6] [builder-C] DONE — demos/v1-C-explorer/ (8 pages, 7 components: rarity-halo / time-pillar / ancient-map / form-genealogy / inscription-reader / pilgrimage-passport / purpose-scene[light])
+[2026-05-20 H6] [builder-A] DONE — demos/v1-A-textual-research/ (8 pages, 6 components: time-pillar / ancient-map / pattern-tree[+rubbing loupe] / form-genealogy[+compare wall] / inscription-reader[段位制+三栏切换] / rarity-halo[克制无动效] + pilgrimage-passport placeholder)
