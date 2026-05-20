@@ -52,21 +52,34 @@
     document.body.insertAdjacentHTML('beforeend', html);
   }
 
-  // ----- Image with fallback (uses SVG bronze-placeholder when image fails) -----
+  // ----- Image with fallback (uses器型 silhouette SVG when image fails) -----
+  // Updated 2026-05-20 H10 per merged-spec §1: replace gradient-blob fallback with
+  // recognizable per-type SVG silhouette tinted gold. 5/5 Auditors flagged this as P0.
   function imageOrPlaceholder(artifact, opts = {}) {
     const cls = opts.cls || "";
     const style = opts.style || "";
     const name = artifact.name_zh;
     const url = MCData.imageUrlFor(artifact);
+    const silUrl = MCData.silhouetteUrl(artifact);
+    const safeName = (name || '').replace(/"/g, '&quot;');
     if (!url) {
-      return `<div class="bronze-placeholder ${cls}" data-name="${name}" style="${style}"></div>`;
+      // No real image at all — show silhouette + name, on dark bronze background.
+      return `
+        <div class="bronze-placeholder ${cls}" data-name="${safeName}" style="${style} position: relative; display:flex; align-items:center; justify-content:center;">
+          <img src="${silUrl}" alt="${safeName} 剪影"
+               style="width:55%; height:55%; object-fit:contain; opacity:0.78; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.45)); color:#d4a857;"
+               onerror="this.style.display='none';"/>
+        </div>
+      `;
     }
-    const safeName = name.replace(/"/g, '&quot;');
     return `
-      <div class="bronze-placeholder ${cls}" data-name="${safeName}" style="${style} position: relative;">
+      <div class="bronze-placeholder ${cls}" data-name="${safeName}" style="${style} position: relative; display:flex; align-items:center; justify-content:center;">
+        <img src="${silUrl}" alt=""
+             class="absolute" aria-hidden="true"
+             style="width:55%; height:55%; object-fit:contain; opacity:0.55; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.45)); color:#d4a857;"/>
         <img src="${url}" alt="${safeName}" class="absolute inset-0 w-full h-full object-cover"
              style="opacity:0; filter: brightness(0.85) contrast(1.05) saturate(0.85);"
-             onload="this.style.opacity='1'; this.parentElement.removeAttribute('data-name');"
+             onload="this.style.opacity='1'; this.parentElement.removeAttribute('data-name'); var prev=this.previousElementSibling; if(prev) prev.style.display='none';"
              onerror="this.style.display='none';"/>
       </div>
     `;

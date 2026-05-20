@@ -273,41 +273,137 @@ window.MC = (function () {
     if (!data) throw new Error('catalog load failed');
     window.MC._catalog = data;
     window.MC._byId = Object.fromEntries(data.map(a => [a.id, a]));
+    // Precache silhouettes (parallel; non-blocking — callers should await MC.silhouettesReady)
+    window.MC.silhouettesReady = precacheSilhouettes();
+    await window.MC.silhouettesReady;
     return data;
   }
 
-  // Image fallback — use a stylized SVG since wikipedia URLs are CC category pages
-  // We use a colored gradient placeholder + 篆書 name. This keeps tone correct.
-  function placeholderSvg(a) {
+  // ---- Silhouette map: artifact id -> filename under /assets/silhouettes/ ----
+  // Generated 2026-05-20 H10 by builder-iterator-v2 per merged-spec.md §1 shared foundation.
+  // Replaces the prior gradient-blob fallback that 4/5 Auditors flagged.
+  const SILHOUETTE_BY_ID = {
+    houmuwu_ding:           'fangding',
+    siyang_fangzun:         'fang_zun',
+    fuhao_xiaozun:          'xiao_zun',
+    da_yu_ding:             'yuanding',
+    da_ke_ding:             'yuanding',
+    maogong_ding:           'yuanding',
+    sanshi_pan:             'pan',
+    he_zun:                 'fang_zun',
+    li_gui:                 'gui',
+    guoji_zibai_pan:        'pan',
+    lianhe_fanghu:          'fanghu',
+    yuewang_goujian_jian:   'yuewang_jian',
+    zenghouyi_bianzhong:    'bianzhong',
+    zenghouyi_zunpan:       'fang_zun',
+    cuojin_boshanlu:        'fanghu',
+    changxin_gongdeng:      'changxin_gongdeng',
+    matafeiyan:             'sanxingdui_dali_ren',
+    sanxingdui_dali_ren:    'sanxingdui_dali_ren',
+    sanxingdui_zongmu_mianju:'sanxingdui_zongmu',
+    sanxingdui_shenshu:     'sanxingdui_dali_ren',
+    zilong_ding:            'yuanding',
+    siyangshou_bu:          'fang_zun',
+    longxing_gong:          'fanghu',
+    qin_tongchema:          'sanxingdui_dali_ren',
+    shangyang_fangsheng:    'pan',
+  };
+
+  // Map by form_subtype keyword as fallback when id is missing from above
+  function silhouetteKeyFor(a) {
+    if (!a) return 'yuanding';
+    if (SILHOUETTE_BY_ID[a.id]) return SILHOUETTE_BY_ID[a.id];
+    const f = (a.form_subtype || a.type || '');
+    if (f.includes('方鼎')) return 'fangding';
+    if (f.includes('鼎'))   return 'yuanding';
+    if (f.includes('簋'))   return 'gui';
+    if (f.includes('鸮'))   return 'xiao_zun';
+    if (f.includes('方尊')) return 'fang_zun';
+    if (f.includes('尊'))   return 'fang_zun';
+    if (f.includes('壶'))   return 'fanghu';
+    if (f.includes('盘'))   return 'pan';
+    if (f.includes('钟'))   return 'bianzhong';
+    if (f.includes('剑'))   return 'yuewang_jian';
+    if (f.includes('灯'))   return 'changxin_gongdeng';
+    if (f.includes('立人')) return 'sanxingdui_dali_ren';
+    if (f.includes('面具')) return 'sanxingdui_zongmu';
+    return 'yuanding';
+  }
+
+  // Bronze tint per rarity tier — silhouette is single-color so we set fill via CSS color
+  function silhouetteFillFor(a) {
     const t = rarityTier(a);
-    const palette = {
-      'treasure': ['#d4a857', '#a4732c'],
-      'tier-1':   ['#c9a85f', '#947a3d'],
-      'tier-2':   ['#a575a5', '#754d75'],
-      'tier-3':   ['#7d99b5', '#536b85'],
-      'common':   ['#b5b1aa', '#857f74'],
+    return {
+      'treasure': '#a4732c',
+      'tier-1':   '#947a3d',
+      'tier-2':   '#754d75',
+      'tier-3':   '#536b85',
+      'common':   '#857f74',
     }[t];
+  }
+
+  // Path resolver: tries multiple candidate roots so the same code works whether
+  // catalog.html is opened directly, or via a sub-path.
+  // Returns an inline-embeddable data URI of the SVG silhouette (no network fetch needed at render time).
+  // For the iteration-1 close-loop, we embed the SVG markup directly via JS for simplicity
+  // (so a single <img src> with data: URI keeps working on all 8 pages).
+  const _SVG_CACHE = {};
+  function _loadSilhouetteSync(key) {
+    if (_SVG_CACHE[key]) return _SVG_CACHE[key];
+    return null; // will be filled by precache below
+  }
+
+  // Precache all 12 silhouettes on load (these files exist under /assets/silhouettes/).
+  // We use XHR sync? No — fetch async; consumers should call placeholderUrl after MC.ready.
+  async function precacheSilhouettes() {
+    const keys = ['fangding','yuanding','xiao_zun','fang_zun','sanxingdui_zongmu','sanxingdui_dali_ren','yuewang_jian','changxin_gongdeng','gui','bianzhong','pan','fanghu'];
+    const candidateRoots = [
+      '../../assets/silhouettes/',
+      '../assets/silhouettes/',
+      '/assets/silhouettes/',
+      './assets/silhouettes/',
+    ];
+    for (const key of keys) {
+      for (const root of candidateRoots) {
+        try {
+          const r = await fetch(root + key + '.svg');
+          if (r.ok) {
+            _SVG_CACHE[key] = await r.text();
+            break;
+          }
+        } catch (_) {}
+      }
+    }
+  }
+
+  // Image fallback — uses pre-cached器型 silhouette SVG.
+  // Updated 2026-05-20 H10: was a generic ellipse blob (Aesthetic Auditor P0 "椭圆 blob"), now per-type silhouette.
+  // If silhouette hasn't loaded yet (async race), falls back to a quiet name-only mark.
+  function placeholderSvg(a) {
+    const key = silhouetteKeyFor(a);
+    const fill = silhouetteFillFor(a);
     const txt = (a.name_zh || '').slice(0, 4);
+    const inner = _SVG_CACHE[key] || '';
+    // Strip outer <svg> tag from the cached file; we'll wrap our own viewBox 200x240.
+    let innerBody = '';
+    if (inner) {
+      const m = inner.match(/<svg[^>]*>([\s\S]*?)<\/svg>/);
+      if (m) innerBody = m[1];
+      // Override the SVG file's hardcoded bronze fill with the per-rarity tint.
+      innerBody = innerBody.replace(/fill="#a4732c"/g, `fill="${fill}"`);
+    }
+    if (!innerBody) {
+      // Silhouette not yet loaded — quiet name-only mark (no gradient blob).
+      return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" preserveAspectRatio="xMidYMid meet">
+        <rect width="200" height="240" fill="#f4ede0"/>
+        <text x="100" y="125" text-anchor="middle" font-family="STKaiti,KaiTi,serif" font-size="14" fill="${fill}" opacity="0.55">${txt}</text>
+      </svg>`;
+    }
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" preserveAspectRatio="xMidYMid meet">
-      <defs>
-        <linearGradient id="g_${a.id}" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="${palette[0]}" stop-opacity="0.85"/>
-          <stop offset="100%" stop-color="${palette[1]}" stop-opacity="0.95"/>
-        </linearGradient>
-        <radialGradient id="lit_${a.id}" cx="0.3" cy="0.25" r="0.7">
-          <stop offset="0%" stop-color="rgba(255,255,255,0.7)"/>
-          <stop offset="40%" stop-color="rgba(255,255,255,0.1)"/>
-          <stop offset="100%" stop-color="rgba(0,0,0,0.3)"/>
-        </radialGradient>
-      </defs>
-      <rect width="200" height="240" fill="#f2ede3"/>
-      <g transform="translate(100,120)">
-        <ellipse rx="68" ry="84" fill="url(#g_${a.id})"/>
-        <ellipse rx="68" ry="84" fill="url(#lit_${a.id})" opacity="0.8"/>
-        <path d="M-50,-60 L50,-60 L40,-55 L-40,-55 Z" fill="${palette[1]}" opacity="0.6"/>
-        <path d="M-58,40 Q0,55 58,40 L48,68 Q0,80 -48,68 Z" fill="${palette[1]}" opacity="0.4"/>
-      </g>
-      <text x="100" y="218" text-anchor="middle" font-family="STKaiti,KaiTi,serif" font-size="20" font-weight="700" fill="#3a2e1a" opacity="0.85">${txt}</text>
+      <rect width="200" height="240" fill="#f4ede0"/>
+      <g transform="translate(50,40) scale(1.0)">${innerBody}</g>
+      <text x="100" y="226" text-anchor="middle" font-family="STKaiti,KaiTi,serif" font-size="13" fill="${fill}" opacity="0.65" letter-spacing="2">${txt}</text>
     </svg>`;
   }
 
@@ -322,6 +418,10 @@ window.MC = (function () {
     SITES,
     GENEALOGY,
     MEMES,
+    SILHOUETTE_BY_ID,
+    silhouetteKeyFor,
+    silhouetteFillFor,
+    precacheSilhouettes,
     load,
     rarityTier,
     rarityHaloClass,

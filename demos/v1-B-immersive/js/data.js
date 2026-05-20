@@ -222,6 +222,65 @@
     return "商"; // fallback
   }
 
+  // ---- Silhouette map: artifact id -> filename under /assets/silhouettes/ ----
+  // Added 2026-05-20 H10 by builder-iterator-v2 per merged-spec §1.
+  // Used when imageUrlFor returns null (e.g. sanxingdui_zongmu_mianju with bad image),
+  // and as the visual fallback layer beneath wikimedia <img> (so a 404 still shows器型, not gradient).
+  const SILHOUETTE_BY_ID = {
+    houmuwu_ding:           'fangding',
+    siyang_fangzun:         'fang_zun',
+    fuhao_xiaozun:          'xiao_zun',
+    da_yu_ding:             'yuanding',
+    da_ke_ding:             'yuanding',
+    maogong_ding:           'yuanding',
+    sanshi_pan:             'pan',
+    he_zun:                 'fang_zun',
+    li_gui:                 'gui',
+    guoji_zibai_pan:        'pan',
+    lianhe_fanghu:          'fanghu',
+    yuewang_goujian_jian:   'yuewang_jian',
+    zenghouyi_bianzhong:    'bianzhong',
+    zenghouyi_zunpan:       'fang_zun',
+    cuojin_boshanlu:        'fanghu',
+    changxin_gongdeng:      'changxin_gongdeng',
+    matafeiyan:             'sanxingdui_dali_ren',
+    sanxingdui_dali_ren:    'sanxingdui_dali_ren',
+    sanxingdui_zongmu_mianju:'sanxingdui_zongmu',
+    sanxingdui_shenshu:     'sanxingdui_dali_ren',
+    zilong_ding:            'yuanding',
+    siyangshou_bu:          'fang_zun',
+    longxing_gong:          'fanghu',
+    qin_tongchema:          'sanxingdui_dali_ren',
+    shangyang_fangsheng:    'pan',
+  };
+
+  function silhouetteKeyFor(a) {
+    if (!a) return 'yuanding';
+    if (SILHOUETTE_BY_ID[a.id]) return SILHOUETTE_BY_ID[a.id];
+    const f = (a.form_subtype || a.type || '');
+    if (f.includes('方鼎')) return 'fangding';
+    if (f.includes('鼎'))   return 'yuanding';
+    if (f.includes('簋'))   return 'gui';
+    if (f.includes('鸮'))   return 'xiao_zun';
+    if (f.includes('方尊')) return 'fang_zun';
+    if (f.includes('尊'))   return 'fang_zun';
+    if (f.includes('壶'))   return 'fanghu';
+    if (f.includes('盘'))   return 'pan';
+    if (f.includes('钟'))   return 'bianzhong';
+    if (f.includes('剑'))   return 'yuewang_jian';
+    if (f.includes('灯'))   return 'changxin_gongdeng';
+    if (f.includes('立人')) return 'sanxingdui_dali_ren';
+    if (f.includes('面具')) return 'sanxingdui_zongmu';
+    return 'yuanding';
+  }
+
+  function silhouetteUrl(a) {
+    // Try multiple roots; the page that loads this is at demos/v1-B-immersive/<page>.html
+    // Relative path "../../assets/silhouettes/..." works from there.
+    const key = silhouetteKeyFor(a);
+    return '../../assets/silhouettes/' + key + '.svg';
+  }
+
   // ---- Image fallback for offline / failed-to-load demo ----
   // Use Wikimedia thumbnail patterns when known
   function imageUrlFor(artifact) {
@@ -311,5 +370,8 @@
     siteKeyFor,
     dynastyKeyFor,
     imageUrlFor,
+    silhouetteUrl,
+    silhouetteKeyFor,
+    SILHOUETTE_BY_ID,
   };
 })(typeof window !== "undefined" ? window : globalThis);

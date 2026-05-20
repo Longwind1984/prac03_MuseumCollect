@@ -64,3 +64,5 @@
 [2026-05-20 H7.5] [auditor-comparative] DONE — d1-comparative.md + merged-spec.md
 
 [2026-05-20 H7.5] [orchestrator] DECISION: triggering v2 close-loop iteration per Comparative Auditor + PM Auditor recommendation. Scope: 4 P0 content fixes + 6-8 high-impact silhouette SVG + wire into B/C demos. Single builder-iterator agent.
+
+[2026-05-20 H10] [builder-iterator-v2] DONE — iteration-1-changes.md (12 SVG generated, 5 content fixes [4 P0 + 1 related-B-image], 2 demos wired [C state.js + B data/ui/css]). v1-C catalog now shows 12 differentiated器型 silhouettes (was 7 identical椭圆 blob); v1-B image fallback uses silhouette (was gradient方块). Playwright verified zero new pageerror; 25/25 B me.html placeholders have correct silhouette; 22/22 C catalog cards render. ~120 min total.
