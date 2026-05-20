@@ -57,3 +57,5 @@
 [2026-05-20 H6.5] [orchestrator] 5 Auditors launched in parallel (UX/Aesthetic/Content/Motivation/PM). Comparative will spawn after they complete.
 [2026-05-20 H7] [auditor-motivation] DONE — d1-motivation.md + next-brief-motivation.md
 [2026-05-20 H7] [auditor-ux] DONE — d1-ux.md + next-brief-ux.md
+[2026-05-20 H7] [auditor-pm] DONE — d1-pm.md + next-brief-pm.md
+[2026-05-20 H7] [auditor-content] DONE — d1-content.md + next-brief-content.md
