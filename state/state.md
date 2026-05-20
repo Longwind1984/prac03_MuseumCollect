@@ -43,3 +43,7 @@
 [2026-05-20 H3] [ai-engineer] DONE — api-contract + mock-server-readme + ai-roadmap + mock-recognition.js
 [2026-05-20 H3] [visualization-designer] DONE — 10 component specs + gamification-mechanics.md
 [2026-05-20 H3] [orchestrator] Phase 2 complete (designer + ai-engineer). Launching Phase 3: 3 Builders parallel (A/B/C personas)
+[2026-05-20 H3.5] [orchestrator] Phase 3 launched: 3 Builders parallel
+  - builder-A (考据派): demos/v1-A-textual-research/
+  - builder-B (沉浸派): demos/v1-B-immersive/
+  - builder-C (探索派): demos/v1-C-explorer/
