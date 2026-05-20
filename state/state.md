@@ -54,3 +54,4 @@
 [2026-05-20 H6] [builder-B] DONE — demos/v1-B-immersive/ (8 pages, 7 components: ancient-map[era switching] / purpose-scene[杀手锏 22 positions, 等级判定] / craft-scroll / pilgrimage-passport / time-pillar / rarity-halo / 国宝独白). Playwright 8/8 pages 0 JS errors.
 
 [2026-05-20 H6.5] [orchestrator] Phase 3 complete (3/3 Builders). Launching Phase 4: 5 Auditor squad parallel (UX/Aesthetic/Content/Motivation/PM) + Comparative after.
+[2026-05-20 H6.5] [orchestrator] 5 Auditors launched in parallel (UX/Aesthetic/Content/Motivation/PM). Comparative will spawn after they complete.
