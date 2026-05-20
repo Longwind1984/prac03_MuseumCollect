@@ -39,3 +39,4 @@
 [2026-05-20 H1] [data-engineer] DONE — bronze-treasures-v1.json (24/25 fully filled) + licensing-log.md
 
 [2026-05-20 H2] [orchestrator] Phase 1 complete (3/3 agents done). Launching Phase 2: visualization-designer (background)
+[2026-05-20 H2.1] [orchestrator] also launching ai-engineer in parallel (independent of designer, light scope)
