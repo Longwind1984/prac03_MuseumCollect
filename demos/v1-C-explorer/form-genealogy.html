@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>形制谱系树 (Pokédex) — MuseumCollect</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link rel="stylesheet" href="css/explorer.css" />
+</head>
+<body class="paper-bg">
+
+<nav class="top-nav">
+  <div class="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2 click-feedback">
+      <span class="inline-flex w-8 h-8 rounded-lg items-center justify-center text-white font-bold"
+            style="background:linear-gradient(135deg,#c0392b 0%,#c9a85f 100%);font-family:'KaiTi',serif">青</span>
+      <span class="font-semibold tracking-wide">青铜图鉴</span>
+      <span class="text-xs text-stone-400">/ 探索版</span>
+    </a>
+    <div class="flex items-center gap-1 text-sm">
+      <a href="catalog.html"      class="px-3 py-1.5 rounded-full hover:bg-black/5">图鉴</a>
+      <a href="time-pillar.html"  class="px-3 py-1.5 rounded-full hover:bg-black/5">时空柱</a>
+      <a href="ancient-map.html"  class="px-3 py-1.5 rounded-full hover:bg-black/5">古国地图</a>
+      <a href="form-genealogy.html" class="px-3 py-1.5 rounded-full bg-amber-100 text-amber-900">形制谱系</a>
+      <a href="scan.html"         class="px-3 py-1.5 rounded-full hover:bg-black/5">扫描</a>
+      <a href="me.html"           class="ml-2 px-3 py-1.5 rounded-full bg-black text-amber-50 font-medium">我的</a>
+    </div>
+  </div>
+</nav>
+
+<main class="max-w-6xl mx-auto px-5 py-8">
+
+  <header class="mb-6 fade-up flex items-end justify-between flex-wrap gap-3">
+    <div>
+      <div class="text-xs text-stone-500 tracking-widest mb-1">DIMENSION · 形制 · ★ C 招牌页</div>
+      <h1 class="text-3xl font-bold">形制谱系树 · Pokédex 风</h1>
+      <p class="text-stone-600 mt-1 text-sm">点节点 → 看子型对照墙 · 集齐子型 → 解锁进化时间线</p>
+    </div>
+    <div class="flex items-center gap-3 text-xs text-stone-500">
+      <div class="flex items-center gap-1.5">
+        <span class="inline-block w-3 h-3 rounded-full bg-stone-800"></span> 根
+      </div>
+      <div class="flex items-center gap-1.5">
+        <span class="inline-block w-3 h-3 rounded-full" style="background:#5a8478"></span> 已收
+      </div>
+      <div class="flex items-center gap-1.5">
+        <span class="inline-block w-3 h-3 rounded-full bg-white border border-stone-300"></span> 待补
+      </div>
+      <div class="flex items-center gap-1.5">
+        <span class="inline-block w-3 h-3 rounded-full" style="background:#d4a857"></span> 国宝
+      </div>
+    </div>
+  </header>
+
+  <section class="grid grid-cols-12 gap-6">
+
+    <!-- LEFT: D3 tree -->
+    <div class="col-span-12 md:col-span-7 fade-up delay-1">
+      <div class="card p-4" style="height:660px;overflow:hidden">
+        <svg id="treeSvg" class="w-full h-full" viewBox="0 0 800 650"></svg>
+      </div>
+      <div class="mt-2 text-xs text-stone-500 text-center">点节点查看 · 滚轮缩放</div>
+    </div>
+
+    <!-- RIGHT: Pokédex wall for selected subtype -->
+    <div class="col-span-12 md:col-span-5 fade-up delay-2">
+      <div id="dexPanel" class="card p-5"></div>
+
+      <!-- Achievement preview -->
+      <div class="card p-5 mt-4" style="background:linear-gradient(135deg,#fff7e8 0%,#ffffff 70%)">
+        <div class="text-xs text-amber-700 tracking-widest mb-2">UNLOCKS</div>
+        <div class="space-y-3 text-xs">
+          <div>
+            <div class="flex justify-between mb-1"><span class="font-medium">鼎类大师</span><span class="text-stone-500">1 / 4 子型</span></div>
+            <div class="progress-track"><div class="progress-fill" style="width:25%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-1"><span class="font-medium">尊器收藏家</span><span class="text-stone-500">3 / 4 子型</span></div>
+            <div class="progress-track"><div class="progress-fill treasure" style="width:75%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-1"><span class="font-medium">百工之祖 · 工艺集齐</span><span class="text-stone-500">2 / 7</span></div>
+            <div class="progress-track"><div class="progress-fill" style="width:29%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <footer class="text-center text-xs text-stone-400 pt-10 pb-10">
+    集齐 = 学术揭示,不是 +XP · 集齐解锁的是"进化时间线"
+  </footer>
+</main>
+
+<script src="js/state.js"></script>
+<script>
+(async function () {
+  await MC.load();
+
+  const root = MC.GENEALOGY;
+  const dxPanel = document.getElementById('dexPanel');
+
+  // Build hierarchy
+  const hierarchy = d3.hierarchy(root);
+  const layout = d3.tree().size([620, 560]);
+  layout(hierarchy);
+
+  const svg = d3.select('#treeSvg');
+  // Use a g for the tree, allow pan/zoom
+  const g = svg.append('g').attr('transform', 'translate(60, 20)');
+
+  // Compute collected status per node
+  function isSubtypeCollected(node) {
+    if (node.data.kind === 'subtype') {
+      const m = node.data.members || [];
+      return m.some(id => MC.isCollected(id));
+    }
+    return node.children && node.children.some(c => isSubtypeCollected(c));
+  }
+  function subtypeCount(node) {
+    if (node.data.kind !== 'subtype') return null;
+    const m = node.data.members || [];
+    const owned = m.filter(id => MC.isCollected(id)).length;
+    return { owned, total: m.length };
+  }
+  function hasTreasureMember(node) {
+    if (node.data.kind !== 'subtype') return false;
+    const m = node.data.members || [];
+    return m.some(id => {
+      const a = MC.artifact(id);
+      return a && MC.rarityTier(a) === 'treasure' && MC.isCollected(id);
+    });
+  }
+
+  // Links
+  g.selectAll('.tree-link')
+    .data(hierarchy.links())
+    .enter()
+    .append('path')
+    .attr('class', d => 'tree-link' + (isSubtypeCollected(d.target) ? ' collected' : ''))
+    .attr('d', d3.linkHorizontal().x(d => d.y).y(d => d.x));
+
+  // Nodes
+  const nodes = g.selectAll('.node')
+    .data(hierarchy.descendants())
+    .enter()
+    .append('g')
+    .attr('class', 'node')
+    .attr('transform', d => `translate(${d.y},${d.x})`)
+    .style('cursor', d => d.data.kind === 'subtype' ? 'pointer' : 'default');
+
+  nodes.append('circle')
+    .attr('r', d => d.depth === 0 ? 9 : (d.data.kind === 'subtype' ? 7 : 6))
+    .attr('class', d => {
+      if (d.depth === 0) return 'tree-node-circle';
+      if (hasTreasureMember(d)) return 'tree-node-circle treasure';
+      if (isSubtypeCollected(d)) return 'tree-node-circle collected';
+      return 'tree-node-circle';
+    });
+
+  nodes.append('text')
+    .attr('dy', d => d.depth === 0 ? -16 : -10)
+    .attr('text-anchor', d => d.depth === 0 ? 'middle' : 'start')
+    .attr('x', d => d.depth === 0 ? 0 : 12)
+    .style('font-size', d => d.depth === 0 ? '14px' : '11px')
+    .style('font-weight', d => d.depth <= 1 ? '700' : '500')
+    .style('font-family', "'STKaiti', 'KaiTi', serif")
+    .style('fill', d => isSubtypeCollected(d) ? '#1a1a1c' : '#999')
+    .text(d => d.data.name);
+
+  // Subtype: count below
+  nodes.filter(d => d.data.kind === 'subtype')
+    .append('text')
+    .attr('dy', 16)
+    .attr('x', 12)
+    .style('font-size', '9px')
+    .style('fill', d => isSubtypeCollected(d) ? '#5a8478' : '#a8a8a8')
+    .text(d => {
+      const c = subtypeCount(d);
+      return c ? `${c.owned}/${c.total}` : '';
+    });
+
+  // Click subtype
+  nodes.filter(d => d.data.kind === 'subtype')
+    .on('click', (e, d) => {
+      renderDex(d.data);
+    });
+
+  // Zoom
+  const zoom = d3.zoom().scaleExtent([0.5, 2.5]).on('zoom', (e) => {
+    g.attr('transform', `translate(${60 + e.transform.x}, ${20 + e.transform.y}) scale(${e.transform.k})`);
+  });
+  svg.call(zoom);
+
+  function renderDex(subtype) {
+    const members = subtype.members || [];
+    const allArtifactsForSubtype = members.map(MC.artifact).filter(Boolean);
+    const owned = allArtifactsForSubtype.filter(a => MC.isCollected(a.id));
+    const candidates = allArtifactsForSubtype.filter(a => !MC.isCollected(a.id));
+
+    // synthetic locked slots (Pokédex 风 — show empty slots even if no concrete member exists)
+    const targetSlots = Math.max(4, allArtifactsForSubtype.length);
+    const emptySlots = Math.max(0, targetSlots - allArtifactsForSubtype.length);
+
+    const ownedPct = targetSlots ? Math.round(owned.length / targetSlots * 100) : 0;
+
+    dxPanel.innerHTML = `
+      <div class="text-xs text-stone-500 tracking-widest mb-1">SUBTYPE</div>
+      <h2 class="text-2xl font-bold mb-1">${subtype.name} ${subtype.rare ? '<span class="chip zhusha ml-2">孤型</span>' : ''}</h2>
+      <div class="text-sm text-stone-500 mb-3">已知 ${allArtifactsForSubtype.length} 件 · 你 ${owned.length} 件</div>
+
+      <div class="progress-track mb-4"><div class="progress-fill ${owned.some(a => MC.rarityTier(a) === 'treasure') ? 'treasure' : ''}" style="width:${ownedPct}%"></div></div>
+
+      <div class="grid grid-cols-2 gap-3 mb-4">
+        ${allArtifactsForSubtype.map(a => {
+          const isOwned = MC.isCollected(a.id);
+          const haloClass = isOwned ? MC.rarityHaloClass(a) : '';
+          const isTreasure = MC.rarityTier(a) === 'treasure';
+          return `
+          <a href="artifact.html?id=${a.id}" class="card overflow-hidden ${haloClass} ${isOwned ? '' : 'silhouette-wrapper'} click-feedback" style="border-radius:12px">
+            ${isOwned ? `
+              <div style="aspect-ratio:4/5;background:#fff;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden">
+                ${isTreasure ? '<div class="guo-bao-stamp" style="top:5px;right:5px;width:30px;height:30px;font-size:8px">国之<br/>重器</div>' : ''}
+                <img src="${MC.placeholderUrl(a)}" style="width:88%;height:88%;object-fit:contain"/>
+              </div>
+              <div class="p-2"><div class="text-xs font-semibold truncate">${a.name_zh}</div></div>
+            ` : `
+              <div style="aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;position:relative">
+                <img src="${MC.placeholderUrl(a)}" class="silhouette" style="width:80%;height:80%;object-fit:contain;position:relative;z-index:2"/>
+              </div>
+              <div class="p-2" style="position:relative;z-index:5;background:white">
+                <div class="text-xs font-semibold text-stone-500 truncate">${a.dynasty} · 待补</div>
+                <div class="text-[10px] text-stone-400">${a.current_museum ? a.current_museum.split(' /')[0] : ''}</div>
+              </div>
+            `}
+          </a>
+          `;
+        }).join('')}
+
+        ${Array.from({length: emptySlots}, (_, i) => `
+          <div class="silhouette-wrapper" style="aspect-ratio:5/6;border-radius:12px;display:flex;align-items:center;justify-content:center;position:relative">
+            <div class="absolute inset-0" style="background:linear-gradient(135deg,#efeae0 0%,#e2dccc 100%);border-radius:12px"></div>
+            <div class="relative z-10 text-center">
+              <div class="text-[10px] text-stone-500">空 slot</div>
+              <div class="text-[10px] text-stone-400">数据库未补</div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+
+      ${candidates.length || emptySlots ? `
+        <div class="text-xs text-stone-500 mb-2">缺位提示</div>
+        <div class="text-xs text-stone-600">
+          ${candidates.length ? `还有 ${candidates.length} 件可补,补齐 → 解锁 <b>${subtype.name} 进化时间线</b>` : ''}
+        </div>
+      ` : `
+        <div class="text-sm text-emerald-700 mt-3">✦ 全集齐 · 已可看进化时间线</div>
+      `}
+    `;
+  }
+
+  // initial selection: 鸟兽形尊 (fuhao_xiaozun is collected)
+  let initial = null;
+  hierarchy.descendants().forEach(d => {
+    if (d.data.kind === 'subtype' && d.data.name === '鸟兽形尊') initial = d;
+  });
+  if (initial) {
+    renderDex(initial.data);
+  } else {
+    renderDex({ name: '方鼎', members: ['houmuwu_ding'], kind: 'subtype' });
+  }
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>图鉴 · 穿越长卷</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/immersive.css" />
+</head>
+<body>
+
+  <!-- ====== Header section ====== -->
+  <section class="px-20 pt-32 pb-8">
+    <div class="max-w-6xl mx-auto text-center scene-enter">
+      <div class="poem-line mb-3" style="font-size: 13px; letter-spacing: 0.5em; opacity: 0.6;">
+        — 图 · 鉴 —
+      </div>
+      <h1 class="calligraphy-title mb-6">穿越长卷</h1>
+      <p class="poem-line max-w-xl mx-auto" style="font-size: 15px; opacity: 0.8;">
+        二十五件国宝,三种走法。你可以听时代说话,也可以看版图变迁,或循着一件礼器的用途,走进它的场合。
+      </p>
+    </div>
+  </section>
+
+  <!-- ====== Mode switch ====== -->
+  <section class="px-20 py-8">
+    <div class="max-w-6xl mx-auto flex justify-center gap-3 scene-enter-late">
+      <button class="toggle-pill active" data-mode="dynasty">时 代 之 卷</button>
+      <button class="toggle-pill" data-mode="region">古 国 之 卷</button>
+      <button class="toggle-pill" data-mode="purpose">用 途 之 卷</button>
+    </div>
+  </section>
+
+  <!-- ====== View content ====== -->
+  <main id="catalogView" class="px-20 pb-32 scene-enter-latest"></main>
+
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script>
+    (async function () {
+      MCUI.renderHeader('catalog');
+      MCUI.renderFooter();
+      await MCData.ready;
+
+      const view = document.getElementById('catalogView');
+
+      function renderDynasty() {
+        // Group by dynasty in DYNASTIES order
+        const groups = {};
+        MCData.DYNASTIES.forEach(d => groups[d.key] = []);
+        MCData.catalog.forEach(a => {
+          const k = MCData.dynastyKeyFor(a);
+          if (!groups[k]) groups[k] = [];
+          groups[k].push(a);
+        });
+
+        view.innerHTML = `
+          <div class="max-w-6xl mx-auto">
+            ${MCData.DYNASTIES.filter(d => groups[d.key] && groups[d.key].length).map((d, idx) => `
+              <section class="mb-28 fade-up">
+                <div class="flex items-baseline gap-8 mb-10">
+                  <div class="vert-title" style="color: var(--gold-treasure); font-size: 2.2rem; letter-spacing: 0.4em;">${d.label}</div>
+                  <div class="flex-1">
+                    <div class="poem-line mb-2" style="font-size: 15px; color: var(--silk-warm); opacity: 0.9;">${d.poem}</div>
+                    <div style="color: var(--bronze-mid); font-size: 12px; letter-spacing: 0.25em;">${d.range} · ${d.years} 年 · ${groups[d.key].length} 件</div>
+                  </div>
+                  <div class="brush-divider flex-1" style="max-width: 200px;"></div>
+                </div>
+
+                <div class="grid grid-cols-4 gap-8">
+                  ${groups[d.key].map(a => {
+                    const m = MCData.getMonologue(a.id);
+                    const c = MCData.isCollected(a.id);
+                    return `
+                      <a href="artifact.html?id=${a.id}" class="block group">
+                        <div class="${MCData.isTreasure(a) ? 'halo-treasure' : ''} ${c ? '' : 'sleeping'}"
+                             style="aspect-ratio: 3/4; overflow: hidden; position: relative; transition: transform 0.6s ease;">
+                          ${MCUI.imageOrPlaceholder(a, { cls: 'w-full h-full', style: 'width:100%; height:100%;' })}
+                          ${MCData.isForbiddenExport(a) ? '<div class="absolute top-3 left-3"><span class="seal" style="font-size: 9px; padding: 2px 6px;">禁 出 境</span></div>' : ''}
+                          ${!c ? '<div class="absolute bottom-0 left-0 right-0 text-center py-2" style="background: rgba(13,12,10,0.85); font-family: var(--font-kai); font-size: 11px; letter-spacing: 0.3em; color: var(--bronze-mid);">未 唤 醒</div>' : ''}
+                        </div>
+                        <h4 class="mt-4 calligraphy-title hover-line inline-block" style="font-size: 1.1rem; color: var(--silk-cream);">${a.name_zh}</h4>
+                        <p class="mt-1 poem-line" style="font-size: 11px; opacity: 0.7; letter-spacing: 0.1em;">${(m.poem || a.period || '').slice(0, 24)}</p>
+                      </a>
+                    `;
+                  }).join('')}
+                </div>
+              </section>
+            `).join('')}
+          </div>
+        `;
+        MCUI.observeFadeUp();
+      }
+
+      function renderRegion() {
+        // Group by ancient state
+        const groups = {};
+        MCData.catalog.forEach(a => {
+          const s = a.ancient_state || '其他';
+          // normalize
+          let key = s;
+          if (s.includes('蜀')) key = '古蜀';
+          else if (s.includes('商') && !s.includes('湘')) key = '商·中原';
+          else if (s.includes('商')) key = '商·南方';
+          else if (s.includes('周')) key = '周·王畿';
+          else if (s.includes('郑')) key = '郑';
+          else if (s.includes('越')) key = '越';
+          else if (s.includes('曾')) key = '曾(随)';
+          else if (s.includes('秦')) key = '秦';
+          else if (s.includes('汉')) key = '西汉/东汉';
+          else if (s.includes('商方国') || s.includes('丙')) key = '商·方国';
+          if (!groups[key]) groups[key] = [];
+          groups[key].push(a);
+        });
+        const regionPoems = {
+          '商·中原': '天命玄鸟,降而生商。',
+          '商·南方': '湘江浩浩,商之远裔。',
+          '商·方国': '边缘方国,自有青铜。',
+          '周·王畿': '溥天之下,莫非王土。',
+          '古蜀': '其目纵,是为蚕丛。',
+          '郑': '郑伯克段于鄢。',
+          '越': '卧薪尝胆,十年生聚。',
+          '曾(随)': '钟鼓既设,一朝飨之。',
+          '秦': '六合一统,车同轨。',
+          '西汉/东汉': '神山仙境,天马奔腾。',
+        };
+
+        view.innerHTML = `
+          <div class="max-w-6xl mx-auto">
+            ${Object.entries(groups).filter(([k,v]) => v.length).map(([k, list]) => `
+              <section class="mb-28 fade-up">
+                <div class="flex items-baseline gap-8 mb-10">
+                  <div class="vert-title" style="color: var(--gold-treasure); font-size: 2rem; letter-spacing: 0.3em;">${k.replace('·','\n')}</div>
+                  <div class="flex-1">
+                    <div class="poem-line mb-2" style="font-size: 15px; color: var(--silk-warm); opacity: 0.9;">${regionPoems[k] || ''}</div>
+                    <div style="color: var(--bronze-mid); font-size: 12px; letter-spacing: 0.25em;">${list.length} 件 · ${list.filter(a => MCData.isCollected(a.id)).length} 件已唤醒</div>
+                  </div>
+                  <div class="brush-divider flex-1" style="max-width: 200px;"></div>
+                </div>
+
+                <div class="grid grid-cols-4 gap-8">
+                  ${list.map(a => {
+                    const m = MCData.getMonologue(a.id);
+                    const c = MCData.isCollected(a.id);
+                    return `
+                      <a href="artifact.html?id=${a.id}" class="block">
+                        <div class="${MCData.isTreasure(a) ? 'halo-treasure' : ''} ${c ? '' : 'sleeping'}"
+                             style="aspect-ratio: 3/4; overflow: hidden; position: relative;">
+                          ${MCUI.imageOrPlaceholder(a, { cls: 'w-full h-full', style: 'width:100%; height:100%;' })}
+                        </div>
+                        <h4 class="mt-4 calligraphy-title hover-line inline-block" style="font-size: 1.1rem; color: var(--silk-cream);">${a.name_zh}</h4>
+                        <p class="mt-1 poem-line" style="font-size: 11px; opacity: 0.7;">出 · ${(a.excavation_site || '').replace(/^[省市]/g,'').slice(0, 18)}</p>
+                      </a>
+                    `;
+                  }).join('')}
+                </div>
+              </section>
+            `).join('')}
+          </div>
+        `;
+        MCUI.observeFadeUp();
+      }
+
+      function renderPurpose() {
+        const purposeGroups = {
+          '祭祀礼器': { poem: '神鼎九重,礼乐千秋。', list: [] },
+          '盛酒礼器': { poem: '凡饮酒,先以鼎,后以尊。', list: [] },
+          '盥洗礼器': { poem: '水器在西,以洁君心。', list: [] },
+          '兵器': { poem: '剑光寒,卧薪尝胆。', list: [] },
+          '乐器': { poem: '钟鼓喤喤,磬筦将将。', list: [] },
+          '其他': { poem: '生活之器,亦有神光。', list: [] },
+        };
+        MCData.catalog.forEach(a => {
+          const p = a.purpose || '';
+          if (p.includes('祭祀')) purposeGroups['祭祀礼器'].list.push(a);
+          else if (p.includes('盛酒') || p.includes('酒礼')) purposeGroups['盛酒礼器'].list.push(a);
+          else if (p.includes('盥洗') || p.includes('水') || p.includes('盘')) purposeGroups['盥洗礼器'].list.push(a);
+          else if ((a.type || '').includes('兵')) purposeGroups['兵器'].list.push(a);
+          else if ((a.type || '').includes('乐')) purposeGroups['乐器'].list.push(a);
+          else purposeGroups['其他'].list.push(a);
+        });
+
+        view.innerHTML = `
+          <div class="max-w-6xl mx-auto">
+            ${Object.entries(purposeGroups).filter(([k,v]) => v.list.length).map(([k, info]) => `
+              <section class="mb-28 fade-up">
+                <div class="flex items-baseline gap-8 mb-10">
+                  <div class="vert-title" style="color: var(--gold-treasure); font-size: 2.2rem; letter-spacing: 0.4em;">${k.slice(0,2)}</div>
+                  <div class="flex-1">
+                    <div class="poem-line mb-2" style="font-size: 15px; color: var(--silk-warm); opacity: 0.9;">${info.poem}</div>
+                    <div style="color: var(--bronze-mid); font-size: 12px; letter-spacing: 0.25em;">${k} · ${info.list.length} 件</div>
+                  </div>
+                  <div class="brush-divider flex-1" style="max-width: 200px;"></div>
+                </div>
+
+                <div class="grid grid-cols-4 gap-8">
+                  ${info.list.map(a => {
+                    const m = MCData.getMonologue(a.id);
+                    const c = MCData.isCollected(a.id);
+                    return `
+                      <a href="artifact.html?id=${a.id}" class="block">
+                        <div class="${MCData.isTreasure(a) ? 'halo-treasure' : ''} ${c ? '' : 'sleeping'}"
+                             style="aspect-ratio: 3/4; overflow: hidden; position: relative;">
+                          ${MCUI.imageOrPlaceholder(a, { cls: 'w-full h-full', style: 'width:100%; height:100%;' })}
+                        </div>
+                        <h4 class="mt-4 calligraphy-title hover-line inline-block" style="font-size: 1.1rem; color: var(--silk-cream);">${a.name_zh}</h4>
+                        <p class="mt-1 poem-line" style="font-size: 11px; opacity: 0.7;">${(a.form_subtype || '').slice(0, 18)}</p>
+                      </a>
+                    `;
+                  }).join('')}
+                </div>
+              </section>
+            `).join('')}
+          </div>
+        `;
+        MCUI.observeFadeUp();
+      }
+
+      // Initial render
+      renderDynasty();
+
+      document.querySelectorAll('[data-mode]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          document.querySelectorAll('[data-mode]').forEach(b => b.classList.remove('active'));
+          e.currentTarget.classList.add('active');
+          const mode = e.currentTarget.dataset.mode;
+          view.style.opacity = '0';
+          setTimeout(() => {
+            if (mode === 'dynasty') renderDynasty();
+            if (mode === 'region') renderRegion();
+            if (mode === 'purpose') renderPurpose();
+            view.style.opacity = '1';
+          }, 300);
+        });
+      });
+    })();
+  </script>
+  <style>
+    #catalogView { transition: opacity 0.6s ease; }
+  </style>
+</body>
+</html>

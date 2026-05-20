@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>古国漫游 · 穿越</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/immersive.css" />
+</head>
+<body>
+
+  <section class="px-20 pt-32 pb-12">
+    <div class="max-w-6xl mx-auto text-center scene-enter">
+      <div class="poem-line mb-3" style="font-size: 13px; letter-spacing: 0.5em; opacity: 0.6;">
+        — 古 · 国 · 图 —
+      </div>
+      <h1 class="calligraphy-title mb-6">穿越图</h1>
+      <p class="poem-line max-w-2xl mx-auto" style="font-size: 15px; opacity: 0.8;">
+        山川河流三千年没变,可是国名在动。<br/>
+        商在中原,蜀在西山,它们同时活着——你愿意,可以同时看见。
+      </p>
+    </div>
+  </section>
+
+  <!-- Era switch -->
+  <section class="px-20 pb-8">
+    <div class="max-w-6xl mx-auto flex justify-center items-center gap-4 scene-enter-late">
+      <span class="poem-line" style="font-size: 12px; opacity: 0.6; letter-spacing: 0.3em;">穿越至</span>
+      <button class="toggle-pill" data-era="夏">夏</button>
+      <button class="toggle-pill active" data-era="商">商</button>
+      <button class="toggle-pill" data-era="西周">西周</button>
+      <button class="toggle-pill" data-era="春秋">春秋</button>
+      <button class="toggle-pill" data-era="战国">战国</button>
+      <button class="toggle-pill" data-era="秦汉">秦汉</button>
+    </div>
+  </section>
+
+  <!-- Map view -->
+  <section class="px-20 pb-12">
+    <div class="max-w-6xl mx-auto relative scene-enter-latest">
+
+      <div class="aged-panel paper-grain" style="position: relative; aspect-ratio: 16/10; overflow: hidden;">
+        <svg id="mapSvg" viewBox="0 0 820 560" class="w-full h-full" style="display: block;">
+          <!-- filled by JS -->
+        </svg>
+        <!-- Floating info bubble -->
+        <div id="bubble" class="poem-tooltip" style="display: none;"></div>
+      </div>
+
+      <div class="mt-8 grid grid-cols-3 gap-12">
+        <div class="text-center">
+          <div class="poem-line mb-1" style="font-size: 11px; opacity: 0.6; letter-spacing: 0.4em;">已踏足</div>
+          <div class="calligraphy-title" id="footprintCount" style="color: var(--gold-treasure); font-size: 1.6rem;">0 处</div>
+        </div>
+        <div class="text-center">
+          <div class="poem-line mb-1" style="font-size: 11px; opacity: 0.6; letter-spacing: 0.4em;">待 呼 唤</div>
+          <div class="calligraphy-title" id="waitingCount" style="color: var(--silk-warm); font-size: 1.6rem;">— 处</div>
+        </div>
+        <div class="text-center">
+          <div class="poem-line mb-1" style="font-size: 11px; opacity: 0.6; letter-spacing: 0.4em;">国 之 重 器</div>
+          <div class="calligraphy-title" id="treasureCount" style="color: var(--gold-treasure); font-size: 1.6rem;">— 处</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Selected site narrative -->
+  <section class="px-20 py-24" style="background: var(--ink-dark);">
+    <div class="max-w-5xl mx-auto" id="siteNarrative">
+      <div class="text-center mb-12">
+        <div class="poem-line" style="font-size: 13px; letter-spacing: 0.5em; opacity: 0.6;">— 点 击 任 一 古 都 ,听 它 说 —</div>
+        <h2 class="calligraphy-title mt-6" style="font-size: 2.2rem; opacity: 0.7;">默 待</h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- 朝圣护照 - the 海外流散 page (Pilgrimage Passport, B-specific) -->
+  <section class="px-20 py-32" style="background: var(--ink-black);">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+        <div class="poem-line" style="font-size: 13px; letter-spacing: 0.5em; opacity: 0.6;">— 朝 · 圣 · 护 · 照 —</div>
+        <h2 class="calligraphy-title mt-4" style="font-size: 2.5rem;">流 散 篇 · 本 应 在 家</h2>
+        <p class="mt-4 poem-line" style="font-size: 14px; opacity: 0.7;">毛公鼎在台北,子龙鼎曾流落日本——它们离家三千里,等一张回来的船票。</p>
+      </div>
+
+      <div class="aged-panel paper-grain p-12 relative" style="background: linear-gradient(135deg, #e8dcc0, #d6c8a8); color: #3a2a1a;">
+        <div class="absolute top-6 right-8 seal">流 散 篇</div>
+        <div style="font-family: var(--font-kai); font-size: 18px; letter-spacing: 0.3em; color: #3a2a1a; margin-bottom: 8px;">博 古 护 照</div>
+        <div style="color: #6d4a2a; font-size: 11px; letter-spacing: 0.35em; margin-bottom: 32px;">甲编 · 〇〇八三七 · 持照人 苏念</div>
+
+        <div id="diasporaList" class="grid grid-cols-2 gap-8"></div>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script>
+    (async function () {
+      MCUI.renderHeader('ancient-map');
+      MCUI.renderFooter();
+      await MCData.ready;
+
+      // ===== Era → which sites are alive =====
+      const ERA_SITES = {
+        '夏': ['二里头'],
+        '商': ['殷墟', '二里岗', '盘龙城', '三星堆', '灵石'],
+        '西周': ['周原', '丰镐', '宝鸡', '凤翔'],
+        '春秋': ['新郑', '侯马', '凤翔', '临淄', '江陵', '随州', '绍兴'],
+        '战国': ['随州', '江陵', '临淄', '凤翔', '绍兴', '灵石'],
+        '秦汉': ['临潼', '满城', '雷台'],
+      };
+      const ERA_POEMS = {
+        '夏': '禹疏九河,初定中国。',
+        '商': '天命玄鸟,降而生商。',
+        '西周': '周虽旧邦,其命维新。',
+        '春秋': '鹤鸣于九皋,声闻于天。',
+        '战国': '钟鼓既设,一朝飨之。',
+        '秦汉': '车同轨,书同文,天下一统。',
+      };
+
+      const svg = document.getElementById('mapSvg');
+      const bubble = document.getElementById('bubble');
+
+      function drawMap(era) {
+        const sites = ERA_SITES[era] || [];
+        let html = '';
+
+        // Background: a subtle topographic ink wash
+        html += `
+          <defs>
+            <radialGradient id="northPlain" cx="50%" cy="50%">
+              <stop offset="0%" stop-color="#3a2a1a" stop-opacity="0.6"/>
+              <stop offset="100%" stop-color="transparent"/>
+            </radialGradient>
+            <linearGradient id="riverGold" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#d4a857" stop-opacity="0.5"/>
+              <stop offset="100%" stop-color="#d4a857" stop-opacity="0.1"/>
+            </linearGradient>
+            <filter id="inkBlur"><feGaussianBlur stdDeviation="2"/></filter>
+          </defs>
+        `;
+
+        // North China plain wash
+        html += `<ellipse cx="540" cy="280" rx="320" ry="200" fill="url(#northPlain)" filter="url(#inkBlur)" opacity="0.6"/>`;
+
+        // 黄河 (Yellow River) — wavy line going from west to east
+        html += `<path d="M180,200 Q300,180 380,210 T520,260 T700,290 L780,310" stroke="url(#riverGold)" stroke-width="2.5" fill="none" stroke-linecap="round"/>`;
+        html += `<text x="350" y="195" fill="#d4a857" font-family="serif" font-size="11" font-style="italic" opacity="0.75" letter-spacing="3">黄 河</text>`;
+
+        // 长江 (Yangtze)
+        html += `<path d="M250,460 Q380,490 500,490 T700,510" stroke="url(#riverGold)" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>`;
+        html += `<text x="400" y="485" fill="#d4a857" font-family="serif" font-size="10" font-style="italic" opacity="0.65" letter-spacing="3">长 江</text>`;
+
+        // 渤海
+        html += `<path d="M720,200 Q760,210 770,260 Q770,310 740,330" stroke="#d4a857" stroke-width="0.8" fill="rgba(13,12,10,0.4)" opacity="0.4"/>`;
+        html += `<text x="730" y="265" fill="#d4a857" font-family="serif" font-size="10" font-style="italic" opacity="0.5" letter-spacing="2">渤 海</text>`;
+
+        // 海岸线 (coast line)
+        html += `<path d="M770,200 Q780,300 780,400 Q770,500 760,540" stroke="#8b6f3d" stroke-width="0.8" fill="none" opacity="0.4"/>`;
+
+        // 山形 (mountains) for the west
+        html += `
+          <g opacity="0.5" stroke="#8b6f3d" stroke-width="0.8" fill="none">
+            <path d="M180,250 L195,225 L210,250 M205,250 L225,220 L245,250"/>
+            <path d="M260,440 L275,415 L290,440 M285,440 L305,410 L325,440"/>
+            <path d="M340,500 L355,475 L370,500"/>
+          </g>
+        `;
+        html += `<text x="200" y="275" fill="#8b6f3d" font-family="serif" font-size="9" font-style="italic" opacity="0.55" letter-spacing="2">陇 山</text>`;
+        html += `<text x="280" y="465" fill="#8b6f3d" font-family="serif" font-size="9" font-style="italic" opacity="0.55" letter-spacing="2">巴 蜀 之 山</text>`;
+
+        // Site dots
+        const collectedSites = new Set(MCData.catalog
+          .filter(a => MCData.isCollected(a.id))
+          .map(a => MCData.siteKeyFor(a)));
+
+        Object.entries(MCData.SITE_COORDS).forEach(([siteName, coord]) => {
+          if (!sites.includes(siteName)) return;
+          const visited = collectedSites.has(siteName);
+          const inEraArtifacts = MCData.catalog.filter(a => MCData.siteKeyFor(a) === siteName);
+          const hasTreasure = inEraArtifacts.some(a => MCData.isTreasure(a));
+
+          if (visited) {
+            // Visited — bronze dot with mini icon
+            html += `
+              <g class="site-dot" data-site="${siteName}" style="cursor: pointer;" transform="translate(${coord.x},${coord.y})">
+                <circle r="14" fill="rgba(212,168,87,0.15)"/>
+                <circle r="6" fill="#d4a857" stroke="#fff8e0" stroke-width="1.5"/>
+                ${hasTreasure ? `<circle r="20" fill="none" stroke="#d4a857" stroke-width="0.8" opacity="0.5">
+                  <animate attributeName="r" values="18;26;18" dur="4s" repeatCount="indefinite"/>
+                  <animate attributeName="opacity" values="0.5;0.1;0.5" dur="4s" repeatCount="indefinite"/>
+                </circle>` : ''}
+                <text x="14" y="-4" fill="#d4a857" font-family="serif" font-size="12" font-style="italic" letter-spacing="2">${coord.label}</text>
+              </g>
+            `;
+          } else {
+            // Unvisited — ghost ring with breathing
+            html += `
+              <g class="site-dot" data-site="${siteName}" style="cursor: pointer;" transform="translate(${coord.x},${coord.y})">
+                <circle r="6" fill="none" stroke="#8b6f3d" stroke-width="0.8" stroke-dasharray="2 2" opacity="0.6">
+                  <animate attributeName="opacity" values="0.3;0.7;0.3" dur="4s" repeatCount="indefinite"/>
+                </circle>
+                <text x="-3" y="3" fill="#8b6f3d" font-family="serif" font-size="9" opacity="0.7">?</text>
+                <text x="14" y="-4" fill="#8b6f3d" font-family="serif" font-size="11" font-style="italic" letter-spacing="2" opacity="0.6">${coord.label}</text>
+              </g>
+            `;
+          }
+        });
+
+        // Era label, centered top
+        html += `<text x="410" y="35" text-anchor="middle" fill="#d4a857" font-family="serif" font-size="28" letter-spacing="20" font-style="italic" opacity="0.9">${era}</text>`;
+        html += `<text x="410" y="60" text-anchor="middle" fill="#d4a857" font-family="serif" font-size="11" letter-spacing="6" opacity="0.65" font-style="italic">${ERA_POEMS[era]}</text>`;
+
+        svg.innerHTML = html;
+
+        // Counts
+        const footprints = sites.filter(s => collectedSites.has(s)).length;
+        const waiting = sites.filter(s => !collectedSites.has(s)).length;
+        const treasureCount = sites.filter(s => {
+          const ax = MCData.catalog.filter(a => MCData.siteKeyFor(a) === s);
+          return ax.some(a => MCData.isTreasure(a));
+        }).length;
+        document.getElementById('footprintCount').textContent = `${footprints} 处`;
+        document.getElementById('waitingCount').textContent = `${waiting} 处`;
+        document.getElementById('treasureCount').textContent = `${treasureCount} 处`;
+
+        // Hover & click
+        document.querySelectorAll('.site-dot').forEach(g => {
+          g.addEventListener('mouseenter', (e) => {
+            const site = g.dataset.site;
+            const coord = MCData.SITE_COORDS[site];
+            const arts = MCData.catalog.filter(a => MCData.siteKeyFor(a) === site);
+            const cnt = arts.length;
+            const visited = arts.some(a => MCData.isCollected(a.id));
+            bubble.innerHTML = visited
+              ? `<div style="font-family: var(--font-kai); font-size: 14px; color: var(--gold-treasure); letter-spacing: 0.15em;">${coord.label}</div><div style="margin-top:6px; color: var(--silk-warm); font-size: 12px;">${coord.desc}</div><div style="margin-top:6px; color: var(--gold-soft); font-size: 11px; letter-spacing: 0.2em;">已唤醒 ${arts.filter(a=>MCData.isCollected(a.id)).length} / ${cnt}</div>`
+              : `<div style="font-family: var(--font-kai); font-size: 14px; color: var(--silk-warm); letter-spacing: 0.15em;">${coord.label}</div><div style="margin-top:6px; color: var(--bronze-mid); font-size: 12px;">${coord.desc}</div><div style="margin-top:6px; color: var(--bronze-mid); font-size: 11px; letter-spacing: 0.2em;">这里出土过 ${cnt} 件,等你来</div>`;
+            const rect = g.getBoundingClientRect();
+            bubble.style.left = (rect.left + 30) + 'px';
+            bubble.style.top = (rect.top + window.scrollY - 40) + 'px';
+            bubble.style.display = 'block';
+            setTimeout(() => bubble.classList.add('show'), 10);
+          });
+          g.addEventListener('mouseleave', () => {
+            bubble.classList.remove('show');
+            setTimeout(() => bubble.style.display = 'none', 400);
+          });
+          g.addEventListener('click', () => {
+            const site = g.dataset.site;
+            renderSiteNarrative(site);
+          });
+        });
+      }
+
+      function renderSiteNarrative(siteName) {
+        const coord = MCData.SITE_COORDS[siteName];
+        const arts = MCData.catalog.filter(a => MCData.siteKeyFor(a) === siteName);
+        if (!arts.length) {
+          document.getElementById('siteNarrative').innerHTML = `
+            <div class="text-center">
+              <h2 class="calligraphy-title" style="font-size: 2.2rem;">${coord.label}</h2>
+              <p class="poem-line mt-4" style="opacity: 0.7;">这里暂无藏件。</p>
+            </div>
+          `;
+          return;
+        }
+        const visited = arts.some(a => MCData.isCollected(a.id));
+        const m = MCData.getMonologue(arts[0].id);
+
+        document.getElementById('siteNarrative').innerHTML = `
+          <div class="text-center mb-12 fade-up in">
+            <div class="poem-line" style="font-size: 13px; letter-spacing: 0.5em; opacity: 0.6;">— ${visited ? '你 已 踏 足' : '尚 待 呼 唤'} —</div>
+            <h2 class="calligraphy-title mt-4" style="font-size: 2.8rem;">${coord.label}</h2>
+            <p class="poem-line mt-3" style="font-size: 15px; opacity: 0.85; color: var(--silk-cream);">${coord.desc}</p>
+            ${!visited ? `<p class="poem-line mt-2" style="font-size: 13px; opacity: 0.6; color: var(--vermilion);">此地出土过 ${arts.length} 件国宝,你尚未踏足。</p>` : ''}
+          </div>
+          <div class="grid grid-cols-3 gap-8 fade-up in">
+            ${arts.map(a => {
+              const c = MCData.isCollected(a.id);
+              const am = MCData.getMonologue(a.id);
+              return `
+                <a href="artifact.html?id=${a.id}" class="block">
+                  <div class="${MCData.isTreasure(a) ? 'halo-treasure' : ''} ${c ? '' : 'sleeping'}" style="aspect-ratio: 3/4; overflow: hidden;">
+                    ${MCUI.imageOrPlaceholder(a, { cls: 'w-full h-full', style: 'width:100%; height:100%;' })}
+                  </div>
+                  <h4 class="mt-4 calligraphy-title hover-line inline-block" style="font-size: 1.1rem;">${a.name_zh}</h4>
+                  <p class="mt-1 poem-line" style="font-size: 11px; opacity: 0.7;">${(am.poem || a.period || '').slice(0, 22)}</p>
+                </a>
+              `;
+            }).join('')}
+          </div>
+        `;
+      }
+
+      // ===== Diaspora 流散篇 =====
+      const diaspora = MCData.catalog.filter(a => {
+        const m = a.current_museum || '';
+        return m.includes('台北') || m.includes('大英') || m.includes('MET') || m.includes('大都会') || m.includes('弗利尔');
+      });
+      const diasporaStamps = {
+        '台北故宫博物院': { name: '台北 · 故宫', icon: '北故', story: '一九四八年迁台,海峡之外四十年。' },
+        '大英博物馆': { name: '伦敦 · 大英', icon: '大英', story: '本应在家。' },
+      };
+
+      const grouped = {};
+      diaspora.forEach(a => {
+        const k = a.current_museum.split('/')[0].trim();
+        if (!grouped[k]) grouped[k] = [];
+        grouped[k].push(a);
+      });
+
+      document.getElementById('diasporaList').innerHTML = Object.entries(grouped).map(([museum, arts]) => {
+        const info = diasporaStamps[museum] || { name: museum, icon: museum.slice(0, 2), story: '' };
+        return `
+          <div class="relative">
+            <div class="flex gap-4 mb-4 items-center">
+              <div style="width: 64px; height: 64px; border: 2px solid #a02c2c; display: flex; align-items: center; justify-content: center; transform: rotate(-3deg); background: rgba(160,44,44,0.08);">
+                <span style="font-family: var(--font-kai); color: #a02c2c; font-size: 18px; letter-spacing: 0.1em; font-weight: 600;">${info.icon}</span>
+              </div>
+              <div>
+                <div style="font-family: var(--font-kai); font-size: 18px; color: #3a2a1a; letter-spacing: 0.15em;">${info.name}</div>
+                <div style="color: #6d4a2a; font-size: 12px; letter-spacing: 0.2em; margin-top: 2px;">${arts.length} 件 · ${info.story}</div>
+              </div>
+            </div>
+            <ul style="color: #4a3a24; font-family: var(--font-serif); font-size: 13px; line-height: 2; letter-spacing: 0.1em;">
+              ${arts.map(a => `<li>· <a href="artifact.html?id=${a.id}" style="color: #4a3a24; text-decoration: underline; text-decoration-color: rgba(160,44,44,0.4);">${a.name_zh}</a></li>`).join('')}
+            </ul>
+          </div>
+        `;
+      }).join('');
+
+      // Initial render
+      drawMap('商');
+      document.querySelectorAll('[data-era]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('[data-era]').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          drawMap(btn.dataset.era);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

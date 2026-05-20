@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>礼器归位 · 宗庙之夜</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/immersive.css" />
+</head>
+<body>
+
+  <section class="px-20 pt-32 pb-12">
+    <div class="max-w-6xl mx-auto text-center scene-enter">
+      <div class="poem-line mb-3" style="font-size: 13px; letter-spacing: 0.5em; opacity: 0.6;">
+        — 礼 器 · 归 位 —
+      </div>
+      <h1 class="calligraphy-title mb-6">把你的收藏请进宗庙</h1>
+      <p class="poem-line max-w-2xl mx-auto" style="font-size: 15px; opacity: 0.85;">
+        天子九鼎八簋。诸侯七鼎六簋。大夫五鼎四簋。<br/>
+        你手里的器物,够什么样的礼?
+      </p>
+    </div>
+  </section>
+
+  <!-- Scene type tabs (locked: tonight only 太牢 fully implemented) -->
+  <section class="px-20 pb-8">
+    <div class="max-w-6xl mx-auto flex justify-center gap-3 scene-enter-late">
+      <button class="toggle-pill active" data-scene="taiao">太 牢 · 宗 庙</button>
+      <button class="toggle-pill" data-scene="yanxiang" style="opacity:0.5;">燕 飨 · 殿 堂</button>
+      <button class="toggle-pill" data-scene="junli" style="opacity:0.5;">军 礼 · 营 中</button>
+      <button class="toggle-pill" data-scene="zangli" style="opacity:0.5;">葬 礼 · 墓 道</button>
+    </div>
+  </section>
+
+  <!-- Main scene area -->
+  <section class="px-20 pb-32 scene-enter-latest">
+    <div class="max-w-7xl mx-auto grid grid-cols-[3fr_1fr] gap-10">
+
+      <!-- LEFT: The big isometric scene -->
+      <div>
+        <div class="aged-panel paper-grain relative" style="aspect-ratio: 5/3; overflow: hidden;">
+          <!-- Scene SVG -->
+          <svg id="sceneSvg" viewBox="0 0 800 480" class="w-full h-full">
+            <!-- defs -->
+            <defs>
+              <radialGradient id="flameRad" cx="50%" cy="50%">
+                <stop offset="0%" stop-color="#d4a857" stop-opacity="0.95"/>
+                <stop offset="50%" stop-color="#b91c1c" stop-opacity="0.45"/>
+                <stop offset="100%" stop-color="transparent"/>
+              </radialGradient>
+              <linearGradient id="floorGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#2a1a14"/>
+                <stop offset="100%" stop-color="#0d0808"/>
+              </linearGradient>
+              <linearGradient id="altarGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#6d4a2a"/>
+                <stop offset="100%" stop-color="#3a2a1a"/>
+              </linearGradient>
+              <filter id="goldGlow"><feGaussianBlur stdDeviation="3"/></filter>
+            </defs>
+
+            <!-- Sky -->
+            <rect x="0" y="0" width="800" height="240" fill="#0d0c0a"/>
+            <!-- Distant moon -->
+            <circle cx="660" cy="80" r="20" fill="#d4a857" opacity="0.18"/>
+            <!-- Roof -->
+            <path d="M50,220 L160,140 L640,140 L750,220 Z" fill="#1a1614" stroke="#8b6f3d" stroke-width="1.5" opacity="0.7"/>
+            <path d="M120,180 L680,180" stroke="#d4a857" stroke-width="0.8" opacity="0.4"/>
+            <!-- Pillars -->
+            <rect x="170" y="220" width="10" height="160" fill="#3a2a1a" stroke="#6d4a2a" stroke-width="1"/>
+            <rect x="620" y="220" width="10" height="160" fill="#3a2a1a" stroke="#6d4a2a" stroke-width="1"/>
+            <!-- Floor (iso) -->
+            <polygon points="100,380 700,380 750,460 50,460" fill="url(#floorGrad)" stroke="#3a2a1a" stroke-width="1"/>
+            <!-- floor grid -->
+            <g opacity="0.2" stroke="#8b6f3d" stroke-width="0.4">
+              <line x1="160" y1="380" x2="140" y2="460"/>
+              <line x1="240" y1="380" x2="230" y2="460"/>
+              <line x1="320" y1="380" x2="320" y2="460"/>
+              <line x1="400" y1="380" x2="410" y2="460"/>
+              <line x1="480" y1="380" x2="500" y2="460"/>
+              <line x1="560" y1="380" x2="585" y2="460"/>
+              <line x1="640" y1="380" x2="675" y2="460"/>
+              <line x1="100" y1="410" x2="750" y2="410"/>
+              <line x1="80" y1="440" x2="755" y2="440"/>
+            </g>
+
+            <!-- 神主 — central spirit altar -->
+            <rect x="350" y="220" width="100" height="40" fill="url(#altarGrad)" stroke="#d4a857" stroke-width="1.5"/>
+            <rect x="370" y="200" width="60" height="22" fill="#6d4a2a" stroke="#d4a857" stroke-width="1"/>
+            <text x="400" y="215" text-anchor="middle" fill="#d4a857" font-family="serif" font-size="13" font-style="italic" letter-spacing="3">神 主</text>
+
+            <!-- Twin flames left & right of altar -->
+            <g transform="translate(280, 280)">
+              <ellipse rx="38" ry="10" fill="url(#flameRad)" opacity="0.95"/>
+              <path d="M-3,-6 Q-7,-32 0,-52 Q5,-32 3,-6 Z" fill="#d4a857" opacity="0.85">
+                <animate attributeName="d" dur="3s" repeatCount="indefinite"
+                  values="M-3,-6 Q-7,-32 0,-52 Q5,-32 3,-6 Z;
+                          M-3,-6 Q-9,-34 0,-48 Q7,-32 3,-6 Z;
+                          M-3,-6 Q-7,-32 0,-52 Q5,-32 3,-6 Z"/>
+              </path>
+              <path d="M-2,-10 Q-5,-26 0,-40 Q4,-26 2,-10 Z" fill="#b91c1c" opacity="0.7"/>
+            </g>
+            <g transform="translate(520, 280)">
+              <ellipse rx="38" ry="10" fill="url(#flameRad)" opacity="0.95"/>
+              <path d="M-3,-6 Q-7,-32 0,-52 Q5,-32 3,-6 Z" fill="#d4a857" opacity="0.85">
+                <animate attributeName="d" dur="3.6s" repeatCount="indefinite"
+                  values="M-3,-6 Q-7,-32 0,-52 Q5,-32 3,-6 Z;
+                          M-3,-6 Q-5,-28 0,-50 Q9,-32 3,-6 Z;
+                          M-3,-6 Q-7,-32 0,-52 Q5,-32 3,-6 Z"/>
+              </path>
+              <path d="M-2,-10 Q-5,-26 0,-40 Q4,-26 2,-10 Z" fill="#b91c1c" opacity="0.7"/>
+            </g>
+
+            <!-- 9 鼎 positions (north row, top of floor) -->
+            <g id="dingPositions"></g>
+            <!-- 8 簋 positions (mid row) -->
+            <g id="guiPositions"></g>
+            <!-- 4 酒器 positions (east) -->
+            <g id="jiuPositions"></g>
+            <!-- 2 水器 positions (west) -->
+            <g id="shuiPositions"></g>
+
+            <!-- Two priest silhouettes -->
+            <g transform="translate(220, 440)" opacity="0.8">
+              <ellipse cx="0" cy="0" rx="14" ry="3" fill="#0d0c0a"/>
+              <path d="M-10,0 Q-12,-32 0,-44 Q12,-32 10,0 Z" fill="#1a0c08" stroke="#6d4a2a" stroke-width="0.6"/>
+              <circle cx="0" cy="-50" r="6" fill="#1a0c08" stroke="#6d4a2a" stroke-width="0.6"/>
+            </g>
+            <g transform="translate(580, 440)" opacity="0.8">
+              <ellipse cx="0" cy="0" rx="14" ry="3" fill="#0d0c0a"/>
+              <path d="M-10,0 Q-12,-32 0,-44 Q12,-32 10,0 Z" fill="#1a0c08" stroke="#6d4a2a" stroke-width="0.6"/>
+              <circle cx="0" cy="-50" r="6" fill="#1a0c08" stroke="#6d4a2a" stroke-width="0.6"/>
+            </g>
+
+            <!-- Title at top -->
+            <text x="400" y="60" text-anchor="middle" fill="#d4a857" font-family="serif" font-size="22" letter-spacing="14" font-style="italic" opacity="0.85">太 牢 · 宗 庙</text>
+            <text x="400" y="85" text-anchor="middle" fill="#d4a857" font-family="serif" font-size="11" letter-spacing="6" opacity="0.6" font-style="italic">商周天子之礼,九鼎八簋</text>
+          </svg>
+        </div>
+
+        <!-- Status bar below -->
+        <div class="mt-8 aged-panel paper-grain p-6 flex justify-between items-center">
+          <div>
+            <div class="poem-line" style="font-size: 11px; opacity: 0.6; letter-spacing: 0.3em;">已 归 位</div>
+            <div class="calligraphy-title mt-1" id="placedCount" style="font-size: 1.8rem; color: var(--gold-treasure);">0 / 15</div>
+          </div>
+          <div>
+            <div class="poem-line" style="font-size: 11px; opacity: 0.6; letter-spacing: 0.3em;">等 级 判 定</div>
+            <div class="calligraphy-title mt-1" id="rankTitle" style="font-size: 1.6rem; color: var(--gold-treasure);">— 礼</div>
+          </div>
+          <div class="text-right max-w-xs">
+            <div class="poem-line" style="font-size: 11px; opacity: 0.6; letter-spacing: 0.3em;">下 一 阶</div>
+            <div id="nextStep" class="mt-1 poem-line" style="font-size: 13px; color: var(--silk-warm);">先放一件鼎</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Your collection panel -->
+      <div>
+        <div class="aged-panel paper-grain p-6">
+          <div class="poem-line mb-4 text-center" style="font-size: 12px; letter-spacing: 0.4em; opacity: 0.7;">— 你 的 收 藏 —</div>
+          <div class="text-center mb-6">
+            <h3 class="calligraphy-title" style="font-size: 1.3rem;">待 归 位</h3>
+            <p class="poem-line mt-1" style="font-size: 11px; opacity: 0.6;">拖一件器物到对应位置</p>
+          </div>
+          <div id="myArtifacts" class="space-y-3"></div>
+        </div>
+
+        <!-- Narration card -->
+        <div class="mt-6 aged-panel paper-grain p-6">
+          <div class="poem-line" style="font-size: 12px; letter-spacing: 0.3em; color: var(--gold-soft);">— 周 礼 · 王 道 篇 —</div>
+          <p id="storyText" class="monologue mt-3" style="font-size: 14px; line-height: 2; letter-spacing: 0.05em;">
+            《周礼》记天子九鼎八簋,诸侯七鼎六簋,大夫五鼎四簋,士三鼎二簋。<br/><br/>
+            你手中的鼎,究竟够什么级别的礼?
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 列鼎制度 explainer -->
+  <section class="px-20 py-32" style="background: var(--ink-dark);">
+    <div class="max-w-4xl mx-auto text-center">
+      <div class="poem-line mb-3" style="font-size: 13px; letter-spacing: 0.5em; opacity: 0.6;">— 列 鼎 制 度 —</div>
+      <h2 class="calligraphy-title mb-12" style="font-size: 2.5rem;">为什么鼎是九个,不是八个</h2>
+
+      <div class="grid grid-cols-4 gap-6">
+        <div class="aged-panel paper-grain p-6 text-center">
+          <div class="calligraphy-title mb-2" style="font-size: 1.8rem; color: var(--gold-treasure);">九</div>
+          <div class="poem-line" style="font-size: 13px; letter-spacing: 0.2em;">天 子</div>
+          <p class="mt-3" style="font-size: 12px; color: var(--silk-warm); opacity: 0.7; line-height: 1.8;">九鼎八簋。<br/>问鼎中原。</p>
+        </div>
+        <div class="aged-panel paper-grain p-6 text-center">
+          <div class="calligraphy-title mb-2" style="font-size: 1.8rem; color: var(--gold-treasure);">七</div>
+          <div class="poem-line" style="font-size: 13px; letter-spacing: 0.2em;">诸 侯</div>
+          <p class="mt-3" style="font-size: 12px; color: var(--silk-warm); opacity: 0.7; line-height: 1.8;">七鼎六簋。<br/>列国之尊。</p>
+        </div>
+        <div class="aged-panel paper-grain p-6 text-center">
+          <div class="calligraphy-title mb-2" style="font-size: 1.8rem; color: var(--gold-treasure);">五</div>
+          <div class="poem-line" style="font-size: 13px; letter-spacing: 0.2em;">大 夫</div>
+          <p class="mt-3" style="font-size: 12px; color: var(--silk-warm); opacity: 0.7; line-height: 1.8;">五鼎四簋。<br/>朝野之中。</p>
+        </div>
+        <div class="aged-panel paper-grain p-6 text-center">
+          <div class="calligraphy-title mb-2" style="font-size: 1.8rem; color: var(--gold-treasure);">三</div>
+          <div class="poem-line" style="font-size: 13px; letter-spacing: 0.2em;">士</div>
+          <p class="mt-3" style="font-size: 12px; color: var(--silk-warm); opacity: 0.7; line-height: 1.8;">三鼎二簋。<br/>礼之底线。</p>
+        </div>
+      </div>
+
+      <p class="poem-line mt-16 max-w-2xl mx-auto" style="font-size: 16px; line-height: 2.2; opacity: 0.85;">
+        每多一件鼎,身份就多一级。<br/>
+        鼎,不是锅。鼎,是合同。
+      </p>
+    </div>
+  </section>
+
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script>
+    (async function () {
+      MCUI.renderHeader('purpose-scene');
+      MCUI.renderFooter();
+      await MCData.ready;
+
+      // ====== Build position slots ======
+      // 9 ding positions (north row, top of floor)
+      const dingPos = [];
+      const dingY = 320;
+      const dingRow = 9;
+      const startX = 130, endX = 670;
+      for (let i = 0; i < dingRow; i++) {
+        dingPos.push({ id: `ding-${i}`, x: startX + (endX - startX) * i / (dingRow - 1), y: dingY, accepts: ['鼎'], label: `鼎 ${i+1}` });
+      }
+      // 8 gui (mid row)
+      const guiPos = [];
+      const guiY = 380;
+      for (let i = 0; i < 8; i++) {
+        guiPos.push({ id: `gui-${i}`, x: 160 + (640 - 160) * i / 7, y: guiY, accepts: ['簋'], label: `簋 ${i+1}` });
+      }
+      // 4 wine
+      const jiuPos = [
+        { id: 'jiu-1', x: 690, y: 320, accepts: ['尊', '酒器'], label: '尊位' },
+        { id: 'jiu-2', x: 690, y: 380, accepts: ['卣', '酒器'], label: '卣位' },
+        { id: 'jiu-3', x: 720, y: 350, accepts: ['爵', '觚', '酒器'], label: '爵位' },
+      ];
+      // 2 water
+      const shuiPos = [
+        { id: 'shui-1', x: 110, y: 320, accepts: ['盘', '水器'], label: '盘位' },
+        { id: 'shui-2', x: 110, y: 380, accepts: ['匜', '水器'], label: '匜位' },
+      ];
+
+      const allPos = [...dingPos, ...guiPos, ...jiuPos, ...shuiPos];
+
+      function drawSlot(pos, filled) {
+        const isDing = pos.id.startsWith('ding');
+        const isGui = pos.id.startsWith('gui');
+        const size = isDing ? 22 : (isGui ? 16 : 14);
+        if (filled) {
+          // Filled: golden silhouette
+          let icon = '';
+          if (isDing) {
+            icon = `<g transform="translate(${pos.x},${pos.y})">
+              <ellipse cx="0" cy="-${size/2}" rx="${size*0.85}" ry="${size*0.25}" fill="none" stroke="#d4a857" stroke-width="1.5"/>
+              <path d="M-${size*0.7},-${size/2} Q-${size*0.85},${size*0.3} -${size*0.65},${size*0.55} L${size*0.65},${size*0.55} Q${size*0.85},${size*0.3} ${size*0.7},-${size/2} Z"
+                    fill="url(#altarGrad)" stroke="#d4a857" stroke-width="1.2"/>
+              <rect x="-${size*0.6}" y="${size*0.55}" width="${size*0.18}" height="${size*0.4}" fill="#4a3a24" stroke="#d4a857" stroke-width="0.6"/>
+              <rect x="${size*0.42}" y="${size*0.55}" width="${size*0.18}" height="${size*0.4}" fill="#4a3a24" stroke="#d4a857" stroke-width="0.6"/>
+              <rect x="-${size*0.09}" y="${size*0.55}" width="${size*0.18}" height="${size*0.4}" fill="#4a3a24" stroke="#d4a857" stroke-width="0.6"/>
+              <circle r="${size*1.4}" fill="#d4a857" opacity="0.18"/>
+            </g>`;
+          } else if (isGui) {
+            icon = `<g transform="translate(${pos.x},${pos.y})">
+              <ellipse cx="0" cy="0" rx="${size*0.9}" ry="${size*0.55}" fill="url(#altarGrad)" stroke="#d4a857" stroke-width="1.2"/>
+              <rect x="-${size*0.6}" y="${size*0.4}" width="${size*1.2}" height="${size*0.3}" fill="#3a2a1a" stroke="#d4a857" stroke-width="0.6"/>
+              <circle r="${size*1.3}" fill="#d4a857" opacity="0.18"/>
+            </g>`;
+          } else {
+            icon = `<g transform="translate(${pos.x},${pos.y})">
+              <rect x="-${size*0.6}" y="-${size*0.8}" width="${size*1.2}" height="${size*1.4}" fill="url(#altarGrad)" stroke="#d4a857" stroke-width="1"/>
+              <circle r="${size*1.4}" fill="#d4a857" opacity="0.18"/>
+            </g>`;
+          }
+          return icon;
+        } else {
+          // Empty slot: dashed vermilion outline + "位" character
+          return `<g transform="translate(${pos.x},${pos.y})" class="empty-slot" data-pos-id="${pos.id}">
+            <rect x="-${size*0.8}" y="-${size*0.8}" width="${size*1.6}" height="${size*1.6}"
+                  fill="none" stroke="#a02c2c" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.6"/>
+            <text x="0" y="${size*0.25}" text-anchor="middle" fill="#a02c2c" font-family="serif"
+                  font-size="${size*0.6}" font-style="italic" opacity="0.7">位</text>
+          </g>`;
+        }
+      }
+
+      // Mock state of placements (deterministic placement based on what we've "collected")
+      // To showcase the page, pre-place some collected items
+      const placements = {
+        // Pre-place: 后母戊鼎 (ding-0), 妇好鸮尊 (jiu-1), 利簋 (gui-0), 何尊 (jiu-2), 大盂鼎 (ding-1)
+        'ding-0': 'houmuwu_ding',
+        'ding-1': 'da_yu_ding',
+        'gui-0': 'li_gui',
+        'jiu-1': 'fuhao_xiaozun',
+        'jiu-2': 'he_zun',
+      };
+
+      function renderScene() {
+        document.getElementById('dingPositions').innerHTML = dingPos.map(p => drawSlot(p, !!placements[p.id])).join('');
+        document.getElementById('guiPositions').innerHTML = guiPos.map(p => drawSlot(p, !!placements[p.id])).join('');
+        document.getElementById('jiuPositions').innerHTML = jiuPos.map(p => drawSlot(p, !!placements[p.id])).join('');
+        document.getElementById('shuiPositions').innerHTML = shuiPos.map(p => drawSlot(p, !!placements[p.id])).join('');
+
+        const placedCount = Object.keys(placements).length;
+        const totalSlots = allPos.length;
+        document.getElementById('placedCount').textContent = `${placedCount} / ${totalSlots}`;
+
+        // Determine rank by ding count
+        const dingPlaced = dingPos.filter(p => placements[p.id]).length;
+        let rank = '—';
+        let storyText = '';
+        let nextStep = '';
+        if (dingPlaced >= 9) {
+          rank = '天 子 之 礼';
+          storyText = `九鼎齐归。<br/><br/>商周天子之礼,你已具足。火光照亮宗庙,你看见了三千年前那位王。`;
+          nextStep = '礼制具足,可解锁宏景';
+        } else if (dingPlaced >= 7) {
+          rank = '诸 侯 之 礼';
+          storyText = `七鼎归位,你已是一国之主。<br/><br/>《左传》:"诸侯七鼎六簋。"再补两件鼎,可至天子。`;
+          nextStep = `再补 ${9 - dingPlaced} 鼎,可至天子`;
+        } else if (dingPlaced >= 5) {
+          rank = '大 夫 之 礼';
+          storyText = `五鼎归位,你已是朝中大夫。<br/><br/>距诸侯之礼还差 ${7 - dingPlaced} 件。诸侯不易,但你正在路上。`;
+          nextStep = `再补 ${7 - dingPlaced} 鼎,可至诸侯`;
+        } else if (dingPlaced >= 3) {
+          rank = '士 之 礼';
+          storyText = `三鼎归位,你已是一位"士"。<br/><br/>《礼记》:"士三鼎二簋。"士,礼之底线。再多一件,可至大夫。`;
+          nextStep = `再补 ${5 - dingPlaced} 鼎,可至大夫`;
+        } else if (dingPlaced >= 1) {
+          rank = '初 礼';
+          storyText = `第一件鼎已就位。<br/><br/>你站在了礼制的入口。继续走,前方是士、大夫、诸侯、天子。`;
+          nextStep = `再补 ${3 - dingPlaced} 鼎,可至士礼`;
+        } else {
+          rank = '未 入 礼';
+          storyText = `《周礼》记天子九鼎八簋。<br/><br/>你手中的鼎,究竟够什么级别的礼?`;
+          nextStep = '先放一件鼎';
+        }
+        document.getElementById('rankTitle').textContent = rank;
+        document.getElementById('storyText').innerHTML = storyText;
+        document.getElementById('nextStep').textContent = nextStep;
+      }
+
+      renderScene();
+
+      // ====== Right panel: your collection ======
+      const collected = MCData.catalog.filter(a => MCData.isCollected(a.id));
+
+      function placementSlotForArtifact(a) {
+        const fs = a.form_subtype || '';
+        const t = a.type || '';
+        if (fs.includes('方鼎') || fs.includes('圆鼎') || (fs.includes('鼎') && !fs.includes('熏'))) return 'ding';
+        if (fs.includes('簋')) return 'gui';
+        if (t.includes('酒器') || fs.includes('尊') || fs.includes('卣') || fs.includes('爵') || fs.includes('觚')) return 'jiu';
+        if (fs.includes('盘') || fs.includes('匜') || (t.includes('水器'))) return 'shui';
+        return null;
+      }
+
+      function placedArtifactIds() {
+        return new Set(Object.values(placements));
+      }
+
+      function renderMyArtifacts() {
+        const placed = placedArtifactIds();
+        document.getElementById('myArtifacts').innerHTML = collected.map(a => {
+          const slot = placementSlotForArtifact(a);
+          const isPlaced = placed.has(a.id);
+          return `
+            <div class="draggable flex items-center gap-3 p-2 ${isPlaced ? 'opacity-40' : ''}"
+                 style="border: 1px solid rgba(212,168,87,0.2); ${isPlaced ? 'pointer-events: none;' : ''}"
+                 draggable="${!isPlaced}" data-artifact="${a.id}" data-slot-type="${slot || ''}">
+              <div class="${MCData.isTreasure(a) ? 'halo-treasure' : ''}" style="width: 48px; height: 48px; overflow: hidden; flex-shrink: 0;">
+                ${MCUI.imageOrPlaceholder(a, { cls: 'w-full h-full', style: 'width:100%; height:100%;' })}
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="calligraphy-title truncate" style="font-size: 0.95rem;">${a.name_zh}</div>
+                <div class="poem-line" style="font-size: 10px; opacity: 0.6; letter-spacing: 0.15em;">${slot ? `归 ${slot === 'ding' ? '鼎' : slot === 'gui' ? '簋' : slot === 'jiu' ? '酒' : '水'}位` : '无相应位'}${isPlaced ? ' · 已归' : ''}</div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        // Wire drag
+        document.querySelectorAll('.draggable[draggable=true]').forEach(el => {
+          el.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('artifact', el.dataset.artifact);
+            e.dataTransfer.setData('slotType', el.dataset.slotType);
+            el.style.opacity = '0.5';
+          });
+          el.addEventListener('dragend', (e) => {
+            el.style.opacity = '1';
+          });
+        });
+      }
+
+      renderMyArtifacts();
+
+      // ====== Drag and drop into SVG slots ======
+      // Because SVG handling is tricky, we use a click-to-place mechanic too.
+      // Click an artifact to "select", then click an empty slot to place.
+      let selected = null;
+      document.getElementById('myArtifacts').addEventListener('click', (e) => {
+        const target = e.target.closest('[data-artifact]');
+        if (!target || target.classList.contains('opacity-40')) return;
+        // Toggle select
+        document.querySelectorAll('.draggable').forEach(el => el.style.background = '');
+        if (selected === target.dataset.artifact) {
+          selected = null;
+        } else {
+          selected = target.dataset.artifact;
+          target.style.background = 'rgba(212, 168, 87, 0.15)';
+        }
+      });
+
+      // Click empty slot in SVG to place
+      document.getElementById('sceneSvg').addEventListener('click', (e) => {
+        const slot = e.target.closest('.empty-slot');
+        if (!slot || !selected) return;
+        const posId = slot.dataset.posId;
+        const pos = allPos.find(p => p.id === posId);
+        const a = MCData.catalog.find(x => x.id === selected);
+        const expectedType = placementSlotForArtifact(a);
+        const slotType = posId.split('-')[0];
+
+        if (expectedType !== slotType) {
+          // 不合礼
+          alert(`格不合礼。此位需 ${slotType === 'ding' ? '鼎' : slotType === 'gui' ? '簋' : slotType === 'jiu' ? '酒器' : '水器'},而你选的是 ${a.form_subtype || a.type}。`);
+          return;
+        }
+        placements[posId] = selected;
+        selected = null;
+        document.querySelectorAll('.draggable').forEach(el => el.style.background = '');
+        renderScene();
+        renderMyArtifacts();
+
+        // After placement, render a soft golden flash via title
+        const overlay = document.createElement('div');
+        overlay.style.cssText = 'position:fixed; inset:0; pointer-events:none; z-index:200; background: radial-gradient(circle, rgba(212,168,87,0.25), transparent 50%); animation: flash 1.2s ease forwards;';
+        document.body.appendChild(overlay);
+        setTimeout(() => overlay.remove(), 1200);
+      });
+
+      // Add drag-over visual cue for SVG (click-to-place is primary; this is enhancement)
+      document.getElementById('sceneSvg').addEventListener('dragover', (e) => e.preventDefault());
+      document.getElementById('sceneSvg').addEventListener('drop', (e) => {
+        e.preventDefault();
+        const artifact = e.dataTransfer.getData('artifact');
+        const slotType = e.dataTransfer.getData('slotType');
+        // try to find nearest empty slot of matching type
+        const candidates = allPos.filter(p => p.id.startsWith(slotType) && !placements[p.id]);
+        if (!candidates.length) return alert('此类位已满,礼制具足。');
+        const target = candidates[0];
+        placements[target.id] = artifact;
+        renderScene();
+        renderMyArtifacts();
+      });
+    })();
+  </script>
+  <style>
+    @keyframes flash {
+      0% { opacity: 0; }
+      30% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    .empty-slot { cursor: pointer; transition: opacity 0.3s ease; }
+    .empty-slot:hover { opacity: 1 !important; }
+    .empty-slot:hover rect { stroke-width: 1.5; }
+    .draggable { cursor: pointer; transition: background 0.3s ease; }
+  </style>
+</body>
+</html>

@@ -1,0 +1,497 @@
+/* scholar.css — Persona A 考据派 visual system.
+ * Paper-like background, serif heads, mono numerics, restrained citations.
+ * No bright reward colors. Inline footnote markers like [1].
+ */
+
+:root {
+  --paper:        #f3ede2;        /* aged paper base */
+  --paper-soft:   #ebe4d6;        /* gutter shade */
+  --paper-dark:   #d9d0bd;        /* table-rule shade */
+  --ink:          #1d1a14;        /* main body ink */
+  --ink-soft:     #4c4538;        /* secondary ink */
+  --ink-faded:    #7a7261;        /* metadata / annotation */
+  --rule:         #cdc4b1;        /* hairline rule */
+  --rule-dark:    #8c8470;        /* darker rule */
+  --vermilion:    #a02c2c;        /* 朱砂 印章 */
+  --vermilion-dim: #862626;
+  --bronze:       #8a6b3d;        /* 青铜暗金 */
+  --bronze-light: #b9905a;        /* 一级文物边 */
+  --bronze-glow:  #d4a857;        /* 国宝光晕 */
+  --jade:         #4f6855;        /* 碧 — 段位印章 */
+  --indigo:       #2c3a55;        /* 引用链接 */
+  --soft-shadow:  rgba(46, 36, 18, 0.08);
+}
+
+html, body {
+  background-color: var(--paper);
+  background-image:
+    /* tiny noise stipple */
+    radial-gradient(rgba(46, 36, 18, 0.04) 1px, transparent 1px),
+    /* faint horizontal rule */
+    linear-gradient(180deg, rgba(46, 36, 18, 0.018) 0%, transparent 100%);
+  background-size: 6px 6px, 100% 100%;
+  color: var(--ink);
+  font-family: "Songti SC", "STSong", "Source Han Serif SC", "Noto Serif CJK SC", "SimSun", serif;
+  font-feature-settings: "kern", "liga";
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-serif-cn {
+  font-family: "Songti SC", "STSong", "Source Han Serif SC", "Noto Serif CJK SC", "SimSun", serif;
+}
+
+.font-fang {
+  font-family: "FangSong", "STFangsong", "Noto Serif CJK SC", serif;
+  font-weight: 400;
+}
+
+.font-kai {
+  font-family: "Kaiti SC", "KaiTi", "STKaiti", serif;
+}
+
+.font-mono-num {
+  font-family: "Iosevka", "JetBrains Mono", "Source Code Pro", "Menlo", "Consolas", monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* === Top navigation (table of contents style) === */
+.toc-nav {
+  border-bottom: 1px solid var(--rule);
+  background-color: rgba(243, 237, 226, 0.92);
+  backdrop-filter: blur(4px);
+}
+
+.toc-nav a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding: 0.25rem 0.05rem;
+  transition: border-color 120ms ease, color 120ms ease;
+}
+.toc-nav a:hover, .toc-nav a.active {
+  color: var(--ink);
+  border-bottom-color: var(--vermilion);
+}
+
+/* === Title typography === */
+h1.scholar-title, h2.scholar-title {
+  font-family: "Songti SC", "STSong", serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+.section-cap {
+  font-family: "Songti SC", "STSong", serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.35em;
+  color: var(--ink-faded);
+  text-transform: none;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.35rem;
+  margin-bottom: 0.85rem;
+}
+
+.scholar-rule {
+  border: none;
+  border-top: 1px solid var(--rule-dark);
+  margin: 1.4rem 0;
+}
+.scholar-rule.double {
+  border-top: 3px double var(--rule-dark);
+}
+
+/* === Citation system === */
+.cite-ref {
+  font-size: 0.7em;
+  vertical-align: super;
+  color: var(--indigo);
+  font-family: "Iosevka", "JetBrains Mono", monospace;
+  cursor: help;
+  margin: 0 0.05em;
+  border-bottom: 1px dotted var(--indigo);
+}
+.cite-ref:hover { color: var(--vermilion); border-bottom-color: var(--vermilion); }
+
+.cite-tooltip {
+  position: absolute;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 0.5rem 0.7rem;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  max-width: 22rem;
+  border-left: 3px solid var(--vermilion);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  z-index: 999;
+  pointer-events: none;
+  white-space: normal;
+}
+
+/* === Tables (data-density UI primitive for A) === */
+.scholar-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.85rem;
+}
+.scholar-table th, .scholar-table td {
+  padding: 0.4rem 0.6rem;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: top;
+}
+.scholar-table th {
+  font-family: "FangSong", serif;
+  font-weight: 600;
+  color: var(--ink-soft);
+  border-bottom: 1.5px solid var(--rule-dark);
+  white-space: nowrap;
+}
+.scholar-table tbody tr:hover { background: var(--paper-soft); }
+
+/* === Rarity halo (PERSONA A restraint: gold ring + 朱砂 stamp ONLY, no rotating particles) === */
+.rarity-treasure-forbidden, .rarity-treasure {
+  border: 1.5px solid var(--bronze-glow);
+  box-shadow: inset 0 0 0 1px rgba(212, 168, 87, 0.25);
+}
+.rarity-treasure-forbidden::after {
+  content: "禁";
+  position: absolute;
+  top: 4px; right: 4px;
+  width: 22px; height: 22px;
+  background: var(--vermilion);
+  color: var(--paper);
+  font-family: "Songti SC", serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+.rarity-tier-1 { border: 1px solid var(--bronze-light); }
+.rarity-tier-2 { border: 1px solid #8a4f8a; }
+.rarity-tier-3 { border: 1px solid #5c7a99; }
+.rarity-common { border: 1px solid #b6ad97; }
+
+.rarity-tag {
+  display: inline-block;
+  font-family: "FangSong", serif;
+  font-size: 0.65rem;
+  padding: 1px 4px;
+  border: 1px solid var(--vermilion);
+  color: var(--vermilion);
+  margin-left: 0.3rem;
+  letter-spacing: 0.1em;
+}
+.rarity-tag.long-inscription { border-color: var(--jade); color: var(--jade); }
+.rarity-tag.overseas { border-color: var(--ink-faded); color: var(--ink-faded); }
+.rarity-tag.shu { border-color: var(--bronze); color: var(--bronze); }
+
+/* === Card primitive === */
+.artifact-card {
+  position: relative;
+  background: var(--paper);
+  padding: 0.9rem 0.9rem 0.7rem;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+.artifact-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px var(--soft-shadow);
+}
+.artifact-card.uncollected { opacity: 0.42; filter: grayscale(0.4); }
+.artifact-card .thumb-box {
+  aspect-ratio: 1/1;
+  background: var(--paper-soft);
+  border: 1px solid var(--rule);
+  display: flex; align-items: center; justify-content: center;
+  font-family: "Songti SC", serif;
+  color: var(--ink-faded);
+  margin-bottom: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.artifact-card.uncollected .thumb-box::after {
+  content: "待 录";
+  position: absolute;
+  font-family: "Songti SC", serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.5em;
+  color: var(--ink-faded);
+  opacity: 0.5;
+}
+
+/* === Inscription reader === */
+.jinwen-char {
+  display: inline-block;
+  padding: 0.2rem 0.35rem;
+  font-family: "Songti SC", serif;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  border-bottom: 1px dotted transparent;
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+  color: var(--ink-soft);
+}
+.jinwen-char:hover {
+  background: var(--paper-dark);
+  border-bottom-color: var(--vermilion);
+  color: var(--ink);
+}
+.jinwen-char.recognized {
+  color: var(--bronze);
+  font-weight: 600;
+}
+.jinwen-char.unknown {
+  color: var(--ink-faded);
+  font-style: italic;
+}
+
+/* === Rubbing 拓片 styling === */
+.rubbing-sheet {
+  background-color: #f5f1e6;
+  background-image:
+    radial-gradient(rgba(20, 14, 4, 0.08) 1px, transparent 1px),
+    linear-gradient(115deg, rgba(40, 25, 6, 0.04), rgba(0,0,0,0.06) 50%, rgba(40, 25, 6, 0.04));
+  background-size: 4px 4px, 100% 100%;
+  filter: contrast(1.05);
+  border: 1px solid var(--rule-dark);
+  position: relative;
+}
+
+/* === Inkblot seal (印章) — used for 段位 and 通鉴 === */
+.seal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem; height: 2.4rem;
+  background: var(--vermilion);
+  color: var(--paper);
+  font-family: "Songti SC", serif;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border-radius: 2px;
+  text-align: center;
+  line-height: 1;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.15), 1px 1px 0 rgba(0,0,0,0.05);
+  font-size: 0.75rem;
+}
+.seal.large { width: 3.6rem; height: 3.6rem; font-size: 1rem; }
+.seal.jade { background: var(--jade); }
+.seal.bronze { background: var(--bronze); }
+.seal.faded { background: var(--ink-faded); }
+
+/* === Progress bars — flat, ASCII-like === */
+.bar-track {
+  height: 8px;
+  background: var(--paper-soft);
+  border: 1px solid var(--rule);
+  position: relative;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  background: var(--bronze);
+  transition: width 400ms ease;
+}
+.bar-fill.partial { background: repeating-linear-gradient(90deg, var(--bronze) 0 6px, transparent 6px 9px); }
+
+/* === Time-pillar dynasty segment === */
+.dynasty-segment {
+  position: relative;
+  background: var(--paper-soft);
+  border-left: 3px solid var(--rule);
+  padding: 0.55rem 0.7rem;
+  font-size: 0.85rem;
+  margin-bottom: 1px;
+  transition: background 120ms ease;
+}
+.dynasty-segment .filled {
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 4px;
+  background: var(--bronze);
+}
+.dynasty-segment.empty .filled { display: none; }
+.dynasty-segment:hover { background: #ebe2cf; }
+.dynasty-segment.empty {
+  background: repeating-linear-gradient(45deg, transparent 0 6px, rgba(124, 113, 90, 0.08) 6px 7px), var(--paper-soft);
+  color: var(--ink-faded);
+}
+
+/* === Map === */
+.map-frame {
+  background: #ece4d2;
+  background-image:
+    radial-gradient(rgba(40, 25, 6, 0.06) 1px, transparent 1.5px),
+    linear-gradient(160deg, rgba(40, 25, 6, 0.04), rgba(124, 100, 60, 0.06));
+  background-size: 8px 8px, 100% 100%;
+  border: 1px solid var(--rule-dark);
+  position: relative;
+}
+.site-dot {
+  fill: var(--ink-faded);
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.site-dot.collected { fill: var(--vermilion); stroke: var(--ink); }
+.site-dot.treasure { fill: var(--bronze-glow); stroke: var(--bronze); }
+.site-dot.empty { fill: none; stroke-dasharray: 2 2; stroke: var(--ink-faded); }
+
+/* === Tree (D3) === */
+.tree-node-circ { fill: var(--paper); stroke: var(--ink-faded); stroke-width: 1.2; }
+.tree-node-circ.recognized { fill: var(--bronze); stroke: var(--ink); }
+.tree-node-circ.rare { stroke: var(--vermilion); stroke-width: 2; }
+.tree-node-label { font-family: "FangSong", serif; font-size: 11px; fill: var(--ink); }
+.tree-edge { stroke: var(--rule-dark); stroke-width: 1.2; fill: none; }
+.tree-edge.recognized { stroke: var(--bronze); stroke-width: 2; }
+.tree-edge.dashed { stroke-dasharray: 3 3; opacity: 0.5; }
+
+/* === Buttons (sober) === */
+.scholar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--ink);
+  background: transparent;
+  font-family: "FangSong", serif;
+  font-size: 0.85rem;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease;
+}
+.scholar-btn:hover { background: var(--ink); color: var(--paper); }
+.scholar-btn.primary { background: var(--ink); color: var(--paper); }
+.scholar-btn.primary:hover { background: var(--vermilion); border-color: var(--vermilion); }
+.scholar-btn.subtle { border-color: var(--rule-dark); color: var(--ink-soft); font-size: 0.75rem; padding: 0.3rem 0.6rem; }
+.scholar-btn.subtle:hover { background: var(--paper-dark); color: var(--ink); }
+
+/* === Pattern tree node === */
+.pattern-node {
+  cursor: pointer;
+  transition: opacity 200ms ease;
+}
+.pattern-node text {
+  font-family: "FangSong", serif;
+  fill: var(--ink-soft);
+  font-size: 12px;
+}
+.pattern-node circle {
+  fill: var(--paper);
+  stroke: var(--ink-faded);
+  stroke-width: 1.2;
+  transition: fill 200ms ease, stroke 200ms ease;
+}
+.pattern-node.recognized circle { fill: var(--bronze); stroke: var(--ink); }
+.pattern-node.recognized text { fill: var(--ink); font-weight: 600; }
+.pattern-node.rare circle { stroke: var(--vermilion); stroke-width: 2; }
+.pattern-node:not(.recognized) circle { stroke-dasharray: 3 3; opacity: 0.7; }
+
+/* === Footer === */
+.scholar-footer {
+  border-top: 1px solid var(--rule);
+  background: var(--paper-soft);
+  font-size: 0.75rem;
+  color: var(--ink-faded);
+  padding: 1rem 0;
+}
+.scholar-footer a { color: var(--indigo); }
+
+/* === Compare wall === */
+.compare-cell {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  position: relative;
+  padding: 0.5rem;
+  min-height: 11rem;
+}
+.compare-cell.empty {
+  background: repeating-linear-gradient(45deg, var(--paper) 0 6px, rgba(160, 44, 44, 0.04) 6px 7px);
+  border: 1px dashed var(--vermilion);
+}
+.compare-cell.empty::after {
+  content: "待 补";
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Songti SC", serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.4em;
+  color: var(--vermilion);
+  opacity: 0.55;
+}
+
+/* === Detail-page side dossier === */
+.dossier {
+  background: var(--paper);
+  border: 1px solid var(--rule-dark);
+  position: relative;
+}
+.dossier::before {
+  content: "档 案 卡";
+  position: absolute;
+  top: -10px; left: 12px;
+  background: var(--paper);
+  padding: 0 0.4rem;
+  font-family: "Songti SC", serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  color: var(--ink-faded);
+}
+
+/* === Breathing animation for empty time segments (soft) === */
+@keyframes breathe {
+  0%, 100% { opacity: 0.42; }
+  50%      { opacity: 0.62; }
+}
+.breathing { animation: breathe 6s ease-in-out infinite; }
+
+/* === Mini badge for collected status === */
+.collected-mark {
+  display: inline-block;
+  width: 8px; height: 8px;
+  background: var(--bronze);
+  border: 1px solid var(--ink);
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.collected-mark.uncollected { background: transparent; border-style: dashed; }
+
+/* === Inline definition style === */
+.kv {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  gap: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+.kv dt {
+  font-family: "FangSong", serif;
+  color: var(--ink-faded);
+}
+.kv dd { color: var(--ink); }
+
+/* === Asterisk margin notes === */
+.margin-note {
+  position: relative;
+  padding-left: 1rem;
+  font-family: "FangSong", serif;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  line-height: 1.65;
+  border-left: 2px solid var(--rule-dark);
+}
+
+/* === Scrollbar - subtle === */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--rule-dark); border-radius: 4px; }
+
+/* === Small print: pinyin annotation === */
+.pinyin {
+  font-size: 0.65rem;
+  color: var(--ink-faded);
+  font-family: "Iosevka", monospace;
+  letter-spacing: 0.05em;
+}

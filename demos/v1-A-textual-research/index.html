@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<title>青铜考 · 总目 — 考据案卷系统</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="MuseumCollect Persona A · 考据派 Builder demo. Textual researcher's working notebook for 商周青铜器.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/scholar.css">
+</head>
+<body data-page="index.html" class="min-h-screen">
+
+<div id="site-header"></div>
+
+<main class="max-w-6xl mx-auto px-6 pt-10">
+
+  <!-- Title block, like a journal opening -->
+  <section class="grid grid-cols-12 gap-8 mb-10">
+    <div class="col-span-12 md:col-span-8">
+      <div class="section-cap">卷首 · Volume I</div>
+      <h1 class="scholar-title text-4xl mb-4 leading-tight">
+        青铜考 ·<br>
+        <span class="text-2xl" style="color:var(--ink-soft)">商周青铜器证据链工作台</span>
+      </h1>
+      <p class="font-fang text-base leading-relaxed mb-3" style="color:var(--ink-soft)">
+        本系统为博物馆爱好者中的"考据派"用户而设。<span id="cite1"></span>它不是一份图录,是一份**逐条挂载来源的个人证据档案**——
+        每一件器物都视作证据链上的节点,每一处断代、释字、铸主推断都标注出处与争议。
+      </p>
+      <p class="font-fang text-sm leading-relaxed" style="color:var(--ink-soft)">
+        三大查阅入口按维度组织:<strong class="font-serif-cn">时空柱</strong>(以朝代时长真实比例为骨架)、<strong class="font-serif-cn">出土地图</strong>(古国版图,非现代行政区)、<strong class="font-serif-cn">纹饰演化树</strong>(带主流学派引用)。所有数据可一键导出为研究笔记 (Markdown) 或 BibTeX。
+      </p>
+    </div>
+
+    <!-- Sidebar: collection summary, scholarly density -->
+    <aside class="col-span-12 md:col-span-4">
+      <div class="dossier p-5">
+        <div class="section-cap" style="margin-bottom:0.5rem">个人案卷</div>
+        <dl class="kv mt-3">
+          <dt>持照人</dt><dd id="u-name">—</dd>
+          <dt>单位</dt><dd id="u-aff">—</dd>
+          <dt>护照号</dt><dd class="font-mono-num" id="u-pass">—</dd>
+          <dt>录入文物</dt><dd id="u-collected">—</dd>
+          <dt>覆盖朝代</dt><dd id="u-dynasties">—</dd>
+          <dt>累计识字</dt><dd id="u-chars">—</dd>
+          <dt>识字段位</dt><dd id="u-rank">—</dd>
+          <dt>研究笔记</dt><dd id="u-notes">—</dd>
+        </dl>
+        <hr class="scholar-rule">
+        <button class="scholar-btn w-full" onclick="MuseumLayout.exportNotes()">导出研究笔记 (Markdown)</button>
+      </div>
+    </aside>
+  </section>
+
+  <hr class="scholar-rule double">
+
+  <!-- Three dimensional entries -->
+  <section class="mb-12">
+    <div class="section-cap">目 录 · Three Dimensional Indices</div>
+    <p class="font-fang text-sm mb-6" style="color:var(--ink-faded)">
+      下列三大入口将同一批文物按不同维度切片,各自承载不同语义。点击进入对应维度页。
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <a href="time-pillar.html" class="block dossier p-6 hover:bg-[#ebe2cf] transition">
+        <div class="section-cap">维度 · 一</div>
+        <h2 class="scholar-title text-lg mb-2">时空柱 — Dynasty Pillar</h2>
+        <p class="font-fang text-sm leading-relaxed mb-4" style="color:var(--ink-soft)">
+          垂直柱式,朝代区段高度严格正比于历史时长(商554年 / 西周275年 / 夏250年),非平均分配。子分期独立可展开。
+        </p>
+        <div class="bar-track mb-2"><div class="bar-fill" id="dyn-pct" style="width:36%"></div></div>
+        <div class="font-mono-num text-xs" id="dyn-label">9 / 25 件 · 5 / 8 朝代有录入</div>
+      </a>
+
+      <a href="ancient-map.html" class="block dossier p-6 hover:bg-[#ebe2cf] transition">
+        <div class="section-cap">维度 · 二</div>
+        <h2 class="scholar-title text-lg mb-2">出土地图 — Excavation Map</h2>
+        <p class="font-fang text-sm leading-relaxed mb-4" style="color:var(--ink-soft)">
+          采用谭其骧《中国历史地图集》风格的古国轮廓,而非现代行政区。可切换朝代以观察版图重排。
+        </p>
+        <div class="bar-track mb-2"><div class="bar-fill" id="site-pct" style="width:40%"></div></div>
+        <div class="font-mono-num text-xs" id="site-label">5 / 14 地点 已踏足</div>
+      </a>
+
+      <a href="pattern-tree.html" class="block dossier p-6 hover:bg-[#ebe2cf] transition">
+        <div class="section-cap">维度 · 三</div>
+        <h2 class="scholar-title text-lg mb-2">纹饰演化树 — Pattern Genealogy</h2>
+        <p class="font-fang text-sm leading-relaxed mb-4" style="color:var(--ink-soft)">
+          按学界主流分期: 神权(饕餮)→ 礼制(窃曲)→ 写实(凤鸟/莲鹤)。每条演化连线挂载李学勤 / 容庚等学派引用。
+        </p>
+        <div class="bar-track mb-2"><div class="bar-fill" id="pat-pct" style="width:55%"></div></div>
+        <div class="font-mono-num text-xs" id="pat-label">10 / 18 类纹饰 已识</div>
+      </a>
+    </div>
+  </section>
+
+  <hr class="scholar-rule">
+
+  <!-- Recent entries + Notes log (data-dense, scholar feel) -->
+  <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+    <div class="md:col-span-2">
+      <div class="section-cap">近期录入 · 摘要</div>
+      <table class="scholar-table" id="recent-table">
+        <thead>
+          <tr><th class="w-8">№</th><th>名称</th><th>朝代 · 分期</th><th>出土</th><th>馆藏</th><th>稀有度</th><th>断代依据</th></tr>
+        </thead>
+        <tbody id="recent-tbody"></tbody>
+      </table>
+      <p class="font-fang text-xs mt-3" style="color:var(--ink-faded)">
+        ※ 表中"断代依据"为简化标注;详细出处见各条目详情页 / "档案卡"。
+      </p>
+    </div>
+
+    <aside>
+      <div class="section-cap">研究笔记 · 最近</div>
+      <ul class="font-fang text-sm leading-relaxed" style="color:var(--ink-soft)">
+        <li class="mb-2 pb-2" style="border-bottom:1px dashed var(--rule)">
+          <span class="font-mono-num text-xs" style="color:var(--ink-faded)">2026-05-19</span><br>
+          毛公鼎 vs 大盂鼎 字体比较:"王"字中部 X 形向竖画化的过渡发生在中期偏晚<sup class="cite-ref" data-cite="字源比对依《商周金文字典》P.1138;参考郭沫若《两周金文辞大系图录考释》。">[1]</sup>
+        </li>
+        <li class="mb-2 pb-2" style="border-bottom:1px dashed var(--rule)">
+          <span class="font-mono-num text-xs" style="color:var(--ink-faded)">2026-05-17</span><br>
+          后母戊 vs 司母戊 释读争议:目前学界倾向"后"读法,认为"后"指君王/王后之尊号<sup class="cite-ref" data-cite="马承源 1988;李学勤 2010 后母戊新说;裘锡圭释字。">[2]</sup>
+        </li>
+        <li class="mb-2 pb-2" style="border-bottom:1px dashed var(--rule)">
+          <span class="font-mono-num text-xs" style="color:var(--ink-faded)">2026-05-15</span><br>
+          何尊"宅兹中国"四字:迄今所知"中国"二字作为合成词的最早出处,见底铭第6行末-第7行初。
+        </li>
+        <li class="mb-2">
+          <span class="font-mono-num text-xs" style="color:var(--ink-faded)">2026-05-13</span><br>
+          利簋"甲子朝, 岁鼎":夏商周断代工程据此定牧野之战于 BC 1046.02.20。
+        </li>
+      </ul>
+    </aside>
+  </section>
+
+  <hr class="scholar-rule">
+
+  <!-- Bottom: invisible-progress callouts (gamification but not flashy) -->
+  <section class="mb-10">
+    <div class="section-cap">研究进度 · 隐式</div>
+    <p class="font-fang text-sm mb-4" style="color:var(--ink-faded)">
+      本系统不设"积分 / 等级 / 排行榜"。下方仅为方便您回顾的研究断面:
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div class="margin-note p-3">
+        <strong class="font-serif-cn">商代晚期</strong> 录入 <span class="font-mono-num">3 件</span> / 池 4 件 ≈ <span class="font-mono-num">75%</span>。续录子龙鼎、四羊首铜瓿可使此期断面充盈。
+      </div>
+      <div class="margin-note p-3">
+        <strong class="font-serif-cn">西周早期</strong> 已覆盖大盂鼎(康王) / 利簋(武王) / 何尊(成王) <span class="font-mono-num">3 / 3</span>件,可形成早期册命金文比较序列。
+      </div>
+      <div class="margin-note p-3">
+        <strong class="font-serif-cn">古蜀文明</strong> 尚有 <span class="font-mono-num">2 / 3</span> 件(青铜大立人、神树)未录,该独立体系与殷墟同期但无文字。
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div id="site-footer"></div>
+
+<script src="js/data.js"></script>
+<script src="js/layout.js"></script>
+<script>
+(async function () {
+  await MuseumA.ready;
+  const u = MuseumA.user;
+  document.getElementById('u-name').textContent = u.name;
+  document.getElementById('u-aff').textContent = u.affiliation;
+  document.getElementById('u-pass').textContent = u.passport_id;
+
+  // Stats
+  const dStats = MuseumA.dynastyStats();
+  const totalCollected = u.collected_ids.length;
+  const totalPool = MuseumA.catalog.length;
+  const dynastiesWith = Object.values(dStats).filter(d => d.collected > 0).length;
+  document.getElementById('u-collected').innerHTML = `<span class="font-mono-num">${totalCollected}</span> / ${totalPool} 件`;
+  document.getElementById('u-dynasties').innerHTML = `<span class="font-mono-num">${dynastiesWith}</span> / 8 朝`;
+  document.getElementById('u-chars').innerHTML = `<span class="font-mono-num">${u.recognized_char_count}</span> 字`;
+  const rk = MuseumA.inscriptionRank();
+  document.getElementById('u-rank').innerHTML = `<strong>${rk.rank}</strong> · 距${rk.next || '终极'} <span class="font-mono-num">${rk.upper ? (rk.upper - u.recognized_char_count) : '∞'}</span> 字`;
+  document.getElementById('u-notes').innerHTML = `<span class="font-mono-num">${u.notes_chars.toLocaleString()}</span> 字`;
+
+  // Dimension cards
+  document.getElementById('dyn-pct').style.width = (totalCollected / totalPool * 100).toFixed(0) + '%';
+  document.getElementById('dyn-label').innerHTML = `<span class="font-mono-num">${totalCollected}</span> / ${totalPool} 件 · <span class="font-mono-num">${dynastiesWith}</span> / 8 朝代有录入`;
+
+  const sStats = MuseumA.siteStats();
+  const sitesWith = Object.values(sStats).filter(s => s.collected > 0).length;
+  const sitesTotal = Object.keys(sStats).length;
+  document.getElementById('site-pct').style.width = (sitesWith / sitesTotal * 100).toFixed(0) + '%';
+  document.getElementById('site-label').innerHTML = `<span class="font-mono-num">${sitesWith}</span> / ${sitesTotal} 地点 已踏足`;
+
+  const pStats = MuseumA.patternStats();
+  const patternsWith = Object.values(pStats).filter(p => p.collected > 0).length;
+  const patternsTotal = Object.keys(pStats).length;
+  document.getElementById('pat-pct').style.width = (patternsWith / patternsTotal * 100).toFixed(0) + '%';
+  document.getElementById('pat-label').innerHTML = `<span class="font-mono-num">${patternsWith}</span> / ${patternsTotal} 类纹饰 已识`;
+
+  // Citation
+  document.getElementById('cite1').innerHTML = MuseumLayout.citation('注', '系统定位见 docs/personas-for-builders.md §A 考据派 (陈翊安, 北京大学 考古文博学院)。');
+
+  // Recent collection table (latest 6 from collected, in canonical order shown)
+  const tbody = document.getElementById('recent-tbody');
+  let rows = '';
+  let i = 1;
+  u.collected_ids.slice(0, 9).forEach(id => {
+    const a = MuseumA.catalogById[id];
+    if (!a) return;
+    const reasons = [];
+    if (a.inscription && a.inscription.char_count > 0) reasons.push(`铭 ${a.inscription.char_count}字`);
+    if (a.craft) reasons.push(a.craft.split(/[(+ ]/)[0]);
+    if (a.excavation_year) reasons.push(`出土 ${a.excavation_year}`);
+    rows += `
+    <tr>
+      <td class="font-mono-num" style="color:var(--ink-faded)">${i.toString().padStart(2, '0')}</td>
+      <td><a href="artifact.html?id=${a.id}" class="hover:underline" style="color:var(--ink)"><strong class="font-serif-cn">${a.name_zh}</strong></a></td>
+      <td class="font-fang">${a.dynasty} · ${a.period || ''}</td>
+      <td class="font-fang text-xs">${(a.excavation_site || '').substring(0, 12)}…</td>
+      <td class="font-fang text-xs">${a.current_museum || ''}</td>
+      <td>${MuseumLayout.citation(MuseumA.tierLabel(a.rarity_level), a.rarity_level)}</td>
+      <td class="font-fang text-xs" style="color:var(--ink-soft)">${reasons.join(' · ')}</td>
+    </tr>`;
+    i++;
+  });
+  tbody.innerHTML = rows;
+  MuseumLayout.attachCitations(document);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>时空柱 · 三千年的厚</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/immersive.css" />
+</head>
+<body>
+
+  <section class="px-20 pt-32 pb-12">
+    <div class="max-w-6xl mx-auto text-center scene-enter">
+      <div class="poem-line mb-3" style="font-size: 13px; letter-spacing: 0.5em; opacity: 0.6;">
+        — 时 · 空 · 柱 —
+      </div>
+      <h1 class="calligraphy-title mb-6">三千年的厚度,你身体能感觉到</h1>
+      <p class="poem-line max-w-2xl mx-auto" style="font-size: 15px; opacity: 0.8;">
+        商有五百五十四年,西周仅两百七十五。柱的高度,就是真实的时间。
+      </p>
+    </div>
+  </section>
+
+  <!-- Main: pillar + dynasty cards side -->
+  <section class="px-20 pb-32 scene-enter-late">
+    <div class="max-w-6xl mx-auto grid grid-cols-[1fr_2fr] gap-16">
+      <!-- Left: the pillar (sticky) -->
+      <div class="relative" style="position: sticky; top: 100px; height: calc(100vh - 140px);">
+        <svg id="pillarSvg" viewBox="0 0 240 800" class="w-full h-full">
+          <!-- filled by JS -->
+        </svg>
+      </div>
+
+      <!-- Right: dynasty narratives -->
+      <div id="dynastyNarratives" class="space-y-20"></div>
+    </div>
+  </section>
+
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script>
+    (async function () {
+      MCUI.renderHeader('time-pillar');
+      MCUI.renderFooter();
+      await MCData.ready;
+
+      const TOTAL_YEARS = MCData.DYNASTIES.reduce((s, d) => s + d.years, 0); // ~2049 years
+      const PILLAR_HEIGHT = 760;
+      const TOP_PAD = 20;
+
+      // Group artifacts by dynasty
+      const byDynasty = {};
+      MCData.DYNASTIES.forEach(d => byDynasty[d.key] = []);
+      MCData.catalog.forEach(a => {
+        const k = MCData.dynastyKeyFor(a);
+        if (byDynasty[k]) byDynasty[k].push(a);
+      });
+
+      // Compute y offsets (top→bottom: 夏→东汉)
+      let y = TOP_PAD;
+      const segments = MCData.DYNASTIES.map(d => {
+        const h = (d.years / TOTAL_YEARS) * (PILLAR_HEIGHT - TOP_PAD * 2);
+        const arts = byDynasty[d.key] || [];
+        const collected = arts.filter(a => MCData.isCollected(a.id));
+        const fillRatio = arts.length > 0 ? collected.length / arts.length : 0;
+        const seg = { ...d, y, h, arts, collected, fillRatio };
+        y += h;
+        return seg;
+      });
+
+      // ----- Render SVG pillar -----
+      const svg = document.getElementById('pillarSvg');
+      let pillarHtml = '';
+
+      // Defs
+      pillarHtml += `
+        <defs>
+          <linearGradient id="bronzeFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#d4a857" stop-opacity="0.8"/>
+            <stop offset="50%" stop-color="#8b6f3d" stop-opacity="0.85"/>
+            <stop offset="100%" stop-color="#4a3a24" stop-opacity="0.9"/>
+          </linearGradient>
+          <pattern id="paper" patternUnits="userSpaceOnUse" width="20" height="20">
+            <rect width="20" height="20" fill="#1a1614"/>
+            <circle cx="5" cy="5" r="0.3" fill="#3a2a1a"/>
+            <circle cx="15" cy="15" r="0.3" fill="#3a2a1a"/>
+          </pattern>
+        </defs>
+      `;
+
+      // Pillar body
+      const pillarX = 80, pillarW = 80;
+      segments.forEach((seg, i) => {
+        // Background (aged paper)
+        pillarHtml += `<rect x="${pillarX}" y="${seg.y}" width="${pillarW}" height="${seg.h}" fill="url(#paper)" stroke="#3a2a1a" stroke-width="0.5"/>`;
+        // Bronze fill from bottom (proportional)
+        const fillH = seg.h * seg.fillRatio;
+        if (fillH > 0) {
+          pillarHtml += `<rect x="${pillarX}" y="${seg.y + seg.h - fillH}" width="${pillarW}" height="${fillH}" fill="url(#bronzeFill)"/>`;
+        }
+        // If empty -> breathing glow overlay
+        if (seg.fillRatio === 0) {
+          pillarHtml += `<rect x="${pillarX}" y="${seg.y}" width="${pillarW}" height="${seg.h}" fill="#b91c1c" opacity="0.0">
+            <animate attributeName="opacity" values="0;0.08;0" dur="6s" repeatCount="indefinite"/>
+          </rect>`;
+        }
+
+        // Dynasty label on left (vertical text)
+        pillarHtml += `
+          <text x="${pillarX - 20}" y="${seg.y + seg.h / 2}" text-anchor="middle" fill="#d4a857"
+                font-family="serif" font-size="${Math.min(20, seg.h / 3)}" letter-spacing="4" font-style="italic">
+            ${seg.label}
+          </text>
+        `;
+
+        // Separator line
+        if (i < segments.length - 1) {
+          pillarHtml += `<line x1="${pillarX - 10}" y1="${seg.y + seg.h}" x2="${pillarX + pillarW + 10}" y2="${seg.y + seg.h}" stroke="#d4a857" stroke-width="0.5" opacity="0.3"/>`;
+        }
+
+        // Right side: collection count
+        pillarHtml += `
+          <text x="${pillarX + pillarW + 10}" y="${seg.y + seg.h / 2 - 4}" fill="#d4a857" font-family="serif" font-size="12" letter-spacing="2" opacity="0.9">
+            ${seg.collected.length} / ${seg.arts.length}
+          </text>
+          <text x="${pillarX + pillarW + 10}" y="${seg.y + seg.h / 2 + 12}" fill="#7a6a4a" font-family="serif" font-size="10" letter-spacing="1.5">
+            ${seg.years}年
+          </text>
+        `;
+
+        // Right side mini dots: each collected artifact = one dot
+        seg.arts.forEach((a, j) => {
+          if (j > 8) return;
+          const dotX = pillarX + pillarW + 60 + (j % 4) * 8;
+          const dotY = seg.y + 15 + Math.floor(j / 4) * 8;
+          const isCol = MCData.isCollected(a.id);
+          pillarHtml += `<circle cx="${dotX}" cy="${dotY}" r="2.5" fill="${isCol ? '#d4a857' : '#3a2a1a'}" stroke="${isCol ? '#d4a857' : '#5a4a2a'}" stroke-width="0.5"/>`;
+        });
+      });
+
+      // Top and bottom dates
+      pillarHtml += `<text x="${pillarX + pillarW / 2}" y="${10}" text-anchor="middle" fill="#7a6a4a" font-family="serif" font-size="10" letter-spacing="2">公元前 1750</text>`;
+      pillarHtml += `<text x="${pillarX + pillarW / 2}" y="${PILLAR_HEIGHT + 30}" text-anchor="middle" fill="#7a6a4a" font-family="serif" font-size="10" letter-spacing="2">公元 220</text>`;
+
+      svg.innerHTML = pillarHtml;
+
+      // ----- Right: dynasty narratives -----
+      const narrativeHtml = segments.map(seg => {
+        const filled = seg.collected.length;
+        const total = seg.arts.length;
+        const fillPct = (seg.fillRatio * 100).toFixed(0);
+
+        let titleSeal = '';
+        if (seg.fillRatio >= 0.8 && total > 0) titleSeal = `<span class="seal" style="font-size: 10px;">通 鉴</span>`;
+        else if (seg.fillRatio >= 0.5 && total > 0) titleSeal = `<span class="poem-line" style="font-size: 11px; color: var(--gold-soft); letter-spacing: 0.2em;">渐入</span>`;
+        else if (total > 0 && filled === 0) titleSeal = `<span class="poem-line" style="font-size: 11px; color: var(--bronze-mid); letter-spacing: 0.2em;">待 踏 足</span>`;
+
+        // Almost there call-out
+        let almostThere = '';
+        if (total > 0 && fillPct < 100 && fillPct >= 50) {
+          almostThere = `<div class="poem-line mt-4" style="font-size: 12px; opacity: 0.6; letter-spacing: 0.15em;">还差 ${total - filled} 件,${seg.label}通鉴可得。</div>`;
+        }
+
+        return `
+          <section class="fade-up" id="dynasty-${seg.key}">
+            <div class="flex items-baseline gap-4 mb-4">
+              <h2 class="calligraphy-title" style="font-size: 2.4rem; color: var(--gold-treasure);">${seg.label}</h2>
+              ${titleSeal}
+            </div>
+            <div class="poem-line mb-3" style="font-size: 17px; opacity: 0.9; color: var(--silk-cream);">${seg.poem}</div>
+            <div style="color: var(--bronze-mid); font-size: 12px; letter-spacing: 0.3em;" class="mb-6">${seg.range} · ${seg.years} 年</div>
+            ${almostThere}
+            ${total === 0 ? `<p class="poem-line mt-4" style="opacity: 0.5;">这片时间里,本卷暂无藏件。</p>` : `
+              <div class="grid grid-cols-3 gap-6 mt-6">
+                ${seg.arts.slice(0, 6).map(a => {
+                  const m = MCData.getMonologue(a.id);
+                  const c = MCData.isCollected(a.id);
+                  return `
+                    <a href="artifact.html?id=${a.id}" class="block">
+                      <div class="${MCData.isTreasure(a) ? 'halo-treasure' : ''} ${c ? '' : 'sleeping'}"
+                           style="aspect-ratio: 3/4; overflow: hidden;">
+                        ${MCUI.imageOrPlaceholder(a, { cls: 'w-full h-full', style: 'width:100%; height:100%;' })}
+                      </div>
+                      <h4 class="mt-3 calligraphy-title hover-line inline-block" style="font-size: 1.05rem;">${a.name_zh}</h4>
+                      <p class="mt-1 poem-line" style="font-size: 11px; opacity: 0.7;">${(m.poem || a.period || '').slice(0, 22)}</p>
+                    </a>
+                  `;
+                }).join('')}
+              </div>
+            `}
+          </section>
+        `;
+      }).join(`<div class="brush-divider"></div>`);
+
+      document.getElementById('dynastyNarratives').innerHTML = narrativeHtml;
+      MCUI.observeFadeUp();
+    })();
+  </script>
+</body>
+</html>

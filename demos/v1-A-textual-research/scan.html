@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<title>影像录入 · 照片识别 — 青铜考</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/scholar.css">
+<style>
+  .preset-card { background: var(--paper); border: 1px solid var(--rule-dark); cursor: pointer; transition: background 120ms ease; }
+  .preset-card:hover { background: var(--paper-soft); }
+  .preset-card .placeholder { aspect-ratio: 4/3; background-image: linear-gradient(135deg, #d9d0bd 25%, #ebe4d6 25%, #ebe4d6 50%, #d9d0bd 50%, #d9d0bd 75%, #ebe4d6 75%); background-size: 8px 8px; }
+  .conf-band { font-family: "FangSong", serif; padding: 0.15rem 0.4rem; border: 1px solid; font-size: 0.7rem; }
+  .conf-band.high { color: var(--bronze); border-color: var(--bronze); }
+  .conf-band.medium { color: var(--ink-soft); border-color: var(--ink-soft); }
+  .conf-band.low { color: var(--vermilion); border-color: var(--vermilion); }
+  .conf-band.no_match { color: var(--ink-faded); border-color: var(--ink-faded); }
+  .spinner { width: 24px; height: 24px; border: 2px solid var(--ink-faded); border-top-color: var(--bronze); border-radius: 50%; animation: spin 0.9s linear infinite; }
+  @keyframes spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+  .candidate-row { padding: 0.6rem 0.6rem; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: 4rem 1fr 7rem 5rem; gap: 0.5rem; align-items: center; }
+  .candidate-row:hover { background: var(--paper-soft); }
+  .confidence-bar { height: 4px; background: var(--paper-soft); border: 1px solid var(--rule); position: relative; }
+  .confidence-bar > div { position: absolute; left: 0; top: 0; bottom: 0; background: var(--bronze); }
+</style>
+</head>
+<body data-page="scan.html" class="min-h-screen">
+
+<div id="site-header"></div>
+
+<main class="max-w-5xl mx-auto px-6 pt-8">
+
+  <section class="mb-6">
+    <div class="section-cap">影像 / 展签 录入 · Image & Label Recognition</div>
+    <h1 class="scholar-title text-3xl mb-2">照片录入工作台</h1>
+    <p class="font-fang text-sm leading-relaxed" style="color:var(--ink-soft)">
+      在博物馆现场,您可对器物或展签摄影。本系统将以图像识别(CLIP 检索)+ 展签 OCR 双路径,返回带置信度、匹配依据与候选项的识别结果。
+      <sup class="cite-ref" data-cite="模型: 当前为 mock-v0.1 模拟器, 见 ai-service/mock-recognition.js。生产环境将切换为 CLIP + Tencent Cloud OCR 双路径,合同详 ai-service/api-contract.md。">[模]</sup>
+    </p>
+    <p class="font-fang text-xs mt-2" style="color:var(--ink-faded)">
+      ※ 本系统对识别置信度采取<strong>诚实做法</strong>:不冒充确定。低置信度时呈现多候选 + 搜索回退。
+    </p>
+  </section>
+
+  <hr class="scholar-rule">
+
+  <!-- Preset cards -->
+  <section>
+    <div class="section-cap">候选样张 · 4 种情境</div>
+    <p class="font-fang text-xs mb-3" style="color:var(--ink-faded)">点击下方任一样张以模拟识别(无需真实摄像头)。</p>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3" id="presets">
+      <div class="preset-card p-2" data-seed="houmuwu">
+        <div class="placeholder mb-2"></div>
+        <div class="font-serif-cn text-sm"><strong>正面 · 高清</strong></div>
+        <div class="font-fang text-xs" style="color:var(--ink-faded)">某商代鼎,正面无遮挡</div>
+        <div class="font-mono-num text-[10px] mt-1" style="color:var(--ink-faded)">demo_seed: houmuwu</div>
+      </div>
+      <div class="preset-card p-2" data-seed="fuhao">
+        <div class="placeholder mb-2"></div>
+        <div class="font-serif-cn text-sm"><strong>侧光 · 模糊</strong></div>
+        <div class="font-fang text-xs" style="color:var(--ink-faded)">某商代酒器,光线一般</div>
+        <div class="font-mono-num text-[10px] mt-1" style="color:var(--ink-faded)">demo_seed: fuhao</div>
+      </div>
+      <div class="preset-card p-2" data-seed="ocr_houmuwu">
+        <div class="placeholder mb-2"></div>
+        <div class="font-serif-cn text-sm"><strong>展签 · OCR</strong></div>
+        <div class="font-fang text-xs" style="color:var(--ink-faded)">仅拍展签</div>
+        <div class="font-mono-num text-[10px] mt-1" style="color:var(--ink-faded)">demo_seed: ocr_houmuwu</div>
+      </div>
+      <div class="preset-card p-2" data-seed="inscription_he_zun">
+        <div class="placeholder mb-2"></div>
+        <div class="font-serif-cn text-sm"><strong>铭文 · 混合</strong></div>
+        <div class="font-fang text-xs" style="color:var(--ink-faded)">器底铭文为主</div>
+        <div class="font-mono-num text-[10px] mt-1" style="color:var(--ink-faded)">demo_seed: inscription_he_zun</div>
+      </div>
+      <div class="preset-card p-2" data-seed="lianhe">
+        <div class="placeholder mb-2"></div>
+        <div class="font-serif-cn text-sm"><strong>春秋器物</strong></div>
+        <div class="font-fang text-xs" style="color:var(--ink-faded)">中置信度</div>
+        <div class="font-mono-num text-[10px] mt-1" style="color:var(--ink-faded)">demo_seed: lianhe</div>
+      </div>
+      <div class="preset-card p-2" data-seed="siyang">
+        <div class="placeholder mb-2"></div>
+        <div class="font-serif-cn text-sm"><strong>四羊方尊</strong></div>
+        <div class="font-fang text-xs" style="color:var(--ink-faded)">明显特征</div>
+        <div class="font-mono-num text-[10px] mt-1" style="color:var(--ink-faded)">demo_seed: siyang</div>
+      </div>
+      <div class="preset-card p-2" data-seed="lowconf">
+        <div class="placeholder mb-2"></div>
+        <div class="font-serif-cn text-sm"><strong>低置信度</strong></div>
+        <div class="font-fang text-xs" style="color:var(--ink-faded)">模型不确定</div>
+        <div class="font-mono-num text-[10px] mt-1" style="color:var(--ink-faded)">demo_seed: lowconf</div>
+      </div>
+      <div class="preset-card p-2" data-seed="nomatch">
+        <div class="placeholder mb-2"></div>
+        <div class="font-serif-cn text-sm"><strong>无匹配</strong></div>
+        <div class="font-fang text-xs" style="color:var(--ink-faded)">非青铜器</div>
+        <div class="font-mono-num text-[10px] mt-1" style="color:var(--ink-faded)">demo_seed: nomatch</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Loading -->
+  <section id="loading" class="hidden mt-6 dossier p-5 flex items-center gap-3">
+    <div class="spinner"></div>
+    <div class="font-fang text-sm" style="color:var(--ink-soft)">正在识别 · 模拟 CLIP 检索 + OCR 双路径 ...</div>
+  </section>
+
+  <!-- Result -->
+  <section id="result" class="mt-6"></section>
+
+  <hr class="scholar-rule">
+
+  <!-- API panel -->
+  <section class="mb-10">
+    <div class="section-cap">API 响应 · 调试视图 (透明化)</div>
+    <p class="font-fang text-xs mb-2" style="color:var(--ink-faded)">
+      考据派要求"AI 不黑盒"。下方面板显示原始响应,生产环境此面板可由用户主动展开。
+    </p>
+    <pre id="api-debug" class="font-mono-num text-xs p-3" style="background:var(--paper-soft); border:1px solid var(--rule-dark); overflow:auto; max-height:300px"></pre>
+  </section>
+
+</main>
+
+<div id="site-footer"></div>
+
+<script src="js/data.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/mock-recognition.js"></script>
+<script>
+(async function() {
+  await MuseumA.ready;
+  await mockRecognition.ready;
+
+  document.querySelectorAll('.preset-card').forEach(card => {
+    card.addEventListener('click', async () => {
+      const seed = card.dataset.seed;
+      document.getElementById('loading').classList.remove('hidden');
+      document.getElementById('result').innerHTML = '';
+      document.getElementById('api-debug').textContent = '';
+      const res = await mockRecognition.recognize({ demo_seed: seed });
+      document.getElementById('loading').classList.add('hidden');
+      renderResult(res);
+      document.getElementById('api-debug').textContent = JSON.stringify(res, null, 2);
+    });
+  });
+
+  function renderResult(r) {
+    const out = document.getElementById('result');
+    const band = r.confidence_band;
+    const top = r.candidates[0];
+    let head = '';
+    const labelMap = { high: '高置信度匹配', medium: '中置信度 · 多候选', low: '低置信度', no_match: '未匹配' };
+    head = `
+    <div class="flex items-baseline gap-3 mb-3">
+      <div class="section-cap" style="margin:0">识别结果</div>
+      <span class="conf-band ${band}">${labelMap[band] || band}</span>
+      <span class="font-mono-num text-xs" style="color:var(--ink-faded)">request: ${r.request_id} · ${r.elapsed_ms} ms · ${r.model_version}</span>
+    </div>`;
+
+    let body = '';
+    if (band === 'no_match' || !top) {
+      body = `
+      <div class="dossier p-5">
+        <div class="font-serif-cn text-lg">未匹配到目标条目。</div>
+        <p class="font-fang text-sm mt-2" style="color:var(--ink-soft)">本系统不冒充确定。可尝试以下回退路径:</p>
+        <ul class="font-fang text-sm mt-2 ml-4 list-disc" style="color:var(--ink-soft)">
+          <li>正面 / 良好光线下重拍此件</li>
+          <li>直接搜索此件中文名(<a href="catalog.html" style="color:var(--indigo); text-decoration:underline">图鉴页</a>)</li>
+          <li>仅扫展签文字(标签 OCR 路径)</li>
+        </ul>
+      </div>`;
+    } else if (band === 'high') {
+      const a = MuseumA.catalogById[top.artifact_id];
+      const own = MuseumA.isCollected(a.id);
+      const tier = MuseumA.rarityTier(a.rarity_level);
+      body = `
+      <div class="dossier p-5 rarity-${tier}">
+        <div class="flex justify-between items-start">
+          <div>
+            <div class="font-serif-cn text-2xl"><strong>${a.name_zh}</strong> <span class="pinyin">${a.name_pinyin}</span></div>
+            <div class="font-fang text-sm mt-1" style="color:var(--ink-soft)">${a.dynasty} · ${a.period || ''} · ${a.current_museum}</div>
+          </div>
+          <div class="text-right">
+            <div class="font-mono-num text-3xl">${(top.confidence * 100).toFixed(0)}%</div>
+            <div class="font-fang text-xs" style="color:var(--ink-faded)">${top.match_method}</div>
+          </div>
+        </div>
+        <hr class="scholar-rule" style="margin:0.6rem 0">
+        <div class="section-cap">匹配依据 (model reasons)</div>
+        <ul class="font-fang text-sm mt-2" style="color:var(--ink-soft)">
+          ${top.match_reasons.map(r => `<li>· ${r}</li>`).join('')}
+        </ul>
+        <hr class="scholar-rule" style="margin:0.6rem 0">
+        <div class="flex gap-2 mt-3">
+          ${own ? `<span class="font-fang text-sm" style="color:var(--bronze)"><strong>✓</strong> 此条目已在您的案卷中</span>`
+                 : `<button class="scholar-btn primary" id="btn-confirm">+ 录入此条目</button>`}
+          <a href="artifact.html?id=${a.id}" class="scholar-btn">查看详情条目</a>
+        </div>
+      </div>
+      ${r.ocr_text ? `
+      <div class="dossier p-4 mt-4">
+        <div class="section-cap">展签 OCR 文本</div>
+        <pre class="font-fang text-sm mt-2" style="color:var(--ink); white-space:pre-wrap; line-height:1.7">${r.ocr_text}</pre>
+        ${r.extracted_fields ? `<div class="section-cap mt-3">提取字段</div><pre class="font-mono-num text-xs mt-1" style="color:var(--ink-soft)">${JSON.stringify(r.extracted_fields, null, 2)}</pre>` : ''}
+      </div>` : ''}
+      ${r.candidates.length > 1 ? `
+      <div class="mt-4">
+        <div class="section-cap">次候选 (top-K)</div>
+        ${r.candidates.slice(1).map(c => candidateRow(c)).join('')}
+      </div>` : ''}
+      `;
+    } else if (band === 'medium') {
+      body = `
+      <div class="dossier p-4">
+        <p class="font-fang text-sm mb-3" style="color:var(--ink-soft)">本图存在多个候选。请人工判定:</p>
+        ${r.candidates.map(c => candidateRow(c)).join('')}
+      </div>`;
+    } else if (band === 'low') {
+      body = `
+      <div class="dossier p-4">
+        <div class="font-serif-cn">置信度 ${(top.confidence*100).toFixed(0)}% — 仅供参考</div>
+        <p class="font-fang text-sm mt-2" style="color:var(--ink-soft)">系统识别为 <strong>${top.name_zh}</strong>(置信度低)。请人工核实:</p>
+        ${candidateRow(top)}
+        <div class="mt-3 flex gap-2">
+          <a href="artifact.html?id=${top.artifact_id}" class="scholar-btn">查看详情确认</a>
+          <a href="catalog.html" class="scholar-btn">改用搜索回退</a>
+        </div>
+      </div>`;
+    }
+    out.innerHTML = head + body;
+    if (band === 'high' && top) {
+      const btn = document.getElementById('btn-confirm');
+      const a = MuseumA.catalogById[top.artifact_id];
+      if (btn) btn.addEventListener('click', () => {
+        MuseumA.user.collected_ids.push(a.id);
+        out.querySelector('#btn-confirm').outerHTML = `<span class="font-fang text-sm" style="color:var(--bronze)"><strong>✓</strong> 已录入。</span>`;
+      });
+    }
+  }
+
+  function candidateRow(c) {
+    const a = MuseumA.catalogById[c.artifact_id];
+    const own = MuseumA.isCollected(a.id);
+    const tier = MuseumA.rarityTier(a.rarity_level);
+    return `
+    <a href="artifact.html?id=${a.id}" class="candidate-row rarity-${tier}" style="text-decoration:none">
+      <div class="font-mono-num text-lg">${(c.confidence*100).toFixed(0)}%</div>
+      <div>
+        <div class="font-serif-cn"><strong>${a.name_zh}</strong> ${own ? '<span class="font-fang text-xs" style="color:var(--bronze)">已录</span>' : ''}</div>
+        <div class="font-fang text-xs" style="color:var(--ink-faded)">${a.dynasty} · ${a.current_museum}</div>
+      </div>
+      <div class="confidence-bar"><div style="width:${(c.confidence*100).toFixed(0)}%"></div></div>
+      <div class="font-fang text-xs" style="color:var(--ink-soft)">${c.match_method}</div>
+    </a>`;
+  }
+})();
+</script>
+</body>
+</html>

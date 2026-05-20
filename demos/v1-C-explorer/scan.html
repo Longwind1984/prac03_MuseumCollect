@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>扫描识别 — MuseumCollect</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/explorer.css" />
+  <style>
+    /* Scanner specific */
+    .scanner-frame {
+      position: relative;
+      aspect-ratio: 4/5;
+      background: linear-gradient(135deg, #1a1a1c 0%, #2a2a2c 100%);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    }
+    .scanner-line {
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #c9a85f 50%, transparent);
+      box-shadow: 0 0 12px #c9a85f, 0 0 24px rgba(201,168,95,0.5);
+      animation: scan-line 1.6s ease-in-out infinite;
+    }
+    @keyframes scan-line {
+      0%   { top: 12%; }
+      50%  { top: 88%; }
+      100% { top: 12%; }
+    }
+    .corner-mark {
+      position: absolute;
+      width: 28px;
+      height: 28px;
+      border: 2px solid #c9a85f;
+    }
+    .corner-tl { top: 14px; left: 14px; border-right: none; border-bottom: none; border-top-left-radius: 12px; }
+    .corner-tr { top: 14px; right: 14px; border-left: none; border-bottom: none; border-top-right-radius: 12px; }
+    .corner-bl { bottom: 14px; left: 14px; border-right: none; border-top: none; border-bottom-left-radius: 12px; }
+    .corner-br { bottom: 14px; right: 14px; border-left: none; border-top: none; border-bottom-right-radius: 12px; }
+
+    /* Reveal sequence */
+    .reveal-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(26,26,28,0.92);
+      transition: opacity 600ms ease-out;
+    }
+    .reveal-overlay.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .crack-line {
+      stroke: #d4a857;
+      stroke-width: 2;
+      fill: none;
+      opacity: 0;
+      animation: crack 800ms ease-out forwards;
+    }
+    @keyframes crack {
+      0%   { opacity: 0; stroke-dashoffset: 100; }
+      50%  { opacity: 1; }
+      100% { opacity: 1; stroke-dashoffset: 0; }
+    }
+
+    /* Confidence bands */
+    .conf-band-high   { background: linear-gradient(135deg,#fff7e8 0%, #fce8a8 100%); color:#5a3e1a; }
+    .conf-band-medium { background: #fff7e8; color: #5a3e1a; }
+    .conf-band-low    { background: #f1ede4; color: #5a3e1a; }
+    .conf-band-no_match { background: #f7f3eb; color: #5a3e1a; }
+  </style>
+</head>
+<body class="paper-bg">
+
+<nav class="top-nav">
+  <div class="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2 click-feedback">
+      <span class="inline-flex w-8 h-8 rounded-lg items-center justify-center text-white font-bold"
+            style="background:linear-gradient(135deg,#c0392b 0%,#c9a85f 100%);font-family:'KaiTi',serif">青</span>
+      <span class="font-semibold tracking-wide">青铜图鉴</span>
+      <span class="text-xs text-stone-400">/ 探索版</span>
+    </a>
+    <div class="flex items-center gap-1 text-sm">
+      <a href="catalog.html"      class="px-3 py-1.5 rounded-full hover:bg-black/5">图鉴</a>
+      <a href="time-pillar.html"  class="px-3 py-1.5 rounded-full hover:bg-black/5">时空柱</a>
+      <a href="ancient-map.html"  class="px-3 py-1.5 rounded-full hover:bg-black/5">古国地图</a>
+      <a href="form-genealogy.html" class="px-3 py-1.5 rounded-full hover:bg-black/5">形制谱系</a>
+      <a href="scan.html"         class="px-3 py-1.5 rounded-full bg-amber-100 text-amber-900">扫描</a>
+      <a href="me.html"           class="ml-2 px-3 py-1.5 rounded-full bg-black text-amber-50 font-medium">我的</a>
+    </div>
+  </div>
+</nav>
+
+<main class="max-w-6xl mx-auto px-5 py-8">
+
+  <header class="mb-8 fade-up">
+    <div class="text-xs text-stone-500 tracking-widest mb-2">SCAN · 扫描即开卡</div>
+    <h1 class="text-3xl font-bold">对准 →  AI 识别 →  稀有度揭示</h1>
+    <p class="text-stone-600 mt-2 max-w-2xl">
+      你在博物馆里看到一件鼎,点扫描,AI 用 CLIP+OCR 找到它,然后告诉你它的"稀有度"。
+      想象成开盲盒,但开出来的是知识不是糖。
+    </p>
+  </header>
+
+  <section class="grid grid-cols-12 gap-6">
+
+    <!-- LEFT: scanner -->
+    <div class="col-span-12 md:col-span-7 fade-up delay-1">
+      <div class="scanner-frame" id="scannerFrame">
+        <div class="corner-mark corner-tl"></div>
+        <div class="corner-mark corner-tr"></div>
+        <div class="corner-mark corner-bl"></div>
+        <div class="corner-mark corner-br"></div>
+
+        <!-- Idle state (default) -->
+        <div id="scanIdle" class="absolute inset-0 flex flex-col items-center justify-center text-amber-300/70">
+          <div class="text-7xl mb-4" style="font-family:'STKaiti',serif">青</div>
+          <div class="text-sm tracking-widest">SELECT 一张图开始</div>
+        </div>
+
+        <!-- Scanning state -->
+        <div id="scanScanning" class="absolute inset-0 hidden">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <img id="scanningImg" alt="" style="max-width:75%;max-height:65%;filter:drop-shadow(0 0 20px rgba(212,168,87,0.4))"/>
+          </div>
+          <div class="scanner-line"></div>
+          <div class="absolute bottom-6 left-0 right-0 text-center text-amber-300/80 text-sm tracking-widest">
+            <div id="scanStatus">IMAGE EMBEDDING…</div>
+            <div class="text-[10px] text-amber-200/60 mt-1" id="scanModel">model: clip-vit-b32-bronze-v0.3</div>
+          </div>
+        </div>
+
+        <!-- Reveal state — card drop -->
+        <div id="scanReveal" class="absolute inset-0 hidden">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div id="revealCard" class="rarity-treasure" style="
+              width:60%; aspect-ratio:3/4;
+              border-radius:20px;
+              background:#fff;
+              transform: translateY(-100%) rotate(-8deg);
+              transition: transform 900ms cubic-bezier(0.34, 1.56, 0.64, 1);
+              padding:14px;
+              position:relative">
+              <div id="revealCardInner" style="height:100%;display:flex;flex-direction:column">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Preset image picker -->
+      <div class="mt-6">
+        <div class="text-xs text-stone-500 mb-3">选一张 mock 图开始(real app 是相机)</div>
+        <div class="grid grid-cols-4 gap-3">
+          <button data-demo-seed="houmuwu" data-imgid="houmuwu_ding" class="preset-btn group">
+            <div class="preset-thumb"></div>
+            <div class="text-xs mt-1.5 text-stone-700 font-medium">高清正面 · 后母戊鼎</div>
+            <div class="text-[10px] text-stone-500">置信 94%</div>
+          </button>
+          <button data-demo-seed="fuhao" data-imgid="fuhao_xiaozun" class="preset-btn group">
+            <div class="preset-thumb"></div>
+            <div class="text-xs mt-1.5 text-stone-700 font-medium">侧光模糊照</div>
+            <div class="text-[10px] text-stone-500">中等置信 · 3 候选</div>
+          </button>
+          <button data-demo-seed="ocr_houmuwu" data-imgid="houmuwu_ding" class="preset-btn group">
+            <div class="preset-thumb"></div>
+            <div class="text-xs mt-1.5 text-stone-700 font-medium">仅展签 · OCR</div>
+            <div class="text-[10px] text-stone-500">名字匹配</div>
+          </button>
+          <button data-demo-seed="nomatch" class="preset-btn group">
+            <div class="preset-thumb" style="background:#e6e0d3"></div>
+            <div class="text-xs mt-1.5 text-stone-700 font-medium">无匹配 · 兜底</div>
+            <div class="text-[10px] text-stone-500">"试试搜索"</div>
+          </button>
+        </div>
+        <style>
+          .preset-btn { text-align: left; cursor: pointer; transition: transform 160ms; }
+          .preset-btn:active { transform: scale(0.97); }
+          .preset-thumb {
+            width: 100%; aspect-ratio: 1;
+            background: linear-gradient(135deg, #d4a857 0%, #8b6f3e 100%);
+            border-radius: 12px;
+            border: 2px solid transparent;
+            transition: border-color 160ms;
+          }
+          .preset-btn:hover .preset-thumb { border-color: #c9a85f; }
+        </style>
+      </div>
+    </div>
+
+    <!-- RIGHT: result panel -->
+    <div class="col-span-12 md:col-span-5 fade-up delay-2">
+      <div id="resultPanel">
+
+        <!-- Default: how it works -->
+        <div id="howItWorks" class="card p-6">
+          <h3 class="font-semibold mb-4 flex items-center gap-2">
+            <span class="text-amber-600">⚙</span> 它是怎么工作的
+          </h3>
+          <ol class="space-y-3 text-sm text-stone-700">
+            <li class="flex gap-3">
+              <span class="inline-flex w-6 h-6 rounded-full bg-amber-100 text-amber-800 items-center justify-center text-xs font-bold flex-none">1</span>
+              <div>
+                <div class="font-medium">图片 embedding</div>
+                <div class="text-stone-500 text-xs">CLIP-ViT-B32 微调到青铜器领域</div>
+              </div>
+            </li>
+            <li class="flex gap-3">
+              <span class="inline-flex w-6 h-6 rounded-full bg-amber-100 text-amber-800 items-center justify-center text-xs font-bold flex-none">2</span>
+              <div>
+                <div class="font-medium">向量检索 + OCR 双通道</div>
+                <div class="text-stone-500 text-xs">Qdrant 找 top-5 · 展签也可单独识</div>
+              </div>
+            </li>
+            <li class="flex gap-3">
+              <span class="inline-flex w-6 h-6 rounded-full bg-amber-100 text-amber-800 items-center justify-center text-xs font-bold flex-none">3</span>
+              <div>
+                <div class="font-medium">稀有度揭示</div>
+                <div class="text-stone-500 text-xs">国宝级有金光,普通级无 — 克制</div>
+              </div>
+            </li>
+            <li class="flex gap-3">
+              <span class="inline-flex w-6 h-6 rounded-full bg-amber-100 text-amber-800 items-center justify-center text-xs font-bold flex-none">4</span>
+              <div>
+                <div class="font-medium">入图鉴 → 多维同时点亮</div>
+                <div class="text-stone-500 text-xs">时空柱 · 古国地图 · 谱系树</div>
+              </div>
+            </li>
+          </ol>
+
+          <div class="mt-6 pt-4 border-t border-dashed">
+            <div class="text-xs text-stone-500 mb-2">Anti-Skinner-box 承诺</div>
+            <ul class="text-[11px] text-stone-500 space-y-1">
+              <li>· 揭示动效 ≤ 2s,可跳过</li>
+              <li>· 没有概率抽卡,只识真实看到的</li>
+              <li>· 不每日推送催</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <footer class="text-center text-xs text-stone-400 pt-10 pb-10">
+    扫一个 → 多个维度点亮 → 这是 day-1 wow moment 的本源
+  </footer>
+</main>
+
+<script src="js/state.js"></script>
+<script src="js/mock-recognition.js"></script>
+<script>
+(async function () {
+  await MC.load();
+  await mockRecognition.ready;
+
+  const $ = (s) => document.querySelector(s);
+  const idle     = $('#scanIdle');
+  const scanning = $('#scanScanning');
+  const reveal   = $('#scanReveal');
+  const scanImg  = $('#scanningImg');
+  const scanStatus = $('#scanStatus');
+  const revealCard = $('#revealCard');
+  const revealInner= $('#revealCardInner');
+  const resultPanel= $('#resultPanel');
+  const howItWorks = $('#howItWorks');
+
+  document.querySelectorAll('[data-demo-seed]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const seed = btn.dataset.demoSeed;
+      const imgid = btn.dataset.imgid;
+      const imgArtifact = imgid ? MC.artifact(imgid) : null;
+
+      // 1. Idle → Scanning
+      idle.classList.add('hidden');
+      reveal.classList.add('hidden');
+      scanning.classList.remove('hidden');
+      if (imgArtifact) {
+        scanImg.src = MC.placeholderUrl(imgArtifact);
+      } else {
+        scanImg.src = MC.placeholderUrl({ id: 'placeholder', name_zh: '?', rarity_level: 'common' });
+      }
+      scanStatus.textContent = 'IMAGE EMBEDDING…';
+      howItWorks.classList.add('hidden');
+
+      const result = await mockRecognition.recognize({ demo_seed: seed });
+
+      // animate status text
+      const statusSequence = ['IMAGE EMBEDDING…', 'VECTOR SEARCH (Qdrant)…', 'MATCHING REASONS…', 'OPENING CARD…'];
+      let stIdx = 0;
+      const stInterval = setInterval(() => {
+        stIdx++;
+        if (stIdx < statusSequence.length) scanStatus.textContent = statusSequence[stIdx];
+      }, 350);
+      setTimeout(() => clearInterval(stInterval), 1700);
+
+      // 2. Reveal
+      setTimeout(() => {
+        scanning.classList.add('hidden');
+        reveal.classList.remove('hidden');
+        renderReveal(result);
+        // animate card drop
+        revealCard.style.transform = 'translateY(-100%) rotate(-8deg)';
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            revealCard.style.transform = 'translateY(0) rotate(0deg)';
+          }, 40);
+        });
+        renderResultPanel(result);
+      }, 1500);
+    });
+  });
+
+  function renderReveal(r) {
+    const band = r.confidence_band;
+    if (band === 'no_match' || r.candidates.length === 0) {
+      revealCard.style.background = 'rgba(255,255,255,0.96)';
+      revealCard.className = '';
+      revealCard.style.cssText = `width:60%;aspect-ratio:3/4;border-radius:20px;padding:14px;transition:transform 900ms cubic-bezier(0.34,1.56,0.64,1);background:rgba(255,255,255,0.96);transform:translateY(-100%) rotate(-8deg)`;
+      revealInner.innerHTML = `
+        <div class="flex items-center justify-center h-full text-center">
+          <div>
+            <div class="text-5xl mb-3">🔍</div>
+            <div class="font-semibold mb-1">没找到匹配</div>
+            <div class="text-xs text-stone-500">试试 [搜索] / OCR 展签</div>
+          </div>
+        </div>`;
+      return;
+    }
+
+    const top = r.candidates[0];
+    const a = MC.artifact(top.artifact_id);
+    if (!a) return;
+    const isTreasure = MC.rarityTier(a) === 'treasure';
+
+    revealCard.className = MC.rarityHaloClass(a);
+    revealCard.style.cssText = `width:62%;aspect-ratio:3/4;border-radius:20px;padding:14px;transition:transform 900ms cubic-bezier(0.34,1.56,0.64,1);background:#fff;transform:translateY(-100%) rotate(-8deg)`;
+    revealInner.innerHTML = `
+      ${isTreasure ? '<div class="guo-bao-stamp" style="top:10px;right:10px;width:42px;height:42px;font-size:10px">国之<br/>重器</div>' : ''}
+      <div class="text-[10px] tracking-widest text-stone-500 mb-1">PULL · ${(top.confidence*100).toFixed(0)}%</div>
+      <div class="flex-1 flex items-center justify-center my-2">
+        <img src="${MC.placeholderUrl(a)}" alt="" style="width:90%;max-height:160px;object-fit:contain;filter:drop-shadow(0 8px 18px rgba(0,0,0,0.20))"/>
+      </div>
+      <div class="text-center mt-2">
+        <div class="font-bold text-base">${a.name_zh}</div>
+        <div class="text-[11px] text-stone-500 mt-0.5">${a.dynasty} · ${(a.current_museum||'').split(' /')[0]}</div>
+      </div>
+    `;
+  }
+
+  function renderResultPanel(r) {
+    const band = r.confidence_band;
+    const top = r.candidates[0];
+    const a = top ? MC.artifact(top.artifact_id) : null;
+
+    if (band === 'high' && a) {
+      resultPanel.innerHTML = `
+        <div class="card p-6 conf-band-high">
+          <div class="text-[11px] tracking-widest text-amber-700 mb-1">HIGH CONFIDENCE · ${(top.confidence*100).toFixed(0)}%</div>
+          <div class="text-2xl font-bold mb-1">${a.name_zh}</div>
+          <div class="text-sm mb-4">${a.dynasty} · ${(a.current_museum||'').split(' /')[0]} · ${MC.rarityDisplayName(a)}</div>
+          <div class="text-xs text-stone-600 mb-2">匹配依据:</div>
+          <ul class="text-xs space-y-1 mb-4">
+            ${(top.match_reasons || []).map(rr => `<li>· ${rr}</li>`).join('')}
+          </ul>
+          <div class="flex gap-2">
+            <a href="artifact.html?id=${a.id}" class="btn btn-zhusha flex-1 text-sm">+ 加入图鉴</a>
+            <a href="artifact.html?id=${a.id}" class="btn btn-ghost text-sm">查看详情</a>
+          </div>
+        </div>
+
+        ${r.candidates.length > 1 ? `
+          <div class="mt-4 text-xs text-stone-500">也可能是:</div>
+          <div class="mt-2 grid grid-cols-2 gap-2">
+            ${r.candidates.slice(1).map(c => {
+              const aa = MC.artifact(c.artifact_id);
+              if (!aa) return '';
+              return `
+                <a href="artifact.html?id=${aa.id}" class="card p-3 click-feedback">
+                  <div class="text-amber-700 text-xs font-semibold">${(c.confidence*100).toFixed(0)}%</div>
+                  <div class="font-semibold text-sm truncate">${aa.name_zh}</div>
+                  <div class="text-[10px] text-stone-500">${aa.dynasty} · ${(aa.current_museum||'').split(' /')[0]}</div>
+                </a>
+              `;
+            }).join('')}
+          </div>
+        ` : ''}
+
+        ${r.ocr_text ? `
+          <div class="mt-4 card p-4 bg-stone-50">
+            <div class="text-xs text-stone-500 mb-1">📜 展签 OCR</div>
+            <pre class="text-xs whitespace-pre-wrap font-mono text-stone-700">${r.ocr_text}</pre>
+          </div>
+        ` : ''}
+
+        <!-- Multi-dim instant feedback (day-1 wow) -->
+        <div class="mt-4 card p-4" style="background:linear-gradient(135deg,#fff7e8 0%,#ffffff 70%)">
+          <div class="text-xs text-amber-700 tracking-widest mb-2">DAY-1 WOW · 同时点亮</div>
+          <div class="grid grid-cols-3 gap-2 text-xs">
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+              时空柱 ${a.dynasty}
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+              ${(MC.siteForArtifact(a)||{}).key || a.dynasty} 地图
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+              ${a.form_subtype || a.type} 谱系
+            </div>
+          </div>
+        </div>
+      `;
+    } else if (band === 'medium') {
+      resultPanel.innerHTML = `
+        <div class="card p-6 conf-band-medium">
+          <div class="text-[11px] tracking-widest text-amber-700 mb-2">MEDIUM CONFIDENCE</div>
+          <div class="font-semibold mb-3">可能是这几件之一,你看到的是?</div>
+          <div class="space-y-2">
+            ${r.candidates.map(c => {
+              const aa = MC.artifact(c.artifact_id);
+              if (!aa) return '';
+              return `
+                <a href="artifact.html?id=${aa.id}" class="block card p-3 hover:bg-amber-50 click-feedback">
+                  <div class="flex items-center gap-3">
+                    <img src="${MC.placeholderUrl(aa)}" style="width:48px;height:48px;object-fit:contain"/>
+                    <div class="flex-1">
+                      <div class="font-semibold text-sm">${aa.name_zh}</div>
+                      <div class="text-[10px] text-stone-500">${aa.dynasty} · ${(aa.current_museum||'').split(' /')[0]}</div>
+                    </div>
+                    <div class="text-amber-700 font-semibold">${(c.confidence*100).toFixed(0)}%</div>
+                  </div>
+                </a>
+              `;
+            }).join('')}
+          </div>
+          <div class="mt-4 text-xs text-stone-500">都不像?<a href="catalog.html" class="text-amber-700 underline">→ 搜搜看</a></div>
+        </div>
+      `;
+    } else if (band === 'low' && a) {
+      resultPanel.innerHTML = `
+        <div class="card p-6 conf-band-low">
+          <div class="text-[11px] tracking-widest text-amber-700 mb-1">LOW CONFIDENCE · ${(top.confidence*100).toFixed(0)}%</div>
+          <div class="font-semibold mb-1">有点像 <span class="underline">${a.name_zh}</span></div>
+          <div class="text-xs text-stone-500 mb-4">但不太确定 — 你能帮我们确认吗?</div>
+          <div class="flex gap-2">
+            <a href="artifact.html?id=${a.id}" class="btn btn-primary text-sm flex-1">就是它</a>
+            <a href="catalog.html" class="btn btn-ghost text-sm">不是,搜</a>
+          </div>
+        </div>
+      `;
+    } else { // no_match
+      resultPanel.innerHTML = `
+        <div class="card p-6 conf-band-no_match">
+          <h3 class="font-semibold mb-2">没找到匹配</h3>
+          <div class="text-xs text-stone-500 mb-4">不是 dead-end,试试这些:</div>
+          <ul class="space-y-2">
+            <li><button class="text-amber-700 hover:underline text-sm">→ 重新拍一张(光线好/正面/无遮挡)</button></li>
+            <li><a href="catalog.html" class="text-amber-700 hover:underline text-sm">→ 直接搜索(输入名字、朝代…)</a></li>
+            <li><button class="text-amber-700 hover:underline text-sm">→ 扫展签上的文字 (OCR 模式)</button></li>
+          </ul>
+        </div>
+      `;
+    }
+  }
+})();
+</script>
+
+</body>
+</html>

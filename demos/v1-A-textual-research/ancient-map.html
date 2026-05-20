@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<title>出土地图 · 古国漫游 — 青铜考</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/scholar.css">
+<style>
+  .dyn-tab { font-family: "FangSong", serif; padding: 0.3rem 0.7rem; border: 1px solid var(--rule); cursor: pointer; font-size: 0.85rem; color: var(--ink-soft); background: var(--paper); }
+  .dyn-tab.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .site-label { font-family: "Songti SC", serif; font-size: 11px; fill: var(--ink); letter-spacing: 0.05em; }
+  .state-label { font-family: "Songti SC", serif; font-size: 16px; fill: var(--ink-soft); letter-spacing: 0.4em; opacity: 0.55; }
+  .map-svg { background: transparent; }
+  .site-pulse { stroke: var(--vermilion); fill: none; stroke-dasharray: 2 3; animation: spin 14s linear infinite; }
+  @keyframes spin { from { stroke-dashoffset: 0; } to { stroke-dashoffset: 100; } }
+  .overseas-box { background: #ebe2c8; border: 1px solid var(--rule-dark); border-style: dashed; padding: 0.7rem; }
+</style>
+</head>
+<body data-page="ancient-map.html" class="min-h-screen">
+
+<div id="site-header"></div>
+
+<main class="max-w-6xl mx-auto px-6 pt-8">
+
+  <section class="mb-4">
+    <div class="section-cap">维度 · 二 / Excavation Map</div>
+    <h1 class="scholar-title text-3xl mb-2">出土古国漫游地图</h1>
+    <p class="font-fang text-sm leading-relaxed" style="color:var(--ink-soft)">
+      底图采谭其骧《中国历史地图集》<sup class="cite-ref" data-cite="谭其骧主编《中国历史地图集》(1991),中国地图出版社。本系统采用简化轮廓 + 古国名小篆标注。">[谭]</sup>风格的古国轮廓
+      —— 山川河流不变,但<strong>古国边界与国名按朝代轴重排</strong>。点位为考古遗址(殷墟、周原、三星堆等),非现代行政区。
+    </p>
+    <p class="font-fang text-xs mt-2" style="color:var(--ink-faded)">
+      ※ 海外馆藏作为"流散篇"单立。本系统**情感来源于"本应在家"的克制**,不作政治煽情。
+    </p>
+  </section>
+
+  <hr class="scholar-rule">
+
+  <!-- Dynasty switch -->
+  <div class="flex items-center gap-1 mb-3 flex-wrap">
+    <span class="font-fang text-xs mr-2" style="color:var(--ink-faded)">朝代版图:</span>
+    <button class="dyn-tab" data-dyn="商">商</button>
+    <button class="dyn-tab active" data-dyn="西周">西周</button>
+    <button class="dyn-tab" data-dyn="春秋">春秋</button>
+    <button class="dyn-tab" data-dyn="战国">战国</button>
+    <button class="dyn-tab" data-dyn="秦">秦</button>
+    <button class="dyn-tab" data-dyn="西汉">西汉</button>
+    <span class="ml-auto font-fang text-xs" style="color:var(--ink-faded)">
+      <label class="cursor-pointer"><input type="checkbox" id="show-overseas"> 显示海外流散</label>
+    </span>
+  </div>
+
+  <!-- Map -->
+  <div class="grid grid-cols-12 gap-6">
+    <div class="col-span-12 md:col-span-8">
+      <div class="map-frame" style="position:relative; padding: 1rem;">
+        <svg viewBox="0 0 720 600" class="map-svg" style="width:100%; height:auto" id="mainMap">
+          <!-- decorative title -->
+          <text x="360" y="36" text-anchor="middle" font-family="Songti SC" font-size="20" fill="#7a7261" letter-spacing="0.6em">中 原 · 周 边 古 国 图</text>
+          <text x="360" y="56" text-anchor="middle" font-family="FangSong" font-size="10" fill="#8c8470" id="dyn-subtitle">按 西周 版图绘</text>
+          <!-- rivers (decorative) -->
+          <path d="M50,300 Q200,260 350,300 Q500,330 700,290" stroke="#8c8470" stroke-width="0.8" fill="none" stroke-dasharray="3,3"/>
+          <text x="120" y="290" font-family="FangSong" font-size="10" fill="#8c8470" font-style="italic">黄 河</text>
+          <path d="M50,500 Q200,460 350,500 Q500,530 700,490" stroke="#8c8470" stroke-width="0.8" fill="none" stroke-dasharray="3,3"/>
+          <text x="120" y="500" font-family="FangSong" font-size="10" fill="#8c8470" font-style="italic">长 江</text>
+
+          <!-- borders + state labels (changes per dynasty) -->
+          <g id="borders"></g>
+
+          <!-- sites -->
+          <g id="sites"></g>
+        </svg>
+        <div class="font-fang text-xs mt-2 flex gap-4 flex-wrap" style="color:var(--ink-faded)">
+          <span><span style="display:inline-block;width:10px;height:10px;background:var(--vermilion);border-radius:50%"></span> 已踏足(已录入该地出土件)</span>
+          <span><span style="display:inline-block;width:10px;height:10px;background:var(--bronze-glow);border-radius:50%; border:1px solid var(--bronze)"></span> 国宝出土地</span>
+          <span><span style="display:inline-block;width:10px;height:10px;border:1px dashed var(--ink-faded);border-radius:50%"></span> 未踏足</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right column: site details / dossier -->
+    <aside class="col-span-12 md:col-span-4">
+      <div class="dossier p-4" id="site-info">
+        <div class="section-cap">考古笔记 (悬停或点击点位)</div>
+        <p class="font-fang text-sm mt-3" style="color:var(--ink-soft)">将光标置于地图上的遗址点。</p>
+      </div>
+
+      <!-- Overseas pane -->
+      <div id="overseas-pane" class="hidden mt-4 overseas-box">
+        <div class="section-cap" style="margin-bottom:0.4rem">流 散 篇 · Overseas Diaspora</div>
+        <p class="font-fang text-xs leading-relaxed" style="color:var(--ink-soft)">
+          本应在家。本系统中以下国宝藏于海外或迁台之馆,标"流散"。
+        </p>
+        <ul class="font-fang text-xs mt-2 space-y-1" id="overseas-list"></ul>
+      </div>
+    </aside>
+  </div>
+
+  <hr class="scholar-rule">
+
+  <!-- Site table summary -->
+  <section class="mt-6 mb-10">
+    <div class="section-cap">遗址 · 录入摘要</div>
+    <table class="scholar-table">
+      <thead><tr><th>遗址</th><th>古国 / 邦</th><th>现代位置</th><th class="text-right">数据池</th><th class="text-right">已录</th><th>代表器</th><th>考古备注</th></tr></thead>
+      <tbody id="sites-tbody"></tbody>
+    </table>
+  </section>
+
+</main>
+
+<div id="site-footer"></div>
+
+<script src="js/data.js"></script>
+<script src="js/layout.js"></script>
+<script>
+// === Border polygons: simplified per dynasty (very rough but suggestive) ===
+const DYNASTY_BORDERS = {
+  '商': [
+    { name: '商', path: 'M420,180 L620,180 L640,330 L470,330 L420,250 Z', cx: 530, cy: 260, color: '#a02c2c33' },
+    { name: '古蜀', path: 'M250,400 L340,400 L340,490 L250,490 Z', cx: 290, cy: 450, color: '#8a6b3d33' },
+    { name: '湘江方国', path: 'M460,460 L560,460 L560,540 L460,540 Z', cx: 510, cy: 500, color: '#4f685533' },
+  ],
+  '西周': [
+    { name: '周', path: 'M300,250 L520,230 L540,360 L320,380 Z', cx: 410, cy: 305, color: '#a02c2c33' },
+    { name: '诸侯封国', path: 'M540,260 L660,250 L660,340 L540,330 Z', cx: 600, cy: 295, color: '#8a6b3d33' },
+    { name: '蜀', path: 'M250,400 L340,400 L340,490 L250,490 Z', cx: 290, cy: 450, color: '#4f685533' },
+  ],
+  '春秋': [
+    { name: '晋', path: 'M400,200 L490,200 L490,290 L400,290 Z', cx: 445, cy: 245, color: '#a02c2c33' },
+    { name: '齐', path: 'M540,250 L650,250 L650,330 L540,330 Z', cx: 595, cy: 290, color: '#8a6b3d33' },
+    { name: '楚', path: 'M450,400 L600,400 L600,530 L450,530 Z', cx: 525, cy: 465, color: '#4f685533' },
+    { name: '秦', path: 'M310,280 L400,280 L400,380 L310,380 Z', cx: 355, cy: 330, color: '#86262633' },
+    { name: '郑', path: 'M490,310 L540,310 L540,360 L490,360 Z', cx: 515, cy: 335, color: '#b9905a33' },
+    { name: '越', path: 'M580,470 L660,470 L660,540 L580,540 Z', cx: 620, cy: 505, color: '#2c3a5533' },
+  ],
+  '战国': [
+    { name: '秦', path: 'M280,260 L420,260 L420,380 L280,380 Z', cx: 350, cy: 320, color: '#a02c2c33' },
+    { name: '楚', path: 'M420,400 L620,400 L620,540 L420,540 Z', cx: 520, cy: 470, color: '#4f685533' },
+    { name: '齐', path: 'M540,220 L660,220 L660,320 L540,320 Z', cx: 600, cy: 270, color: '#8a6b3d33' },
+    { name: '燕', path: 'M540,150 L660,150 L660,220 L540,220 Z', cx: 600, cy: 185, color: '#2c3a5533' },
+    { name: '曾', path: 'M510,420 L580,420 L580,470 L510,470 Z', cx: 545, cy: 445, color: '#b9905a33' },
+  ],
+  '秦': [
+    { name: '秦', path: 'M280,180 L660,180 L660,540 L280,540 Z', cx: 470, cy: 360, color: '#a02c2c22' },
+  ],
+  '西汉': [
+    { name: '西汉', path: 'M260,180 L680,180 L680,540 L260,540 Z', cx: 470, cy: 360, color: '#a02c2c22' },
+    { name: '中山国', path: 'M555,200 L620,200 L620,260 L555,260 Z', cx: 587, cy: 230, color: '#8a6b3d33' },
+  ],
+};
+
+(async function() {
+  await MuseumA.ready;
+
+  const sStats = MuseumA.siteStats();
+
+  function renderForDynasty(dyn) {
+    document.getElementById('dyn-subtitle').textContent = `按 ${dyn} 版图绘`;
+    // borders
+    const borders = DYNASTY_BORDERS[dyn] || DYNASTY_BORDERS['西周'];
+    let bg = '';
+    borders.forEach(b => {
+      bg += `<path d="${b.path}" fill="${b.color}" stroke="#8c8470" stroke-width="0.8" stroke-dasharray="4,2"/>`;
+      bg += `<text x="${b.cx}" y="${b.cy}" text-anchor="middle" class="state-label">${b.name}</text>`;
+    });
+    document.getElementById('borders').innerHTML = bg;
+
+    // sites
+    let sg = '';
+    Object.keys(MuseumA.SITE_COORDS).forEach(k => {
+      const c = MuseumA.SITE_COORDS[k];
+      const stat = sStats[k] || { pool: 0, collected: 0, items: [] };
+      const own = stat.collected > 0;
+      const hasTreasure = stat.items.some(a => MuseumA.rarityTier(a.rarity_level) === 'treasure' || MuseumA.rarityTier(a.rarity_level) === 'treasure-forbidden');
+      const cls = own ? (hasTreasure ? 'treasure' : 'collected') : 'empty';
+      const r = own ? 6 : 4;
+      const x = c.x, y = c.y;
+      sg += `
+      <g class="site-dot-group" data-site="${k}" style="cursor:pointer">
+        ${own && hasTreasure ? `<circle cx="${x}" cy="${y}" r="${r+4}" class="site-pulse"/>` : ''}
+        <circle cx="${x}" cy="${y}" r="${r}" class="site-dot ${cls}"/>
+        <text x="${x + r + 5}" y="${y + 4}" class="site-label">${k}</text>
+      </g>`;
+    });
+    document.getElementById('sites').innerHTML = sg;
+
+    // attach hover handlers
+    document.querySelectorAll('.site-dot-group').forEach(g => {
+      g.addEventListener('mouseenter', () => showSite(g.dataset.site));
+      g.addEventListener('click', () => showSite(g.dataset.site));
+    });
+  }
+
+  function showSite(siteKey) {
+    const meta = MuseumA.SITE_COORDS[siteKey];
+    const stat = MuseumA.siteStats()[siteKey] || { pool: 0, collected: 0, items: [] };
+    const box = document.getElementById('site-info');
+    const archNotes = {
+      '殷墟':   { dig: '1928–1937, 1950至今,中央研究院 / 中科院考古所历次发掘;妇好墓 1976 由郑振香主持。', cite: '《考古》1977-1;李济《安阳》。' },
+      '周原':   { dig: '1976 庄白一号窖藏(微史家族 103 件);宝鸡考古所 + 北大联合发掘。', cite: '《周原青铜器丛考》尹盛平 1992。' },
+      '三星堆': { dig: '1986 两座祭祀坑;2019–2022 六新坑发现;四川考古院 / 北大 / 上博联合。', cite: '《三星堆祭祀坑》(1999);考古 2021-3。' },
+      '随州':   { dig: '1978 擂鼓墩 1 号墓 (曾侯乙墓);1981 2 号墓。湖北考古所 + 武汉大学。', cite: '《曾侯乙墓》文物社 1989。' },
+      '宁乡':   { dig: '湖南宁乡黄材镇月山铺转耳仑(1938 四羊方尊出土地)。', cite: '《湖南考古辑刊》第 1 辑。' },
+      '满城':   { dig: '1968 中山靖王刘胜墓(满城汉墓)。', cite: '《满城汉墓发掘报告》文物社 1980。' },
+      '武威':   { dig: '1969 武威雷台东汉墓。', cite: '《文物》1972-2 雷台汉墓简报。' },
+      '临潼':   { dig: '1976 临潼零口镇西周窖藏(利簋);1980 秦始皇陵铜车马。', cite: '《临潼考古》。' },
+      '新郑':   { dig: '1923 新郑李家楼郑公大墓。', cite: '《新郑彝器》1937 关百益编。' },
+      '江陵':   { dig: '1965 望山一号楚墓(越王勾践剑出土地)。', cite: '《文物》1966-5。' },
+      '灵石':   { dig: '1976 灵石县旌介村商代墓葬。', cite: '《文物》1986-11。' },
+    };
+    const nt = archNotes[siteKey] || { dig: '考古报告暂阙。', cite: '—' };
+    let itemHTML = stat.items.map(a => {
+      const own = MuseumA.isCollected(a.id);
+      return `<li class="py-1" style="border-bottom:1px dotted var(--rule)">
+        <a href="artifact.html?id=${a.id}" class="font-fang text-xs hover:underline" style="color:var(--ink)">
+          <span class="collected-mark ${own?'':'uncollected'}"></span><strong class="font-serif-cn">${a.name_zh}</strong>
+        </a>
+        <span class="font-mono-num text-[10px]" style="color:var(--ink-faded)"> · ${a.dynasty}·${(a.period||'').replace(a.dynasty,'')} · ${MuseumA.tierLabel(a.rarity_level)}</span>
+      </li>`;
+    }).join('');
+    box.innerHTML = `
+      <div class="section-cap">考古笔记 · ${siteKey}</div>
+      <div class="mt-3 font-serif-cn text-lg">${meta.name_full}</div>
+      <div class="font-fang text-xs" style="color:var(--ink-faded)">古国: ${meta.state}</div>
+      <hr class="scholar-rule" style="margin: 0.6rem 0">
+      <div class="font-fang text-sm leading-relaxed">${nt.dig}</div>
+      <div class="font-mono-num text-xs mt-1" style="color:var(--ink-faded)">${nt.cite}</div>
+      <hr class="scholar-rule" style="margin: 0.6rem 0">
+      <div class="font-fang text-xs" style="color:var(--ink-faded)">该地数据池 <strong class="font-mono-num">${stat.pool}</strong> 件 / 已录 <strong class="font-mono-num">${stat.collected}</strong> 件</div>
+      <ul class="mt-2">${itemHTML || '<li class="font-fang text-xs" style="color:var(--ink-faded)">该地暂无器物条目。</li>'}</ul>
+      ${stat.pool > stat.collected ? `<p class="font-fang text-xs mt-3 margin-note p-2">尚有 <strong class="font-mono-num">${stat.pool - stat.collected}</strong> 件待录入。补全可形成该地的完整断面参考。</p>` : ''}
+    `;
+  }
+
+  // Overseas
+  document.getElementById('show-overseas').addEventListener('change', e => {
+    const box = document.getElementById('overseas-pane');
+    if (e.target.checked) {
+      box.classList.remove('hidden');
+      const overseas = MuseumA.catalog.filter(a => (a.current_museum||'').indexOf('台北') >= 0 || (a.current_museum||'').indexOf('大英') >= 0 || (a.current_museum||'').indexOf('MET') >= 0);
+      document.getElementById('overseas-list').innerHTML = overseas.map(a => `
+        <li class="py-1" style="border-bottom:1px dotted var(--rule-dark)">
+          <a href="artifact.html?id=${a.id}" style="color:var(--ink)">${a.name_zh}</a>
+          <span class="font-mono-num text-[10px]" style="color:var(--ink-faded)"> · ${a.current_museum}</span>
+        </li>
+      `).join('') || '<li class="font-fang text-xs" style="color:var(--ink-faded)">本数据池中无海外流散件。</li>';
+    } else {
+      box.classList.add('hidden');
+    }
+  });
+
+  // Tabs
+  document.querySelectorAll('.dyn-tab').forEach(t => {
+    t.addEventListener('click', () => {
+      document.querySelectorAll('.dyn-tab').forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+      renderForDynasty(t.dataset.dyn);
+    });
+  });
+
+  // Table
+  const tb = document.getElementById('sites-tbody');
+  const archNotesShort = {
+    '殷墟': '商晚都城,1928始掘',
+    '周原': '西周王畿,庄白窖藏',
+    '三星堆': '古蜀独立体系',
+    '随州': '曾侯乙乐器组',
+    '宁乡': '商代湘江青铜文明',
+    '满城': '中山靖王刘胜墓',
+    '武威': '雷台东汉墓',
+    '临潼': '利簋 / 秦俑 / 铜车马',
+    '新郑': '郑公大墓,1923 出土',
+    '江陵': '楚墓中出越王剑',
+    '灵石': '商方国"丙"国',
+    '二里头': '夏都候选',
+    '丰镐': '西周都城',
+    '盘龙城': '商代南方方国',
+  };
+  let trs = '';
+  Object.keys(MuseumA.SITE_COORDS).forEach(k => {
+    const meta = MuseumA.SITE_COORDS[k];
+    const stat = sStats[k] || { pool: 0, collected: 0, items: [] };
+    const reps = stat.items.slice(0, 2).map(a => a.name_zh).join('、');
+    const mod = meta.name_full.split('·')[1] || '';
+    trs += `
+    <tr>
+      <td class="font-serif-cn"><strong>${k}</strong></td>
+      <td class="font-fang text-xs">${meta.state}</td>
+      <td class="font-fang text-xs">${mod}</td>
+      <td class="font-mono-num text-right">${stat.pool}</td>
+      <td class="font-mono-num text-right"><strong>${stat.collected}</strong></td>
+      <td class="font-fang text-xs">${reps || '—'}</td>
+      <td class="font-fang text-xs" style="color:var(--ink-soft)">${archNotesShort[k] || ''}</td>
+    </tr>`;
+  });
+  tb.innerHTML = trs;
+
+  renderForDynasty('西周');
+  showSite('殷墟');
+  MuseumLayout.attachCitations(document);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>我的图鉴 · 阿K — MuseumCollect</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/explorer.css" />
+</head>
+<body class="paper-bg">
+
+<nav class="top-nav">
+  <div class="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2 click-feedback">
+      <span class="inline-flex w-8 h-8 rounded-lg items-center justify-center text-white font-bold"
+            style="background:linear-gradient(135deg,#c0392b 0%,#c9a85f 100%);font-family:'KaiTi',serif">青</span>
+      <span class="font-semibold tracking-wide">青铜图鉴</span>
+      <span class="text-xs text-stone-400">/ 探索版</span>
+    </a>
+    <div class="flex items-center gap-1 text-sm">
+      <a href="catalog.html"      class="px-3 py-1.5 rounded-full hover:bg-black/5">图鉴</a>
+      <a href="time-pillar.html"  class="px-3 py-1.5 rounded-full hover:bg-black/5">时空柱</a>
+      <a href="ancient-map.html"  class="px-3 py-1.5 rounded-full hover:bg-black/5">古国地图</a>
+      <a href="form-genealogy.html" class="px-3 py-1.5 rounded-full hover:bg-black/5">形制谱系</a>
+      <a href="scan.html"         class="px-3 py-1.5 rounded-full hover:bg-black/5">扫描</a>
+      <a href="me.html"           class="ml-2 px-3 py-1.5 rounded-full bg-black text-amber-50 font-medium">我的</a>
+    </div>
+  </div>
+</nav>
+
+<main class="max-w-6xl mx-auto px-5 py-8">
+
+  <!-- ============================== HEADER (avatar + 段位) ============================== -->
+  <section class="grid grid-cols-12 gap-6 mb-10 fade-up">
+    <!-- avatar -->
+    <div class="col-span-12 md:col-span-4 card p-6 text-center relative overflow-hidden">
+      <div class="absolute inset-0 opacity-30 pointer-events-none"
+           style="background:radial-gradient(at 50% 0%, rgba(201,168,95,0.40), transparent 60%)"></div>
+      <div class="relative">
+        <div class="inline-flex w-20 h-20 rounded-full items-center justify-center text-white text-3xl font-bold mx-auto"
+             style="background:linear-gradient(135deg,#c0392b,#c9a85f);font-family:'KaiTi',serif">K</div>
+        <h2 class="text-xl font-semibold mt-3">阿K · 李珂</h2>
+        <div class="text-sm text-stone-500">上海美院 · 第 27 天</div>
+
+        <!-- 段位 row (隐线 — 小印章) -->
+        <div id="titleRow" class="mt-4 flex flex-wrap justify-center gap-2"></div>
+
+        <!-- Share row -->
+        <div class="mt-5 flex gap-2 justify-center">
+          <button id="openShareGen" class="btn btn-zhusha text-sm flex-1">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            生成梗卡片
+          </button>
+          <button class="btn btn-ghost text-sm">复制图鉴</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- stats grid -->
+    <div class="col-span-12 md:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-3">
+
+      <div class="card p-5">
+        <div class="flex items-baseline gap-1 mb-1">
+          <span class="text-3xl font-bold">7</span><span class="text-sm text-stone-500">/25</span>
+        </div>
+        <div class="text-xs text-stone-500 mb-2">总收藏</div>
+        <div class="progress-track"><div class="progress-fill" style="width:28%"></div></div>
+      </div>
+
+      <div class="card p-5">
+        <div class="flex items-baseline gap-1 mb-1">
+          <span class="text-3xl font-bold text-amber-700">100</span><span class="text-sm text-stone-500">%</span>
+        </div>
+        <div class="text-xs text-stone-500 mb-2">国宝率<br><span class="text-stone-400">(行业 4%)</span></div>
+        <div class="progress-track"><div class="progress-fill treasure" style="width:100%"></div></div>
+      </div>
+
+      <div class="card p-5">
+        <div class="flex items-baseline gap-1 mb-1">
+          <span class="text-3xl font-bold">4</span><span class="text-sm text-stone-500">/7</span>
+        </div>
+        <div class="text-xs text-stone-500 mb-2">朝代覆盖</div>
+        <div class="progress-track"><div class="progress-fill" style="width:57%"></div></div>
+      </div>
+
+      <div class="card p-5">
+        <div class="flex items-baseline gap-1 mb-1">
+          <span class="text-3xl font-bold">47</span><span class="text-sm text-stone-500">字</span>
+        </div>
+        <div class="text-xs text-stone-500 mb-2">铭文识读 · 二段</div>
+        <div class="progress-track"><div class="progress-fill" style="width:30%"></div></div>
+      </div>
+
+      <div class="card p-5 col-span-2 md:col-span-2">
+        <div class="text-xs text-stone-500 mb-2">出土地分布 · 已踏足</div>
+        <div class="flex flex-wrap gap-1.5">
+          <span class="chip cuilv">殷墟 (河南)</span>
+          <span class="chip cuilv">三星堆 (四川)</span>
+          <span class="chip cuilv">周原 (陕西)</span>
+          <span class="chip cuilv">新郑 (河南)</span>
+          <span class="chip cuilv">满城 (河北)</span>
+          <span class="chip">5 / 12</span>
+        </div>
+      </div>
+
+      <div class="card p-5 col-span-2 md:col-span-2 relative overflow-hidden"
+           style="background:linear-gradient(135deg,#fff7e8 0%,#ffffff 70%)">
+        <div class="text-xs text-amber-700 tracking-widest mb-1">即将解锁</div>
+        <div class="text-base font-semibold mb-1">再识 3 字 → 铭文识读·三段</div>
+        <div class="text-xs text-stone-600 mb-2">推荐:大盂鼎 291 字,含未识 78 字</div>
+        <div class="progress-track" style="max-width:200px"><div class="progress-fill" style="width:94%"></div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================== 我的收藏卡墙 ============================== -->
+  <section class="mb-12 fade-up delay-1">
+    <div class="flex items-end justify-between mb-4">
+      <h2 class="text-xl font-semibold">我的收藏卡墙</h2>
+      <div class="text-xs text-stone-500">点卡片 → 翻面看背面 · 点收藏图标分享</div>
+    </div>
+
+    <div id="cardWall" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+  </section>
+
+  <!-- ============================== 待解锁称号 ============================== -->
+  <section class="mb-12 fade-up delay-2">
+    <h2 class="text-xl font-semibold mb-4">下一步可解锁</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+      <div class="card p-5">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-semibold">国宝学徒</span>
+          <span class="chip liujin text-xs">10 件国宝</span>
+        </div>
+        <div class="text-xs text-stone-500 mb-3">再收 3 件国宝 → 头像挂"宝"印章</div>
+        <div class="progress-track"><div class="progress-fill treasure" style="width:70%"></div></div>
+        <div class="text-[10px] text-stone-400 mt-2">推荐:大盂鼎 (国博) · 越王勾践剑 (湖北博)</div>
+      </div>
+
+      <div class="card p-5">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-semibold">三家朝圣者</span>
+          <span class="chip cuilv text-xs">商三大遗址</span>
+        </div>
+        <div class="text-xs text-stone-500 mb-3">已 2/3 · 还差盘龙城 (湖北黄陂)</div>
+        <div class="progress-track"><div class="progress-fill" style="width:67%"></div></div>
+        <div class="text-[10px] text-stone-400 mt-2">已点亮:殷墟 · 三星堆</div>
+      </div>
+
+      <div class="card p-5">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-semibold">尊器收藏家</span>
+          <span class="chip zhusha text-xs">尊 4 件</span>
+        </div>
+        <div class="text-xs text-stone-500 mb-3">已 3/4 · 再 1 件解锁"尊"全谱</div>
+        <div class="progress-track"><div class="progress-fill" style="width:75%"></div></div>
+        <div class="text-[10px] text-stone-400 mt-2">推荐:曾侯乙尊盘 (湖北博)</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================== Off-ramp banner ============================== -->
+  <section class="mb-16">
+    <div class="card p-5 flex items-center gap-4"
+         style="background:linear-gradient(90deg,#f7f3eb 0%,#ffffff 100%)">
+      <div class="text-2xl">🌿</div>
+      <div class="flex-1">
+        <div class="font-semibold text-sm">不必每天打开</div>
+        <div class="text-xs text-stone-500">下次去博物馆,记得带上图鉴 — 我们不会催你,看完的留下,没看的等你</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-center text-xs text-stone-400 pb-10">
+    阿K · MuseumCollect 探索版 · 阶段 4 周(2026-05-20)
+  </footer>
+</main>
+
+<!-- ============================== Share Card Generator Modal ============================== -->
+<div id="shareModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4"
+     style="background:rgba(0,0,0,0.55);backdrop-filter:blur(4px)">
+  <div class="relative w-full max-w-5xl grid grid-cols-12 gap-5">
+
+    <!-- Controls (left) -->
+    <div class="col-span-12 md:col-span-5 card p-6">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-semibold">梗卡片生成器</h3>
+        <button id="closeShare" class="w-8 h-8 rounded-full hover:bg-black/5 flex items-center justify-center">✕</button>
+      </div>
+
+      <div class="text-xs text-stone-500 mb-2">选一件收藏</div>
+      <div id="shareArtifactPicker" class="grid grid-cols-4 gap-2 mb-4 max-h-48 overflow-y-auto no-scrollbar"></div>
+
+      <div class="text-xs text-stone-500 mb-2">挑一句梗(可改)</div>
+      <textarea id="memeInput" rows="2"
+                class="w-full px-3 py-2 rounded-lg border border-stone-300 text-sm focus:outline-none focus:border-amber-500"
+                placeholder="一句话…"></textarea>
+
+      <div class="text-xs text-stone-500 mt-3 mb-2">背景风格</div>
+      <div class="flex gap-2 mb-4">
+        <button data-bg="warm" class="bg-btn flex-1 py-2 rounded-lg border border-stone-300 text-xs">
+          <span class="inline-block w-4 h-4 rounded-full align-middle mr-1" style="background:linear-gradient(135deg,#fffaef,#f7eed8)"></span>
+          鎏金
+        </button>
+        <button data-bg="ink" class="bg-btn flex-1 py-2 rounded-lg border border-stone-300 text-xs">
+          <span class="inline-block w-4 h-4 rounded-full align-middle mr-1" style="background:linear-gradient(135deg,#1a1a1c,#3a2a14)"></span>
+          墨色
+        </button>
+        <button data-bg="zhusha" class="bg-btn flex-1 py-2 rounded-lg border border-stone-300 text-xs">
+          <span class="inline-block w-4 h-4 rounded-full align-middle mr-1" style="background:linear-gradient(135deg,#fff,#fce8e5)"></span>
+          素白
+        </button>
+      </div>
+
+      <div class="flex gap-2">
+        <button class="btn btn-primary flex-1 text-sm">导出 PNG (mock)</button>
+        <button class="btn btn-ghost text-sm">分享到小红书</button>
+      </div>
+
+      <div class="mt-4 text-xs text-stone-400 leading-relaxed">
+        梗卡片自动叠加你的称号水印("铭文识读·二段")。 实际生成会用 html2canvas 或 canvas API,这里只是 preview。
+      </div>
+    </div>
+
+    <!-- PREVIEW (right) -->
+    <div class="col-span-12 md:col-span-7 flex items-center justify-center">
+      <div id="sharePreview" class="share-card-preview" style="width:340px;min-height:540px">
+        <!-- filled by JS -->
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<script src="js/state.js"></script>
+<script>
+(async function () {
+  await MC.load();
+  const collected = MC.COLLECTED_IDS.map(MC.artifact);
+  const titlesData = MC.computeTitles({ collected_ids: MC.COLLECTED_IDS, catalog: MC.catalog() });
+
+  // === 段位 row ===
+  const titleRow = document.getElementById('titleRow');
+  const rankToClass = { '入门':'rank-rookie','一段':'rank-dan-1','二段':'rank-dan-2','三段':'rank-dan-3','鉴师':'rank-master','大宗师':'rank-master'};
+  titleRow.innerHTML = titlesData.titles.map(t => `
+    <span class="rank-badge ${t.kind === 'rank' ? (rankToClass[t.dan] || '') : ''}">
+      <span class="seal">${t.seal}</span>${t.label}
+    </span>
+  `).join('');
+
+  // === Card wall ===
+  const cardWall = document.getElementById('cardWall');
+  cardWall.innerHTML = collected.map(a => {
+    const isTreasure = MC.rarityTier(a) === 'treasure';
+    return `
+    <div class="card overflow-hidden ${MC.rarityHaloClass(a)} bounce-on-hover click-feedback"
+         style="border-radius:16px" data-id="${a.id}">
+      <a href="artifact.html?id=${a.id}" class="block">
+      <div style="aspect-ratio: 4/5; background:#fff;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden">
+        ${isTreasure ? '<div class="guo-bao-stamp" style="top:6px;right:6px;width:38px;height:38px;font-size:9px"><span>国之<br/>重器</span></div>' : ''}
+        <img src="${MC.placeholderUrl(a)}" alt="" style="width:90%;height:90%;object-fit:contain"/>
+      </div>
+      <div class="p-3">
+        <div class="font-semibold text-sm truncate">${a.name_zh}</div>
+        <div class="text-[10px] text-stone-500 mt-0.5">${a.dynasty} · ${a.form_subtype || a.type}</div>
+        <div class="text-[10px] text-stone-400 mt-1">${MC.COLLECTED_DATES[a.id] || ''}</div>
+      </div>
+      </a>
+    </div>`;
+  }).join('');
+
+  // === Share modal ===
+  const modal     = document.getElementById('shareModal');
+  const openBtn   = document.getElementById('openShareGen');
+  const closeBtn  = document.getElementById('closeShare');
+  const picker    = document.getElementById('shareArtifactPicker');
+  const memeInput = document.getElementById('memeInput');
+  const preview   = document.getElementById('sharePreview');
+  let   selectedId = collected[2].id;  // default to 妇好鸮尊
+  let   bgStyle = 'warm';
+
+  picker.innerHTML = collected.map((a, i) => `
+    <button data-pick="${a.id}" class="rounded-lg overflow-hidden border-2 ${a.id===selectedId?'border-amber-500':'border-transparent'} hover:border-amber-300 click-feedback">
+      <img src="${MC.placeholderUrl(a)}" alt="${a.name_zh}" style="width:100%;aspect-ratio:1;object-fit:cover;background:#fff"/>
+    </button>
+  `).join('');
+
+  function renderPreview() {
+    const a = MC.artifact(selectedId);
+    const isTreasure = MC.rarityTier(a) === 'treasure';
+    const memeText = memeInput.value || MC.memeFor(a.id);
+    const bgStyles = {
+      warm:   'background:linear-gradient(180deg,#fffaef 0%,#f7eed8 100%);color:#1a1a1c',
+      ink:    'background:linear-gradient(180deg,#1a1a1c 0%,#3a2a14 100%);color:#fff7e8',
+      zhusha: 'background:linear-gradient(180deg,#ffffff 0%,#fce8e5 100%);color:#1a1a1c',
+    };
+    const memeColor = bgStyle === 'ink' ? '#f6caa3' : '#c0392b';
+    preview.setAttribute('style', `width:340px;min-height:540px;${bgStyles[bgStyle]}`);
+    preview.innerHTML = `
+      <div class="p-5 relative h-full flex flex-col">
+        <!-- header -->
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex w-7 h-7 rounded-md items-center justify-center text-white font-bold text-sm"
+                  style="background:linear-gradient(135deg,#c0392b 0%,#c9a85f 100%);font-family:'KaiTi',serif">青</span>
+            <span class="text-xs font-semibold tracking-wide">青铜图鉴 · 阿K</span>
+          </div>
+          <span class="text-[10px] tracking-widest opacity-60">No.${MC.COLLECTED_IDS.indexOf(a.id)+1}/25</span>
+        </div>
+
+        <!-- artifact area with halo for treasures -->
+        <div class="relative flex-1 flex items-center justify-center my-2"
+             style="${isTreasure ? `background:radial-gradient(circle at 50% 50%, rgba(212,168,87,${bgStyle==='ink'?0.35:0.20}) 0%, transparent 60%)` : ''}">
+          ${isTreasure ? `<div class="guo-bao-stamp" style="top:0;right:0;position:absolute">国之<br/>重器</div>` : ''}
+          <img src="${MC.placeholderUrl(a)}" alt="" style="width:90%;max-height:260px;object-fit:contain;filter:drop-shadow(0 14px 28px rgba(0,0,0,0.18))"/>
+        </div>
+
+        <!-- name + meta -->
+        <div class="text-center">
+          <div class="text-xl font-bold mb-1">${a.name_zh}</div>
+          <div class="text-xs opacity-70">${a.period} · ${(a.current_museum||'').split(' /')[0]}</div>
+        </div>
+
+        <!-- 梗 line -->
+        <div class="meme-line mt-3 text-center" style="font-family:'STKaiti',serif;font-size:17px;font-weight:700;line-height:1.5;color:${memeColor}">
+          "${memeText}"
+        </div>
+
+        <!-- rarity tags -->
+        <div class="flex justify-center gap-1.5 mt-3 flex-wrap">
+          ${isTreasure ? '<span class="chip" style="background:rgba(212,168,87,0.18);color:#8b6f3e;border-color:rgba(212,168,87,0.4)">国宝</span>' : ''}
+          ${a.inscription && a.inscription.char_count >= 100 ? '<span class="chip" style="background:rgba(46,139,87,0.18);color:#1f6b3f">长铭</span>' : ''}
+          ${(a.excavation_site||'').includes('三星堆') ? '<span class="chip" style="background:rgba(192,57,43,0.18);color:#a02e22">古蜀</span>' : ''}
+          ${(a.current_museum||'').includes('台北') ? '<span class="chip" style="background:rgba(140,140,140,0.20);color:#444">流散海外</span>' : ''}
+        </div>
+
+        <!-- watermark / 称号 -->
+        <div class="mt-4 pt-3 border-t border-dashed flex items-center justify-between text-[10px]"
+             style="border-color:${bgStyle==='ink'?'rgba(255,247,232,0.2)':'rgba(0,0,0,0.15)'};opacity:0.75">
+          <span>称号: 铭文识读·二段</span>
+          <span>museumcollect.cn</span>
+        </div>
+      </div>
+    `;
+  }
+
+  function openShare() {
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    renderPreview();
+  }
+  openBtn.addEventListener('click', openShare);
+  closeBtn.addEventListener('click', () => { modal.classList.add('hidden'); modal.classList.remove('flex'); });
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeBtn.click(); });
+
+  picker.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-pick]');
+    if (!btn) return;
+    selectedId = btn.dataset.pick;
+    [...picker.children].forEach(c => c.classList.toggle('border-amber-500', c.dataset.pick === selectedId));
+    [...picker.children].forEach(c => c.classList.toggle('border-transparent', c.dataset.pick !== selectedId));
+    memeInput.value = MC.memeFor(selectedId);
+    renderPreview();
+  });
+
+  memeInput.addEventListener('input', renderPreview);
+
+  document.querySelectorAll('.bg-btn').forEach(b => b.addEventListener('click', () => {
+    bgStyle = b.dataset.bg;
+    document.querySelectorAll('.bg-btn').forEach(x => x.classList.remove('ring-2','ring-amber-500'));
+    b.classList.add('ring-2','ring-amber-500');
+    renderPreview();
+  }));
+
+  // Auto-open via hash
+  if (location.hash === '#share') setTimeout(openShare, 300);
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>唤醒一件国宝</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/immersive.css" />
+</head>
+<body>
+
+  <section class="px-20 pt-32 pb-12">
+    <div class="max-w-5xl mx-auto text-center scene-enter">
+      <div class="poem-line mb-3" style="font-size: 13px; letter-spacing: 0.5em; opacity: 0.6;">— 唤 · 醒 —</div>
+      <h1 class="calligraphy-title mb-6">让一件国宝醒过来</h1>
+      <p class="poem-line max-w-xl mx-auto" style="font-size: 15px; opacity: 0.85;">
+        在博物馆里给一件器物拍一张照,放进来,我替它认出自己。<br/>
+        它会用一句诗告诉你它的名字。
+      </p>
+    </div>
+  </section>
+
+  <!-- Upload zone -->
+  <section class="px-20 pb-12 scene-enter-late">
+    <div class="max-w-4xl mx-auto">
+      <div class="aged-panel paper-grain relative" style="aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; cursor: pointer;"
+           id="uploadZone">
+        <div class="text-center">
+          <!-- camera glyph -->
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color: var(--gold-soft); margin: 0 auto; opacity: 0.7;">
+            <path d="M3 9a2 2 0 0 1 2-2h2.5l1.5-2h6l1.5 2H19a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke-width="1"/>
+            <circle cx="12" cy="13" r="3.5" stroke-width="1"/>
+          </svg>
+          <div class="poem-line mt-5" style="font-size: 14px; letter-spacing: 0.3em; opacity: 0.75;">从 下 方 选 一 张 你 拍 过 的 国 宝</div>
+          <div class="poem-line mt-2" style="font-size: 11px; opacity: 0.5;">或拖入图片(MOCK · 这里用预设场景演示)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo preset cards -->
+  <section class="px-20 pb-12">
+    <div class="max-w-5xl mx-auto">
+      <div class="poem-line text-center mb-8" style="font-size: 13px; letter-spacing: 0.5em; opacity: 0.6;">— 演 示 · 四 种 场 景 —</div>
+      <div class="grid grid-cols-4 gap-6">
+        <button class="preset-btn aged-panel paper-grain" data-demo-seed="houmuwu">
+          <div class="aspect-square relative overflow-hidden mb-3" style="background: radial-gradient(circle at 40% 30%, #8b6f3d 0%, #2a1a14 70%);">
+            <div class="absolute inset-0 flex items-center justify-center" style="font-family: var(--font-kai); color: rgba(212,168,87,0.45); font-size: 1.6rem; letter-spacing: 0.3em;">高 清 正 面</div>
+          </div>
+          <div class="poem-line text-center" style="font-size: 12px; letter-spacing: 0.25em;">高 信 度 一 件</div>
+          <div class="text-center mt-1" style="color: var(--bronze-mid); font-size: 10px; letter-spacing: 0.2em;">后母戊鼎</div>
+        </button>
+
+        <button class="preset-btn aged-panel paper-grain" data-demo-seed="fuhao">
+          <div class="aspect-square relative overflow-hidden mb-3" style="background: radial-gradient(circle at 60% 50%, #6d4a2a 0%, #1a1614 70%);">
+            <div class="absolute inset-0 flex items-center justify-center" style="font-family: var(--font-kai); color: rgba(212,168,87,0.45); font-size: 1.6rem; letter-spacing: 0.3em;">侧 光 模 糊</div>
+          </div>
+          <div class="poem-line text-center" style="font-size: 12px; letter-spacing: 0.25em;">疑 似 几 件</div>
+          <div class="text-center mt-1" style="color: var(--bronze-mid); font-size: 10px; letter-spacing: 0.2em;">妇好鸮尊 ?</div>
+        </button>
+
+        <button class="preset-btn aged-panel paper-grain" data-demo-seed="ocr_houmuwu">
+          <div class="aspect-square relative overflow-hidden mb-3" style="background: linear-gradient(135deg, #3a2a1a, #1a0c08);">
+            <div class="absolute inset-0 flex items-center justify-center" style="font-family: var(--font-kai); color: rgba(212,168,87,0.45); font-size: 1.5rem; letter-spacing: 0.3em;">展 签 文 字</div>
+          </div>
+          <div class="poem-line text-center" style="font-size: 12px; letter-spacing: 0.25em;">铭 文 之 读</div>
+          <div class="text-center mt-1" style="color: var(--bronze-mid); font-size: 10px; letter-spacing: 0.2em;">从展签读</div>
+        </button>
+
+        <button class="preset-btn aged-panel paper-grain" data-demo-seed="nomatch">
+          <div class="aspect-square relative overflow-hidden mb-3" style="background: linear-gradient(135deg, #2a3a2a, #0d1408);">
+            <div class="absolute inset-0 flex items-center justify-center" style="font-family: var(--font-kai); color: rgba(212,168,87,0.45); font-size: 1.5rem; letter-spacing: 0.3em;">非 青 铜</div>
+          </div>
+          <div class="poem-line text-center" style="font-size: 12px; letter-spacing: 0.25em;">无 法 认 出</div>
+          <div class="text-center mt-1" style="color: var(--bronze-mid); font-size: 10px; letter-spacing: 0.2em;">换一张</div>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Loading state -->
+  <section id="loading" class="px-20 py-24" style="display: none;">
+    <div class="max-w-4xl mx-auto text-center">
+      <div style="width: 80px; height: 80px; border: 1px solid var(--gold-soft); border-radius: 50%; margin: 0 auto; position: relative;">
+        <div style="position: absolute; inset: 6px; border: 1px solid var(--gold-treasure); border-top-color: transparent; border-radius: 50%; animation: rotateSlow 1.6s linear infinite;"></div>
+      </div>
+      <div class="poem-line mt-8" style="font-size: 15px; letter-spacing: 0.4em; opacity: 0.85;">正 在 唤 醒</div>
+      <div class="poem-line mt-3" style="font-size: 12px; opacity: 0.6;">它埋了三千年,这一两秒值得等</div>
+    </div>
+  </section>
+
+  <!-- Result state -->
+  <section id="result" class="px-20 py-12" style="display: none;">
+    <div class="max-w-5xl mx-auto"></div>
+  </section>
+
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/mock-recognition.js"></script>
+  <script>
+    (async function () {
+      MCUI.renderHeader('scan');
+      MCUI.renderFooter();
+      await MCData.ready;
+      await mockRecognition.ready;
+
+      const $loading = document.getElementById('loading');
+      const $result = document.getElementById('result');
+      const $resultInner = $result.querySelector('.max-w-5xl');
+
+      function showLoading() {
+        $result.style.display = 'none';
+        $loading.style.display = 'block';
+      }
+      function hideLoading() { $loading.style.display = 'none'; }
+      function showResult(html) {
+        $resultInner.innerHTML = html;
+        $result.style.display = 'block';
+        $result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      function renderHigh(r) {
+        const top = r.candidates[0];
+        const artifact = MCData.catalog.find(a => a.id === top.artifact_id);
+        const mono = MCData.getMonologue(top.artifact_id);
+        return `
+          <div class="text-center mb-12 scene-enter">
+            <div class="poem-line" style="font-size: 13px; letter-spacing: 0.5em; opacity: 0.6;">— 唤 醒 · 成 功 —</div>
+            <h2 class="calligraphy-title mt-4" style="font-size: 2.6rem;">它就是 — ${top.name_zh}</h2>
+            <div class="poem-line mt-2" style="font-size: 12px; opacity: 0.6; letter-spacing: 0.3em;">置信度 ${(top.confidence*100).toFixed(0)}% · ${top.match_method}</div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-12 items-start">
+            <div class="${MCData.isTreasure(artifact) ? 'halo-treasure' : ''}" style="aspect-ratio: 3/4; overflow: hidden; position: relative;">
+              ${MCUI.imageOrPlaceholder(artifact, { cls: 'lg w-full h-full', style: 'width:100%; height:100%;' })}
+              ${MCData.isForbiddenExport(artifact) ? '<div class="absolute top-4 left-4"><span class="seal">国 之 重 器</span></div>' : ''}
+            </div>
+            <div>
+              <div class="poem-line mb-4" style="font-size: 16px;">${mono.poem || ''}</div>
+              <div class="mb-6 flex items-center gap-3" style="color: var(--silk-warm); font-size: 13px; letter-spacing: 0.2em;">
+                <span>${artifact.dynasty}</span>
+                <span style="color: var(--gold-soft);">·</span>
+                <span>${artifact.current_museum}</span>
+              </div>
+
+              <div class="aged-panel paper-grain p-5 mb-6">
+                <div class="poem-line mb-3" style="font-size: 11px; letter-spacing: 0.3em; color: var(--gold-soft);">为何是它</div>
+                <ul class="space-y-2">
+                  ${top.match_reasons.map(r => `<li class="poem-line" style="font-size: 13px; opacity: 0.85;">· ${r}</li>`).join('')}
+                </ul>
+              </div>
+
+              <div class="monologue mb-8" style="font-size: 14px; line-height: 2;">
+                <p>${(mono.voice || artifact.story_brief || '').split('\n')[0]}</p>
+              </div>
+
+              <div class="flex gap-3">
+                ${MCData.isCollected(artifact.id)
+                  ? `<a href="artifact.html?id=${artifact.id}" class="btn-bronze">已 在 你 卷 中 · 看 完 整 →</a>`
+                  : `<button class="btn-gold" onclick="window.alert('已唤醒,加入了你的青铜之旅。')">迎 它 进 来</button>
+                     <a href="artifact.html?id=${artifact.id}" class="btn-bronze">先 听 它 说 →</a>`}
+              </div>
+
+              ${r.candidates.length > 1 ? `
+                <div class="mt-12">
+                  <div class="poem-line mb-4" style="font-size: 11px; letter-spacing: 0.3em; opacity: 0.6;">— 也 可 能 是 —</div>
+                  <div class="flex gap-3 flex-wrap">
+                    ${r.candidates.slice(1).map(c => `
+                      <a href="artifact.html?id=${c.artifact_id}" class="aged-panel paper-grain px-4 py-3" style="text-decoration: none; transition: all 0.4s ease;" onmouseover="this.style.borderColor='var(--gold-soft)'" onmouseout="this.style.borderColor='rgba(212,168,87,0.18)'">
+                        <div class="calligraphy-title" style="font-size: 1rem; color: var(--silk-cream);">${c.name_zh}</div>
+                        <div class="poem-line mt-1" style="font-size: 10px; opacity: 0.6;">${(c.confidence*100).toFixed(0)}% 相似</div>
+                      </a>
+                    `).join('')}
+                  </div>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        `;
+      }
+
+      function renderMedium(r) {
+        return `
+          <div class="text-center mb-12 scene-enter">
+            <div class="poem-line" style="font-size: 13px; letter-spacing: 0.5em; opacity: 0.6;">— 看 起 来 是 这 几 件 —</div>
+            <h2 class="calligraphy-title mt-4" style="font-size: 2.4rem;">请 替 它 选 一 个 名 字</h2>
+            <p class="poem-line mt-3" style="font-size: 14px; opacity: 0.7;">三千年的远,光线一糊,要靠你看一眼</p>
+          </div>
+          <div class="grid grid-cols-3 gap-10">
+            ${r.candidates.map((c, i) => {
+              const artifact = MCData.catalog.find(a => a.id === c.artifact_id);
+              const mono = MCData.getMonologue(c.artifact_id);
+              return `
+                <a href="artifact.html?id=${c.artifact_id}" class="block group">
+                  <div class="${MCData.isTreasure(artifact) ? 'halo-treasure' : ''}" style="aspect-ratio: 3/4; overflow: hidden;">
+                    ${MCUI.imageOrPlaceholder(artifact, { cls: 'w-full h-full', style: 'width:100%; height:100%;' })}
+                  </div>
+                  <div class="mt-4 flex items-baseline gap-2">
+                    <h4 class="calligraphy-title hover-line inline-block" style="font-size: 1.2rem;">${c.name_zh}</h4>
+                    <span class="poem-line" style="font-size: 11px; opacity: 0.6;">${(c.confidence*100).toFixed(0)}%</span>
+                  </div>
+                  <div class="poem-line mt-1" style="font-size: 11px; opacity: 0.7;">${c.dynasty} · ${c.current_museum}</div>
+                  <p class="mt-3 poem-line" style="font-size: 11px; opacity: 0.65; font-style: italic;">${(mono.poem || '').slice(0, 26)}</p>
+                </a>
+              `;
+            }).join('')}
+          </div>
+        `;
+      }
+
+      function renderOCR(r) {
+        const top = r.candidates[0];
+        const artifact = MCData.catalog.find(a => a.id === top.artifact_id);
+        const mono = MCData.getMonologue(top.artifact_id);
+        return `
+          <div class="text-center mb-12 scene-enter">
+            <div class="poem-line" style="font-size: 13px; letter-spacing: 0.5em; opacity: 0.6;">— 从 展 签 读 出 来 —</div>
+            <h2 class="calligraphy-title mt-4" style="font-size: 2.4rem;">${top.name_zh}</h2>
+          </div>
+
+          <div class="grid grid-cols-2 gap-12 items-start">
+            <div>
+              <div class="aged-panel paper-grain p-6" style="background: rgba(232, 220, 192, 0.04);">
+                <div class="poem-line mb-4" style="font-size: 11px; letter-spacing: 0.3em; opacity: 0.6;">— 展 签 文 字 ·  OCR 识 读 —</div>
+                <pre class="poem-line" style="font-size: 13px; line-height: 2; opacity: 0.85; white-space: pre-wrap; font-family: var(--font-serif);">${r.ocr_text}</pre>
+              </div>
+
+              <div class="aged-panel paper-grain p-5 mt-6">
+                <div class="poem-line mb-3" style="font-size: 11px; letter-spacing: 0.3em; color: var(--gold-soft);">解 析 字 段</div>
+                <div class="space-y-2" style="font-size: 13px; color: var(--silk-warm);">
+                  ${Object.entries(r.extracted_fields || {}).map(([k, v]) => `
+                    <div class="flex gap-4">
+                      <span style="color: var(--bronze-mid); width: 100px; letter-spacing: 0.2em;">${({name:'名字',dynasty:'朝代',period_hint:'时期',excavation_year:'出土',excavation_site:'地点',current_museum:'现 藏'})[k] || k}</span>
+                      <span>${v}</span>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="${MCData.isTreasure(artifact) ? 'halo-treasure' : ''}" style="aspect-ratio: 3/4; overflow: hidden;">
+                ${MCUI.imageOrPlaceholder(artifact, { cls: 'lg w-full h-full', style: 'width:100%; height:100%;' })}
+              </div>
+              <div class="poem-line mt-4" style="font-size: 14px;">${mono.poem || ''}</div>
+              <div class="flex gap-3 mt-6">
+                <a href="artifact.html?id=${artifact.id}" class="btn-gold">听 它 说 →</a>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      function renderNoMatch(r) {
+        return `
+          <div class="text-center mb-12 scene-enter">
+            <div class="poem-line" style="font-size: 13px; letter-spacing: 0.5em; opacity: 0.6;">— 暂 没 认 出 来 —</div>
+            <h2 class="calligraphy-title mt-4" style="font-size: 2.2rem;">三 千 年 太 远 ,请 再 给 一 次 机 会</h2>
+            <p class="poem-line mt-4 max-w-xl mx-auto" style="font-size: 14px; opacity: 0.75;">
+              也许光线、角度、或它本来就不是青铜——你可以这样做:
+            </p>
+          </div>
+          <div class="grid grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <a class="aged-panel paper-grain p-8 text-center hover-line block" style="text-decoration: none; cursor: pointer;">
+              <div class="calligraphy-title mb-3" style="font-size: 1.4rem; color: var(--gold-soft);">再 拍 一 张</div>
+              <div class="poem-line" style="font-size: 12px; opacity: 0.7;">正面 · 光线足 · 无遮挡</div>
+            </a>
+            <a href="catalog.html" class="aged-panel paper-grain p-8 text-center hover-line block" style="text-decoration: none;">
+              <div class="calligraphy-title mb-3" style="font-size: 1.4rem; color: var(--gold-soft);">直 接 搜 索</div>
+              <div class="poem-line" style="font-size: 12px; opacity: 0.7;">输入它的名字</div>
+            </a>
+            <a class="aged-panel paper-grain p-8 text-center hover-line block" style="text-decoration: none; cursor: pointer;" onclick="document.querySelector('[data-demo-seed=ocr_houmuwu]').click()">
+              <div class="calligraphy-title mb-3" style="font-size: 1.4rem; color: var(--gold-soft);">扫 展 签</div>
+              <div class="poem-line" style="font-size: 12px; opacity: 0.7;">从文字识读</div>
+            </a>
+          </div>
+        `;
+      }
+
+      // Wire preset buttons
+      document.querySelectorAll('[data-demo-seed]').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const seed = btn.dataset.demoSeed;
+          showLoading();
+          const r = await mockRecognition.recognize({ demo_seed: seed });
+          hideLoading();
+          if (r.confidence_band === 'high' && !r.ocr_text) showResult(renderHigh(r));
+          else if (r.ocr_text) showResult(renderOCR(r));
+          else if (r.confidence_band === 'medium' || r.confidence_band === 'low') showResult(renderMedium(r));
+          else showResult(renderNoMatch(r));
+        });
+      });
+
+      // Click upload zone → trigger high-conf default
+      document.getElementById('uploadZone').addEventListener('click', () => {
+        document.querySelector('[data-demo-seed=houmuwu]').click();
+      });
+    })();
+  </script>
+  <style>
+    @keyframes rotateSlow { 0% { transform: rotate(0); } 100% { transform: rotate(360deg); } }
+    .preset-btn { padding: 14px; border: none; background: transparent; cursor: pointer; transition: all 0.6s cubic-bezier(0.22, 0.85, 0.3, 1); }
+    .preset-btn:hover { transform: translateY(-2px); border-color: var(--gold-soft); }
+  </style>
+</body>
+</html>

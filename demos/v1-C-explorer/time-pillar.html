@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>时空柱 — MuseumCollect</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/explorer.css" />
+</head>
+<body class="paper-bg">
+
+<nav class="top-nav">
+  <div class="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2 click-feedback">
+      <span class="inline-flex w-8 h-8 rounded-lg items-center justify-center text-white font-bold"
+            style="background:linear-gradient(135deg,#c0392b 0%,#c9a85f 100%);font-family:'KaiTi',serif">青</span>
+      <span class="font-semibold tracking-wide">青铜图鉴</span>
+      <span class="text-xs text-stone-400">/ 探索版</span>
+    </a>
+    <div class="flex items-center gap-1 text-sm">
+      <a href="catalog.html"      class="px-3 py-1.5 rounded-full hover:bg-black/5">图鉴</a>
+      <a href="time-pillar.html"  class="px-3 py-1.5 rounded-full bg-amber-100 text-amber-900">时空柱</a>
+      <a href="ancient-map.html"  class="px-3 py-1.5 rounded-full hover:bg-black/5">古国地图</a>
+      <a href="form-genealogy.html" class="px-3 py-1.5 rounded-full hover:bg-black/5">形制谱系</a>
+      <a href="scan.html"         class="px-3 py-1.5 rounded-full hover:bg-black/5">扫描</a>
+      <a href="me.html"           class="ml-2 px-3 py-1.5 rounded-full bg-black text-amber-50 font-medium">我的</a>
+    </div>
+  </div>
+</nav>
+
+<main class="max-w-6xl mx-auto px-5 py-8">
+
+  <header class="mb-6 fade-up">
+    <div class="text-xs text-stone-500 tracking-widest mb-1">DIMENSION · 时代</div>
+    <h1 class="text-3xl font-bold">时空柱 · 你的 1700 年</h1>
+    <p class="text-stone-600 mt-1 text-sm">每段高度 ∝ 朝代时长 · 填充 = 你的收藏率 · 空段缓慢呼吸 = "待踏足"</p>
+  </header>
+
+  <section class="grid grid-cols-12 gap-8 mb-12">
+
+    <!-- LEFT: pillar viz -->
+    <div class="col-span-12 md:col-span-7 fade-up delay-1">
+      <div class="card p-6 relative" style="min-height:780px">
+
+        <!-- Decade markers on left -->
+        <div class="absolute left-2 top-6 bottom-6 text-[10px] text-stone-400" style="writing-mode:vertical-rl">
+          BC 1750 · BC 1046 (武王伐纣) · BC 771 (平王东迁) · BC 476 (三家分晋) · BC 221 (秦统一) · AD 220
+        </div>
+
+        <div id="pillarStack" class="ml-12 mr-2 flex flex-col gap-1.5">
+          <!-- segments injected -->
+        </div>
+
+        <div class="mt-4 text-xs text-stone-500 text-center">点击段 → 看该期收藏 / 候选</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: selected period panel -->
+    <div class="col-span-12 md:col-span-5 fade-up delay-2">
+      <div id="periodPanel" class="card p-6 sticky top-20">
+        <!-- filled by JS -->
+      </div>
+
+      <div class="card p-5 mt-4" style="background:linear-gradient(135deg,#fff7e8 0%,#ffffff 70%)">
+        <div class="text-xs text-amber-700 tracking-widest mb-1">通鉴解锁进度</div>
+        <div class="text-base font-semibold mb-3">4 / 7 朝代已开</div>
+        <div class="space-y-2 text-xs">
+          <div class="flex justify-between"><span>夏</span><span class="text-stone-400">未踏足</span></div>
+          <div class="flex justify-between"><span>商</span><span class="text-emerald-700 font-medium">3 / 7 件 · 已开</span></div>
+          <div class="flex justify-between"><span>西周</span><span class="text-emerald-700 font-medium">1 / 6 件 · 已开</span></div>
+          <div class="flex justify-between"><span>春秋</span><span class="text-emerald-700 font-medium">1 / 2 件 · 已开</span></div>
+          <div class="flex justify-between"><span>战国</span><span class="text-stone-400">0 / 3 件 · 待踏足</span></div>
+          <div class="flex justify-between"><span>秦</span><span class="text-stone-400">0 / 2 件 · 待踏足</span></div>
+          <div class="flex justify-between"><span>汉</span><span class="text-emerald-700 font-medium">2 / 3 件 · 已开</span></div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <footer class="text-center text-xs text-stone-400 pb-10">
+    时长真实 · 商最长(554 年)· 夏稀薄(250 年)· 秦只 15 年
+  </footer>
+</main>
+
+<script src="js/state.js"></script>
+<script>
+(async function () {
+  await MC.load();
+  const all = MC.catalog();
+
+  // dynasty config (height ∝ duration)
+  const dynasties = [
+    { key: '夏',   label: '夏 (二里头)',  start: -1750, end: -1600, color1:'#7a6e54', subs: [] },
+    { key: '商',   label: '商',           start: -1600, end: -1046, color1:'#5a8478', subs: [
+      { name: '商早期 (二里岗)',     start: -1600, end: -1300 },
+      { name: '商中期 (殷墟前)',     start: -1300, end: -1250 },
+      { name: '商晚期 (殷墟 · 妇好)', start: -1250, end: -1046 },
+    ]},
+    { key: '西周', label: '西周',         start: -1046, end: -771, color1:'#5a8478', subs: [
+      { name: '西周早期 (武成康昭)', start: -1046, end: -946 },
+      { name: '西周中期 (穆恭懿孝)', start: -946,  end: -857 },
+      { name: '西周晚期 (夷厉宣幽)', start: -857,  end: -771 },
+    ]},
+    { key: '春秋', label: '春秋',         start: -771,  end: -476, color1:'#5a8478', subs: [] },
+    { key: '战国', label: '战国',         start: -476,  end: -221, color1:'#5a8478', subs: [] },
+    { key: '秦',   label: '秦',           start: -221,  end: -207, color1:'#7a6e54', subs: [] },
+    { key: '汉',   label: '汉 (西+东)',   start: -207,  end: 220,  color1:'#5a8478', subs: [] },
+  ];
+  const TOTAL = 1970;
+
+  // bucket artifacts by dynasty
+  const byD = {};
+  dynasties.forEach(d => byD[d.key] = []);
+  all.forEach(a => {
+    const k = dynasties.find(d => (a.dynasty||'').startsWith(d.key));
+    if (k) byD[k.key].push(a);
+  });
+
+  // Render pillar - stacked top to bottom (oldest at bottom is more traditional, but flip top-recent for clarity)
+  // 用户角度: top = 远古, bottom = 现代, 阅读自上而下 (按时间正序)
+  const stack = document.getElementById('pillarStack');
+  const totalPx = 720;
+
+  stack.innerHTML = dynasties.map((d, idx) => {
+    const dur = d.end - d.start;
+    const heightPx = Math.max(28, Math.round(dur / TOTAL * totalPx));
+    const items = byD[d.key] || [];
+    const total = items.length;
+    const owned = items.filter(a => MC.isCollected(a.id)).length;
+    const fillPct = total > 0 ? Math.round(owned / total * 100) : 0;
+    const hasTreasure = items.some(a => MC.isCollected(a.id) && MC.rarityTier(a) === 'treasure');
+    const isEmpty = owned === 0;
+
+    return `
+      <div class="pillar-segment ${isEmpty ? 'soft-breath' : ''}" data-key="${d.key}" data-idx="${idx}" style="height:${heightPx}px;cursor:pointer">
+        <div class="pillar-fill ${hasTreasure ? 'has-treasure' : ''}" style="height:${fillPct}%"></div>
+        <div class="absolute inset-0 flex items-center justify-between px-4 z-10">
+          <div>
+            <div class="font-semibold text-sm">${d.label}</div>
+            <div class="text-[10px] text-stone-600">${dur} 年</div>
+          </div>
+          <div class="text-right">
+            <div class="text-sm font-bold">${owned} / ${total}</div>
+            ${fillPct >= 80 ? '<div class="text-[10px] text-amber-700">✦ 通鉴</div>' : ''}
+            ${isEmpty ? '<div class="text-[10px] text-stone-400">待踏足</div>' : ''}
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // Default panel: select 商
+  let selected = '商';
+  function renderPanel(key) {
+    const d = dynasties.find(x => x.key === key);
+    const items = byD[key] || [];
+    const owned = items.filter(a => MC.isCollected(a.id));
+    const candidates = items.filter(a => !MC.isCollected(a.id));
+    const panel = document.getElementById('periodPanel');
+
+    panel.innerHTML = `
+      <div class="text-xs text-stone-500 tracking-widest mb-1">PERIOD</div>
+      <h2 class="text-2xl font-bold mb-1">${d.label}</h2>
+      <div class="text-sm text-stone-500 mb-4">${d.end - d.start} 年 · ${items.length} 件 mock · 你收 ${owned.length} 件</div>
+
+      ${d.subs.length ? `
+        <div class="mb-4">
+          <div class="text-xs text-stone-500 mb-2">子分期</div>
+          <div class="flex flex-wrap gap-1.5">
+            ${d.subs.map(s => `<span class="chip text-[10px]">${s.name}</span>`).join('')}
+          </div>
+        </div>
+      ` : ''}
+
+      ${owned.length ? `
+        <div class="mb-4">
+          <div class="text-xs text-emerald-700 mb-2">✦ 已收 ${owned.length}</div>
+          <div class="grid grid-cols-3 gap-2">
+            ${owned.map(a => `
+              <a href="artifact.html?id=${a.id}" class="card overflow-hidden ${MC.rarityHaloClass(a)} click-feedback" style="border-radius:10px">
+                <div style="aspect-ratio:1;background:#fff;display:flex;align-items:center;justify-content:center">
+                  <img src="${MC.placeholderUrl(a)}" style="width:88%;height:88%;object-fit:contain"/>
+                </div>
+                <div class="p-1.5"><div class="text-[10px] font-semibold truncate">${a.name_zh}</div></div>
+              </a>
+            `).join('')}
+          </div>
+        </div>
+      ` : `
+        <div class="mb-4 p-4 rounded-lg" style="background:rgba(212,168,87,0.08)">
+          <div class="text-xs text-amber-700 mb-1">这段还没踏足</div>
+          <div class="text-sm">不催你 · 看到了就来</div>
+        </div>
+      `}
+
+      ${candidates.length ? `
+        <div>
+          <div class="text-xs text-stone-500 mb-2">候选 ${candidates.length} 件 (剪影)</div>
+          <div class="grid grid-cols-4 gap-2">
+            ${candidates.slice(0, 8).map(a => `
+              <a href="artifact.html?id=${a.id}" class="silhouette-wrapper card click-feedback" style="aspect-ratio:1;border-radius:10px;overflow:hidden">
+                <img src="${MC.placeholderUrl(a)}" alt="" class="silhouette" style="width:80%;height:80%;object-fit:contain"/>
+              </a>
+            `).join('')}
+          </div>
+          ${candidates.length > 8 ? `<div class="text-[10px] text-stone-400 mt-2 text-center">…还有 ${candidates.length - 8} 件</div>` : ''}
+        </div>
+      ` : ''}
+    `;
+  }
+
+  document.querySelectorAll('[data-key]').forEach(seg => {
+    seg.addEventListener('click', () => {
+      selected = seg.dataset.key;
+      document.querySelectorAll('[data-key]').forEach(x => x.classList.remove('ring-2','ring-amber-500'));
+      seg.classList.add('ring-2','ring-amber-500');
+      renderPanel(selected);
+    });
+  });
+
+  // initial
+  document.querySelector('[data-key="商"]').classList.add('ring-2','ring-amber-500');
+  renderPanel('商');
+})();
+</script>
+
+</body>
+</html>

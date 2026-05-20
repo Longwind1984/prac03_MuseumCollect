@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>古国地图 — MuseumCollect</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/explorer.css" />
+</head>
+<body class="paper-bg">
+
+<nav class="top-nav">
+  <div class="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2 click-feedback">
+      <span class="inline-flex w-8 h-8 rounded-lg items-center justify-center text-white font-bold"
+            style="background:linear-gradient(135deg,#c0392b 0%,#c9a85f 100%);font-family:'KaiTi',serif">青</span>
+      <span class="font-semibold tracking-wide">青铜图鉴</span>
+      <span class="text-xs text-stone-400">/ 探索版</span>
+    </a>
+    <div class="flex items-center gap-1 text-sm">
+      <a href="catalog.html"      class="px-3 py-1.5 rounded-full hover:bg-black/5">图鉴</a>
+      <a href="time-pillar.html"  class="px-3 py-1.5 rounded-full hover:bg-black/5">时空柱</a>
+      <a href="ancient-map.html"  class="px-3 py-1.5 rounded-full bg-amber-100 text-amber-900">古国地图</a>
+      <a href="form-genealogy.html" class="px-3 py-1.5 rounded-full hover:bg-black/5">形制谱系</a>
+      <a href="scan.html"         class="px-3 py-1.5 rounded-full hover:bg-black/5">扫描</a>
+      <a href="me.html"           class="ml-2 px-3 py-1.5 rounded-full bg-black text-amber-50 font-medium">我的</a>
+    </div>
+  </div>
+</nav>
+
+<main class="max-w-6xl mx-auto px-5 py-8">
+
+  <header class="mb-6 fade-up flex items-end justify-between flex-wrap gap-3">
+    <div>
+      <div class="text-xs text-stone-500 tracking-widest mb-1">DIMENSION · 出土地</div>
+      <h1 class="text-3xl font-bold">古国漫游 · 5 / 12 已踏足</h1>
+      <p class="text-stone-600 mt-1 text-sm">古地图风格 · 商 / 西周 / 战国 切换 · 三星堆独立文明金色光晕</p>
+    </div>
+
+    <!-- Time-period switcher -->
+    <div class="tab-bar">
+      <button class="tab-btn active" data-era="商">商</button>
+      <button class="tab-btn" data-era="西周">西周</button>
+      <button class="tab-btn" data-era="战国">战国</button>
+      <button class="tab-btn" data-era="秦汉">秦汉</button>
+    </div>
+  </header>
+
+  <section class="grid grid-cols-12 gap-6">
+
+    <!-- LEFT: map -->
+    <div class="col-span-12 md:col-span-8 fade-up delay-1">
+      <div class="card p-5 relative" style="aspect-ratio: 5/4;background:linear-gradient(135deg,#faf3e3 0%,#f4ead4 100%)">
+        <!-- Decorative compass -->
+        <div class="absolute top-4 right-4 text-xs text-stone-400 z-10" style="font-family:'KaiTi',serif">
+          北↑
+        </div>
+
+        <svg id="theMap" viewBox="0 0 1000 700" class="w-full h-full" style="cursor:grab">
+
+          <defs>
+            <!-- Brush stroke pattern -->
+            <pattern id="paper" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
+              <rect width="120" height="120" fill="#faf3e3" opacity="0.4"/>
+            </pattern>
+            <radialGradient id="treasureGlow" cx="0.5" cy="0.5">
+              <stop offset="0%" stop-color="#d4a857" stop-opacity="0.6"/>
+              <stop offset="100%" stop-color="#d4a857" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+
+          <!-- Simplified China outline -->
+          <path d="M 120,330 Q 200,250 320,260 Q 420,220 540,240 Q 660,230 750,260 Q 820,290 870,330
+                   Q 900,380 880,440 Q 860,500 800,540 Q 720,580 640,580 Q 540,590 460,580
+                   Q 360,570 280,550 Q 200,520 150,470 Q 110,420 120,330 Z"
+                fill="#fff" stroke="#a8a08c" stroke-width="2" stroke-linejoin="round" opacity="0.92"/>
+
+          <!-- 黄河 -->
+          <path d="M 200,330 Q 320,320 440,340 Q 560,340 660,320 Q 760,300 820,330"
+                fill="none" stroke="#a4c2d4" stroke-width="3" opacity="0.7" stroke-dasharray="6 3"/>
+          <!-- 长江 -->
+          <path d="M 240,470 Q 340,440 460,460 Q 580,470 680,460 Q 780,450 820,430"
+                fill="none" stroke="#a4c2d4" stroke-width="3" opacity="0.7" stroke-dasharray="6 3"/>
+
+          <!-- 山形 decorative -->
+          <g stroke="#a8a08c" stroke-width="1.2" fill="none" opacity="0.5">
+            <path d="M 280,300 L 295,285 L 310,300 M 305,300 L 320,288 L 335,300"/>
+            <path d="M 410,308 L 425,294 L 440,308"/>
+            <path d="M 700,310 L 715,295 L 730,310"/>
+          </g>
+
+          <!-- ===== Site points (filled by JS) ===== -->
+          <g id="sitePoints"></g>
+
+          <!-- Decorative labels -->
+          <g font-family="KaiTi,serif" font-weight="bold" font-size="14" fill="#7a6e54" opacity="0.6">
+            <text x="200" y="270">陇右</text>
+            <text x="640" y="270">东海</text>
+            <text x="700" y="500">江南</text>
+          </g>
+        </svg>
+
+        <!-- Overseas box -->
+        <div class="absolute bottom-5 right-5 w-44 card p-3" style="background:rgba(255,251,238,0.92);border:1px dashed #d1c4a8">
+          <div class="text-[10px] text-stone-500 mb-1">流散海外 · 待跨洋</div>
+          <div class="text-xs text-stone-600">毛公鼎 → 台北故宫</div>
+          <div class="text-xs text-stone-600">大克鼎 → 上博 (国内)</div>
+          <div class="text-[10px] text-stone-400 mt-1">"本应在家"</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: site detail panel -->
+    <div class="col-span-12 md:col-span-4 fade-up delay-2">
+      <div id="sitePanel" class="card p-5 sticky top-20"></div>
+
+      <div class="card p-5 mt-4" style="background:linear-gradient(135deg,#fff7e8 0%,#ffffff 70%)">
+        <div class="text-xs text-amber-700 tracking-widest mb-1">CROSS-LIT</div>
+        <div class="font-semibold text-base mb-2">"二重文明见证者"</div>
+        <div class="text-xs text-stone-600">你已点亮 殷墟 + 三星堆 — 商晚期同时存在的两个文明</div>
+        <div class="mt-3">
+          <span class="rank-badge"><span class="seal">双</span>跨文明 · 已达成</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <footer class="text-center text-xs text-stone-400 pt-10 pb-10">
+    地理是死的,古国是活的 · 你不是在补 GPS,你在补足迹
+  </footer>
+</main>
+
+<script src="js/state.js"></script>
+<script>
+(async function () {
+  await MC.load();
+  const all = MC.catalog();
+
+  // group all artifacts by approx site
+  function siteKey(a) {
+    const sa = MC.siteForArtifact(a);
+    return sa ? sa.key : null;
+  }
+
+  // We'll build a curated list of points
+  const POINTS = [
+    { key: '殷墟', x: 558, y: 305, label: '殷墟', state: '商', isRare: false },
+    { key: '周原', x: 408, y: 342, label: '周原', state: '西周', isRare: false },
+    { key: '丰镐', x: 428, y: 358, label: '丰镐', state: '西周', isRare: false },
+    { key: '二里头', x: 528, y: 335, label: '二里头', state: '夏/商', isRare: false },
+    { key: '三星堆', x: 320, y: 460, label: '三星堆', state: '古蜀', isRare: true },
+    { key: '新郑', x: 552, y: 320, label: '新郑 (郑)', state: '春秋', isRare: false },
+    { key: '随州', x: 555, y: 440, label: '随州 (曾)', state: '战国', isRare: false },
+    { key: '江陵', x: 540, y: 472, label: '江陵 (楚)', state: '春秋战国', isRare: false },
+    { key: '宁乡', x: 530, y: 502, label: '宁乡', state: '商方国', isRare: false },
+    { key: '灵石', x: 470, y: 290, label: '灵石 (山西方国)', state: '商方国', isRare: false },
+    { key: '满城', x: 590, y: 248, label: '满城 (中山)', state: '西汉', isRare: false },
+    { key: '临潼', x: 442, y: 360, label: '临潼 (秦陵)', state: '秦', isRare: false },
+    { key: '武威', x: 290, y: 260, label: '武威 (雷台)', state: '东汉', isRare: false },
+    { key: '凤翔', x: 405, y: 360, label: '凤翔', state: '战国/秦', isRare: false },
+    { key: '辉县', x: 555, y: 305, label: '辉县', state: '商', isRare: false },
+  ];
+
+  function pointStats(p) {
+    const matched = all.filter(a => (a.excavation_site || '').includes(p.key));
+    const owned = matched.filter(a => MC.isCollected(a.id));
+    return { total: matched.length, owned: owned.length, items: matched, ownedItems: owned };
+  }
+
+  function renderPoints(era) {
+    const g = document.getElementById('sitePoints');
+    const filtered = POINTS.filter(p => {
+      if (era === '商') return ['商','商方国','夏/商','古蜀'].includes(p.state);
+      if (era === '西周') return ['西周','商方国','古蜀','西周/春秋'].includes(p.state);
+      if (era === '战国') return ['春秋','战国','春秋战国','古蜀','战国/秦'].includes(p.state);
+      if (era === '秦汉') return ['秦','西汉','东汉','战国/秦'].includes(p.state);
+      return true;
+    });
+
+    g.innerHTML = filtered.map(p => {
+      const s = pointStats(p);
+      const isFootprint = s.owned > 0;
+      const fill = isFootprint
+        ? (p.isRare ? '#d4a857' : '#5a8478')
+        : 'transparent';
+      const stroke = isFootprint
+        ? (p.isRare ? '#a4732c' : '#3e5f54')
+        : '#a8a08c';
+      const r = isFootprint ? 12 : 8;
+
+      return `
+        <g class="map-point" data-key="${p.key}" transform="translate(${p.x}, ${p.y})">
+          ${p.isRare && isFootprint ? `<circle r="32" fill="url(#treasureGlow)"/>` : ''}
+          <circle r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="${isFootprint ? 2 : 1.5}" stroke-dasharray="${isFootprint ? '' : '3 2'}"/>
+          ${isFootprint ? `<circle r="4" fill="#fff7e8"/>` : `<text y="3" text-anchor="middle" font-size="11" fill="#a8a08c" font-weight="700">?</text>`}
+          <text y="${r + 14}" text-anchor="middle" font-size="13" font-family="KaiTi,serif" font-weight="700" fill="#3a2e1a">${p.label}</text>
+          ${isFootprint ? `<text y="${r + 28}" text-anchor="middle" font-size="10" fill="#5a8478">${s.owned}/${s.total}</text>` : `<text y="${r + 28}" text-anchor="middle" font-size="10" fill="#a8a08c">${s.total} 待踏足</text>`}
+        </g>
+      `;
+    }).join('');
+
+    // Add click listeners
+    document.querySelectorAll('.map-point').forEach(node => {
+      node.addEventListener('click', () => {
+        const key = node.dataset.key;
+        renderSitePanel(key);
+      });
+    });
+  }
+
+  function renderSitePanel(key) {
+    const p = POINTS.find(x => x.key === key);
+    if (!p) return;
+    const s = pointStats(p);
+    const panel = document.getElementById('sitePanel');
+    const isFootprint = s.owned > 0;
+
+    panel.innerHTML = `
+      <div class="text-xs text-stone-500 tracking-widest mb-1">SITE</div>
+      <h2 class="text-2xl font-bold mb-1">${p.label}</h2>
+      <div class="text-sm text-stone-500 mb-4">${p.state} · ${s.total} 件 mock · 你 ${s.owned} 件 ${p.isRare ? '· <span class="text-amber-700">古蜀稀有</span>' : ''}</div>
+
+      ${!isFootprint ? `
+        <div class="p-4 rounded-lg mb-4" style="background:rgba(192,57,43,0.06);border:1px dashed rgba(192,57,43,0.3)">
+          <div class="text-sm font-semibold text-stone-700">还没踏足</div>
+          <div class="text-xs text-stone-500 mt-1">${p.label} 出土过 ${s.total} 件。第一件入图鉴 → 此点亮金色徽章</div>
+        </div>
+      ` : ''}
+
+      ${s.ownedItems.length ? `
+        <div class="mb-4">
+          <div class="text-xs text-emerald-700 mb-2">✦ 已收</div>
+          <div class="grid grid-cols-3 gap-2">
+            ${s.ownedItems.map(a => `
+              <a href="artifact.html?id=${a.id}" class="card overflow-hidden ${MC.rarityHaloClass(a)} click-feedback" style="border-radius:8px">
+                <div style="aspect-ratio:1;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden">
+                  <img src="${MC.placeholderUrl(a)}" style="width:88%;height:88%;object-fit:contain"/>
+                </div>
+                <div class="p-1.5"><div class="text-[10px] font-semibold truncate">${a.name_zh}</div></div>
+              </a>
+            `).join('')}
+          </div>
+        </div>
+      ` : ''}
+
+      ${s.items.filter(a => !MC.isCollected(a.id)).length ? `
+        <div>
+          <div class="text-xs text-stone-500 mb-2">候选 ${s.items.filter(a=>!MC.isCollected(a.id)).length} 件 · 待你召唤</div>
+          <div class="grid grid-cols-4 gap-2">
+            ${s.items.filter(a => !MC.isCollected(a.id)).map(a => `
+              <a href="artifact.html?id=${a.id}" class="silhouette-wrapper card click-feedback" style="aspect-ratio:1;border-radius:8px;overflow:hidden">
+                <img src="${MC.placeholderUrl(a)}" alt="" class="silhouette" style="width:80%;height:80%;object-fit:contain"/>
+              </a>
+            `).join('')}
+          </div>
+        </div>
+      ` : ''}
+    `;
+  }
+
+  // tabs
+  document.querySelectorAll('[data-era]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-era]').forEach(x => x.classList.remove('active'));
+      btn.classList.add('active');
+      renderPoints(btn.dataset.era);
+    });
+  });
+
+  // initial
+  renderPoints('商');
+  renderSitePanel('殷墟');
+})();
+</script>
+
+</body>
+</html>

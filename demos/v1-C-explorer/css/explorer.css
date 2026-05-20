@@ -1,0 +1,533 @@
+/* ============================================================
+   MuseumCollect — Persona C (探索派) Visual System
+   阿K · Z 世代 · 故宫文创 + 潮玩 + 克制游戏化
+   ============================================================ */
+
+:root {
+  /* Base palette: high-end 文创, NOT garish */
+  --bg-page:        #faf7f2;     /* warm paper */
+  --bg-card:        #ffffff;
+  --bg-glass:       rgba(255, 255, 255, 0.72);
+  --ink-primary:    #1a1a1c;
+  --ink-secondary:  #595959;
+  --ink-tertiary:   #8c8c8c;
+
+  /* Accent: 故宫朱红 / 翠绿 / 鎏金 — keep restrained */
+  --accent-zhusha:  #c0392b;     /* 朱砂 */
+  --accent-cuilv:   #2e8b57;     /* 翠绿 */
+  --accent-liujin:  #c9a85f;     /* 鎏金 */
+  --accent-shijin:  #d4a857;     /* 国宝鎏金 brighter */
+  --accent-tongqing:#5a8478;     /* 铜青 */
+
+  /* Rarity tiers — strict gradient per Designer */
+  --rarity-common:    #b5b1aa;   /* 普通 — no glow */
+  --rarity-3:         #5C7A99;   /* 三级 */
+  --rarity-2:         #8A4F8A;   /* 二级 */
+  --rarity-1:         #C9A85F;   /* 一级 */
+  --rarity-treasure:  #D4A857;   /* 国宝 — only this gets visible halo */
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+
+  --shadow-soft:   0 4px 12px rgba(20, 20, 20, 0.06);
+  --shadow-pop:    0 8px 32px rgba(20, 20, 20, 0.10);
+  --shadow-treasure: 0 0 24px rgba(212, 168, 87, 0.45), 0 0 48px rgba(212, 168, 87, 0.20);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-page);
+  color: var(--ink-primary);
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Source Han Sans CN", "Noto Sans CJK SC", sans-serif;
+  font-feature-settings: "tnum" 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+
+/* 背景纸纹 */
+.paper-bg {
+  background-color: var(--bg-page);
+  background-image:
+    radial-gradient(at 8% 12%, rgba(192, 57, 43, 0.04) 0px, transparent 50%),
+    radial-gradient(at 88% 80%, rgba(212, 168, 87, 0.06) 0px, transparent 55%),
+    radial-gradient(at 50% 100%, rgba(46, 139, 87, 0.03) 0px, transparent 50%);
+}
+
+/* ============================================================
+   稀有度光晕系统 (THE 克制 vs 显式 balance)
+   一级以下完全无光晕 — 仅国宝级有龙纹+粒子,克制递进
+   ============================================================ */
+
+.rarity-common  { border: 1px solid #d9d4cb; }
+.rarity-tier-3  { border: 1px solid rgba(92, 122, 153, 0.5); }
+.rarity-tier-2  { border: 1px solid rgba(138, 79, 138, 0.55); }
+.rarity-tier-1 {
+  border: 1px solid var(--rarity-1);
+  box-shadow: 0 0 0 1px rgba(201, 168, 95, 0.18), 0 6px 16px rgba(201, 168, 95, 0.08);
+}
+
+/* THE crown jewel — used SPARINGLY (only 国宝). 克制 = 高级 */
+.rarity-treasure {
+  position: relative;
+  border: 2px solid var(--rarity-treasure);
+  box-shadow: var(--shadow-treasure);
+  background: linear-gradient(180deg, #fffaef 0%, #ffffff 30%);
+}
+
+.rarity-treasure::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: conic-gradient(from 0deg,
+    transparent 0deg, rgba(212, 168, 87, 0.45) 40deg,
+    transparent 80deg, transparent 280deg,
+    rgba(212, 168, 87, 0.45) 320deg, transparent 360deg);
+  filter: blur(8px);
+  opacity: 0.7;
+  z-index: -1;
+  animation: halo-spin 30s linear infinite;
+}
+
+@keyframes halo-spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 朱砂红章 — only on 国宝 */
+.guo-bao-stamp {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  background: var(--accent-zhusha);
+  color: #fff7e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.1;
+  text-align: center;
+  letter-spacing: 0;
+  transform: rotate(-6deg);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  font-family: "STKaiti", "KaiTi", "DengXian", serif;
+  z-index: 5;
+}
+
+.guo-bao-stamp small {
+  display: block;
+  font-size: 9px;
+  margin-top: 1px;
+  opacity: 0.85;
+}
+
+/* ============================================================
+   Card system — 卡片化 / 玻璃拟态 / 潮玩感
+   ============================================================ */
+
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  transition: transform 220ms cubic-bezier(0.2, 0, 0, 1), box-shadow 220ms;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-pop);
+}
+
+.glass {
+  background: var(--bg-glass);
+  backdrop-filter: blur(14px) saturate(180%);
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: var(--radius-md);
+}
+
+/* ============================================================
+   抽卡 / 翻面 — Card flip
+   ============================================================ */
+
+.card-flip-3d {
+  perspective: 1200px;
+  -webkit-perspective: 1200px;
+}
+
+.card-flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 800ms cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
+.card-flip-3d.flipped .card-flip-inner {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--radius-lg);
+}
+
+.card-face.back {
+  transform: rotateY(180deg);
+}
+
+/* ============================================================
+   段位印章 (隐线 — for me.html headers, not flashy)
+   ============================================================ */
+
+.rank-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px 4px 6px;
+  border-radius: var(--radius-pill);
+  background: rgba(212, 168, 87, 0.10);
+  color: var(--ink-primary);
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid rgba(212, 168, 87, 0.30);
+}
+
+.rank-badge .seal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background: var(--accent-zhusha);
+  color: #fff7e8;
+  border-radius: 3px;
+  font-family: "KaiTi", serif;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* 段位 variants by tier */
+.rank-rookie .seal { background: var(--accent-tongqing); }
+.rank-dan-1  .seal { background: #5a8478; }
+.rank-dan-2  .seal { background: #4a6e5e; }
+.rank-dan-3  .seal { background: #8b6f3e; }
+.rank-master .seal { background: var(--rarity-treasure); }
+
+/* ============================================================
+   进度条 (gamified but tasteful)
+   ============================================================ */
+
+.progress-track {
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-cuilv) 0%, var(--accent-liujin) 100%);
+  border-radius: var(--radius-pill);
+  transition: width 800ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.progress-fill.treasure {
+  background: linear-gradient(90deg, var(--accent-liujin) 0%, var(--rarity-treasure) 100%);
+}
+
+/* ============================================================
+   Chips, tags
+   ============================================================ */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: #f1ede4;
+  color: var(--ink-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.chip.zhusha { background: rgba(192, 57, 43, 0.08); color: var(--accent-zhusha); border-color: rgba(192, 57, 43, 0.20); }
+.chip.cuilv  { background: rgba(46, 139, 87, 0.08); color: var(--accent-cuilv); border-color: rgba(46, 139, 87, 0.20); }
+.chip.liujin { background: rgba(201, 168, 95, 0.12); color: #8b6f3e; border-color: rgba(201, 168, 95, 0.30); }
+
+/* ============================================================
+   Buttons (potao风 / 文创风 — bold but classy)
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: transform 160ms, box-shadow 160ms, background 160ms;
+}
+
+.btn:active { transform: scale(0.97); }
+
+.btn-primary {
+  background: var(--ink-primary);
+  color: #fff7e8;
+}
+.btn-primary:hover { background: #2a2a2c; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18); }
+
+.btn-zhusha {
+  background: var(--accent-zhusha);
+  color: #fff7e8;
+}
+.btn-zhusha:hover { background: #a92e22; box-shadow: 0 4px 12px rgba(192, 57, 43, 0.30); }
+
+.btn-treasure {
+  background: linear-gradient(135deg, var(--accent-liujin) 0%, var(--rarity-treasure) 100%);
+  color: #2a1f0a;
+}
+.btn-treasure:hover { box-shadow: 0 6px 18px rgba(212, 168, 87, 0.40); }
+
+.btn-ghost {
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--ink-primary);
+}
+.btn-ghost:hover { background: rgba(0, 0, 0, 0.08); }
+
+/* ============================================================
+   Top nav (sticky, glass)
+   ============================================================ */
+
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(250, 247, 242, 0.85);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* ============================================================
+   Pokédex-style silhouette (locked artifact)
+   ============================================================ */
+
+.silhouette {
+  position: relative;
+  filter: brightness(0) opacity(0.18) blur(0.5px);
+  transition: filter 320ms;
+}
+
+.silhouette-wrapper {
+  position: relative;
+  background: linear-gradient(135deg, #efeae0 0%, #e2dccc 100%);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.silhouette-wrapper::after {
+  content: "?";
+  position: absolute;
+  font-size: 64px;
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.10);
+  font-family: "PingFang SC", serif;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ============================================================
+   Microinteractions
+   ============================================================ */
+
+.bounce-on-hover { transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1); }
+.bounce-on-hover:hover { transform: scale(1.02); }
+
+.click-feedback { transition: transform 120ms; }
+.click-feedback:active { transform: scale(0.96); }
+
+/* Soft pulse for the "next milestone" callouts — slow, not a Skinner-box pulse */
+@keyframes soft-breath {
+  0%, 100% { opacity: 0.85; }
+  50%      { opacity: 1.0; }
+}
+.soft-breath {
+  animation: soft-breath 4.2s ease-in-out infinite;
+}
+
+/* Subtle 缓动 for the rarity sparkle, only on 国宝 details */
+@keyframes spark-drift {
+  0%   { transform: translate(0, 0) scale(1); opacity: 0; }
+  20%  { opacity: 1; }
+  100% { transform: translate(20px, -28px) scale(0.3); opacity: 0; }
+}
+.spark {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--rarity-treasure);
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(0.4px);
+  box-shadow: 0 0 8px var(--rarity-treasure);
+}
+
+/* ============================================================
+   Time pillar — vertical bars
+   ============================================================ */
+
+.pillar-segment {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #efeae0, #e6e0d3);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.pillar-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(180deg, var(--accent-tongqing) 0%, #6b9c8e 100%);
+  transition: height 800ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.pillar-fill.has-treasure {
+  background: linear-gradient(180deg, var(--accent-tongqing) 0%, #6b9c8e 60%, var(--accent-liujin) 100%);
+}
+
+/* ============================================================
+   Map points
+   ============================================================ */
+
+.map-point {
+  cursor: pointer;
+  transition: transform 200ms;
+}
+.map-point:hover { transform: scale(1.15); }
+
+/* ============================================================
+   Tabs
+   ============================================================ */
+
+.tab-bar {
+  display: inline-flex;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: var(--radius-pill);
+  padding: 4px;
+  gap: 2px;
+}
+
+.tab-btn {
+  padding: 8px 18px;
+  border: none;
+  background: transparent;
+  color: var(--ink-secondary);
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 160ms, color 160ms;
+}
+
+.tab-btn.active {
+  background: #fff;
+  color: var(--ink-primary);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+/* ============================================================
+   Genealogy tree (D3 svg)
+   ============================================================ */
+
+.tree-link {
+  fill: none;
+  stroke: rgba(0, 0, 0, 0.20);
+  stroke-width: 1.5;
+}
+
+.tree-link.collected {
+  stroke: var(--accent-tongqing);
+  stroke-width: 2;
+}
+
+.tree-node-circle {
+  fill: #fff;
+  stroke: rgba(0, 0, 0, 0.20);
+  stroke-width: 1.5;
+}
+
+.tree-node-circle.collected {
+  fill: var(--accent-tongqing);
+  stroke: var(--accent-tongqing);
+}
+
+.tree-node-circle.treasure {
+  fill: var(--rarity-treasure);
+  stroke: var(--rarity-treasure);
+  filter: drop-shadow(0 0 8px var(--rarity-treasure));
+}
+
+/* ============================================================
+   Share-card preview
+   ============================================================ */
+
+.share-card-preview {
+  width: 320px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: linear-gradient(180deg, #fffaef 0%, #f7eed8 100%);
+  border: 1px solid rgba(212, 168, 87, 0.30);
+  box-shadow: var(--shadow-pop);
+  position: relative;
+}
+
+.share-card-preview .meme-line {
+  font-family: "STKaiti", "KaiTi", serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent-zhusha);
+  line-height: 1.4;
+}
+
+/* Utility: hide scrollbar but allow scroll */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Fade-in on load */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fade-up 600ms cubic-bezier(0.2, 0, 0, 1) both; }
+.fade-up.delay-1 { animation-delay: 80ms; }
+.fade-up.delay-2 { animation-delay: 160ms; }
+.fade-up.delay-3 { animation-delay: 240ms; }
+.fade-up.delay-4 { animation-delay: 320ms; }

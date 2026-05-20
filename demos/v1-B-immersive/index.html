@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>青·铜 · 等过三千年</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/immersive.css" />
+</head>
+<body>
+
+  <!-- ======== Hero — 一件器物,一句诗,极致留白 ======== -->
+  <section class="relative min-h-screen flex items-center"
+           style="background: var(--ink-black); padding-top: 80px;">
+    <!-- Hero bronze image at right, dark overlay -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute inset-0 ken-burns" style="left: 35%; right: 0;">
+        <div id="heroImg" class="absolute inset-0"></div>
+      </div>
+      <!-- Vignette overlay to legibility -->
+      <div class="absolute inset-0"
+           style="background:
+             linear-gradient(90deg, var(--ink-black) 0%, rgba(13,12,10,0.85) 40%, rgba(13,12,10,0.5) 60%, rgba(13,12,10,0.35) 100%),
+             radial-gradient(ellipse at right, transparent 30%, rgba(13,12,10,0.6) 100%);"></div>
+
+      <!-- Wisps of incense smoke -->
+      <div class="wisp" style="left: 70%; bottom: 20%; animation-delay: 0s;"></div>
+      <div class="wisp" style="left: 75%; bottom: 25%; animation-delay: 3s;"></div>
+      <div class="wisp" style="left: 80%; bottom: 18%; animation-delay: 6s;"></div>
+    </div>
+
+    <!-- Vertical title decoration on far right -->
+    <div class="absolute right-12 top-1/4 vert-title scene-enter-late"
+         style="color: var(--bronze-mid); font-size: 1.4rem; letter-spacing: 0.5em; opacity: 0.5;">
+      青 銅 卷
+    </div>
+
+    <!-- Hero content -->
+    <div class="relative z-10 max-w-2xl pl-20 pr-12 scene-enter">
+      <div class="poem-line text-sm mb-8" style="opacity: 0.7;">
+        — 等过三千年,你来看我 —
+      </div>
+
+      <h1 class="calligraphy-title mb-6">
+        穿过那一道<br/>
+        <span style="color: var(--gold-treasure);">青铜的门</span>
+      </h1>
+
+      <p style="font-family: var(--font-serif); font-size: 1rem; line-height: 2; letter-spacing: 0.1em; color: var(--silk-warm); opacity: 0.85;" class="mb-8 max-w-md scene-enter-late">
+        不是 App,是一卷可以走进去的长卷。<br/>
+        每一件国宝,在等你听它说话。
+      </p>
+
+      <div class="flex gap-5 scene-enter-late">
+        <a href="catalog.html" class="btn-gold">入·图鉴</a>
+        <a href="scan.html" class="btn-bronze">唤·醒一件</a>
+      </div>
+
+      <div class="mt-12 flex items-center gap-4 scene-enter-latest" style="color: var(--bronze-mid); font-size: 11px; letter-spacing: 0.4em;">
+        <span>苏念</span>
+        <span style="color: var(--gold-soft);">·</span>
+        <span id="collectStat">已唤醒 8 / 25</span>
+        <span style="color: var(--gold-soft);">·</span>
+        <span>夔龙派初识</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== Today's Bronze — 今日的国宝 (B persona must-have §1) ======== -->
+  <section class="relative px-20 py-32" style="background: var(--ink-dark);">
+    <div class="max-w-5xl mx-auto">
+      <div class="poem-line text-center mb-6" style="font-size: 13px; letter-spacing: 0.5em; opacity: 0.6;">
+        — 今 日 之 国 宝 —
+      </div>
+      <h2 class="calligraphy-title text-center mb-16" style="font-size: 2.5rem;">
+        今晚为你点亮的一件
+      </h2>
+
+      <div id="todayCard" class="grid grid-cols-2 gap-16 items-center fade-up">
+        <!-- filled in by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== 三大维度入口 — but framed as poetic doorways, not buttons ======== -->
+  <section class="relative px-20 py-32 ink-wash">
+    <div class="max-w-6xl mx-auto">
+      <div class="poem-line text-center mb-3" style="font-size: 13px; letter-spacing: 0.5em; opacity: 0.6;">
+        — 三 道 入 口 —
+      </div>
+      <h2 class="calligraphy-title text-center mb-4" style="font-size: 2.5rem;">
+        穿越,有三种走法
+      </h2>
+      <p class="text-center mb-20 poem-line" style="font-size: 14px; opacity: 0.7;">
+        从时间走,从地理走,从礼制走。
+      </p>
+
+      <div class="grid grid-cols-3 gap-12 fade-up">
+        <a href="time-pillar.html" class="group block">
+          <div class="aspect-[3/4] mb-6 relative overflow-hidden"
+               style="background: linear-gradient(180deg, #2a1a14 0%, #1a1010 50%, #0d0c0a 100%); border: 1px solid rgba(212,168,87,0.18);">
+            <!-- A faux time-pillar visual -->
+            <svg viewBox="0 0 100 240" class="absolute inset-0 w-full h-full">
+              <rect x="35" y="10" width="30" height="22" fill="rgba(212,168,87,0.12)"/>
+              <rect x="35" y="32" width="30" height="36" fill="rgba(212,168,87,0.25)"/>
+              <rect x="35" y="68" width="30" height="56" fill="rgba(212,168,87,0.5)"/>
+              <rect x="35" y="124" width="30" height="40" fill="rgba(212,168,87,0.3)"/>
+              <rect x="35" y="164" width="30" height="32" fill="rgba(212,168,87,0.18)"/>
+              <rect x="35" y="196" width="30" height="44" fill="rgba(212,168,87,0.1)" class="awaken-pulse"/>
+              <text x="50" y="22" text-anchor="middle" fill="#d4a857" font-size="8" font-family="serif">秦汉</text>
+              <text x="50" y="56" text-anchor="middle" fill="#d4a857" font-size="8" font-family="serif">战国</text>
+              <text x="50" y="100" text-anchor="middle" fill="#d4a857" font-size="8" font-family="serif">商</text>
+              <text x="50" y="146" text-anchor="middle" fill="#d4a857" font-size="8" font-family="serif">西周</text>
+              <text x="50" y="180" text-anchor="middle" fill="#d4a857" font-size="8" font-family="serif">春秋</text>
+              <text x="50" y="222" text-anchor="middle" fill="#7a6a4a" font-size="8" font-family="serif">夏</text>
+            </svg>
+          </div>
+          <h3 class="hover-line inline-block calligraphy-title" style="font-size: 1.6rem; color: var(--gold-treasure);">时·空·柱</h3>
+          <p class="mt-3 poem-line" style="font-size: 14px; opacity: 0.75;">夏商之久,你身体能感觉到。</p>
+        </a>
+
+        <a href="ancient-map.html" class="group block">
+          <div class="aspect-[3/4] mb-6 relative overflow-hidden"
+               style="background: radial-gradient(ellipse at center, #2a2418 0%, #0d0c0a 80%); border: 1px solid rgba(212,168,87,0.18);">
+            <svg viewBox="0 0 120 160" class="absolute inset-0 w-full h-full">
+              <!-- abstract ancient state map -->
+              <path d="M20,40 Q40,30 60,40 T100,50 L100,90 Q80,100 60,95 T20,90 Z" fill="rgba(74,58,36,0.5)" stroke="rgba(212,168,87,0.3)" stroke-width="0.5"/>
+              <path d="M30,90 Q50,100 70,105 L80,140 Q60,135 40,130 Z" fill="rgba(74,107,74,0.3)" stroke="rgba(212,168,87,0.2)" stroke-width="0.5"/>
+              <circle cx="65" cy="55" r="2.5" fill="#d4a857"/>
+              <circle cx="45" cy="62" r="2" fill="#d4a857"/>
+              <circle cx="30" cy="100" r="2" fill="#b91c1c" class="awaken-pulse"/>
+              <circle cx="80" cy="110" r="2" fill="rgba(212,168,87,0.3)" class="awaken-pulse"/>
+              <text x="68" y="52" fill="#d4a857" font-size="5" font-family="serif">殷</text>
+              <text x="48" y="59" fill="#d4a857" font-size="5" font-family="serif">周</text>
+              <text x="33" y="97" fill="#b91c1c" font-size="5" font-family="serif">蜀</text>
+            </svg>
+          </div>
+          <h3 class="hover-line inline-block calligraphy-title" style="font-size: 1.6rem; color: var(--gold-treasure);">古·国·图</h3>
+          <p class="mt-3 poem-line" style="font-size: 14px; opacity: 0.75;">商在中原,蜀在西山,它们同时活着。</p>
+        </a>
+
+        <a href="purpose-scene.html" class="group block">
+          <div class="aspect-[3/4] mb-6 relative overflow-hidden"
+               style="background: linear-gradient(180deg, #2a1414 0%, #1a0e0e 50%, #0d0808 100%); border: 1px solid rgba(212,168,87,0.18);">
+            <svg viewBox="0 0 120 160" class="absolute inset-0 w-full h-full">
+              <!-- altar -->
+              <rect x="30" y="100" width="60" height="30" fill="rgba(74,58,36,0.4)" stroke="rgba(212,168,87,0.3)" stroke-width="0.5"/>
+              <rect x="40" y="80" width="40" height="20" fill="rgba(109,74,42,0.5)" stroke="rgba(212,168,87,0.3)" stroke-width="0.5"/>
+              <!-- ding positions -->
+              <rect x="34" y="108" width="10" height="14" fill="rgba(212,168,87,0.6)" stroke="#d4a857" stroke-width="0.5"/>
+              <rect x="48" y="108" width="10" height="14" fill="rgba(212,168,87,0.6)" stroke="#d4a857" stroke-width="0.5"/>
+              <rect x="62" y="108" width="10" height="14" fill="none" stroke="#b91c1c" stroke-width="0.5" stroke-dasharray="2"/>
+              <rect x="76" y="108" width="10" height="14" fill="none" stroke="#b91c1c" stroke-width="0.5" stroke-dasharray="2"/>
+              <!-- flame -->
+              <path d="M58,50 Q56,40 60,30 Q64,40 62,50 Z" fill="#d4a857" opacity="0.7"/>
+              <path d="M55,55 Q53,45 57,35 Q61,45 59,55 Z" fill="#b91c1c" opacity="0.5"/>
+              <text x="60" y="22" text-anchor="middle" fill="#d4a857" font-size="5" font-family="serif">神主</text>
+            </svg>
+          </div>
+          <h3 class="hover-line inline-block calligraphy-title" style="font-size: 1.6rem; color: var(--gold-treasure);">礼·器·归·位</h3>
+          <p class="mt-3 poem-line" style="font-size: 14px; opacity: 0.75;">九鼎八簋,把你的收藏请回宗庙。</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== Awakened so far — 我的青铜之旅 (preview) ======== -->
+  <section class="px-20 py-32" style="background: var(--ink-black);">
+    <div class="max-w-6xl mx-auto">
+      <div class="poem-line text-center mb-3" style="font-size: 13px; letter-spacing: 0.5em; opacity: 0.6;">
+        — 你 已 唤 醒 —
+      </div>
+      <h2 class="calligraphy-title text-center mb-16" style="font-size: 2.5rem;">
+        你走过的国宝,在这里等你回头
+      </h2>
+      <div id="awakenedScroll" class="flex gap-8 overflow-x-auto scroll-snap-x pb-6 fade-up" style="scroll-padding-left: 80px;">
+        <!-- filled by JS -->
+      </div>
+      <div class="mt-12 text-center">
+        <a href="me.html" class="btn-bronze">看完整的旅程 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== Closing line ======== -->
+  <section class="px-20 py-40 text-center" style="background: var(--ink-dark);">
+    <div class="poem-line max-w-2xl mx-auto" style="font-size: 22px; line-height: 2.2; letter-spacing: 0.18em; color: var(--silk-cream);">
+      博物馆里那一件鼎、那一座尊、那一柄剑,<br/>
+      不只是被陈列。<br/>
+      它们在等一个肯停下来的人。<br/>
+      <span style="color: var(--gold-treasure);">你今晚来了。</span>
+    </div>
+  </section>
+
+  <!-- ======== Scripts ======== -->
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script>
+    (async function () {
+      MCUI.renderHeader('index');
+      MCUI.renderFooter();
+
+      await MCData.ready;
+
+      // ----- Today's bronze: pick one collected + emotionally strong -----
+      const featuredId = 'houmuwu_ding';
+      const featured = MCData.catalog.find(a => a.id === featuredId);
+      const mono = MCData.getMonologue(featuredId);
+
+      // Hero image
+      document.getElementById('heroImg').innerHTML = MCUI.imageOrPlaceholder(featured, { cls: 'w-full h-full lg', style: 'width:100%; height:100%;' });
+
+      // Today card
+      document.getElementById('todayCard').innerHTML = `
+        <div class="halo-treasure" style="aspect-ratio: 3/4; overflow: hidden; position: relative;">
+          ${MCUI.imageOrPlaceholder(featured, { cls: 'lg w-full h-full', style: 'width:100%; height:100%;' })}
+          <div class="absolute top-4 left-4">
+            <span class="seal">国 之 重 器</span>
+          </div>
+        </div>
+        <div>
+          <div class="poem-line mb-4" style="font-size: 16px;">${mono.poem}</div>
+          <h3 class="calligraphy-title mb-2" style="font-size: 2.5rem;">${featured.name_zh}</h3>
+          <div class="mb-8" style="color: var(--bronze-mid); letter-spacing: 0.2em; font-size: 13px;">
+            ${featured.dynasty} · ${featured.current_museum}
+          </div>
+          <div class="monologue" style="font-size: 15px; line-height: 2.2;">
+            ${mono.voice.split('\n').slice(0,3).map(p => `<p>${p}</p>`).join('')}
+          </div>
+          <div class="mt-8">
+            <a href="artifact.html?id=${featured.id}" class="btn-gold">听 完 它 的 话 →</a>
+          </div>
+        </div>
+      `;
+
+      // ----- Awakened scroll -----
+      const collected = MCData.catalog.filter(a => MCData.isCollected(a.id));
+      document.getElementById('awakenedScroll').innerHTML = collected.map(a => {
+        const m = MCData.getMonologue(a.id);
+        return `
+          <a href="artifact.html?id=${a.id}" class="scroll-snap-item flex-shrink-0 block hover-line group" style="width: 260px;">
+            <div class="${MCData.isTreasure(a) ? 'halo-treasure' : ''}" style="aspect-ratio: 3/4; overflow: hidden; position: relative;">
+              ${MCUI.imageOrPlaceholder(a, { cls: 'w-full h-full', style: 'width:100%; height:100%;' })}
+            </div>
+            <h4 class="mt-4 calligraphy-title" style="font-size: 1.2rem; color: var(--silk-cream);">${a.name_zh}</h4>
+            <p class="poem-line mt-1" style="font-size: 12px; opacity: 0.75;">${(m.poem || a.dynasty).slice(0, 16)}${m.poem && m.poem.length > 16 ? '…' : ''}</p>
+          </a>
+        `;
+      }).join('');
+
+      // ----- Collection stat -----
+      document.getElementById('collectStat').textContent = `已唤醒 ${MCData.getCollectedCount()} / ${MCData.getTotalCount()}`;
+
+      MCUI.observeFadeUp();
+    })();
+  </script>
+</body>
+</html>

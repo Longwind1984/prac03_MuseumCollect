@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<title>图鉴 · 三维度索引 — 青铜考</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/scholar.css">
+<style>
+  .view-tab { font-family: "FangSong", serif; padding: 0.4rem 1rem; border-bottom: 2px solid transparent; cursor: pointer; color: var(--ink-faded); }
+  .view-tab.active { color: var(--ink); border-bottom-color: var(--vermilion); font-weight: 600; }
+  .period-block { background: var(--paper); border: 1px solid var(--rule); margin-bottom: 0.5rem; }
+  .period-head { padding: 0.45rem 0.7rem; background: var(--paper-soft); border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; font-family: "Songti SC", serif; }
+  .form-branch { padding: 0.5rem 0.5rem 0.5rem 1rem; border-left: 2px solid var(--rule); margin-bottom: 0.3rem; }
+  .form-branch h4 { font-family: "Songti SC", serif; font-size: 0.95rem; }
+  .grid-thumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.75rem; padding: 0.7rem; }
+</style>
+</head>
+<body data-page="catalog.html" class="min-h-screen">
+
+<div id="site-header"></div>
+
+<main class="max-w-6xl mx-auto px-6 pt-8">
+
+  <section class="mb-6">
+    <div class="section-cap">图 鉴 · Catalog</div>
+    <h1 class="scholar-title text-3xl mb-2">三维度索引</h1>
+    <p class="font-fang text-sm leading-relaxed" style="color:var(--ink-soft)">
+      同一批 <span class="font-mono-num" id="total-count">—</span> 件器物,可按"<strong>朝代分期</strong>"、"<strong>出土古国</strong>"、"<strong>形制谱系</strong>"三种维度切换查看。
+      每种视图保留各自的语义结构(分期 / 古国 / 谱系树),非简单换序的列表。
+      <sup class="cite-ref" data-cite="维度形态化原则见 docs/dimensional-map.md §1-4,'形态承载意义'。">[设计]</sup>
+    </p>
+  </section>
+
+  <!-- View tabs -->
+  <div class="flex gap-2 mb-2" style="border-bottom: 1px solid var(--rule-dark)">
+    <div class="view-tab active" data-view="period">按 朝代 · 分期</div>
+    <div class="view-tab" data-view="site">按 出土 · 古国</div>
+    <div class="view-tab" data-view="form">按 形制 · 谱系</div>
+    <div class="ml-auto py-2 font-mono-num text-xs flex items-center gap-3" style="color:var(--ink-faded)">
+      <label class="flex items-center gap-1 cursor-pointer">
+        <input type="checkbox" id="filter-collected"> 仅已录入
+      </label>
+      <label class="flex items-center gap-1 cursor-pointer">
+        <input type="checkbox" id="filter-treasure"> 仅国宝
+      </label>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="flex gap-5 mb-4 font-fang text-xs" style="color:var(--ink-faded)">
+    <span><span class="collected-mark"></span>已录入</span>
+    <span><span class="collected-mark uncollected"></span>待录入</span>
+    <span class="ml-auto">右上角 <span class="rarity-tag" style="font-size:0.55rem">禁</span> = 禁止出境 ·
+      <span class="rarity-tag long-inscription" style="font-size:0.55rem">长铭</span> ≥ 100 字 ·
+      <span class="rarity-tag overseas" style="font-size:0.55rem">迁台</span> 流转台北 ·
+      <span class="rarity-tag shu" style="font-size:0.55rem">蜀</span> 古蜀独立体系
+    </span>
+  </div>
+
+  <!-- View by Period -->
+  <section id="view-period" class="view-content">
+    <p class="font-fang text-xs mb-3" style="color:var(--ink-faded)">
+      按朝代分期纵向排列。子分期默认全展开,以便横向比对(本视图为考据派而设)。
+    </p>
+    <div id="period-list"></div>
+  </section>
+
+  <!-- View by Site (ancient state) -->
+  <section id="view-site" class="view-content hidden">
+    <p class="font-fang text-xs mb-3" style="color:var(--ink-faded)">
+      按出土地古国名归集(殷 / 周 / 楚 / 曾 / 古蜀 等)。其下注明现代行政对应。
+    </p>
+    <div id="site-list"></div>
+  </section>
+
+  <!-- View by Form genealogy -->
+  <section id="view-form" class="view-content hidden">
+    <p class="font-fang text-xs mb-3" style="color:var(--ink-faded)">
+      按"<strong>器型大类 → 器型 → 子型</strong>"三级谱系排列。同子型并列即"同型对照墙"。
+      <sup class="cite-ref" data-cite="谱系树参考马承源《商周青铜器分期标准器》及李学勤《中国青铜器入门》。">[谱系]</sup>
+    </p>
+    <div id="form-list"></div>
+  </section>
+
+</main>
+
+<div id="site-footer"></div>
+
+<script src="js/data.js"></script>
+<script src="js/layout.js"></script>
+<script>
+function thumbCard(a) {
+  const collected = MuseumA.isCollected(a.id);
+  const tier = MuseumA.rarityTier(a.rarity_level);
+  const tags = MuseumA.rarityTags(a);
+  const tagHTML = tags.map(t => {
+    if (t === '禁') return '';
+    if (t === '长铭') return `<span class="rarity-tag long-inscription">长铭</span>`;
+    if (t === '迁台') return `<span class="rarity-tag overseas">迁台</span>`;
+    if (t === '蜀') return `<span class="rarity-tag shu">蜀</span>`;
+    return '';
+  }).join('');
+  const charCt = (a.inscription && a.inscription.char_count) || 0;
+  const sizeHt = (a.size && a.size.height_cm) || '?';
+  return `
+  <a href="artifact.html?id=${a.id}" class="artifact-card ${collected ? '' : 'uncollected'} rarity-${tier}" style="display:block; text-decoration:none;">
+    <div class="thumb-box font-serif-cn">${collected ? a.name_zh : ''}</div>
+    <div class="text-xs font-serif-cn" style="color:var(--ink)">
+      <span class="collected-mark ${collected ? '' : 'uncollected'}"></span>
+      <strong>${a.name_zh}</strong>${tagHTML}
+    </div>
+    <div class="text-[10px] font-mono-num mt-1" style="color:var(--ink-faded)">
+      ${a.dynasty}·${(a.period||'').replace(a.dynasty,'')} · 高 ${sizeHt} cm · 铭 ${charCt}字
+    </div>
+    <div class="text-[10px] font-fang mt-0.5" style="color:var(--ink-faded)">
+      ${(a.current_museum||'').substring(0, 14)}
+    </div>
+  </a>`;
+}
+
+function filtered(items, opts) {
+  return items.filter(a => {
+    if (opts.collectedOnly && !MuseumA.isCollected(a.id)) return false;
+    if (opts.treasureOnly && (a.rarity_level || '').indexOf('国宝') < 0) return false;
+    return true;
+  });
+}
+
+function renderPeriod(opts) {
+  const out = document.getElementById('period-list');
+  out.innerHTML = '';
+  // Group by dynasty -> period
+  const byDyn = {};
+  for (const a of MuseumA.catalog) {
+    const d = a.dynasty || '未定';
+    const p = a.period || '未定';
+    if (!byDyn[d]) byDyn[d] = {};
+    if (!byDyn[d][p]) byDyn[d][p] = [];
+    byDyn[d][p].push(a);
+  }
+  // Order according to DYNASTY_RANGES
+  const ord = MuseumA.DYNASTY_RANGES.map(d => d.key).concat(['战国 / 秦']);
+  ord.forEach(dyn => {
+    if (!byDyn[dyn]) return;
+    const block = document.createElement('div');
+    block.className = 'period-block';
+    let html = '';
+    Object.keys(byDyn[dyn]).forEach(p => {
+      const items = filtered(byDyn[dyn][p], opts);
+      if (!items.length) return;
+      const collected = items.filter(a => MuseumA.isCollected(a.id)).length;
+      html += `
+      <div class="period-head">
+        <span><span class="font-serif-cn text-base">${dyn}</span> · <span class="font-fang text-sm">${p}</span></span>
+        <span class="font-mono-num text-xs" style="color:var(--ink-faded)">${collected}/${items.length}</span>
+      </div>
+      <div class="grid-thumbs">${items.map(thumbCard).join('')}</div>`;
+    });
+    if (html) {
+      block.innerHTML = html;
+      out.appendChild(block);
+    }
+  });
+}
+
+function renderSite(opts) {
+  const out = document.getElementById('site-list');
+  out.innerHTML = '';
+  // Group by ancient_state primary token
+  const byState = {};
+  for (const a of MuseumA.catalog) {
+    const raw = (a.ancient_state || '未定');
+    // Take first 2 chars as primary
+    const key = raw.match(/^[一-鿿]+/) ? raw.match(/^[一-鿿]+/)[0].substring(0, 2) : raw.substring(0,2);
+    const mappedKey = (key === '商' || key === '周' || key === '古蜀' || key === '郑' || key === '曾' || key === '越' || key === '秦' || key === '西汉' || key === '东汉') ? key : key;
+    if (!byState[mappedKey]) byState[mappedKey] = [];
+    byState[mappedKey].push(a);
+  }
+  const order = ['夏','商','古蜀','周','郑','曾','越','秦','西汉','东汉'];
+  order.forEach(s => {
+    if (!byState[s]) return;
+    const items = filtered(byState[s], opts);
+    if (!items.length) return;
+    const block = document.createElement('div');
+    block.className = 'period-block';
+    const collected = items.filter(a => MuseumA.isCollected(a.id)).length;
+    const modernSites = Array.from(new Set(items.map(a => (a.excavation_site || '').split(/[省市区县,]/)[0]))).filter(Boolean);
+    block.innerHTML = `
+      <div class="period-head">
+        <span><span class="font-serif-cn text-base">${s}</span> <span class="font-fang text-xs" style="color:var(--ink-faded)"> · ${modernSites.slice(0,3).join('/')}</span></span>
+        <span class="font-mono-num text-xs" style="color:var(--ink-faded)">${collected}/${items.length}</span>
+      </div>
+      <div class="grid-thumbs">${items.map(thumbCard).join('')}</div>
+    `;
+    out.appendChild(block);
+  });
+}
+
+function renderForm(opts) {
+  const out = document.getElementById('form-list');
+  out.innerHTML = '';
+  // Group: type -> form_subtype
+  const byType = {};
+  for (const a of MuseumA.catalog) {
+    const t = a.type || '未定';
+    const f = a.form_subtype || '未定';
+    if (!byType[t]) byType[t] = {};
+    if (!byType[t][f]) byType[t][f] = [];
+    byType[t][f].push(a);
+  }
+  const order = ['食器','酒器','水器','乐器','兵器','礼器(神巫/王形象)','礼器(神面)','礼器(神物/宇宙树)','酒器/水器(盛酒尊+承水盘)','酒器/盛贮器','杂器(熏炉)','杂器(灯具)','杂器(随葬铜雕)','杂器(陪葬车马)','杂器(度量衡)'];
+  order.forEach(t => {
+    if (!byType[t]) return;
+    const block = document.createElement('div');
+    block.className = 'period-block';
+    let html = `<div class="period-head"><span><span class="font-serif-cn text-base">${t}</span></span></div>`;
+    Object.keys(byType[t]).forEach(f => {
+      const items = filtered(byType[t][f], opts);
+      if (!items.length) return;
+      const collected = items.filter(a => MuseumA.isCollected(a.id)).length;
+      html += `
+      <div class="form-branch">
+        <h4 class="mb-1"><span class="font-fang text-xs" style="color:var(--ink-faded)">子型 · </span>${f} <span class="font-mono-num text-xs" style="color:var(--ink-faded)">${collected}/${items.length}</span></h4>
+        <div class="grid-thumbs" style="padding:0">${items.map(thumbCard).join('')}</div>
+      </div>`;
+    });
+    block.innerHTML = html;
+    out.appendChild(block);
+  });
+}
+
+(async function() {
+  await MuseumA.ready;
+  document.getElementById('total-count').textContent = MuseumA.catalog.length;
+
+  function refresh() {
+    const opts = {
+      collectedOnly: document.getElementById('filter-collected').checked,
+      treasureOnly:  document.getElementById('filter-treasure').checked,
+    };
+    renderPeriod(opts);
+    renderSite(opts);
+    renderForm(opts);
+    MuseumLayout.attachCitations(document);
+  }
+
+  document.querySelectorAll('.view-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelectorAll('.view-content').forEach(c => c.classList.add('hidden'));
+      document.getElementById('view-' + tab.dataset.view).classList.remove('hidden');
+    });
+  });
+
+  document.getElementById('filter-collected').addEventListener('change', refresh);
+  document.getElementById('filter-treasure').addEventListener('change', refresh);
+  refresh();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>图鉴 — MuseumCollect</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/explorer.css" />
+</head>
+<body class="paper-bg">
+
+<nav class="top-nav">
+  <div class="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2 click-feedback">
+      <span class="inline-flex w-8 h-8 rounded-lg items-center justify-center text-white font-bold"
+            style="background:linear-gradient(135deg,#c0392b 0%,#c9a85f 100%);font-family:'KaiTi',serif">青</span>
+      <span class="font-semibold tracking-wide">青铜图鉴</span>
+      <span class="text-xs text-stone-400">/ 探索版</span>
+    </a>
+    <div class="flex items-center gap-1 text-sm">
+      <a href="catalog.html"      class="px-3 py-1.5 rounded-full bg-amber-100 text-amber-900">图鉴</a>
+      <a href="time-pillar.html"  class="px-3 py-1.5 rounded-full hover:bg-black/5">时空柱</a>
+      <a href="ancient-map.html"  class="px-3 py-1.5 rounded-full hover:bg-black/5">古国地图</a>
+      <a href="form-genealogy.html" class="px-3 py-1.5 rounded-full hover:bg-black/5">形制谱系</a>
+      <a href="scan.html"         class="px-3 py-1.5 rounded-full hover:bg-black/5">扫描</a>
+      <a href="me.html"           class="ml-2 px-3 py-1.5 rounded-full bg-black text-amber-50 font-medium">我的</a>
+    </div>
+  </div>
+</nav>
+
+<main class="max-w-6xl mx-auto px-5 py-8">
+
+  <!-- Header -->
+  <header class="mb-6 fade-up flex items-end justify-between">
+    <div>
+      <div class="text-xs text-stone-500 tracking-widest mb-1">CATALOG · 图鉴</div>
+      <h1 class="text-3xl font-bold">25 件国宝 · 你的 Pokédex</h1>
+      <p class="text-stone-600 mt-1 text-sm">已收 <b>7</b> / 25 · 国宝率 100%</p>
+    </div>
+    <div class="text-sm text-stone-500">收藏 ▦ · 剪影 ?</div>
+  </header>
+
+  <!-- Tabs: 时代 / 出土地 / 形制 -->
+  <div class="flex items-center gap-3 mb-6 flex-wrap">
+    <div class="tab-bar" role="tablist">
+      <button class="tab-btn active" data-view="dynasty">按时代</button>
+      <button class="tab-btn" data-view="site">按出土地</button>
+      <button class="tab-btn" data-view="form">按形制</button>
+    </div>
+
+    <div class="ml-auto flex items-center gap-2 text-xs">
+      <button id="filterAll" class="chip cuilv">全部</button>
+      <button id="filterTreasure" class="chip">仅看国宝</button>
+      <button id="filterOwned" class="chip">仅看已收</button>
+    </div>
+  </div>
+
+  <!-- Container -->
+  <section id="catalogContainer" class="space-y-8"></section>
+
+  <footer class="text-center text-xs text-stone-400 pt-10 pb-10">
+    点剪影 → 看候选属性 · 不是禁,是待踏足
+  </footer>
+</main>
+
+<script src="js/state.js"></script>
+<script>
+(async function () {
+  await MC.load();
+  const all = MC.catalog();
+
+  let view = 'dynasty';
+  let filter = 'all'; // all / treasure / owned
+
+  function artifactCard(a, locked=false) {
+    const isOwned = MC.isCollected(a.id);
+    const isTreasure = MC.rarityTier(a) === 'treasure';
+    const haloClass = isOwned ? MC.rarityHaloClass(a) : '';
+
+    if (!isOwned) {
+      // Silhouette / locked
+      return `
+        <a href="artifact.html?id=${a.id}" class="card overflow-hidden silhouette-wrapper bounce-on-hover click-feedback" style="border-radius:14px;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;flex-direction:column">
+          <img src="${MC.placeholderUrl(a)}" alt="" class="silhouette" style="width:80%;height:75%;object-fit:contain;position:relative;z-index:2"/>
+          <div class="text-[10px] text-stone-500 px-2 pb-1 absolute bottom-1 left-0 right-0 text-center z-10 bg-white/60 rounded">
+            ${a.dynasty} · ${a.form_subtype || a.type}
+          </div>
+        </a>`;
+    }
+
+    return `
+      <a href="artifact.html?id=${a.id}" class="card overflow-hidden ${haloClass} bounce-on-hover click-feedback" style="border-radius:14px">
+        <div style="aspect-ratio: 4/5; background:#fff;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden">
+          ${isTreasure ? '<div class="guo-bao-stamp" style="top:6px;right:6px;width:34px;height:34px;font-size:8px"><span>国之<br/>重器</span></div>' : ''}
+          <img src="${MC.placeholderUrl(a)}" style="width:88%;height:88%;object-fit:contain"/>
+        </div>
+        <div class="p-2.5">
+          <div class="font-semibold text-sm truncate">${a.name_zh}</div>
+          <div class="text-[10px] text-stone-500 mt-0.5">${a.dynasty} · ${a.form_subtype || a.type}</div>
+        </div>
+      </a>
+    `;
+  }
+
+  function applyFilter(arr) {
+    if (filter === 'treasure') return arr.filter(a => MC.rarityTier(a) === 'treasure');
+    if (filter === 'owned') return arr.filter(a => MC.isCollected(a.id));
+    return arr;
+  }
+
+  function render() {
+    const c = document.getElementById('catalogContainer');
+    if (view === 'dynasty') {
+      const dynastyOrder = ['夏','商','西周','春秋','战国','秦','汉'];
+      c.innerHTML = dynastyOrder.map(d => {
+        const items = applyFilter(all.filter(a => (a.dynasty || '').startsWith(d)));
+        if (items.length === 0) return '';
+        const ownedCount = items.filter(a => MC.isCollected(a.id)).length;
+        return `
+          <div class="fade-up">
+            <div class="flex items-baseline justify-between mb-3">
+              <h2 class="text-xl font-semibold">
+                ${d}
+                <span class="text-sm text-stone-500 ml-2 font-normal">${ownedCount}/${items.length} 件</span>
+              </h2>
+              ${ownedCount === items.length && items.length > 0 ? '<span class="chip liujin">✦ 通鉴</span>' : ''}
+              ${ownedCount === 0 ? '<span class="chip soft-breath">待踏足</span>' : ''}
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+              ${items.map(a => artifactCard(a)).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    } else if (view === 'site') {
+      // group by ancient_state simplified
+      const groupKey = (a) => {
+        if ((a.excavation_site||'').includes('三星堆')) return '古蜀 · 三星堆';
+        if ((a.excavation_site||'').includes('金沙'))   return '古蜀 · 金沙';
+        if ((a.excavation_site||'').includes('安阳') || (a.excavation_site||'').includes('殷'))  return '中原 · 殷墟';
+        if ((a.excavation_site||'').includes('宝鸡') || (a.excavation_site||'').includes('扶风') || (a.excavation_site||'').includes('岐山')) return '中原 · 周原';
+        if ((a.excavation_site||'').includes('随州')) return '南方 · 曾国 (随州)';
+        if ((a.excavation_site||'').includes('江陵')) return '南方 · 楚 (江陵)';
+        if ((a.excavation_site||'').includes('新郑')) return '中原 · 郑 (新郑)';
+        if ((a.excavation_site||'').includes('满城')) return '北方 · 中山国 (满城)';
+        if ((a.excavation_site||'').includes('武威')) return '河西 · 雷台 (武威)';
+        if ((a.excavation_site||'').includes('宁乡')) return '南方 · 湘江流域 (宁乡)';
+        if ((a.excavation_site||'').includes('灵石')) return '北方 · 山西方国 (灵石)';
+        if ((a.excavation_site||'').includes('临潼')) return '中原 · 秦陵 (临潼)';
+        return '其他';
+      };
+      const groups = {};
+      all.forEach(a => {
+        const k = groupKey(a);
+        (groups[k] = groups[k] || []).push(a);
+      });
+      const order = ['中原 · 殷墟','中原 · 周原','古蜀 · 三星堆','南方 · 曾国 (随州)','南方 · 湘江流域 (宁乡)','南方 · 楚 (江陵)','中原 · 郑 (新郑)','北方 · 中山国 (满城)','北方 · 山西方国 (灵石)','中原 · 秦陵 (临潼)','河西 · 雷台 (武威)','其他'];
+      c.innerHTML = order.filter(k => groups[k]).map(k => {
+        const items = applyFilter(groups[k]);
+        if (items.length === 0) return '';
+        const ownedCount = items.filter(a => MC.isCollected(a.id)).length;
+        const isRare = k.startsWith('古蜀');
+        return `
+          <div class="fade-up">
+            <div class="flex items-baseline justify-between mb-3">
+              <h2 class="text-xl font-semibold">
+                ${k}
+                <span class="text-sm text-stone-500 ml-2 font-normal">${ownedCount}/${items.length} 件</span>
+                ${isRare ? '<span class="chip zhusha ml-2">古蜀稀有</span>' : ''}
+              </h2>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+              ${items.map(a => artifactCard(a)).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    } else { // form
+      const groupKey = (a) => a.type || '其他';
+      const groups = {};
+      all.forEach(a => { (groups[groupKey(a)] = groups[groupKey(a)] || []).push(a); });
+      const order = ['食器','酒器','水器','乐器','兵器','杂器','酒器/水器(盛酒尊+承水盘)','酒器/盛贮器','礼器(神巫/王形象)','礼器(神面)','礼器(神物/宇宙树)','其他'];
+      c.innerHTML = order.filter(k => groups[k]).map(k => {
+        const items = applyFilter(groups[k]);
+        if (items.length === 0) return '';
+        const ownedCount = items.filter(a => MC.isCollected(a.id)).length;
+        return `
+          <div class="fade-up">
+            <div class="flex items-baseline justify-between mb-3">
+              <h2 class="text-xl font-semibold">${k}
+                <span class="text-sm text-stone-500 ml-2 font-normal">${ownedCount}/${items.length} 件</span>
+              </h2>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+              ${items.map(a => artifactCard(a)).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+  }
+
+  // tabs
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(x => x.classList.remove('active'));
+      btn.classList.add('active');
+      view = btn.dataset.view;
+      render();
+    });
+  });
+
+  // filters
+  const filterEls = { all: document.getElementById('filterAll'), treasure: document.getElementById('filterTreasure'), owned: document.getElementById('filterOwned') };
+  Object.entries(filterEls).forEach(([k,el]) => {
+    el.addEventListener('click', () => {
+      filter = k;
+      Object.entries(filterEls).forEach(([fk,fe]) => {
+        fe.classList.toggle('cuilv', fk === filter);
+      });
+      render();
+    });
+  });
+
+  // initial filter UI
+  filterEls.all.classList.add('cuilv');
+
+  render();
+})();
+</script>
+
+</body>
+</html>

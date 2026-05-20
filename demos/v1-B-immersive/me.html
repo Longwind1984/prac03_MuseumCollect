@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>我的青铜之旅</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/immersive.css" />
+</head>
+<body>
+
+  <!-- Personal seal section -->
+  <section class="px-20 pt-32 pb-12">
+    <div class="max-w-6xl mx-auto scene-enter">
+      <div class="flex items-end gap-12">
+        <!-- Personal "印章" -->
+        <div style="position: relative;">
+          <div style="width: 160px; height: 160px; border: 3px solid #a02c2c; background: rgba(160,44,44,0.06);
+                      display: flex; align-items: center; justify-content: center; transform: rotate(-3deg); position: relative;">
+            <div style="font-family: var(--font-kai); color: #a02c2c; font-size: 26px; letter-spacing: 0.4em; font-weight: 600; line-height: 1.4; text-align: center;">
+              苏念<br/>之 卷
+            </div>
+          </div>
+          <div style="position: absolute; inset: -8px; border: 1px dashed rgba(160,44,44,0.4); transform: rotate(-3deg); pointer-events: none;"></div>
+        </div>
+
+        <div class="flex-1">
+          <div class="poem-line mb-3" style="font-size: 13px; letter-spacing: 0.5em; opacity: 0.6;">— 我 的 青 铜 之 旅 —</div>
+          <h1 class="calligraphy-title" style="font-size: 3.5rem;">苏念之卷</h1>
+          <div class="mt-4 flex items-center gap-5" style="color: var(--silk-warm); font-size: 13px; letter-spacing: 0.2em;">
+            <span>三十二岁 · 杭州</span>
+            <span style="color: var(--gold-soft);">|</span>
+            <span>护照号 甲编 〇〇八三七</span>
+          </div>
+          <p class="poem-line mt-6 max-w-xl" style="font-size: 16px; line-height: 2; opacity: 0.9;">
+            "我等过三千年,你来看我。"<br/>
+            <span style="font-size: 13px; opacity: 0.6;">—— 妇好鸮尊的那一夜,我才明白这句话。</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Soft stats -->
+  <section class="px-20 py-12">
+    <div class="max-w-6xl mx-auto grid grid-cols-4 gap-12 fade-up">
+      <div class="text-center">
+        <div class="calligraphy-title" id="statCollected" style="font-size: 2.4rem; color: var(--gold-treasure);">— 件</div>
+        <div class="poem-line mt-2" style="font-size: 12px; letter-spacing: 0.3em; opacity: 0.6;">已 唤 醒</div>
+      </div>
+      <div class="text-center">
+        <div class="calligraphy-title" id="statDynasty" style="font-size: 2.4rem; color: var(--gold-treasure);">—</div>
+        <div class="poem-line mt-2" style="font-size: 12px; letter-spacing: 0.3em; opacity: 0.6;">穿 越 朝 代</div>
+      </div>
+      <div class="text-center">
+        <div class="calligraphy-title" id="statSite" style="font-size: 2.4rem; color: var(--gold-treasure);">—</div>
+        <div class="poem-line mt-2" style="font-size: 12px; letter-spacing: 0.3em; opacity: 0.6;">踏 足 古 国</div>
+      </div>
+      <div class="text-center">
+        <div class="calligraphy-title" id="statTreasure" style="font-size: 2.4rem; color: var(--gold-treasure);">—</div>
+        <div class="poem-line mt-2" style="font-size: 12px; letter-spacing: 0.3em; opacity: 0.6;">国 之 重 器</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Titles row -->
+  <section class="px-20 py-12">
+    <div class="max-w-6xl mx-auto fade-up">
+      <div class="poem-line text-center mb-8" style="font-size: 13px; letter-spacing: 0.5em; opacity: 0.6;">— 已 得 的 称 号 —</div>
+      <div class="flex flex-wrap justify-center gap-4" id="titlesRow">
+        <!-- filled -->
+      </div>
+    </div>
+  </section>
+
+  <!-- The journey scroll — kicker visual -->
+  <section class="px-20 py-24" style="background: var(--ink-dark);">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <div class="poem-line mb-3" style="font-size: 13px; letter-spacing: 0.5em; opacity: 0.6;">— 时 光 长 卷 —</div>
+        <h2 class="calligraphy-title" style="font-size: 2.5rem;">你走过的国宝,在这里</h2>
+        <p class="mt-3 poem-line" style="font-size: 14px; opacity: 0.75;">每一件出现的位置,就是它在历史上的年代</p>
+      </div>
+
+      <!-- A long horizontal scroll, like an emakimono unrolling -->
+      <div class="aged-panel paper-grain" style="position: relative; padding: 60px 30px;">
+        <!-- Timeline line -->
+        <div style="position: absolute; left: 60px; right: 60px; top: 50%; height: 1px; background: linear-gradient(to right, transparent, var(--gold-soft), transparent); opacity: 0.5;"></div>
+
+        <div id="journeyScroll" class="flex overflow-x-auto scroll-snap-x gap-12 py-8" style="scroll-padding-left: 60px;">
+          <!-- filled -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The map of awakened sites -->
+  <section class="px-20 py-24" style="background: var(--ink-black);">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+        <div class="poem-line" style="font-size: 13px; letter-spacing: 0.5em; opacity: 0.6;">— 你 踏 过 的 古 国 —</div>
+        <h2 class="calligraphy-title mt-3" style="font-size: 2.2rem;">足 迹</h2>
+      </div>
+      <div id="footprintList" class="grid grid-cols-3 gap-6 fade-up"></div>
+    </div>
+  </section>
+
+  <!-- Almost there — emotional triggers -->
+  <section class="px-20 py-32" style="background: var(--ink-dark);">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-12">
+        <div class="poem-line" style="font-size: 13px; letter-spacing: 0.5em; opacity: 0.6;">— 还 在 等 你 的 —</div>
+        <h2 class="calligraphy-title mt-3" style="font-size: 2.2rem;">尚 未 唤 醒</h2>
+      </div>
+      <div id="waitingList" class="space-y-12 fade-up"></div>
+    </div>
+  </section>
+
+  <!-- Share card preview -->
+  <section class="px-20 py-32" style="background: var(--ink-black);">
+    <div class="max-w-4xl mx-auto text-center">
+      <div class="poem-line mb-3" style="font-size: 13px; letter-spacing: 0.5em; opacity: 0.6;">— 分 享 一 张 —</div>
+      <h2 class="calligraphy-title mb-12" style="font-size: 2rem;">把这一段旅程,告诉别人</h2>
+
+      <div class="aged-panel paper-grain max-w-md mx-auto p-10 relative" style="background: linear-gradient(180deg, #1a1614 0%, #0d0c0a 100%);">
+        <div class="absolute top-4 right-4 seal">苏 念 之 卷</div>
+        <div class="poem-line mb-3" style="font-size: 12px; letter-spacing: 0.4em; opacity: 0.6;">— 我 的 青 铜 之 旅 —</div>
+        <div class="calligraphy-title mb-1" style="font-size: 3.5rem; color: var(--gold-treasure);" id="shareCount">8</div>
+        <div class="poem-line mb-6" style="font-size: 14px; letter-spacing: 0.2em;">已 唤 醒 的 国 宝</div>
+        <div class="brush-divider" style="width: 60%; margin: 16px auto;"></div>
+        <p class="poem-line mt-4" style="font-size: 15px; line-height: 2; letter-spacing: 0.08em;">
+          "三千年的厚度,<br/>我已走过八件。"
+        </p>
+        <div class="mt-8" style="font-size: 11px; color: var(--bronze-mid); letter-spacing: 0.3em;">
+          青·铜 · MUSEUM · COLLECT
+        </div>
+      </div>
+
+      <button class="btn-gold mt-12">长 按 保 存 (mock)</button>
+    </div>
+  </section>
+
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script>
+    (async function () {
+      MCUI.renderHeader('me');
+      MCUI.renderFooter();
+      await MCData.ready;
+
+      const collected = MCData.catalog.filter(a => MCData.isCollected(a.id));
+      const uncollected = MCData.catalog.filter(a => !MCData.isCollected(a.id));
+
+      // ----- Stats -----
+      const dynasties = new Set(collected.map(a => MCData.dynastyKeyFor(a)));
+      const sites = new Set(collected.map(a => MCData.siteKeyFor(a)));
+      const treasures = collected.filter(a => MCData.isTreasure(a));
+
+      document.getElementById('statCollected').textContent = `${collected.length} 件`;
+      document.getElementById('statDynasty').textContent = `${dynasties.size} 朝`;
+      document.getElementById('statSite').textContent = `${sites.size} 处`;
+      document.getElementById('statTreasure').textContent = `${treasures.length} 件`;
+      document.getElementById('shareCount').textContent = collected.length;
+
+      // ----- Titles (computed by dimension coverage) -----
+      const titles = [];
+      // Pattern-based
+      const patternCount = {};
+      collected.forEach(a => {
+        (a.patterns || []).forEach(p => {
+          patternCount[p] = (patternCount[p] || 0) + 1;
+        });
+      });
+      const sortedPatterns = Object.entries(patternCount).sort((a,b) => b[1] - a[1]);
+      if (sortedPatterns.length > 0 && sortedPatterns[0][1] >= 2) {
+        const top = sortedPatterns[0][0];
+        if (top.includes('夔')) titles.push({ key: '夔龙派初识', sub: '在 ' + sortedPatterns[0][1] + ' 件器上识得' });
+        else if (top.includes('饕餮')) titles.push({ key: '饕餮慕者', sub: '在 ' + sortedPatterns[0][1] + ' 件器上识得' });
+        else if (top.includes('云雷')) titles.push({ key: '云雷之友', sub: '在 ' + sortedPatterns[0][1] + ' 件器上识得' });
+      }
+      // Form-based
+      const formCount = {};
+      collected.forEach(a => {
+        const f = (a.form_subtype || '').slice(0,2);
+        formCount[f] = (formCount[f] || 0) + 1;
+      });
+      const sortedForms = Object.entries(formCount).sort((a,b) => b[1] - a[1]);
+      if (sortedForms[0] && sortedForms[0][1] >= 2) {
+        const top = sortedForms[0][0];
+        if (top.includes('鼎')) titles.push({ key: '鼎 之 听 者', sub: '共 ' + sortedForms[0][1] + ' 鼎' });
+        else if (top.includes('尊')) titles.push({ key: '尊 之 友', sub: '共 ' + sortedForms[0][1] + ' 尊' });
+      }
+      // Site
+      if (sites.has('三星堆')) titles.push({ key: '古 蜀 见 证', sub: '踏过三星堆' });
+      // Dynasty
+      const shangCount = collected.filter(a => MCData.dynastyKeyFor(a) === '商').length;
+      if (shangCount >= 3) titles.push({ key: '商 之 听 者', sub: shangCount + ' 件商代' });
+      // Treasure rate
+      const rate = collected.length > 0 ? Math.round((treasures.length / collected.length) * 100) : 0;
+      if (rate >= 70) titles.push({ key: '国 宝 偏 爱', sub: '国宝率 ' + rate + '%' });
+      titles.push({ key: '踏 上 青 铜 之 路', sub: 'Day 1 · 永不褪色' });
+
+      document.getElementById('titlesRow').innerHTML = titles.map(t => `
+        <div style="border: 1px solid var(--bronze-mid); padding: 14px 24px; background: rgba(74,58,36,0.15); text-align: center;">
+          <div style="font-family: var(--font-kai); font-size: 1.1rem; color: var(--gold-treasure); letter-spacing: 0.25em;">${t.key}</div>
+          <div class="poem-line mt-1" style="font-size: 10px; opacity: 0.6; letter-spacing: 0.2em;">${t.sub}</div>
+        </div>
+      `).join('');
+
+      // ----- Journey scroll: sorted by approx_year ascending -----
+      function parseYear(a) {
+        const s = a.approx_year || '';
+        // crude: extract a negative number for BCE, positive for CE
+        const matchBCE = s.match(/(-?\d{2,4})\s*年/);
+        const matchBCE2 = s.match(/公元前\s*(\d{2,4})/);
+        const matchCE = s.match(/公元\s*(\d{2,4})\s*年/);
+        const matchCent = s.match(/(\d+)\s*世纪/);
+        if (matchBCE2) return -parseInt(matchBCE2[1]);
+        if (matchCE) return parseInt(matchCE[1]);
+        if (matchCent) {
+          const c = parseInt(matchCent[1]);
+          return s.includes('前') ? -c * 100 : c * 100;
+        }
+        return -1000;
+      }
+      const sorted = [...collected].sort((a, b) => parseYear(a) - parseYear(b));
+      document.getElementById('journeyScroll').innerHTML = sorted.map(a => {
+        const m = MCData.getMonologue(a.id);
+        return `
+          <a href="artifact.html?id=${a.id}" class="scroll-snap-item flex-shrink-0 block" style="width: 220px;">
+            <div class="${MCData.isTreasure(a) ? 'halo-treasure' : ''}" style="aspect-ratio: 3/4; overflow: hidden;">
+              ${MCUI.imageOrPlaceholder(a, { cls: 'w-full h-full', style: 'width:100%; height:100%;' })}
+            </div>
+            <h4 class="mt-3 calligraphy-title hover-line inline-block" style="font-size: 1rem;">${a.name_zh}</h4>
+            <div class="mt-1 poem-line" style="font-size: 11px; opacity: 0.7; letter-spacing: 0.15em;">${a.dynasty} · ${a.approx_year || ''}</div>
+            <p class="mt-2 poem-line" style="font-size: 11px; opacity: 0.65; font-style: italic;">${(m.poem || '').slice(0, 24)}</p>
+          </a>
+        `;
+      }).join('');
+
+      // ----- Footprint list -----
+      document.getElementById('footprintList').innerHTML = Array.from(sites).map(s => {
+        const coord = MCData.SITE_COORDS[s];
+        if (!coord) return '';
+        const here = collected.filter(a => MCData.siteKeyFor(a) === s);
+        return `
+          <div class="aged-panel paper-grain p-6">
+            <div class="flex items-start gap-3 mb-3">
+              <span class="seal" style="font-size: 10px; padding: 3px 8px;">已 踏</span>
+              <div>
+                <div class="calligraphy-title" style="font-size: 1.2rem;">${coord.label}</div>
+                <div class="poem-line" style="font-size: 11px; opacity: 0.7; margin-top: 2px;">${coord.desc}</div>
+              </div>
+            </div>
+            <ul class="mt-3 space-y-1">
+              ${here.map(a => `<li class="poem-line" style="font-size: 13px; opacity: 0.85;"><a href="artifact.html?id=${a.id}" style="color: var(--silk-cream);">· ${a.name_zh}</a></li>`).join('')}
+            </ul>
+          </div>
+        `;
+      }).join('');
+
+      // ----- Waiting list (uncollected) -----
+      const waitingShown = uncollected.slice(0, 4);
+      document.getElementById('waitingList').innerHTML = waitingShown.map(a => {
+        const m = MCData.getMonologue(a.id);
+        const callout = `${a.current_museum} · ${a.dynasty}`;
+        return `
+          <div class="grid grid-cols-[120px_1fr] gap-8 items-center">
+            <div class="sleeping" style="aspect-ratio: 3/4; overflow: hidden;">
+              ${MCUI.imageOrPlaceholder(a, { cls: 'w-full h-full', style: 'width:100%; height:100%;' })}
+            </div>
+            <div>
+              <div class="calligraphy-title mb-2" style="font-size: 1.5rem; color: var(--silk-warm);">${a.name_zh}</div>
+              <div class="poem-line mb-3" style="font-size: 12px; opacity: 0.7; letter-spacing: 0.2em;">${callout}</div>
+              <p class="poem-line" style="font-size: 14px; opacity: 0.8;">${(m.poem || a.story_brief || '').slice(0, 40)}…</p>
+              <a href="artifact.html?id=${a.id}" class="inline-block mt-4 hover-line poem-line" style="font-size: 12px; color: var(--gold-soft); letter-spacing: 0.2em;">去 听 它 说 →</a>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      MCUI.observeFadeUp();
+    })();
+  </script>
+</body>
+</html>

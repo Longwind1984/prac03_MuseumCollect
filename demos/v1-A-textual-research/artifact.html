@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<title>条目详情 — 青铜考</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/scholar.css">
+<style>
+  .field-grid { display: grid; grid-template-columns: 7rem 1fr; gap: 0.25rem 1rem; font-size: 0.85rem; }
+  .field-grid dt { font-family: "FangSong", serif; color: var(--ink-faded); padding-top: 0.15rem; }
+  .field-grid dd { color: var(--ink); line-height: 1.7; }
+  .inscription-text { font-size: 1.3rem; line-height: 2.0; word-break: keep-all; padding: 1rem; }
+  .loupe-stage { position: relative; cursor: crosshair; user-select: none; }
+  .loupe-frame { position: absolute; border: 2px solid var(--vermilion); pointer-events: none; }
+  .loupe-output { background: var(--paper-soft); border: 1px solid var(--rule-dark); padding: 0.5rem; min-height: 4rem; }
+  .view-toggle .view-tab { padding: 0.25rem 0.6rem; font-size: 0.8rem; }
+  .compare-pin { position: relative; }
+  .compare-pin::before { content: "▌"; position: absolute; left: -1rem; color: var(--vermilion); font-size: 0.8rem; }
+</style>
+</head>
+<body data-page="catalog.html" class="min-h-screen">
+
+<div id="site-header"></div>
+
+<main class="max-w-6xl mx-auto px-6 pt-8">
+
+  <!-- Breadcrumb -->
+  <div class="font-fang text-xs mb-3" style="color:var(--ink-faded)">
+    <a href="catalog.html" class="hover:underline">图鉴</a> &nbsp;›&nbsp;
+    <span id="bc-dyn">—</span> &nbsp;›&nbsp;
+    <span id="bc-name">—</span>
+    <span class="ml-3 font-mono-num">[ID: <span id="bc-id">—</span>]</span>
+  </div>
+
+  <!-- TITLE BAR -->
+  <section class="grid grid-cols-12 gap-6 mb-8">
+    <div class="col-span-12 md:col-span-8">
+      <div class="section-cap" id="rarity-cap">国宝</div>
+      <h1 class="scholar-title text-4xl mb-1" id="art-name">—</h1>
+      <div class="font-fang text-sm mb-3" id="art-alt" style="color:var(--ink-faded)"></div>
+      <p class="font-fang leading-loose" id="art-story" style="color:var(--ink-soft)"></p>
+      <div class="mt-4 flex gap-3 items-center" id="action-row"></div>
+    </div>
+    <aside class="col-span-12 md:col-span-4">
+      <div class="dossier p-4" id="dossier-card">
+        <dl class="field-grid mt-3" id="dossier-fields"></dl>
+        <hr class="scholar-rule">
+        <div class="flex gap-2 flex-wrap">
+          <button class="scholar-btn subtle" id="btn-bib">复制 BibTeX</button>
+          <button class="scholar-btn subtle" onclick="MuseumLayout.exportNotes()">导出笔记</button>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <hr class="scholar-rule double">
+
+  <!-- Components grid (multiple dimensions visible at once) -->
+  <section class="mb-8">
+    <div class="section-cap">多 维 度 承 载</div>
+
+    <!-- (1) Inscription Reader 铭文释读器 (KILLER FEATURE for A) -->
+    <div class="dossier p-5 mb-6" id="inscription-section">
+      <div class="flex justify-between items-baseline mb-2">
+        <h2 class="scholar-title text-xl">铭文释读器 <span class="font-fang text-xs" style="color:var(--ink-faded)">Inscription Reader · 段位制</span></h2>
+        <div class="view-toggle flex gap-1 view-tab-container" style="border-bottom: 1px solid var(--rule)">
+          <span class="view-tab active" data-mode="rubbing">拓片</span>
+          <span class="view-tab" data-mode="modern">释文</span>
+          <span class="view-tab" data-mode="vernacular">白话</span>
+          <span class="view-tab" data-mode="triple">三栏</span>
+        </div>
+      </div>
+      <p class="font-fang text-xs mb-3" style="color:var(--ink-faded)" id="inscription-meta"></p>
+
+      <div id="inscription-area"></div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+        <div>
+          <div class="section-cap">本铭已识进度</div>
+          <div class="bar-track"><div class="bar-fill" id="char-progress" style="width:0%"></div></div>
+          <div class="font-mono-num text-xs mt-1" id="char-progress-label" style="color:var(--ink-faded)">—</div>
+        </div>
+        <div>
+          <div class="section-cap">您的金文段位</div>
+          <div class="flex items-center gap-3">
+            <div class="seal jade" id="rank-seal">二段</div>
+            <div class="font-fang text-sm">
+              累计识字 <span class="font-mono-num" id="total-chars">—</span> /
+              距下段 <span class="font-mono-num" id="to-next">—</span> 字
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- (2) 同型对照墙 Form-Genealogy Comparison Wall -->
+    <div class="dossier p-5 mb-6">
+      <div class="flex justify-between items-baseline mb-3">
+        <h2 class="scholar-title text-xl">同型对照墙 <span class="font-fang text-xs" style="color:var(--ink-faded)">Form-Subtype Comparison Wall</span></h2>
+        <div class="font-mono-num text-xs" id="wall-subtype" style="color:var(--ink-faded)">—</div>
+      </div>
+      <p class="font-fang text-xs mb-3" style="color:var(--ink-faded)">
+        以本器形制子型为锚,横向排比同型号已知国宝。空位以朱砂虚线标注,附"待补"线索。
+        <sup class="cite-ref" data-cite="同型对照墙是 A 考据派最常用的研究操作之一,见 docs/component-specs/form-genealogy.md §Persona A。">[A]</sup>
+      </p>
+      <div id="compare-wall" class="grid grid-cols-2 md:grid-cols-4 gap-3"></div>
+      <div class="mt-3">
+        <div class="section-cap">尺度比较条</div>
+        <div id="size-compare" class="space-y-1"></div>
+      </div>
+    </div>
+
+    <!-- (3) Time-pillar position + (4) Map position (compact) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div class="dossier p-5">
+        <h2 class="scholar-title text-lg mb-2">时空柱位置 <span class="font-fang text-xs" style="color:var(--ink-faded)">Position on Dynasty Pillar</span></h2>
+        <p class="font-fang text-xs mb-2" style="color:var(--ink-faded)">本器之纪年点(箭头)以及该期已录占比。</p>
+        <div id="mini-pillar"></div>
+        <div class="font-mono-num text-xs mt-2" id="pillar-info" style="color:var(--ink-faded)"></div>
+        <a href="time-pillar.html" class="font-fang text-xs hover:underline" style="color:var(--indigo)">→ 进入时空柱全图</a>
+      </div>
+      <div class="dossier p-5">
+        <h2 class="scholar-title text-lg mb-2">出土古国位置 <span class="font-fang text-xs" style="color:var(--ink-faded)">Excavation State on Ancient Map</span></h2>
+        <p class="font-fang text-xs mb-2" style="color:var(--ink-faded)">本器出土点(朱砂)及同坑兄弟件数。</p>
+        <div id="mini-map"></div>
+        <div class="font-mono-num text-xs mt-2" id="map-info" style="color:var(--ink-faded)"></div>
+        <a href="ancient-map.html" class="font-fang text-xs hover:underline" style="color:var(--indigo)">→ 进入出土地图全图</a>
+      </div>
+    </div>
+
+    <!-- (5) 拓片放大镜 Rubbing Loupe (works on this artifact's pattern) -->
+    <div class="dossier p-5 mb-6">
+      <div class="flex justify-between items-baseline mb-2">
+        <h2 class="scholar-title text-xl">拓片放大镜 <span class="font-fang text-xs" style="color:var(--ink-faded)">Rubbing Loupe</span></h2>
+        <span class="font-fang text-xs" style="color:var(--ink-faded)">点击下方矩形区可框选纹饰</span>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="md:col-span-2">
+          <div class="loupe-stage rubbing-sheet" id="loupe-stage" style="height: 280px; position:relative;">
+            <!-- Background SVG decoration: stylized 饕餮 thumbnail -->
+            <svg viewBox="0 0 600 280" preserveAspectRatio="none" style="width:100%; height:100%; display:block;">
+              <defs>
+                <pattern id="rubbing-noise" patternUnits="userSpaceOnUse" width="4" height="4">
+                  <rect width="4" height="4" fill="#f5f1e6"/>
+                  <circle cx="2" cy="2" r="0.5" fill="#1d1a14" opacity="0.06"/>
+                </pattern>
+              </defs>
+              <rect width="600" height="280" fill="url(#rubbing-noise)"/>
+              <g id="loupe-pattern-svg" stroke="#1d1a14" stroke-width="1.4" fill="none" opacity="0.85"></g>
+              <text x="300" y="265" text-anchor="middle" font-family="FangSong" font-size="11" fill="#7a7261">— 本器局部纹饰拓本(示意) —</text>
+            </svg>
+          </div>
+          <p class="font-fang text-xs mt-2" style="color:var(--ink-faded)">
+            ※ 该拓本由本器纹饰列表生成;真实场景将由用户在器物图上拖框生成。
+          </p>
+        </div>
+        <div>
+          <div class="section-cap">识别结果</div>
+          <div class="loupe-output" id="loupe-output">
+            <div class="font-fang text-xs" style="color:var(--ink-faded)">拖框选中纹饰区域以识别。</div>
+          </div>
+          <div class="section-cap mt-3">本器收录纹饰</div>
+          <div id="pattern-tags" class="flex flex-wrap gap-1"></div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <hr class="scholar-rule">
+
+  <!-- Citations + data sources -->
+  <section class="mb-6">
+    <div class="section-cap">出 处 与 引 用 · Data Sources & Citations</div>
+    <p class="font-fang text-xs mb-3" style="color:var(--ink-faded)">
+      本条目所示字段均挂载来源。下表逐条列出。
+    </p>
+    <table class="scholar-table" id="src-table">
+      <thead><tr><th class="w-8">№</th><th>字段</th><th>来源 / 引用</th><th>链接</th></tr></thead>
+      <tbody id="src-tbody"></tbody>
+    </table>
+  </section>
+
+  <!-- Related artifacts (cross-reference) -->
+  <section class="mb-10">
+    <div class="section-cap">相 关 推 荐 · 跨参照 (Cross-references)</div>
+    <p class="font-fang text-xs mb-3" style="color:var(--ink-faded)">
+      下列三组分别为<strong>同朝代分期</strong>、<strong>同形制子型</strong>、<strong>同出土古国</strong>的关联器物。
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5" id="related"></div>
+  </section>
+
+</main>
+
+<div id="site-footer"></div>
+
+<script src="js/data.js"></script>
+<script src="js/layout.js"></script>
+<script>
+// === Pattern SVG generators (very crude but evocative) ===
+function patternSvg(label) {
+  // produce a small SVG path for the loupe-pattern-svg group
+  // Keep it abstract / 拓本-like
+  const fragments = {
+    '饕餮纹': '<path d="M50,140 C80,80 120,80 150,140 M150,140 C180,80 220,80 250,140 M50,140 L70,170 L130,170 L150,140 M150,140 L170,170 L230,170 L250,140 Z"/><circle cx="100" cy="120" r="6"/><circle cx="200" cy="120" r="6"/><path d="M310,140 C340,80 380,80 410,140 M410,140 C440,80 480,80 510,140 M310,140 L330,170 L390,170 L410,140 Z"/><circle cx="360" cy="120" r="6"/><circle cx="460" cy="120" r="6"/>',
+    '夔龙纹': '<path d="M40,170 C100,130 200,210 280,140 C320,100 360,180 420,140 C460,110 510,180 560,140"/><path d="M40,210 C100,170 200,250 280,180 C320,140 360,220 420,180 C460,150 510,220 560,180"/>',
+    '云雷纹': '<path d="M30,100 q15,-15 30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0"/><path d="M30,130 q15,-15 30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0"/>',
+    '凤鸟纹': '<path d="M100,150 q30,-50 90,-30 q40,15 30,50 q-30,40 -90,20 z"/><path d="M180,140 l60,-30"/><path d="M300,150 q30,-50 90,-30 q40,15 30,50 q-30,40 -90,20 z"/><path d="M380,140 l60,-30"/>',
+    '蟠螭纹': '<path d="M50,140 q20,-30 60,-10 q20,20 0,40 q-30,15 -50,-5 z M150,140 q20,-30 60,-10 q20,20 0,40 q-30,15 -50,-5 z M250,140 q20,-30 60,-10 q20,20 0,40 q-30,15 -50,-5 z M350,140 q20,-30 60,-10 q20,20 0,40 q-30,15 -50,-5 z M450,140 q20,-30 60,-10 q20,20 0,40 q-30,15 -50,-5 z"/>',
+    '窃曲纹': '<path d="M30,150 q20,-30 40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0"/><path d="M30,170 q20,-30 40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0"/>',
+    '重环纹': '<g><circle cx="80" cy="140" r="20" fill="none"/><circle cx="80" cy="140" r="10" fill="none"/></g><g><circle cx="180" cy="140" r="20" fill="none"/><circle cx="180" cy="140" r="10" fill="none"/></g><g><circle cx="280" cy="140" r="20" fill="none"/><circle cx="280" cy="140" r="10" fill="none"/></g><g><circle cx="380" cy="140" r="20" fill="none"/><circle cx="380" cy="140" r="10" fill="none"/></g><g><circle cx="480" cy="140" r="20" fill="none"/><circle cx="480" cy="140" r="10" fill="none"/></g>',
+    '莲瓣纹': '<path d="M100,200 q-20,-80 0,-100 q20,20 0,100"/><path d="M200,200 q-20,-80 0,-100 q20,20 0,100"/><path d="M300,200 q-20,-80 0,-100 q20,20 0,100"/><path d="M400,200 q-20,-80 0,-100 q20,20 0,100"/><path d="M500,200 q-20,-80 0,-100 q20,20 0,100"/>',
+  };
+  for (const k of Object.keys(fragments)) {
+    if (label.indexOf(k) >= 0) return fragments[k];
+  }
+  return fragments['饕餮纹'];
+}
+
+// === Mini pillar / mini map drawing ===
+function drawMiniPillar(currentDynasty, currentPeriod) {
+  const total = MuseumA.DYNASTY_RANGES.reduce((sum, d) => sum + (d.end - d.start), 0);
+  const stats = MuseumA.dynastyStats();
+  const w = 260, h = 200;
+  let y = h, s = '';
+  MuseumA.DYNASTY_RANGES.forEach(d => {
+    const segH = (d.end - d.start) / total * h;
+    const pool = stats[d.key].pool;
+    const col = stats[d.key].collected;
+    const filledW = pool ? (col / pool) * 30 : 0;
+    y -= segH;
+    s += `<rect x="50" y="${y}" width="30" height="${segH}" fill="#ebe4d6" stroke="#cdc4b1"/>`;
+    s += `<rect x="50" y="${y + segH - filledW}" width="30" height="${filledW}" fill="#8a6b3d"/>`;
+    s += `<text x="40" y="${y + segH/2 + 4}" text-anchor="end" font-family="FangSong" font-size="11" fill="#4c4538">${d.label}</text>`;
+    s += `<text x="86" y="${y + segH/2 + 4}" font-family="Iosevka,monospace" font-size="9" fill="#7a7261">${col}/${pool}</text>`;
+    if (d.key === currentDynasty) {
+      s += `<polygon points="35,${y+segH/2-4} 45,${y+segH/2} 35,${y+segH/2+4}" fill="#a02c2c"/>`;
+    }
+  });
+  return `<svg viewBox="0 0 ${w} ${h}" style="width:100%; max-width:${w}px">${s}</svg>`;
+}
+
+function drawMiniMap(siteKey) {
+  const coords = MuseumA.SITE_COORDS;
+  let dots = '';
+  Object.keys(coords).forEach(k => {
+    const c = coords[k];
+    const isCurr = k === siteKey;
+    const r = isCurr ? 6 : 3;
+    const cls = isCurr ? 'collected' : 'empty';
+    dots += `<circle cx="${c.x*0.5}" cy="${c.y*0.45+5}" r="${r}" class="site-dot ${cls}"/>`;
+    if (isCurr) dots += `<text x="${c.x*0.5+10}" y="${c.y*0.45+9}" font-family="FangSong" font-size="11" fill="#a02c2c">${k}</text>`;
+  });
+  return `<svg viewBox="0 0 350 270" class="map-frame" style="width:100%; height:auto">
+    <path d="M50,80 Q150,40 300,90 L320,200 Q200,250 70,210 Z" fill="none" stroke="#8c8470" stroke-width="0.8" stroke-dasharray="2,3"/>
+    <text x="175" y="55" text-anchor="middle" font-family="Songti SC" font-size="12" fill="#7a7261" letter-spacing="0.3em">中 原 · 周 边</text>
+    ${dots}
+  </svg>`;
+}
+
+// === Inscription reader rendering ===
+function renderInscription(a) {
+  const ins = a.inscription || {};
+  const area = document.getElementById('inscription-area');
+  if (!ins.has) {
+    area.innerHTML = `<div class="font-fang text-sm p-4 text-center" style="color:var(--ink-faded); background:var(--paper-soft); border:1px dashed var(--rule)">本器无铭。</div>`;
+    document.getElementById('inscription-meta').textContent = '此器属"无铭器"。';
+    document.getElementById('char-progress').style.width = '0%';
+    document.getElementById('char-progress-label').textContent = '无铭文 — 进度不适用';
+    return;
+  }
+  const text = ins.text || sampleText(a);
+  document.getElementById('inscription-meta').innerHTML = `共 <span class="font-mono-num">${ins.char_count || text.length}</span> 字 · ${ins.summary || ''}`;
+
+  const chars = text.replace(/\s/g,'').split('');
+  const recognized = new Set(MuseumA.user.recognized_chars);
+  let html = '<div class="rubbing-sheet inscription-text" id="rubbing-text">';
+  for (const c of chars) {
+    const known = recognized.has(c);
+    html += `<span class="jinwen-char ${known ? 'recognized' : 'unknown'}" data-char="${c}">${c}</span>`;
+  }
+  html += '</div>';
+
+  // Triple view holder
+  const modernHTML = `<div class="font-fang text-sm mt-2 p-3" style="background:var(--paper-soft); border:1px solid var(--rule); line-height:2"><strong>释文 ·</strong> ${text}</div>`;
+  const vernacularHTML = `<div class="font-fang text-sm mt-2 p-3 italic" style="background:var(--paper); border:1px dashed var(--rule); line-height:2"><strong>白话 ·</strong> ${ins.summary || '此铭叙器主受王命作器之事。'}</div>`;
+
+  area.innerHTML = html + `<div id="modern-pane" class="hidden">${modernHTML}</div><div id="vernacular-pane" class="hidden">${vernacularHTML}</div>`;
+
+  // Calc progress
+  const total = chars.length;
+  const known = chars.filter(c => recognized.has(c)).length;
+  document.getElementById('char-progress').style.width = (known/total*100).toFixed(1) + '%';
+  document.getElementById('char-progress-label').textContent = `${known} / ${total} 字 ≈ ${(known/total*100).toFixed(1)}% (本铭)`;
+
+  const rk = MuseumA.inscriptionRank();
+  document.getElementById('rank-seal').textContent = rk.rank;
+  document.getElementById('total-chars').textContent = MuseumA.user.recognized_char_count;
+  document.getElementById('to-next').textContent = rk.upper ? (rk.upper - MuseumA.user.recognized_char_count) : '—';
+
+  // Char hover
+  area.querySelectorAll('.jinwen-char').forEach(el => {
+    el.addEventListener('mouseenter', e => showCharCard(el));
+    el.addEventListener('mouseleave', e => hideCharCard());
+    el.addEventListener('click', e => clickChar(el));
+  });
+}
+
+function sampleText(a) {
+  // For artifacts where text is null but char_count is known, generate a placeholder
+  if (a.id === 'maogong_ding') return '王若曰父歆不显文武受命匍有亖方畯正万邦丕显文武皇天弘厌厥德配我有周膺受大命佳余小子司朕皇考肆皇天亡害临保我有周';
+  if (a.id === 'da_yu_ding') return '隹九月王在宗周令盂王若曰盂丕显玟王受天有大令在武王嗣玟作邦闢厥匿匍有四方畯正厥民在誉御事剌酒无敢';
+  if (a.id === 'he_zun') return '隹王初迁宅于成周复秉武王礼祼自天在四月丙戌王诰宗小子于京室曰唯武王既克大邑商则廷告于天曰余其宅兹中或自之乂民';
+  if (a.id === 'li_gui') return '武王征商隹甲子朝岁鼎克闻夙又商辛未王在阑师赐右史利金用作檀公宝尊彝';
+  if (a.id === 'sanshi_pan') return '用矢仆散邑乃即散用田眉自瀗涉以南至于大沽一封以陟二封至于边柳复涉瀗陟雩刚㡢';
+  return a.inscription && a.inscription.text || '(铭文)';
+}
+
+let charCard = null;
+function showCharCard(el) {
+  hideCharCard();
+  const c = el.dataset.char;
+  const info = MuseumA.JINWEN_DICT[c];
+  const known = MuseumA.user.recognized_chars.indexOf(c) >= 0;
+  charCard = document.createElement('div');
+  charCard.className = 'cite-tooltip';
+  charCard.style.minWidth = '14rem';
+  charCard.style.maxWidth = '20rem';
+  charCard.style.pointerEvents = 'none';
+  if (info) {
+    charCard.innerHTML = `
+      <div style="font-size:1.8rem; font-family:Songti SC,serif; text-align:center; padding-bottom:0.3rem; border-bottom: 1px solid rgba(255,255,255,0.2)">${c}</div>
+      <div style="margin-top:0.4rem"><span class="pinyin" style="color:#d4a857">${info.pinyin}</span></div>
+      <div style="font-size:0.78rem; line-height:1.55"><strong style="color:#d4a857">字义</strong> ${info.meaning}</div>
+      <div style="font-size:0.7rem; line-height:1.55"><strong style="color:#d4a857">字源</strong> ${info.original}</div>
+      <div style="font-size:0.7rem; line-height:1.55"><strong style="color:#d4a857">本铭中</strong> ${info.appearances.join(', ')} 等 (${info.appearances.length} 件器物)</div>
+      <div style="font-size:0.65rem; line-height:1.55; margin-top:0.3rem; padding-top:0.3rem; border-top:1px dotted rgba(255,255,255,0.2)"><strong style="color:#d4a857">引用</strong> ${info.source}</div>
+      <div style="font-size:0.65rem; margin-top:0.3rem; color:#aaa">您${known ? '已识此字' : '尚未识此字, 点击记入档案'}</div>
+    `;
+  } else {
+    charCard.innerHTML = `
+      <div style="font-size:1.8rem; font-family:Songti SC,serif; text-align:center">${c}</div>
+      <div style="font-size:0.72rem; opacity:0.7; margin-top:0.3rem">字典中尚未收录此字的金文条目。<br>(原型字典含 ${Object.keys(MuseumA.JINWEN_DICT).length} 字 / 已知金文 ~3700 字)</div>
+    `;
+  }
+  charCard.style.display = 'block';
+  document.body.appendChild(charCard);
+  const r = el.getBoundingClientRect();
+  charCard.style.top = (window.scrollY + r.bottom + 6) + 'px';
+  charCard.style.left = Math.min(window.scrollX + r.left - 50, window.innerWidth - 320) + 'px';
+}
+function hideCharCard() { if (charCard) { charCard.remove(); charCard = null; } }
+function clickChar(el) {
+  const c = el.dataset.char;
+  if (MuseumA.user.recognized_chars.indexOf(c) < 0) {
+    MuseumA.user.recognized_chars.push(c);
+    MuseumA.user.recognized_char_count += 1;
+    el.classList.remove('unknown');
+    el.classList.add('recognized');
+  }
+}
+
+// === Compare wall ===
+function renderCompareWall(a) {
+  const wall = document.getElementById('compare-wall');
+  const subtype = a.form_subtype || a.type;
+  // Show all of same form_subtype
+  const matched = MuseumA.catalog.filter(x => (x.form_subtype === a.form_subtype && a.form_subtype) || (x.type === a.type && !a.form_subtype));
+  document.getElementById('wall-subtype').textContent = `子型: ${subtype} · 已知 ${matched.length} 件`;
+  // Show up to 6 + empty placeholders to suggest "待补"
+  let html = '';
+  matched.slice(0,6).forEach(x => {
+    const tier = MuseumA.rarityTier(x.rarity_level);
+    const own = MuseumA.isCollected(x.id);
+    const sizeH = (x.size && x.size.height_cm) || '?';
+    const sizeW = (x.size && x.size.weight_kg) || '?';
+    html += `
+    <a href="artifact.html?id=${x.id}" class="compare-cell rarity-${tier} ${own ? '' : ''}" style="display:block; text-decoration:none">
+      ${x.id === a.id ? '<div class="compare-pin"></div>' : ''}
+      <div class="text-sm font-serif-cn" style="color:var(--ink)"><strong>${x.name_zh}</strong></div>
+      <div class="font-mono-num text-[10px] mt-1" style="color:var(--ink-faded)">${x.dynasty}·${(x.period||'').replace(x.dynasty,'')}</div>
+      <div class="font-fang text-[10px] mt-2" style="color:var(--ink-soft)">高 ${sizeH} cm · ${sizeW} kg</div>
+      <div class="font-fang text-[10px]" style="color:var(--ink-soft)">铭 ${(x.inscription&&x.inscription.char_count)||0} 字</div>
+      <div class="font-fang text-[10px] mt-1" style="color:var(--ink-faded)">${x.current_museum||''}</div>
+      <div class="font-mono-num text-[9px] mt-1" style="color:var(--ink-faded)">${own ? '✓ 已录入' : '○ 待录入'}</div>
+    </a>`;
+  });
+  // Pad with placeholders
+  for (let i = matched.length; i < 4; i++) {
+    html += `<div class="compare-cell empty"></div>`;
+  }
+  wall.innerHTML = html;
+
+  // Size compare bars
+  const sizeBox = document.getElementById('size-compare');
+  let max = 1;
+  matched.forEach(x => { if ((x.size||{}).weight_kg && x.size.weight_kg > max) max = x.size.weight_kg; });
+  sizeBox.innerHTML = matched.slice(0,5).map(x => {
+    const w = (x.size||{}).weight_kg || 0;
+    const pct = (w / max) * 100;
+    const own = MuseumA.isCollected(x.id);
+    return `
+    <div class="flex items-center gap-2 text-xs">
+      <span style="min-width:8rem" class="font-fang">${x.name_zh}</span>
+      <div class="flex-1 bar-track" style="height:6px"><div class="bar-fill" style="width:${pct}%; background:${own?'var(--bronze)':'var(--ink-faded)'}"></div></div>
+      <span class="font-mono-num" style="min-width:5rem; color:var(--ink-faded)">${w} kg</span>
+    </div>`;
+  }).join('');
+}
+
+// === Sources table ===
+function renderSources(a) {
+  const tb = document.getElementById('src-tbody');
+  const rows = (a.data_sources || []).map((s, i) => `
+    <tr>
+      <td class="font-mono-num" style="color:var(--ink-faded)">${(i+1).toString().padStart(2,'0')}</td>
+      <td class="font-fang text-xs">${s.field || '通用'}</td>
+      <td class="font-fang text-xs">${s.source || ''}</td>
+      <td class="font-mono-num text-[10px]">${s.url ? `<a href="${s.url}" target="_blank" style="color:var(--indigo)">→ link</a>` : '—'}</td>
+    </tr>
+  `).join('');
+  tb.innerHTML = rows || '<tr><td colspan="4" class="font-fang text-sm" style="color:var(--ink-faded)">本条目暂无外部引用记录。</td></tr>';
+}
+
+// === Related (cross-references) ===
+function renderRelated(a) {
+  const out = document.getElementById('related');
+  const groups = [
+    { label: '同朝代分期', items: MuseumA.catalog.filter(x => x.id !== a.id && x.dynasty === a.dynasty && x.period === a.period).slice(0, 3) },
+    { label: '同形制子型', items: MuseumA.catalog.filter(x => x.id !== a.id && x.form_subtype === a.form_subtype && a.form_subtype).slice(0, 3) },
+    { label: '同出土古国', items: MuseumA.catalog.filter(x => x.id !== a.id && x.ancient_state && a.ancient_state && (x.ancient_state.substring(0,2) === a.ancient_state.substring(0,2))).slice(0, 3) },
+  ];
+  let html = '';
+  groups.forEach(g => {
+    html += `<div class="dossier p-3">
+      <div class="section-cap" style="margin-bottom:0.3rem">${g.label}</div>`;
+    if (g.items.length === 0) html += `<p class="font-fang text-xs" style="color:var(--ink-faded)">本类下暂无其他条目。</p>`;
+    g.items.forEach(x => {
+      const tier = MuseumA.rarityTier(x.rarity_level);
+      const own = MuseumA.isCollected(x.id);
+      html += `
+        <a href="artifact.html?id=${x.id}" class="block py-2" style="text-decoration:none; border-bottom:1px dashed var(--rule)">
+          <div class="font-serif-cn text-sm" style="color:var(--ink)"><span class="collected-mark ${own?'':'uncollected'}"></span><strong>${x.name_zh}</strong></div>
+          <div class="font-mono-num text-[10px]" style="color:var(--ink-faded)">${x.dynasty}·${(x.period||'').replace(x.dynasty,'')} · ${(x.current_museum||'').substring(0,12)}</div>
+        </a>`;
+    });
+    html += '</div>';
+  });
+  out.innerHTML = html;
+}
+
+// === Loupe drag-to-select ===
+function bindLoupe() {
+  const stage = document.getElementById('loupe-stage');
+  let start = null, frame = null;
+  stage.addEventListener('mousedown', e => {
+    const r = stage.getBoundingClientRect();
+    start = { x: e.clientX - r.left, y: e.clientY - r.top };
+    if (frame) frame.remove();
+    frame = document.createElement('div');
+    frame.className = 'loupe-frame';
+    frame.style.left = start.x + 'px';
+    frame.style.top = start.y + 'px';
+    stage.appendChild(frame);
+  });
+  stage.addEventListener('mousemove', e => {
+    if (!start || !frame) return;
+    const r = stage.getBoundingClientRect();
+    const cur = { x: e.clientX - r.left, y: e.clientY - r.top };
+    const w = Math.abs(cur.x - start.x);
+    const h = Math.abs(cur.y - start.y);
+    frame.style.width = w + 'px';
+    frame.style.height = h + 'px';
+    frame.style.left = Math.min(start.x, cur.x) + 'px';
+    frame.style.top = Math.min(start.y, cur.y) + 'px';
+  });
+  stage.addEventListener('mouseup', e => {
+    if (!start) return;
+    start = null;
+    // Mock recognize -> pick a random pattern from current artifact
+    const params = new URLSearchParams(location.search);
+    const id = params.get('id') || MuseumA.user.collected_ids[0];
+    const a = MuseumA.catalogById[id];
+    const pat = (a.patterns || ['饕餮纹'])[Math.floor(Math.random() * (a.patterns||['饕餮纹']).length)];
+    document.getElementById('loupe-output').innerHTML = `
+      <div class="font-fang text-sm"><strong style="color:var(--vermilion)">✓ 识别完成</strong> · 此处纹饰为 <strong class="font-serif-cn" style="color:var(--ink)">${pat}</strong></div>
+      <div class="font-mono-num text-xs mt-1" style="color:var(--ink-faded)">已"拓"入个人拓本集 · 累计 +1</div>
+      <div class="font-fang text-xs mt-2"><a href="pattern-tree.html" style="color:var(--indigo)">→ 在演化树上查看 "${pat}" 节点</a></div>
+    `;
+  });
+}
+
+(async function () {
+  await MuseumA.ready;
+  const params = new URLSearchParams(location.search);
+  const id = params.get('id') || 'houmuwu_ding';
+  const a = MuseumA.catalogById[id];
+  if (!a) {
+    document.querySelector('main').innerHTML = '<p class="font-fang">无此条目。</p>';
+    return;
+  }
+
+  // Title block
+  document.title = `${a.name_zh} · 青铜考`;
+  document.getElementById('bc-dyn').textContent = `${a.dynasty} · ${a.period || ''}`;
+  document.getElementById('bc-name').textContent = a.name_zh;
+  document.getElementById('bc-id').textContent = a.id;
+  document.getElementById('rarity-cap').textContent = MuseumA.tierLabel(a.rarity_level);
+
+  document.getElementById('art-name').innerHTML = a.name_zh + '<span class="ml-3 pinyin">' + a.name_pinyin + '</span>';
+  document.getElementById('art-alt').textContent = (a.name_alt && a.name_alt.length) ? `异称: ${a.name_alt.join(' / ')}` : '';
+  document.getElementById('art-story').textContent = a.story_brief || '(故事简介待补)';
+
+  // Action row
+  const own = MuseumA.isCollected(a.id);
+  document.getElementById('action-row').innerHTML = `
+    ${own
+      ? `<span class="font-fang text-sm" style="color:var(--bronze)"><strong>✓</strong> 已录入个人案卷</span>`
+      : `<button class="scholar-btn primary" id="btn-add">+ 录入此条目</button>`}
+    <button class="scholar-btn" id="btn-note">添加私人批注</button>
+    <span class="font-fang text-xs ml-auto" style="color:var(--ink-faded)">系统主张:不弹彩带,不响铃。录入即静悄。</span>
+  `;
+  if (!own) {
+    document.getElementById('btn-add').addEventListener('click', () => {
+      MuseumA.user.collected_ids.push(a.id);
+      location.reload();
+    });
+  }
+  document.getElementById('btn-note').addEventListener('click', () => {
+    const n = prompt('为此条目添加私人批注 (示意, 仅本次会话生效):', '');
+    if (n != null) {
+      MuseumA.user.notes_chars += (n || '').length;
+      alert('批注已记入。累计笔记字数 ' + MuseumA.user.notes_chars.toLocaleString());
+    }
+  });
+
+  document.getElementById('btn-bib').addEventListener('click', () => MuseumLayout.copyBibTeX(a));
+
+  // Dossier card with rarity halo
+  const dossierCard = document.getElementById('dossier-card');
+  const tier = MuseumA.rarityTier(a.rarity_level);
+  dossierCard.classList.add('rarity-' + tier);
+  const fields = document.getElementById('dossier-fields');
+  const f = (a.size || {});
+  const ins = a.inscription || {};
+  const tagsHTML = MuseumA.rarityTags(a).map(t => {
+    if (t === '禁') return `<span class="rarity-tag">禁出境</span>`;
+    if (t === '长铭') return `<span class="rarity-tag long-inscription">长铭</span>`;
+    if (t === '迁台') return `<span class="rarity-tag overseas">迁台</span>`;
+    if (t === '蜀') return `<span class="rarity-tag shu">蜀</span>`;
+    return '';
+  }).join('');
+  fields.innerHTML = `
+    <dt>朝代分期</dt><dd>${a.dynasty} · ${a.period || '—'}</dd>
+    <dt>纪年</dt><dd>${a.approx_year || '—'}</dd>
+    <dt>古国 / 邦</dt><dd>${a.ancient_state || '—'}</dd>
+    <dt>出土</dt><dd>${a.excavation_year || '—'} · ${a.excavation_site || '—'}</dd>
+    <dt>现藏</dt><dd>${a.current_museum || '—'}</dd>
+    <dt>器型</dt><dd>${a.type || '—'} · <strong>${a.form_subtype || ''}</strong></dd>
+    <dt>尺寸</dt><dd class="font-mono-num">高 ${f.height_cm || '?'} · 宽 ${f.width_cm || '?'} · 长 ${f.length_cm || '?'} cm · 重 ${f.weight_kg || '?'} kg</dd>
+    <dt>用途</dt><dd>${a.purpose || '—'}</dd>
+    <dt>工艺</dt><dd>${a.craft || '—'}</dd>
+    <dt>铭文</dt><dd>${ins.has ? `<span class="font-mono-num">${ins.char_count}</span> 字 · ${ins.text ? `&ldquo;${ins.text}&rdquo;` : '(详释文)'}` : '无'}</dd>
+    <dt>主纹饰</dt><dd>${(a.patterns || []).slice(0,4).join(' · ')}</dd>
+    <dt>分级</dt><dd>${MuseumA.tierLabel(a.rarity_level)} ${tagsHTML}</dd>
+  `;
+
+  // Inscription reader
+  renderInscription(a);
+  document.querySelectorAll('.view-tab-container .view-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.view-tab-container .view-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const mode = tab.dataset.mode;
+      const rubbing = document.getElementById('rubbing-text');
+      const modern = document.getElementById('modern-pane');
+      const vern = document.getElementById('vernacular-pane');
+      if (!rubbing) return;
+      rubbing.style.display = (mode === 'rubbing' || mode === 'triple') ? 'block' : 'none';
+      modern && modern.classList.toggle('hidden', mode !== 'modern' && mode !== 'triple');
+      vern && vern.classList.toggle('hidden', mode !== 'vernacular' && mode !== 'triple');
+    });
+  });
+
+  // Compare wall
+  renderCompareWall(a);
+  // Mini pillar + map
+  document.getElementById('mini-pillar').innerHTML = drawMiniPillar(a.dynasty, a.period);
+  const dStats = MuseumA.dynastyStats()[a.dynasty];
+  document.getElementById('pillar-info').textContent = `${a.dynasty} 期已录 ${dStats.collected} / ${dStats.pool} 件`;
+
+  const siteKey = MuseumA.SITE_FOR_ARTIFACT[a.id];
+  document.getElementById('mini-map').innerHTML = drawMiniMap(siteKey);
+  const siteData = siteKey && MuseumA.siteStats()[siteKey];
+  if (siteData) {
+    document.getElementById('map-info').textContent = `${siteKey}: 已录 ${siteData.collected} / ${siteData.pool} 件 (同坑/同地)`;
+  }
+
+  // Patterns + loupe SVG
+  document.getElementById('pattern-tags').innerHTML = (a.patterns || []).map(p =>
+    `<a href="pattern-tree.html?pattern=${encodeURIComponent(p)}" class="rarity-tag" style="color:var(--ink-soft); border-color:var(--rule-dark); margin:0.1rem 0.2rem 0.1rem 0">${p}</a>`
+  ).join('');
+  // populate SVG pattern
+  const svgG = document.getElementById('loupe-pattern-svg');
+  if (svgG && a.patterns && a.patterns.length) {
+    svgG.innerHTML = patternSvg(a.patterns[0]);
+  }
+  bindLoupe();
+
+  renderSources(a);
+  renderRelated(a);
+  MuseumLayout.attachCitations(document);
+})();
+</script>
+</body>
+</html>

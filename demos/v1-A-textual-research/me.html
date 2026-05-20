@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<title>我的案卷 · 个人研究断面 — 青铜考</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/scholar.css">
+<style>
+  .passport-strip { background: var(--paper); border: 1px solid var(--rule-dark); padding: 0.5rem 0.7rem; display: flex; gap: 0.5rem; align-items: center; }
+  .stamp-box { width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; font-family: "Songti SC", serif; font-size: 0.7rem; line-height: 1.1; text-align: center; }
+  .stamp-box.stamped { background: var(--vermilion); color: var(--paper); }
+  .stamp-box.unstamped { border: 1.5px dashed var(--ink-faded); color: var(--ink-faded); }
+  .rank-card { background: var(--paper); border: 1px solid var(--rule-dark); padding: 1rem; position: relative; }
+  .rank-card::before { content: "段 位"; position: absolute; top: -10px; left: 12px; background: var(--paper); padding: 0 0.4rem; font-family: "Songti SC", serif; font-size: 0.7rem; letter-spacing: 0.4em; color: var(--ink-faded); }
+  .achievement-row { padding: 0.6rem 0; border-bottom: 1px dashed var(--rule); display: flex; align-items: center; gap: 0.7rem; }
+  .achievement-row.unlocked .label { color: var(--bronze); font-weight: 600; }
+  .achievement-row.in-progress .label { color: var(--ink); }
+  .achievement-row.locked .label { color: var(--ink-faded); }
+  /* Radar chart axes */
+  .radar-axis { stroke: var(--rule); stroke-dasharray: 2 2; }
+  .radar-axis-label { font-family: "FangSong", serif; font-size: 11px; fill: var(--ink-soft); }
+  .radar-shape { fill: rgba(138, 107, 61, 0.25); stroke: var(--bronze); stroke-width: 1.5; }
+</style>
+</head>
+<body data-page="me.html" class="min-h-screen">
+
+<div id="site-header"></div>
+
+<main class="max-w-6xl mx-auto px-6 pt-8">
+
+  <!-- Title bar -->
+  <section class="grid grid-cols-12 gap-6 mb-6">
+    <div class="col-span-12 md:col-span-8">
+      <div class="section-cap">个人案卷 · Researcher Dossier</div>
+      <h1 class="scholar-title text-3xl mb-1">陈翊安 · 案卷</h1>
+      <p class="font-fang text-sm" style="color:var(--ink-soft)">
+        北京大学 考古文博学院 / 商周青铜器纹饰演变方向 · 持照编号 <span class="font-mono-num">甲编 · No.00837</span>
+      </p>
+      <p class="font-fang text-xs mt-2" style="color:var(--ink-faded)">
+        ※ 本页为<strong>隐式研究进度</strong>呈现 — 不设积分、不发徽章弹幕、不响铃。所有"称号"皆为研究分布的副产品。
+      </p>
+    </div>
+    <aside class="col-span-12 md:col-span-4 flex items-center justify-end gap-2">
+      <button class="scholar-btn primary" onclick="MuseumLayout.exportNotes()">导出研究笔记 (Markdown)</button>
+    </aside>
+  </section>
+
+  <hr class="scholar-rule">
+
+  <!-- Headline metrics row -->
+  <section class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8">
+    <div class="dossier p-3">
+      <div class="section-cap" style="margin-bottom:0.2rem">录入</div>
+      <div class="font-mono-num text-3xl" id="m-collected">—</div>
+      <div class="font-fang text-xs" style="color:var(--ink-faded)">/ 数据池 <span id="m-pool">—</span> 件</div>
+    </div>
+    <div class="dossier p-3">
+      <div class="section-cap" style="margin-bottom:0.2rem">朝代覆盖</div>
+      <div class="font-mono-num text-3xl" id="m-dyn">—</div>
+      <div class="font-fang text-xs" style="color:var(--ink-faded)">/ 8 朝</div>
+    </div>
+    <div class="dossier p-3">
+      <div class="section-cap" style="margin-bottom:0.2rem">古国 / 遗址</div>
+      <div class="font-mono-num text-3xl" id="m-site">—</div>
+      <div class="font-fang text-xs" style="color:var(--ink-faded)">/ <span id="m-site-total">—</span> 地点</div>
+    </div>
+    <div class="dossier p-3">
+      <div class="section-cap" style="margin-bottom:0.2rem">纹饰类</div>
+      <div class="font-mono-num text-3xl" id="m-pat">—</div>
+      <div class="font-fang text-xs" style="color:var(--ink-faded)">/ <span id="m-pat-total">—</span> 类</div>
+    </div>
+    <div class="dossier p-3">
+      <div class="section-cap" style="margin-bottom:0.2rem">识字累计</div>
+      <div class="font-mono-num text-3xl" id="m-chars">—</div>
+      <div class="font-fang text-xs" style="color:var(--ink-faded)">/ 已知金文 <span class="font-mono-num">~3700</span></div>
+    </div>
+  </section>
+
+  <!-- Rank + Radar + Achievements -->
+  <section class="grid grid-cols-1 md:grid-cols-12 gap-5 mb-8">
+
+    <!-- Rank card -->
+    <div class="md:col-span-4 rank-card">
+      <div class="flex items-start gap-4">
+        <div class="seal large jade" id="rank-stamp" style="width:5rem; height:5rem; font-size:1.4rem">—</div>
+        <div>
+          <div class="font-serif-cn text-xl"><strong id="rank-name">—</strong> · 金文识读</div>
+          <div class="font-mono-num text-xs mt-1" style="color:var(--ink-faded)">已识 <strong id="rank-curr">—</strong> 字</div>
+          <div class="font-mono-num text-xs" style="color:var(--ink-faded)">距 <strong id="rank-next">—</strong> 段 <span id="rank-delta">—</span> 字</div>
+          <div class="bar-track mt-2"><div class="bar-fill" id="rank-bar"></div></div>
+        </div>
+      </div>
+      <p class="font-fang text-xs leading-relaxed mt-3" style="color:var(--ink-soft)">
+        段位制根植于围棋传统:入门 → 一段(10字)→ 二段(50字)→ 三段(150字)→ 鉴师(400字)→ 大宗师(1000字)。
+        非游戏关卡。<sup class="cite-ref" data-cite="段位词与阈值见 docs/component-specs/inscription-reader.md §段位制;参考围棋段位与摄影分级。">[段]</sup>
+      </p>
+      <hr class="scholar-rule">
+      <div class="text-xs font-fang" style="color:var(--ink-soft)">
+        <strong>建议推进:</strong>
+        <span id="rank-suggest">—</span>
+      </div>
+    </div>
+
+    <!-- Rarity radar chart -->
+    <div class="md:col-span-4 dossier p-4">
+      <div class="section-cap">稀有度分布 · Box-plot 替代雷达</div>
+      <svg viewBox="0 0 240 200" style="width:100%; height:auto" id="rarity-radar"></svg>
+      <p class="font-fang text-xs mt-2" style="color:var(--ink-soft)">
+        您的<strong>国宝率 = <span class="font-mono-num" id="treasure-pct">—</span></strong>(行业基线 ≈ 4%)<sup class="cite-ref" data-cite="国宝率仅为本系统的自我对照指标,**不构建排行榜**,见 docs/gamification-mechanics.md §3。">[标]</sup>。本系统不做排行榜,仅供研究分布参考。
+      </p>
+    </div>
+
+    <!-- Achievements (隐式称号) -->
+    <div class="md:col-span-4 dossier p-4">
+      <div class="section-cap">隐式研究称号 · 副产品</div>
+      <p class="font-fang text-xs" style="color:var(--ink-faded)">称号为研究分布之自然结果,出现在分享卡片水印中;无弹幕,无音效。</p>
+      <div class="mt-2" id="ach-list"></div>
+    </div>
+  </section>
+
+  <hr class="scholar-rule">
+
+  <!-- Passport stamps (馆藏地朝圣) -->
+  <section class="mb-8">
+    <div class="section-cap">朝 圣 护 照 · 馆藏地</div>
+    <p class="font-fang text-xs mb-3" style="color:var(--ink-faded)">
+      每馆首件录入即盖一枚朱砂印。海外/迁台之馆单立为"流散篇"(泛黄底)。
+    </p>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3" id="passport-grid"></div>
+  </section>
+
+  <hr class="scholar-rule">
+
+  <!-- Recent timeline -->
+  <section class="mb-8">
+    <div class="section-cap">最近录入 · 时间线</div>
+    <table class="scholar-table">
+      <thead><tr><th>日期 (mock)</th><th>名称</th><th>朝代 · 分期</th><th>稀有度</th><th>录入断面</th></tr></thead>
+      <tbody id="timeline-tbody"></tbody>
+    </table>
+  </section>
+
+  <hr class="scholar-rule">
+
+  <!-- Pending researchies (待补) -->
+  <section class="mb-10">
+    <div class="section-cap">待 补 · 研究断面建议</div>
+    <p class="font-fang text-xs mb-3" style="color:var(--ink-faded)">
+      下列建议为本系统基于您现有录入分布而提出的<strong>待补研究方向</strong>(非 "未解锁奖品")。
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5" id="pending"></div>
+  </section>
+
+</main>
+
+<div id="site-footer"></div>
+
+<script src="js/data.js"></script>
+<script src="js/layout.js"></script>
+<script>
+function topRarityTier(items) {
+  const tiers = items.map(a => {
+    const t = MuseumA.rarityTier(a.rarity_level);
+    if (t === 'treasure-forbidden') return 5;
+    if (t === 'treasure') return 4;
+    if (t === 'tier-1') return 3;
+    if (t === 'tier-2') return 2;
+    if (t === 'tier-3') return 1;
+    return 0;
+  });
+  return Math.max(...tiers, 0);
+}
+
+(async function() {
+  await MuseumA.ready;
+
+  const u = MuseumA.user;
+  const dStats = MuseumA.dynastyStats();
+  const sStats = MuseumA.siteStats();
+  const pStats = MuseumA.patternStats();
+
+  // === Headline metrics ===
+  document.getElementById('m-collected').textContent = u.collected_ids.length;
+  document.getElementById('m-pool').textContent = MuseumA.catalog.length;
+  document.getElementById('m-dyn').textContent = Object.values(dStats).filter(d => d.collected > 0).length;
+  document.getElementById('m-site').textContent = Object.values(sStats).filter(s => s.collected > 0).length;
+  document.getElementById('m-site-total').textContent = Object.keys(sStats).length;
+  document.getElementById('m-pat').textContent = Object.values(pStats).filter(p => p.collected > 0).length;
+  document.getElementById('m-pat-total').textContent = Object.keys(pStats).length;
+  document.getElementById('m-chars').textContent = u.recognized_char_count;
+
+  // === Rank ===
+  const rk = MuseumA.inscriptionRank();
+  document.getElementById('rank-stamp').textContent = rk.rank;
+  document.getElementById('rank-name').textContent = rk.rank;
+  document.getElementById('rank-curr').textContent = u.recognized_char_count;
+  document.getElementById('rank-next').textContent = rk.next || '终极';
+  document.getElementById('rank-delta').textContent = rk.upper ? (rk.upper - u.recognized_char_count) : '∞';
+  document.getElementById('rank-bar').style.width = rk.pct.toFixed(0) + '%';
+  // suggestion
+  const allInscriptions = MuseumA.catalog.filter(a => a.inscription && a.inscription.has && !MuseumA.isCollected(a.id));
+  const top = allInscriptions.sort((a,b) => (b.inscription.char_count||0) - (a.inscription.char_count||0))[0];
+  if (top) {
+    document.getElementById('rank-suggest').innerHTML = `录入 <a href="artifact.html?id=${top.id}" style="color:var(--indigo); text-decoration:underline"><strong class="font-serif-cn">${top.name_zh}</strong></a> (铭 ${top.inscription.char_count} 字) 可推进段位 — 该铭含您未识字若干。`;
+  }
+
+  // === Rarity radar (actually a simple bar set in box-plot fashion for A) ===
+  const tiers = ['国宝', '一级', '二级', '三级', '普通'];
+  const counts = { '国宝': 0, '一级': 0, '二级': 0, '三级': 0, '普通': 0 };
+  const allCounts = { '国宝': 0, '一级': 0, '二级': 0, '三级': 0, '普通': 0 };
+  MuseumA.catalog.forEach(a => {
+    const t = MuseumA.rarityTier(a.rarity_level);
+    let k = '普通';
+    if (t === 'treasure-forbidden' || t === 'treasure') k = '国宝';
+    else if (t === 'tier-1') k = '一级';
+    else if (t === 'tier-2') k = '二级';
+    else if (t === 'tier-3') k = '三级';
+    allCounts[k]++;
+    if (MuseumA.isCollected(a.id)) counts[k]++;
+  });
+  // Render as horizontal stacked bars
+  const radar = document.getElementById('rarity-radar');
+  let bars = '';
+  let yOff = 24;
+  tiers.forEach((t, i) => {
+    const c = counts[t];
+    const all = allCounts[t];
+    const pct = all ? (c / all) * 100 : 0;
+    bars += `
+      <text x="10" y="${yOff + 11}" font-family="Songti SC" font-size="11" fill="#1d1a14">${t}</text>
+      <text x="220" y="${yOff + 11}" font-family="Iosevka, monospace" font-size="10" text-anchor="end" fill="#7a7261">${c}/${all}</text>
+      <rect x="60" y="${yOff + 2}" width="150" height="14" fill="#ebe4d6" stroke="#cdc4b1"/>
+      <rect x="60" y="${yOff + 2}" width="${pct/100*150}" height="14" fill="${t === '国宝' ? 'var(--bronze-glow)' : 'var(--bronze)'}"/>`;
+    yOff += 28;
+  });
+  radar.innerHTML = bars;
+  const treasureCount = counts['国宝'];
+  document.getElementById('treasure-pct').textContent = (treasureCount / u.collected_ids.length * 100).toFixed(0) + '%';
+
+  // === Achievements (隐式) ===
+  const ach = [];
+  // 段位
+  ach.push({ status: 'unlocked', label: '金文识读 · ' + rk.rank, note: `已识 ${u.recognized_char_count} 字, 副产品。` });
+  // 朝代主义者
+  const topDyn = Object.entries(dStats).sort((a,b)=>b[1].collected-a[1].collected)[0];
+  if (topDyn[1].collected >= 2) ach.push({ status: 'unlocked', label: '主时代偏 ' + topDyn[0], note: `本期录入 ${topDyn[1].collected} 件,系您当前研究重心。` });
+  // 纹饰偏好
+  const recogPatternFamilies = {};
+  MuseumA.PATTERN_NODES.forEach(n => {
+    if (pStats[n.label] && pStats[n.label].collected > 0) recogPatternFamilies[n.family] = (recogPatternFamilies[n.family]||0) + 1;
+  });
+  const topFam = Object.entries(recogPatternFamilies).sort((a,b)=>b[1]-a[1])[0];
+  if (topFam && topFam[1] >= 2) ach.push({ status: 'unlocked', label: topFam[0] + '派 (隐式)', note: `已识本谱系 ${topFam[1]} 类纹饰。` });
+  // 海内三宝
+  const sanbao = ['da_yu_ding', 'da_ke_ding', 'maogong_ding'];
+  const got = sanbao.filter(id => MuseumA.isCollected(id)).length;
+  ach.push({ status: got === 3 ? 'unlocked' : (got > 0 ? 'in-progress' : 'locked'), label: '海内三宝集 ' + got + '/3', note: '大盂鼎 / 大克鼎 / 毛公鼎' + (got < 3 ? ' — 尚缺 ' + (3 - got) + ' 件' : ' — 全集。') });
+  // Three states
+  const csites = Object.values(sStats).filter(s => s.collected > 0).length;
+  ach.push({ status: csites >= 3 ? 'unlocked' : 'in-progress', label: '三家朝圣 ' + csites + '/14 地点', note: '已踏足 ' + csites + ' 处出土地。' });
+  // Long inscription readers
+  const longInscriptions = MuseumA.catalog.filter(a => MuseumA.isCollected(a.id) && a.inscription && a.inscription.char_count >= 100);
+  ach.push({ status: longInscriptions.length >= 2 ? 'unlocked' : 'in-progress', label: '长铭文读者 ' + longInscriptions.length + '/5', note: longInscriptions.map(a=>a.name_zh).join(', ') || '尚未录入长铭文器物。' });
+  // 古蜀
+  const shu = MuseumA.catalog.filter(a => (a.ancient_state||'').indexOf('蜀') >= 0).map(a=>a.id);
+  const shuC = shu.filter(id => MuseumA.isCollected(id)).length;
+  ach.push({ status: shuC === 3 ? 'unlocked' : (shuC > 0 ? 'in-progress' : 'locked'), label: '古蜀文明见证 ' + shuC + '/3', note: '与中原同期但独立的体系。再录 ' + (3-shuC) + ' 件可形成完整三星堆断面。' });
+
+  const achHTML = ach.map(a => `
+    <div class="achievement-row ${a.status}">
+      ${a.status === 'unlocked' ? '<span class="seal jade" style="width:1.8rem; height:1.8rem; font-size:0.6rem">在</span>' :
+        a.status === 'in-progress' ? '<span class="seal bronze" style="width:1.8rem; height:1.8rem; font-size:0.6rem">续</span>' :
+        '<span class="seal faded" style="width:1.8rem; height:1.8rem; font-size:0.6rem">候</span>'}
+      <div class="flex-1">
+        <div class="font-fang text-sm label">${a.label}</div>
+        <div class="font-fang text-xs" style="color:var(--ink-faded)">${a.note}</div>
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('ach-list').innerHTML = achHTML;
+
+  // === Passport (museums) ===
+  const museums = {};
+  MuseumA.catalog.forEach(a => {
+    const m = (a.current_museum || '未明').split(/[\\/]/)[0].trim();
+    if (!museums[m]) museums[m] = { pool: 0, collected: 0, items: [] };
+    museums[m].pool++;
+    museums[m].items.push(a);
+    if (MuseumA.isCollected(a.id)) museums[m].collected++;
+  });
+  const order = ['中国国家博物馆','故宫博物院','上海博物馆','台北故宫博物院','河南博物院','陕西历史博物馆','湖北省博物馆','河北博物院','宝鸡青铜器博物院','三星堆博物馆','秦始皇帝陵博物院','山西博物院','湖南博物院','甘肃省博物馆'];
+  let pg = '';
+  order.forEach(m => {
+    const stat = museums[m];
+    if (!stat) return;
+    const stamped = stat.collected > 0;
+    const isOverseas = m.indexOf('台北') >= 0 || m.indexOf('大英') >= 0 || m.indexOf('MET') >= 0;
+    pg += `
+    <div class="passport-strip" style="${isOverseas ? 'background: #ebe2c8;' : ''}">
+      <div class="stamp-box ${stamped ? 'stamped' : 'unstamped'}">${stamped ? m.split(/(博物|博物院|历史|故宫)/)[0].substring(0,4) : '待'}</div>
+      <div class="flex-1">
+        <div class="font-serif-cn text-sm"><strong>${m}</strong>${isOverseas ? '<span class="rarity-tag overseas" style="font-size:0.55rem">流</span>' : ''}</div>
+        <div class="font-mono-num text-xs" style="color:var(--ink-faded)">${stat.collected} / ${stat.pool}</div>
+      </div>
+    </div>`;
+  });
+  document.getElementById('passport-grid').innerHTML = pg;
+
+  // === Timeline ===
+  const tbody = document.getElementById('timeline-tbody');
+  const dates = ['2026-05-19', '2026-05-17', '2026-05-15', '2026-05-13', '2026-05-12', '2026-05-08', '2026-05-04', '2026-04-29', '2026-04-22'];
+  let trs = '';
+  u.collected_ids.forEach((id, i) => {
+    const a = MuseumA.catalogById[id];
+    if (!a) return;
+    const reasons = [];
+    if (a.inscription && a.inscription.char_count) reasons.push(`铭 ${a.inscription.char_count}字`);
+    if ((a.craft || '').indexOf('失蜡') >= 0) reasons.push('失蜡');
+    if ((a.ancient_state || '').indexOf('蜀') >= 0) reasons.push('古蜀');
+    trs += `
+    <tr>
+      <td class="font-mono-num text-xs">${dates[i] || '—'}</td>
+      <td><a href="artifact.html?id=${a.id}" class="font-serif-cn hover:underline" style="color:var(--ink)"><strong>${a.name_zh}</strong></a></td>
+      <td class="font-fang text-xs">${a.dynasty} · ${a.period || ''}</td>
+      <td class="font-fang text-xs">${MuseumA.tierLabel(a.rarity_level)}</td>
+      <td class="font-fang text-xs" style="color:var(--ink-soft)">${reasons.join(' · ')}</td>
+    </tr>`;
+  });
+  tbody.innerHTML = trs;
+
+  // === Pending suggestions ===
+  const pending = [
+    {
+      title: '商代早 / 中期 断面建设',
+      body: '您当前录入集中于商晚期。商早(二里岗)与商中暂为空白,补 1–2 件方鼎或乳钉爵可形成商代纵向断面。',
+      next: '建议从子龙鼎(商晚,海外回流)或商早乳钉鼎(数据池外参考)起步。',
+    },
+    {
+      title: '失蜡法 工艺断面',
+      body: '您已覆盖范铸法 9 件,但失蜡法 0 件。失蜡法首次大规模应用见曾侯乙尊盘 (BC 433)。',
+      next: '建议录入 <a href="artifact.html?id=zenghouyi_zunpan" style="color:var(--indigo); text-decoration:underline">曾侯乙尊盘</a>(湖北博)。',
+    },
+    {
+      title: '古蜀独立文明对照',
+      body: '您已录三星堆 1 件(纵目面具),尚缺青铜大立人、青铜神树。三者并陈方能呈现古蜀政教合一图景。',
+      next: '建议补 <a href="artifact.html?id=sanxingdui_dali_ren" style="color:var(--indigo); text-decoration:underline">青铜大立人</a> + <a href="artifact.html?id=sanxingdui_shenshu" style="color:var(--indigo); text-decoration:underline">青铜神树</a>。',
+    },
+  ];
+  document.getElementById('pending').innerHTML = pending.map(p => `
+    <div class="margin-note p-3">
+      <div class="font-serif-cn text-sm mb-1"><strong>${p.title}</strong></div>
+      <p class="font-fang text-xs">${p.body}</p>
+      <p class="font-fang text-xs mt-2" style="color:var(--ink-faded)"><strong>建议:</strong> ${p.next}</p>
+    </div>
+  `).join('');
+
+  MuseumLayout.attachCitations(document);
+})();
+</script>
+</body>
+</html>

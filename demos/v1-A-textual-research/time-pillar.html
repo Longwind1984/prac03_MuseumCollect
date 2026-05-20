@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<title>时空柱 · 朝代分期 — 青铜考</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<link rel="stylesheet" href="css/scholar.css">
+<style>
+  .pillar-row { display: grid; grid-template-columns: 12rem 1fr 12rem; gap: 1rem; align-items: stretch; }
+  .pillar-axis { font-family: "Iosevka", monospace; font-size: 10px; color: var(--ink-faded); position: relative; }
+  .pillar-event { position: absolute; right: 0; text-align: right; padding-right: 4px; font-family: "FangSong", serif; font-size: 0.75rem; color: var(--ink-soft); line-height: 1.4; max-width: 12rem; }
+  .pillar-event::before { content: ""; display: inline-block; width: 12px; border-top: 1px solid var(--vermilion); vertical-align: middle; margin-right: 4px; }
+  .seg-major { position: absolute; left: 0; right: 0; background: var(--paper-soft); border: 1px solid var(--rule); }
+  .seg-major.collected-some { border-color: var(--bronze); }
+  .seg-fill { position: absolute; left: 0; bottom: 0; right: 0; background: linear-gradient(180deg, transparent 0%, rgba(138, 107, 61, 0.15) 30%, var(--bronze) 100%); }
+  .seg-label { position: absolute; left: 8px; top: 8px; font-family: "Songti SC", serif; font-size: 1rem; color: var(--ink); letter-spacing: 0.05em; }
+  .seg-sub-list { position: absolute; left: 8px; top: 32px; font-family: "FangSong", serif; font-size: 0.7rem; color: var(--ink-soft); line-height: 1.4; }
+  .seg-count { position: absolute; right: 8px; top: 8px; font-family: "Iosevka", monospace; font-size: 0.7rem; color: var(--ink-faded); }
+  .seg-stamp { position: absolute; right: 8px; bottom: 8px; }
+  .seg-major.empty { background: repeating-linear-gradient(45deg, transparent 0 8px, rgba(124, 113, 90, 0.08) 8px 9px), var(--paper-soft); }
+  .seg-major.empty .seg-label { color: var(--ink-faded); }
+  .seg-collected-thumb { position: absolute; padding: 2px 6px; font-family: "FangSong", serif; font-size: 0.65rem; background: var(--paper); border: 1px solid var(--bronze); border-left: 3px solid var(--bronze); color: var(--ink); white-space: nowrap; box-shadow: 0 1px 2px rgba(0,0,0,0.08); }
+  .seg-collected-thumb:hover { background: var(--paper-dark); }
+</style>
+</head>
+<body data-page="time-pillar.html" class="min-h-screen">
+
+<div id="site-header"></div>
+
+<main class="max-w-7xl mx-auto px-6 pt-8">
+
+  <section class="mb-6">
+    <div class="section-cap">维度 · 一 / Dynasty Pillar</div>
+    <h1 class="scholar-title text-3xl mb-2">时空柱</h1>
+    <p class="font-fang text-sm leading-relaxed" style="color:var(--ink-soft)">
+      朝代区段高度严格正比于历史时长(夏 <span class="font-mono-num">250</span> · 商 <span class="font-mono-num">554</span> · 西周 <span class="font-mono-num">275</span> · 春秋 <span class="font-mono-num">295</span> · 战国 <span class="font-mono-num">255</span> · 秦 <span class="font-mono-num">15</span> · 西汉 <span class="font-mono-num">215</span> · 东汉 <span class="font-mono-num">195</span> 年)<sup class="cite-ref" data-cite="纪年依夏商周断代工程 (2000) 与《中国历史纪年表》;西周起年 BC 1046 据利簋'甲子朝,岁鼎'与 BC 1046.02.20 天象推断。">[纪]</sup>。子分期独立可读。
+    </p>
+    <p class="font-fang text-xs mt-2" style="color:var(--ink-faded)">
+      ※ 已录入器物以小标签沉浮于段内对应年份的位置;右侧标注重大考据/历史事件,亦带引用来源。
+    </p>
+  </section>
+
+  <hr class="scholar-rule">
+
+  <!-- The pillar -->
+  <div class="pillar-row">
+    <!-- Left: time scale BC/AD ticks -->
+    <div class="pillar-axis" id="left-axis" style="position:relative; min-height:1500px"></div>
+    <!-- Middle: the actual pillar -->
+    <div id="pillar-stage" style="position:relative; min-height:1500px"></div>
+    <!-- Right: historical events with citations -->
+    <div class="pillar-axis" id="right-events" style="position:relative; min-height:1500px"></div>
+  </div>
+
+  <hr class="scholar-rule">
+
+  <!-- Summary table below -->
+  <section class="mt-6 mb-10">
+    <div class="section-cap">朝代分期 · 摘要</div>
+    <table class="scholar-table">
+      <thead>
+        <tr><th>朝代</th><th>子分期</th><th class="text-right">时长 (年)</th><th class="text-right">数据池</th><th class="text-right">已录</th><th class="text-right">覆盖率</th><th>代表器</th><th>研究备注</th></tr>
+      </thead>
+      <tbody id="summary-tbody"></tbody>
+    </table>
+    <p class="font-fang text-xs mt-3" style="color:var(--ink-faded)">
+      ※ 覆盖率 = 已录入数 / 该期数据池数。**完全空白段**未做"未解锁"虚化 — 学界普遍认为夏 / 商早期史料稀少非用户之过<sup class="cite-ref" data-cite="李学勤《走出疑古时代》P.45 论及夏商早期史料断层;商早期(二里岗)器物存世数远少于商晚期。">[史]</sup>。
+    </p>
+  </section>
+
+</main>
+
+<div id="site-footer"></div>
+
+<script src="js/data.js"></script>
+<script src="js/layout.js"></script>
+<script>
+(async function() {
+  await MuseumA.ready;
+
+  const TOTAL_START = -1750, TOTAL_END = 220;
+  const TOTAL_RANGE = TOTAL_END - TOTAL_START;
+  const STAGE_HEIGHT = 1500;
+  const PX_PER_YEAR = STAGE_HEIGHT / TOTAL_RANGE;
+
+  function yearToPx(y) {
+    // y is BC negative; convert from top
+    return (TOTAL_END - y) * PX_PER_YEAR;
+  }
+
+  const stage = document.getElementById('pillar-stage');
+  const leftAxis = document.getElementById('left-axis');
+  const rightEvents = document.getElementById('right-events');
+
+  // === Left axis: BC ticks every 200 years
+  let axisHTML = '';
+  for (let y = -1700; y <= 200; y += 200) {
+    const px = yearToPx(y);
+    const label = y < 0 ? `BC ${-y}` : (y === 0 ? 'BC/AD' : `AD ${y}`);
+    axisHTML += `
+    <div style="position:absolute; right:0; top:${px}px; padding-right:8px; border-top:1px solid var(--rule)">
+      <span class="font-mono-num">${label}</span>
+    </div>`;
+  }
+  leftAxis.innerHTML = axisHTML;
+
+  // === Right side events
+  let eventsHTML = '';
+  MuseumA.DYNASTY_EVENTS.forEach(e => {
+    const px = yearToPx(e.year);
+    eventsHTML += `
+    <div class="pillar-event" style="top:${px - 8}px">
+      ${e.label}
+      ${MuseumLayout.citation('源', e.source)}
+    </div>`;
+  });
+  rightEvents.innerHTML = eventsHTML;
+
+  // === Pillar segments
+  const dStats = MuseumA.dynastyStats();
+  let segHTML = '';
+  MuseumA.DYNASTY_RANGES.forEach(d => {
+    const topPx = yearToPx(d.end);
+    const botPx = yearToPx(d.start);
+    const segHeight = botPx - topPx;
+    const stats = dStats[d.key];
+    const pct = stats.pool ? (stats.collected / stats.pool * 100) : 0;
+    const fillH = segHeight * (pct / 100);
+    const isEmpty = stats.collected === 0;
+    const cls = isEmpty ? 'empty breathing' : (stats.collected === stats.pool ? 'collected-full' : 'collected-some');
+    const stampHTML = pct >= 60 ? `<div class="seg-stamp"><span class="seal large jade">${d.label}通鉴</span></div>` :
+                     pct >= 30 ? `<span class="seg-stamp font-fang text-xs" style="color:var(--bronze)">再 ${stats.pool - stats.collected} 件 · 解锁 ${d.label} 通鉴</span>` :
+                     '';
+    segHTML += `
+      <div class="seg-major ${cls}" style="top:${topPx}px; height:${segHeight}px;">
+        ${!isEmpty ? `<div class="seg-fill" style="height:${fillH}px"></div>` : ''}
+        <div class="seg-label">${d.label}
+          <span class="font-mono-num text-xs ml-2" style="color:var(--ink-faded)">${d.end - d.start} 年 · BC ${-d.start}~${d.end < 0 ? 'BC ' + (-d.end) : 'AD ' + d.end}</span>
+        </div>
+        <div class="seg-sub-list">${d.periods.map(p => '· ' + p).join('<br>')}</div>
+        <div class="seg-count">${stats.collected}/${stats.pool}</div>
+        ${stampHTML}
+      </div>`;
+  });
+
+  // === Collected item thumbs (sticky to their year position)
+  // place to the right within segment; stagger to avoid overlap
+  const thumbs = {};
+  MuseumA.user.collected_ids.forEach(id => {
+    const a = MuseumA.catalogById[id];
+    if (!a) return;
+    const yr = MuseumA.approxStartYear(a.approx_year);
+    if (!yr) return;
+    const px = yearToPx(yr);
+    if (!thumbs[Math.floor(px / 30)]) thumbs[Math.floor(px / 30)] = 0;
+    const indent = thumbs[Math.floor(px / 30)]++;
+    segHTML += `
+      <a href="artifact.html?id=${a.id}" class="seg-collected-thumb" style="top:${px - 8}px; right:${20 + indent * 130}px">
+        ▌${a.name_zh}
+        <span class="font-mono-num" style="color:var(--ink-faded)">${a.approx_year || ''}</span>
+      </a>`;
+  });
+
+  stage.innerHTML = segHTML;
+
+  // === Summary table
+  const tb = document.getElementById('summary-tbody');
+  const notesMap = {
+    '夏':   '存世稀少,二里头爵为标准器。',
+    '商':   '商晚期 (殷墟妇好墓) 为黄金期。',
+    '西周': '册命金文之巅;海内三宝皆出此期。',
+    '春秋': '神性→人性的过渡,郭沫若言"新时代之觉醒"。',
+    '战国': '失蜡法出世;曾侯乙墓十大重器。',
+    '秦':   '统一度量衡;铜车马"青铜之冠"。',
+    '西汉': '错金、鎏金工艺臻至,中山靖王刘胜墓为标杆。',
+    '东汉': '雕塑写实主义,马踏飞燕为代表。',
+  };
+  let tbHTML = '';
+  MuseumA.DYNASTY_RANGES.forEach(d => {
+    const stats = dStats[d.key];
+    const pct = stats.pool ? (stats.collected / stats.pool * 100).toFixed(0) : '—';
+    const reps = stats.items.slice(0, 3).map(a => a.name_zh).join('、') || '—';
+    tbHTML += `
+    <tr>
+      <td class="font-serif-cn"><strong>${d.label}</strong></td>
+      <td class="font-fang text-xs">${d.periods.join(' / ')}</td>
+      <td class="font-mono-num text-right">${d.end - d.start}</td>
+      <td class="font-mono-num text-right">${stats.pool}</td>
+      <td class="font-mono-num text-right"><strong>${stats.collected}</strong></td>
+      <td class="font-mono-num text-right">${pct}%</td>
+      <td class="font-fang text-xs">${reps}</td>
+      <td class="font-fang text-xs" style="color:var(--ink-soft)">${notesMap[d.key] || ''}</td>
+    </tr>`;
+  });
+  tb.innerHTML = tbHTML;
+
+  MuseumLayout.attachCitations(document);
+})();
+</script>
+</body>
+</html>

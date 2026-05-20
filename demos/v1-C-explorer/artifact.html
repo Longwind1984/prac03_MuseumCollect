@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>文物详情 — MuseumCollect</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/explorer.css" />
+</head>
+<body class="paper-bg">
+
+<nav class="top-nav">
+  <div class="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2 click-feedback">
+      <span class="inline-flex w-8 h-8 rounded-lg items-center justify-center text-white font-bold"
+            style="background:linear-gradient(135deg,#c0392b 0%,#c9a85f 100%);font-family:'KaiTi',serif">青</span>
+      <span class="font-semibold tracking-wide">青铜图鉴</span>
+      <span class="text-xs text-stone-400">/ 探索版</span>
+    </a>
+    <div class="flex items-center gap-1 text-sm">
+      <a href="catalog.html"      class="px-3 py-1.5 rounded-full hover:bg-black/5">图鉴</a>
+      <a href="time-pillar.html"  class="px-3 py-1.5 rounded-full hover:bg-black/5">时空柱</a>
+      <a href="ancient-map.html"  class="px-3 py-1.5 rounded-full hover:bg-black/5">古国地图</a>
+      <a href="form-genealogy.html" class="px-3 py-1.5 rounded-full hover:bg-black/5">形制谱系</a>
+      <a href="scan.html"         class="px-3 py-1.5 rounded-full hover:bg-black/5">扫描</a>
+      <a href="me.html"           class="ml-2 px-3 py-1.5 rounded-full bg-black text-amber-50 font-medium">我的</a>
+    </div>
+  </div>
+</nav>
+
+<main class="max-w-6xl mx-auto px-5 py-8">
+
+  <!-- Crumb -->
+  <div class="text-xs text-stone-500 mb-4">
+    <a href="catalog.html" class="hover:text-black">图鉴</a> /
+    <span id="crumbType" class="text-stone-400">…</span>
+  </div>
+
+  <!-- HERO: card-flip detail -->
+  <section class="grid grid-cols-12 gap-8 mb-12 fade-up">
+
+    <!-- LEFT: 3D card flip with artifact -->
+    <div class="col-span-12 md:col-span-5">
+      <div id="heroCard" class="card-flip-3d cursor-pointer mb-3" style="height: 480px;">
+        <div class="card-flip-inner">
+          <!-- BACK -->
+          <div class="card-face back" style="
+            background: linear-gradient(135deg,#1a1a1c 0%,#3a2a14 100%);
+            border:2px solid rgba(212,168,87,0.4);
+            display:flex;align-items:center;justify-content:center;">
+            <div class="text-center">
+              <div class="text-amber-300/80 text-xs tracking-widest mb-3">CARD</div>
+              <div class="text-amber-300 text-7xl" style="font-family:'STKaiti',serif">青</div>
+              <div class="text-amber-200/70 text-xs mt-3 tracking-[0.4em]">BRONZE COLLECTION</div>
+            </div>
+          </div>
+          <!-- FRONT (filled by JS) -->
+          <div id="heroFront" class="card-face" style="padding:24px"></div>
+        </div>
+      </div>
+      <div class="text-xs text-stone-500 text-center">点卡片翻面 · 这是你的"卡背→卡正面"开卡体验</div>
+
+      <!-- Action row -->
+      <div class="mt-6 flex gap-2">
+        <button id="addCollect" class="btn btn-zhusha flex-1 click-feedback">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+          加入图鉴
+        </button>
+        <button id="shareThis" class="btn btn-treasure flex-1 click-feedback">
+          梗卡片分享
+        </button>
+        <button class="btn btn-ghost click-feedback px-3">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.35-7-10a7 7 0 0 1 14 0c0 5.65-7 10-7 10z" stroke="currentColor" stroke-width="2"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- RIGHT: meta + story -->
+    <div class="col-span-12 md:col-span-7">
+      <div class="flex flex-wrap gap-2 mb-3" id="metaChips">
+        <!-- chips -->
+      </div>
+      <h1 id="artifactName" class="text-4xl font-bold tracking-tight">…</h1>
+      <div id="artifactSub" class="text-stone-500 mt-1">…</div>
+
+      <!-- 梗 line — quotable -->
+      <blockquote id="memeQuote" class="mt-5 pl-4 border-l-4 border-amber-500"
+                  style="font-family:'STKaiti',serif;font-size:20px;font-weight:600;color:#c0392b;line-height:1.5">
+        …
+      </blockquote>
+
+      <!-- Stats grid -->
+      <div class="grid grid-cols-3 gap-3 mt-6" id="quickStats">
+        <!-- filled by JS -->
+      </div>
+
+      <!-- Story (folded by default) -->
+      <div class="mt-6">
+        <div class="text-xs text-stone-500 mb-1">📖 故事</div>
+        <p id="storyText" class="text-sm leading-relaxed text-stone-700">…</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== Multi-dimension panel ============================== -->
+  <section class="mb-12 fade-up delay-1">
+    <h2 class="text-xl font-semibold mb-4">这件文物在 5 个维度里的位置</h2>
+
+    <div class="grid grid-cols-12 gap-4">
+
+      <!-- 1. 时代 — mini time pillar -->
+      <a href="time-pillar.html" class="col-span-12 md:col-span-4 card p-5 click-feedback bounce-on-hover">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-stone-500">时代</span>
+          <span class="text-amber-700 text-sm">→</span>
+        </div>
+        <div class="flex items-end gap-1 h-20 mb-2">
+          <div class="flex-1 rounded-md soft-breath" style="background:#e6e0d3"></div>
+          <div class="flex-1 rounded-md" id="dynastyBar0" style="background:#e6e0d3;position:relative;height:90%"></div>
+          <div class="flex-1 rounded-md" id="dynastyBar1" style="background:#e6e0d3;position:relative;height:50%"></div>
+          <div class="flex-1 rounded-md" id="dynastyBar2" style="background:#e6e0d3;position:relative;height:55%"></div>
+          <div class="flex-1 rounded-md" id="dynastyBar3" style="background:#e6e0d3;position:relative;height:50%"></div>
+        </div>
+        <div class="text-sm font-semibold" id="dynastyText">…</div>
+      </a>
+
+      <!-- 2. 出土地 — mini map -->
+      <a href="ancient-map.html" class="col-span-12 md:col-span-4 card p-5 click-feedback bounce-on-hover">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-stone-500">出土地</span>
+          <span class="text-amber-700 text-sm">→</span>
+        </div>
+        <svg id="miniMap" viewBox="0 0 200 88" class="w-full h-20 mb-2">
+          <path d="M10,40 Q40,20 80,30 T150,40 T190,55 L190,80 L10,80 Z" fill="#efeae0" stroke="#c8c3b8" stroke-width="0.5"/>
+        </svg>
+        <div class="text-sm font-semibold" id="siteText">…</div>
+      </a>
+
+      <!-- 3. 馆藏护照 印章 -->
+      <a href="me.html" class="col-span-12 md:col-span-4 card p-5 click-feedback bounce-on-hover">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-stone-500">馆藏地</span>
+          <span class="text-amber-700 text-sm">→</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div id="museumStamp" class="w-16 h-16 rounded-md flex items-center justify-center text-white text-xs font-bold text-center leading-tight"
+               style="background:#c0392b;transform:rotate(-4deg);font-family:'KaiTi',serif">…</div>
+          <div>
+            <div class="text-sm font-semibold" id="museumText">…</div>
+            <div class="text-[10px] text-stone-500">护照印章 · 已盖</div>
+          </div>
+        </div>
+      </a>
+
+      <!-- 4. 形制谱系位置 -->
+      <a href="form-genealogy.html" class="col-span-12 md:col-span-6 card p-5 click-feedback bounce-on-hover">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-stone-500">形制</span>
+          <span class="text-amber-700 text-sm">→ Pokédex 风谱系树</span>
+        </div>
+        <svg viewBox="0 0 320 90" class="w-full h-20 mb-2">
+          <line x1="20" y1="45" x2="100" y2="45" stroke="#5a8478" stroke-width="2"/>
+          <line x1="100" y1="45" x2="200" y2="20" stroke="#5a8478" stroke-width="2"/>
+          <line x1="100" y1="45" x2="200" y2="45" stroke="#bbb" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="100" y1="45" x2="200" y2="70" stroke="#5a8478" stroke-width="2"/>
+          <line x1="200" y1="20" x2="290" y2="20" stroke="#c9a85f" stroke-width="2.5"/>
+          <circle cx="20"  cy="45" r="6"  fill="#1a1a1c"/>
+          <circle cx="100" cy="45" r="5"  fill="#5a8478"/>
+          <circle cx="200" cy="20" r="5"  fill="#5a8478"/>
+          <circle cx="200" cy="45" r="4"  fill="#fff" stroke="#bbb"/>
+          <circle cx="200" cy="70" r="5"  fill="#5a8478"/>
+          <circle cx="290" cy="20" r="7"  fill="#d4a857"/>
+          <text x="290" y="44" text-anchor="middle" font-size="10" fill="#8b6f3e" font-weight="700">★ 你在这里</text>
+        </svg>
+        <div class="text-sm font-semibold" id="formText">…</div>
+      </a>
+
+      <!-- 5. 纹饰 -->
+      <div class="col-span-12 md:col-span-6 card p-5">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-stone-500">纹饰 · 你已识别</span>
+          <a href="form-genealogy.html#patterns" class="text-amber-700 text-sm">→</a>
+        </div>
+        <div id="patternList" class="flex flex-wrap gap-2 mb-2"></div>
+        <div class="text-[10px] text-stone-500 mt-3">长按图区(模拟)→ "拓"下一片黑白拓片 → 入纹饰收藏夹</div>
+      </div>
+
+      <!-- 6. 铭文 (if any) -->
+      <div id="inscriptionPanel" class="col-span-12 card p-5 hidden">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs text-stone-500">铭文 · 你的段位 二段</span>
+          <div class="flex items-center gap-2">
+            <span class="rank-badge rank-dan-2"><span class="seal">叩</span>金文 47 字</span>
+            <a href="#" class="text-amber-700 text-sm">展开释读 →</a>
+          </div>
+        </div>
+
+        <div id="inscriptionText" class="bg-[#f7f3eb] rounded-lg p-4 text-lg leading-loose tracking-wider" style="font-family:'STKaiti','KaiTi',serif">
+          <!-- spans inserted by JS -->
+        </div>
+        <div class="mt-3 text-xs text-stone-500">悬停字 → 释读 · 已识字会淡金色高亮</div>
+
+        <!-- hover popup -->
+        <div id="charPopup" class="hidden absolute z-40 card p-3 max-w-xs text-xs leading-relaxed pointer-events-none" style="box-shadow:0 10px 30px rgba(0,0,0,0.15)"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== Related ============================== -->
+  <section class="mb-16 fade-up delay-2">
+    <h2 class="text-xl font-semibold mb-4">同形制 / 同朝代 / 同出土地</h2>
+    <div id="relatedRow" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+  </section>
+
+  <footer class="text-center text-xs text-stone-400 pb-10">
+    阿K · 看完顺便加入图鉴
+  </footer>
+</main>
+
+<!-- Collection feedback toast -->
+<div id="collectToast" class="fixed inset-x-0 top-20 z-50 flex justify-center pointer-events-none">
+  <div class="card px-5 py-3 flex items-center gap-3 opacity-0 transition-opacity duration-300"
+       style="transform:translateY(-20px);transition:opacity 300ms, transform 400ms;background:linear-gradient(135deg,#fff7e8 0%,#fff 100%);border:1px solid rgba(212,168,87,0.4)">
+    <span class="text-2xl">✦</span>
+    <div>
+      <div class="font-semibold text-sm" id="toastTitle">已加入图鉴</div>
+      <div class="text-xs text-stone-500" id="toastSub">时空柱 · 古国地图 · 谱系树 · 同时点亮</div>
+    </div>
+  </div>
+</div>
+
+<script src="js/state.js"></script>
+<script>
+(async function () {
+  await MC.load();
+
+  const params = new URLSearchParams(location.search);
+  const id = params.get('id') || 'fuhao_xiaozun';
+  const a = MC.artifact(id);
+  if (!a) { document.body.innerHTML = '<div class="p-10 text-center">未找到</div>'; return; }
+
+  const isTreasure = MC.rarityTier(a) === 'treasure';
+  const isCollected = MC.isCollected(a.id);
+
+  document.title = `${a.name_zh} — 青铜图鉴`;
+  document.getElementById('crumbType').textContent = `${a.type} / ${a.form_subtype || ''} / ${a.name_zh}`;
+  document.getElementById('artifactName').textContent = a.name_zh;
+  document.getElementById('artifactSub').textContent = `${a.dynasty}${a.period ? ' · '+a.period : ''} · ${a.current_museum}`;
+  document.getElementById('memeQuote').textContent = `"${MC.memeFor(a.id)}"`;
+  document.getElementById('storyText').textContent = a.story_brief || '';
+
+  // chips
+  document.getElementById('metaChips').innerHTML = `
+    ${isTreasure ? '<span class="chip liujin">国宝</span>' : `<span class="chip">${MC.rarityDisplayName(a)}</span>`}
+    ${a.inscription && a.inscription.char_count >= 100 ? '<span class="chip cuilv">长铭 ' + a.inscription.char_count + ' 字</span>' : ''}
+    ${(a.excavation_site||'').includes('三星堆') ? '<span class="chip zhusha">古蜀稀有</span>' : ''}
+    ${(a.current_museum||'').includes('台北') ? '<span class="chip" style="background:#fcecdc;color:#a45a16">流散海外</span>' : ''}
+    <span class="chip">${a.type}</span>
+    ${a.form_subtype ? '<span class="chip">' + a.form_subtype + '</span>' : ''}
+  `;
+
+  // hero front
+  const heroFront = document.getElementById('heroFront');
+  heroFront.className = `card-face ${MC.rarityHaloClass(a)}`;
+  heroFront.style.cssText = `padding:24px;border-radius:24px;display:flex;flex-direction:column`;
+  heroFront.innerHTML = `
+    ${isTreasure ? '<div class="guo-bao-stamp" style="top:14px;right:14px">国之<br/>重器</div>' : ''}
+    <div class="text-[10px] tracking-widest opacity-60 mb-1">No.${MC.catalog().findIndex(x=>x.id===a.id)+1} / 25</div>
+    <div class="flex-1 flex items-center justify-center relative">
+      <img src="${MC.placeholderUrl(a)}" alt="${a.name_zh}" style="width:90%;max-height:330px;object-fit:contain;filter:drop-shadow(0 14px 28px rgba(0,0,0,0.18))"/>
+    </div>
+    <div class="border-t border-dashed border-stone-300 mt-3 pt-3">
+      <div class="font-bold text-base">${a.name_zh}</div>
+      <div class="text-xs text-stone-500 mt-0.5">${a.period}</div>
+    </div>
+  `;
+
+  // Hero flip
+  const heroCard = document.getElementById('heroCard');
+  let flipped = false;
+  setTimeout(() => { heroCard.classList.add('flipped'); flipped = true; }, 350);
+  heroCard.addEventListener('click', () => {
+    flipped = !flipped;
+    heroCard.classList.toggle('flipped', flipped);
+  });
+
+  // Quick stats
+  const sz = a.size || {};
+  document.getElementById('quickStats').innerHTML = `
+    <div class="card p-3">
+      <div class="text-[10px] text-stone-500">出土年</div>
+      <div class="font-semibold text-base">${a.excavation_year || '?'}</div>
+    </div>
+    <div class="card p-3">
+      <div class="text-[10px] text-stone-500">高度 / 重量</div>
+      <div class="font-semibold text-base">${sz.height_cm || '?'} cm · ${sz.weight_kg ? sz.weight_kg + ' kg' : '?'}</div>
+    </div>
+    <div class="card p-3">
+      <div class="text-[10px] text-stone-500">工艺</div>
+      <div class="font-semibold text-base">${a.craft ? a.craft.split(/[(\s+]/)[0] : '?'}</div>
+    </div>
+  `;
+
+  // 时代 mini bars: highlight the artifact's dynasty
+  const dynastyOrder = ['夏','商','西周','春秋','战国','秦','汉'];
+  const i = dynastyOrder.findIndex(d => (a.dynasty||'').includes(d));
+  for (let k = 0; k < 5; k++) {
+    const el = document.getElementById('dynastyBar' + k);
+    if (!el) continue;
+    if (k === i - 1) { // 1-indexed display
+      el.innerHTML = `<div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(180deg,#c9a85f,#d4a857);height:80%;border-radius:6px;box-shadow:0 0 10px rgba(212,168,87,0.6)"></div>`;
+    }
+  }
+  document.getElementById('dynastyText').textContent = `${a.dynasty}${a.period ? ' · ' + a.period : ''}`;
+
+  // 出土地 mini map
+  const site = MC.siteForArtifact(a);
+  const miniMap = document.getElementById('miniMap');
+  if (site) {
+    const sx = site.x / 1000 * 200;
+    const sy = site.y / 700 * 88;
+    miniMap.innerHTML += `<circle cx="${sx}" cy="${sy}" r="4" fill="#c9a85f"/><circle cx="${sx}" cy="${sy}" r="8" fill="none" stroke="#c9a85f" opacity="0.5"/>`;
+    document.getElementById('siteText').textContent = site.label;
+  } else {
+    document.getElementById('siteText').textContent = a.excavation_site;
+  }
+
+  // Museum stamp
+  const museumColors = {
+    '中国国家博物馆': '#c0392b',
+    '故宫博物院':     '#a02c2c',
+    '台北故宫博物院': '#8b6f3e',
+    '上海博物馆':     '#8b3a3a',
+    '河南博物院':     '#3d7a4f',
+    '湖北省博物馆':   '#1a5a7e',
+    '三星堆博物馆':   '#5a3e1a',
+    '河北博物院':     '#4a5e8c',
+    '宝鸡青铜器博物院':'#8b3a3a',
+    '甘肃省博物馆':   '#7a5a3a',
+    '山西博物院':     '#3a6e4a',
+    '湖南博物院':     '#8b3a3a',
+    '秦始皇帝陵博物院':'#5a3a3a',
+  };
+  const mkey = (a.current_museum || '').split(/[ /]/)[0];
+  const mc = museumColors[mkey] || '#c0392b';
+  const stamp = document.getElementById('museumStamp');
+  stamp.style.background = mc;
+  // Get 2-char abbrev
+  const abbrev = { '中国国家博物馆':'国博','故宫博物院':'故宫','台北故宫博物院':'台故','上海博物馆':'上博','河南博物院':'豫博','湖北省博物馆':'鄂博','三星堆博物馆':'三星','河北博物院':'冀博','宝鸡青铜器博物院':'宝鸡','甘肃省博物馆':'甘博','山西博物院':'晋博','湖南博物院':'湘博','秦始皇帝陵博物院':'秦陵' };
+  stamp.textContent = abbrev[mkey] || mkey.slice(0,2);
+  document.getElementById('museumText').textContent = a.current_museum;
+
+  // 形制
+  document.getElementById('formText').textContent = `${a.type} · ${a.form_subtype || ''}`;
+
+  // 纹饰
+  document.getElementById('patternList').innerHTML = (a.patterns || []).map(p => `
+    <span class="chip" style="background:rgba(46,139,87,0.10);color:#1f6b3f;border-color:rgba(46,139,87,0.25)">${p}</span>
+  `).join('');
+
+  // 铭文 (if any)
+  if (a.inscription && a.inscription.has) {
+    document.getElementById('inscriptionPanel').classList.remove('hidden');
+    document.getElementById('inscriptionPanel').classList.add('block');
+    const text = a.inscription.text || a.inscription.summary || '';
+    // tiny dictionary of mock readings
+    const dict = {
+      '王':'wáng · 王朝最高统治者',
+      '若':'ruò · 顺从,如此',
+      '曰':'yuē · 说',
+      '父':'fù · 父亲',
+      '后':'hòu · 君王/王后(本铭释读)',
+      '母':'mǔ · 母亲',
+      '戊':'wù · 商王武丁之妻妇妌庙号',
+      '妇':'fù · 已婚女子',
+      '好':'hǎo · 妇好 · 商王武丁之妻、女将军',
+      '中':'zhōng · 中央 ("宅兹中国")',
+      '国':'guó · 邦国 ("宅兹中国"最早出处)',
+      '宅':'zhái · 居住',
+      '兹':'zī · 此',
+      '子':'zǐ · 商王室子弟称谓',
+      '龙':'lóng · 鼎类铭文中最早的"龙"字',
+      '武':'wǔ · 武王',
+      '征':'zhēng · 征伐',
+      '商':'shāng · 商朝',
+      '甲':'jiǎ · 甲子日',
+      '岁':'suì · 木星',
+      '越':'yuè · 越国',
+      '鸠':'jiū · 越王勾践 (鸠浅)',
+      '浅':'qiǎn · ',
+      '自':'zì · 自己',
+      '作':'zuò · 制作',
+      '用':'yòng · 使用',
+      '剑':'jiàn · 剑',
+    };
+    // For long inscriptions, render a sample (first 16 chars) and indicate length
+    let inscText = text || '王 若 曰 父 不 显 文 武 受 命';  // synthetic for 长铭
+    if (!text && a.inscription.char_count > 20) {
+      // Use a representative snippet by name
+      inscText = {
+        'maogong_ding':  '王 若 曰 父 不 显 文 武 皇 天 弘 厌 厥 德 配 我',
+        'da_yu_ding':    '丕 显 文 王 受 天 有 大 命 在 武 王 嗣 文 作 邦',
+        'da_ke_ding':    '克 曰 穆 穆 文 祖 师 华 父 聪 襄 厥 心 宁 静 于',
+        'sanshi_pan':    '用 矢 撲 散 邑 廼 即 散 用 田 履 自 瀗 涉 以 南',
+        'guoji_zibai_pan':'丕 显 子 白 壮 武 于 戎 工 经 维 四 方 搏 伐 玁',
+        'zenghouyi_bianzhong':'楚 王 媵 章 作 曾 侯 乙 宗 彝 律 名 钟',
+        'changxin_gongdeng':'长 信 尚 浴 阳 信 家',
+      }[a.id] || inscText;
+    }
+    const recognized = new Set(['王','若','曰','父','后','母','戊','妇','好','中','国','宅','兹','子','龙','武','商']);
+    const inscEl = document.getElementById('inscriptionText');
+    inscEl.innerHTML = inscText.split(/\s+/).map(ch => {
+      const known = dict[ch];
+      const recoglight = recognized.has(ch);
+      return `<span class="char-token cursor-help inline-block px-1.5 py-0.5 mx-0.5 rounded
+                    ${recoglight ? 'bg-amber-100/60 text-amber-900' : 'text-stone-700'}"
+                    data-meaning="${known || ch + ' · 待识'}">${ch}</span>`;
+    }).join('');
+
+    if (a.inscription.char_count > 20) {
+      inscEl.innerHTML += `<div class="text-xs text-stone-500 mt-3">…<span class="ml-2">全铭 ${a.inscription.char_count} 字 · 你已识 ${Math.min(47, a.inscription.char_count)} / ${a.inscription.char_count}</span></div>`;
+    }
+
+    // tooltip
+    const popup = document.getElementById('charPopup');
+    document.querySelectorAll('.char-token').forEach(t => {
+      t.addEventListener('mouseenter', (e) => {
+        popup.classList.remove('hidden');
+        popup.innerHTML = `<div class="font-bold text-base mb-1">${t.textContent}</div>
+                           <div class="text-stone-600">${t.dataset.meaning}</div>
+                           <div class="text-[10px] text-amber-700 mt-2">已识 4 次 · 在 3 件器中</div>`;
+        const rect = t.getBoundingClientRect();
+        popup.style.left = (rect.left + window.scrollX) + 'px';
+        popup.style.top  = (rect.bottom + window.scrollY + 8) + 'px';
+        popup.style.position = 'absolute';
+      });
+      t.addEventListener('mouseleave', () => popup.classList.add('hidden'));
+    });
+  }
+
+  // Related row
+  const all = MC.catalog();
+  const related = all.filter(x =>
+    x.id !== a.id && (x.dynasty === a.dynasty || x.form_subtype === a.form_subtype || x.type === a.type)
+  ).slice(0, 4);
+  document.getElementById('relatedRow').innerHTML = related.map(r => {
+    const haloClass = MC.rarityHaloClass(r);
+    const isOwned = MC.isCollected(r.id);
+    const treasure = MC.rarityTier(r) === 'treasure';
+    return `
+    <a href="artifact.html?id=${r.id}" class="card overflow-hidden ${haloClass} bounce-on-hover click-feedback" style="border-radius:16px;${!isOwned ? 'opacity:0.96':''}">
+      <div style="aspect-ratio: 4/5; background:#fff;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden">
+        ${treasure ? '<div class="guo-bao-stamp" style="top:6px;right:6px;width:36px;height:36px;font-size:9px"><span>国之<br/>重器</span></div>' : ''}
+        ${!isOwned ? '<div class="absolute inset-0 flex items-end justify-end p-2 text-[10px] text-stone-400">未收藏</div>' : ''}
+        <img src="${MC.placeholderUrl(r)}" alt="" style="width:88%;height:88%;object-fit:contain;${!isOwned ? 'filter:grayscale(0.4) opacity(0.65)' : ''}"/>
+      </div>
+      <div class="p-3">
+        <div class="font-semibold text-sm truncate">${r.name_zh}</div>
+        <div class="text-[10px] text-stone-500">${r.dynasty} · ${r.form_subtype || r.type}</div>
+      </div>
+    </a>`;
+  }).join('');
+
+  // Collect button feedback
+  document.getElementById('addCollect').addEventListener('click', () => {
+    const toast = document.getElementById('collectToast').firstElementChild;
+    document.getElementById('toastTitle').textContent = isCollected ? '已在你的图鉴里' : '已加入图鉴 +1';
+    document.getElementById('toastSub').textContent = isCollected ? '继续往下集' : '时空柱 · 古国地图 · 谱系树 · 同时点亮';
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateY(0)';
+    setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateY(-20px)'; }, 1900); // <=2s per anti-Skinner
+  });
+
+  // Share - jump to me.html#share
+  document.getElementById('shareThis').addEventListener('click', () => {
+    location.href = 'me.html#share';
+  });
+})();
+</script>
+
+</body>
+</html>

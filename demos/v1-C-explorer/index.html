@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MuseumCollect · 青铜图鉴 · 探索版</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/explorer.css" />
+</head>
+<body class="paper-bg">
+
+<!-- ============================== NAV ============================== -->
+<nav class="top-nav">
+  <div class="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2 click-feedback">
+      <span class="inline-flex w-8 h-8 rounded-lg items-center justify-center text-white font-bold"
+            style="background:linear-gradient(135deg,#c0392b 0%,#c9a85f 100%);font-family:'KaiTi',serif">青</span>
+      <span class="font-semibold tracking-wide">青铜图鉴</span>
+      <span class="text-xs text-stone-400">/ 探索版</span>
+    </a>
+    <div class="flex items-center gap-1 text-sm">
+      <a href="catalog.html"      class="px-3 py-1.5 rounded-full hover:bg-black/5">图鉴</a>
+      <a href="time-pillar.html"  class="px-3 py-1.5 rounded-full hover:bg-black/5">时空柱</a>
+      <a href="ancient-map.html"  class="px-3 py-1.5 rounded-full hover:bg-black/5">古国地图</a>
+      <a href="form-genealogy.html" class="px-3 py-1.5 rounded-full hover:bg-black/5">形制谱系</a>
+      <a href="scan.html"         class="px-3 py-1.5 rounded-full hover:bg-black/5">扫描</a>
+      <a href="me.html"           class="ml-2 px-3 py-1.5 rounded-full bg-black text-amber-50 font-medium">我的</a>
+    </div>
+  </div>
+</nav>
+
+<main class="max-w-6xl mx-auto px-5 py-8">
+
+  <!-- ============================== HERO ============================== -->
+  <section class="grid grid-cols-12 gap-6 items-stretch mb-12">
+    <!-- LEFT: hero artifact card -->
+    <div class="col-span-12 md:col-span-7 fade-up">
+      <div class="text-xs text-stone-500 mb-2 flex items-center gap-2">
+        <span class="inline-block w-1 h-1 rounded-full bg-emerald-600 animate-pulse"></span>
+        今日推荐 · 5 月 20 日
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold leading-tight tracking-tight">
+        逛过的每一件国宝<br/>
+        <span class="text-stone-500">都是你图鉴里一张<span class="bg-gradient-to-r from-amber-500 to-amber-700 bg-clip-text text-transparent">会发光的卡</span>。</span>
+      </h1>
+      <p class="mt-4 text-stone-600 max-w-md">
+        25 件中国国宝 · 商代 → 东汉 1700 年 · 5 种形制谱系 · 12 处古国遗址。
+        扫一扫,开盲盒,集卡牌。
+      </p>
+
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href="scan.html" class="btn btn-zhusha click-feedback">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 7h2l2-3h10l2 3h2v13H3V7z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="13" r="4" stroke="currentColor" stroke-width="2"/></svg>
+          扫一扫开卡
+        </a>
+        <a href="catalog.html" class="btn btn-ghost click-feedback">浏览图鉴</a>
+      </div>
+    </div>
+
+    <!-- RIGHT: featured artifact card flip -->
+    <div class="col-span-12 md:col-span-5 fade-up delay-1">
+      <div class="relative">
+        <div class="absolute -top-2 -left-2 text-[10px] tracking-widest text-stone-500">FEATURED · 今日</div>
+
+        <div id="heroCard" class="card-flip-3d cursor-pointer" style="height: 380px;">
+          <div class="card-flip-inner">
+
+            <!-- BACK (face down) -->
+            <div class="card-face back" style="
+              background: linear-gradient(135deg,#1a1a1c 0%,#3a2a14 100%);
+              border-radius:24px;
+              display:flex;align-items:center;justify-content:center;
+              border:2px solid rgba(212,168,87,0.4);">
+              <div class="text-center">
+                <div class="text-amber-400/80 text-xs tracking-widest mb-2">点击翻面</div>
+                <div class="text-amber-300 text-7xl font-serif" style="font-family:'STKaiti',serif">青</div>
+                <div class="text-amber-200/70 text-xs mt-2 tracking-[0.4em]">BRONZE · 商-汉</div>
+              </div>
+            </div>
+
+            <!-- FRONT (the artifact) — content injected by JS -->
+            <div id="heroFront" class="card-face rarity-treasure" style="
+              border-radius:24px;
+              padding: 20px;
+              display:flex;flex-direction:column;
+              ">
+              <!-- filled by JS -->
+            </div>
+
+          </div>
+        </div>
+
+        <div class="mt-3 text-xs text-stone-500 text-center">点击卡片翻面 → 看清今日的"国之重器"</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== STATS STRIP ============================== -->
+  <section class="mb-10 fade-up delay-2">
+    <div class="card p-6">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <div class="text-xs text-stone-500">阿K · 我的进度</div>
+          <div class="font-semibold text-lg">青铜见习 · 第 4 周</div>
+        </div>
+        <a href="me.html" class="text-sm text-stone-500 hover:text-black">查看完整 →</a>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+
+        <!-- 1. Collection -->
+        <div>
+          <div class="flex items-baseline gap-1">
+            <span class="text-3xl font-bold" id="statCollected">7</span>
+            <span class="text-stone-500 text-sm">/ 25 件</span>
+          </div>
+          <div class="text-xs text-stone-500 mb-2">总收藏</div>
+          <div class="progress-track"><div class="progress-fill" style="width:28%"></div></div>
+        </div>
+
+        <!-- 2. 国宝率 -->
+        <div>
+          <div class="flex items-baseline gap-1">
+            <span class="text-3xl font-bold text-amber-700" id="statTreasureRate">100</span>
+            <span class="text-stone-500 text-sm">%</span>
+          </div>
+          <div class="text-xs text-stone-500 mb-2">国宝率 (行业 4%)</div>
+          <div class="progress-track"><div class="progress-fill treasure" style="width:100%"></div></div>
+        </div>
+
+        <!-- 3. 朝代覆盖 -->
+        <div>
+          <div class="flex items-baseline gap-1">
+            <span class="text-3xl font-bold">4</span>
+            <span class="text-stone-500 text-sm">/ 7 朝代</span>
+          </div>
+          <div class="text-xs text-stone-500 mb-2">朝代覆盖</div>
+          <div class="progress-track"><div class="progress-fill" style="width:57%"></div></div>
+        </div>
+
+        <!-- 4. 铭文识字 -->
+        <div>
+          <div class="flex items-baseline gap-1">
+            <span class="text-3xl font-bold">47</span>
+            <span class="text-stone-500 text-sm">字</span>
+          </div>
+          <div class="text-xs text-stone-500 mb-2">铭文识读 · 二段</div>
+          <div class="progress-track"><div class="progress-fill" style="width:30%"></div></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== 3 维度入口 (cards) ============================== -->
+  <section class="mb-12 fade-up delay-3">
+    <div class="flex items-end justify-between mb-4">
+      <h2 class="text-xl font-semibold">3 种维度,3 种打开方式</h2>
+      <div class="text-xs text-stone-500">同一批文物,不同的"看"</div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+      <!-- 时空柱 -->
+      <a href="time-pillar.html" class="card p-5 bounce-on-hover click-feedback flex flex-col">
+        <div class="flex items-start justify-between mb-3">
+          <div class="flex flex-col gap-1">
+            <span class="text-xs text-stone-500">DIMENSION · 时代</span>
+            <h3 class="text-lg font-semibold">时空柱</h3>
+          </div>
+          <div class="text-amber-700">→</div>
+        </div>
+        <!-- Mini pillar viz -->
+        <div class="flex items-end gap-1.5 h-24 mb-3">
+          <div class="flex-1 rounded-md" style="background:#e6e0d3;height:100%;position:relative;">
+            <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(180deg,#5a8478,#6b9c8e);height:60%;border-radius:6px"></div>
+          </div>
+          <div class="flex-1 rounded-md" style="background:#e6e0d3;height:80%;position:relative;">
+            <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(180deg,#5a8478,#6b9c8e);height:30%;border-radius:6px"></div>
+          </div>
+          <div class="flex-1 rounded-md" style="background:#e6e0d3;height:55%;position:relative;">
+            <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(180deg,#5a8478,#6b9c8e);height:25%;border-radius:6px"></div>
+          </div>
+          <div class="flex-1 rounded-md soft-breath" style="background:#e6e0d3;height:50%"></div>
+          <div class="flex-1 rounded-md" style="background:#e6e0d3;height:35%;position:relative;">
+            <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(180deg,#c9a85f,#d4a857);height:50%;border-radius:6px"></div>
+          </div>
+        </div>
+        <div class="text-xs text-stone-500">商 → 东汉 · 已点亮 4 / 7 朝代</div>
+      </a>
+
+      <!-- 古国地图 -->
+      <a href="ancient-map.html" class="card p-5 bounce-on-hover click-feedback flex flex-col">
+        <div class="flex items-start justify-between mb-3">
+          <div class="flex flex-col gap-1">
+            <span class="text-xs text-stone-500">DIMENSION · 出土地</span>
+            <h3 class="text-lg font-semibold">古国地图</h3>
+          </div>
+          <div class="text-amber-700">→</div>
+        </div>
+        <!-- Mini map -->
+        <svg viewBox="0 0 200 96" class="w-full h-24 mb-3">
+          <path d="M10,40 Q40,20 80,30 T150,40 T190,55 L190,90 L10,90 Z"
+                fill="#efeae0" stroke="#c8c3b8" stroke-width="0.5"/>
+          <circle cx="120" cy="40" r="3" fill="#c9a85f"/>
+          <circle cx="95" cy="50" r="2.5" fill="#5a8478"/>
+          <circle cx="60" cy="60" r="3" fill="#c9a85f"/>
+          <circle cx="140" cy="60" r="2.5" fill="#5a8478"/>
+          <circle cx="80" cy="35" r="2.5" stroke="#999" stroke-width="0.8" fill="none" stroke-dasharray="2,1"/>
+          <circle cx="160" cy="45" r="2.5" stroke="#999" stroke-width="0.8" fill="none" stroke-dasharray="2,1"/>
+        </svg>
+        <div class="text-xs text-stone-500">已踏足 5 / 12 古国 · 含三星堆</div>
+      </a>
+
+      <!-- 形制谱系 -->
+      <a href="form-genealogy.html" class="card p-5 bounce-on-hover click-feedback flex flex-col">
+        <div class="flex items-start justify-between mb-3">
+          <div class="flex flex-col gap-1">
+            <span class="text-xs text-stone-500">DIMENSION · 形制</span>
+            <h3 class="text-lg font-semibold">形制谱系树</h3>
+            <span class="chip liujin text-[10px] mt-1">Pokédex 风</span>
+          </div>
+          <div class="text-amber-700">→</div>
+        </div>
+        <!-- Mini tree -->
+        <svg viewBox="0 0 200 96" class="w-full h-24 mb-3">
+          <line x1="20" y1="48" x2="80" y2="22"  stroke="#5a8478" stroke-width="1.6"/>
+          <line x1="20" y1="48" x2="80" y2="48"  stroke="#5a8478" stroke-width="1.6"/>
+          <line x1="20" y1="48" x2="80" y2="74"  stroke="#bbb"    stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="80" y1="22" x2="160" y2="14" stroke="#5a8478" stroke-width="1.6"/>
+          <line x1="80" y1="22" x2="160" y2="32" stroke="#bbb"    stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="80" y1="48" x2="160" y2="48" stroke="#5a8478" stroke-width="1.6"/>
+          <line x1="80" y1="48" x2="160" y2="62" stroke="#c9a85f" stroke-width="2"/>
+          <circle cx="20" cy="48" r="5" fill="#1a1a1c"/>
+          <circle cx="80" cy="22" r="4" fill="#5a8478"/>
+          <circle cx="80" cy="48" r="4" fill="#5a8478"/>
+          <circle cx="80" cy="74" r="4" fill="#fff" stroke="#bbb" stroke-width="1"/>
+          <circle cx="160" cy="14" r="3.5" fill="#5a8478"/>
+          <circle cx="160" cy="32" r="3.5" fill="#fff" stroke="#bbb" stroke-width="1"/>
+          <circle cx="160" cy="48" r="3.5" fill="#5a8478"/>
+          <circle cx="160" cy="62" r="4" fill="#d4a857" filter="url(#g)"/>
+          <defs><filter id="g"><feGaussianBlur stdDeviation="1.2"/></filter></defs>
+        </svg>
+        <div class="text-xs text-stone-500">7 件已上树 · 18 件 silhouette 等你</div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ============================== 最近发现 / 探险中 ============================== -->
+  <section class="mb-12 fade-up delay-4">
+    <div class="flex items-end justify-between mb-4">
+      <h2 class="text-xl font-semibold">本周新点亮</h2>
+      <a href="me.html" class="text-sm text-stone-500 hover:text-black">看更多 →</a>
+    </div>
+
+    <div id="recentRow" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <!-- filled by JS -->
+    </div>
+  </section>
+
+  <!-- ============================== 下一步诱发 ============================== -->
+  <section class="mb-16 fade-up delay-4">
+    <div class="card p-6 relative overflow-hidden"
+         style="background:linear-gradient(135deg,#fff7e8 0%,#ffffff 70%);border:1px solid rgba(201,168,95,0.30)">
+      <div class="text-xs text-amber-700 tracking-widest mb-1">NEXT MILESTONE</div>
+      <div class="text-xl font-semibold mb-1">再收 3 件 → 解锁"商代食器子图鉴"</div>
+      <div class="text-sm text-stone-600 mb-4">已收 2 件 (后母戊鼎 · 子龙鼎*),还差 3 件:扁足鼎 / 鬲 / 甗 之一</div>
+      <div class="progress-track" style="max-width:340px"><div class="progress-fill treasure" style="width:40%"></div></div>
+      <div class="mt-4 flex gap-3">
+        <a href="catalog.html?dynasty=商&type=食器" class="btn btn-primary text-sm">看候选 5 件</a>
+        <a href="scan.html" class="btn btn-ghost text-sm">扫一扫</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-center text-xs text-stone-400 pb-10">
+    Persona C · 探索派 · Z 世代 · 阿K (21, 美院大三)<br/>
+    <span class="text-stone-300">这不是文创卡片店,这是博物馆的图鉴 + 段位系统</span>
+  </footer>
+</main>
+
+<script src="js/state.js"></script>
+<script>
+(async function () {
+  await MC.load();
+  const collected = MC.COLLECTED_IDS.map(MC.artifact);
+
+  // === HERO featured: 妇好鸮尊 ===
+  const featured = MC.artifact('fuhao_xiaozun');
+  const heroFront = document.getElementById('heroFront');
+  heroFront.innerHTML = `
+    <div class="absolute top-3 left-3 z-10">
+      <span class="chip liujin text-[10px]">国宝 · 商晚期</span>
+    </div>
+    <div class="guo-bao-stamp">国之<br/>重器</div>
+    <div class="flex-1 flex items-center justify-center">
+      <img src="${MC.placeholderUrl(featured)}" alt="" style="height:220px;filter:drop-shadow(0 12px 24px rgba(0,0,0,0.18))"/>
+    </div>
+    <div class="px-2">
+      <div class="text-xl font-bold mb-1">${featured.name_zh}</div>
+      <div class="text-xs text-stone-600">${featured.period} · ${featured.current_museum.split(' /')[0]}</div>
+      <div class="meme-line mt-2" style="font-family:'STKaiti',serif;font-size:14px;font-weight:600;color:#c0392b">
+        "${MC.memeFor(featured.id)}"
+      </div>
+      <div class="mt-3 flex gap-2">
+        <a href="artifact.html?id=${featured.id}" class="btn btn-treasure text-xs flex-1">查看详情</a>
+        <a href="me.html#share" class="btn btn-ghost text-xs">生成梗卡片</a>
+      </div>
+    </div>
+  `;
+
+  // Hero card flip
+  const heroCard = document.getElementById('heroCard');
+  let flipped = false;
+  setTimeout(() => { heroCard.classList.add('flipped'); flipped = true; }, 350); // auto-flip on load
+  heroCard.addEventListener('click', () => {
+    flipped = !flipped;
+    heroCard.classList.toggle('flipped', flipped);
+  });
+
+  // === Recent row ===
+  const recentRow = document.getElementById('recentRow');
+  const recent = collected.slice(-4).reverse();
+  recentRow.innerHTML = recent.map(a => `
+    <a href="artifact.html?id=${a.id}" class="card overflow-hidden bounce-on-hover click-feedback ${MC.rarityHaloClass(a)}" style="border-radius:16px">
+      <div style="aspect-ratio: 4/5; background:#fff;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden">
+        ${MC.rarityTier(a) === 'treasure' ? '<div class="guo-bao-stamp" style="top:6px;right:6px;width:36px;height:36px;font-size:9px"><span>国之<br/>重器</span></div>' : ''}
+        <img src="${MC.placeholderUrl(a)}" alt="" style="width:88%;height:88%;object-fit:contain"/>
+      </div>
+      <div class="p-3">
+        <div class="font-semibold text-sm truncate">${a.name_zh}</div>
+        <div class="text-[10px] text-stone-500 mt-0.5">${a.dynasty} · ${a.form_subtype || a.type}</div>
+        <div class="text-[10px] text-stone-400 mt-1">${MC.COLLECTED_DATES[a.id] || ''}</div>
+      </div>
+    </a>
+  `).join('');
+})();
+</script>
+
+</body>
+</html>
