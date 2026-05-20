@@ -1,0 +1,1078 @@
+[
+  {
+    "id": "houmuwu_ding",
+    "name_zh": "后母戊鼎",
+    "name_pinyin": "Hou Mu Wu Ding",
+    "name_alt": ["司母戊鼎", "司母戊大方鼎"],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前1300-1046年",
+    "excavation_year": "1939",
+    "excavation_site": "河南省安阳市武官村殷墟遗址",
+    "ancient_state": "商",
+    "current_museum": "中国国家博物馆",
+    "size": {
+      "height_cm": 133,
+      "width_cm": 79.2,
+      "length_cm": 112,
+      "weight_kg": 832.84
+    },
+    "type": "食器",
+    "form_subtype": "方鼎",
+    "patterns": ["饕餮纹", "夔龙纹", "云雷纹", "虎噬人头纹", "蝉纹"],
+    "inscription": {
+      "has": true,
+      "text": "后母戊",
+      "char_count": 3,
+      "summary": "鼎腹内壁铸铭'后母戊'三字。学界一度释为'司母戊',现倾向'后母戊'读法。'后'指君王/王后,'戊'为商王武丁之妻妇妌庙号"
+    },
+    "purpose": "祭祀礼器",
+    "craft": "范铸法",
+    "rarity_level": "国宝",
+    "story_brief": "后母戊鼎是商王祖庚或祖甲为祭祀其母'戊'(武丁王后妇妌)所铸,是迄今出土最大、最重的商代青铜礼器,也是世界古代青铜器之最。1939年由河南安阳武官村农民吴希增等在田间发现,因日军逼近曾就地回埋。新中国成立后由南京调归中国历史博物馆(今国博)。由28块陶范分铸再合铸而成,展示商晚期范铸法巅峰水准。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Hou_Mu_Wu_Ding",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA (各文件许可不一,使用前须确认单文件)",
+        "caption": "后母戊鼎相册类目,内有31个CC许可文件"
+      }
+    ],
+    "data_sources": [
+      {"field": "size,excavation_year,excavation_site", "source": "Wikipedia EN (Houmuwu ding)", "url": "https://en.wikipedia.org/wiki/Houmuwu_ding"},
+      {"field": "inscription,purpose,craft", "source": "Wikipedia EN + ResearchGate citation", "url": "https://en.wikipedia.org/wiki/Houmuwu_ding"}
+    ]
+  },
+  {
+    "id": "siyang_fangzun",
+    "name_zh": "四羊方尊",
+    "name_pinyin": "Si Yang Fang Zun",
+    "name_alt": ["四羊青铜方尊", "Four-goat Square Zun"],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前13-11世纪",
+    "excavation_year": "1938",
+    "excavation_site": "湖南省宁乡县黄材镇月山铺转耳仑山腰",
+    "ancient_state": "商(湘江流域方国)",
+    "current_museum": "中国国家博物馆",
+    "size": {
+      "height_cm": 58.3,
+      "width_cm": 52.4,
+      "length_cm": 52.4,
+      "weight_kg": 34.5
+    },
+    "type": "酒器",
+    "form_subtype": "方尊",
+    "patterns": ["羊角纹", "夔龙纹", "饕餮纹", "云雷纹", "凤鸟纹"],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "盛酒礼器(祭祀宴飨)",
+    "craft": "范铸法(分铸焊接,先铸羊角与羊头再合范浇铸器身)",
+    "rarity_level": "国宝",
+    "story_brief": "四羊方尊是现存商代青铜方尊中最大的一件。1938年4月由宁乡黄材镇姜景舒兄弟在种红薯时挖出,后辗转至湖南省政府,抗战期间在长沙被日机炸成20余块碎片,深藏库房多年。1952年文物专家张欣如经过两个月修复使其重生,1956年湖南省博收藏,1959年调入中国国家博物馆。四肩四只大卷角羊立体浮雕由分铸法先成后合铸器身,是商代'湘江青铜文明'代表作。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Four-goat_Square_Zun",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA (各文件许可不一)",
+        "caption": "四羊方尊相册,16个文件"
+      }
+    ],
+    "data_sources": [
+      {"field": "size,excavation_year,excavation_site", "source": "Wikipedia EN (Four-goat Square Zun)", "url": "https://en.wikipedia.org/wiki/Four-goat_Square_Zun"},
+      {"field": "story_brief", "source": "Shanghai Daily archive (Ancient zun's turbulent history)", "url": "https://archive.shine.cn/sunday/now-and-then/Ancient-zuns-turbulent-history/shdaily.shtml"}
+    ]
+  },
+  {
+    "id": "fuhao_xiaozun",
+    "name_zh": "妇好鸮尊",
+    "name_pinyin": "Fu Hao Xiao Zun",
+    "name_alt": ["妇好鸮形尊", "Fu Hao Owl Zun"],
+    "dynasty": "商",
+    "period": "商代晚期(武丁时期)",
+    "approx_year": "约公元前1250年",
+    "excavation_year": "1976",
+    "excavation_site": "河南省安阳市殷墟妇好墓",
+    "ancient_state": "商",
+    "current_museum": "河南博物院 / 中国国家博物馆 (两件一对)",
+    "size": {
+      "height_cm": 46.3,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": 16
+    },
+    "type": "酒器",
+    "form_subtype": "鸟兽形尊(鸮形)",
+    "patterns": ["饕餮纹", "云雷纹", "蝉纹", "夔龙纹", "蟠蛇纹"],
+    "inscription": {
+      "has": true,
+      "text": "妇好",
+      "char_count": 2,
+      "summary": "口沿内壁铸铭'妇好'二字,标明器主为商王武丁之妻、女将军妇好"
+    },
+    "purpose": "祭祀盛酒礼器",
+    "craft": "范铸法(分铸器身、提梁、盖)",
+    "rarity_level": "国宝",
+    "story_brief": "妇好鸮尊为一对,1976年出土于安阳殷墟妇好墓(中国唯一未被盗扰的商王室成员墓葬),分藏中国国家博物馆与河南博物院。器形整体作站立鸮(猫头鹰)状,小耳圆目,宽喙宽尾下垂,与双足三点稳立。盖钮立鸟立龙,通身满饰蝉纹、饕餮纹、蟠蛇纹、夔龙纹与云雷纹,工艺繁复。'妇好'是商王武丁之妻、能征善战的女将军、中国最早有记载的女性,该器是其身份与权力的象征。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Fu_Hao_owl_zun",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA (各文件许可不一)",
+        "caption": "妇好鸮尊相册"
+      }
+    ],
+    "data_sources": [
+      {"field": "size,excavation_year,site,inscription", "source": "Wikipedia EN (Fu Hao owl zun)", "url": "https://en.wikipedia.org/wiki/Fu_Hao_owl_zun"},
+      {"field": "patterns,description", "source": "Henan Museum official site (reference only)", "url": "https://english.chnmus.net/en/collection/details.html?id=7052473239225765888"}
+    ]
+  },
+  {
+    "id": "da_yu_ding",
+    "name_zh": "大盂鼎",
+    "name_pinyin": "Da Yu Ding",
+    "name_alt": ["盂鼎"],
+    "dynasty": "西周",
+    "period": "西周早期(康王时期)",
+    "approx_year": "约公元前11世纪",
+    "excavation_year": "约1849年(道光年间)",
+    "excavation_site": "陕西省岐山县京当镇礼村",
+    "ancient_state": "周",
+    "current_museum": "中国国家博物馆",
+    "size": {
+      "height_cm": 101.9,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": 153.5
+    },
+    "type": "食器",
+    "form_subtype": "圆鼎",
+    "patterns": ["饕餮纹", "云雷纹"],
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 291,
+      "summary": "鼎内壁铸铭文19行291字,记康王告诫盂酒乱亡商之鉴,以及康王赐予盂车马、奴隶、土地的史实。是西周早期重要史料"
+    },
+    "purpose": "祭祀礼器(纪功册命)",
+    "craft": "范铸法",
+    "rarity_level": "国宝",
+    "story_brief": "大盂鼎与上博大克鼎、台北毛公鼎并称'海内三宝'。1849年前后(道光年间)出土于陕西岐山县礼村,先后辗转于宋金鉴、左宗棠、潘祖荫等名家手中。抗战期间潘氏家族将其埋于地下避日寇,1951年由潘达于女士无偿捐献国家,1959年入藏中国历史博物馆(今国博)。鼎内291字铭文是研究西周早期(康王)历史与册命制度的核心材料,叙述了'酒戒商鉴'的政治哲学。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Dayu_Ding",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA (各文件许可不一)",
+        "caption": "大盂鼎相册"
+      }
+    ],
+    "data_sources": [
+      {"field": "size,inscription,museum", "source": "Wikipedia EN (Da Yu ding)", "url": "https://en.wikipedia.org/wiki/Da_Yu_ding"},
+      {"field": "story", "source": "CGTN article (2023-08-25)", "url": "https://news.cgtn.com/news/2023-08-25/Inscriptions-on-Da-Yu-Ding-vessel-exemplify-early-bronze-script-1myBf5iTnj2/index.html"}
+    ]
+  },
+  {
+    "id": "da_ke_ding",
+    "name_zh": "大克鼎",
+    "name_pinyin": "Da Ke Ding",
+    "name_alt": ["克鼎"],
+    "dynasty": "西周",
+    "period": "西周晚期(孝王时期)",
+    "approx_year": "约公元前10世纪",
+    "excavation_year": "1890",
+    "excavation_site": "陕西省扶风县法门镇任家村",
+    "ancient_state": "周",
+    "current_museum": "上海博物馆",
+    "size": {
+      "height_cm": 93.1,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": 201.5
+    },
+    "type": "食器",
+    "form_subtype": "圆鼎",
+    "patterns": ["饕餮纹", "波曲纹(环带纹)", "夔龙纹"],
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 290,
+      "summary": "鼎腹内壁铸铭文28行290字,记周王册命贵族克(膳夫克)继承祖父职务,并赐予土地、奴隶。是西周'册命金文'代表作"
+    },
+    "purpose": "祭祀礼器(纪功册命)",
+    "craft": "范铸法",
+    "rarity_level": "国宝",
+    "story_brief": "大克鼎1890年(光绪十六年)出土于陕西扶风县法门寺附近窖藏,同坑还有小克鼎七件、编钟一组,共逾1200件青铜器。先归柯劭忞,后入潘祖荫家。抗战时期潘氏家族将其与大盂鼎一同埋藏避难。1952年潘达于女士将其捐献国家,藏上海博物馆。鼎口饕餮纹,腹部饰波曲纹(环带纹),是西周晚期纹饰范式的代表。与大盂鼎、毛公鼎并称'海内三宝'。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Da_Ke_ding",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA (各文件许可不一)",
+        "caption": "大克鼎相册"
+      }
+    ],
+    "data_sources": [
+      {"field": "all fields", "source": "Wikipedia EN (Da Ke ding)", "url": "https://en.wikipedia.org/wiki/Da_Ke_ding"}
+    ]
+  },
+  {
+    "id": "maogong_ding",
+    "name_zh": "毛公鼎",
+    "name_pinyin": "Mao Gong Ding",
+    "name_alt": [],
+    "dynasty": "西周",
+    "period": "西周晚期(宣王时期)",
+    "approx_year": "约公元前828-782年",
+    "excavation_year": "1843",
+    "excavation_site": "陕西省岐山县董家村",
+    "ancient_state": "周",
+    "current_museum": "台北故宫博物院",
+    "size": {
+      "height_cm": 53.8,
+      "width_cm": 47.9,
+      "length_cm": null,
+      "weight_kg": 34.7
+    },
+    "type": "食器",
+    "form_subtype": "圆鼎",
+    "patterns": ["重环纹", "弦纹"],
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 500,
+      "summary": "鼎腹内壁铸铭文32行,约499-500字,是现存青铜器中铭文最长者。记周宣王告诫叔父毛公以及赏赐毛公的诏书,毛公铸鼎以传后世"
+    },
+    "purpose": "祭祀礼器(册命纪功)",
+    "craft": "范铸法",
+    "rarity_level": "国宝",
+    "story_brief": "毛公鼎1843年出土于陕西岐山,因器主为周宣王叔父毛公而得名。铭文499-500字,是世界上最长的青铜器铭文,被誉为'抵得一篇《尚书》'。鼎几经辗转,清末归陈介祺,后又流转至端方、叶恭绰等人之手。抗战时叶氏家族将其密藏沪上避免落入日军。1946年由陈咏仁捐献,1948年迁台,现为台北故宫'三大镇馆之宝'之一(与翠玉白菜、肉形石并称)。与大盂鼎、大克鼎并称'海内三宝'。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Mao_Gong_ding",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA (各文件许可不一)",
+        "caption": "毛公鼎相册"
+      }
+    ],
+    "data_sources": [
+      {"field": "size,inscription", "source": "Wikipedia EN (Mao Gong ding)", "url": "https://en.wikipedia.org/wiki/Mao_Gong_ding"},
+      {"field": "excavation_year", "source": "live2makan + China Knowledge", "url": "https://live2makan.com/2021/04/14/national-palace-museum-maogong-ding-%E6%AF%9B%E5%85%AC%E9%BC%8E/"}
+    ]
+  },
+  {
+    "id": "sanshi_pan",
+    "name_zh": "散氏盘",
+    "name_pinyin": "San Shi Pan",
+    "name_alt": ["散盘", "矢人盘"],
+    "dynasty": "西周",
+    "period": "西周晚期(厉王时期)",
+    "approx_year": "约公元前9世纪",
+    "excavation_year": "1810年前后(清嘉庆年间)",
+    "excavation_site": "陕西省宝鸡市凤翔县(传)",
+    "ancient_state": "周(矢国与散国)",
+    "current_museum": "台北故宫博物院",
+    "size": {
+      "height_cm": 20.6,
+      "width_cm": null,
+      "length_cm": 54.6,
+      "weight_kg": 21.31
+    },
+    "type": "水器",
+    "form_subtype": "盘",
+    "patterns": ["夔龙纹", "兽面纹"],
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 357,
+      "summary": "盘内底铸铭文19行357字,记录矢国侵犯散国后被迫赔偿土地、双方划定地界的协议,被誉为'中国最早的土地契约'。书风错落自由,是金文书法重要里程碑"
+    },
+    "purpose": "盥洗礼器(承装协议礼器)",
+    "craft": "范铸法",
+    "rarity_level": "国宝",
+    "story_brief": "散氏盘约1810年(清嘉庆十四年前后)出土于陕西宝鸡凤翔县。盘内357字铭文为现存最早的'土地契约',详述矢国侵略散国后赔偿土地之事,记录了田界划定、官员姓名与盟誓过程。书法散逸古朴,字字错落,是金文书法学习的重要范本。清末入清宫,后随文物迁台,藏台北故宫。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:San_Shi_Pan",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA (各文件许可不一,使用前确认)",
+        "caption": "散氏盘相关图片(若有)"
+      }
+    ],
+    "data_sources": [
+      {"field": "inscription,significance", "source": "Taipei NPM 3D Gallery", "url": "https://theme.npm.edu.tw/3d/Content.aspx?sno=04001043&l=2"}
+    ]
+  },
+  {
+    "id": "he_zun",
+    "name_zh": "何尊",
+    "name_pinyin": "He Zun",
+    "name_alt": [],
+    "dynasty": "西周",
+    "period": "西周早期(成王时期)",
+    "approx_year": "约公元前1038年(成王五年)",
+    "excavation_year": "1963",
+    "excavation_site": "陕西省宝鸡市贾村塬陈家",
+    "ancient_state": "周",
+    "current_museum": "宝鸡青铜器博物院",
+    "size": {
+      "height_cm": 38.8,
+      "width_cm": 28.8,
+      "length_cm": 28.8,
+      "weight_kg": 14.6
+    },
+    "type": "酒器",
+    "form_subtype": "尊(圆口方腹)",
+    "patterns": ["饕餮纹", "蕉叶纹", "云雷纹"],
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 122,
+      "summary": "尊底内壁铸铭文12行122字(119字可识,3字未释),记成王迁宅成周(洛邑)、追述武王克商'宅兹中国'的史实。是迄今所知'中国'二字最早出处"
+    },
+    "purpose": "祭祀礼器",
+    "craft": "范铸法",
+    "rarity_level": "国宝(2002年首批禁止出境文物)",
+    "story_brief": "何尊1963年由陕西宝鸡贾村塬陈氏家中农民挖出,1965年被当废铜以30元卖入废品收购站,后由文物干部佟太放慧眼识出抢救入馆。1975年文物专家马承源除锈时发现底部122字铭文,'宅兹中国'四字使之名震天下——这是'中国'二字作为合成词的最早出现。何尊见证了西周初年武王克商、成王迁洛、营建成周的关键史实。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:He_Zun",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA (各文件许可不一)",
+        "caption": "何尊相册"
+      }
+    ],
+    "data_sources": [
+      {"field": "size,inscription,site", "source": "Wikipedia EN (He zun)", "url": "https://en.wikipedia.org/wiki/He_zun"},
+      {"field": "story", "source": "Xinhua / Chinadaily articles", "url": "http://english.news.cn/20240912/f777f986c9294d479c28431e8df27f5e/c.html"}
+    ]
+  },
+  {
+    "id": "li_gui",
+    "name_zh": "利簋",
+    "name_pinyin": "Li Gui",
+    "name_alt": ["武王征商簋", "西周利簋"],
+    "dynasty": "西周",
+    "period": "西周早期(武王时期)",
+    "approx_year": "约公元前1046年",
+    "excavation_year": "1976",
+    "excavation_site": "陕西省临潼县零口镇",
+    "ancient_state": "周",
+    "current_museum": "中国国家博物馆",
+    "size": {
+      "height_cm": 28,
+      "width_cm": null,
+      "length_cm": 22,
+      "weight_kg": 7.95
+    },
+    "type": "食器",
+    "form_subtype": "簋(有方座)",
+    "patterns": ["饕餮纹", "夔龙纹", "云雷纹"],
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 32,
+      "summary": "簋内底铸铭文4行32字,记'武王征商,惟甲子朝,岁鼎'——即武王伐纣牧野之战发生于甲子日清晨,木星(岁)正当头。是确定牧野之战年代的唯一物证"
+    },
+    "purpose": "祭祀礼器(纪功)",
+    "craft": "范铸法",
+    "rarity_level": "国宝",
+    "story_brief": "利簋是迄今所知西周最早的青铜器之一,1976年3月出土于陕西临潼县零口镇西周窖藏。簋内32字铭文记录了'甲子朝,岁鼎'——即武王伐纣的牧野之战发生在甲子日凌晨、木星正当中天,这一天文记录与《尚书·牧誓》《国语》等典籍可互证,使学界得以将牧野之战定于公元前1046年2月20日,是夏商周断代工程的关键证据。器主'利'为参战将领,武王战胜后赏赐其铜料,利铸此器以记功。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Li_gui",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA (各文件许可不一)",
+        "caption": "利簋相册"
+      }
+    ],
+    "data_sources": [
+      {"field": "size,inscription", "source": "Wikipedia EN (Li gui)", "url": "https://en.wikipedia.org/wiki/Li_Gui_(vessel)"},
+      {"field": "story", "source": "National Museum of China", "url": "https://en.chnmuseum.cn/collections_577/collection_highlights_608/archaeological_discoveries_609/202109/t20210902_251144.html"}
+    ]
+  },
+  {
+    "id": "guoji_zibai_pan",
+    "name_zh": "虢季子白盘",
+    "name_pinyin": "Guo Ji Zi Bai Pan",
+    "name_alt": [],
+    "dynasty": "西周",
+    "period": "西周晚期(宣王时期)",
+    "approx_year": "公元前816年(宣王十二年)",
+    "excavation_year": "约1843年(道光年间)",
+    "excavation_site": "陕西省宝鸡市陈仓区(原虢国故地)",
+    "ancient_state": "周(虢国)",
+    "current_museum": "中国国家博物馆",
+    "size": {
+      "height_cm": 39.5,
+      "width_cm": 86.5,
+      "length_cm": 137.2,
+      "weight_kg": 215.3
+    },
+    "type": "水器",
+    "form_subtype": "长方形盘",
+    "patterns": ["窃曲纹", "环带纹", "兽首衔环"],
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 111,
+      "summary": "盘内底铸铭文8行111字,记周宣王十二年(前816年)虢季子白奉命征伐玁狁(北方戎狄),于洛水北岸大胜,斩首500、俘获50,被周王赐车马弓矢。是研究西周对外战争的重要史料"
+    },
+    "purpose": "盥洗礼器(纪功)",
+    "craft": "范铸法",
+    "rarity_level": "国宝(现存最大青铜盘)",
+    "story_brief": "虢季子白盘是现存世界上最大的青铜盘,长方形,造型如大浴缸,四壁饰窃曲纹与环带纹,四面铸兽首衔环。约1843年道光年间出土于宝鸡陈仓(古虢国故地)。先后归徐燮均、刘铭传家族。刘氏将其埋藏地下七十年,屡次拒绝列强、军阀索取,1949年献交国家。盘内111字铭文记虢季子白奉宣王命大败玁狁于洛水之北的史实,书法工整严谨。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Guoji_Zibai_pan",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA (各文件许可不一)",
+        "caption": "虢季子白盘相册"
+      }
+    ],
+    "data_sources": [
+      {"field": "all", "source": "Wikipedia EN (Guoji Zibai pan)", "url": "https://en.wikipedia.org/wiki/Guoji_Zibai_pan"}
+    ]
+  },
+  {
+    "id": "lianhe_fanghu",
+    "name_zh": "莲鹤方壶",
+    "name_pinyin": "Lian He Fang Hu",
+    "name_alt": ["莲鹤铜方壶", "立鹤方壶"],
+    "dynasty": "春秋",
+    "period": "春秋中晚期(郑国)",
+    "approx_year": "约公元前6世纪",
+    "excavation_year": "1923",
+    "excavation_site": "河南省新郑市李家楼郑公大墓",
+    "ancient_state": "郑",
+    "current_museum": "故宫博物院 / 河南博物院 (两件一对)",
+    "size": {
+      "height_cm": 122,
+      "width_cm": 54,
+      "length_cm": null,
+      "weight_kg": 64
+    },
+    "type": "酒器",
+    "form_subtype": "方壶(双莲瓣盖,顶立鹤)",
+    "patterns": ["蟠螭纹", "莲瓣纹", "兽面纹", "立体盘龙", "立鹤"],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "盛酒礼器",
+    "craft": "复合工艺(分铸、圆雕、浮雕、焊接,可能含失蜡法早期工艺)",
+    "rarity_level": "国宝",
+    "story_brief": "莲鹤方壶1923年出土于河南新郑李家楼郑公大墓,一对两件,分藏北京故宫与河南博物院。其器盖双层透雕莲瓣中央立一展翅欲飞的仙鹤,器身满饰蟠螭纹,四角立体盘龙仿佛欲腾空而起。郭沫若评价其'乃时代之精神之一象征',从商周的肃穆神秘转向春秋的生动写实,标志着'新时代之觉醒'。是青铜艺术由神性走向人性的里程碑。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Lotus_and_Crane_Square_Pot",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA (各文件许可不一)",
+        "caption": "莲鹤方壶相册(若存在)"
+      }
+    ],
+    "data_sources": [
+      {"field": "size,site,description", "source": "China Online Museum + chnmus.net", "url": "http://www.chinaonlinemuseum.com/bronzes-zhou-lianhe-fanghu.php"}
+    ]
+  },
+  {
+    "id": "yuewang_goujian_jian",
+    "name_zh": "越王勾践剑",
+    "name_pinyin": "Yue Wang Gou Jian Jian",
+    "name_alt": ["Sword of Goujian"],
+    "dynasty": "春秋",
+    "period": "春秋晚期(越国)",
+    "approx_year": "约公元前496-465年(勾践在位期间)",
+    "excavation_year": "1965",
+    "excavation_site": "湖北省江陵县望山一号楚墓",
+    "ancient_state": "越(出土于楚墓,推测为越楚通婚陪嫁)",
+    "current_museum": "湖北省博物馆",
+    "size": {
+      "height_cm": null,
+      "width_cm": 4.6,
+      "length_cm": 55.6,
+      "weight_kg": 0.875
+    },
+    "type": "兵器",
+    "form_subtype": "剑(青铜剑)",
+    "patterns": ["菱形暗格纹", "鸟篆铭文", "蓝色玻璃 + 绿松石嵌饰"],
+    "inscription": {
+      "has": true,
+      "text": "越王鸠浅(勾践)自作用剑",
+      "char_count": 8,
+      "summary": "剑身近格处错金鸟篆铭文'越王鸠浅(勾践)自作用剑'8字,确证为越王勾践本人佩剑"
+    },
+    "purpose": "兵器(王者佩剑)",
+    "craft": "复合金属铸造 + 错金 + 菱形暗格纹工艺(双液浇铸/硫化处理)",
+    "rarity_level": "国宝(2013年首批禁止出境文物)",
+    "story_brief": "越王勾践剑1965年12月出土于湖北江陵望山一号楚墓,出土时寒光闪闪、锋利无比,试纸应手而断,埋藏地下2400余年竟无锈蚀。剑身菱形暗格纹由含硫处理而成,剑刃含锡量高(锋利),剑脊含锡低(韧性),为典型'复合金属'工艺。剑格嵌蓝色玻璃和绿松石,近格处错金鸟篆'越王鸠浅自作用剑'8字。该剑出现在楚墓,学界主流推测为越楚联姻时勾践女儿陪嫁之物。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Sword_of_Goujian",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA (各文件许可不一)",
+        "caption": "越王勾践剑相册"
+      }
+    ],
+    "data_sources": [
+      {"field": "size,inscription,craft", "source": "Wikipedia EN (Sword of Goujian)", "url": "https://en.wikipedia.org/wiki/Sword_of_Goujian"}
+    ]
+  },
+  {
+    "id": "zenghouyi_bianzhong",
+    "name_zh": "曾侯乙编钟",
+    "name_pinyin": "Zeng Hou Yi Bian Zhong",
+    "name_alt": ["Bianzhong of Marquis Yi of Zeng"],
+    "dynasty": "战国",
+    "period": "战国早期(曾国)",
+    "approx_year": "约公元前433年",
+    "excavation_year": "1978",
+    "excavation_site": "湖北省随州市擂鼓墩曾侯乙墓",
+    "ancient_state": "曾(随)",
+    "current_museum": "湖北省博物馆",
+    "size": {
+      "height_cm": 273,
+      "width_cm": 335,
+      "length_cm": 748,
+      "weight_kg": 4421.48
+    },
+    "type": "乐器",
+    "form_subtype": "编钟(钮钟+甬钟+镈钟共65件)",
+    "patterns": ["蟠螭纹", "云雷纹", "蟠龙纹"],
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 3755,
+      "summary": "全套65枚编钟及钟架上铸刻铭文共3755字,是迄今所知公元前5世纪唯一一份关于音乐理论的大规模文献。记十二律名、各国律名对照、各钟所发音名等,'一钟双音'体系空前。中间最大的镈钟为楚惠王熊章赠予曾侯乙"
+    },
+    "purpose": "乐器(宫廷雅乐)",
+    "craft": "范铸法 + 复合分铸 + 精密音律调控",
+    "rarity_level": "国宝(2002年首批禁止出境文物)",
+    "story_brief": "曾侯乙编钟1978年出土于湖北随州擂鼓墩,共65件分三层八组悬挂于7.48米长、2.65米宽的曲尺形钟架上,总重逾4421公斤。每件甬钟可发两个相差三度的音,音域跨越5个半八度,12律俱全,可演奏五声、六声、七声音阶乐曲。3755字铭文是世界乐律学最早的系统文献,展示出公元前5世纪中国已有十二平均律雏形。中央最大的镈钟为楚惠王熊章赠予曾侯乙的纪念品。2024年被联合国教科文组织列入《世界记忆名录》。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Bianzhong_of_Marquis_Yi_of_Zeng",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA (各文件许可不一,共132个文件)",
+        "caption": "曾侯乙编钟相册,132个文件"
+      }
+    ],
+    "data_sources": [
+      {"field": "size,inscription", "source": "Wikipedia EN (Bianzhong of Marquis Yi of Zeng)", "url": "https://en.wikipedia.org/wiki/Bianzhong_of_Marquis_Yi_of_Zeng"},
+      {"field": "world memory", "source": "UNESCO Memory of the World", "url": "https://www.unesco.org/en/memory-world/suizhou-bianzhong-marquis-yi-zeng"}
+    ]
+  },
+  {
+    "id": "zenghouyi_zunpan",
+    "name_zh": "曾侯乙尊盘",
+    "name_pinyin": "Zeng Hou Yi Zun Pan",
+    "name_alt": ["Marquis Yi of Zeng's Zun-Pan"],
+    "dynasty": "战国",
+    "period": "战国早期(曾国)",
+    "approx_year": "约公元前433年",
+    "excavation_year": "1978",
+    "excavation_site": "湖北省随州市擂鼓墩曾侯乙墓",
+    "ancient_state": "曾(随)",
+    "current_museum": "湖北省博物馆",
+    "size": {
+      "height_cm": 33.1,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": 30
+    },
+    "type": "酒器/水器(盛酒尊+承水盘)",
+    "form_subtype": "尊盘组合(尊置盘中)",
+    "patterns": ["透空蟠螭纹", "立体蟠虺", "饕餮纹", "云雷纹"],
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": null,
+      "summary": "尊与盘上均有'曾侯乙作持用终'铭文,确证器主"
+    },
+    "purpose": "酒礼器(尊盛酒、盘承水冰温)",
+    "craft": "失蜡法(中国已知最早大规模使用失蜡法的器物之一)",
+    "rarity_level": "国宝(2002年首批禁止出境文物)",
+    "story_brief": "曾侯乙尊盘1978年出土于湖北随州擂鼓墩曾侯乙墓,由一件尊和一件盘组合而成,尊置盘中,盘内可注水温酒/冰酒。尊与盘的口沿满布透空蟠螭龙纹,层层叠叠、互相缠绕、高低错落,以传统范铸法几乎不可能实现——经学界论证为中国已知最早大规模使用'失蜡法'(熔模铸造)的青铜器,将中国失蜡法的起源前推至战国早期。盘内可注热水或冰块,使尊中酒得以温/冷,展示了战国精密工艺与生活美学。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Zenghouyi_Zunpan",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA (各文件许可不一)",
+        "caption": "曾侯乙尊盘相册(若存在)"
+      }
+    ],
+    "data_sources": [
+      {"field": "all", "source": "CCTV English + Smarthistory", "url": "https://english.cctv.com/2023/04/06/VIDEv7gjLrAO8xd1CckxXUny230406.shtml"}
+    ]
+  },
+  {
+    "id": "cuojin_boshanlu",
+    "name_zh": "错金博山炉",
+    "name_pinyin": "Cuo Jin Bo Shan Lu",
+    "name_alt": ["金错博山炉", "刘胜墓博山炉"],
+    "dynasty": "西汉",
+    "period": "西汉前期(中山靖王刘胜时期)",
+    "approx_year": "公元前2世纪",
+    "excavation_year": "1968",
+    "excavation_site": "河北省满城县中山靖王刘胜墓",
+    "ancient_state": "西汉(中山国)",
+    "current_museum": "河北博物院",
+    "size": {
+      "height_cm": 26,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": 3.4
+    },
+    "type": "杂器(熏炉)",
+    "form_subtype": "博山形熏炉",
+    "patterns": ["山峦人物动物纹", "云气纹", "错金丝", "盘龙"],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "熏香器(神山仙境意象)",
+    "craft": "范铸法 + 错金工艺(以金丝镶嵌)",
+    "rarity_level": "国宝(2002年首批禁止出境文物)",
+    "story_brief": "错金博山炉1968年出土于河北满城中山靖王刘胜墓(与其妻窦绾墓同时发现金缕玉衣),通高26 cm。炉盖塑成层峦叠嶂的博山(神仙居所),山间有猎人、奔兽、神兽出没,香烟自山间缝隙缭绕而出,营造仙境云雾;炉柄、底座以金丝错出云气纹,光彩夺目。是汉代神仙思想(求仙、博山、仙山)在工艺品中最完美的具象化,也是西汉错金工艺的巅峰之作。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Boshanlu",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA (各文件许可不一)",
+        "caption": "博山炉类目"
+      }
+    ],
+    "data_sources": [
+      {"field": "all", "source": "Wikipedia EN (Hill censer) + Baidu Baike English mirror (reference only)", "url": "https://en.wikipedia.org/wiki/Hill_censer"}
+    ]
+  },
+  {
+    "id": "changxin_gongdeng",
+    "name_zh": "长信宫灯",
+    "name_pinyin": "Chang Xin Gong Deng",
+    "name_alt": ["Changxin Palace Lamp"],
+    "dynasty": "西汉",
+    "period": "西汉前期",
+    "approx_year": "公元前2世纪",
+    "excavation_year": "1968",
+    "excavation_site": "河北省满城县中山靖王刘胜之妻窦绾墓",
+    "ancient_state": "西汉(中山国)",
+    "current_museum": "河北博物院",
+    "size": {
+      "height_cm": 48,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": 15.85
+    },
+    "type": "杂器(灯具)",
+    "form_subtype": "宫女执灯",
+    "patterns": ["素面鎏金", "局部刻铭"],
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 65,
+      "summary": "灯体多处刻铭65字,记'长信尚浴'等字样,说明其原为窦太后'长信宫'之物,后转赐窦绾。可考流转史"
+    },
+    "purpose": "实用照明器(高级宫廷灯具)",
+    "craft": "分铸鎏金 + 中空导烟设计",
+    "rarity_level": "国宝(2002年首批禁止出境文物)",
+    "story_brief": "长信宫灯1968年出土于河北满城窦绾墓,通体鎏金,造型为一跪坐宫女双手执灯。其精妙之处在于宫女右臂为中空导烟管:灯烛燃烧时烟尘经其右臂导入宫女腹中(腹内贮水溶解烟尘),从而保持室内空气洁净——是世界上最早的'环保灯'设计。灯盘可旋转、灯罩可开合调节光向,展现了汉代精巧的机械设计。65字铭文记录其在长信宫(窦太后宫)的使用与转赐过程。被誉为'中华第一灯',启发了北京冬奥会火炬设计。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Changxin_Palace_Lamp",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA (各文件许可不一)",
+        "caption": "长信宫灯相册"
+      }
+    ],
+    "data_sources": [
+      {"field": "all", "source": "China Online Museum + chinadaily", "url": "https://www.comuseum.com/arts/han-changxin-palace-lamp/"}
+    ]
+  },
+  {
+    "id": "matafeiyan",
+    "name_zh": "马踏飞燕",
+    "name_pinyin": "Ma Ta Fei Yan",
+    "name_alt": ["铜奔马", "Flying Horse of Gansu"],
+    "dynasty": "东汉",
+    "period": "东汉中晚期",
+    "approx_year": "公元2世纪",
+    "excavation_year": "1969",
+    "excavation_site": "甘肃省武威市雷台汉墓",
+    "ancient_state": "东汉",
+    "current_museum": "甘肃省博物馆",
+    "size": {
+      "height_cm": 34.5,
+      "width_cm": 13.1,
+      "length_cm": 45,
+      "weight_kg": 7.3
+    },
+    "type": "杂器(随葬铜雕)",
+    "form_subtype": "立体铜奔马雕塑",
+    "patterns": ["素面写实雕塑"],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "墓葬随葬铜俑(可能为车马仪仗)",
+    "craft": "失蜡法 + 焊接(单足支撑全身重量,力学杰作)",
+    "rarity_level": "国宝(2002年首批禁止出境文物)",
+    "story_brief": "马踏飞燕1969年由甘肃武威新鲜公社农民在挖防空洞时发现于雷台东汉墓。马作昂首嘶鸣、三足腾空、右后蹄踏一飞鸟之态,全身重量经飞鸟一点支撑,达到完美的力学平衡。飞鸟扭头惊视,反衬奔马之速。1984年被国家旅游局选为中国旅游标志。其'天马奔腾'造型成为中国与世界文化对话的视觉符号,展示了东汉雕塑的写实精神与浪漫想象的完美融合。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Galloping_Horse_Treading_on_a_Flying_Swallow",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA (各文件许可不一)",
+        "caption": "马踏飞燕相册"
+      }
+    ],
+    "data_sources": [
+      {"field": "all", "source": "Wikipedia EN (Flying Horse of Gansu)", "url": "https://en.wikipedia.org/wiki/Flying_Horse_of_Gansu"}
+    ]
+  },
+  {
+    "id": "sanxingdui_dali_ren",
+    "name_zh": "三星堆青铜大立人",
+    "name_pinyin": "San Xing Dui Qing Tong Da Li Ren",
+    "name_alt": ["青铜立人像", "大立人像"],
+    "dynasty": "商",
+    "period": "商代晚期(古蜀文化)",
+    "approx_year": "约公元前1200年",
+    "excavation_year": "1986",
+    "excavation_site": "四川省广汉市三星堆遗址二号祭祀坑",
+    "ancient_state": "古蜀(三星堆文化)",
+    "current_museum": "三星堆博物馆",
+    "size": {
+      "height_cm": 262,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": 180
+    },
+    "type": "礼器(神巫/王形象)",
+    "form_subtype": "立体铜人立像(连座)",
+    "patterns": ["龙纹", "兽面纹", "鸟纹", "虫纹", "几何纹(满饰繁复纹样,'最早龙袍')"],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文(古蜀文化无成熟文字)"
+    },
+    "purpose": "祭祀礼器(神职/王权象征)",
+    "craft": "范铸法 + 分铸法(身、座分铸再合体)",
+    "rarity_level": "国宝",
+    "story_brief": "三星堆青铜大立人1986年出土于三星堆遗址二号祭祀坑,通高2.62米(人像1.72米 + 底座0.9米),重约180公斤,是现存世界上最早、最高、最完整的青铜立人像,被誉为'世界铜像之王'。立人双手环握,目光肃穆,身着层叠繁复的'龙袍'式礼服(满饰龙纹、兽面纹、鸟纹、虫纹),立于神坛之上。学界对其身份说法不一:王者?大祭司?神祇?目前主流认为其代表古蜀政教合一的最高统治者,手持的或为牙璋、玉琮、象牙等重器。古蜀文明独立于中原商文化,其青铜艺术风格让世界重新认识中国早期文明的多元性。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Large_bronze_standing_figure_of_Sanxingdui",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA (各文件许可不一)",
+        "caption": "三星堆大立人相册"
+      }
+    ],
+    "data_sources": [
+      {"field": "all", "source": "Wikipedia EN (Sanxingdui) + 三星堆博物馆 (reference only)", "url": "https://en.wikipedia.org/wiki/Sanxingdui"}
+    ]
+  },
+  {
+    "id": "sanxingdui_zongmu_mianju",
+    "name_zh": "三星堆纵目面具",
+    "name_pinyin": "San Xing Dui Zong Mu Mian Ju",
+    "name_alt": ["凸目面具", "Bronze Mask with Protruding Eyes"],
+    "dynasty": "商",
+    "period": "商代晚期(古蜀文化)",
+    "approx_year": "约公元前1200年",
+    "excavation_year": "1986",
+    "excavation_site": "四川省广汉市三星堆遗址二号祭祀坑",
+    "ancient_state": "古蜀(三星堆文化)",
+    "current_museum": "三星堆博物馆",
+    "size": {
+      "height_cm": 66,
+      "width_cm": 85,
+      "length_cm": 138,
+      "weight_kg": null
+    },
+    "type": "礼器(神面)",
+    "form_subtype": "立体面具(双眼柱状外凸,大耳上扬)",
+    "patterns": ["素面 + 强烈夸张造型"],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "祭祀(神祇崇拜,可能挂于神柱/神殿)",
+    "craft": "范铸法 + 分铸法",
+    "rarity_level": "国宝",
+    "story_brief": "三星堆纵目面具1986年出土于三星堆二号祭祀坑,长138 cm、宽85 cm、高66 cm,是三星堆出土最大的面具。其最显著特征是双眼瞳孔呈圆柱状外凸长达16 cm,双耳尖长上挑70 cm。古蜀传说中的始祖蚕丛'其目纵',学界主流认为该面具即蚕丛或其神化形象的写照。也有学者认为其象征'千里眼顺风耳'——超凡的视听能力。面具过于沉重不能佩戴,推测其原本挂于神殿木柱之上,以神之眼俯视祭祀场域。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/File:Bronze_head_from_Sanxingdui.JPG",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA 3.0 (uploader Nishanshaman)",
+        "caption": "三星堆青铜头像(注:严格说该具体文件是青铜头像而非纵目面具,但可作类似器物示意。纵目面具图请于Wikipedia搜索)"
+      }
+    ],
+    "data_sources": [
+      {"field": "all", "source": "Wikipedia EN (Sanxingdui)", "url": "https://en.wikipedia.org/wiki/Sanxingdui"}
+    ]
+  },
+  {
+    "id": "sanxingdui_shenshu",
+    "name_zh": "三星堆青铜神树",
+    "name_pinyin": "San Xing Dui Qing Tong Shen Shu",
+    "name_alt": ["青铜神树一号", "通天神树"],
+    "dynasty": "商",
+    "period": "商代晚期(古蜀文化)",
+    "approx_year": "约公元前1200年",
+    "excavation_year": "1986",
+    "excavation_site": "四川省广汉市三星堆遗址二号祭祀坑",
+    "ancient_state": "古蜀(三星堆文化)",
+    "current_museum": "三星堆博物馆",
+    "size": {
+      "height_cm": 396,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": 180
+    },
+    "type": "礼器(神物/宇宙树)",
+    "form_subtype": "立体青铜神树(三层九枝,九鸟二十七果,一龙沿干而下)",
+    "patterns": ["写实植物枝叶", "立体鸟(太阳神鸟)", "立体龙", "果实(铃形)"],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "祭祀礼器(通天神物,沟通天地)",
+    "craft": "复合分铸 + 焊接(碎片2479块经10年修复)",
+    "rarity_level": "国宝",
+    "story_brief": "三星堆青铜神树1986年出土于二号祭祀坑,通高3.96米,是迄今所见最大的单体青铜文物。神树分三层,每层三枝共九枝,每枝顶端有一果一鸟,共27果9鸟;主干一侧有一头朝下的蜿蜒铜龙顺干而下。学界认为其形象与《山海经》中'扶桑'、'建木'(古人想象沟通天地之神树)对应——九日栖于树枝,神鸟(太阳化身)轮流出巡,龙为载神升降的神物。该树出土时已碎成2479片,文物修复专家杨晓邬历时10年(1986-1996)修复成功。三星堆共出土6株神树。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Sanxingdui_Sacred_Tree",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA (各文件许可不一)",
+        "caption": "三星堆神树相册(若存在)"
+      }
+    ],
+    "data_sources": [
+      {"field": "all", "source": "Chinadaily + arkeonews + CGTN", "url": "https://govt.chinadaily.com.cn/s/202503/12/WS67d131ce498eec7e1f731a17/massive-bronze-sacred-tree-from-sanxingdui-site.html"}
+    ]
+  },
+  {
+    "id": "zilong_ding",
+    "name_zh": "子龙鼎",
+    "name_pinyin": "Zi Long Ding",
+    "name_alt": ["Zi Long Bronze Ding"],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前12-11世纪",
+    "excavation_year": "约1920年代",
+    "excavation_site": "河南省辉县(传)",
+    "ancient_state": "商",
+    "current_museum": "中国国家博物馆",
+    "size": {
+      "height_cm": 103,
+      "width_cm": null,
+      "length_cm": 80,
+      "weight_kg": 230
+    },
+    "type": "食器",
+    "form_subtype": "圆鼎(三足深腹)",
+    "patterns": ["饕餮纹(六组兽面)", "云雷纹", "弦纹"],
+    "inscription": {
+      "has": true,
+      "text": "子龙",
+      "char_count": 2,
+      "summary": "口沿内壁铸铭'子龙'二字,'龙'字是迄今所见鼎类青铜器铭文中最早的'龙'字。'子'为商代王室子弟称谓"
+    },
+    "purpose": "祭祀礼器",
+    "craft": "范铸法",
+    "rarity_level": "国宝",
+    "story_brief": "子龙鼎是现存商代圆鼎中最大者,通高103cm、口径80cm、重230公斤,与方形的后母戊鼎并称'商代圆鼎之王/方鼎之王'。1920年代出土于河南辉县后流落海外,先至日本(经千石唯司收藏),后转入香港。2006年国家文物局以海外文物征集形式抢救回归,藏中国国家博物馆。鼎铭'子龙'二字之'龙'是迄今所见鼎类青铜器铭文中最早的龙字,弥足珍贵。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Zilong_ding",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA (各文件许可不一,需确认)",
+        "caption": "子龙鼎相册(若存在)"
+      }
+    ],
+    "data_sources": [
+      {"field": "all", "source": "live2makan + 国博 reference + 艺术家访谈", "url": "https://live2makan.com/2025/02/05/treasures-zi-long-bronze-ding-shang-dynasty/"}
+    ]
+  },
+  {
+    "id": "siyangshou_bu",
+    "name_zh": "四羊首铜瓿",
+    "name_pinyin": "Si Yang Shou Tong Bu",
+    "name_alt": [],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前12-11世纪",
+    "excavation_year": "TODO(数据缺失)",
+    "excavation_site": "湖南省宁乡(传)",
+    "ancient_state": "商(湘江流域方国)",
+    "current_museum": "湖南博物院",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "酒器/盛贮器",
+    "form_subtype": "瓿(肩部四羊首装饰)",
+    "patterns": ["羊首立体", "饕餮纹", "云雷纹"],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "TODO"
+    },
+    "purpose": "盛贮酒礼器",
+    "craft": "范铸法 + 分铸(羊首先铸再合范)",
+    "rarity_level": "一级文物(TODO 确认)",
+    "story_brief": "TODO: 数据待补充。该器与四羊方尊同属湘江流域商代青铜文明产物,以肩部四只立体羊首装饰为特征。维基百科与开放资源信息稀少,建议参考湖南博物院出版物或学界论文,谨慎使用。",
+    "image_urls": [],
+    "data_sources": [
+      {"field": "all", "source": "TODO: 维基百科与英文开放数据集对该器记载极少", "url": null}
+    ]
+  },
+  {
+    "id": "longxing_gong",
+    "name_zh": "龙形觥",
+    "name_pinyin": "Long Xing Gong",
+    "name_alt": ["石楼龙形觥(常与之混淆)", "Dragon-shaped Gong"],
+    "dynasty": "商",
+    "period": "商代晚期(方国)",
+    "approx_year": "约公元前12-11世纪",
+    "excavation_year": "1976",
+    "excavation_site": "山西省灵石县旌介村商墓",
+    "ancient_state": "商方国('丙'国/狄方/鬼方区域)",
+    "current_museum": "山西博物院 / 山西青铜博物馆",
+    "size": {
+      "height_cm": 21.7,
+      "width_cm": 10,
+      "length_cm": 23.8,
+      "weight_kg": null
+    },
+    "type": "酒器",
+    "form_subtype": "觥(龙形,似船型)",
+    "patterns": ["鼍纹(扬子鳄)", "夔龙纹", "兽面纹", "立体龙首盖钮"],
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 5,
+      "summary": "盖内有'天黾'(或'天鼋')二字铭文,器底有三字铭文(待考)"
+    },
+    "purpose": "盛酒礼器(贵族饮酒)",
+    "craft": "范铸法 + 分铸",
+    "rarity_level": "国宝(山西博物院十大镇馆之宝之一)",
+    "story_brief": "龙形觥1976年出土于山西灵石县旌介村商代墓葬,造型独特如停泊的龙舟,前端塑昂首龙头(双目突出、长牙外露),龙腹平阔可容酒约1.5升。器身满饰鼍纹(扬子鳄)、夔龙纹与兽面纹——鼍纹在中原青铜器中极罕见,提示3000年前山西气候温润有沼泽鳄鱼栖息。该器风格与中原商文化典型范式有别,属商代晚期山西方国('丙国'/狄方)文化特色,反映了商王朝边缘的多元青铜文明。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Shanxi_Museum",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA (各文件许可不一,需逐一确认)",
+        "caption": "山西博物院相关图片(直接龙形觥图片需在Commons搜索确认)"
+      }
+    ],
+    "data_sources": [
+      {"field": "size,site,patterns", "source": "山西博物院科普资源 + 太原道", "url": "http://www.tydao.com/2010/shengbo/sb001lonxin.htm"}
+    ]
+  },
+  {
+    "id": "qin_tongchema",
+    "name_zh": "秦陵铜车马",
+    "name_pinyin": "Qin Ling Tong Che Ma",
+    "name_alt": ["秦始皇铜车马", "Qin Bronze Chariot"],
+    "dynasty": "秦",
+    "period": "秦代(始皇时期)",
+    "approx_year": "约公元前210年",
+    "excavation_year": "1980",
+    "excavation_site": "陕西省西安市临潼区秦始皇陵封土西侧20米处",
+    "ancient_state": "秦",
+    "current_museum": "秦始皇帝陵博物院",
+    "size": {
+      "height_cm": 152,
+      "width_cm": null,
+      "length_cm": 317,
+      "weight_kg": 1241
+    },
+    "type": "杂器(陪葬车马)",
+    "form_subtype": "铜车马(一号立车 + 二号安车,共两乘)",
+    "patterns": ["云气纹", "卷云纹", "几何纹(彩绘 + 错金银)"],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文(器上有'安车第二'等少量秦戳印,标识车序)"
+    },
+    "purpose": "陪葬礼器(秦始皇灵魂之车)",
+    "craft": "范铸法 + 失蜡法 + 焊接 + 错金银 + 彩绘",
+    "rarity_level": "国宝(2002年首批禁止出境文物)",
+    "story_brief": "秦陵铜车马1980年12月出土于秦始皇陵封土西侧7.8米地下,出土时碎为3000余片,经8年精修复原。共两乘:一号'立车'(车手立式驾驭,225 cm长、152 cm高、约1061kg),二号'安车'(封闭厢式,317 cm长,后室可坐卧),两车合计约2300公斤,是迄今出土最大、最完整、最精美的青铜车马。每车配四匹铜马一位车御,马具、车具齐全。彩绘以白色为底,绘云气纹;部分构件错金银。比例为真车马的1/2。被誉为'青铜之冠'。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Bronze_chariots_of_Qin_Shi_Huang",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA (各文件许可不一)",
+        "caption": "秦陵铜车马相册(若存在)"
+      }
+    ],
+    "data_sources": [
+      {"field": "all", "source": "Wikipedia EN (Qin bronze chariot) + travelchinaguide", "url": "https://en.wikipedia.org/wiki/Qin_bronze_chariot"}
+    ]
+  },
+  {
+    "id": "shangyang_fangsheng",
+    "name_zh": "商鞅方升",
+    "name_pinyin": "Shang Yang Fang Sheng",
+    "name_alt": ["秦商鞅铜方升", "Rectangular Sheng of Shang Yang"],
+    "dynasty": "战国 / 秦",
+    "period": "战国晚期秦国(商鞅变法时期)+ 秦统一后加刻诏文",
+    "approx_year": "公元前344年(秦孝公十八年初铸)",
+    "excavation_year": "约清末民初(传世品,无明确出土记录)",
+    "excavation_site": "陕西(传世)",
+    "ancient_state": "秦(商鞅变法)",
+    "current_museum": "上海博物馆",
+    "size": {
+      "height_cm": 2.32,
+      "width_cm": 6.9,
+      "length_cm": 18.7,
+      "weight_kg": 0.69
+    },
+    "type": "杂器(度量衡)",
+    "form_subtype": "方升(长方形量器)",
+    "patterns": ["素面 + 刻铭"],
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 75,
+      "summary": "器壁三面及底面均有刻铭,共约75字。左壁刻商鞅变法记事(秦孝公十八年大良造鞅令'十六又五分一寸为升'),把手对面壁刻'重泉'二字,器底加刻秦始皇二十六年(前221年)统一度量衡诏书。是商鞅变法与秦始皇统一度衡的双重物证"
+    },
+    "purpose": "度量衡标准器(量1升)",
+    "craft": "范铸法",
+    "rarity_level": "国宝(2002年首批禁止出境文物)",
+    "story_brief": "商鞅方升铸于公元前344年(秦孝公十八年),由商鞅亲自督造,作为秦国法定容量基准器:'十六又五分一立方寸为一升'。实测容积约202.15毫升,是研究秦国度量衡与中国古代'以度审容'(用尺寸推求容积)制度的关键实物。秦始皇统一六国后(前221年),将其重新启用为全国标准,并在底部加刻统一诏书。器身三面铭文75字,横跨战国与秦统一两个关键时点,是研究中国古代标准化制度的'独一无二'实物史料。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Shang_Yang_fangsheng",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA (各文件许可不一)",
+        "caption": "商鞅方升相册(若存在)"
+      }
+    ],
+    "data_sources": [
+      {"field": "all", "source": "ChinaServicesInfo + The Paper 文物细读", "url": "https://www.chinaservicesinfo.com/s/202109/10/WS613b0c99498e6a12c12057ea/ancient-rectangular-measuring-vessel-set-standard-for-measuring.html"}
+    ]
+  }
+]
