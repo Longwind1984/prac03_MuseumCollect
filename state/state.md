@@ -60,3 +60,4 @@
 [2026-05-20 H7] [auditor-pm] DONE — d1-pm.md + next-brief-pm.md
 [2026-05-20 H7] [auditor-content] DONE — d1-content.md + next-brief-content.md
 [2026-05-20 H7] [auditor-aesthetic] DONE — d1-aesthetic.md + next-brief-aesthetic.md
+[2026-05-20 H7] [orchestrator] Comparative Auditor launched (synthesize 5 audits + merged-spec for v2). Decide on close-loop iteration after notification.
