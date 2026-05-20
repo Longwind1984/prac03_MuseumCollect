@@ -131,6 +131,9 @@ window.MC = (function () {
           ]},
           { name: '簋', kind: 'type', children: [
             { name: '方座簋', kind: 'subtype', members: ['li_gui'] },
+            // 注: 簋 还有四耳簋、附耳簋 等常见子型;此 v1 demo 仅收 1 件方座簋
+            { name: '四耳簋', kind: 'subtype', members: [] },
+            { name: '附耳簋', kind: 'subtype', members: [] },
           ]},
         ],
       },
@@ -141,6 +144,9 @@ window.MC = (function () {
             { name: '方尊', kind: 'subtype', members: ['siyang_fangzun'] },
             { name: '鸟兽形尊', kind: 'subtype', members: ['fuhao_xiaozun'] },
             { name: '方腹尊', kind: 'subtype', members: ['he_zun'] },
+            // 尊盘组合 = "尊置于盘中" 的复合器(尊作主器,盘作承器)
+            // 学术上不是独立器型,这里作为"尊"的复合子型展示
+            { name: '尊盘组合(复合器)', kind: 'subtype', composite: true, members: ['zenghouyi_zunpan'], rare: true, note: '尊置于盘中,曾侯乙尊盘为代表;盘亦在水器维度参见' },
           ]},
           { name: '壶', kind: 'type', children: [
             { name: '方壶', kind: 'subtype', members: ['lianhe_fanghu'] },
@@ -150,9 +156,6 @@ window.MC = (function () {
           ]},
           { name: '觥', kind: 'type', children: [
             { name: '龙形觥', kind: 'subtype', members: ['longxing_gong'], rare: true },
-          ]},
-          { name: '尊盘', kind: 'type', children: [
-            { name: '尊盘组合', kind: 'subtype', members: ['zenghouyi_zunpan'], rare: true },
           ]},
         ],
       },

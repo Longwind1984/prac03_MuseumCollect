@@ -57,7 +57,7 @@
     },
     li_gui: {
       poem: "时日曷丧?予及汝皆亡。 —— 商人之怨",
-      voice: `我是利簋。\n一九七六年,陕西临潼。那一年,我被一位叫"利"的将领的器物——他参加过武王伐纣。\n\n我内底有三十二个字:"武王征商,惟甲子朝,岁鼎。"——意思是,武王伐纣的牧野之战,发生在甲子日的清晨,木星正当头顶。\n\n这是天文学家可以验证的话。后人据此把牧野之战定于公元前一〇四六年二月二十日。\n\n我替一个将军记住了那一天的天空——三千年前的清晨,木星照着一支正在改朝换代的军队。`
+      voice: `我是利簋。\n一九七六年,陕西临潼。那一年,我属于一位叫"利"的将领——他参加过武王伐纣。\n\n我内底有三十二个字:"武王征商,惟甲子朝,岁鼎。"——意思是,武王伐纣的牧野之战,发生在甲子日的清晨,木星正当头顶。\n\n这是天文学家可以验证的话。后人据此把牧野之战定于公元前一〇四六年二月二十日。\n\n我替一个将军记住了那一天的天空——三千年前的清晨,木星照着一支正在改朝换代的军队。`
     },
     guoji_zibai_pan: {
       poem: "薄伐玁狁,至于太原。 —— 《诗经·小雅·六月》",
@@ -244,7 +244,8 @@
       changxin_gongdeng: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Changxin_Palace_Lamp.jpg/640px-Changxin_Palace_Lamp.jpg",
       matafeiyan: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Galloping_Horse_Treading_on_a_Flying_Swallow.jpg/640px-Galloping_Horse_Treading_on_a_Flying_Swallow.jpg",
       sanxingdui_dali_ren: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Large_bronze_standing_figure_of_Sanxingdui.jpg/480px-Large_bronze_standing_figure_of_Sanxingdui.jpg",
-      sanxingdui_zongmu_mianju: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Bronze_head_from_Sanxingdui.JPG/640px-Bronze_head_from_Sanxingdui.JPG",
+      // sanxingdui_zongmu_mianju: 原 Bronze_head_from_Sanxingdui.JPG 实为青铜头像,非纵目面具,已移除。fallback 使用 silhouette。
+      sanxingdui_zongmu_mianju: null,
       sanxingdui_shenshu: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Sanxingdui_Sacred_Tree.jpg/480px-Sanxingdui_Sacred_Tree.jpg",
       qin_tongchema: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Qin_bronze_chariots.jpg/640px-Qin_bronze_chariots.jpg",
     };
