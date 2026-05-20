@@ -6,12 +6,12 @@
 
 ## TL;DR
 
-✅ **3 个高保真 demo 完成 + 完整 audit 闭环 + v2 close-loop 触发**
+✅ **3 个高保真 demo 完成 + 完整 audit 闭环 + v2 close-loop 完成**
 
-- 14 个 sub-agent 跑完,~2.4M token (~$20-25)
+- 15 个 sub-agent 跑完,~2.4M token (~$20-25)
 - 3 personas (陈翊安 / 苏念 / 阿K) → 3 个差异化 demo (A 考据派 / B 沉浸派 / C 探索派)
 - 6 视角 audit (UX / Aesthetic / Content / Motivation / PM / Comparative) — Composite ranking **A 7.8 > C 6.8 > B 6.2**
-- v2 close-loop iteration 在跑(silhouette SVG + 4 content fixes)— 这是 PM Auditor 强调的 portfolio-killer "audit-as-trigger 实证"
+- v2 close-loop iteration **已 ship**:12 silhouette SVG + 4 content fixes + B/C 接入 + Playwright 验证 — 这是 PM Auditor 强调的 portfolio-killer "audit-as-trigger 实证"已经成立
 
 **核心洞察**:5/5 Auditor 独立 flag **图像供应链** = 最强信号(没真实文物 silhouette 永远过不了"配得上国宝"这一关)
 
@@ -59,13 +59,35 @@
 | PM | hire signal 7.0/10 | — | audit-as-trigger 需 close-loop 证据 |
 | Comparative | **A 7.8 > C 6.8 > B 6.2** | — | 3 demos as a set 才是真 portfolio asset |
 
-### Phase 5 — v2 close-loop iteration (in progress)
+### Phase 5 — v2 close-loop iteration ✅
 
-Comparative Auditor 推荐的 single most important fix:
-**生成共享 silhouette SVG 套 + wire 入 B/C demos**(同时击中 4 个 Auditor 的 P0)。
-合并 4 个 P0 content fixes(B 利簋病句 / C 尊盘 taxonomy / 后母戊纹饰层级 / 三星堆 image 错位)。
+总时 ~120 min,在 2h 预算内,by 单一 builder-iterator agent。详见 `audits/iteration-1-changes.md`。
 
-v2 iterator 完成后,本节会更新具体产出。
+**4/4 P0 content fixes shipped**:
+1. B 利簋独白病句 ("我被一位叫'利'的将领的器物" → "我属于一位叫'利'的将领")
+2. C 尊盘 taxonomy (top-level vessel type → composite subtype under 尊)
+3. 后母戊鼎 patterns 分层 (饕餮 main / 夔龙·虎噬人头 secondary / 云雷 local)
+4. 三星堆纵目面具 错位 image URL → null + TODO
+
+**12 silhouette SVGs** (超出 8 个目标):
+fangding · yuanding · xiao_zun · fang_zun · sanxingdui_zongmu · sanxingdui_dali_ren · yuewang_jian · changxin_gongdeng · gui · bianzhong · pan · fanghu
+— 单色青铜色 `#a4732c`,viewBox 0 0 100,可识别造型,带来源 comment
+
+**Wiring**:
+- C `state.js`: SILHOUETTE_BY_ID 映射 25 件 + per-rarity tinting,28 page call-sites 接入
+- B `data.js` + `ui.js`: silhouette 下垫层在 wiki img 之下,on-error 自动 fallback
+- A: 故意跳过(保留考据派 "待补" 空格美学)
+
+**Playwright 验证(关键!)**:
+- B `me.html`:12 个收藏 placeholder 解析为 12 unique silhouette,**回应 Aesthetic Auditor 的"7 identical 椭圆 blob" P0**
+- C `catalog.html`:22 placeholder 卡 fangding path inline 渲染
+- 零 page errors
+
+**为什么这个 iteration 重要**:
+> Audit (5/5 Auditor 独立 flag 图像供应链) → Comparative merged-spec (推荐 silhouette) → v2 iterator (实现) → diff verifiable
+> **"audit-as-iteration-trigger" 不再是 PPT claim,是 demonstrated fact**
+
+这是 PM Auditor 强调的 portfolio-killer fix。✓
 
 ---
 

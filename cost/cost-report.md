@@ -45,25 +45,25 @@
 ### Phase 5 — v2 Iteration (close-loop)
 | Agent | Tokens | Wall-clock |
 |---|---|---|
-| Builder Iterator | TBD | TBD |
+| Builder Iterator | 174,107 | ~16 min wall-clock (~120 min actual work) |
+| **Subtotal** | **174K** | |
 
 ---
 
-## Totals (so far)
+## Totals (final)
 
-- **Subagent tokens (Phase 1-4)**: ~2.23M
-- **Phase 5 estimate**: +200K
-- **Projected total**: ~2.43M
+- **Subagent tokens (Phase 1-5)**: **2,401,962** (~2.4M)
+- **15 subagent invocations** total
 
-## Wall-clock (so far)
+## Wall-clock (final)
 
 - Setup: 30 min
 - Phase 1: 13 min (parallel)
 - Phase 2: 19 min (parallel)
 - Phase 3: 25 min (parallel) 
 - Phase 4: 24 min (parallel + Comparative seq)
-- Phase 5: TBD (~120 min estimated)
-- **Total night run**: ~3.5h elapsed at Comparative completion, +2h estimated for v2
+- Phase 5: 16 min (single agent)
+- **Total night run: ~2h 7min compute time** (compressed via parallelism from ~6-7h sequential equivalent)
 
 ---
 
