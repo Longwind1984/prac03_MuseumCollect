@@ -49,3 +49,8 @@
   - builder-C (探索派): demos/v1-C-explorer/
 [2026-05-20 H6] [builder-C] DONE — demos/v1-C-explorer/ (8 pages, 7 components: rarity-halo / time-pillar / ancient-map / form-genealogy / inscription-reader / pilgrimage-passport / purpose-scene[light])
 [2026-05-20 H6] [builder-A] DONE — demos/v1-A-textual-research/ (8 pages, 6 components: time-pillar / ancient-map / pattern-tree[+rubbing loupe] / form-genealogy[+compare wall] / inscription-reader[段位制+三栏切换] / rarity-halo[克制无动效] + pilgrimage-passport placeholder)
+[2026-05-20 H6] [builder-B] DONE — demos/v1-B-immersive/ (8 pages, 7 components: 古国地图穿越切换 / 礼器归位场景 / 工艺长卷 / 朝圣护照流散篇 / 时空柱诗意时间 / 稀有度光晕 / 国宝独白 [inscription-reader 沉浸变体])
+
+[2026-05-20 H6] [builder-B] DONE — demos/v1-B-immersive/ (8 pages, 7 components: ancient-map[era switching] / purpose-scene[杀手锏 22 positions, 等级判定] / craft-scroll / pilgrimage-passport / time-pillar / rarity-halo / 国宝独白). Playwright 8/8 pages 0 JS errors.
+
+[2026-05-20 H6.5] [orchestrator] Phase 3 complete (3/3 Builders). Launching Phase 4: 5 Auditor squad parallel (UX/Aesthetic/Content/Motivation/PM) + Comparative after.
