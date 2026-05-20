@@ -27,3 +27,10 @@
 [setup] night-plan-d0.md written
 [setup] 8 agent definitions to be written
 [setup] awaiting user "启动" trigger
+
+---
+
+## Night Run D0 Events
+
+[2026-05-20 H0] [orchestrator] night-run-started; reading night-plan-d0.md
+[2026-05-20 H0] [orchestrator] Phase 1 launching: domain-researcher + product-owner + data-engineer (parallel, background)
