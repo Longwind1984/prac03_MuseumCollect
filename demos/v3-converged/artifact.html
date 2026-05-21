@@ -17,6 +17,7 @@
   border: 2px solid var(--accent-gold);
 }
 .silhouette-img { width: 70%; height: 70%; object-fit: contain; opacity: .8; filter: invert(1); }
+.photo-img { width: 100%; height: 100%; object-fit: cover; }
 .view-toggle { display: flex; gap: 4px; margin-top: 8px; justify-content: center; }
 .view-btn {
   padding: 4px 12px; font-size: 11px; border-radius: 20px; cursor: pointer;
@@ -80,43 +81,53 @@
 <script src="js/cross-dim-wiring.js"></script>
 <script src="js/data-loader.js"></script>
 <script>
-// Mock artifact data for demo (covers all 11 schema fields)
-const MOCK_ARTIFACTS = {
-  'houmuwu_ding': {
-    id: 'houmuwu_ding', name_zh: '后母戊鼎', name_pinyin: 'Hou Mu Wu Ding',
-    name_alt: ['司母戊鼎'], dynasty: '商', period: '商代晚期', approx_year: '约公元前1300-1046年',
-    excavation: { year: 1939, site: '河南省安阳市武官村殷墟', ancient_state: '商', method: '田间挖出', dating_method: '类型学+铭文', significance: '现存最大最重商代青铜器' },
-    current_museum: '中国国家博物馆', size: { height_cm: 133, width_cm: 79.2, length_cm: 110, weight_kg: 832.84 },
-    type: '食器', form_subtype: '方鼎', form_detail: '直立双耳，腹部长方形，下接四柱足',
-    distinctive_features: ['现存最重商代青铜器','三层花纹典范','28块陶范合铸'],
-    patterns_structured: { main: ['饕餮纹 — 腹身四面'], secondary: ['夔龙纹 — 腹下边带'], ground: ['云雷纹 — 全身底纹'], rim: ['虎噬人头纹 — 耳外侧','蝉纹 — 柱足上段'] },
-    inscription: { has: true, text: '后母戊', char_count: 3, summary: '鼎腹内壁铸铭"后母戊"三字。商王祖庚或祖甲为祭祀母妇妌（庙号母戊）而铸', stage: '商晚期金文' },
-    purpose: { primary: '祭祀礼器', context: '商王为祭其母而铸，太牢礼主器', user_class: '商王室' },
-    craft: { primary: '范铸法', details: '28块陶范分铸再合浇，是当时世界最大单体青铜铸件', achievements: '展示商晚期范铸法巅峰' },
-    rarity_level: '国宝',
-    scholarly_status: '商代礼器顶级代表，改写商代青铜冶铸史认知，2002年首批禁止出境文物',
-    provenance_timeline: [{year:1939,event:'河南安阳武官村田间出土，因日军逼近就地回埋'},{year:1946,event:'抗战胜利后运抵南京'},{year:1959,event:'移入中国历史博物馆（今国博）永久珍藏'}],
-    related_artifacts: ['四羊方尊','妇好鸮尊','子龙鼎'],
-    data_sources: ['中国国家博物馆官网','考古学报1959','殷周金文集成']
-  },
-  'he_zun': {
-    id: 'he_zun', name_zh: '何尊', name_pinyin: 'He Zun',
-    dynasty: '西周', period: '西周早期', approx_year: '约公元前1038年（成王五年）',
-    excavation: { year: 1963, site: '陕西省宝鸡市贾村镇', ancient_state: '西周', method: '农民取土时发现', dating_method: '铭文纪年+类型学', significance: '"中国"二字最早实物出处' },
-    current_museum: '宝鸡青铜器博物院', size: { height_cm: 38.8, weight_kg: 14.6 },
-    type: '酒器', form_subtype: '尊', form_detail: '圆筒形尊，口圆外侈，颈部内收',
-    distinctive_features: ['"宅兹中国"最早实物证据','122字册命铭文','西周早期器型代表'],
-    patterns_structured: { main: ['饕餮纹 — 腹身'], ground: ['云雷纹 — 底纹'] },
-    inscription: { has: true, text: '惟王初壅，宅兹中或（国）...', char_count: 122, summary: '成王五年册命铭文，含"宅兹中国"四字——"中国"二字最早出处（前1038年）', stage: '西周早期金文' },
-    purpose: { primary: '祭祀/册命礼器', context: '何受成王册命而铸，纪念王城营建', user_class: '贵族何' },
-    craft: { primary: '范铸法', details: '西周早期典型风格，颈腹纹饰精整', achievements: '铭文史料价值超越器物工艺本身' },
-    rarity_level: '国宝',
-    scholarly_status: '"中国"最早文字记录，先秦史、语言学研究必引器物，2002年首批禁止出境',
-    provenance_timeline: [{year:1963,event:'陕西宝鸡贾村农民取土偶然发现'},{year:1965,event:'宝鸡博物馆入藏'},{year:1975,event:'唐兰先生释读出"宅兹中国"，震动学界'}],
-    related_artifacts: ['利簋','大盂鼎','班簋'],
-    data_sources: ['宝鸡青铜器博物院','唐兰《何尊铭文解释》1976']
-  },
-};
+// Normalize a segment JSON record into the shape renderArtifact expects.
+// Segment data may have slightly different field shapes (inscription as bool,
+// craft as string, data_sources as objects, etc.) — this defends each access.
+function normalizeRecord(r) {
+  const i = r.inscription || {};
+  const p = r.purpose || {};
+  const c = r.craft || {};
+  const ds = r.data_sources || [];
+  return {
+    id: r.id,
+    name_zh: r.name_zh || r.name || r.id,
+    name_pinyin: r.name_pinyin || '',
+    name_alt: r.name_alt || [],
+    dynasty: r.dynasty || '未知',
+    period: r.period || '',
+    approx_year: r.approx_year || '',
+    rarity_level: r.rarity_level || '一般',
+    excavation: r.excavation || {},
+    current_museum: r.current_museum || '不详',
+    size: r.size || {},
+    type: r.type || '',
+    form_subtype: r.form_subtype || '',
+    form_detail: r.form_detail || '',
+    distinctive_features: r.distinctive_features || [],
+    patterns_structured: r.patterns_structured || {},
+    inscription: (typeof i === 'boolean')
+      ? { has: i, text: '', char_count: 0, summary: '', stage: '' }
+      : {
+          has: i.has !== undefined ? i.has : !!(i.text || (i.char_count || 0) > 0),
+          text: i.text || '',
+          char_count: i.char_count || (i.text ? i.text.length : 0),
+          summary: i.summary || '',
+          stage: i.stage || ''
+        },
+    purpose: (typeof p === 'string')
+      ? { primary: p, context: '', user_class: '' }
+      : { primary: p.primary || '', context: p.context || '', user_class: p.user_class || '' },
+    craft: (typeof c === 'string')
+      ? { primary: c, details: '' }
+      : { primary: c.primary || '', details: c.details || '' },
+    scholarly_status: r.scholarly_status || '',
+    provenance_timeline: r.provenance_timeline || [],
+    related_artifacts: r.related_artifacts || [],
+    data_sources: ds.map(s => typeof s === 'string' ? s : (s.source || s.url || s.title || JSON.stringify(s))),
+    image_urls: r.image_urls || []
+  };
+}
 
 function getRarityClass(level) {
   if (level === '国宝') return 'rarity-treasure';
@@ -143,6 +154,14 @@ function renderArtifact(data) {
   const silhouette = getSilhouetteFor(data.form_subtype);
   const inscChars = data.inscription.text ? data.inscription.text.split('') : [];
 
+  // Photo-first: use direct_url or local_path if available, else fall back to silhouette
+  const imgData = data.image_urls && data.image_urls[0];
+  const photoUrl = imgData && (imgData.direct_url || (imgData.local_path ? `../../${imgData.local_path}` : null));
+  const silhouetteUrl = `../../assets/silhouettes/${silhouette}.svg`;
+  const hasPhoto = !!photoUrl;
+  const initSrc = hasPhoto ? photoUrl : silhouetteUrl;
+  const initClass = hasPhoto ? 'photo-img' : 'silhouette-img';
+
   const html = `
   <!-- Hero -->
   <div class="artifact-hero">
@@ -152,14 +171,16 @@ function renderArtifact(data) {
         <div>
           <div class="artifact-image-box ${data.rarity_level==='国宝'?'treasure':''}">
             ${data.rarity_level==='国宝' ? '<div class="rarity-badge">国之重器</div>' : ''}
-            <img id="artifact-img" class="silhouette-img"
-              src="../../assets/silhouettes/${silhouette}.svg"
-              onerror="this.style.display='none'; this.parentNode.innerHTML+='<div style=\\'font-size:64px;color:rgba(255,255,255,.3)\\'>🏺</div>'"
+            <img id="artifact-img" class="${initClass}"
+              src="${initSrc}"
+              data-photo-url="${photoUrl || ''}"
+              data-silhouette-url="${silhouetteUrl}"
+              onerror="this.onerror=null;this.src='${silhouetteUrl}';this.className='silhouette-img';"
               alt="${data.name_zh}">
           </div>
           <div class="view-toggle">
-            <button class="view-btn active" onclick="switchView('silhouette')">线稿</button>
-            <button class="view-btn" onclick="switchView('photo')">实景</button>
+            <button class="view-btn${hasPhoto ? ' active' : ''}" onclick="switchView('photo')">实景</button>
+            <button class="view-btn${!hasPhoto ? ' active' : ''}" onclick="switchView('silhouette')">线稿</button>
           </div>
         </div>
 
@@ -358,14 +379,19 @@ function renderArtifact(data) {
 }
 
 function switchView(mode) {
-  document.querySelectorAll('.view-btn').forEach(b => b.classList.toggle('active', b.textContent.trim() === (mode==='silhouette'?'线稿':'实景')));
+  document.querySelectorAll('.view-btn').forEach(b => b.classList.toggle('active', b.textContent.trim() === (mode==='实景'?'实景':'线稿')));
   const img = document.getElementById('artifact-img');
   if (!img) return;
-  if (mode === 'photo') {
+  const photoUrl = img.dataset.photoUrl;
+  const silhouetteUrl = img.dataset.silhouetteUrl;
+  if (mode === 'photo' && photoUrl) {
+    img.src = photoUrl;
+    img.className = 'photo-img';
     img.style.filter = 'none';
     img.style.opacity = '1';
-    img.style.background = 'transparent';
   } else {
+    img.src = silhouetteUrl;
+    img.className = 'silhouette-img';
     img.style.filter = 'invert(1)';
     img.style.opacity = '0.8';
   }
@@ -395,16 +421,37 @@ function highlightPattern(pattern) {
 // Load artifact based on URL param
 const params = new URLSearchParams(location.search);
 const artifactId = params.get('id') || 'houmuwu_ding';
-const artifact = MOCK_ARTIFACTS[artifactId] || MOCK_ARTIFACTS['houmuwu_ding'];
 
-document.addEventListener('DOMContentLoaded', function() {
-  renderArtifact(artifact);
-  document.title = `${artifact.name_zh} — MuseumCollect v3`;
-  // Emit era-focus for this artifact's dynasty
+function renderNotFound() {
+  document.getElementById('artifact-content').innerHTML =
+    `<div style="text-align:center; padding:80px 24px; color:var(--text-muted);">
+      <h2 style="color:var(--text-ink); font-size:28px; margin-bottom:12px;">未找到该文物</h2>
+      <p style="font-size:14px; margin-bottom:8px;">artifactId: <code style="background:#f4ece0; padding:2px 8px; border-radius:4px;">${artifactId}</code></p>
+      <p style="font-size:13px; margin-bottom:20px;">可能是 URL 拼写错误,或该 ID 不在 277 件数据集中。</p>
+      <a href="catalog.html" style="display:inline-block; padding:10px 24px; background:var(--accent-bronze); color:white; border-radius:6px; text-decoration:none;">← 返回图鉴</a>
+    </div>`;
+}
+
+function tryRender() {
+  if (!(window.MuseumData && window.MuseumData.artifacts && window.MuseumData.artifacts.length > 0)) return false;
+  const raw = window.MuseumData.get(artifactId);
+  if (!raw) {
+    renderNotFound();
+    return true;
+  }
+  const data = normalizeRecord(raw);
+  renderArtifact(data);
+  document.title = `${data.name_zh} — MuseumCollect v3`;
   setTimeout(() => {
-    if (window.CrossDimWiring) window.CrossDimWiring.emitEra(artifact.dynasty, 'artifact.load');
+    if (window.CrossDimWiring) window.CrossDimWiring.emitEra(data.dynasty, 'artifact.load');
   }, 500);
-});
+  return true;
+}
+
+// Render now if data already loaded, otherwise wait for the ready event
+if (!tryRender()) {
+  document.addEventListener('museum-data-ready', tryRender);
+}
 </script>
 </body>
 </html>

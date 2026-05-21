@@ -160,3 +160,15 @@ Total active background agents: 9 (5 DE + 4 Phase B)
 [2026-05-22 H2.5] [builder-iterator-v4-track-b] DONE — 10 fixes shipped, 0 skipped. Fixed: da_ke_ding period 西周晚期→中期; 何尊 citation 1986→1976; FULL_TEXT padded to exactly 122 chars; 莲鹤方壶 失蜡法 qualifier removed; 史墙盘 "第一部史诗"→"最早金文史学文献"; 8 emoji nav icons replaced with inline SVGs; me.html debug panel hidden behind ?debug=1; 三星堆 silhouette mapping added to catalog.html+artifact.html; locked titles hidden (show unlocked only + count summary); Day-0 onboarding overlay added to index.html (localStorage mc_v3_visited + ?firstvisit=1).
 
 [2026-05-22 H2.5] [builder-iterator-v4-track-c] DONE — dashboard.html shipped (3 components co-present, era-focus wired). Single-file at demos/v3-converged/dashboard.html: time-pillar (D3 inline, 240px left col, 8 dynasty bands with density fill + breathing animation) + geo mini-map (D3 inline SVG, china outline + rivers + era polygon overlays + site dots) + pattern-strip (25 icon nodes, dominant highlighted gold) + bottom era panel (artifact cards + rarity halos). All 3 components listen same era-focus event bus; hover/click 商 band → map swaps to shang polygons + 殷墟/三星堆 sites light up + 饕餮/夔龙 pattern icons glow gold + bottom panel shows 8 商代 artifact cards. Auto-focuses 商 on load for wow demo. index.html nav updated with ★ 三联动 gold link.
+
+[2026-05-22 H4] [data-engineer-photo-fetcher] DONE — 144/277 photos fetched (direct_url), demo render patched
+  - 144 Wikimedia Category URL records updated with direct_url (upload.wikimedia.org 1200px thumbs)
+  - 95 non-Wikimedia records skipped (museum sites, no CC license available)
+  - License dist: CC BY-SA 4.0 (74), CC BY-SA 3.0 (61), CC BY 2.0 (9)
+  - local_path=null (upload.wikimedia.org blocked by server allowlist; direct_url loads in browser)
+  - artifact.html: photo-first render, 实景 button default-active, switchView updated
+  - catalog.html: data-loader.js added, getPhotoUrl() call, re-render on museum-data-ready
+  - dashboard.html: data-loader.js added, artifact-card-mini photo-first
+  - me.html: data-loader.js added, collection-item thumbnail photo-first
+  - data-loader.js: getPhotoUrl(id, basePath) helper added to MuseumData API
+  - Files: data/photo-fetch-report.md, data/licensing-log-v3.md (144 entries appended)

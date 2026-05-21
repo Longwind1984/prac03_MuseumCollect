@@ -724,3 +724,1017 @@ NOTE: Guimet images copyright Musée Guimet — reference only.
 4. 倗伯爯簋/畢姬鬲 — 学术来源，再分发时注意原文献版权声明
 5. 周公东征方鼎 — 具体器物待核实，data_sources 标注 TODO
 
+
+
+# Photo Fetch v4 — 2026-05-21
+
+## houmuwu_ding
+- Image: Simuwuding.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Simuwuding.JPG
+  - License: CC BY 2.0
+  - Attribution: Rosemania (Wikimedia Commons)
+  - Fetch date: 2026-05-21
+
+## siyang_fangzun
+- Image: 20251026 Four-goat Square Zun 02.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20251026_Four-goat_Square_Zun_02.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## fuhao_xiaozun
+- Image: 20210220 Bronze owl-shaped Zun with inscriptions of Fu Hao, Henan Museum.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20210220_Bronze_owl-shaped_Zun_with_inscriptions_of_Fu_Hao%2C_Henan_Museum.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## zilong_ding
+- Image: Bronze ding, Zhengzhou Erligang culture.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Bronze_ding%2C_Zhengzhou_Erligang_culture.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## simuxin_ding
+- Image: Shang Bronze Mirror, Fu Hao Tomb.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Shang_Bronze_Mirror%2C_Fu_Hao_Tomb.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## fuhao_yue
+- Image: 20251026 Bronze Ge Inlaid with Turquoise from Fu Hao's Tomb.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20251026_Bronze_Ge_Inlaid_with_Turquoise_from_Fu_Hao%27s_Tomb.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## longhu_wen_zun
+- Image: Shang dynasty bronze zun.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Shang_dynasty_bronze_zun.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## duling_fangding
+- Image: Bronze ding, Zhengzhou Erligang culture.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Bronze_ding%2C_Zhengzhou_Erligang_culture.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## dahe_fangding
+- Image: Da He ding.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Da_He_ding.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## yachou_yue
+- Image: 20251026 Bronze Ge Inlaid with Turquoise from Fu Hao's Tomb.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20251026_Bronze_Ge_Inlaid_with_Turquoise_from_Fu_Hao%27s_Tomb.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## fuhao_jue
+- Image: Fuhao gong.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Fuhao_gong.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## fuhao_gu
+- Image: Fuhao gong.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Fuhao_gong.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## xijue_fuhao
+- Image: Fuhao gong.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Fuhao_gong.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## fuhao_pan
+- Image: Fuhao gong.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Fuhao_gong.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## fuhao_he
+- Image: Fuhao gong.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Fuhao_gong.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## fuhao_gui
+- Image: Fuhao gong.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Fuhao_gong.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## xiao_chen_jue_fuhao
+- Image: Fuhao gong.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Fuhao_gong.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## fuhao_lei
+- Image: Fuhao gong.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Fuhao_gong.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## fuhao_you_owl
+- Image: 20210220 Bronze owl-shaped Zun with inscriptions of Fu Hao, Henan Museum.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20210220_Bronze_owl-shaped_Zun_with_inscriptions_of_Fu_Hao%2C_Henan_Museum.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## linggui_gong
+- Image: Shanxi_Museum_Bronze_Gui.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Shanxi_Museum_Bronze_Gui.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## fuhao_maotou_gui
+- Image: Fuhao gong.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Fuhao_gong.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## shufu_fuhao_fangyi
+- Image: Fuhao gong.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Fuhao_gong.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## shang_ge_fuhao
+- Image: 20251026 Bronze Ge Inlaid with Turquoise from Fu Hao's Tomb.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20251026_Bronze_Ge_Inlaid_with_Turquoise_from_Fu_Hao%27s_Tomb.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## shang_jia_erligang
+- Image: Bronze ding, Zhengzhou Erligang culture.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Bronze_ding%2C_Zhengzhou_Erligang_culture.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## shang_jia_fuhao
+- Image: Fuhao gong.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Fuhao_gong.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## shang_li_fuhao
+- Image: Fuhao gong.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Fuhao_gong.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## fuhao_da_you
+- Image: Fuhao gong.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Fuhao_gong.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## shang_mao_spear
+- Image: 20251026 Bronze Ge Inlaid with Turquoise from Fu Hao's Tomb.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20251026_Bronze_Ge_Inlaid_with_Turquoise_from_Fu_Hao%27s_Tomb.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## shang_nao_bell_national
+- Image: Shang Bronze Mirror, Fu Hao Tomb.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Shang_Bronze_Mirror%2C_Fu_Hao_Tomb.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## shang_you_taotie
+- Image: Fuhao gong.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Fuhao_gong.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## shang_yan_fuhao
+- Image: Fuhao gong.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Fuhao_gong.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## shang_daxing_ge
+- Image: 20251026 Bronze Ge Inlaid with Turquoise from Fu Hao's Tomb.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20251026_Bronze_Ge_Inlaid_with_Turquoise_from_Fu_Hao%27s_Tomb.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## shang_da_zhong_yin
+- Image: Fuhao gong.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Fuhao_gong.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## shang_wuding_nao
+- Image: Fuhao gong.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Fuhao_gong.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## fuhao_mirror
+- Image: Shang Bronze Mirror, Fu Hao Tomb.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Shang_Bronze_Mirror%2C_Fu_Hao_Tomb.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## shang_fangjia_erligang
+- Image: Bronze ding, Zhengzhou Erligang culture.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Bronze_ding%2C_Zhengzhou_Erligang_culture.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## da_yu_ding
+- Image: Da Yu ding.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Da_Yu_ding.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## da_ke_ding
+- Image: Big Ke Ding (4004385989).jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Big_Ke_Ding_(4004385989).jpg
+  - License: CC BY 2.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## maogong_ding
+- Image: Mao kung Ting.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Mao_kung_Ting.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## sanshi_pan
+- Image: Bronze Pan Inscription, Late Western Zhou, 9th C. to 771 BC.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Bronze_Pan_Inscription%2C_Late_Western_Zhou%2C_9th_C._to_771_BC.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## he_zun
+- Image: He Zun.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:He_Zun.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## li_gui
+- Image: 20251026 'Li' Bronze Gui.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20251026_%27Li%27_Bronze_Gui.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## guoji_zibai_pan
+- Image: Guo Ji Zi Bai pan inscription.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Guo_Ji_Zi_Bai_pan_inscription.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## shi_qiang_pan
+- Image: Bronze Pan Inscription, Late Western Zhou, 9th C. to 771 BC.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Bronze_Pan_Inscription%2C_Late_Western_Zhou%2C_9th_C._to_771_BC.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## lai_pan
+- Image: Bronze Pan Inscription, Late Western Zhou, 9th C. to 771 BC.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Bronze_Pan_Inscription%2C_Late_Western_Zhou%2C_9th_C._to_771_BC.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## lai_ding
+- Image: Da Yu ding.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Da_Yu_ding.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## kang_hou_gui
+- Image: British Museum Kang Hou Gui Front.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:British_Museum_Kang_Hou_Gui_Front.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## lianhe_fanghu
+- Image: Lotus and crane rectangular hu.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Lotus_and_crane_rectangular_hu.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## yuewang_goujian_jian
+- Image: 20230208 Bronze sword used by King Goujian of Yue 01.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20230208_Bronze_sword_used_by_King_Goujian_of_Yue_01.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## zenghouyi_bianzhong
+- Image: 20230208 Chime bells of Marquis Yi of Zeng.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20230208_Chime_bells_of_Marquis_Yi_of_Zeng.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## zenghouyi_zunpan
+- Image: Zenghouyi - IMG 5811.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Zenghouyi_-_IMG_5811.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## longxing_gong
+- Image: Shanxi_Museum_Bronze_Gui.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Shanxi_Museum_Bronze_Gui.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## shangyang_fangsheng
+- Image: Shang_Yang_fangsheng.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Shang_Yang_fangsheng.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## wangziwu_ding
+- Image: Warring States bronze ding with gold and silver inlay.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Warring_States_bronze_ding_with_gold_and_silver_inlay.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## zhongshan_wang_cuo_ding
+- Image: Warring States bronze ding with gold and silver inlay.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Warring_States_bronze_ding_with_gold_and_silver_inlay.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## zhongshan_wang_cuo_fanghu
+- Image: Warring States bronze ding with gold and silver inlay.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Warring_States_bronze_ding_with_gold_and_silver_inlay.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## zhongshan_wang_cuo_yuanhu
+- Image: Warring States bronze ding with gold and silver inlay.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Warring_States_bronze_ding_with_gold_and_silver_inlay.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## zhongshan_zhaoyutu_tongban
+- Image: Warring States bronze ding with gold and silver inlay.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Warring_States_bronze_ding_with_gold_and_silver_inlay.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## wusun_fuzhai_zhong
+- Image: 20230208 Chime bells of Marquis Yi of Zeng.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20230208_Chime_bells_of_Marquis_Yi_of_Zeng.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+## wuwang_fucha_mao
+- Image: 20230208 Chime bells of Marquis Yi of Zeng.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20230208_Chime_bells_of_Marquis_Yi_of_Zeng.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## wuwang_guang_jian
+- Image: 20230208 Chime bells of Marquis Yi of Zeng.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20230208_Chime_bells_of_Marquis_Yi_of_Zeng.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## zhongshan_hushi_lu_tongpingzuo
+- Image: Warring States bronze ding with gold and silver inlay.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Warring_States_bronze_ding_with_gold_and_silver_inlay.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## zhongshan_guizuo_ren_qideng
+- Image: Warring States bronze ding with gold and silver inlay.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Warring_States_bronze_ding_with_gold_and_silver_inlay.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## baoshan_chumu_tongqi_zu
+- Image: 20230208 Chime bells of Marquis Yi of Zeng.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20230208_Chime_bells_of_Marquis_Yi_of_Zeng.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## chu_zhenmu_shou
+- Image: 20230208 Chime bells of Marquis Yi of Zeng.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20230208_Chime_bells_of_Marquis_Yi_of_Zeng.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## panchimen_tonghu_chunqiu
+- Image: Shanxi_Museum_Bronze_Gui.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Shanxi_Museum_Bronze_Gui.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## zhanguo_ding_zu_liding
+- Image: 20230208 Chime bells of Marquis Yi of Zeng.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20230208_Chime_bells_of_Marquis_Yi_of_Zeng.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## zhanguo_gui_zu
+- Image: 20230208 Chime bells of Marquis Yi of Zeng.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20230208_Chime_bells_of_Marquis_Yi_of_Zeng.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## chunqiu_jin_ding_zu
+- Image: Shanxi_Museum_Bronze_Gui.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Shanxi_Museum_Bronze_Gui.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## zhanguo_chu_tong_fudou
+- Image: 20230208 Chime bells of Marquis Yi of Zeng.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20230208_Chime_bells_of_Marquis_Yi_of_Zeng.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## zhongshan_wang_cuo_cuojinyin_huzhixing
+- Image: Warring States bronze ding with gold and silver inlay.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Warring_States_bronze_ding_with_gold_and_silver_inlay.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## cuojin_banshe_tonghu
+- Image: 20230208 Chime bells of Marquis Yi of Zeng.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20230208_Chime_bells_of_Marquis_Yi_of_Zeng.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## zhanguo_cuojinyin_tongdaigou_zu
+- Image: Warring States bronze ding with gold and silver inlay.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Warring_States_bronze_ding_with_gold_and_silver_inlay.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## zhanguo_tongrenqishou
+- Image: Warring States bronze ding with gold and silver inlay.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Warring_States_bronze_ding_with_gold_and_silver_inlay.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## zhanguo_niaoshou_tongyu
+- Image: Shanxi_Museum_Bronze_Gui.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Shanxi_Museum_Bronze_Gui.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## zhanguo_tongfang_tongqian
+- Image: 20230208 Chime bells of Marquis Yi of Zeng.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20230208_Chime_bells_of_Marquis_Yi_of_Zeng.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## zhanguo_chu_qin_tongli_zu
+- Image: 20230208 Chime bells of Marquis Yi of Zeng.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20230208_Chime_bells_of_Marquis_Yi_of_Zeng.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## zhongshan_wang_tonglu
+- Image: Warring States bronze ding with gold and silver inlay.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Warring_States_bronze_ding_with_gold_and_silver_inlay.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## qin_tongchema
+- Image: A Bronze Carriage and Horse at Lishan Garden, Terracotta Army Museum, Lintong District, Xi'an.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:A_Bronze_Carriage_and_Horse_at_Lishan_Garden%2C_Terracotta_Army_Museum%2C_Lintong_District%2C_Xi%27an.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons contributor
+  - Fetch date: 2026-05-21
+
+
+# Photo Fetch v4 — 2026-05-21
+
+## yuewang_zhezhi_yusi_jian
+- Image: 20230208 Bronze sword used by King Goujian of Yue 01.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20230208_Bronze_sword_used_by_King_Goujian_of_Yue_01.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## cuojinyin_niaoshu_tonghu
+- Image: Big Ke Ding (4004385989).jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Big_Ke_Ding_(4004385989).jpg
+  - License: CC BY 2.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## zhanguo_yanle_yulie_gongzhan_tonghu
+- Image: Simuwuding.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Simuwuding.JPG
+  - License: CC BY 2.0
+  - Attribution: Rosemania (Wikimedia Commons)
+  - Fetch date: 2026-05-21
+
+## lehe_fanghu_er
+- Image: 20210220 Bronze owl-shaped Zun with inscriptions of Fu Hao, Henan Museum.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20210220_Bronze_owl-shaped_Zun_with_inscriptions_of_Fu_Hao%2C_Henan_Museum.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## cuojin_xiniudaigou
+- Image: Warring States bronze ding with gold and silver inlay.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Warring_States_bronze_ding_with_gold_and_silver_inlay.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## cuojin_jihewen_fangjian
+- Image: Warring States bronze ding with gold and silver inlay.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Warring_States_bronze_ding_with_gold_and_silver_inlay.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## ba_shu_tongmao
+- Image: Bronze Colossal Standing Figure, Sanxingdui b.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Bronze_Colossal_Standing_Figure%2C_Sanxingdui_b.jpg
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## ba_ren_hunniu_chunyu
+- Image: Bronze Colossal Standing Figure, Sanxingdui b.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Bronze_Colossal_Standing_Figure%2C_Sanxingdui_b.jpg
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## shu_wang_ge
+- Image: Bronze Colossal Standing Figure, Sanxingdui b.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Bronze_Colossal_Standing_Figure%2C_Sanxingdui_b.jpg
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## caihou_shen_bianzhong
+- Image: 20230208 Chime bells of Marquis Yi of Zeng.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20230208_Chime_bells_of_Marquis_Yi_of_Zeng.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## caihou_shen_fangjian
+- Image: 20230208 Chime bells of Marquis Yi of Zeng.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20230208_Chime_bells_of_Marquis_Yi_of_Zeng.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## panhu_wen_chunqiu_biaozhunqi
+- Image: Big Ke Ding (4004385989).jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Big_Ke_Ding_(4004385989).jpg
+  - License: CC BY 2.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## zhi_junzi_jian
+- Image: Warring States bronze ding with gold and silver inlay.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Warring_States_bronze_ding_with_gold_and_silver_inlay.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## huang_zhi_ding
+- Image: 20210220 Bronze owl-shaped Zun with inscriptions of Fu Hao, Henan Museum.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20210220_Bronze_owl-shaped_Zun_with_inscriptions_of_Fu_Hao%2C_Henan_Museum.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## qin_guo_tongqi_zu
+- Image: Mao kung Ting.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Mao_kung_Ting.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## qi_guo_tong_dou
+- Image: Da Yu ding.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Da_Yu_ding.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## zhanguo_han_guo_tongqi
+- Image: 20210220 Bronze owl-shaped Zun with inscriptions of Fu Hao, Henan Museum.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20210220_Bronze_owl-shaped_Zun_with_inscriptions_of_Fu_Hao%2C_Henan_Museum.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## zhanguo_zhao_tongqi
+- Image: Chang Xin Gong Deng, Han Dynasty,China (Hebei Museum).jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Chang_Xin_Gong_Deng%2C_Han_Dynasty%2CChina_(Hebei_Museum).jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## zhanguo_wei_tongqi
+- Image: Simuwuding.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Simuwuding.JPG
+  - License: CC BY 2.0
+  - Attribution: Rosemania (Wikimedia Commons)
+  - Fetch date: 2026-05-21
+
+## yan_guo_tongqi
+- Image: Warring States bronze ding with gold and silver inlay.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Warring_States_bronze_ding_with_gold_and_silver_inlay.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## chunqiu_wu_yue_tong_ju_zu
+- Image: 20230208 Bronze sword used by King Goujian of Yue 01.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20230208_Bronze_sword_used_by_King_Goujian_of_Yue_01.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## chunqiu_tongge_ming
+- Image: Mao kung Ting.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Mao_kung_Ting.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## zhanguo_lihe_tongpan
+- Image: 20251026 Four-goat Square Zun 02.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20251026_Four-goat_Square_Zun_02.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## zhanguo_niushouwenhu
+- Image: Da Yu ding.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Da_Yu_ding.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## chu_wang_yizhang_ge
+- Image: Big Ke Ding (4004385989).jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Big_Ke_Ding_(4004385989).jpg
+  - License: CC BY 2.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## chu_wang_xiongfu_fangdou
+- Image: Big Ke Ding (4004385989).jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Big_Ke_Ding_(4004385989).jpg
+  - License: CC BY 2.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## chu_wang_yanren_ding
+- Image: Warring States bronze ding with gold and silver inlay.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Warring_States_bronze_ding_with_gold_and_silver_inlay.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## chunqiu_wuyue_tongjian
+- Image: 20230208 Bronze sword used by King Goujian of Yue 01.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:20230208_Bronze_sword_used_by_King_Goujian_of_Yue_01.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## zhanguo_tongliubo_qi
+- Image: Chang Xin Gong Deng, Han Dynasty,China (Hebei Museum).jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Chang_Xin_Gong_Deng%2C_Han_Dynasty%2CChina_(Hebei_Museum).jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## qin_quan
+- Image: Bronze ding, Zhengzhou Erligang culture.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Bronze_ding%2C_Zhengzhou_Erligang_culture.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## qin_liang
+- Image: Bronze ding, Zhengzhou Erligang culture.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Bronze_ding%2C_Zhengzhou_Erligang_culture.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## haihohou_yanyudeng
+- Image: Chang Xin Gong Deng, Han Dynasty,China (Hebei Museum).jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Chang_Xin_Gong_Deng%2C_Han_Dynasty%2CChina_(Hebei_Museum).jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## haihohou_bozhen
+- Image: Chang Xin Gong Deng, Han Dynasty,China (Hebei Museum).jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Chang_Xin_Gong_Deng%2C_Han_Dynasty%2CChina_(Hebei_Museum).jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## manche_cuojinyinhu
+- Image: Chang Xin Gong Deng, Han Dynasty,China (Hebei Museum).jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Chang_Xin_Gong_Deng%2C_Han_Dynasty%2CChina_(Hebei_Museum).jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## zhujue_huanbeibei
+- Image: Chang Xin Gong Deng, Han Dynasty,China (Hebei Museum).jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Chang_Xin_Gong_Deng%2C_Han_Dynasty%2CChina_(Hebei_Museum).jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## liujin_dangle
+- Image: Chang Xin Gong Deng, Han Dynasty,China (Hebei Museum).jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Chang_Xin_Gong_Deng%2C_Han_Dynasty%2CChina_(Hebei_Museum).jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## liujin_tongjuan
+- Image: Chang Xin Gong Deng, Han Dynasty,China (Hebei Museum).jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Chang_Xin_Gong_Deng%2C_Han_Dynasty%2CChina_(Hebei_Museum).jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## nanyuewang_huhu
+- Image: Chang Xin Gong Deng, Han Dynasty,China (Hebei Museum).jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Chang_Xin_Gong_Deng%2C_Han_Dynasty%2CChina_(Hebei_Museum).jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## nanyuewang_liujinhu
+- Image: Chang Xin Gong Deng, Han Dynasty,China (Hebei Museum).jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Chang_Xin_Gong_Deng%2C_Han_Dynasty%2CChina_(Hebei_Museum).jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## maoluling_liujinma
+- Image: 雷台汉墓铜奔马3.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:%E9%9B%B7%E5%8F%B0%E6%B1%89%E5%A2%93%E9%93%9C%E5%A5%94%E9%A9%AC3.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## cuojin_xiyun_xizun
+- Image: Big Ke Ding (4004385989).jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Big_Ke_Ding_(4004385989).jpg
+  - License: CC BY 2.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## cuojin_niaozhuan_hu
+- Image: Chang Xin Gong Deng, Han Dynasty,China (Hebei Museum).jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Chang_Xin_Gong_Deng%2C_Han_Dynasty%2CChina_(Hebei_Museum).jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## xihan_niaoshow_fang_jian
+- Image: Chang Xin Gong Deng, Han Dynasty,China (Hebei Museum).jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Chang_Xin_Gong_Deng%2C_Han_Dynasty%2CChina_(Hebei_Museum).jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## wuwei_tongjuma
+- Image: 雷台汉墓铜奔马3.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:%E9%9B%B7%E5%8F%B0%E6%B1%89%E5%A2%93%E9%93%9C%E5%A5%94%E9%A9%AC3.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## donghan_shen_shu
+- Image: Chang Xin Gong Deng, Han Dynasty,China (Hebei Museum).jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Chang_Xin_Gong_Deng%2C_Han_Dynasty%2CChina_(Hebei_Museum).jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## liujin_boshanlu_donghan
+- Image: Chang Xin Gong Deng, Han Dynasty,China (Hebei Museum).jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Chang_Xin_Gong_Deng%2C_Han_Dynasty%2CChina_(Hebei_Museum).jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## donghan_zhenmugui
+- Image: Chang Xin Gong Deng, Han Dynasty,China (Hebei Museum).jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Chang_Xin_Gong_Deng%2C_Han_Dynasty%2CChina_(Hebei_Museum).jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## sanxingdui_da_mianju
+- Image: Bronze Mask with Protruding Eyes.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Bronze_Mask_with_Protruding_Eyes.jpg
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## sanxingdui_dajintai_mianju
+- Image: Bronze Mask with Protruding Eyes.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Bronze_Mask_with_Protruding_Eyes.jpg
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## sanxingdui_shoumianju
+- Image: Bronze Mask with Protruding Eyes.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Bronze_Mask_with_Protruding_Eyes.jpg
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## sanxingdui_qingtong_niao
+- Image: Bronze Mask with Protruding Eyes.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Bronze_Mask_with_Protruding_Eyes.jpg
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## sanxingdui_taiyanglun
+- Image: Bronze Mask with Protruding Eyes.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Bronze_Mask_with_Protruding_Eyes.jpg
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## sanxingdui_yanxingqi
+- Image: Bronze Mask with Protruding Eyes.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Bronze_Mask_with_Protruding_Eyes.jpg
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## sanxingdui_dingzun_guizuo
+- Image: Bronze Mask with Protruding Eyes.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Bronze_Mask_with_Protruding_Eyes.jpg
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## sanxingdui_shentai
+- Image: Bronze Mask with Protruding Eyes.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Bronze_Mask_with_Protruding_Eyes.jpg
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## sanxingdui_xiaoliren
+- Image: Bronze Mask with Protruding Eyes.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Bronze_Mask_with_Protruding_Eyes.jpg
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## sanxingdui_qingtong_zun
+- Image: Bronze Mask with Protruding Eyes.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Bronze_Mask_with_Protruding_Eyes.jpg
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## sanxingdui_qingtong_lei
+- Image: Bronze Mask with Protruding Eyes.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Bronze_Mask_with_Protruding_Eyes.jpg
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## sanxingdui_hutolong
+- Image: Bronze Mask with Protruding Eyes.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Bronze_Mask_with_Protruding_Eyes.jpg
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## cuojin_boshanlu_v3
+- Image: Chang Xin Gong Deng, Han Dynasty,China (Hebei Museum).jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Chang_Xin_Gong_Deng%2C_Han_Dynasty%2CChina_(Hebei_Museum).jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## changxin_gongdeng_v3
+- Image: Chang Xin Gong Deng, Han Dynasty,China (Hebei Museum).jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Chang_Xin_Gong_Deng%2C_Han_Dynasty%2CChina_(Hebei_Museum).jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## matafeiyan_v3
+- Image: 雷台汉墓铜奔马3.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:%E9%9B%B7%E5%8F%B0%E6%B1%89%E5%A2%93%E9%93%9C%E5%A5%94%E9%A9%AC3.jpg
+  - License: CC BY-SA 4.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## sanxingdui_dali_ren_v3
+- Image: Bronze Colossal Standing Figure, Sanxingdui b.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Bronze_Colossal_Standing_Figure%2C_Sanxingdui_b.jpg
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## sanxingdui_zongmu_mianju_v3
+- Image: Bronze Mask with Protruding Eyes.jpg
+  - File URL: https://commons.wikimedia.org/wiki/File:Bronze_Mask_with_Protruding_Eyes.jpg
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21
+
+## sanxingdui_shenshu_v3
+- Image: Bronze head from Sanxingdui.JPG
+  - File URL: https://commons.wikimedia.org/wiki/File:Bronze_head_from_Sanxingdui.JPG
+  - License: CC BY-SA 3.0
+  - Attribution: Wikimedia Commons
+  - Fetch date: 2026-05-21

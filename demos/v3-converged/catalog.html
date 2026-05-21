@@ -123,8 +123,18 @@
 </div>
 
 <script src="js/state.js"></script>
+<script src="js/data-loader.js"></script>
 <script src="js/cross-dim-wiring.js"></script>
 <script>
+// Helper: get photo URL from MuseumData for a given artifact id
+function getPhotoUrl(artifactId) {
+  if (!window.MuseumData) return null;
+  const rec = window.MuseumData.get(artifactId);
+  if (!rec) return null;
+  const img = rec.image_urls && rec.image_urls[0];
+  if (!img) return null;
+  return img.direct_url || (img.local_path ? '../../' + img.local_path : null) || null;
+}
 // Mock catalog data (representative 50 items)
 const CATALOG_ITEMS = [
   {id:'houmuwu_ding', name:'后母戊鼎', dynasty:'商', form:'方鼎', site:'殷墟', rarity:'国宝', patterns:['饕餮纹','夔龙纹'], inscription:'有', char_count:3},
@@ -243,8 +253,8 @@ function renderGrid() {
     <div class="art-card ${isT?'treasure':''} ${isC?'collected':''}" onclick="location.href='artifact.html?id=${item.id}'">
       ${isC ? '<div class="collected-dot"></div>' : ''}
       ${isT ? '<div class="rarity-halo treasure">国宝</div>' : ''}
-      <div class="art-card-img">
-        <img src="../../assets/silhouettes/${silh}.svg" alt="${item.name}" onerror="this.style.display='none'; this.parentNode.innerHTML='<span style=\\'font-size:36px;opacity:.3;\\'>🏺</span>'">
+      <div class="art-card-img" style="overflow:hidden;">
+        ${(function(){const ph=getPhotoUrl(item.id);return ph?`<img src="${ph}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;" onerror="this.onerror=null;this.src='../../assets/silhouettes/${silh}.svg';this.style.objectFit='contain';this.style.padding='16px';">`:`<img src="../../assets/silhouettes/${silh}.svg" alt="${item.name}" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=\\'font-size:36px;opacity:.3;\\'>🏺</span>'">`;})()}
       </div>
       <div class="art-card-body">
         <div class="art-card-name">${item.name}</div>
@@ -347,6 +357,8 @@ document.addEventListener('DOMContentLoaded', () => {
   buildPatternFilters();
   buildGeoFilters();
   renderGrid();
+  // Re-render when MuseumData finishes loading photos
+  document.addEventListener('museum-data-ready', () => renderGrid());
 
   // Listen for era-focus from other components (穿越模式)
   document.addEventListener('era-focus', (e) => {

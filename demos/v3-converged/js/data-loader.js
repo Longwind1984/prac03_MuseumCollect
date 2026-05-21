@@ -98,6 +98,20 @@
       get(id) { return all.find(a => a.id === id) || null; },
       collected: MOCK_COLLECTED_IDS,
       isCollected(id) { return MOCK_COLLECTED_IDS.has(id); },
+      /**
+       * getPhotoUrl(id) — returns the best available image URL for an artifact.
+       * Priority: direct_url (Wikimedia thumb) > local_path > null.
+       * Pass basePath (e.g. '../../') when resolving local_path relatively.
+       */
+      getPhotoUrl(id, basePath) {
+        const rec = this.get(id);
+        if (!rec) return null;
+        const img = rec.image_urls && rec.image_urls[0];
+        if (!img) return null;
+        if (img.direct_url) return img.direct_url;
+        if (img.local_path) return (basePath || '') + img.local_path;
+        return null;
+      },
       eraStats() {
         return Object.entries(byEra).map(([era, arts]) => ({
           era,

@@ -313,6 +313,7 @@ body {
 .debug-bar.visible { display: block; }
 #debug-log { color: #7a9060; }
 </style>
+<script src="js/data-loader.js"></script>
 </head>
 <body>
 
@@ -1174,11 +1175,21 @@ function updateBottomPanel(dynasty) {
       };
       const rarityColor = rarityColors[artifact.rarity] || '#666';
 
-      // Try silhouette image, fallback to colored block
+      // Photo-first: use MuseumData direct_url if available, fallback to silhouette
+      const photoUrl = (function(){
+        if (!window.MuseumData) return null;
+        const rec = window.MuseumData.get(artifact.id);
+        if (!rec) return null;
+        const img = rec.image_urls && rec.image_urls[0];
+        return img ? (img.direct_url || (img.local_path ? '../../' + img.local_path : null)) : null;
+      })();
+      const imgSrc = photoUrl || (SILHOUETTE_PATH + artifact.silhouette + '.svg');
+      const imgStyle = photoUrl ? 'width:100%;height:100%;object-fit:cover;' : '';
       card.innerHTML = `
-        <img src="${SILHOUETTE_PATH}${artifact.silhouette}.svg"
+        <img src="${imgSrc}"
+             style="${imgStyle}"
              alt="${artifact.name}"
-             onerror="this.style.background='${dynasty.color}44';this.src=''">
+             onerror="this.onerror=null;this.src='${SILHOUETTE_PATH}${artifact.silhouette}.svg';this.style='';">
         <div class="card-name">
           <span class="rarity-halo" style="background:${rarityColor}"></span>${artifact.name}
         </div>
