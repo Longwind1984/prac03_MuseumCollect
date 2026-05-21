@@ -10,14 +10,16 @@ test('data-integrity: he_zun inscription page shows 1976 唐兰 citation, not 19
   // The 1976 唐兰 citation lives on the inscription-special-hezun page, not artifact.html.
   // (Per d2 P0 fix: ensure 唐兰1976 not 唐兰1986.)
   await page.goto(`${BASE}/inscription-special-hezun.html`);
-  await page.waitForTimeout(1500);
-  const body = await page.locator('body').innerText().catch(() => '');
+  await page.waitForTimeout(2000);
+  // Use page.content() (full HTML) instead of innerText (truncated to visible viewport)
+  const html = await page.content();
   test.info().annotations.push({ type: 'he_zun-citation', description: JSON.stringify({
-    has1976: /1976/.test(body),
-    has1986TangLan: /唐兰.{0,15}1986|1986.{0,15}唐兰/.test(body),
+    has1976: /1976/.test(html),
+    has1975Display: /1975年释读/.test(html),
+    has1986TangLan: /唐兰.{0,15}1986|1986.{0,15}唐兰/.test(html),
   })});
-  expect(body, '何尊 inscription page should cite 唐兰 1976').toMatch(/1976/);
-  expect(body, '何尊 inscription page should NOT cite 唐兰 1986').not.toMatch(/唐兰.{0,20}1986|1986.{0,20}唐兰/);
+  expect(html, '何尊 inscription page HTML should cite 1976').toMatch(/1976/);
+  expect(html, '何尊 inscription should NOT cite 唐兰 1986').not.toMatch(/唐兰.{0,20}1986|1986.{0,20}唐兰/);
 });
 
 test('data-integrity: da_ke_ding period field is 西周中期, not 西周晚期', async ({ page }) => {

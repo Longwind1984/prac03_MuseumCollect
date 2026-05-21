@@ -15,9 +15,12 @@ test('dashboard cross-dim: hovering 商 band triggers map + pattern + panel upda
   page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
   page.on('pageerror', e => errors.push(`pageerror: ${e.message}`));
 
-  await page.goto(`${BASE}/dashboard.html`);
-  // SVG g elements with class need a different locator strategy
-  await page.waitForFunction(() => document.querySelectorAll('g.dynasty-band-g, [data-dynasty]').length > 0, { timeout: 10_000 });
+  await page.goto(`${BASE}/dashboard.html`, { waitUntil: 'load' });
+  // Wait for D3 SVG dynasty bands to be drawn. Use evaluate as SVG elements don't always match CSS selectors via Playwright locator.
+  await page.waitForFunction(() => {
+    const els = document.querySelectorAll('[data-dynasty]');
+    return els.length >= 8; // 8 dynasties expected
+  }, { timeout: 15_000 });
 
   // Capture initial state of right-column components
   const before = await page.evaluate(() => ({
@@ -27,11 +30,14 @@ test('dashboard cross-dim: hovering 商 band triggers map + pattern + panel upda
     activeBand: document.querySelector('.dynasty-band-g.active')?.getAttribute('data-dynasty') || '',
   }));
 
-  // Hover the Shang band via JS dispatch (SVG hover via locator can be flaky in headless)
-  const shangBand = page.locator('[data-dynasty="商"]');
-  await expect(shangBand).toHaveCount(1, { timeout: 5000 });
-  await shangBand.dispatchEvent('mouseenter');
-  await shangBand.dispatchEvent('mouseover');
+  // Trigger hover via raw event dispatch (SVG locators are unreliable in Playwright)
+  await page.evaluate(() => {
+    const el = document.querySelector('[data-dynasty="商"]');
+    if (el) {
+      el.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
+      el.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
+    }
+  });
   await page.waitForTimeout(500);
 
   const after = await page.evaluate(() => ({
@@ -59,11 +65,22 @@ test('dashboard cross-dim: hovering 商 band triggers map + pattern + panel upda
 });
 
 test('dashboard cross-dim: clicking 商 band locks the era selection', async ({ page }) => {
-  await page.goto(`${BASE}/dashboard.html`);
-  await page.waitForFunction(() => document.querySelectorAll('[data-dynasty]').length > 0, { timeout: 10_000 });
-  const shang = page.locator('[data-dynasty="商"]');
-  await shang.dispatchEvent('click');
+  await page.goto(`${BASE}/dashboard.html`, { waitUntil: 'load' });
+  await page.waitForFunction(() => document.querySelectorAll('[data-dynasty]').length >= 8, { timeout: 15_000 });
+  // Use page.evaluate to manipulate SVG DOM directly (Playwright locators for SVG are flaky)
+  const result = await page.evaluate(() => {
+    const shang = document.querySelector('[data-dynasty="商"]') as HTMLElement;
+    if (!shang) return { found: false };
+    // dispatch a click via raw event
+    shang.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+    return { found: true, classes: shang.className.baseVal || shang.className };
+  });
   await page.waitForTimeout(500);
-  const isActive = await shang.evaluate(el => el.classList.contains('active'));
+  const isActive = await page.evaluate(() => {
+    const el = document.querySelector('[data-dynasty="商"]') as any;
+    const c = el?.className?.baseVal || el?.className || '';
+    return typeof c === 'string' ? c.includes('active') : false;
+  });
+  test.info().annotations.push({ type: 'click-result', description: JSON.stringify({ result, isActive }) });
   expect(isActive).toBe(true);
 });

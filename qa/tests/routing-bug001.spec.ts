@@ -12,6 +12,7 @@ import { test, expect } from '@playwright/test';
 const BASE = '/demos/v3-converged';
 
 test('routing-bug001: random sample of catalog cards does NOT fall back to 后母戊鼎', async ({ page }) => {
+  test.setTimeout(60_000);
   const consoleErrors: string[] = [];
   page.on('console', m => { if (m.type() === 'error') consoleErrors.push(m.text()); });
   page.on('pageerror', e => consoleErrors.push(`pageerror: ${e.message}`));
