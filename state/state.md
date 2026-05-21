@@ -110,3 +110,8 @@ Total active background agents: 9 (5 DE + 4 Phase B)
 [2026-05-21 H2-3] [data-engineer-v3-frontier] DONE — segment-5 (55/55, 12 TODO fields for sparse frontier data)
 
 [2026-05-21 H4] [builder-geo-b1] DONE — geo-system v3 (terrain + 4 era overlays + sites + museums + reusable module)
+
+[2026-05-21 H4] [builder-patterns-b2] DONE — 25 pattern SVG icons + index.json + gallery
+  - 25 SVG files: /home/user/prac03_MuseumCollect/assets/patterns/*.svg
+  - index.json: /home/user/prac03_MuseumCollect/assets/patterns/index.json
+  - gallery: /home/user/prac03_MuseumCollect/demos/v3-shared/pattern-gallery/index.html

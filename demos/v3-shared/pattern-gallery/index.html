@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>纹饰图谱 · MuseumCollect Pattern Gallery</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&family=Noto+Sans+SC:wght@300;400;500&display=swap');
+
+    :root {
+      --bronze: #a4732c;
+      --bronze-dark: #7a5a3a;
+      --bronze-light: #d4a857;
+      --ink: #1a1510;
+      --paper: #f8f3ea;
+      --paper-dark: #ede4d3;
+      --red: #a73a2a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Noto Serif SC', 'SimSun', serif;
+      margin: 0;
+    }
+
+    /* Header */
+    .page-header {
+      background: var(--ink);
+      padding: 24px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .page-header h1 {
+      color: var(--bronze-light);
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      margin: 0;
+    }
+    .page-header p {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.8rem;
+      margin: 0;
+      font-family: 'Noto Sans SC', sans-serif;
+    }
+
+    /* Era filter tabs */
+    .era-filter {
+      display: flex;
+      gap: 8px;
+      padding: 20px 40px 0;
+      border-bottom: 1px solid var(--paper-dark);
+      background: var(--paper);
+    }
+    .era-tab {
+      padding: 8px 20px;
+      border: 1.5px solid transparent;
+      border-bottom: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-family: 'Noto Serif SC', serif;
+      color: #6b5a4a;
+      transition: all 0.2s;
+      border-radius: 4px 4px 0 0;
+      position: relative;
+      bottom: -1px;
+    }
+    .era-tab:hover { color: var(--bronze); border-color: var(--paper-dark); }
+    .era-tab.active {
+      color: var(--bronze-dark);
+      border-color: var(--paper-dark);
+      background: var(--paper);
+      font-weight: 600;
+    }
+    .era-tab .era-dot {
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    /* Era colors matching the time pillar spec */
+    .dot-shang { background: #4a5a3a; }
+    .dot-zhou { background: #a73a2a; }
+    .dot-chunqiu { background: #2a2a3a; }
+    .dot-zhanguo { background: #7a3a2a; }
+    .dot-han { background: #b89046; }
+    .dot-common { background: #888; }
+
+    /* Grid container */
+    .pattern-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1px;
+      background: var(--paper-dark);
+      margin: 0;
+      padding: 1px;
+    }
+
+    /* Pattern card */
+    .pattern-card {
+      background: var(--paper);
+      padding: 24px 16px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.15s;
+      position: relative;
+      overflow: hidden;
+    }
+    .pattern-card:hover { background: #fff; }
+    .pattern-card.hidden { display: none; }
+
+    /* Era accent bar (top of card) */
+    .pattern-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .era-商::before { background: #4a5a3a; }
+    .era-西周::before { background: #a73a2a; }
+    .era-春秋::before { background: #2a2a3a; }
+    .era-战国::before, .era-战国晚::before { background: #7a3a2a; }
+    .era-汉::before { background: #b89046; }
+    .era-通用::before { background: #888; }
+
+    /* SVG icon wrapper — two sizes shown simultaneously */
+    .icon-showcase {
+      display: flex;
+      align-items: flex-end;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .icon-large {
+      width: 80px;
+      height: 80px;
+      color: var(--bronze-dark);
+    }
+    .icon-small {
+      width: 24px;
+      height: 24px;
+      color: var(--bronze-dark);
+      opacity: 0.85;
+    }
+    .icon-tiny {
+      width: 16px;
+      height: 16px;
+      color: var(--ink);
+      opacity: 0.7;
+    }
+
+    /* Card text */
+    .card-name-zh {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 2px;
+      text-align: center;
+    }
+    .card-name-en {
+      font-size: 0.7rem;
+      color: #8a7a6a;
+      font-family: 'Noto Sans SC', sans-serif;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    .card-era {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      font-family: 'Noto Sans SC', sans-serif;
+      margin-bottom: 8px;
+    }
+    .era-tag-商 { background: rgba(74,90,58,0.12); color: #4a5a3a; }
+    .era-tag-西周 { background: rgba(167,58,42,0.12); color: #a73a2a; }
+    .era-tag-春秋 { background: rgba(42,42,58,0.12); color: #2a2a3a; }
+    .era-tag-战国 { background: rgba(122,58,42,0.12); color: #7a3a2a; }
+    .era-tag-汉 { background: rgba(184,144,70,0.12); color: #8a6010; }
+    .era-tag-通用 { background: rgba(100,100,100,0.1); color: #555; }
+
+    /* Tooltip on hover */
+    .card-tooltip {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(26,21,16,0.95);
+      color: rgba(255,255,255,0.9);
+      padding: 12px 14px;
+      font-size: 0.72rem;
+      font-family: 'Noto Sans SC', sans-serif;
+      line-height: 1.5;
+      transform: translateY(100%);
+      transition: transform 0.2s ease;
+      z-index: 10;
+    }
+    .pattern-card:hover .card-tooltip { transform: translateY(0); }
+    .card-tooltip .tt-title {
+      color: var(--bronze-light);
+      font-weight: 500;
+      margin-bottom: 4px;
+      font-size: 0.75rem;
+    }
+    .card-tooltip .tt-typical {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.68rem;
+    }
+
+    /* Size demo strip */
+    .size-demo {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid var(--paper-dark);
+      width: 100%;
+      justify-content: center;
+    }
+    .size-label {
+      font-size: 0.6rem;
+      color: #aaa;
+      font-family: 'Noto Sans SC', sans-serif;
+    }
+
+    /* Stats bar */
+    .stats-bar {
+      background: var(--ink);
+      color: rgba(255,255,255,0.7);
+      padding: 12px 40px;
+      display: flex;
+      gap: 32px;
+      font-size: 0.78rem;
+      font-family: 'Noto Sans SC', sans-serif;
+    }
+    .stats-bar span { color: var(--bronze-light); font-weight: 500; }
+
+    /* Selected card overlay ring */
+    .pattern-card.selected::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 2px solid var(--bronze);
+      pointer-events: none;
+    }
+
+    /* Detail panel (right drawer) */
+    .detail-panel {
+      position: fixed;
+      top: 0; right: 0;
+      width: 340px;
+      height: 100vh;
+      background: var(--paper);
+      border-left: 1px solid var(--paper-dark);
+      padding: 32px 28px;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 50;
+      box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+    }
+    .detail-panel.open { transform: translateX(0); }
+    .detail-panel .close-btn {
+      position: absolute;
+      top: 16px; right: 20px;
+      background: none; border: none;
+      color: #888; font-size: 1.2rem;
+      cursor: pointer;
+    }
+    .detail-panel .dp-icon {
+      width: 120px; height: 120px;
+      color: var(--bronze-dark);
+      margin: 20px auto;
+      display: block;
+    }
+    .detail-panel h2 {
+      font-size: 1.6rem;
+      color: var(--ink);
+      text-align: center;
+      margin: 0 0 4px;
+    }
+    .detail-panel .dp-en {
+      text-align: center;
+      font-size: 0.78rem;
+      color: #888;
+      font-family: 'Noto Sans SC', sans-serif;
+      margin-bottom: 16px;
+    }
+    .detail-panel .dp-section {
+      margin-bottom: 16px;
+    }
+    .detail-panel .dp-section h3 {
+      font-size: 0.75rem;
+      color: var(--bronze-dark);
+      font-family: 'Noto Sans SC', sans-serif;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin: 0 0 6px;
+      border-bottom: 1px solid var(--paper-dark);
+      padding-bottom: 4px;
+    }
+    .detail-panel .dp-section p {
+      font-size: 0.82rem;
+      line-height: 1.7;
+      color: #444;
+      margin: 0;
+    }
+    .dp-era-range {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin: 6px 0;
+    }
+    .dp-era-chip {
+      padding: 2px 8px;
+      background: var(--paper-dark);
+      border-radius: 10px;
+      font-size: 0.68rem;
+      font-family: 'Noto Sans SC', sans-serif;
+      color: #555;
+    }
+    .dp-typical-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .dp-typical-chip {
+      padding: 2px 8px;
+      background: rgba(164,115,44,0.1);
+      border-radius: 4px;
+      font-size: 0.68rem;
+      font-family: 'Noto Sans SC', sans-serif;
+      color: var(--bronze-dark);
+    }
+
+    /* Search input */
+    .search-bar {
+      padding: 16px 40px;
+      background: var(--paper);
+      border-bottom: 1px solid var(--paper-dark);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .search-bar input {
+      border: 1px solid var(--paper-dark);
+      padding: 8px 16px;
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.85rem;
+      background: #fff;
+      color: var(--ink);
+      border-radius: 4px;
+      width: 280px;
+      outline: none;
+    }
+    .search-bar input:focus { border-color: var(--bronze); }
+    .count-label {
+      font-size: 0.78rem;
+      color: #888;
+      font-family: 'Noto Sans SC', sans-serif;
+    }
+
+    /* Color tint mode toggle */
+    .tint-toggle {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-left: auto;
+      font-size: 0.78rem;
+      font-family: 'Noto Sans SC', sans-serif;
+      color: #888;
+    }
+    .tint-toggle button {
+      padding: 4px 12px;
+      border: 1px solid var(--paper-dark);
+      background: none;
+      cursor: pointer;
+      font-size: 0.75rem;
+      border-radius: 3px;
+      color: #666;
+      transition: all 0.15s;
+    }
+    .tint-toggle button.active {
+      background: var(--bronze-dark);
+      color: #fff;
+      border-color: var(--bronze-dark);
+    }
+
+    /* Overlay backdrop */
+    .backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.3);
+      z-index: 40;
+    }
+    .backdrop.show { display: block; }
+
+    /* Scroll to top */
+    .scroll-top {
+      position: fixed;
+      bottom: 32px; right: 32px;
+      width: 40px; height: 40px;
+      background: var(--bronze-dark);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      z-index: 30;
+    }
+
+    /* Main grid layout wrapper */
+    .main-layout {
+      transition: padding-right 0.3s ease;
+    }
+    .main-layout.panel-open {
+      padding-right: 340px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="page-header">
+  <div>
+    <h1>纹饰图谱 · Pattern Dictionary</h1>
+    <p>MuseumCollect v3 · 25 standard pattern icons · Bronze Age China</p>
+  </div>
+  <div style="text-align:right; color: rgba(255,255,255,0.4); font-size:0.72rem; font-family:'Noto Sans SC',sans-serif; line-height:1.8">
+    <div>每图标 80×80 viewBox · single-color · CSS tintable</div>
+    <div>24px 可识别 · 轮廓可区分 · 按时代排序</div>
+  </div>
+</div>
+
+<!-- Stats bar -->
+<div class="stats-bar" id="statsBar">
+  <div>总计 <span id="totalCount">25</span> 纹饰</div>
+  <div>商代 <span>7</span></div>
+  <div>西周 <span>5</span></div>
+  <div>春秋战国 <span>8</span></div>
+  <div>汉代 <span>1</span></div>
+  <div>通用 <span>4</span></div>
+</div>
+
+<!-- Search + filter row -->
+<div class="search-bar">
+  <input type="text" id="searchInput" placeholder="搜索纹饰名称…" oninput="filterPatterns()">
+  <span class="count-label" id="visibleCount">显示 25 / 25</span>
+  <div class="tint-toggle">
+    <span>颜色</span>
+    <button class="active" id="btnBronze" onclick="setTint('bronze')">铜色</button>
+    <button id="btnBlack" onclick="setTint('black')">黑色</button>
+    <button id="btnWhite" onclick="setTint('white')">白底测试</button>
+  </div>
+</div>
+
+<!-- Era tabs -->
+<div class="era-filter">
+  <button class="era-tab active" onclick="filterEra('all', this)">全部 (25)</button>
+  <button class="era-tab" onclick="filterEra('商', this)">
+    <span class="era-dot dot-shang"></span>商代 (7)
+  </button>
+  <button class="era-tab" onclick="filterEra('西周', this)">
+    <span class="era-dot dot-zhou"></span>西周 (5)
+  </button>
+  <button class="era-tab" onclick="filterEra('春秋', this)">
+    <span class="era-dot dot-chunqiu"></span>春秋 (2)
+  </button>
+  <button class="era-tab" onclick="filterEra('战国', this)">
+    <span class="era-dot dot-zhanguo"></span>战国 (5)
+  </button>
+  <button class="era-tab" onclick="filterEra('汉', this)">
+    <span class="era-dot dot-han"></span>汉代 (1)
+  </button>
+  <button class="era-tab" onclick="filterEra('通用', this)">
+    <span class="era-dot dot-common"></span>通用 (2)
+  </button>
+  <button class="era-tab" onclick="filterEra('战国-汉', this)">
+    <span class="era-dot dot-zhanguo"></span>战国-汉场景纹 (3)
+  </button>
+</div>
+
+<!-- Main layout -->
+<div class="main-layout" id="mainLayout">
+  <!-- Pattern grid (generated by JS) -->
+  <div class="pattern-grid" id="patternGrid"></div>
+</div>
+
+<!-- Detail panel -->
+<div class="backdrop" id="backdrop" onclick="closeDetail()"></div>
+<div class="detail-panel" id="detailPanel">
+  <button class="close-btn" onclick="closeDetail()">✕</button>
+  <div id="detailContent"></div>
+</div>
+
+<!-- Scroll top -->
+<button class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ============================
+// DATA — matches index.json
+// ============================
+const PATTERNS = [
+  {
+    slug: "taotie",
+    name_zh: "饕餮纹",
+    name_en: "Taotie / Animal Mask",
+    era_main: "商",
+    era_range: ["夏晚","商早","商中","商晚","西周早"],
+    typical_on: ["方鼎","圆鼎","簋","尊","卣","觥"],
+    description: "商王朝核心纹饰，正面兽面，左右严格对称，巨眼大口，双角外展。学界分饕餮为单元式、分解式、顾首式、简化式四型，后世演化为窃曲纹。",
+    file: "taotie.svg"
+  },
+  {
+    slug: "kuilong",
+    name_zh: "夔龙纹",
+    name_en: "Kuilong / One-Legged Dragon",
+    era_main: "商晚",
+    era_range: ["商中","商晚","西周早","西周中"],
+    typical_on: ["鼎腹","尊颈","觥盖","卣腹"],
+    description: "侧面单足龙（夔以独足著称），张口，卷尾，背生鳍棘。商晚期流行，常与饕餮纹组合，出现于饕餮两侧作辅纹；西周后简化演变为窃曲纹。",
+    file: "kuilong.svg"
+  },
+  {
+    slug: "yunlei",
+    name_zh: "云雷纹",
+    name_en: "Yunlei / Cloud-Thunder",
+    era_main: "商西周",
+    era_range: ["商早","商中","商晚","西周早","西周中"],
+    typical_on: ["所有器型底纹","鼎腹","簋腹","尊腹"],
+    description: "方形回旋螺线，以密集填充作为器表底纹。分云纹（圆回旋）和雷纹（方回旋）两系，是商周青铜器最普遍的背景装饰，衬托主纹层次。",
+    file: "yunlei.svg"
+  },
+  {
+    slug: "lei",
+    name_zh: "雷纹",
+    name_en: "Lei / Thunder Meander",
+    era_main: "商西周",
+    era_range: ["商","西周"],
+    typical_on: ["鼎腹","簋腹","尊腹底纹"],
+    description: "纯方形回折螺旋，无圆弧过渡，比云雷纹更几何化。常以四格方形单元铺满器面，具强烈的秩序感；是云雷纹的方折变体。",
+    file: "lei.svg"
+  },
+  {
+    slug: "rudding",
+    name_zh: "乳钉纹",
+    name_en: "Rudding / Boss Dots",
+    era_main: "商中",
+    era_range: ["商早","商中","商晚"],
+    typical_on: ["方鼎腹壁","圆鼎腹","瓿腹"],
+    description: "规则排列的圆形凸起（浮雕乳丁），每钉外围有方格框线，以网格状均匀分布于器表。是商中期较简朴的装饰，也见于同时期无纹区的填充。",
+    file: "rudding.svg"
+  },
+  {
+    slug: "hu",
+    name_zh: "虎纹",
+    name_en: "Hu / Tiger",
+    era_main: "商",
+    era_range: ["商中","商晚"],
+    typical_on: ["卣腹","觥盖","钺面","尊肩"],
+    description: "猛虎侧面全身像，呈匍匐或行进姿态，条纹以细线表示。商代虎纹以圆耳、圆眼、宽吻为特征；常与饕餮纹共现，有"虎食人头"极罕见变体。",
+    file: "hu.svg"
+  },
+  {
+    slug: "niao",
+    name_zh: "鸟纹（商鸟）",
+    name_en: "Niao / Shang Bird",
+    era_main: "商",
+    era_range: ["商中","商晚","西周早"],
+    typical_on: ["尊颈","卣腹","簋腹"],
+    description: "商代抽象鸟形纹，方形短尾，钩喙，大圆眼，冠羽短直。与西周凤鸟纹有本质区别：商鸟尾部方折、风格紧张；西周凤鸟尾部长曲、风格舒展。",
+    file: "niao.svg"
+  },
+  {
+    slug: "fengniao",
+    name_zh: "凤鸟纹",
+    name_en: "Fengniao / Phoenix Bird",
+    era_main: "西周中",
+    era_range: ["西周早","西周中","西周晚"],
+    typical_on: ["簋腹","尊颈","壶腹","觥盖"],
+    description: "西周中期主流纹饰，大尾长冠，昂首挺胸，姿态优雅。相比商代鸟纹，凤鸟纹线条更流动，长尾向后翻卷，冠羽高扬，体现西周礼乐文明的审美转变。",
+    file: "fengniao.svg"
+  },
+  {
+    slug: "qiequ",
+    name_zh: "窃曲纹",
+    name_en: "Qiequ / Interlocked S-Scroll",
+    era_main: "西周中晚",
+    era_range: ["西周中","西周晚","春秋早"],
+    typical_on: ["鼎腹","簋腹","盨腹","壶颈"],
+    description: "由饕餮纹/夔龙纹高度简化而来的S形抽象纹，眼目残留为中心小椭圆，两侧为卷曲弧线。是商代神兽纹向西周几何纹转化的重要中间环节。",
+    file: "qiequ.svg"
+  },
+  {
+    slug: "chonghuan",
+    name_zh: "重环纹",
+    name_en: "Chonghuan / Concentric Oval Band",
+    era_main: "西周中晚",
+    era_range: ["西周中","西周晚"],
+    typical_on: ["簋腹","鼎腹","盘沿","壶颈"],
+    description: "以重叠椭圆形或尖顶卵形为单元的横向带饰，每单元含外环和内环两层。是西周中晚期典型装饰带，风格比商代神兽纹更素雅克制。",
+    file: "chonghuan.svg"
+  },
+  {
+    slug: "boqu",
+    name_zh: "波曲纹",
+    name_en: "Boqu / Wave-Scroll Band",
+    era_main: "西周晚",
+    era_range: ["西周晚","春秋早"],
+    typical_on: ["壶腹","鼎腹","盘内底","簋腹"],
+    description: "波浪状连续带饰，波峰处以紧密C形螺旋终结，螺旋中心保留兽眼残留。又称环带纹，是西周晚期最流行的主体纹饰之一。",
+    file: "boqu.svg"
+  },
+  {
+    slug: "chuilin",
+    name_zh: "垂鳞纹",
+    name_en: "Chuilin / Hanging Scales",
+    era_main: "西周晚",
+    era_range: ["西周中","西周晚","春秋早"],
+    typical_on: ["鼎颈","盘沿","簋圈足","壶颈"],
+    description: "鱼鳞状弧形单元，上部圆钝下部尖，交叠排列如屋瓦。常用于器物颈部、圈足等带状区域，间隔均匀，秩序感强，是西周晚期常见边饰。",
+    file: "chuilin.svg"
+  },
+  {
+    slug: "panchi",
+    name_zh: "蟠螭纹",
+    name_en: "Panchi / Coiled Hornless Dragon",
+    era_main: "春秋",
+    era_range: ["春秋早","春秋中","春秋晚","战国早"],
+    typical_on: ["鼎腹","簋腹","盘内底","壶腹"],
+    description: "无角小龙相互缠绕交叠的繁密构图，每条螭龙身体细长，头部清晰但小。春秋时期最具代表性的纹饰，比战国蟠虺纹单体更大、头部更明显。",
+    file: "panchi.svg"
+  },
+  {
+    slug: "panhui",
+    name_zh: "蟠虺纹",
+    name_en: "Panhui / Coiled Serpent Micro-pattern",
+    era_main: "战国早",
+    era_range: ["春秋晚","战国早","战国中"],
+    typical_on: ["鼎腹","壶腹","盘内底","钟鼓"],
+    description: "比蟠螭纹更细小密集的小蛇/小龙群，近乎纯纹理效果。单体极小，以填充满铺整个器面为特征，整体看呈织物质感。战国早期铜器大量使用。",
+    file: "panhui.svg"
+  },
+  {
+    slug: "jihe",
+    name_zh: "几何纹",
+    name_en: "Jihe / Geometric",
+    era_main: "战国",
+    era_range: ["战国中","战国晚"],
+    typical_on: ["壶腹","豆盖","鉴腹","盘沿"],
+    description: "纯几何形式的重复图案，脱离动物原型，以菱形、三角形、矩形组合构成。战国时期器物上摆脱神兽崇拜、走向世俗化装饰的代表。",
+    file: "jihe.svg"
+  },
+  {
+    slug: "sanjiao",
+    name_zh: "三角纹",
+    name_en: "Sanjiao / Triangle Band",
+    era_main: "战国",
+    era_range: ["商","西周","春秋","战国"],
+    typical_on: ["口沿","颈部带饰","圈足","器腹分割线"],
+    description: "上下交错排列的三角形带饰，是中国青铜器最古老的几何纹之一，贯穿商至战国，常作为主纹之间的边饰分割带。",
+    file: "sanjiao.svg"
+  },
+  {
+    slug: "yuchi",
+    name_zh: "羽翅纹",
+    name_en: "Yuchi / Feather-Wing",
+    era_main: "战国晚",
+    era_range: ["战国中","战国晚"],
+    typical_on: ["壶腹","盘内底","鉴腹","鸟形器"],
+    description: "以展翅鸟羽为原型的放射状扇形纹，从中轴对称展开，每羽有清晰羽脉线。战国晚期写实主义倾向的代表，常见于楚地器物。",
+    file: "yuchi.svg"
+  },
+  {
+    slug: "shoulie",
+    name_zh: "狩猎纹",
+    name_en: "Shoulie / Hunting Scene",
+    era_main: "战国晚-西汉",
+    era_range: ["战国晚","秦","西汉"],
+    typical_on: ["壶腹","鉴腹","盘内底","铜镜"],
+    description: "战车或骑射猎兽场景，包含弓箭手、奔马、逃跑的鹿/虎等元素。写实叙事风格，反映战国晚期至汉代贵族生活题材对神兽纹的替代。",
+    file: "shoulie.svg"
+  },
+  {
+    slug: "yanle",
+    name_zh: "宴乐纹",
+    name_en: "Yanle / Banquet and Music",
+    era_main: "战国-汉",
+    era_range: ["战国中","战国晚","西汉"],
+    typical_on: ["壶腹","鉴腹","盘内底"],
+    description: "宴饮奏乐舞蹈场景，包含案几、乐器、歌舞者、宴客等要素。与狩猎纹同属战国晚期写实叙事图像，是礼乐文化在器物上的直接表达。",
+    file: "yanle.svg"
+  },
+  {
+    slug: "sishen",
+    name_zh: "四神纹",
+    name_en: "Sishen / Four Divine Beasts",
+    era_main: "汉",
+    era_range: ["西汉","东汉"],
+    typical_on: ["铜镜背面","壶腹","鉴腹","铺首"],
+    description: "青龙（东）、白虎（西）、朱雀（南）、玄武（北）四方神兽组合。汉代宇宙观和方位神系在铜器装饰上的集中体现，铜镜背面四神纹是汉代标志性图像。",
+    file: "sishen.svg"
+  },
+  {
+    slug: "chan",
+    name_zh: "蝉纹",
+    name_en: "Chan / Cicada",
+    era_main: "商西周",
+    era_range: ["商中","商晚","西周早","西周中"],
+    typical_on: ["觚颈","尊腹边","圈足","器腹边纹"],
+    description: "高度抽象的三角形蝉形，正面视角，大复眼对称，腹部有横纹节段，双翼收折。商人视蝉为再生象征，常作为边饰出现于器物边缘带和圈足区域。",
+    file: "chan.svg"
+  },
+  {
+    slug: "jiaoye",
+    name_zh: "焦叶纹",
+    name_en: "Jiaoye / Plantain Leaf",
+    era_main: "商西周",
+    era_range: ["商晚","西周早","西周中"],
+    typical_on: ["尊颈","卣颈","圈足内侧"],
+    description: "长三角形叶片向上排列成一圈，每叶有中脊线和侧脉，形似香蕉叶。常装饰于尊、卣类器物的颈部或圈足上方，以竖向带状呈现，是商周典型的领状装饰。",
+    file: "jiaoye.svg"
+  },
+  {
+    slug: "xian",
+    name_zh: "弦纹",
+    name_en: "Xian / String Lines",
+    era_main: "通用",
+    era_range: ["商早","商中","商晚","西周","春秋"],
+    typical_on: ["所有器型颈部","器腹分割线","圈足上缘"],
+    description: "单条或多条平行环绕线，是青铜器最简洁的装饰手法。以线的粗细和组合节奏划分器型各段，兼具功能性和装饰性，是最普遍的通用底纹。",
+    file: "xian.svg"
+  },
+  {
+    slug: "wo",
+    name_zh: "涡纹",
+    name_en: "Wo / Vortex Spiral",
+    era_main: "商",
+    era_range: ["商早","商中","商晚"],
+    typical_on: ["方器腹壁","尊肩","觥颈","圈足"],
+    description: "圆形螺旋漩涡，以多圈同心弧向中心收缩，中心为实点（涡眼）。常数个成组出现于器表，代表水流或天体旋转的宇宙意象，是商代早中期特有纹饰。",
+    file: "wo.svg"
+  },
+  {
+    slug: "shouti_juanqu",
+    name_zh: "兽体卷曲纹",
+    name_en: "Shouti Juanqu / Coiled Beast Body",
+    era_main: "西周晚-春秋",
+    era_range: ["西周晚","春秋早","春秋中"],
+    typical_on: ["鼎腹","簋腹","盨腹","盘沿"],
+    description: "夔龙简化变体，兽体完全卷曲成螺旋状，头与尾相接，形成圆形或S形自缠结构。是夔龙纹向蟠螭纹过渡的中间形态，西周晚期至春秋早期流行。",
+    file: "shouti_juanqu.svg"
+  }
+];
+
+// ERA classification for filtering
+function getEraClass(p) {
+  const e = p.era_main;
+  if (e.includes('商')) return '商';
+  if (e.includes('西周')) return '西周';
+  if (e.includes('春秋') && !e.includes('战国')) return '春秋';
+  if (e.includes('战国') && !e.includes('汉')) return '战国';
+  if (e.includes('汉') && !e.includes('战国')) return '汉';
+  if (e.includes('通用')) return '通用';
+  if (e.includes('战国') && e.includes('汉')) return '战国-汉';
+  return '通用';
+}
+
+// Path to SVG files
+const SVG_BASE = '../../../assets/patterns/';
+
+// Current tint
+let currentTint = 'bronze';
+let currentEra = 'all';
+let currentSearch = '';
+
+// Color map
+const TINT_COLORS = {
+  bronze: '#7a5a3a',
+  black: '#1a1510',
+  white: '#fff'
+};
+
+function renderGrid() {
+  const grid = document.getElementById('patternGrid');
+  grid.innerHTML = '';
+
+  let visible = 0;
+  PATTERNS.forEach((p, idx) => {
+    const era = getEraClass(p);
+    const matchEra = currentEra === 'all' || era === currentEra;
+    const search = currentSearch.toLowerCase();
+    const matchSearch = !search ||
+      p.name_zh.includes(currentSearch) ||
+      p.name_en.toLowerCase().includes(search) ||
+      p.slug.includes(search);
+
+    const card = document.createElement('div');
+    card.className = `pattern-card era-${era}`;
+    card.dataset.idx = idx;
+
+    if (!matchEra || !matchSearch) {
+      card.classList.add('hidden');
+    } else {
+      visible++;
+    }
+
+    // Determine era tag class
+    let eraTagClass = 'era-tag-通用';
+    if (era === '商') eraTagClass = 'era-tag-商';
+    else if (era === '西周') eraTagClass = 'era-tag-西周';
+    else if (era === '春秋') eraTagClass = 'era-tag-春秋';
+    else if (era === '战国' || era === '战国-汉') eraTagClass = 'era-tag-战国';
+    else if (era === '汉') eraTagClass = 'era-tag-汉';
+
+    card.innerHTML = `
+      <div class="icon-showcase">
+        <img class="icon-large tintable" src="${SVG_BASE}${p.file}" alt="${p.name_zh}">
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:center">
+          <img class="icon-small tintable" src="${SVG_BASE}${p.file}" alt="">
+          <img class="icon-tiny tintable" src="${SVG_BASE}${p.file}" alt="">
+        </div>
+      </div>
+      <div class="card-name-zh">${p.name_zh}</div>
+      <div class="card-name-en">${p.name_en.split('/')[0].trim()}</div>
+      <span class="card-era ${eraTagClass}">${p.era_main}</span>
+
+      <div class="size-demo">
+        <span class="size-label">80px</span>
+        <img style="width:60px;height:60px;" src="${SVG_BASE}${p.file}" class="tintable" alt="">
+        <span class="size-label">24px</span>
+        <img style="width:24px;height:24px;" src="${SVG_BASE}${p.file}" class="tintable" alt="">
+        <span class="size-label">16px</span>
+        <img style="width:16px;height:16px;" src="${SVG_BASE}${p.file}" class="tintable" alt="">
+      </div>
+
+      <div class="card-tooltip">
+        <div class="tt-title">${p.name_zh}</div>
+        <div>${p.description.substring(0, 80)}…</div>
+        <div class="tt-typical">典型器型: ${p.typical_on.slice(0,3).join(' · ')}</div>
+      </div>
+    `;
+
+    card.addEventListener('click', () => openDetail(idx));
+    grid.appendChild(card);
+  });
+
+  applyTint();
+  document.getElementById('visibleCount').textContent = `显示 ${visible} / ${PATTERNS.length}`;
+}
+
+function applyTint() {
+  // SVG images can't be tinted with CSS color directly (they're <img> not inline)
+  // We apply CSS filter to simulate tinting
+  const tintable = document.querySelectorAll('.tintable');
+  const bg = document.body.style.backgroundColor;
+
+  tintable.forEach(img => {
+    if (currentTint === 'bronze') {
+      // Bronze-ish: sepia + slight hue
+      img.style.filter = 'sepia(0.6) saturate(1.4) brightness(0.85)';
+    } else if (currentTint === 'black') {
+      img.style.filter = 'brightness(0.1) saturate(0)';
+    } else if (currentTint === 'white') {
+      img.style.filter = 'invert(1)';
+    }
+  });
+
+  // Update grid bg for white mode
+  const grid = document.getElementById('patternGrid');
+  if (currentTint === 'white') {
+    grid.style.background = '#222';
+    document.querySelectorAll('.pattern-card').forEach(c => c.style.background = '#333');
+  } else {
+    grid.style.background = 'var(--paper-dark)';
+    document.querySelectorAll('.pattern-card').forEach(c => c.style.background = '');
+  }
+}
+
+function setTint(mode) {
+  currentTint = mode;
+  document.getElementById('btnBronze').classList.toggle('active', mode === 'bronze');
+  document.getElementById('btnBlack').classList.toggle('active', mode === 'black');
+  document.getElementById('btnWhite').classList.toggle('active', mode === 'white');
+  applyTint();
+}
+
+function filterEra(era, btn) {
+  currentEra = era;
+  document.querySelectorAll('.era-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid();
+}
+
+function filterPatterns() {
+  currentSearch = document.getElementById('searchInput').value;
+  renderGrid();
+}
+
+// ====== DETAIL PANEL ======
+function openDetail(idx) {
+  const p = PATTERNS[idx];
+  const panel = document.getElementById('detailPanel');
+  const backdrop = document.getElementById('backdrop');
+  const content = document.getElementById('detailContent');
+
+  content.innerHTML = `
+    <img class="dp-icon" src="${SVG_BASE}${p.file}" alt="${p.name_zh}" style="filter: sepia(0.5) saturate(1.3) brightness(0.9)">
+    <h2>${p.name_zh}</h2>
+    <div class="dp-en">${p.name_en}</div>
+
+    <div style="display:flex;justify-content:center;margin-bottom:16px">
+      <span class="card-era era-tag-${getEraClass(p) === '战国-汉' ? '战国' : getEraClass(p)}">${p.era_main}</span>
+    </div>
+
+    <div class="dp-section">
+      <h3>时代跨度</h3>
+      <div class="dp-era-range">
+        ${p.era_range.map(e => `<span class="dp-era-chip">${e}</span>`).join('')}
+      </div>
+    </div>
+
+    <div class="dp-section">
+      <h3>典型器物</h3>
+      <div class="dp-typical-list">
+        ${p.typical_on.map(t => `<span class="dp-typical-chip">${t}</span>`).join('')}
+      </div>
+    </div>
+
+    <div class="dp-section">
+      <h3>简介</h3>
+      <p>${p.description}</p>
+    </div>
+
+    <div class="dp-section">
+      <h3>尺寸演示</h3>
+      <div style="display:flex;gap:16px;align-items:flex-end;padding:16px;background:var(--paper-dark);border-radius:4px">
+        <div style="text-align:center">
+          <img src="${SVG_BASE}${p.file}" style="width:80px;height:80px;filter:sepia(0.5) saturate(1.3)">
+          <div style="font-size:0.65rem;color:#888;font-family:'Noto Sans SC',sans-serif;margin-top:4px">80px</div>
+        </div>
+        <div style="text-align:center">
+          <img src="${SVG_BASE}${p.file}" style="width:48px;height:48px;filter:sepia(0.5) saturate(1.3)">
+          <div style="font-size:0.65rem;color:#888;font-family:'Noto Sans SC',sans-serif;margin-top:4px">48px</div>
+        </div>
+        <div style="text-align:center">
+          <img src="${SVG_BASE}${p.file}" style="width:24px;height:24px;filter:sepia(0.5) saturate(1.3)">
+          <div style="font-size:0.65rem;color:#888;font-family:'Noto Sans SC',sans-serif;margin-top:4px">24px</div>
+        </div>
+        <div style="text-align:center">
+          <img src="${SVG_BASE}${p.file}" style="width:16px;height:16px;filter:brightness(0.2)">
+          <div style="font-size:0.65rem;color:#888;font-family:'Noto Sans SC',sans-serif;margin-top:4px">16px</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dp-section">
+      <h3>slug / filename</h3>
+      <p style="font-family:'Courier New',monospace;font-size:0.78rem;background:var(--paper-dark);padding:8px;border-radius:3px">
+        ${p.slug}.svg
+      </p>
+    </div>
+  `;
+
+  panel.classList.add('open');
+  backdrop.classList.add('show');
+  document.getElementById('mainLayout').classList.add('panel-open');
+
+  // Highlight selected card
+  document.querySelectorAll('.pattern-card').forEach(c => c.classList.remove('selected'));
+  document.querySelector(`.pattern-card[data-idx="${idx}"]`)?.classList.add('selected');
+}
+
+function closeDetail() {
+  document.getElementById('detailPanel').classList.remove('open');
+  document.getElementById('backdrop').classList.remove('show');
+  document.getElementById('mainLayout').classList.remove('panel-open');
+  document.querySelectorAll('.pattern-card').forEach(c => c.classList.remove('selected'));
+}
+
+// ====== KEYBOARD ======
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeDetail();
+});
+
+// ====== INIT ======
+renderGrid();
+</script>
+</body>
+</html>
