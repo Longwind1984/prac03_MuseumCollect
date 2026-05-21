@@ -72,3 +72,14 @@
   - 15 subagent invocations, ~2.4M tokens
   - Morning report finalized at /home/user/prac03_MuseumCollect/morning-report.md
   - Awaiting user wake-up; container will remain idle until next user input
+
+## D1 Planning (post-user-feedback)
+
+[2026-05-21 D1-plan] [orchestrator] User feedback received: knowledge base too thin, visuals too crude, PM dimensions need re-examination
+[2026-05-21 D1-plan] [orchestrator] PM reflection complete. 7+1 first-class dimensions defined (形制/时代/地理/纹饰/铭文/用途/铸主 + 稀有度全局层)
+[2026-05-21 D1-plan] [orchestrator] User confirmed 4 decisions via AskUserQuestion:
+  - 7+1 dimensions
+  - 300 artifacts full-depth
+  - converge to 1 polished demo
+  - v3 night run one-shot
+[2026-05-21 D1-plan] [orchestrator] night-plan-d1.md committed. Awaiting "启动" trigger to launch.
