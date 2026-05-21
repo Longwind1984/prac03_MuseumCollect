@@ -360,10 +360,37 @@ Comparative Auditor D2 综合判断:**6.5/10 (v1 composite) → 7.2/10 (v3) = +0
 
 > **AI PM 的关键不是用 AI 写代码,是把 AI 的约束当作产品设计原则。**
 
+### 5.7 audit squad 学会审计自己 — v4.5 的"二阶闭环"
+
+§5.4 论点的具体兑现,直到 v4.5 之前都不完整。
+
+**v3 ship 时的现实**:5-persona Audit Squad(UX / Aesthetic / Content / Motivation / PM)在 d2 round 全部判 pass,然后 d3 demo 上线我自己刷一遍,发现 artifact.html 路由 28 个文物详情页**全部静默 fallback 到后母戊鼎**——P0,没有任何 console 报错,没有任何 visual diff,只有"点哪个文物详情都一样"。5 个 auditor 都没抓到,因为他们都是"读+看"模式:读了 source、看了 happy-path 截图、写了 next-iteration brief。没有一个点了 ≥ 5 个不同的 ID。
+
+**这个事件 reframe 了我对 audit-first 的理解**——5 persona 解决的是 "**视角覆盖**",不解决 "**verification depth**"。哪怕我有 100 个 persona,如果他们都是 read-only mode,P0 还是会从地板缝里漏出去。
+
+**v4.5 的修正分三步**:
+
+1. **`auditor.md` 加 8 项 MANDATORY VERIFICATION CHECKLIST**——多 ID stress (≥ 5)、console errors、claim-vs-reality 表、mobile viewport spot-check、dead-button 审计、routing parity、数据依赖证明。"If a future Auditor does not list ≥ 5 IDs tested in their report, they have failed their role."这条是硬规则,不是 nice-to-have。
+2. **加第 7 个 persona: Runtime Auditor**——和前 6 个不同,他是**唯一强制使用工具的 persona**(Playwright MCP / 浏览器 DevTools / 网络监控)。他的 verdict 对 Comparative Auditor 是 binding 的——如果 Runtime 说"broken",Content/Aesthetic 不能用"截图看着 OK"否决。Sonnet 模型(工具调用频繁,速度优先),双输出(machine-readable JSON + human narrative)。
+3. **接入 Tier 1 工具链**:Playwright + Lost Pixel + axe-core 进 `qa/`,6 个 spec / 16 case 真实运行,12 张 visual baseline,运行时 audit 落到 `audits/d3-runtime.{md,json}`。
+
+**最有意义的 emergent 效应**:跑第一份机器 audit 时,16 case 中有 2 个 skipped (D3 CDN 在沙箱不可达)。我手动 vendor d3 到 `assets/vendor/d3.v7.min.js` 解锁这 2 个 test——结果他们跑起来后**又自动发现了 3 个新 bug**:
+- BUG-002 (P1): caster-profile 的 d3 force-graph 引用了不存在的 caster node "zhoukangwang",page crash
+- BUG-003 (P2): dashboard 朝代带的 `.active` class 在 CSS 里定义了但 JS 从未设过——设计与实现 silent mismatch
+- BUG-004 (P2): dashboard 三个 scrollable region 都缺 `tabindex="0"`,axe-core 标 serious a11y violation
+
+修完 4 个 bug 后 16/16 绿。**这是这个项目第一次实现 "audit squad audited itself"**——audit 工具找到 audit 之前漏掉的 bug,修完后 audit 又找到下一波 bug。Audit-first 不再是单步流程,它是**自我迭代的二阶闭环**。
+
+**Takeaway**(我现在愿意在面试桌上守住的论断):
+
+> **AI agent 不只是 build,它能监督自己 build 的成果。audit-first 的真正终态不是 "agent 写完代码,人来 review",而是 "agent 写完代码,另一类 agent 自动 verify,verify 失败的 case 反哺 build agent 的 prompt"——这是把 PM 角色从 reviewer 升级到 squad-coach 的关键 enabler。**
+
+这条论点 v3 阶段我做不出来,因为 5 persona 都是 read-only。v4.5 之后我可以做出来——`audits/d3-runtime.json` 是机器可读的 evidence,它是 case-study 整个 §3 §4 §5 论点的**最后一块拼图**。
+
 ---
 
-**Case Study 版本**:v0.3 (v4 Phase E Track A 完成)
-**作者**:Product Owner agent (v4 iteration, Opus, cold context)
+**Case Study 版本**:v0.4 (v4.5 Audit-Itself 闭环完成)
+**作者**:Product Owner agent (v4 iteration, Opus, cold context) + 项目主理人 (v4.5 §5.7 增补)
 **日期**:2026-05-22
-**字数**:~6500 字(v3+v4 累计),其中 §3 ~2500 字 / §4 ~1800 字 / §5 ~2000 字
-**下次更新触发条件**:D7-D14 任一 Track 闭环完成
+**字数**:~7300 字(v3+v4+v4.5 累计),其中 §3 ~2500 字 / §4 ~1800 字 / §5 ~2800 字
+**下次更新触发条件**:D7-D14 任一 Track 闭环完成,或 v5 mobile-first rebuild 启动
