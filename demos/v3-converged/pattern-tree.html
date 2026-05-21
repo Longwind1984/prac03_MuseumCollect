@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>纹饰演化树 — MuseumCollect v3</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<link rel="stylesheet" href="css/converged.css">
+<style>
+.pattern-node { cursor: pointer; }
+.pattern-node circle { transition: all .3s; }
+.pattern-node:hover circle { filter: brightness(1.3); }
+.pattern-node.active circle { stroke: var(--accent-gold); stroke-width: 3; }
+.pattern-node.era-active circle { filter: drop-shadow(0 0 8px rgba(164,115,44,.8)); }
+.pattern-detail-panel { background: white; border: 1px solid var(--border-light); border-radius: 12px; padding: 20px; }
+.pattern-icon-lg { width: 80px; height: 80px; border: 2px solid var(--border-medium); border-radius: 12px; display: flex; align-items: center; justify-content: center; background: white; }
+.pattern-icon-lg.active { border-color: var(--accent-bronze); background: #fdf8f0; }
+.pattern-grid-item { cursor: pointer; transition: all .2s; border-radius: 8px; padding: 8px; text-align: center; }
+.pattern-grid-item:hover { background: var(--bg-cream); }
+.era-band { position: absolute; top: 0; bottom: 0; opacity: .05; pointer-events: none; }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo">器·<span>集</span></a>
+  <div class="nav-links">
+    <a href="catalog.html" class="nav-link">图鉴</a>
+    <a href="time-pillar.html" class="nav-link">时代柱</a>
+    <a href="geo-system.html" class="nav-link">地理</a>
+    <a href="pattern-tree.html" class="nav-link active">纹饰树</a>
+    <a href="inscription-reader.html" class="nav-link">铭文</a>
+    <a href="purpose-scene.html" class="nav-link">礼制场景</a>
+    <a href="caster-profile.html" class="nav-link">铸主</a>
+    <a href="me.html" class="nav-link">我的图鉴</a>
+    <a href="scan.html" class="nav-link">识别</a>
+  </div>
+  <button class="linkage-toggle"><div class="linkage-dot"></div><span class="linkage-label">穿越模式 ●</span></button>
+</nav>
+
+<div class="page-container" style="padding:24px;">
+  <div style="margin-bottom:20px;">
+    <h1 class="page-title" style="margin-bottom:4px;">纹饰演化树</h1>
+    <p class="page-subtitle">25 种纹饰图标 · 商早→汉 演化脉络 · hover 朝代联动高亮</p>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr 320px; gap:20px;">
+    <!-- Tree -->
+    <div>
+      <div style="background:white; border:1px solid var(--border-light); border-radius:12px; overflow:hidden;">
+        <!-- Era axis header -->
+        <div id="era-axis" style="display:flex; border-bottom:1px solid var(--border-light); font-size:11px; padding:0 16px;"></div>
+        <!-- SVG tree -->
+        <div style="position:relative; overflow-x:auto;">
+          <svg id="pattern-tree-svg" style="display:block;"></svg>
+        </div>
+      </div>
+
+      <!-- Pattern icon grid (below tree) -->
+      <div style="margin-top:20px; background:white; border:1px solid var(--border-light); border-radius:12px; padding:20px;">
+        <div class="section-title" style="margin-bottom:16px;">全部 25 纹饰图标</div>
+        <div id="pattern-icon-grid" style="display:flex; flex-wrap:wrap; gap:8px;"></div>
+      </div>
+    </div>
+
+    <!-- Detail panel -->
+    <div>
+      <div class="pattern-detail-panel" id="pattern-detail">
+        <div style="text-align:center; padding:40px 0; color:var(--text-muted);">
+          <div style="font-size:36px; margin-bottom:12px;">🌿</div>
+          点击任意纹饰节点<br>查看详细信息
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/state.js"></script>
+<script src="js/cross-dim-wiring.js"></script>
+<script>
+// Pattern evolution data
+const PATTERNS = [
+  { slug:'taotie', name:'饕餮纹', era:'商', x:2, y:1, parents:[], color:'#4a5a3a', identified:true,
+    desc:'商王朝核心纹饰，正面兽面，严格对称。学界分单元式、分解式、顾首式、简化式四型，后演化为窃曲纹。',
+    typical:['方鼎','圆鼎','簋','尊'], forms:['方尊','方鼎','觚形尊'] },
+  { slug:'kuilong', name:'夔龙纹', era:'商晚', x:3, y:2, parents:['taotie'], color:'#3a6a4a', identified:true,
+    desc:'侧面单足龙，张口卷尾。商晚期流行，常与饕餮纹组合，西周后简化演变为窃曲纹。',
+    typical:['鼎腹','尊颈','觥盖'], forms:['方鼎','圆鼎'] },
+  { slug:'yunlei', name:'云雷纹', era:'商周', x:1, y:3, parents:[], color:'#5a5a3a', identified:true,
+    desc:'方形回旋螺线，商周青铜器最普遍的背景底纹。衬托主纹层次，贯穿商至西周中期。',
+    typical:['所有器型底纹'], forms:['全部'] },
+  { slug:'chan', name:'蝉纹', era:'商西周', x:4, y:2, parents:[], color:'#6a4a3a', identified:true,
+    desc:'三角形蝉形，复眼对称，商人视蝉为再生象征，常作边饰。', typical:['觚颈','圈足'], forms:['觚'] },
+  { slug:'niao', name:'鸟纹(商)', era:'商晚', x:2, y:3, parents:[], color:'#5a4a3a', identified:true,
+    desc:'商代抽象鸟形，方形短尾，与西周凤鸟纹有本质区别。', typical:['尊颈','卣腹'], forms:['尊','卣'] },
+  { slug:'fengniao', name:'凤鸟纹', era:'西周中', x:3, y:4, parents:['niao'], color:'#a73a2a', identified:true,
+    desc:'西周中期主流纹饰，大尾长冠，昂首挺胸，体现西周礼乐审美转变。',
+    typical:['簋腹','尊颈','壶腹'], forms:['簋','壶'] },
+  { slug:'qiequ', name:'窃曲纹', era:'西周中晚', x:5, y:2, parents:['kuilong','taotie'], color:'#a73a2a', identified:true,
+    desc:'饕餮/夔龙高度简化的S形抽象纹，眼目残留为中心椭圆，是商代神兽纹向西周几何纹的过渡。',
+    typical:['鼎腹','簋腹'], forms:['圆鼎','簋'] },
+  { slug:'chonghuan', name:'重环纹', era:'西周中晚', x:6, y:3, parents:['qiequ'], color:'#8a3a2a', identified:true,
+    desc:'以重叠椭圆形为单元的横向带饰，西周中晚期典型，风格素雅克制。',
+    typical:['簋腹','鼎腹'], forms:['簋','圆鼎'] },
+  { slug:'boqu', name:'波曲纹', era:'西周晚', x:6, y:4, parents:['chonghuan'], color:'#7a3a2a', identified:false,
+    desc:'波浪状连续带饰，波峰处以C形螺旋终结，西周晚期最流行主体纹饰之一。',
+    typical:['壶腹','鼎腹'], forms:['壶','圆鼎'] },
+  { slug:'panchi', name:'蟠螭纹', era:'春秋', x:7, y:2, parents:['qiequ'], color:'#2a2a3a', identified:true,
+    desc:'无角小龙相互缠绕，春秋时期最具代表性纹饰。每条螭龙身体细长，头部清晰。',
+    typical:['鼎腹','盘内底'], forms:['鼎','盘'] },
+  { slug:'panhui', name:'蟠虺纹', era:'战国早', x:8, y:2, parents:['panchi'], color:'#7a3a2a', identified:false,
+    desc:'比蟠螭更细小密集的小蛇/小龙群，近乎纯纹理效果，战国早期大量使用。',
+    typical:['鼎腹','壶腹'], forms:['鼎','壶'] },
+  { slug:'jihe', name:'几何纹', era:'战国', x:9, y:3, parents:['panhui'], color:'#7a3a2a', identified:false,
+    desc:'纯几何重复图案，脱离动物原型，菱形三角矩形组合，战国世俗化装饰代表。',
+    typical:['壶腹','鉴腹'], forms:['壶','鉴'] },
+  { slug:'yanle', name:'宴乐纹', era:'战国汉', x:10, y:2, parents:[], color:'#b89046', identified:false,
+    desc:'宴饮奏乐场景，包含案几乐器歌舞者，写实叙事风格替代神兽纹。',
+    typical:['壶腹','鉴腹'], forms:['壶','鉴'] },
+  { slug:'shoulie', name:'狩猎纹', era:'战国汉', x:10, y:4, parents:[], color:'#b89046', identified:false,
+    desc:'战车骑射猎兽场景，弓箭手奔马逃鹿，战国晚期至汉代贵族生活题材。',
+    typical:['壶腹','铜镜'], forms:['壶'] },
+  { slug:'rudding', name:'乳钉纹', era:'商中', x:1, y:4, parents:[], color:'#6a4a3a', identified:true,
+    desc:'规则排列的圆形凸起（浮雕乳丁），商中期较简朴的装饰，以网格状均匀分布。',
+    typical:['方鼎腹壁','圆鼎腹'], forms:['方鼎'] },
+  { slug:'jiaoye', name:'焦叶纹', era:'商西周', x:2, y:5, parents:[], color:'#5a5a3a', identified:true,
+    desc:'长三角形叶片向上排列成一圈，常装饰于尊卣类器物颈部，是典型领状装饰。',
+    typical:['尊颈','卣颈'], forms:['尊','卣'] },
+  { slug:'xian', name:'弦纹', era:'通用', x:1, y:6, parents:[], color:'#888', identified:true,
+    desc:'单条或多条平行环绕线，最简洁的装饰手法。兼具功能性与装饰性。',
+    typical:['所有器型颈部'], forms:['全部'] },
+  { slug:'wo', name:'涡纹', era:'商', x:3, y:6, parents:[], color:'#4a5a3a', identified:true,
+    desc:'圆形螺旋漩涡，中心为实点（涡眼），代表水流天体旋转，商代早中期特有。',
+    typical:['方器腹壁','尊肩'], forms:['方鼎','尊'] },
+  { slug:'panchi', name:'蟠螭纹', era:'春秋', x:7, y:2, parents:[], color:'#2a2a3a', identified:true, skip:true },
+  { slug:'sishen', name:'四神纹', era:'汉', x:11, y:3, parents:[], color:'#b89046', identified:false,
+    desc:'青龙白虎朱雀玄武四方神兽，汉代宇宙观在铜器上的集中体现。',
+    typical:['铜镜背面','壶腹'], forms:['铜镜'] },
+  { slug:'hu', name:'虎纹', era:'商', x:4, y:4, parents:[], color:'#5a4a3a', identified:false,
+    desc:'猛虎侧面全身像，商代以圆耳圆眼宽吻为特征，常与饕餮纹共现。',
+    typical:['卣腹','觥盖','钺面'], forms:['卣','觥'] },
+];
+
+const ERA_BANDS = [
+  {name:'商',     x_start:0.05, x_end:0.28, color:'#4a5a3a'},
+  {name:'西周',   x_start:0.28, x_end:0.52, color:'#a73a2a'},
+  {name:'春秋',   x_start:0.52, x_end:0.66, color:'#2a2a3a'},
+  {name:'战国',   x_start:0.66, x_end:0.82, color:'#7a3a2a'},
+  {name:'汉',     x_start:0.82, x_end:0.98, color:'#b89046'},
+];
+
+const GRID_PATTERNS = [
+  'taotie','kuilong','yunlei','fengniao','panchi','panhui','qiequ','chonghuan','boqu',
+  'chan','jiaoye','xian','rudding','wo','jihe','yanle','shoulie','sishen','hu','niao',
+  'sanjiao','yuchi','shouti_juanqu','chuilin','lei'
+];
+
+let activePatternSlug = null;
+
+function buildTree() {
+  const container = document.getElementById('pattern-tree-svg').parentNode;
+  const W = 900;
+  const H = 420;
+
+  // Era axis
+  const axis = document.getElementById('era-axis');
+  ERA_BANDS.forEach(band => {
+    const el = document.createElement('div');
+    el.style.cssText = `flex: ${(band.x_end - band.x_start) * 100}; padding: 8px 4px; text-align: center; color: ${band.color}; font-weight: 600; border-right: 1px solid var(--border-light);`;
+    el.textContent = band.name;
+    el.dataset.era = band.name;
+    axis.appendChild(el);
+  });
+
+  const svg = d3.select('#pattern-tree-svg').attr('width', W).attr('height', H);
+  svg.selectAll('*').remove();
+
+  // Background era bands
+  ERA_BANDS.forEach(band => {
+    svg.append('rect')
+      .attr('x', band.x_start * W).attr('y', 0)
+      .attr('width', (band.x_end - band.x_start) * W).attr('height', H)
+      .attr('fill', band.color).attr('opacity', 0.04)
+      .attr('class', 'era-band')
+      .attr('data-era', band.name);
+  });
+
+  // Map x/y grid to pixels
+  const X_STEPS = 12; const Y_STEPS = 8;
+  const pxX = (x) => (x / X_STEPS) * W;
+  const pxY = (y) => (y / Y_STEPS) * H;
+
+  // Draw evolution lines
+  const nodes = PATTERNS.filter(p => !p.skip);
+  nodes.forEach(node => {
+    (node.parents || []).forEach(parentSlug => {
+      const parent = nodes.find(n => n.slug === parentSlug);
+      if (!parent) return;
+      svg.append('path')
+        .attr('d', `M${pxX(parent.x)},${pxY(parent.y)} C${pxX((parent.x+node.x)/2)},${pxY(parent.y)} ${pxX((parent.x+node.x)/2)},${pxY(node.y)} ${pxX(node.x)},${pxY(node.y)}`)
+        .attr('fill', 'none')
+        .attr('stroke', '#ccc').attr('stroke-width', 1.5)
+        .attr('stroke-dasharray', '4,2')
+        .attr('class', `link-from-${parentSlug} link-to-${node.slug}`);
+    });
+  });
+
+  // Draw nodes
+  nodes.forEach(node => {
+    const cx = pxX(node.x);
+    const cy = pxY(node.y);
+    const r = 24;
+
+    const g = svg.append('g')
+      .attr('class', `pattern-node ${node.identified ? '' : 'not-identified'}`)
+      .attr('id', `node-${node.slug}`)
+      .attr('transform', `translate(${cx},${cy})`);
+
+    // Breathing animation for unidentified
+    if (!node.identified) {
+      g.style('opacity', '.5');
+      g.style('animation', 'breathe 4s ease-in-out infinite');
+    }
+
+    // Circle
+    g.append('circle')
+      .attr('r', r)
+      .attr('fill', node.identified ? node.color : '#ccc')
+      .attr('opacity', 0.9)
+      .attr('stroke', node.identified ? 'rgba(255,255,255,.4)' : 'none')
+      .attr('stroke-width', 1.5);
+
+    // Pattern icon (try img, fallback text)
+    g.append('image')
+      .attr('href', `../../assets/patterns/${node.slug}.svg`)
+      .attr('x', -16).attr('y', -16)
+      .attr('width', 32).attr('height', 32)
+      .style('filter', node.identified ? 'invert(1) brightness(2)' : 'invert(.3)')
+      .on('error', function() {
+        d3.select(this).remove();
+        g.append('text').attr('text-anchor','middle').attr('dy','4')
+          .attr('fill','white').attr('font-size',10).text(node.name.charAt(0));
+      });
+
+    // Label
+    g.append('text')
+      .attr('text-anchor', 'middle').attr('dy', r + 12)
+      .attr('font-size', 10).attr('fill', '#555').attr('font-weight', '600')
+      .text(node.name.replace('纹',''));
+
+    g.on('click', () => showPatternDetail(node));
+    g.on('mouseenter', function() {
+      d3.select(this).select('circle').attr('filter', 'brightness(1.3)');
+    });
+    g.on('mouseleave', function() {
+      d3.select(this).select('circle').attr('filter', null);
+    });
+  });
+
+  // Main groups labels
+  const groups = [
+    {label:'神兽纹系', y:60, color:'#4a5a3a'},
+    {label:'几何/底纹系', y:200, color:'#888'},
+    {label:'写实动物系', y:300, color:'#5a4a3a'},
+    {label:'构件类', y:370, color:'#888'},
+  ];
+  groups.forEach(g => {
+    svg.append('text').attr('x', 8).attr('y', g.y)
+      .attr('font-size', 10).attr('fill', g.color).attr('opacity', .6)
+      .attr('font-style', 'italic').text(g.label);
+  });
+}
+
+function showPatternDetail(node) {
+  activePatternSlug = node.slug;
+  const panel = document.getElementById('pattern-detail');
+  panel.innerHTML = `
+    <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;">
+      <div class="pattern-icon-lg active">
+        <img src="../../assets/patterns/${node.slug}.svg" style="width:56px;height:56px;"
+          onerror="this.parentNode.innerHTML='<span style=\\'font-size:28px;color:var(--accent-bronze);\\'>${node.name.charAt(0)}</span>'">
+      </div>
+      <div>
+        <div style="font-size:20px; font-weight:700; margin-bottom:4px;">${node.name}</div>
+        <div style="font-size:12px; color:${node.color};">${node.era}${node.identified ? ' · 已识别' : ' · 未识别'}</div>
+      </div>
+    </div>
+    <div style="font-size:13px; color:var(--text-ink); line-height:1.7; margin-bottom:12px;">${node.desc || '暂无描述'}</div>
+    <div style="margin-bottom:12px;">
+      <div class="field-label">常见器型</div>
+      <div style="display:flex; flex-wrap:wrap; gap:4px; margin-top:4px;">
+        ${(node.typical||[]).map(t => `<span class="chop chop-bronze">${t}</span>`).join('')}
+      </div>
+    </div>
+    <div>
+      <div class="field-label">相关形制</div>
+      <div style="display:flex; flex-wrap:wrap; gap:4px; margin-top:4px;">
+        ${(node.forms||[]).map(f => `<span class="chop chop-gray" onclick="location.href='catalog.html?type=${f}'">${f}</span>`).join('')}
+      </div>
+    </div>
+    <div style="margin-top:16px;">
+      <a href="catalog.html?pattern=${encodeURIComponent(node.name)}" style="color:var(--accent-bronze); font-size:12px; text-decoration:none;">→ 查看含此纹饰的器物</a>
+    </div>
+  `;
+  // Emit pattern-focus
+  document.dispatchEvent(new CustomEvent('pattern-focus', { detail: { pattern: node.name, era_dominant: node.era, triggered_by: 'pattern-tree.click' } }));
+  // Highlight node
+  d3.selectAll('.pattern-node').classed('active', false);
+  d3.select(`#node-${node.slug}`).classed('active', true);
+}
+
+function buildIconGrid() {
+  const grid = document.getElementById('pattern-icon-grid');
+  GRID_PATTERNS.forEach(slug => {
+    const node = PATTERNS.find(p => p.slug === slug);
+    const name = node ? node.name : slug;
+    const identified = node ? node.identified : false;
+    const el = document.createElement('div');
+    el.className = 'pattern-grid-item';
+    el.setAttribute('data-pattern', name);
+    el.style.opacity = identified ? '1' : '0.4';
+    el.innerHTML = `
+      <div class="pattern-icon" style="${identified ? 'border-color:var(--accent-bronze);' : ''}" title="${name}">
+        <img src="../../assets/patterns/${slug}.svg" style="width:24px;height:24px;"
+          onerror="this.style.display='none'; this.parentNode.innerHTML='<span style=\\'font-size:14px;\\'>${name.charAt(0)}</span>'">
+      </div>
+      <div style="font-size:9px; color:var(--text-muted); margin-top:3px; text-align:center;">${name.replace('纹','')}</div>
+    `;
+    el.addEventListener('click', () => {
+      if (node) showPatternDetail(node);
+    });
+    grid.appendChild(el);
+  });
+}
+
+// Era focus linkage
+document.addEventListener('era-focus', function(e) {
+  const { dynasty } = e.detail || {};
+  if (!dynasty || !window.CrossDimWiring || !window.CrossDimWiring.isEnabled()) return;
+  // Map dynasty to dominant patterns
+  const eraPatterns = {
+    '商': ['taotie','kuilong','yunlei','chan'],
+    '西周': ['fengniao','qiequ','chonghuan','boqu'],
+    '春秋': ['panchi','chonghuan'],
+    '战国': ['panhui','jihe','yanle'],
+    '汉': ['sishen','yanle','shoulie'],
+  };
+  const activeSlug = eraPatterns[dynasty] || [];
+  d3.selectAll('.pattern-node').classed('era-active', false);
+  activeSlug.forEach(slug => {
+    d3.select(`#node-${slug}`).classed('era-active', true);
+  });
+  // Highlight pattern icons
+  document.querySelectorAll('[data-pattern]').forEach(el => {
+    const p = el.dataset.pattern;
+    const match = PATTERNS.filter(n => activeSlug.includes(n.slug)).some(n => n.name === p);
+    el.style.borderColor = match ? 'var(--accent-bronze)' : '';
+    el.style.boxShadow = match ? '0 0 6px rgba(164,115,44,.4)' : '';
+    el.style.transform = match ? 'scale(1.1)' : '';
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  buildTree();
+  buildIconGrid();
+});
+</script>
+</body>
+</html>

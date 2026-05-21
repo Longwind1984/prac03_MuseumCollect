@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>地理系统 — MuseumCollect v3</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<link rel="stylesheet" href="css/converged.css">
+<style>
+#map-container { background: #f4ebd9; border-radius: 12px; border: 1px solid var(--border-light); overflow: hidden; position: relative; }
+.site-circle { cursor: pointer; transition: all .3s; }
+.site-circle:hover { filter: brightness(1.4); }
+.site-label { font-size: 10px; pointer-events: none; }
+.detail-panel { background: white; border: 1px solid var(--border-light); border-radius: 12px; padding: 20px; height: 100%; overflow-y: auto; }
+.era-slider { -webkit-appearance: none; width: 100%; height: 6px; background: var(--border-light); border-radius: 3px; outline: none; cursor: pointer; }
+.era-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--accent-bronze); cursor: pointer; }
+.view-tab { padding: 6px 14px; border-radius: 20px; font-size: 12px; cursor: pointer; transition: all .2s; border: 1px solid var(--border-medium); background: white; color: var(--text-muted); }
+.view-tab.active { background: var(--accent-bronze); color: white; border-color: var(--accent-bronze); }
+.overseas-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px; border-bottom: 1px solid var(--border-light); cursor: pointer; transition: all .2s; }
+.overseas-item:hover { background: var(--bg-cream); }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo">器·<span>集</span></a>
+  <div class="nav-links">
+    <a href="catalog.html" class="nav-link">图鉴</a>
+    <a href="time-pillar.html" class="nav-link">时代柱</a>
+    <a href="geo-system.html" class="nav-link active">地理</a>
+    <a href="pattern-tree.html" class="nav-link">纹饰树</a>
+    <a href="inscription-reader.html" class="nav-link">铭文</a>
+    <a href="purpose-scene.html" class="nav-link">礼制场景</a>
+    <a href="caster-profile.html" class="nav-link">铸主</a>
+    <a href="me.html" class="nav-link">我的图鉴</a>
+    <a href="scan.html" class="nav-link">识别</a>
+  </div>
+  <button class="linkage-toggle"><div class="linkage-dot"></div><span class="linkage-label">穿越模式 ●</span></button>
+</nav>
+
+<div class="page-container" style="padding:24px;">
+  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+    <div>
+      <h1 class="page-title" style="margin-bottom:4px;">地理系统</h1>
+      <p class="page-subtitle">出土遗址 · 馆藏分布 · 海外流散 · 时代滑块联动</p>
+    </div>
+    <div style="display:flex; gap:8px;">
+      <button class="view-tab active" id="view-excavation" onclick="setView('excavation')">出土遗址</button>
+      <button class="view-tab" id="view-museum" onclick="setView('museum')">馆藏分布</button>
+      <button class="view-tab" id="view-overseas" onclick="setView('overseas')">海外流散</button>
+    </div>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr 320px; gap:20px;">
+    <!-- Map -->
+    <div>
+      <!-- Era slider -->
+      <div id="era-controls" style="background:white; border:1px solid var(--border-light); border-radius:8px; padding:12px 16px; margin-bottom:12px; display:flex; align-items:center; gap:12px;">
+        <span style="font-size:12px; color:var(--text-muted); white-space:nowrap;">时代：</span>
+        <input type="range" class="era-slider" id="era-slider" min="0" max="5" value="1" oninput="onEraSlider(this.value)">
+        <span id="era-label" style="font-size:13px; font-weight:600; color:var(--accent-bronze); white-space:nowrap; min-width:40px;">商</span>
+      </div>
+      <div id="map-container" style="height:520px;">
+        <svg id="map-svg" width="100%" height="100%"></svg>
+      </div>
+    </div>
+
+    <!-- Detail panel -->
+    <div>
+      <div class="detail-panel" id="detail-panel">
+        <div style="text-align:center; padding:40px 0; color:var(--text-muted);">
+          <div style="font-size:36px; margin-bottom:12px;">🗺</div>
+          <div style="font-size:13px;">点击遗址或博物馆<br>查看详情</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overseas panel (hidden by default) -->
+  <div id="overseas-panel" style="display:none; margin-top:20px;">
+    <div style="background:var(--bg-cream); border:1px solid var(--border-light); border-radius:12px; padding:20px;">
+      <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:16px;">
+        <h2 style="font-size:18px; font-weight:700;">海外流散</h2>
+        <span style="font-size:13px; color:var(--text-muted);">55 件已知流散海外</span>
+        <span style="font-size:11px; color:rgba(120,100,80,.7); font-style:italic; margin-left:auto;">本应在家</span>
+      </div>
+      <div id="overseas-list"></div>
+    </div>
+  </div>
+</div>
+
+<script src="js/state.js"></script>
+<script src="js/cross-dim-wiring.js"></script>
+<script>
+// Site data: [name, x_pct, y_pct, dynasty, count, description, lit]
+const EXCAVATION_SITES = [
+  { name: '殷墟', x: 56, y: 38, dynasty: '商', count: 85, lit: true, desc: '商代晚期都城。1928年起发掘，出土后母戊鼎等商代青铜器精华，妇好墓完整随葬468件铜器。', artifacts: ['后母戊鼎','四羊方尊','妇好鸮尊'] },
+  { name: '周原', x: 48, y: 40, dynasty: '西周', count: 45, lit: true, desc: '西周早中期都邑遗址，陕西扶风宝鸡之间。出土何尊、利簋等西周金文重器。', artifacts: ['何尊','利簋','大克鼎'] },
+  { name: '丰镐', x: 47, y: 41, dynasty: '西周', count: 28, lit: true, desc: '西周宗周（镐京）所在，陕西西安西南。周礼制度核心区。', artifacts: ['毛公鼎(台北)','散氏盘(台北)'] },
+  { name: '三星堆', x: 43, y: 52, dynasty: '商', count: 10, lit: true, desc: '古蜀文明圣地，四川广汉。与商并存的独立文明，纵目面具、大立人青铜器震惊世界。', artifacts: ['三星堆大立人','纵目面具','铜神树'] },
+  { name: '盘龙城', x: 55, y: 47, dynasty: '商', count: 8, lit: true, desc: '商代南方据点，湖北武汉黄陂。揭示商代文化向长江流域扩张的证据。', artifacts: ['盘龙城大方鼎'] },
+  { name: '随州', x: 56, y: 46, dynasty: '战国', count: 12, lit: true, desc: '曾侯乙墓遗址，湖北随州擂鼓墩。1978年出土曾侯乙编钟（65件）、尊盘等战国精华。', artifacts: ['曾侯乙编钟','曾侯乙尊盘'] },
+  { name: '新郑', x: 56, y: 40, dynasty: '春秋', count: 6, lit: true, desc: '郑国都城，河南新郑。1923年出土莲鹤方壶等春秋精华铜器。', artifacts: ['莲鹤方壶'] },
+  { name: '淅川', x: 53, y: 42, dynasty: '春秋', count: 4, lit: true, desc: '楚国北疆，河南淅川下寺。出土楚国青铜群，蟠螭纹繁盛。', artifacts: ['楚国铜鼎'] },
+  { name: '江陵', x: 54, y: 48, dynasty: '战国', count: 5, lit: true, desc: '楚国郢都，湖北荆州。出土越王勾践剑、战国漆铜器群。', artifacts: ['越王勾践剑'] },
+  { name: '满城', x: 58, y: 35, dynasty: '西汉', count: 6, lit: true, desc: '中山靖王刘胜墓，河北保定满城。1968年出土错金博山炉、长信宫灯等西汉精华。', artifacts: ['长信宫灯','错金博山炉'] },
+  { name: '二里头', x: 54, y: 39, dynasty: '夏', count: 4, lit: true, desc: '二里头遗址，河南洛阳偃师。中华最早青铜礼器出土地，或为夏都。', artifacts: ['铜爵','铜斝'] },
+  { name: '平山', x: 58, y: 33, dynasty: '战国', count: 4, lit: false, desc: '中山国都城，河北平山战国中山王墓。', artifacts: ['中山王方壶'] },
+  { name: '临淄', x: 60, y: 35, dynasty: '春秋', count: 2, lit: false, desc: '齐国都城，山东淄博临淄。', artifacts: [] },
+  { name: '金沙', x: 43, y: 53, dynasty: '商', count: 3, lit: false, desc: '古蜀文明遗址，成都金沙，与三星堆同文明序列。', artifacts: [] },
+];
+
+const MUSEUM_SITES = [
+  { name: '国家博物馆', x: 58, y: 36, count: 35, desc: '北京。后母戊鼎、四羊方尊等国宝的永久家园。' },
+  { name: '故宫博物院', x: 58, y: 36.5, count: 28, desc: '北京。清宫旧藏青铜器精华。' },
+  { name: '上海博物馆', x: 61, y: 42, count: 22, desc: '上海。大克鼎、召卣等西周铭文重器。' },
+  { name: '台北故宫', x: 64, y: 49, count: 25, desc: '台湾台北。毛公鼎、散氏盘等西周顶级国宝。' },
+  { name: '河南博物院', x: 55, y: 40, count: 18, desc: '郑州。妇好鸮尊、莲鹤方壶等出土地就近收藏。' },
+  { name: '陕历博', x: 47, y: 40, count: 15, desc: '西安。西周金文铭文重器。' },
+  { name: '湖北省博', x: 55, y: 47, count: 20, desc: '武汉。曾侯乙编钟、尊盘等战国精华。' },
+  { name: '宝鸡青铜博物院', x: 46, y: 40, count: 10, desc: '宝鸡。何尊永久家园。' },
+  { name: '三星堆博物馆', x: 43, y: 52, count: 8, desc: '广汉。古蜀文明全套珍品。' },
+];
+
+const OVERSEAS_ITEMS = [
+  { museum: '大都会博物馆 (MET)', city: '纽约', count: 18, note: '清末至民国间私人藏家收购，部分经1930-40年代古董商流出', highlight: '铭文方鼎、商代饕餮卣' },
+  { museum: '大英博物馆', city: '伦敦', count: 14, note: '维多利亚时代外交官、传教士收集，部分可能涉及非正常流出', highlight: '方彝、铜鬲' },
+  { museum: '弗利尔艺术馆', city: '华盛顿', count: 11, note: '弗利尔个人在华收购，20世纪初', highlight: '觚、爵等商代酒器系列' },
+  { museum: '赛努奇博物馆', city: '巴黎', count: 8, note: '法国收藏家19-20世纪收购', highlight: '周代铭文簋' },
+  { museum: '京都泉屋博物馆', city: '京都', count: 6, note: '日本住友家族近代收购', highlight: '商代饕餮方彝' },
+];
+
+let currentView = 'excavation';
+const ERA_SEQUENCE = ['夏','商','西周','春秋','战国','秦'];
+const ERA_COLORS = { '夏':'#6e4a2e','商':'#4a5a3a','西周':'#a73a2a','春秋':'#2a2a3a','战国':'#7a3a2a','秦':'#1a1a1a','汉':'#b89046' };
+let currentEra = '商';
+
+function setView(view) {
+  currentView = view;
+  document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(`view-${view}`).classList.add('active');
+  document.getElementById('era-controls').style.display = view === 'overseas' ? 'none' : 'flex';
+  document.getElementById('overseas-panel').style.display = view === 'overseas' ? 'block' : 'none';
+  renderMap();
+  if (view === 'overseas') renderOverseas();
+}
+
+function onEraSlider(val) {
+  const era = ERA_SEQUENCE[parseInt(val)];
+  currentEra = era;
+  document.getElementById('era-label').textContent = era;
+  document.getElementById('era-label').style.color = ERA_COLORS[era] || 'var(--accent-bronze)';
+  renderMap();
+  // Emit era-focus event
+  document.dispatchEvent(new CustomEvent('era-focus', {
+    detail: { dynasty: era, triggered_by: 'geo-system.slider' }
+  }));
+}
+
+function renderMap() {
+  const svg = d3.select('#map-svg');
+  const container = document.getElementById('map-container');
+  const W = container.offsetWidth;
+  const H = container.offsetHeight;
+
+  svg.attr('width', W).attr('height', H);
+  svg.selectAll('*').remove();
+
+  // Background
+  svg.append('rect').attr('width', W).attr('height', H).attr('fill', '#f4ebd9');
+
+  // Simplified China boundary (key points as polygon)
+  const chinaOutline = [
+    [0.35,0.05],[0.50,0.02],[0.60,0.04],[0.72,0.08],[0.80,0.12],
+    [0.85,0.20],[0.82,0.28],[0.88,0.38],[0.85,0.46],[0.80,0.52],
+    [0.72,0.58],[0.68,0.68],[0.70,0.80],[0.62,0.88],[0.55,0.90],
+    [0.48,0.88],[0.42,0.80],[0.35,0.72],[0.28,0.65],[0.20,0.60],
+    [0.15,0.50],[0.12,0.40],[0.15,0.30],[0.20,0.22],[0.28,0.15],
+    [0.35,0.05]
+  ].map(([px,py]) => [px*W, py*H]);
+
+  // Mountain ranges (subtle)
+  svg.append('path')
+    .datum(chinaOutline)
+    .attr('d', d3.line()(chinaOutline) + 'Z')
+    .attr('fill', '#f0e6d0')
+    .attr('stroke', '#c8b890')
+    .attr('stroke-width', 1.5);
+
+  // Rivers (simplified)
+  const rivers = [
+    [[0.35,0.38],[0.48,0.40],[0.58,0.42],[0.68,0.48],[0.72,0.55]],  // Yellow River (simplified)
+    [[0.32,0.52],[0.45,0.50],[0.56,0.52],[0.64,0.56],[0.70,0.60]],  // Yangtze (simplified)
+  ];
+  rivers.forEach(r => {
+    svg.append('path')
+      .datum(r.map(([px,py]) => [px*W, py*H]))
+      .attr('d', d3.line().curve(d3.curveCatmullRom)(r.map(([px,py]) => [px*W, py*H])))
+      .attr('fill', 'none')
+      .attr('stroke', '#98b8c8')
+      .attr('stroke-width', 1.5)
+      .attr('opacity', 0.6);
+  });
+
+  // Era overlay (simplified state boundaries as colored region)
+  const eraOverlays = {
+    '商': [[0.44,0.30],[0.62,0.30],[0.68,0.40],[0.65,0.52],[0.50,0.55],[0.42,0.48],[0.40,0.38]],
+    '西周': [[0.38,0.28],[0.68,0.28],[0.75,0.45],[0.65,0.58],[0.48,0.60],[0.35,0.52],[0.32,0.40]],
+    '春秋': [[0.30,0.25],[0.72,0.25],[0.78,0.48],[0.68,0.62],[0.50,0.66],[0.33,0.58],[0.25,0.45]],
+    '战国': [[0.28,0.22],[0.75,0.22],[0.80,0.50],[0.70,0.65],[0.52,0.68],[0.30,0.62],[0.22,0.48]],
+  };
+
+  if (eraOverlays[currentEra]) {
+    const pts = eraOverlays[currentEra].map(([px,py]) => [px*W, py*H]);
+    svg.append('path')
+      .datum(pts)
+      .attr('d', d3.line()(pts) + 'Z')
+      .attr('fill', ERA_COLORS[currentEra] || '#888')
+      .attr('opacity', 0.08)
+      .attr('stroke', ERA_COLORS[currentEra] || '#888')
+      .attr('stroke-width', 1.5)
+      .attr('stroke-dasharray', '6,4')
+      .attr('opacity', 0.3);
+  }
+
+  // Sites
+  const sites = currentView === 'museum' ? MUSEUM_SITES : EXCAVATION_SITES;
+  sites.forEach(site => {
+    const cx = site.x / 100 * W;
+    const cy = site.y / 100 * H;
+    const isLit = currentView === 'museum' ? true : (site.lit && (site.dynasty === currentEra || currentView === 'excavation'));
+    const color = ERA_COLORS[site.dynasty] || ERA_COLORS[currentEra] || '#888';
+    const r = Math.sqrt(site.count) * 2.5;
+
+    const g = svg.append('g').attr('class', 'site-circle');
+
+    if (isLit && site.count > 0) {
+      // Glow for lit sites
+      g.append('circle').attr('cx', cx).attr('cy', cy)
+        .attr('r', r + 4).attr('fill', color).attr('opacity', 0.15);
+    }
+
+    g.append('circle')
+      .attr('cx', cx).attr('cy', cy).attr('r', r)
+      .attr('fill', isLit ? color : '#ccc')
+      .attr('opacity', isLit ? 0.85 : 0.4)
+      .attr('stroke', isLit ? 'white' : 'none')
+      .attr('stroke-width', 1);
+
+    // Count label inside circle
+    if (r > 10) {
+      g.append('text').attr('x', cx).attr('y', cy + 3)
+        .attr('text-anchor', 'middle').attr('font-size', 9)
+        .attr('fill', 'white').attr('font-weight', '600').text(site.count);
+    }
+
+    // Site name label
+    g.append('text')
+      .attr('class', 'site-label')
+      .attr('x', cx + r + 4).attr('y', cy + 3)
+      .attr('fill', isLit ? '#333' : '#aaa')
+      .attr('font-size', 11).attr('font-weight', isLit ? '600' : '400')
+      .text(site.name);
+
+    g.on('click', () => showSiteDetail(site));
+    g.on('mouseenter', function() {
+      d3.select(this).select('circle').attr('stroke-width', 2).attr('stroke', ERA_COLORS[site.dynasty] || 'var(--accent-bronze)');
+    });
+    g.on('mouseleave', function() {
+      d3.select(this).select('circle').attr('stroke-width', 1).attr('stroke', 'white');
+    });
+  });
+
+  // North indicator
+  svg.append('text').attr('x', W - 30).attr('y', 25).attr('font-size', 16).attr('fill', '#888').text('N↑');
+}
+
+function showSiteDetail(site) {
+  const panel = document.getElementById('detail-panel');
+  const isExcav = currentView === 'excavation';
+  panel.innerHTML = `
+    <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+      <div style="width:12px; height:12px; border-radius:50%; background:${ERA_COLORS[site.dynasty]||'#888'};"></div>
+      <div style="font-size:18px; font-weight:700;">${site.name}</div>
+      ${site.dynasty ? `<div style="font-size:12px; color:var(--text-muted);">${site.dynasty}代</div>` : ''}
+    </div>
+    <div style="font-size:13px; color:var(--text-ink); line-height:1.7; margin-bottom:12px;">${site.desc}</div>
+    <div style="margin-bottom:12px;">
+      <div class="field-label">收藏器物</div>
+      <div style="font-size:20px; font-weight:700; color:var(--accent-bronze);">${site.count} 件</div>
+    </div>
+    ${(site.artifacts||[]).length > 0 ? `
+    <div>
+      <div class="field-label" style="margin-bottom:6px;">代表器物：</div>
+      ${site.artifacts.map(a => `
+        <div style="padding:6px 8px; background:var(--bg-cream); border-radius:6px; font-size:12px; cursor:pointer; margin-bottom:4px;"
+          onclick="location.href='catalog.html?search=${encodeURIComponent(a)}'">🏺 ${a}</div>
+      `).join('')}
+    </div>
+    ` : ''}
+    <div style="margin-top:16px;">
+      <a href="catalog.html?geo=${encodeURIComponent(site.name)}" style="color:var(--accent-bronze); font-size:12px; text-decoration:none;">→ 查看全部来自${site.name}的器物</a>
+    </div>
+  `;
+  // Emit site-focus
+  document.dispatchEvent(new CustomEvent('region-focus', { detail: { site: site.name, dynasty: site.dynasty, triggered_by: 'geo-system.click' } }));
+}
+
+function renderOverseas() {
+  const list = document.getElementById('overseas-list');
+  list.innerHTML = OVERSEAS_ITEMS.map(item => `
+    <div class="overseas-item">
+      <div style="font-size:24px;">🌐</div>
+      <div style="flex:1;">
+        <div style="font-size:14px; font-weight:600; margin-bottom:4px;">${item.museum}</div>
+        <div style="font-size:12px; color:var(--text-muted); margin-bottom:4px;">${item.city} · ${item.count} 件已知</div>
+        <div style="font-size:11px; color:var(--text-muted); line-height:1.5;">${item.note}</div>
+        <div style="font-size:11px; color:var(--accent-bronze); margin-top:4px;">${item.highlight}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Listen for era-focus from other components
+document.addEventListener('era-focus', function(e) {
+  const { dynasty } = e.detail || {};
+  if (!dynasty || !window.CrossDimWiring || !window.CrossDimWiring.isEnabled()) return;
+  currentEra = dynasty;
+  const idx = ERA_SEQUENCE.indexOf(dynasty);
+  if (idx >= 0) {
+    document.getElementById('era-slider').value = idx;
+    document.getElementById('era-label').textContent = dynasty;
+    document.getElementById('era-label').style.color = ERA_COLORS[dynasty] || 'var(--accent-bronze)';
+  }
+  renderMap();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderMap();
+  window.addEventListener('resize', renderMap);
+});
+</script>
+</body>
+</html>

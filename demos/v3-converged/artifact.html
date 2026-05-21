@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文物详情 — MuseumCollect v3</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/converged.css">
+<style>
+.artifact-image-box {
+  width: 280px; aspect-ratio: 1; background: var(--bg-dark);
+  border-radius: 12px; display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden; flex-shrink: 0;
+}
+.artifact-image-box.treasure {
+  box-shadow: 0 0 30px rgba(212,168,87,.4), 0 0 60px rgba(212,168,87,.15);
+  border: 2px solid var(--accent-gold);
+}
+.silhouette-img { width: 70%; height: 70%; object-fit: contain; opacity: .8; filter: invert(1); }
+.view-toggle { display: flex; gap: 4px; margin-top: 8px; justify-content: center; }
+.view-btn {
+  padding: 4px 12px; font-size: 11px; border-radius: 20px; cursor: pointer;
+  border: 1px solid var(--border-medium); background: white; color: var(--text-muted); transition: all .2s;
+}
+.view-btn.active { background: var(--accent-bronze); color: white; border-color: var(--accent-bronze); }
+.insc-grid { display: flex; flex-wrap: wrap; gap: 4px; }
+.insc-tooltip {
+  position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+  background: white; border: 1px solid var(--border-medium);
+  border-radius: 8px; padding: 8px 10px; min-width: 120px; z-index: 20;
+  box-shadow: var(--shadow-md); pointer-events: none; opacity: 0; transition: opacity .2s;
+  font-size: 12px; text-align: center;
+}
+.insc-char:hover .insc-tooltip { opacity: 1; }
+.craft-chip {
+  display: inline-flex; align-items: center; gap: 3px; padding: 3px 8px;
+  border: 1px solid var(--border-light); border-radius: 20px; font-size: 11px;
+  color: var(--text-muted); background: white; cursor: default; transition: all .2s;
+}
+.craft-chip:hover { border-color: var(--accent-bronze); color: var(--accent-bronze); }
+.pattern-badge {
+  display: inline-flex; align-items: center; gap: 4px; padding: 4px 8px;
+  border: 1px solid var(--border-light); border-radius: 4px; font-size: 12px;
+  background: white; cursor: pointer; transition: all .2s;
+}
+.pattern-badge:hover { border-color: var(--accent-bronze); background: #fdf8f0; }
+.dim-accordion details > summary {
+  cursor: pointer; padding: 12px 0; font-size: 13px; font-weight: 600;
+  color: var(--accent-bronze); list-style: none; display: flex; align-items: center; gap: 6px;
+  border-bottom: 1px solid var(--border-light);
+}
+.dim-accordion details > summary::before { content: '▶'; font-size: 10px; transition: transform .2s; }
+.dim-accordion details[open] > summary::before { transform: rotate(90deg); }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo">器·<span>集</span></a>
+  <div class="nav-links">
+    <a href="catalog.html" class="nav-link">图鉴</a>
+    <a href="time-pillar.html" class="nav-link">时代柱</a>
+    <a href="geo-system.html" class="nav-link">地理</a>
+    <a href="pattern-tree.html" class="nav-link">纹饰树</a>
+    <a href="inscription-reader.html" class="nav-link">铭文</a>
+    <a href="purpose-scene.html" class="nav-link">礼制场景</a>
+    <a href="caster-profile.html" class="nav-link">铸主</a>
+    <a href="me.html" class="nav-link">我的图鉴</a>
+    <a href="scan.html" class="nav-link">识别</a>
+  </div>
+  <button class="linkage-toggle"><div class="linkage-dot"></div><span class="linkage-label">穿越模式 ●</span></button>
+</nav>
+
+<div id="artifact-content">
+  <!-- Rendered by JS -->
+  <div style="text-align:center; padding:80px; color:var(--text-muted);">加载中...</div>
+</div>
+
+<script src="js/state.js"></script>
+<script src="js/cross-dim-wiring.js"></script>
+<script src="js/data-loader.js"></script>
+<script>
+// Mock artifact data for demo (covers all 11 schema fields)
+const MOCK_ARTIFACTS = {
+  'houmuwu_ding': {
+    id: 'houmuwu_ding', name_zh: '后母戊鼎', name_pinyin: 'Hou Mu Wu Ding',
+    name_alt: ['司母戊鼎'], dynasty: '商', period: '商代晚期', approx_year: '约公元前1300-1046年',
+    excavation: { year: 1939, site: '河南省安阳市武官村殷墟', ancient_state: '商', method: '田间挖出', dating_method: '类型学+铭文', significance: '现存最大最重商代青铜器' },
+    current_museum: '中国国家博物馆', size: { height_cm: 133, width_cm: 79.2, length_cm: 110, weight_kg: 832.84 },
+    type: '食器', form_subtype: '方鼎', form_detail: '直立双耳，腹部长方形，下接四柱足',
+    distinctive_features: ['现存最重商代青铜器','三层花纹典范','28块陶范合铸'],
+    patterns_structured: { main: ['饕餮纹 — 腹身四面'], secondary: ['夔龙纹 — 腹下边带'], ground: ['云雷纹 — 全身底纹'], rim: ['虎噬人头纹 — 耳外侧','蝉纹 — 柱足上段'] },
+    inscription: { has: true, text: '后母戊', char_count: 3, summary: '鼎腹内壁铸铭"后母戊"三字。商王祖庚或祖甲为祭祀母妇妌（庙号母戊）而铸', stage: '商晚期金文' },
+    purpose: { primary: '祭祀礼器', context: '商王为祭其母而铸，太牢礼主器', user_class: '商王室' },
+    craft: { primary: '范铸法', details: '28块陶范分铸再合浇，是当时世界最大单体青铜铸件', achievements: '展示商晚期范铸法巅峰' },
+    rarity_level: '国宝',
+    scholarly_status: '商代礼器顶级代表，改写商代青铜冶铸史认知，2002年首批禁止出境文物',
+    provenance_timeline: [{year:1939,event:'河南安阳武官村田间出土，因日军逼近就地回埋'},{year:1946,event:'抗战胜利后运抵南京'},{year:1959,event:'移入中国历史博物馆（今国博）永久珍藏'}],
+    related_artifacts: ['四羊方尊','妇好鸮尊','子龙鼎'],
+    data_sources: ['中国国家博物馆官网','考古学报1959','殷周金文集成']
+  },
+  'he_zun': {
+    id: 'he_zun', name_zh: '何尊', name_pinyin: 'He Zun',
+    dynasty: '西周', period: '西周早期', approx_year: '约公元前1038年（成王五年）',
+    excavation: { year: 1963, site: '陕西省宝鸡市贾村镇', ancient_state: '西周', method: '农民取土时发现', dating_method: '铭文纪年+类型学', significance: '"中国"二字最早实物出处' },
+    current_museum: '宝鸡青铜器博物院', size: { height_cm: 38.8, weight_kg: 14.6 },
+    type: '酒器', form_subtype: '尊', form_detail: '圆筒形尊，口圆外侈，颈部内收',
+    distinctive_features: ['"宅兹中国"最早实物证据','122字册命铭文','西周早期器型代表'],
+    patterns_structured: { main: ['饕餮纹 — 腹身'], ground: ['云雷纹 — 底纹'] },
+    inscription: { has: true, text: '惟王初壅，宅兹中或（国）...', char_count: 122, summary: '成王五年册命铭文，含"宅兹中国"四字——"中国"二字最早出处（前1038年）', stage: '西周早期金文' },
+    purpose: { primary: '祭祀/册命礼器', context: '何受成王册命而铸，纪念王城营建', user_class: '贵族何' },
+    craft: { primary: '范铸法', details: '西周早期典型风格，颈腹纹饰精整', achievements: '铭文史料价值超越器物工艺本身' },
+    rarity_level: '国宝',
+    scholarly_status: '"中国"最早文字记录，先秦史、语言学研究必引器物，2002年首批禁止出境',
+    provenance_timeline: [{year:1963,event:'陕西宝鸡贾村农民取土偶然发现'},{year:1965,event:'宝鸡博物馆入藏'},{year:1975,event:'唐兰先生释读出"宅兹中国"，震动学界'}],
+    related_artifacts: ['利簋','大盂鼎','班簋'],
+    data_sources: ['宝鸡青铜器博物院','唐兰《何尊铭文解释》1976']
+  },
+};
+
+function getRarityClass(level) {
+  if (level === '国宝') return 'rarity-treasure';
+  if (level === '一级') return 'rarity-first';
+  if (level === '二级') return 'rarity-second';
+  return '';
+}
+
+function getSilhouetteFor(form_subtype) {
+  const map = {
+    '方鼎': 'fangding', '圆鼎': 'yuanding', '簋': 'gui', '尊': 'fang_zun',
+    '方尊': 'fang_zun', '鸮尊': 'xiao_zun', '剑': 'yuewang_jian',
+    '编钟': 'bianzhong', '灯': 'changxin_gongdeng', '壶': 'fanghu',
+    '方壶': 'fanghu', '盘': 'pan',
+  };
+  return map[form_subtype] || 'fangding';
+}
+
+function renderArtifact(data) {
+  const isCollected = window.CollectionState && window.CollectionState.isCollected(data.id);
+  const rarityClass = getRarityClass(data.rarity_level);
+  const silhouette = getSilhouetteFor(data.form_subtype);
+  const inscChars = data.inscription.text ? data.inscription.text.split('') : [];
+
+  const html = `
+  <!-- Hero -->
+  <div class="artifact-hero">
+    <div class="page-container" style="position:relative; z-index:1;">
+      <div style="display:flex; gap:40px; align-items:flex-start;">
+        <!-- Image box -->
+        <div>
+          <div class="artifact-image-box ${data.rarity_level==='国宝'?'treasure':''}">
+            ${data.rarity_level==='国宝' ? '<div class="rarity-badge">国之重器</div>' : ''}
+            <img id="artifact-img" class="silhouette-img"
+              src="../../assets/silhouettes/${silhouette}.svg"
+              onerror="this.style.display='none'; this.parentNode.innerHTML+='<div style=\\'font-size:64px;color:rgba(255,255,255,.3)\\'>🏺</div>'"
+              alt="${data.name_zh}">
+          </div>
+          <div class="view-toggle">
+            <button class="view-btn active" onclick="switchView('silhouette')">线稿</button>
+            <button class="view-btn" onclick="switchView('photo')">实景</button>
+          </div>
+        </div>
+
+        <!-- Meta -->
+        <div style="flex:1; color:white;">
+          <div style="display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap;">
+            ${data.rarity_level==='国宝' ? '<span class="chop" style="border-color:var(--accent-gold); color:var(--accent-gold);">国之重器</span>' : ''}
+            <span class="chop" style="border-color:rgba(255,255,255,.3); color:rgba(255,255,255,.6);">${data.dynasty}·${data.period}</span>
+            <span class="chop" style="border-color:rgba(255,255,255,.3); color:rgba(255,255,255,.6);">${data.form_subtype || data.type}</span>
+            <span class="chop" style="border-color:rgba(255,255,255,.3); color:rgba(255,255,255,.6);">${data.current_museum}</span>
+          </div>
+          <h1 style="font-size:40px; font-weight:700; margin-bottom:8px;">${data.name_zh}</h1>
+          <div style="font-size:16px; color:rgba(255,255,255,.6); margin-bottom:4px;">${data.name_pinyin || ''}</div>
+          ${(data.name_alt||[]).length > 0 ? `<div style="font-size:13px; color:rgba(255,255,255,.4);">别名：${data.name_alt.join(' / ')}</div>` : ''}
+
+          <div style="display:flex; gap:24px; margin-top:20px; flex-wrap:wrap;">
+            ${data.size.height_cm ? `<div><div class="field-label" style="color:rgba(255,255,255,.4);">通高</div><div style="font-size:20px; font-weight:700; color:white;">${data.size.height_cm} cm</div></div>` : ''}
+            ${data.size.weight_kg ? `<div><div class="field-label" style="color:rgba(255,255,255,.4);">重量</div><div style="font-size:20px; font-weight:700; color:white;">${data.size.weight_kg} kg</div></div>` : ''}
+            <div><div class="field-label" style="color:rgba(255,255,255,.4);">铸造</div><div style="font-size:16px; color:white;">${data.approx_year}</div></div>
+          </div>
+
+          <div style="margin-top:20px;">
+            <button id="collect-btn" onclick="toggleCollect('${data.id}')"
+              style="padding:10px 24px; border-radius:6px; font-size:14px; cursor:pointer; font-family:inherit; transition:all .2s;
+                     ${isCollected ? 'background:var(--accent-bronze); color:white; border:2px solid var(--accent-bronze);' : 'background:transparent; color:white; border:2px solid rgba(255,255,255,.5);'}">
+              ${isCollected ? '✓ 已收藏' : '+ 加入收藏'}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-container" style="padding:32px 24px;">
+    <div style="display:grid; grid-template-columns:2fr 1fr; gap:24px;">
+      <div class="dim-accordion">
+
+        <!-- 1. 基本信息 -->
+        <div class="dim-card" style="margin-bottom:16px;">
+          <div class="dim-card-title">① 基本信息</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px;">
+            <div><div class="field-label">朝代</div><div class="field-value">${data.dynasty}</div></div>
+            <div><div class="field-label">分期</div><div class="field-value">${data.period}</div></div>
+            <div><div class="field-label">器型</div><div class="field-value">${data.form_subtype || data.type}</div></div>
+            <div><div class="field-label">通高</div><div class="field-value">${data.size.height_cm || '—'} cm</div></div>
+            <div><div class="field-label">重量</div><div class="field-value">${data.size.weight_kg || '—'} kg</div></div>
+            <div><div class="field-label">馆藏</div><div class="field-value">${data.current_museum}</div></div>
+          </div>
+        </div>
+
+        <!-- 2. 出土信息 -->
+        <details class="dim-card" style="margin-bottom:16px;" open>
+          <summary>② 出土信息</summary>
+          <div style="padding-top:12px;">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+              <div><div class="field-label">出土年份</div><div class="field-value">${data.excavation.year} 年</div></div>
+              <div><div class="field-label">出土地点</div><div class="field-value">${data.excavation.site}</div></div>
+              <div><div class="field-label">古国归属</div><div class="field-value">${data.excavation.ancient_state}</div></div>
+              <div><div class="field-label">断代方法</div><div class="field-value">${data.excavation.dating_method}</div></div>
+            </div>
+            <div style="margin-top:10px; padding:10px; background:var(--bg-cream); border-radius:6px; font-size:13px; color:var(--text-muted);">
+              ${data.excavation.significance}
+            </div>
+          </div>
+        </details>
+
+        <!-- 3. 形制描述 -->
+        <details class="dim-card" style="margin-bottom:16px;" open>
+          <summary>③ 形制 · 工艺</summary>
+          <div style="padding-top:12px;">
+            <div style="font-size:13px; margin-bottom:12px;">${data.form_detail}</div>
+            <div style="margin-bottom:8px; font-size:12px; font-weight:600; color:var(--text-muted);">工艺特征：</div>
+            <div style="display:flex; gap:6px; flex-wrap:wrap;">
+              <span class="craft-chip" title="${data.craft.details}">${data.craft.primary}</span>
+              ${data.distinctive_features.map(f=>`<span class="craft-chip">${f}</span>`).join('')}
+            </div>
+            <div style="margin-top:10px; font-size:12px; color:var(--text-muted);">${data.craft.details}</div>
+          </div>
+        </details>
+
+        <!-- 4. 纹饰 -->
+        <details class="dim-card" style="margin-bottom:16px;" open>
+          <summary>④ 纹饰分析</summary>
+          <div style="padding-top:12px;">
+            ${Object.entries(data.patterns_structured).map(([layer, pats]) => `
+              <div style="margin-bottom:10px;">
+                <div class="field-label">${{main:'主纹',secondary:'辅纹',ground:'底纹',rim:'边纹'}[layer]||layer}</div>
+                <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:4px;">
+                  ${pats.map(p => {
+                    const slug = p.split('纹')[0].toLowerCase().replace(/[^a-z]/g,'');
+                    return `<span class="pattern-badge" data-pattern="${p}" onclick="highlightPattern('${p}')">
+                      <img src="../../assets/patterns/${slug}.svg" style="width:16px;height:16px;" onerror="this.style.display='none'">
+                      ${p}
+                    </span>`;
+                  }).join('')}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </details>
+
+        <!-- 5. 铭文 -->
+        <details class="dim-card" style="margin-bottom:16px;" ${data.inscription.has ? 'open' : ''}>
+          <summary>⑤ 铭文 · 金文 ${data.inscription.has ? `(${data.inscription.char_count}字)` : '(无铭)'}</summary>
+          <div style="padding-top:12px;">
+            ${data.inscription.has ? `
+              <div style="font-size:12px; color:var(--text-muted); margin-bottom:10px;">${data.inscription.stage}</div>
+              <div class="insc-grid" style="margin-bottom:12px;">
+                ${inscChars.slice(0,30).map(c => `
+                  <div class="insc-char recognized" style="position:relative;" title="${c}字 — 点击查看">
+                    ${c}
+                    <div class="insc-tooltip">${c}<br><span style="font-size:10px;color:#888;">点击进入释读</span></div>
+                  </div>
+                `).join('')}
+                ${data.inscription.char_count > 30 ? `<div class="insc-char" style="color:var(--text-muted);">…+${data.inscription.char_count-30}</div>` : ''}
+              </div>
+              <div style="font-size:13px; color:var(--text-ink); line-height:1.7; margin-bottom:10px;">${data.inscription.summary}</div>
+              <a href="inscription-reader.html?id=${data.id}" style="color:var(--accent-bronze); font-size:13px; text-decoration:none;">→ 进入铭文释读器</a>
+            ` : '<div style="color:var(--text-muted); font-size:13px;">此器无铭文记录</div>'}
+          </div>
+        </details>
+
+        <!-- 6. 用途 / 礼制 -->
+        <details class="dim-card" style="margin-bottom:16px;" open>
+          <summary>⑥ 用途 · 礼制</summary>
+          <div style="padding-top:12px;">
+            <div style="display:flex; gap:16px; margin-bottom:10px;">
+              <div><div class="field-label">主要用途</div><div class="field-value">${data.purpose.primary}</div></div>
+              <div><div class="field-label">使用者等级</div><div class="field-value">${data.purpose.user_class}</div></div>
+            </div>
+            <div style="font-size:13px; color:var(--text-muted); line-height:1.7;">${data.purpose.context}</div>
+            <div style="margin-top:10px;">
+              <a href="purpose-scene.html?form=${data.form_subtype}" style="color:var(--accent-bronze); font-size:13px; text-decoration:none;">→ 在礼制场景中归位</a>
+            </div>
+          </div>
+        </details>
+
+      </div>
+
+      <!-- Right column: scholarly + provenance + related -->
+      <div>
+        <!-- Scholarly status -->
+        <div class="dim-card" style="margin-bottom:16px;">
+          <div class="dim-card-title">⑦ 学术地位</div>
+          <div style="font-size:13px; line-height:1.7; color:var(--text-ink);">${data.scholarly_status}</div>
+        </div>
+
+        <!-- Provenance timeline -->
+        <div class="dim-card" style="margin-bottom:16px;">
+          <div class="dim-card-title">⑧ 流传年表</div>
+          <div style="position:relative; padding-left:16px; border-left:2px solid var(--border-light);">
+            ${data.provenance_timeline.map((ev, i) => `
+              <div style="margin-bottom:12px; position:relative;">
+                <div style="position:absolute; left:-21px; top:4px; width:8px; height:8px; border-radius:50%; background:${i===0?'var(--accent-red)':'var(--border-medium)'};"></div>
+                <div style="font-size:11px; color:var(--accent-bronze); font-weight:600;">${ev.year} 年</div>
+                <div style="font-size:12px; color:var(--text-ink);">${ev.event}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- Related artifacts -->
+        <div class="dim-card" style="margin-bottom:16px;">
+          <div class="dim-card-title">⑨ 相关器物</div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            ${(data.related_artifacts||[]).map(name => `
+              <div style="padding:8px; background:var(--bg-cream); border-radius:6px; font-size:13px; cursor:pointer; display:flex; align-items:center; gap:6px;" onclick="location.href='catalog.html?search=${encodeURIComponent(name)}'">
+                <span>🏺</span> ${name}
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- Data sources -->
+        <div class="dim-card" style="margin-bottom:16px;">
+          <div class="dim-card-title">⑩ 资料来源</div>
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            ${(data.data_sources||[]).map(src => `
+              <div style="font-size:11px; color:var(--text-muted); padding:4px 0; border-bottom:1px solid var(--border-light);">${src}</div>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- Caster link -->
+        <div class="dim-card">
+          <div class="dim-card-title">⑪ 铸主档案</div>
+          <a href="caster-profile.html" style="display:flex; align-items:center; gap:8px; color:var(--accent-bronze); text-decoration:none; font-size:13px;">
+            <span>👤</span> 查看相关铸主档案 →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>`;
+
+  document.getElementById('artifact-content').innerHTML = html;
+}
+
+function switchView(mode) {
+  document.querySelectorAll('.view-btn').forEach(b => b.classList.toggle('active', b.textContent.trim() === (mode==='silhouette'?'线稿':'实景')));
+  const img = document.getElementById('artifact-img');
+  if (!img) return;
+  if (mode === 'photo') {
+    img.style.filter = 'none';
+    img.style.opacity = '1';
+    img.style.background = 'transparent';
+  } else {
+    img.style.filter = 'invert(1)';
+    img.style.opacity = '0.8';
+  }
+}
+
+function toggleCollect(id) {
+  if (window.CollectionState) {
+    const now = window.CollectionState.isCollected(id);
+    if (!now) {
+      window.CollectionState.collect(id, { dynasty: '商' });
+    }
+  }
+  const btn = document.getElementById('collect-btn');
+  if (btn) {
+    btn.style.background = 'var(--accent-bronze)';
+    btn.style.color = 'white';
+    btn.textContent = '✓ 已收藏';
+  }
+}
+
+function highlightPattern(pattern) {
+  if (window.CrossDimWiring) {
+    document.dispatchEvent(new CustomEvent('pattern-focus', { detail: { pattern, triggered_by: 'artifact.pattern' } }));
+  }
+}
+
+// Load artifact based on URL param
+const params = new URLSearchParams(location.search);
+const artifactId = params.get('id') || 'houmuwu_ding';
+const artifact = MOCK_ARTIFACTS[artifactId] || MOCK_ARTIFACTS['houmuwu_ding'];
+
+document.addEventListener('DOMContentLoaded', function() {
+  renderArtifact(artifact);
+  document.title = `${artifact.name_zh} — MuseumCollect v3`;
+  // Emit era-focus for this artifact's dynasty
+  setTimeout(() => {
+    if (window.CrossDimWiring) window.CrossDimWiring.emitEra(artifact.dynasty, 'artifact.load');
+  }, 500);
+});
+</script>
+</body>
+</html>

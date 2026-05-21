@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>何尊·宅兹中国 — MuseumCollect v3</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/converged.css">
+<style>
+body { background: #0f0c08; }
+.scroll-container {
+  background: #0f0c08; min-height: 100vh;
+  display: flex; flex-direction: column;
+}
+.hero-section {
+  background: linear-gradient(180deg, #1a1208 0%, #0f0c08 100%);
+  padding: 80px 24px; text-align: center; position: relative;
+}
+.bronze-glow { text-shadow: 0 0 40px rgba(164,115,44,.6), 0 0 80px rgba(164,115,44,.3); }
+.scroll-content {
+  background: linear-gradient(90deg, #1a1208, #0f0c08 30%, #0f0c08 70%, #1a1208);
+  padding: 40px 0;
+}
+.char-reveal {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 48px; width: 80px; height: 80px; cursor: pointer;
+  position: relative; transition: all .3s; border-radius: 8px;
+  font-family: 'Noto Serif SC', serif;
+  color: rgba(164,115,44,.4); border: 1px solid rgba(164,115,44,.1);
+}
+.char-reveal.revealed { color: #d4a857; border-color: rgba(164,115,44,.4); }
+.char-reveal.key-char {
+  color: #fff; border-color: var(--accent-gold);
+  text-shadow: 0 0 20px rgba(212,168,87,.8);
+  box-shadow: 0 0 20px rgba(212,168,87,.3), inset 0 0 20px rgba(212,168,87,.05);
+}
+.char-reveal:hover { background: rgba(164,115,44,.1); }
+.char-panel {
+  background: rgba(255,255,255,.03); border: 1px solid rgba(164,115,44,.2);
+  border-radius: 12px; padding: 20px; transition: all .5s;
+}
+.progress-strip {
+  height: 2px; background: rgba(255,255,255,.05); position: relative; margin: 20px 0;
+}
+.progress-fill-gold {
+  height: 100%; background: linear-gradient(90deg, var(--accent-bronze), var(--accent-gold));
+  border-radius: 2px; transition: width 1s ease;
+}
+.payoff-text {
+  background: rgba(212,168,87,.08); border: 1px solid rgba(212,168,87,.3);
+  border-radius: 12px; padding: 28px; display: none; text-align: center;
+}
+.payoff-text.show { display: block; }
+</style>
+</head>
+<body>
+
+<nav class="top-nav" style="background:rgba(15,12,8,.96); border-bottom-color:rgba(164,115,44,.3);">
+  <a href="index.html" class="nav-logo" style="color:white;">器·<span>集</span></a>
+  <div class="nav-links">
+    <a href="catalog.html" class="nav-link" style="color:rgba(255,255,255,.5);">图鉴</a>
+    <a href="inscription-reader.html" class="nav-link" style="color:rgba(255,255,255,.5);">铭文</a>
+    <a href="me.html" class="nav-link" style="color:rgba(255,255,255,.5);">我的图鉴</a>
+  </div>
+</nav>
+
+<div class="scroll-container">
+  <!-- Hero -->
+  <div class="hero-section">
+    <div style="font-size:12px; color:rgba(164,115,44,.7); letter-spacing:.2em; text-transform:uppercase; margin-bottom:16px;">何尊 · 长卷专题 · 宝鸡青铜器博物院</div>
+    <h1 class="bronze-glow" style="font-size:64px; font-weight:700; color:#d4a857; margin-bottom:12px; line-height:1.1;">
+      宅兹中国
+    </h1>
+    <div style="font-size:18px; color:rgba(255,255,255,.6); margin-bottom:8px;">公元前 1038 年 · 西周成王五年</div>
+    <div style="font-size:14px; color:rgba(164,115,44,.7); margin-bottom:40px;">"中国"二字，第一次刻在青铜上</div>
+    <div style="font-size:13px; color:rgba(255,255,255,.4); max-width:500px; margin:0 auto; line-height:1.8;">
+      122 字铭文，一位叫"何"的贵族为纪念周成王的册命而铸。<br>
+      在那段文字里，"宅兹中国"的"中国"，意为"居此中央之邦"——<br>
+      这是已知最早的实物"中国"二字。
+    </div>
+  </div>
+
+  <!-- Context panels -->
+  <div style="max-width:800px; margin:0 auto; padding:0 24px 40px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:40px;">
+      <div class="char-panel">
+        <div style="font-size:11px; color:rgba(164,115,44,.7); margin-bottom:6px;">时间</div>
+        <div style="font-size:16px; font-weight:700; color:white;">前 1038 年</div>
+        <div style="font-size:11px; color:rgba(255,255,255,.4);">成王五年，营建成周洛邑</div>
+      </div>
+      <div class="char-panel">
+        <div style="font-size:11px; color:rgba(164,115,44,.7); margin-bottom:6px;">出土</div>
+        <div style="font-size:16px; font-weight:700; color:white;">1963年宝鸡</div>
+        <div style="font-size:11px; color:rgba(255,255,255,.4);">陕西宝鸡贾村，农民取土发现</div>
+      </div>
+      <div class="char-panel">
+        <div style="font-size:11px; color:rgba(164,115,44,.7); margin-bottom:6px;">发现</div>
+        <div style="font-size:16px; font-weight:700; color:white;">1975年释读</div>
+        <div style="font-size:11px; color:rgba(255,255,255,.4);">唐兰先生认出"宅兹中国"，震动学界</div>
+      </div>
+    </div>
+
+    <!-- Scroll reveal section -->
+    <div style="margin-bottom:32px;">
+      <div style="font-size:18px; font-weight:700; color:white; margin-bottom:8px;">逐字释读</div>
+      <div style="font-size:12px; color:rgba(255,255,255,.4); margin-bottom:16px;">点击每个字逐步揭开 122 字铭文 · 金色字为关键词</div>
+      <!-- Progress -->
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:16px;">
+        <span style="font-size:11px; color:rgba(255,255,255,.4);">进度</span>
+        <div class="progress-strip" style="flex:1;">
+          <div class="progress-fill-gold" id="read-progress" style="width:0%;"></div>
+        </div>
+        <span id="read-count" style="font-size:11px; color:rgba(164,115,44,.7);">0/122</span>
+      </div>
+
+      <!-- Character grid -->
+      <div id="char-scroll" style="display:flex; flex-wrap:wrap; gap:6px; justify-content:flex-start;"></div>
+    </div>
+
+    <!-- Key passage highlight -->
+    <div style="margin-bottom:32px; padding:28px; background:rgba(164,115,44,.06); border:1px solid rgba(164,115,44,.25); border-radius:16px;">
+      <div style="font-size:11px; color:rgba(164,115,44,.7); letter-spacing:.15em; text-transform:uppercase; margin-bottom:12px;">核心段落</div>
+      <div style="display:flex; gap:8px; align-items:center; justify-content:center; margin-bottom:16px; flex-wrap:wrap;">
+        <div class="char-reveal revealed" style="font-size:36px; width:60px; height:60px;">宅</div>
+        <div class="char-reveal revealed" style="font-size:36px; width:60px; height:60px;">兹</div>
+        <div class="char-reveal key-char" style="font-size:36px; width:60px; height:60px;">中</div>
+        <div class="char-reveal key-char" style="font-size:36px; width:60px; height:60px;">或</div>
+      </div>
+      <div style="text-align:center; font-size:13px; color:rgba(255,255,255,.7); line-height:1.8;">
+        <strong style="color:#d4a857;">宅</strong>（居住）<strong style="color:#d4a857;">兹</strong>（此处）<strong style="color:#d4a857;">中</strong><strong style="color:#d4a857;">或</strong>（中央之邦/中国）
+      </div>
+      <div id="china-explanation" style="margin-top:20px; padding:16px; background:rgba(0,0,0,.3); border-radius:8px; display:none;">
+        <div style="font-size:15px; font-weight:700; color:#d4a857; margin-bottom:8px;">"中国"在此处的含义</div>
+        <div style="font-size:13px; color:rgba(255,255,255,.75); line-height:1.8;">
+          "或"即"国"字的早期写法（口 + 戈，意为以武器守卫城邑）。<br>
+          "中国"在西周语境中意为"天下之中央地带"，指周王都城成周（今洛阳）附近。<br>
+          这不是"中国"作为国家名称的用法，而是"居于天下中央"的地理表述。<br>
+          <strong style="color:#d4a857;">这是"中国"二字在目前已知考古文物中的最早出处。</strong>
+        </div>
+        <div style="margin-top:12px; font-size:12px; color:rgba(255,255,255,.4); font-style:italic;">
+          ——唐兰，《西周青铜器铭文分代史征》，1986
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:12px;">
+        <button onclick="toggleChinaExplanation()" id="explain-btn"
+          style="padding:8px 20px; border:1px solid rgba(164,115,44,.5); border-radius:20px; background:transparent; color:rgba(164,115,44,.8); font-size:12px; cursor:pointer; font-family:inherit;">
+          解读"中国"一词的含义
+        </button>
+      </div>
+    </div>
+
+    <!-- Full text in segments -->
+    <div style="margin-bottom:32px;">
+      <div style="font-size:16px; font-weight:700; color:white; margin-bottom:16px;">铭文全文（分段释义）</div>
+      <div style="display:flex; flex-direction:column; gap:16px;" id="segments-container"></div>
+    </div>
+
+    <!-- Payoff text -->
+    <div class="payoff-text" id="payoff" style="display:none;">
+      <div style="font-size:28px; margin-bottom:12px; color:#d4a857;">✦</div>
+      <div style="font-size:18px; font-weight:700; color:white; margin-bottom:12px;">
+        您刚读完了西周王直接表达王权的一段册命
+      </div>
+      <div style="font-size:14px; color:rgba(255,255,255,.65); line-height:1.8; max-width:480px; margin:0 auto;">
+        这是"中国"这个词第一次落在青铜上。<br>
+        公元前 1038 年，一个叫"何"的贵族铸下了这件铜尊，<br>
+        3000 年后，这四个字从泥土中重新出现在我们眼前。
+      </div>
+      <div style="margin-top:20px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <a href="artifact.html?id=he_zun" style="padding:10px 24px; background:var(--accent-bronze); color:white; border-radius:6px; font-size:13px; text-decoration:none;">查看何尊详情</a>
+        <a href="me.html" style="padding:10px 24px; border:1px solid rgba(255,255,255,.3); color:white; border-radius:6px; font-size:13px; text-decoration:none;">称号已解锁：宅兹中国见证者</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const FULL_TEXT = '惟王初壅宅兹中或王诞降二方民亦惟其叀王恤王作邑成周惟四月丙戌王诰宗小子于京室曰昔在尔考公氏有勋于天彻命今余惟肇乃政于宅兹中国自之乂民鸣呼尔有唯小子无识视于公氏有勋于天彻命今余其越文王勋亦有若成立勤大命配皇天彻命今余一人唯恭德裕天训我不敢僭在位王若曰尔有虽小子无识视余旁惟乃考公氏有勋';
+
+const KEY_CHARS = new Set(['中','或','宅','兹','王','命','天','成']);
+const CASTER_CHARS = new Set(['何','王','周','成']);
+
+const SEGMENTS = [
+  {
+    text: '惟王初壅，宅兹中或（国）。',
+    modern: '当初，周王建立了洛邑，居此中央之邦（中国）。',
+    note: '★ "宅兹中或（国）"——"中国"二字最早实物出处，前1038年',
+  },
+  {
+    text: '王诞降二方民，亦惟其叀王恤。',
+    modern: '周王招降了各方民众，王出于对民众的关怀……',
+    note: '描述成王建立成周，安抚四方之民的过程',
+  },
+  {
+    text: '王作邑成周，惟四月丙戌，王诰宗小子于京室。',
+    modern: '成王营建成周城邑，在四月丙戌日，王在京室（宗庙）告诫宗族子弟。',
+    note: '具体时间："惟四月丙戌"——西周早期历法纪年证据',
+  },
+  {
+    text: '曰：昔在尔考公氏，有勋于天彻命。',
+    modern: '王说：从前你的父亲公氏，对上天的命令有功勋。',
+    note: '周王追述"何"的父亲公氏的功绩',
+  },
+  {
+    text: '今余惟肇乃政于宅兹中国，自之乂民。',
+    modern: '如今我（成王）开始处理政事，居于此中国（中央之邦），以此治理民众。',
+    note: '★ 第二次出现"中国"——这是整篇铭文的核心表达',
+  },
+  {
+    text: '（赐命语）今余其越文王勋，亦有若成立勤大命，配皇天彻命，今余一人唯恭德裕天。',
+    modern: '如今我要效法文王的功勋，使成王建立的伟大王命得以配合皇天的命令，我将以恭谦之德回应上天。',
+    note: '成王表达继承文王遗志、恭敬上天的决心',
+  },
+];
+
+let readCount = 0;
+const totalChars = FULL_TEXT.length;
+let revealed = new Set();
+
+function buildCharScroll() {
+  const container = document.getElementById('char-scroll');
+  FULL_TEXT.split('').forEach((c, i) => {
+    const el = document.createElement('div');
+    el.className = 'char-reveal';
+    el.textContent = c;
+    el.dataset.index = i;
+    el.dataset.char = c;
+    el.addEventListener('click', () => revealChar(el, c, i));
+    container.appendChild(el);
+  });
+}
+
+function revealChar(el, c, i) {
+  if (revealed.has(i)) return;
+  revealed.add(i);
+  readCount++;
+
+  if (KEY_CHARS.has(c)) {
+    el.classList.add('key-char');
+  } else {
+    el.classList.add('revealed');
+  }
+
+  // Update progress
+  const pct = (readCount / totalChars * 100).toFixed(0);
+  document.getElementById('read-progress').style.width = pct + '%';
+  document.getElementById('read-count').textContent = `${readCount}/${totalChars}`;
+
+  // Show payoff at 60%+
+  if (readCount >= Math.floor(totalChars * 0.6)) {
+    document.getElementById('payoff').style.display = 'block';
+    document.getElementById('payoff').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function toggleChinaExplanation() {
+  const exp = document.getElementById('china-explanation');
+  const btn = document.getElementById('explain-btn');
+  if (exp.style.display === 'none') {
+    exp.style.display = 'block';
+    btn.textContent = '收起';
+  } else {
+    exp.style.display = 'none';
+    btn.textContent = '解读"中国"一词的含义';
+  }
+}
+
+function buildSegments() {
+  const container = document.getElementById('segments-container');
+  SEGMENTS.forEach((seg, i) => {
+    const el = document.createElement('div');
+    el.style.cssText = 'background:rgba(255,255,255,.03); border:1px solid rgba(164,115,44,.15); border-radius:10px; padding:16px; cursor:pointer; transition: all .2s;';
+    el.innerHTML = `
+      <div style="font-size:15px; color:#d4a857; margin-bottom:8px; font-family:'Noto Serif SC',serif;">${seg.text}</div>
+      <div style="font-size:13px; color:rgba(255,255,255,.6); line-height:1.6; margin-bottom:8px;">${seg.modern}</div>
+      <div style="font-size:11px; color:rgba(164,115,44,.6); font-style:italic;">${seg.note}</div>
+    `;
+    el.addEventListener('mouseenter', () => { el.style.borderColor = 'rgba(164,115,44,.4)'; });
+    el.addEventListener('mouseleave', () => { el.style.borderColor = 'rgba(164,115,44,.15)'; });
+    container.appendChild(el);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  buildCharScroll();
+  buildSegments();
+});
+</script>
+</body>
+</html>

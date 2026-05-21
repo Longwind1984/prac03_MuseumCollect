@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>铸主档案 — MuseumCollect v3</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<link rel="stylesheet" href="css/converged.css">
+<style>
+.caster-card {
+  background: white; border: 1px solid var(--border-light); border-radius: 12px;
+  padding: 20px; cursor: pointer; transition: all .25s;
+}
+.caster-card:hover, .caster-card.active { border-color: var(--accent-bronze); box-shadow: var(--shadow-md); }
+.biography-section h3 { font-size: 13px; font-weight: 600; color: var(--accent-bronze); margin-bottom: 6px; padding-bottom: 4px; border-bottom: 1px solid var(--border-light); }
+#force-graph { background: #f8f4ec; border-radius: 12px; border: 1px solid var(--border-light); }
+.node { cursor: pointer; }
+.node circle { transition: r .2s; }
+.node:hover circle { r: 12; }
+.node.active circle { stroke: var(--accent-gold); stroke-width: 3; }
+.link { stroke: #ccc; stroke-opacity: 0.6; }
+.node-label { font-size: 10px; pointer-events: none; font-family: 'Noto Serif SC', serif; }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo">器·<span>集</span></a>
+  <div class="nav-links">
+    <a href="catalog.html" class="nav-link">图鉴</a>
+    <a href="time-pillar.html" class="nav-link">时代柱</a>
+    <a href="geo-system.html" class="nav-link">地理</a>
+    <a href="pattern-tree.html" class="nav-link">纹饰树</a>
+    <a href="inscription-reader.html" class="nav-link">铭文</a>
+    <a href="purpose-scene.html" class="nav-link">礼制场景</a>
+    <a href="caster-profile.html" class="nav-link active">铸主</a>
+    <a href="me.html" class="nav-link">我的图鉴</a>
+    <a href="scan.html" class="nav-link">识别</a>
+  </div>
+  <button class="linkage-toggle"><div class="linkage-dot"></div><span class="linkage-label">穿越模式 ●</span></button>
+</nav>
+
+<div class="page-container" style="padding:24px;">
+  <div style="margin-bottom:20px;">
+    <h1 class="page-title" style="margin-bottom:4px;">铸主档案</h1>
+    <p class="page-subtitle">列传体人物卡 · D3 关系图谱 · 字→人→物 全链联动</p>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr 400px; gap:20px;">
+    <!-- Left: Graph + caster list -->
+    <div>
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+        <h2 style="font-size:16px; font-weight:700;">铸主关系图谱</h2>
+        <span style="font-size:12px; color:var(--text-muted);">节点大小 ∝ 传世器数量 · 金色=您已收藏</span>
+      </div>
+      <svg id="force-graph" width="100%" height="420"></svg>
+
+      <!-- Quick caster cards -->
+      <div style="margin-top:20px;">
+        <div style="font-size:14px; font-weight:600; margin-bottom:12px; color:var(--text-muted);">主要铸主列表</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;" id="caster-list"></div>
+      </div>
+    </div>
+
+    <!-- Right: Caster detail -->
+    <div id="caster-detail">
+      <div class="caster-card" style="text-align:center; padding:60px 20px; color:var(--text-muted);">
+        <div style="font-size:36px; margin-bottom:12px;">👤</div>
+        点击图谱节点或左侧列表<br>查看铸主列传
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/state.js"></script>
+<script src="js/cross-dim-wiring.js"></script>
+<script>
+const CASTERS = [
+  {
+    id: 'fuhao', name: '妇好', name_en: 'Fu Hao', era: '商·约1250-1200BC',
+    role: '殷王武丁王后，商代第一位有名女将', dynasty: '商',
+    bio_record: '甲骨卜辞800+条提及，主持祭祀；率军征讨土方/羌方，兵众1.3万；武丁为之作"商王武丁的祭妻卜辞"',
+    bio_arch: '1976年河南安阳殷墟M5妇好墓，随葬468件铜器，铜器总重约1625公斤',
+    artifacts: [{name:'妇好鸮尊', rarity:'国宝', collected:true},{name:'司母辛鼎', rarity:'国宝', collected:false},{name:'妇好方斝', rarity:'一级', collected:false},{name:'妇好觥', rarity:'一级', collected:false},{name:'妇好钺', rarity:'一级', collected:false}],
+    relations: [{type:'夫妻', target:'wuding'},{type:'母子', target:'zugeng'},{type:'母子', target:'zujia'}],
+    size: 8, collected_count: 1, x: 200, y: 140, color: '#4a5a3a'
+  },
+  {
+    id: 'wuding', name: '武丁王', name_en: 'King Wu Ding', era: '商·约1250-1192BC',
+    role: '商朝第23代君主，中兴之主', dynasty: '商',
+    bio_record: '甲骨文史料最丰富的商王。武功赫赫，征讨四方，任用妇好、傅说等贤才。',
+    bio_arch: '甲骨卜辞大量记载其占卜问事，在位59年，商代国力最盛时期',
+    artifacts: [{name:'后母戊鼎(祖庚/祖甲为母铸)', rarity:'国宝', collected:true}],
+    relations: [{type:'夫妻', target:'fuhao'},{type:'父子', target:'zugeng'},{type:'父子', target:'zujia'}],
+    size: 10, collected_count: 3, x: 150, y: 200, color: '#4a5a3a'
+  },
+  {
+    id: 'zugeng', name: '祖庚', name_en: 'Zu Geng', era: '商·约1192-1180BC',
+    role: '武丁之子，商朝君主', dynasty: '商',
+    bio_record: '武丁长子，与弟祖甲可能共同为母妇妌铸后母戊鼎',
+    bio_arch: '后母戊鼎铭文"后母戊"为其母妇妌庙号',
+    artifacts: [{name:'后母戊鼎(为母铸)', rarity:'国宝', collected:true}],
+    relations: [{type:'兄弟', target:'zujia'},{type:'父子-反', target:'wuding'}],
+    size: 5, collected_count: 1, x: 250, y: 250, color: '#4a5a3a'
+  },
+  {
+    id: 'zujia', name: '祖甲', name_en: 'Zu Jia', era: '商·约1180-1155BC',
+    role: '武丁之子，商朝君主', dynasty: '商',
+    bio_record: '武丁次子，与兄祖庚同为母妇妌铸器',
+    bio_arch: '甲骨文有"祖甲"卜辞，商晚期较重要的君主',
+    artifacts: [{name:'后母戊鼎(为母铸)', rarity:'国宝', collected:true}],
+    relations: [{type:'兄弟', target:'zugeng'},{type:'父子-反', target:'wuding'}],
+    size: 5, collected_count: 1, x: 300, y: 200, color: '#4a5a3a'
+  },
+  {
+    id: 'zhouwuwang', name: '周武王', name_en: 'King Wu of Zhou', era: '西周初·约1046BC',
+    role: '周朝开国君主，牧野之战克商', dynasty: '西周',
+    bio_record: '文王之子，联合诸侯，牧野之战灭商，建立西周。利簋铭文确证牧野之战年份为前1046年。',
+    bio_arch: '利簋以天文记事（岁星位置）精确到甲子日，是西周史学的重要依据',
+    artifacts: [{name:'利簋(下属"利"铸)', rarity:'国宝', collected:true}],
+    relations: [{type:'父子', target:'zhouchengwang'},{type:'父子', target:'zhoukangwang'}],
+    size: 9, collected_count: 1, x: 200, y: 80, color: '#a73a2a'
+  },
+  {
+    id: 'zhouchengwang', name: '周成王', name_en: 'King Cheng', era: '西周·约1042-1021BC',
+    role: '周朝第二代君主，周公辅政，制礼作乐', dynasty: '西周',
+    bio_record: '武王之子，幼年即位，周公旦摄政。成王五年营建成周（洛阳），何尊铭文"宅兹中国"即此时。',
+    bio_arch: '何尊铭文是成王时代最重要的铭文史料，班簋记载其分封诸侯',
+    artifacts: [{name:'何尊(何铸以纪册命)', rarity:'国宝', collected:true},{name:'班簋', rarity:'国宝', collected:false}],
+    relations: [{type:'父子-反', target:'zhouwuwang'},{type:'父子', target:'zhoukangwang'}],
+    size: 8, collected_count: 1, x: 300, y: 80, color: '#a73a2a'
+  },
+  {
+    id: 'maogong', name: '毛公（毛伯卫）', name_en: 'Mao Gong', era: '西周晚·约825BC',
+    role: '西周晚期周宣王卿士，主持国政', dynasty: '西周',
+    bio_record: '宣王中兴时期的重要大臣，毛公鼎499字铭文记载宣王命毛公辅政，是西周礼制最重要的文字史料。',
+    bio_arch: '毛公鼎1843年出土于陕西岐山，现藏台北故宫，毛公旅鼎传世亦知',
+    artifacts: [{name:'毛公鼎', rarity:'国宝', collected:true}],
+    relations: [{type:'君臣', target:'zhouxuanwang'}],
+    size: 7, collected_count: 1, x: 450, y: 100, color: '#a73a2a'
+  },
+  {
+    id: 'zhouxuanwang', name: '周宣王', name_en: 'King Xuan', era: '西周晚·828-782BC',
+    role: '西周晚期君主，宣王中兴', dynasty: '西周',
+    bio_record: '西周第11代君主，厉王之子。对外征伐玁狁，虢季子白盘记其战功。任用毛公等贤臣。',
+    bio_arch: '毛公鼎铭记宣王命毛公，虢季子白盘铭记宣王十二年大败玁狁',
+    artifacts: [{name:'毛公鼎(宣王命毛公)', rarity:'国宝', collected:true},{name:'虢季子白盘', rarity:'国宝', collected:false}],
+    relations: [{type:'君臣-反', target:'maogong'}],
+    size: 7, collected_count: 1, x: 380, y: 140, color: '#a73a2a'
+  },
+  {
+    id: 'zenghhouyi', name: '曾侯乙', name_en: 'Marquis Yi', era: '战国早·约433BC',
+    role: '战国早期曾国诸侯', dynasty: '战国',
+    bio_record: '战国早期曾国君主，死后随葬65件编钟（4421kg）及尊盘等珍品。墓在湖北随州擂鼓墩。',
+    bio_arch: '1978年发掘，出土文物包括目前世界现存最大最完整的先秦编钟，以及失蜡法铸造的尊盘绝品',
+    artifacts: [{name:'曾侯乙编钟', rarity:'国宝', collected:true},{name:'曾侯乙尊盘', rarity:'国宝', collected:true}],
+    relations: [],
+    size: 9, collected_count: 2, x: 350, y: 300, color: '#7a3a2a'
+  },
+  {
+    id: 'yuewanggj', name: '越王勾践', name_en: 'King Goujian', era: '春秋晚·约469BC',
+    role: '越国君主，卧薪尝胆，灭吴称霸', dynasty: '春秋',
+    bio_record: '会稽兵败被囚，卧薪尝胆20年，终灭吴国。越王勾践剑是其在位期间铸成。',
+    bio_arch: '越王勾践剑1965年出土于湖北江陵楚墓，可能是战争掠夺品或联姻赠礼。',
+    artifacts: [{name:'越王勾践剑', rarity:'国宝', collected:true}],
+    relations: [],
+    size: 7, collected_count: 1, x: 250, y: 350, color: '#2a2a3a'
+  },
+];
+
+const LINKS = [
+  {source:'fuhao', target:'wuding', label:'夫妻'},
+  {source:'wuding', target:'zugeng', label:'父子'},
+  {source:'wuding', target:'zujia', label:'父子'},
+  {source:'zugeng', target:'zujia', label:'兄弟'},
+  {source:'zhouwuwang', target:'zhouchengwang', label:'父子'},
+  {source:'zhouchengwang', target:'zhoukangwang', label:'父子'},
+  {source:'zhouxuanwang', target:'maogong', label:'君臣'},
+];
+
+let activeCasterId = null;
+
+function buildGraph() {
+  const el = document.getElementById('force-graph');
+  const W = el.clientWidth || 600;
+  const H = 420;
+
+  const svg = d3.select('#force-graph')
+    .attr('width', W).attr('height', H);
+  svg.selectAll('*').remove();
+
+  // Background
+  svg.append('rect').attr('width', W).attr('height', H).attr('fill', '#f8f4ec');
+
+  const sim = d3.forceSimulation(CASTERS)
+    .force('link', d3.forceLink(LINKS.map(l => ({
+      source: CASTERS.findIndex(c => c.id === l.source),
+      target: CASTERS.findIndex(c => c.id === l.target),
+      label: l.label
+    }))).distance(80).strength(0.3))
+    .force('charge', d3.forceManyBody().strength(-200))
+    .force('center', d3.forceCenter(W / 2, H / 2))
+    .force('collision', d3.forceCollide(30));
+
+  const indexedLinks = LINKS.map(l => ({
+    source: CASTERS.findIndex(c => c.id === l.source),
+    target: CASTERS.findIndex(c => c.id === l.target),
+    label: l.label
+  }));
+
+  const link = svg.append('g').selectAll('line')
+    .data(indexedLinks).enter().append('line')
+    .attr('class', 'link').attr('stroke-width', 1.5);
+
+  const linkLabel = svg.append('g').selectAll('text')
+    .data(indexedLinks).enter().append('text')
+    .attr('text-anchor', 'middle').attr('font-size', 9).attr('fill', '#aaa')
+    .text(d => d.label);
+
+  const node = svg.append('g').selectAll('.node')
+    .data(CASTERS).enter().append('g')
+    .attr('class', 'node').attr('id', d => `node-${d.id}`)
+    .call(d3.drag()
+      .on('start', (event, d) => { if (!event.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+      .on('drag', (event, d) => { d.fx = event.x; d.fy = event.y; })
+      .on('end', (event, d) => { if (!event.active) sim.alphaTarget(0); d.fx = null; d.fy = null; })
+    );
+
+  node.append('circle')
+    .attr('r', d => 6 + d.size)
+    .attr('fill', d => d.collected_count > 0 ? d.color : '#ccc')
+    .attr('opacity', d => d.collected_count > 0 ? 0.9 : 0.5)
+    .attr('stroke', d => d.collected_count > 0 ? 'rgba(212,168,87,.5)' : 'none')
+    .attr('stroke-width', 2);
+
+  node.append('text').attr('class', 'node-label')
+    .attr('text-anchor', 'middle').attr('dy', '3')
+    .attr('fill', 'white').attr('font-size', 9)
+    .text(d => d.name.slice(0, 2));
+
+  node.append('text')
+    .attr('x', 0).attr('dy', d => 6 + d.size + 12)
+    .attr('text-anchor', 'middle').attr('font-size', 10).attr('fill', '#555')
+    .text(d => d.name);
+
+  node.on('click', (event, d) => showCasterDetail(d.id));
+
+  sim.on('tick', () => {
+    link.attr('x1', d => CASTERS[d.source].x).attr('y1', d => CASTERS[d.source].y)
+        .attr('x2', d => CASTERS[d.target].x).attr('y2', d => CASTERS[d.target].y);
+    linkLabel.attr('x', d => (CASTERS[d.source].x + CASTERS[d.target].x) / 2)
+             .attr('y', d => (CASTERS[d.source].y + CASTERS[d.target].y) / 2 - 4);
+    node.attr('transform', d => `translate(${d.x},${d.y})`);
+  });
+}
+
+function buildCasterList() {
+  const list = document.getElementById('caster-list');
+  CASTERS.forEach(c => {
+    const el = document.createElement('div');
+    el.className = 'caster-card';
+    el.id = `card-${c.id}`;
+    el.innerHTML = `
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+        <div style="width:10px; height:10px; border-radius:50%; background:${c.collected_count > 0 ? c.color : '#ccc'};"></div>
+        <div style="font-size:13px; font-weight:600;">${c.name}</div>
+        ${c.collected_count > 0 ? `<span style="font-size:9px; background:#fdf0e0; color:var(--accent-bronze); padding:1px 5px; border-radius:10px;">${c.collected_count}件</span>` : ''}
+      </div>
+      <div style="font-size:11px; color:var(--text-muted);">${c.era}</div>
+    `;
+    el.addEventListener('click', () => showCasterDetail(c.id));
+    list.appendChild(el);
+  });
+}
+
+function showCasterDetail(casterId) {
+  activeCasterId = casterId;
+  const c = CASTERS.find(x => x.id === casterId);
+  if (!c) return;
+
+  document.querySelectorAll('.caster-card').forEach(el => el.classList.remove('active'));
+  document.getElementById(`card-${casterId}`)?.classList.add('active');
+  d3.selectAll('.node').classed('active', d => d.id === casterId);
+
+  const detail = document.getElementById('caster-detail');
+  detail.innerHTML = `
+    <div style="background:linear-gradient(135deg,#1a1510,#2a2018); color:white; border-radius:12px; padding:20px; margin-bottom:16px;">
+      <div style="font-size:11px; color:rgba(164,115,44,.7); margin-bottom:6px; letter-spacing:.1em;">${c.dynasty}代铸主</div>
+      <div style="font-size:24px; font-weight:700; margin-bottom:4px;">${c.name}</div>
+      <div style="font-size:14px; color:rgba(255,255,255,.7); margin-bottom:4px;">${c.name_en}</div>
+      <div style="font-size:12px; color:rgba(164,115,44,.7);">${c.era}</div>
+      <div style="font-size:12px; color:rgba(255,255,255,.6); margin-top:8px; line-height:1.6;">${c.role}</div>
+    </div>
+    <div class="biography-section" style="background:white; border:1px solid var(--border-light); border-radius:12px; padding:16px;">
+      <h3>▲ 历史记载</h3>
+      <div style="font-size:13px; color:var(--text-ink); line-height:1.7; margin-bottom:12px;">${c.bio_record}</div>
+      <h3>▲ 考古发现</h3>
+      <div style="font-size:13px; color:var(--text-ink); line-height:1.7; margin-bottom:12px;">${c.bio_arch}</div>
+      <h3>▲ 传世器物 (您已收藏 ${c.collected_count}/${c.artifacts.length})</h3>
+      <div style="display:flex; flex-direction:column; gap:6px; margin-bottom:12px;">
+        ${c.artifacts.map(a => `
+          <div style="display:flex; align-items:center; gap:8px; padding:6px 8px; border-radius:6px; background:${a.collected?'#fdf8f0':'#f5f5f5'}; cursor:pointer;" onclick="location.href='artifact.html?id=${a.name}'">
+            <div style="width:8px; height:8px; border-radius:50%; background:${a.collected?'var(--accent-bronze)':'#ccc'};"></div>
+            <span style="font-size:12px; flex:1;">${a.name}</span>
+            <span style="font-size:10px; color:${a.rarity==='国宝'?'var(--accent-red)':'var(--text-muted)'};">${a.rarity}</span>
+            ${a.collected ? '<span style="font-size:10px; color:var(--accent-bronze);">✓ 已收</span>' : ''}
+          </div>
+        `).join('')}
+      </div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <a href="inscription-reader.html" style="color:var(--accent-bronze); font-size:12px; text-decoration:none;">→ 查看相关铭文</a>
+        <a href="time-pillar.html" style="color:var(--accent-bronze); font-size:12px; text-decoration:none;">→ 时代柱定位</a>
+      </div>
+    </div>
+  `;
+
+  // Emit caster era focus
+  if (window.CrossDimWiring) {
+    window.CrossDimWiring.emitEra(c.dynasty, 'caster-profile.click');
+  }
+}
+
+// Listen for caster-focus events
+document.addEventListener('caster-focus', function(e) {
+  const { caster_ref } = e.detail || {};
+  if (!caster_ref) return;
+  const c = CASTERS.find(x => x.name.includes(caster_ref) || caster_ref.includes(x.name.slice(0,2)));
+  if (c) showCasterDetail(c.id);
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  buildGraph();
+  buildCasterList();
+  // Show first caster
+  showCasterDetail('fuhao');
+});
+</script>
+</body>
+</html>

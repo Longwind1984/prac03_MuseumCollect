@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>拍照识别 — MuseumCollect v3</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/converged.css">
+<style>
+.scan-zone {
+  border: 2px dashed var(--border-medium); border-radius: 16px;
+  min-height: 280px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; cursor: pointer;
+  transition: all .3s; background: white; position: relative;
+}
+.scan-zone:hover, .scan-zone.drag-over { border-color: var(--accent-bronze); background: #fdf8f0; }
+.scan-zone.has-image { border-style: solid; }
+.scan-progress { height: 4px; background: var(--border-light); border-radius: 2px; overflow: hidden; margin-bottom: 8px; }
+.scan-progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent-bronze), var(--accent-gold)); border-radius: 2px; transition: width .4s ease; }
+.result-card {
+  background: white; border-radius: 12px; border: 1px solid var(--border-light);
+  padding: 20px; display: none; transition: all .3s;
+}
+.result-card.show { display: block; }
+.result-card.treasure { border-color: var(--accent-gold); box-shadow: 0 0 20px rgba(212,168,87,.25); }
+.scan-step { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 12px; color: var(--text-muted); }
+.scan-step.active { color: var(--accent-bronze); }
+.scan-step.done { color: #22c55e; }
+.scan-step-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border-medium); flex-shrink: 0; }
+.scan-step.active .scan-step-dot { background: var(--accent-bronze); }
+.scan-step.done .scan-step-dot { background: #22c55e; }
+.quick-btn { padding: 10px 16px; border: 1px solid var(--border-medium); border-radius: 8px; cursor: pointer; transition: all .2s; text-align: center; background: white; }
+.quick-btn:hover { border-color: var(--accent-bronze); background: #fdf8f0; }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo">器·<span>集</span></a>
+  <div class="nav-links">
+    <a href="catalog.html" class="nav-link">图鉴</a>
+    <a href="time-pillar.html" class="nav-link">时代柱</a>
+    <a href="geo-system.html" class="nav-link">地理</a>
+    <a href="pattern-tree.html" class="nav-link">纹饰树</a>
+    <a href="inscription-reader.html" class="nav-link">铭文</a>
+    <a href="purpose-scene.html" class="nav-link">礼制场景</a>
+    <a href="caster-profile.html" class="nav-link">铸主</a>
+    <a href="me.html" class="nav-link">我的图鉴</a>
+    <a href="scan.html" class="nav-link active">识别</a>
+  </div>
+  <button class="linkage-toggle"><div class="linkage-dot"></div><span class="linkage-label">穿越模式 ●</span></button>
+</nav>
+
+<div class="page-container" style="padding:32px 24px; max-width:900px;">
+  <div style="margin-bottom:24px;">
+    <h1 class="page-title" style="margin-bottom:4px;">拍照识别</h1>
+    <p class="page-subtitle">上传照片 · 模拟 AI 识别流程 · 一件器物点亮七个维度</p>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+    <!-- Upload zone -->
+    <div>
+      <div class="scan-zone" id="scan-zone" onclick="document.getElementById('file-input').click()"
+        ondragover="event.preventDefault(); this.classList.add('drag-over')"
+        ondragleave="this.classList.remove('drag-over')"
+        ondrop="handleDrop(event)">
+        <div id="scan-placeholder" style="text-align:center; padding:20px;">
+          <div style="font-size:56px; margin-bottom:12px; opacity:.4;">📷</div>
+          <div style="font-size:15px; font-weight:600; color:var(--text-muted); margin-bottom:6px;">上传青铜器照片</div>
+          <div style="font-size:12px; color:var(--text-muted);">点击或拖拽 · JPG/PNG · 博物馆实拍效果最佳</div>
+        </div>
+        <img id="preview-img" style="display:none; max-height:240px; border-radius:8px; object-fit:contain;">
+      </div>
+
+      <input type="file" id="file-input" accept="image/*" style="display:none" onchange="handleFile(this.files[0])">
+
+      <!-- Recognition steps -->
+      <div id="scan-steps" style="background:white; border:1px solid var(--border-light); border-radius:10px; padding:16px; margin-top:16px; display:none;">
+        <div id="step-1" class="scan-step">
+          <div class="scan-step-dot"></div> 分析图像特征...
+        </div>
+        <div id="step-2" class="scan-step">
+          <div class="scan-step-dot"></div> 提取器型轮廓...
+        </div>
+        <div id="step-3" class="scan-step">
+          <div class="scan-step-dot"></div> 识别纹饰类型...
+        </div>
+        <div id="step-4" class="scan-step">
+          <div class="scan-step-dot"></div> 比对数据库 277 件...
+        </div>
+        <div id="step-5" class="scan-step">
+          <div class="scan-step-dot"></div> 确认断代与馆藏...
+        </div>
+        <!-- Progress bar -->
+        <div class="scan-progress" style="margin-top:12px;">
+          <div class="scan-progress-fill" id="progress-fill" style="width:0%;"></div>
+        </div>
+        <div id="progress-msg" style="font-size:11px; color:var(--text-muted); text-align:right;">0%</div>
+      </div>
+
+      <!-- Quick demo buttons -->
+      <div style="margin-top:16px;">
+        <div style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">快速演示（点击模拟识别）：</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <div class="quick-btn" onclick="demoScan('houmuwu_ding')">
+            <div style="font-size:18px;">🏺</div>
+            <div style="font-size:12px; font-weight:600; margin-top:4px;">后母戊鼎</div>
+            <div style="font-size:10px; color:var(--text-muted);">商·方鼎·国宝</div>
+          </div>
+          <div class="quick-btn" onclick="demoScan('siyang_fang_zun')">
+            <div style="font-size:18px;">🏺</div>
+            <div style="font-size:12px; font-weight:600; margin-top:4px;">四羊方尊</div>
+            <div style="font-size:10px; color:var(--text-muted);">商·方尊·国宝</div>
+          </div>
+          <div class="quick-btn" onclick="demoScan('he_zun')">
+            <div style="font-size:18px;">⭐</div>
+            <div style="font-size:12px; font-weight:600; margin-top:4px;">何尊</div>
+            <div style="font-size:10px; color:var(--text-muted);">西周·尊·宅兹中国</div>
+          </div>
+          <div class="quick-btn" onclick="demoScan('yuewang_goujian_jian')">
+            <div style="font-size:18px;">⚔</div>
+            <div style="font-size:12px; font-weight:600; margin-top:4px;">越王勾践剑</div>
+            <div style="font-size:10px; color:var(--text-muted);">春秋·剑·国宝</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Result panel -->
+    <div>
+      <div id="result-placeholder" style="background:white; border:1px solid var(--border-light); border-radius:12px; padding:48px; text-align:center; color:var(--text-muted);">
+        <div style="font-size:36px; margin-bottom:12px; opacity:.4;">🔍</div>
+        <div style="font-size:13px;">识别结果将在此处显示</div>
+      </div>
+
+      <!-- Result card -->
+      <div class="result-card" id="result-card">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- 7-dimension unlock animation -->
+      <div id="dim-unlock" style="display:none; margin-top:16px; background:white; border:1px solid var(--border-light); border-radius:12px; padding:16px;">
+        <div style="font-size:13px; font-weight:600; margin-bottom:12px; color:var(--accent-bronze);">一件器物，七个维度同时点亮</div>
+        <div id="dim-list" style="display:flex; flex-direction:column; gap:8px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/state.js"></script>
+<script src="js/mock-recognition.js"></script>
+<script src="js/cross-dim-wiring.js"></script>
+<script>
+const MOCK_ARTIFACTS = {
+  'houmuwu_ding': { name:'后母戊鼎', dynasty:'商', period:'商代晚期', form:'方鼎', rarity:'国宝', confidence:97, museum:'中国国家博物馆', patterns:['饕餮纹','夔龙纹','云雷纹'], size:'133cm / 832.84kg', inscription:{has:true, count:3}, craft:'范铸法·28块陶范', special:'现存最重商代青铜器' },
+  'siyang_fang_zun': { name:'四羊方尊', dynasty:'商', period:'商代晚期', form:'方尊', rarity:'国宝', confidence:94, museum:'中国国家博物馆', patterns:['饕餮纹','夔龙纹','凤鸟纹'], size:'58.3cm / 34.5kg', inscription:{has:false, count:0}, craft:'范铸法', special:'中国现存最大商代方尊' },
+  'he_zun': { name:'何尊', dynasty:'西周', period:'西周早期', form:'尊', rarity:'国宝', confidence:89, museum:'宝鸡青铜器博物院', patterns:['饕餮纹','云雷纹'], size:'38.8cm / 14.6kg', inscription:{has:true, count:122}, craft:'范铸法', special:'"宅兹中国"最早实物证据' },
+  'yuewang_goujian_jian': { name:'越王勾践剑', dynasty:'春秋', period:'春秋晚期', form:'剑', rarity:'国宝', confidence:96, museum:'湖北省博物馆', patterns:['菱形暗纹'], size:'55.7cm / 0.875kg', inscription:{has:true, count:8}, craft:'剑形铸造', special:'越王铭文剑·千年不锈' },
+  'zeng_houyi_bianzhong': { name:'曾侯乙编钟', dynasty:'战国', period:'战国早期', form:'编钟', rarity:'国宝', confidence:98, museum:'湖北省博物馆', patterns:['蟠虺纹'], size:'65件组套 / 4421kg', inscription:{has:true, count:2828}, craft:'范铸法·失蜡', special:'世界最大先秦编钟组' },
+};
+
+function handleFile(file) {
+  if (!file) return;
+  const img = document.getElementById('preview-img');
+  const placeholder = document.getElementById('scan-placeholder');
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    img.src = e.target.result;
+    img.style.display = 'block';
+    placeholder.style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+  startScan();
+}
+
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('scan-zone').classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) handleFile(file);
+}
+
+function startScan(artifactId) {
+  document.getElementById('scan-steps').style.display = 'block';
+  document.getElementById('result-placeholder').style.display = 'none';
+  document.getElementById('result-card').style.display = 'none';
+  document.getElementById('result-card').classList.remove('show');
+  document.getElementById('dim-unlock').style.display = 'none';
+
+  const steps = ['step-1','step-2','step-3','step-4','step-5'];
+  steps.forEach(s => {
+    const el = document.getElementById(s);
+    el.className = 'scan-step';
+    el.querySelector('.scan-step-dot').style.background = 'var(--border-medium)';
+  });
+
+  const delays = [500, 1200, 2000, 2800, 3500, 4200];
+  const progresses = [15, 35, 55, 75, 90, 100];
+
+  steps.forEach((stepId, i) => {
+    setTimeout(() => {
+      document.getElementById(stepId).className = 'scan-step active';
+      document.getElementById('progress-fill').style.width = progresses[i] + '%';
+      document.getElementById('progress-msg').textContent = progresses[i] + '%';
+    }, delays[i]);
+    setTimeout(() => {
+      document.getElementById(stepId).className = 'scan-step done';
+    }, delays[i + 1] - 100);
+  });
+
+  setTimeout(() => {
+    const id = artifactId || 'houmuwu_ding';
+    showResult(MOCK_ARTIFACTS[id] || MOCK_ARTIFACTS['houmuwu_ding']);
+  }, delays[5]);
+}
+
+function demoScan(artifactId) {
+  // Show fake image
+  const zone = document.getElementById('scan-zone');
+  const placeholder = document.getElementById('scan-placeholder');
+  const img = document.getElementById('preview-img');
+  placeholder.style.display = 'none';
+  img.src = '';
+  img.style.display = 'none';
+  zone.classList.add('has-image');
+  startScan(artifactId);
+}
+
+function showResult(artifact) {
+  const card = document.getElementById('result-card');
+  const isT = artifact.rarity === '国宝';
+  card.className = 'result-card show' + (isT ? ' treasure' : '');
+
+  card.innerHTML = `
+    <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+      ${isT ? '<span style="background:var(--accent-red); color:white; font-size:10px; padding:2px 6px; border-radius:3px; font-family:serif;">国之重器</span>' : ''}
+      <div style="font-size:11px; color:var(--text-muted);">识别置信度 ${artifact.confidence}%</div>
+    </div>
+    <div style="font-size:26px; font-weight:700; margin-bottom:4px;">${artifact.name}</div>
+    <div style="font-size:13px; color:var(--accent-bronze); margin-bottom:12px;">${artifact.dynasty} · ${artifact.period} · ${artifact.museum}</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px;">
+      <div><div class="field-label">器型</div><div class="field-value">${artifact.form}</div></div>
+      <div><div class="field-label">尺寸/重量</div><div class="field-value">${artifact.size}</div></div>
+      <div><div class="field-label">铭文</div><div class="field-value">${artifact.inscription.has ? artifact.inscription.count + '字' : '无铭'}</div></div>
+      <div><div class="field-label">工艺</div><div class="field-value">${artifact.craft}</div></div>
+    </div>
+    <div style="padding:10px; background:var(--bg-cream); border-radius:6px; font-size:12px; color:var(--text-muted); margin-bottom:12px;">
+      ${artifact.special}
+    </div>
+    <div style="margin-bottom:12px;">
+      <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">主要纹饰：</div>
+      <div style="display:flex; flex-wrap:wrap; gap:4px;">
+        ${artifact.patterns.map(p => `<span class="chop chop-bronze">${p}</span>`).join('')}
+      </div>
+    </div>
+    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+      <a href="artifact.html?id=${Object.keys(MOCK_ARTIFACTS).find(k => MOCK_ARTIFACTS[k] === artifact)}"
+        style="flex:1; padding:10px; background:var(--accent-bronze); color:white; border-radius:6px; text-align:center; font-size:13px; text-decoration:none;">
+        加入收藏 + 查看详情 →
+      </a>
+    </div>
+  `;
+
+  // Show 7-dimension unlock
+  const dimList = document.getElementById('dim-list');
+  const dims = [
+    {dim:'时代柱', result:`${artifact.dynasty}代 · 已点亮`, icon:'⏳'},
+    {dim:'地理系统', result:'出土遗址点亮', icon:'🗺'},
+    {dim:'纹饰树', result:artifact.patterns.join('·'), icon:'🌿'},
+    {dim:'形制图鉴', result:artifact.form, icon:'🏺'},
+    {dim:'铭文释读', result:artifact.inscription.has ? artifact.inscription.count+'字待释读' : '无铭', icon:'金'},
+    {dim:'礼制场景', result:'对应礼器位高亮', icon:'🛕'},
+    {dim:'稀有度', result:artifact.rarity, icon:'⭐'},
+  ];
+  dimList.innerHTML = dims.map(d => `
+    <div style="display:flex; align-items:center; gap:8px; padding:6px; border-radius:6px; animation: fadeInUp .4s ease forwards; opacity:0; background:var(--bg-cream);">
+      <div style="width:28px; height:28px; border-radius:6px; background:var(--accent-bronze); display:flex; align-items:center; justify-content:center; font-size:14px; color:white; flex-shrink:0;">${d.icon}</div>
+      <div style="font-size:12px; font-weight:600; color:var(--text-ink);">${d.dim}</div>
+      <div style="font-size:11px; color:var(--accent-bronze); margin-left:auto;">${d.result}</div>
+    </div>
+  `).join('');
+
+  document.getElementById('dim-unlock').style.display = 'block';
+
+  // Animate each dim card
+  dimList.querySelectorAll('div').forEach((el, i) => {
+    el.style.animation = `none`;
+    setTimeout(() => {
+      el.style.transition = 'opacity .4s, transform .4s';
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(8px)';
+      setTimeout(() => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      }, 50);
+    }, i * 150);
+  });
+
+  // Emit era-focus
+  if (window.CrossDimWiring) {
+    window.CrossDimWiring.emitEra(artifact.dynasty, 'scan.result');
+  }
+}
+
+// Listen for URL param
+const params = new URLSearchParams(location.search);
+if (params.get('demo')) {
+  document.addEventListener('DOMContentLoaded', () => demoScan(params.get('demo')));
+}
+</script>
+</body>
+</html>

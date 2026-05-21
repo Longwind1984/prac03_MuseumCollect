@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>图鉴 — MuseumCollect v3</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/converged.css">
+<style>
+.filter-chip {
+  padding: 4px 12px; border-radius: 20px; font-size: 12px; cursor: pointer;
+  border: 1px solid var(--border-medium); background: white; color: var(--text-muted);
+  transition: all .2s; white-space: nowrap;
+}
+.filter-chip.active { background: var(--accent-bronze); color: white; border-color: var(--accent-bronze); }
+.catalog-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px;
+}
+.art-card {
+  background: white; border-radius: 10px; border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm); cursor: pointer; transition: all .25s; overflow: hidden;
+  position: relative;
+}
+.art-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--accent-bronze); }
+.art-card.treasure { border: 1.5px solid var(--accent-gold); box-shadow: 0 0 8px rgba(212,168,87,.25); }
+.art-card.collected { background: #fffcf5; }
+.art-card-img { aspect-ratio: 1; background: var(--bg-cream); display: flex; align-items: center; justify-content: center; padding: 8px; }
+.art-card-img img { width: 70%; height: 70%; object-fit: contain; opacity: .75; }
+.art-card-body { padding: 10px; }
+.art-card-name { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+.art-card-meta { font-size: 10px; color: var(--text-muted); }
+.rarity-halo { position: absolute; top: 6px; right: 6px; font-size: 9px; padding: 1px 5px; border-radius: 3px; }
+.rarity-halo.treasure { background: var(--accent-red); color: white; }
+.collected-dot { position: absolute; top: 6px; left: 6px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent-bronze); }
+.pokedex-tree { display: flex; flex-direction: column; gap: 8px; }
+.form-parent { font-size: 16px; font-weight: 700; padding: 10px; background: var(--bg-cream); border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+.form-children { display: flex; flex-wrap: wrap; gap: 8px; padding: 8px 16px 8px 28px; }
+.form-child-chip { padding: 4px 10px; border-radius: 20px; font-size: 12px; border: 1px solid var(--border-light); background: white; cursor: pointer; transition: all .2s; }
+.form-child-chip:hover, .form-child-chip.active { border-color: var(--accent-bronze); color: var(--accent-bronze); }
+.search-input { width: 100%; padding: 10px 16px; border: 1px solid var(--border-medium); border-radius: 8px; font-family: inherit; font-size: 13px; background: white; outline: none; transition: border .2s; }
+.search-input:focus { border-color: var(--accent-bronze); }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo">器·<span>集</span></a>
+  <div class="nav-links">
+    <a href="catalog.html" class="nav-link active">图鉴</a>
+    <a href="time-pillar.html" class="nav-link">时代柱</a>
+    <a href="geo-system.html" class="nav-link">地理</a>
+    <a href="pattern-tree.html" class="nav-link">纹饰树</a>
+    <a href="inscription-reader.html" class="nav-link">铭文</a>
+    <a href="purpose-scene.html" class="nav-link">礼制场景</a>
+    <a href="caster-profile.html" class="nav-link">铸主</a>
+    <a href="me.html" class="nav-link">我的图鉴</a>
+    <a href="scan.html" class="nav-link">识别</a>
+  </div>
+  <button class="linkage-toggle"><div class="linkage-dot"></div><span class="linkage-label">穿越模式 ●</span></button>
+</nav>
+
+<div class="page-container" style="padding:24px;">
+  <div style="display:flex; align-items:baseline; gap:16px; margin-bottom:20px;">
+    <h1 class="page-title" style="margin:0;">青铜器图鉴</h1>
+    <span class="text-muted text-sm">277 件 · 已收藏 35 件</span>
+  </div>
+
+  <div class="tab-bar" style="margin-bottom:0;">
+    <button class="tab-btn active" onclick="switchTab('form')">形制谱系</button>
+    <button class="tab-btn" onclick="switchTab('era')">时代</button>
+    <button class="tab-btn" onclick="switchTab('geo')">地理</button>
+    <button class="tab-btn" onclick="switchTab('pattern')">纹饰</button>
+    <button class="tab-btn" onclick="switchTab('inscription')">铭文</button>
+  </div>
+
+  <div style="background:white; border:1px solid var(--border-light); border-top:none; padding:16px; border-radius:0 0 8px 8px; margin-bottom:24px;">
+    <!-- Search -->
+    <div style="margin-bottom:16px;">
+      <input type="text" class="search-input" id="search-input" placeholder="搜索器名、朝代、纹饰..." oninput="filterArtifacts()">
+    </div>
+
+    <!-- Form tab: Pokédex tree -->
+    <div id="tab-form" class="tab-panel active">
+      <div class="pokedex-tree" id="form-tree"></div>
+    </div>
+
+    <!-- Era tab -->
+    <div id="tab-era" class="tab-panel">
+      <div style="display:flex; flex-wrap:wrap; gap:6px;" id="era-filters"></div>
+    </div>
+
+    <!-- Geo tab -->
+    <div id="tab-geo" class="tab-panel">
+      <div style="display:flex; flex-wrap:wrap; gap:6px;" id="geo-filters"></div>
+    </div>
+
+    <!-- Pattern tab -->
+    <div id="tab-pattern" class="tab-panel">
+      <div style="display:flex; flex-wrap:wrap; gap:6px;" id="pattern-filters"></div>
+    </div>
+
+    <!-- Inscription tab -->
+    <div id="tab-inscription" class="tab-panel">
+      <div style="display:flex; flex-wrap:wrap; gap:6px;">
+        <span class="filter-chip" onclick="setFilter('inscription','has')">有铭文</span>
+        <span class="filter-chip" onclick="setFilter('inscription','long')">长铭(100+字)</span>
+        <span class="filter-chip" onclick="setFilter('inscription','none')">无铭</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grid -->
+  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+    <div class="text-muted text-sm" id="grid-count">显示 <strong id="count-num">50</strong> 件</div>
+    <div style="display:flex; gap:8px; align-items:center;">
+      <span class="filter-chip" onclick="setFilter('collected','yes')">仅已收藏</span>
+      <span class="filter-chip" onclick="setFilter('rarity','国宝')">仅国宝</span>
+      <span class="filter-chip active" id="filter-reset" onclick="resetFilters()">全部</span>
+    </div>
+  </div>
+
+  <div class="catalog-grid" id="catalog-grid"></div>
+</div>
+
+<script src="js/state.js"></script>
+<script src="js/cross-dim-wiring.js"></script>
+<script>
+// Mock catalog data (representative 50 items)
+const CATALOG_ITEMS = [
+  {id:'houmuwu_ding', name:'后母戊鼎', dynasty:'商', form:'方鼎', site:'殷墟', rarity:'国宝', patterns:['饕餮纹','夔龙纹'], inscription:'有', char_count:3},
+  {id:'siyang_fang_zun', name:'四羊方尊', dynasty:'商', form:'方尊', site:'湖南宁乡', rarity:'国宝', patterns:['饕餮纹','夔龙纹'], inscription:'有', char_count:0},
+  {id:'fuhao_owl_zun', name:'妇好鸮尊', dynasty:'商', form:'鸮尊', site:'殷墟', rarity:'国宝', patterns:['饕餮纹','云雷纹'], inscription:'有', char_count:2},
+  {id:'zilong_ding', name:'子龙鼎', dynasty:'商', form:'圆鼎', site:'殷墟', rarity:'国宝', patterns:['饕餮纹'], inscription:'有', char_count:3},
+  {id:'da_yu_ding', name:'大盂鼎', dynasty:'西周', form:'圆鼎', site:'陕西眉县', rarity:'国宝', patterns:['凤鸟纹'], inscription:'有', char_count:291},
+  {id:'he_zun', name:'何尊', dynasty:'西周', form:'尊', site:'陕西宝鸡', rarity:'国宝', patterns:['饕餮纹','云雷纹'], inscription:'有', char_count:122},
+  {id:'li_gui', name:'利簋', dynasty:'西周', form:'簋', site:'陕西临潼', rarity:'国宝', patterns:['凤鸟纹'], inscription:'有', char_count:32},
+  {id:'mao_gong_ding', name:'毛公鼎', dynasty:'西周', form:'圆鼎', site:'陕西岐山', rarity:'国宝', patterns:['重环纹','弦纹'], inscription:'有', char_count:499},
+  {id:'da_ke_ding', name:'大克鼎', dynasty:'西周', form:'圆鼎', site:'陕西扶风', rarity:'国宝', patterns:['窃曲纹','凤鸟纹'], inscription:'有', char_count:290},
+  {id:'san_shi_pan', name:'散氏盘', dynasty:'西周', form:'盘', site:'陕西宝鸡', rarity:'国宝', patterns:['重环纹'], inscription:'有', char_count:350},
+  {id:'xu_ji_zi_bai_pan', name:'虢季子白盘', dynasty:'西周', form:'盘', site:'陕西宝鸡', rarity:'国宝', patterns:['鱼纹'], inscription:'有', char_count:111},
+  {id:'da_sheng_pan', name:'大盛鼎', dynasty:'西周', form:'圆鼎', site:'陕西', rarity:'一级', patterns:['窃曲纹'], inscription:'有', char_count:50},
+  {id:'lian_he_fang_hu', name:'莲鹤方壶', dynasty:'春秋', form:'方壶', site:'河南新郑', rarity:'国宝', patterns:['莲瓣纹','蟠螭纹'], inscription:'无', char_count:0},
+  {id:'yuewang_goujian_jian', name:'越王勾践剑', dynasty:'春秋', form:'剑', site:'湖北江陵', rarity:'国宝', patterns:['菱形暗纹'], inscription:'有', char_count:8},
+  {id:'zeng_houyi_bianzhong', name:'曾侯乙编钟', dynasty:'战国', form:'编钟', site:'湖北随州', rarity:'国宝', patterns:['蟠虺纹'], inscription:'有', char_count:2828},
+  {id:'zeng_houyi_zunpan', name:'曾侯乙尊盘', dynasty:'战国', form:'尊盘', site:'湖北随州', rarity:'国宝', patterns:['透空蟠螭纹'], inscription:'有', char_count:12},
+  {id:'shang_yang_fang_sheng', name:'商鞅方升', dynasty:'战国', form:'量器', site:'传陕西', rarity:'国宝', patterns:[], inscription:'有', char_count:32},
+  {id:'changxin_gonglamp', name:'长信宫灯', dynasty:'西汉', form:'灯', site:'河北满城', rarity:'国宝', patterns:['写实人物'], inscription:'有', char_count:6},
+  {id:'cuo_jin_boshanluo', name:'错金博山炉', dynasty:'西汉', form:'炉', site:'河北满城', rarity:'国宝', patterns:['错金云气纹'], inscription:'有', char_count:0},
+  {id:'sanxingdui_bronze_standfigure', name:'三星堆大立人', dynasty:'商', form:'人像', site:'四川广汉三星堆', rarity:'国宝', patterns:[], inscription:'无', char_count:0},
+  {id:'sanxingdui_zongmu_mask', name:'三星堆纵目面具', dynasty:'商', form:'面具', site:'四川广汉三星堆', rarity:'国宝', patterns:[], inscription:'无', char_count:0},
+  {id:'erlitou_tong_jue', name:'二里头铜爵', dynasty:'夏', form:'爵', site:'河南洛阳二里头', rarity:'一级', patterns:['乳钉纹'], inscription:'无', char_count:0},
+  {id:'panlongcheng_fang_ding', name:'盘龙城方鼎', dynasty:'商', form:'方鼎', site:'湖北武汉盘龙城', rarity:'一级', patterns:['饕餮纹'], inscription:'无', char_count:0},
+  {id:'ban_gui', name:'班簋', dynasty:'西周', form:'簋', site:'传出土陕西', rarity:'国宝', patterns:['凤鸟纹'], inscription:'有', char_count:395},
+  {id:'ling_fang_yi', name:'令方彝', dynasty:'西周', form:'方彝', site:'传出土陕西', rarity:'一级', patterns:['饕餮纹','凤鸟纹'], inscription:'有', char_count:187},
+  {id:'nangong_hu', name:'南宫乎钟', dynasty:'西周', form:'编钟', site:'陕西扶风', rarity:'一级', patterns:['波曲纹'], inscription:'有', char_count:55},
+  {id:'met_he_ding', name:'铭文大方鼎(MET)', dynasty:'商', form:'方鼎', site:'传殷墟', rarity:'一级', patterns:['饕餮纹'], inscription:'有', char_count:4},
+  {id:'british_fang_yi', name:'大英方彝', dynasty:'商', form:'方彝', site:'传河南', rarity:'一级', patterns:['饕餮纹','夔龙纹'], inscription:'无', char_count:0},
+  {id:'zhongshan_wang_ding', name:'中山王方壶', dynasty:'战国', form:'方壶', site:'河北平山', rarity:'国宝', patterns:['几何纹'], inscription:'有', char_count:450},
+  {id:'yuewang_zhouji_jian', name:'越王州句剑', dynasty:'春秋', form:'剑', site:'传越国', rarity:'一级', patterns:['鸟篆铭文'], inscription:'有', char_count:6},
+  {id:'chu_wang_ding', name:'楚王熊章铜鼎', dynasty:'战国', form:'圆鼎', site:'湖南长沙', rarity:'一级', patterns:['蟠虺纹'], inscription:'有', char_count:10},
+  {id:'jin_hou_su_bian', name:'晋侯苏编钟', dynasty:'西周', form:'编钟', site:'山西曲沃晋侯墓地', rarity:'国宝', patterns:['重环纹'], inscription:'有', char_count:355},
+  {id:'guoji_zibo_pan', name:'虢仲盨', dynasty:'西周', form:'盨', site:'传陕西', rarity:'一级', patterns:['窃曲纹'], inscription:'有', char_count:30},
+];
+
+const FORM_TREE = {
+  '炊器': ['方鼎','圆鼎','鬲','甗'],
+  '食器': ['簋','簠','盨','敦','豆'],
+  '酒器': ['尊','方尊','鸮尊','爵','觚','壶','方壶','卣','觥','方彝'],
+  '水器': ['盘','匜','鉴'],
+  '乐器': ['编钟','铙','镈'],
+  '兵器': ['剑','戈','矛','钺'],
+  '其他': ['量器','炉','灯','人像','面具'],
+};
+
+let activeFilters = { form: null, era: null, geo: null, pattern: null, inscription: null, collected: null, rarity: null };
+let activeTab = 'form';
+
+function switchTab(tab) {
+  activeTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById(`tab-${tab}`).classList.add('active');
+}
+
+function setFilter(type, value) {
+  if (activeFilters[type] === value) {
+    activeFilters[type] = null;
+  } else {
+    activeFilters[type] = value;
+  }
+  renderGrid();
+}
+
+function resetFilters() {
+  activeFilters = { form: null, era: null, geo: null, pattern: null, inscription: null, collected: null, rarity: null };
+  document.getElementById('search-input').value = '';
+  renderGrid();
+}
+
+function filterArtifacts() { renderGrid(); }
+
+function matchesFilters(item) {
+  const search = document.getElementById('search-input').value.toLowerCase();
+  if (search && !item.name.includes(search) && !item.dynasty.includes(search) && !(item.form||'').includes(search)) return false;
+  if (activeFilters.form && item.form !== activeFilters.form) return false;
+  if (activeFilters.era && item.dynasty !== activeFilters.era) return false;
+  if (activeFilters.geo && item.site !== activeFilters.geo) return false;
+  if (activeFilters.pattern && !(item.patterns||[]).includes(activeFilters.pattern)) return false;
+  if (activeFilters.inscription === 'has' && item.inscription !== '有') return false;
+  if (activeFilters.inscription === 'long' && item.char_count < 100) return false;
+  if (activeFilters.inscription === 'none' && item.inscription !== '无') return false;
+  if (activeFilters.collected === 'yes') {
+    const collected = new Set(['houmuwu_ding','fuhao_owl_zun','siyang_fang_zun','da_yu_ding','he_zun','li_gui','mao_gong_ding','da_ke_ding','san_shi_pan','xu_ji_zi_bai_pan','lian_he_fang_hu','yuewang_goujian_jian','zeng_houyi_bianzhong','zeng_houyi_zunpan','changxin_gonglamp','cuo_jin_boshanluo','sanxingdui_bronze_standfigure','erlitou_tong_jue','panlongcheng_fang_ding','ban_gui','ling_fang_yi','nangong_hu','met_he_ding','british_fang_yi','zhongshan_wang_ding','shang_yang_fang_sheng','jin_hou_su_bian','chu_wang_ding','guoji_zibo_pan']);
+    if (!collected.has(item.id)) return false;
+  }
+  if (activeFilters.rarity === '国宝' && item.rarity !== '国宝') return false;
+  return true;
+}
+
+function getSilhouette(form) {
+  const m = {'方鼎':'fangding','圆鼎':'yuanding','簋':'gui','尊':'fang_zun','方尊':'fang_zun','鸮尊':'xiao_zun','剑':'yuewang_jian','编钟':'bianzhong','灯':'changxin_gongdeng','方壶':'fanghu','盘':'pan'};
+  return m[form] || 'fangding';
+}
+
+function renderGrid() {
+  const filtered = CATALOG_ITEMS.filter(matchesFilters);
+  document.getElementById('count-num').textContent = filtered.length;
+  const grid = document.getElementById('catalog-grid');
+  const collectedIds = new Set(['houmuwu_ding','fuhao_owl_zun','siyang_fang_zun','da_yu_ding','he_zun','li_gui','mao_gong_ding','da_ke_ding','san_shi_pan','xu_ji_zi_bai_pan','lian_he_fang_hu','yuewang_goujian_jian','zeng_houyi_bianzhong','zeng_houyi_zunpan','changxin_gonglamp','cuo_jin_boshanluo','sanxingdui_bronze_standfigure','erlitou_tong_jue','panlongcheng_fang_ding','ban_gui']);
+  grid.innerHTML = filtered.map(item => {
+    const silh = getSilhouette(item.form);
+    const isC = collectedIds.has(item.id);
+    const isT = item.rarity === '国宝';
+    return `
+    <div class="art-card ${isT?'treasure':''} ${isC?'collected':''}" onclick="location.href='artifact.html?id=${item.id}'">
+      ${isC ? '<div class="collected-dot"></div>' : ''}
+      ${isT ? '<div class="rarity-halo treasure">国宝</div>' : ''}
+      <div class="art-card-img">
+        <img src="../../assets/silhouettes/${silh}.svg" alt="${item.name}" onerror="this.style.display='none'; this.parentNode.innerHTML='<span style=\\'font-size:36px;opacity:.3;\\'>🏺</span>'">
+      </div>
+      <div class="art-card-body">
+        <div class="art-card-name">${item.name}</div>
+        <div class="art-card-meta">${item.dynasty} · ${item.form}</div>
+        <div class="art-card-meta" style="color:var(--text-light);">${item.site||''}</div>
+      </div>
+    </div>`;
+  }).join('') + (filtered.length < 277 ? '' : `
+    <div class="art-card" style="border-style:dashed; display:flex; align-items:center; justify-content:center; min-height:120px; color:var(--text-muted); font-size:12px;">
+      + ${277 - filtered.length} 件更多…
+    </div>`);
+}
+
+// Build Pokédex tree filter
+function buildFormTree() {
+  const tree = document.getElementById('form-tree');
+  Object.entries(FORM_TREE).forEach(([parent, children]) => {
+    const block = document.createElement('div');
+    block.innerHTML = `
+      <div class="form-parent" onclick="toggleFormGroup(this)">
+        <span>▶</span> ${parent}
+      </div>
+      <div class="form-children" style="display:none;">
+        ${children.map(c => `<span class="form-child-chip" onclick="setFilter('form','${c}'); event.stopPropagation();">${c}</span>`).join('')}
+      </div>`;
+    tree.appendChild(block);
+  });
+}
+
+function toggleFormGroup(el) {
+  const children = el.nextElementSibling;
+  const arrow = el.querySelector('span');
+  if (children.style.display === 'none') {
+    children.style.display = 'flex';
+    arrow.textContent = '▼';
+  } else {
+    children.style.display = 'none';
+    arrow.textContent = '▶';
+  }
+}
+
+// Build era filters
+function buildEraFilters() {
+  const eras = ['夏','商','西周','春秋','战国','秦','西汉','东汉'];
+  const colors = {'夏':'#6e4a2e','商':'#4a5a3a','西周':'#a73a2a','春秋':'#2a2a3a','战国':'#7a3a2a','秦':'#1a1a1a','西汉':'#b89046','东汉':'#9a7838'};
+  const container = document.getElementById('era-filters');
+  eras.forEach(era => {
+    const el = document.createElement('span');
+    el.className = 'filter-chip';
+    el.textContent = era;
+    el.style.borderLeftColor = colors[era];
+    el.style.borderLeftWidth = '3px';
+    el.addEventListener('click', () => {
+      container.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      setFilter('era', era);
+      if (window.CrossDimWiring) window.CrossDimWiring.emitEra(era, 'catalog.era-filter');
+    });
+    container.appendChild(el);
+  });
+}
+
+// Build pattern filters
+function buildPatternFilters() {
+  const patterns = ['饕餮纹','夔龙纹','云雷纹','凤鸟纹','蟠螭纹','窃曲纹','重环纹','蟠虺纹','错金银'];
+  const container = document.getElementById('pattern-filters');
+  patterns.forEach(p => {
+    const el = document.createElement('span');
+    el.className = 'filter-chip';
+    el.textContent = p;
+    el.addEventListener('click', () => {
+      container.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      setFilter('pattern', p);
+    });
+    container.appendChild(el);
+  });
+}
+
+// Build geo filters
+function buildGeoFilters() {
+  const sites = ['殷墟','周原','三星堆','随州','河南新郑','湖北江陵','陕西宝鸡','河北满城','陕西咸阳'];
+  const container = document.getElementById('geo-filters');
+  sites.forEach(s => {
+    const el = document.createElement('span');
+    el.className = 'filter-chip';
+    el.textContent = s;
+    el.addEventListener('click', () => {
+      container.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      setFilter('geo', s);
+    });
+    container.appendChild(el);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  buildFormTree();
+  buildEraFilters();
+  buildPatternFilters();
+  buildGeoFilters();
+  renderGrid();
+
+  // Listen for era-focus from other components (穿越模式)
+  document.addEventListener('era-focus', (e) => {
+    const { dynasty } = e.detail || {};
+    if (dynasty && window.CrossDimWiring && window.CrossDimWiring.isEnabled()) {
+      activeFilters.era = dynasty;
+      renderGrid();
+    }
+  });
+
+  // Handle URL params
+  const params = new URLSearchParams(location.search);
+  if (params.get('type')) { activeFilters.form = params.get('type'); renderGrid(); }
+  if (params.get('era')) { activeFilters.era = params.get('era'); renderGrid(); }
+});
+</script>
+</body>
+</html>

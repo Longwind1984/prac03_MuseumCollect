@@ -1,0 +1,265 @@
+/* MuseumCollect v3-converged — Shared CSS
+ * Visual: A's scholarly spine (serif, 米黄, 朱砂) + C's polish (sticky nav, cards) + B's flourishes (poetic captions)
+ * Bronze accent: #a4732c
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap');
+
+:root {
+  --bg-paper:       #f7f2e8;
+  --bg-cream:       #faf6ee;
+  --bg-dark:        #1a1510;
+  --text-ink:       #2a1f0e;
+  --text-muted:     #7a6a4a;
+  --text-light:     #a89060;
+  --accent-bronze:  #a4732c;
+  --accent-red:     #a73a2a;
+  --accent-gold:    #d4a857;
+  --border-light:   #ddd0b0;
+  --border-medium:  #c0a870;
+  --shadow-sm:      0 2px 8px rgba(42,31,14,0.08);
+  --shadow-md:      0 4px 16px rgba(42,31,14,0.12);
+  --shadow-lg:      0 8px 32px rgba(42,31,14,0.18);
+  --radius:         6px;
+  --radius-lg:      12px;
+
+  /* Dynasty colors */
+  --xia-color:    #6e4a2e;
+  --shang-color:  #4a5a3a;
+  --xizhou-color: #a73a2a;
+  --chunqiu-color:#2a2a3a;
+  --zhanguo-color:#7a3a2a;
+  --qin-color:    #1a1a1a;
+  --han-color:    #b89046;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Serif SC', '宋体', 'Source Han Serif', serif;
+  background: var(--bg-paper);
+  color: var(--text-ink);
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+/* ── Nav ─────────────────────────────────── */
+.top-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(247,242,232,0.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border-light);
+  padding: 0 24px;
+  display: flex; align-items: center; gap: 0;
+  height: 52px;
+}
+.nav-logo {
+  font-size: 18px; font-weight: 700; color: var(--text-ink);
+  letter-spacing: .05em; margin-right: 32px; text-decoration: none;
+  white-space: nowrap;
+}
+.nav-logo span { color: var(--accent-bronze); }
+.nav-links { display: flex; gap: 0; flex: 1; }
+.nav-link {
+  padding: 0 14px; height: 52px; display: flex; align-items: center;
+  font-size: 13px; color: var(--text-muted); text-decoration: none;
+  border-bottom: 2px solid transparent; transition: all .2s;
+  white-space: nowrap;
+}
+.nav-link:hover, .nav-link.active { color: var(--accent-bronze); border-bottom-color: var(--accent-bronze); }
+
+/* Linkage toggle */
+.linkage-toggle {
+  margin-left: auto; display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--text-muted); white-space: nowrap;
+  cursor: pointer; padding: 6px 12px; border-radius: 20px;
+  border: 1px solid var(--border-light); background: white; transition: all .2s;
+}
+.linkage-toggle:hover { border-color: var(--accent-bronze); }
+.linkage-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-bronze); transition: all .3s; }
+.linkage-dot.off { background: #ccc; }
+
+/* ── Layout helpers ─────────────────────── */
+.page-container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+.page-header { padding: 40px 0 24px; }
+.page-title { font-size: 28px; font-weight: 700; color: var(--text-ink); margin-bottom: 6px; }
+.page-subtitle { font-size: 14px; color: var(--text-muted); font-style: italic; }
+
+.section { margin-bottom: 48px; }
+.section-title {
+  font-size: 16px; font-weight: 600; color: var(--text-ink);
+  margin-bottom: 16px; padding-bottom: 8px;
+  border-bottom: 2px solid var(--accent-bronze);
+  display: flex; align-items: center; gap: 8px;
+}
+.section-title::before {
+  content: ''; display: block; width: 4px; height: 18px;
+  background: var(--accent-bronze); border-radius: 2px;
+}
+
+/* ── Cards ──────────────────────────────── */
+.card {
+  background: white; border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm); overflow: hidden; transition: all .25s;
+}
+.card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+
+.artifact-card { position: relative; cursor: pointer; }
+.artifact-card .card-img {
+  width: 100%; aspect-ratio: 1; background: var(--bg-cream);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.artifact-card .card-img svg { width: 70%; height: 70%; opacity: .7; }
+.artifact-card .card-body { padding: 12px; }
+.artifact-card .card-name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.artifact-card .card-meta { font-size: 11px; color: var(--text-muted); }
+.artifact-card .card-period { font-size: 11px; color: var(--accent-bronze); font-weight: 500; }
+
+/* Rarity halos */
+.rarity-treasure {
+  border: 2px solid var(--accent-gold) !important;
+  box-shadow: 0 0 12px rgba(212,168,87,.5), var(--shadow-sm) !important;
+}
+.rarity-treasure .rarity-badge {
+  position: absolute; top: 8px; right: 8px;
+  background: var(--accent-red); color: white;
+  font-size: 10px; padding: 2px 6px; border-radius: 3px;
+  font-family: 'Noto Serif SC', serif; letter-spacing: .05em;
+}
+.rarity-first {
+  border: 1.5px solid var(--accent-gold) !important;
+  box-shadow: 0 0 6px rgba(212,168,87,.3), var(--shadow-sm) !important;
+}
+.rarity-second { border: 1px solid #7a5a9a !important; }
+.rarity-collected { background: #fffbf0 !important; }
+
+/* ── Tabs ───────────────────────────────── */
+.tab-bar {
+  display: flex; gap: 4px; margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-light); padding-bottom: 0;
+}
+.tab-btn {
+  padding: 8px 16px; font-size: 13px; cursor: pointer;
+  border: none; background: none; color: var(--text-muted);
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  font-family: inherit; transition: all .2s;
+}
+.tab-btn.active { color: var(--accent-bronze); border-bottom-color: var(--accent-bronze); font-weight: 600; }
+.tab-btn:hover:not(.active) { color: var(--text-ink); }
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ── Chops / Tags ───────────────────────── */
+.chop {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 8px; border-radius: 3px; font-size: 11px;
+  border: 1px solid currentColor; font-family: 'Noto Serif SC', serif;
+}
+.chop-red { color: var(--accent-red); background: #fff5f3; }
+.chop-bronze { color: var(--accent-bronze); background: #fdf8f0; }
+.chop-gray { color: var(--text-muted); background: #f5f5f5; }
+
+/* ── Pattern icons ──────────────────────── */
+.pattern-icon {
+  width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border-light); border-radius: 4px; background: white;
+  cursor: pointer; transition: all .2s; overflow: hidden;
+}
+.pattern-icon:hover { border-color: var(--accent-bronze); background: var(--bg-cream); }
+.pattern-icon img, .pattern-icon svg { width: 24px; height: 24px; }
+
+/* ── Inscription characters ─────────────── */
+.insc-char {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; font-size: 20px; cursor: pointer;
+  border-radius: 4px; transition: all .2s; position: relative;
+  font-family: 'Noto Serif SC', serif; border: 1px solid transparent;
+}
+.insc-char:hover { background: var(--bg-cream); border-color: var(--accent-bronze); }
+.insc-char.recognized { color: var(--accent-bronze); }
+
+/* ── Poetic captions (B flourishes) ───── */
+.poetic-caption {
+  font-size: 13px; color: var(--text-muted); font-style: italic;
+  text-align: right; margin-top: 8px; letter-spacing: .03em;
+}
+
+/* ── Progress bars ──────────────────────── */
+.progress-bar { height: 6px; background: var(--border-light); border-radius: 3px; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--accent-bronze); border-radius: 3px; transition: width 1s ease; }
+
+/* ── Bus debug panel ────────────────────── */
+#bus-debug-panel {
+  position: fixed; bottom: 60px; right: 16px; width: 380px;
+  max-height: 220px; overflow-y: auto;
+  background: rgba(10,8,4,0.92); border: 1px solid var(--accent-bronze);
+  border-radius: var(--radius); font-family: monospace; font-size: 11px;
+  color: #ccc; padding: 8px; z-index: 9999; display: none;
+}
+#bus-debug-panel.visible { display: block; }
+.bus-log-item { padding: 2px 0; border-bottom: 1px solid rgba(255,255,255,.05); display: flex; gap: 6px; flex-wrap: wrap; }
+.bus-log-time { color: #888; }
+.bus-log-action.EMIT { color: #f90; }
+.bus-log-action.ON { color: #6cf; }
+.bus-log-name { color: #9f9; }
+.bus-log-payload { color: #ccc; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 200px; }
+
+#bus-debug-toggle {
+  position: fixed; bottom: 16px; right: 16px;
+  background: var(--bg-dark); color: var(--accent-bronze);
+  border: 1px solid var(--accent-bronze); border-radius: 20px;
+  padding: 4px 12px; font-size: 11px; cursor: pointer; z-index: 9999;
+  font-family: monospace;
+}
+
+/* ── Utility ────────────────────────────── */
+.hidden { display: none !important; }
+.flex { display: flex; }
+.items-center { align-items: center; }
+.gap-2 { gap: 8px; }
+.gap-4 { gap: 16px; }
+.mt-4 { margin-top: 16px; }
+.text-muted { color: var(--text-muted); }
+.text-sm { font-size: 13px; }
+.text-xs { font-size: 11px; }
+.font-bold { font-weight: 700; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.grid-6 { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+
+/* ── Artifact detail page ───────────────── */
+.artifact-hero {
+  background: linear-gradient(135deg, #1a1510 0%, #2a2018 100%);
+  color: white; padding: 48px 0; position: relative; overflow: hidden;
+}
+.artifact-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 60% 50%, rgba(164,115,44,.15) 0%, transparent 70%);
+}
+.field-label {
+  font-size: 11px; color: var(--text-muted); text-transform: uppercase;
+  letter-spacing: .08em; margin-bottom: 4px; font-family: 'Noto Sans SC', sans-serif;
+}
+.field-value { font-size: 14px; color: var(--text-ink); }
+
+.dim-card {
+  background: white; border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg); padding: 20px; box-shadow: var(--shadow-sm);
+}
+.dim-card-title {
+  font-size: 13px; font-weight: 600; color: var(--accent-bronze);
+  text-transform: uppercase; letter-spacing: .06em; margin-bottom: 12px;
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* ── Scroll helpers ─────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-paper); }
+::-webkit-scrollbar-thumb { background: var(--border-medium); border-radius: 3px; }

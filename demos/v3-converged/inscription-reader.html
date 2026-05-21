@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>铭文释读器 — MuseumCollect v3</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/converged.css">
+<style>
+.char-cell {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; font-size: 22px; cursor: pointer;
+  border-radius: 6px; transition: all .2s; position: relative;
+  border: 1px solid transparent; font-family: 'Noto Serif SC', serif;
+  user-select: none;
+}
+.char-cell.recognized { color: var(--accent-bronze); }
+.char-cell.highlighted { background: rgba(164,115,44,.15); border-color: var(--accent-bronze); transform: scale(1.15); z-index: 5; }
+.char-cell.caster-ref { color: var(--accent-red); text-decoration: underline dotted; }
+.char-cell:hover { background: var(--bg-cream); border-color: var(--border-medium); }
+.char-tooltip {
+  position: absolute; bottom: 110%; left: 50%; transform: translateX(-50%);
+  background: white; border: 1px solid var(--border-medium); border-radius: 8px;
+  padding: 10px 12px; min-width: 140px; z-index: 20;
+  box-shadow: var(--shadow-md); pointer-events: none;
+  opacity: 0; transition: opacity .15s; font-size: 12px; text-align: center;
+  white-space: nowrap;
+}
+.char-cell:hover .char-tooltip { opacity: 1; }
+.rank-display {
+  background: linear-gradient(135deg, #1a1510, #2a2018);
+  color: white; border-radius: 12px; padding: 20px;
+}
+.layer-btn {
+  padding: 6px 14px; border-radius: 20px; font-size: 12px; cursor: pointer;
+  border: 1px solid var(--border-medium); background: white; color: var(--text-muted); transition: all .2s;
+}
+.layer-btn.active { background: var(--accent-bronze); color: white; border-color: var(--accent-bronze); }
+.caster-minicard {
+  position: fixed; background: white; border: 1px solid var(--border-medium);
+  border-radius: 12px; padding: 16px; min-width: 240px; max-width: 280px;
+  box-shadow: var(--shadow-lg); z-index: 100; display: none;
+}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo">器·<span>集</span></a>
+  <div class="nav-links">
+    <a href="catalog.html" class="nav-link">图鉴</a>
+    <a href="time-pillar.html" class="nav-link">时代柱</a>
+    <a href="geo-system.html" class="nav-link">地理</a>
+    <a href="pattern-tree.html" class="nav-link">纹饰树</a>
+    <a href="inscription-reader.html" class="nav-link active">铭文</a>
+    <a href="purpose-scene.html" class="nav-link">礼制场景</a>
+    <a href="caster-profile.html" class="nav-link">铸主</a>
+    <a href="me.html" class="nav-link">我的图鉴</a>
+    <a href="scan.html" class="nav-link">识别</a>
+  </div>
+  <button class="linkage-toggle"><div class="linkage-dot"></div><span class="linkage-label">穿越模式 ●</span></button>
+</nav>
+
+<div class="page-container" style="padding:24px;">
+  <div style="display:grid; grid-template-columns:1fr 300px; gap:24px;">
+    <div>
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;">
+        <div>
+          <h1 class="page-title" style="margin-bottom:4px;">铭文释读器</h1>
+          <p class="page-subtitle">字字交互 · 段位积累 · 铸主联动</p>
+        </div>
+        <!-- Artifact selector -->
+        <div>
+          <select id="artifact-selector" onchange="loadInscription(this.value)"
+            style="padding:8px 12px; border:1px solid var(--border-medium); border-radius:6px; font-family:inherit; font-size:13px; background:white;">
+            <option value="he_zun">何尊 (122字)</option>
+            <option value="houmuwu_ding">后母戊鼎 (3字)</option>
+            <option value="mao_gong_ding">毛公鼎 (499字)</option>
+            <option value="da_yu_ding">大盂鼎 (291字)</option>
+            <option value="li_gui">利簋 (32字)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- View layer toggle -->
+      <div style="display:flex; gap:6px; margin-bottom:16px;">
+        <button class="layer-btn active" onclick="setLayer('rubbings')">拓片</button>
+        <button class="layer-btn" onclick="setLayer('modern')">释文</button>
+        <button class="layer-btn" onclick="setLayer('translation')">白话</button>
+      </div>
+
+      <!-- Inscription display -->
+      <div style="background:white; border:1px solid var(--border-light); border-radius:12px; padding:20px; margin-bottom:16px;">
+        <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:12px;">
+          <div id="inscription-title" style="font-size:18px; font-weight:700;"></div>
+          <div id="inscription-stats" style="font-size:12px; color:var(--text-muted);"></div>
+        </div>
+        <!-- Rubbings layer -->
+        <div id="layer-rubbings">
+          <div id="char-grid" style="line-height:2.2; letter-spacing:4px;"></div>
+        </div>
+        <!-- Modern layer -->
+        <div id="layer-modern" style="display:none;">
+          <div id="modern-text" style="font-size:15px; line-height:2; color:var(--text-ink); font-family:'Noto Serif SC',serif;"></div>
+        </div>
+        <!-- Translation layer -->
+        <div id="layer-translation" style="display:none;">
+          <div id="trans-text" style="font-size:14px; line-height:2; color:var(--text-ink);"></div>
+        </div>
+      </div>
+
+      <!-- He Zun special link -->
+      <div style="background:#fdf8f0; border:1px solid var(--border-medium); border-radius:8px; padding:14px; display:flex; align-items:center; gap:12px;">
+        <div style="font-size:28px;">⭐</div>
+        <div style="flex:1;">
+          <div style="font-size:13px; font-weight:600; margin-bottom:2px;">何尊"宅兹中国"长卷专题</div>
+          <div style="font-size:12px; color:var(--text-muted);">"中国"二字 3000 年前最早出处 · 逐字释读 122 字册命铭文</div>
+        </div>
+        <a href="inscription-special-hezun.html" style="padding:8px 16px; background:var(--accent-bronze); color:white; border-radius:6px; font-size:12px; text-decoration:none; white-space:nowrap;">进入长卷 →</a>
+      </div>
+    </div>
+
+    <!-- Right sidebar -->
+    <div>
+      <!-- Rank display -->
+      <div class="rank-display" style="margin-bottom:16px;">
+        <div style="font-size:11px; color:rgba(255,255,255,.5); margin-bottom:8px;">铭文段位</div>
+        <div style="font-size:28px; font-weight:700; color:var(--accent-gold); margin-bottom:4px;">入门</div>
+        <div style="font-size:12px; color:rgba(255,255,255,.6); margin-bottom:10px;">已识 85 字 · 跨 12 件器物</div>
+        <div style="background:rgba(255,255,255,.1); height:6px; border-radius:3px; overflow:hidden; margin-bottom:4px;">
+          <div style="height:100%; width:57%; background:var(--accent-gold); border-radius:3px;"></div>
+        </div>
+        <div style="font-size:11px; color:rgba(255,255,255,.4);">初窥→入门→一段 (85/150字)</div>
+      </div>
+
+      <!-- Recognized chars -->
+      <div class="dim-card" style="margin-bottom:16px;">
+        <div class="dim-card-title">本器识别</div>
+        <div id="session-recognized" style="font-size:12px; color:var(--text-muted);">点击字符开始识别</div>
+      </div>
+
+      <!-- Char detail panel -->
+      <div class="dim-card" id="char-detail">
+        <div class="dim-card-title">字义解读</div>
+        <div style="color:var(--text-muted); font-size:13px;">悬停或点击单字查看</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Caster mini card (floating) -->
+<div class="caster-minicard" id="caster-minicard">
+  <div id="caster-card-content"></div>
+  <button onclick="document.getElementById('caster-minicard').style.display='none'"
+    style="position:absolute; top:8px; right:8px; background:none; border:none; font-size:14px; cursor:pointer; color:#888;">✕</button>
+</div>
+
+<script src="js/state.js"></script>
+<script src="js/cross-dim-wiring.js"></script>
+<script>
+// Simplified Jinwen dictionary (200 high-frequency characters)
+const JINWEN_DICT = {
+  '后': { meaning: '王后、女君（后世"后"义）', radical: '口', caster_ref: null },
+  '母': { meaning: '母亲，妇女尊称', radical: '女', caster_ref: null },
+  '戊': { meaning: '天干第五位，此为庙号，商王武丁之妻妇妌庙号', radical: '戈', caster_ref: '妇好' },
+  '宅': { meaning: '居住、建立', radical: '宀', caster_ref: null },
+  '兹': { meaning: '此处、这里', radical: '艸', caster_ref: null },
+  '中': { meaning: '中央、居中，此为"中国"最早出处', radical: '丨', caster_ref: null },
+  '或': { meaning: '城邑、国家（即"国"字早期写法）', radical: '口', caster_ref: null },
+  '王': { meaning: '天子、最高统治者', radical: '王', caster_ref: '周成王' },
+  '周': { meaning: '周朝、周人', radical: '口', caster_ref: '周成王' },
+  '武': { meaning: '武王，文王之子，周朝开国君主', radical: '止', caster_ref: '周武王' },
+  '毛': { meaning: '毛公，西周晚期重臣', radical: '毛', caster_ref: '毛公' },
+  '公': { meaning: '公爵，诸侯等级之首', radical: '八', caster_ref: null },
+  '利': { meaning: '人名"利"，利簋铸主，周武王近臣', radical: '刀', caster_ref: '利' },
+  '何': { meaning: '人名"何"，何尊铸主，成王时贵族', radical: '人', caster_ref: '何' },
+  '妇': { meaning: '女性尊称，妇好之"妇"即贵族妇女称谓', radical: '女', caster_ref: '妇好' },
+  '好': { meaning: '妇好，商王武丁王后、女将', radical: '女', caster_ref: '妇好' },
+  '克': { meaning: '战胜、能够。大克鼎铸主"克"之名', radical: '儿', caster_ref: null },
+  '盂': { meaning: '器名，亦为大盂鼎受命者"盂"之名', radical: '皿', caster_ref: '盂' },
+  '惟': { meaning: '句首发语词，《大诰》中常见', radical: '忄', caster_ref: null },
+  '年': { meaning: '年份、祭祀名（商代祭祀周期）', radical: '禾', caster_ref: null },
+  '祀': { meaning: '祭祀，商代祭祀周期单位', radical: '示', caster_ref: null },
+  '命': { meaning: '册命、任命，西周礼制核心词', radical: '口', caster_ref: null },
+  '邑': { meaning: '城邑、都城', radical: '邑', caster_ref: null },
+  '天': { meaning: '天命、上天（周人革命之依据"天命"）', radical: '大', caster_ref: null },
+};
+
+const INSCRIPTIONS = {
+  'he_zun': {
+    name: '何尊',
+    dynasty: '西周',
+    chars: '惟王初壅宅兹中或王诞降二方民亦惟其叀王恤王作邑成周惟四月丙戌王诰宗小子于京室曰昔在尔考公氏有勋于天彻命今余惟肇乃政于宅兹中国自之乂民鸣呼尔有唯小子无识视于公氏有勋于天彻命今余其越文王勋亦有若成立勤大命配皇天彻命今余一人唯恭德裕天训我不敢僭在位王若曰尔有虽小子无识视余旁惟乃考公氏有勋于天彻',
+    char_count: 122,
+    modern: '成王五年，周成王初建洛邑，居此中国（中央之邦），王降于二方之民，惟期使民归化王城成周……',
+    translation: '在周王刚刚开始建立洛邑之时，王居住在"中国"（中央之邦）。王对宗族小辈在京室中训诫说：昔日你的父亲公氏有功于上天命令……',
+    key_chars: ['中','或','宅','兹','王','邑'],
+  },
+  'houmuwu_ding': {
+    name: '后母戊鼎',
+    dynasty: '商',
+    chars: '后母戊',
+    char_count: 3,
+    modern: '后母戊',
+    translation: '（为祭祀）后母戊（而铸此鼎）。"后"为王后/君，"母"为母亲，"戊"为商王武丁之妻妇妌庙号。',
+    key_chars: ['后','母','戊'],
+  },
+  'mao_gong_ding': {
+    name: '毛公鼎',
+    dynasty: '西周',
+    chars: '王若曰父歆丕显文武皇天引厌厥德配我有周膺受大命率怀不廷方亦惟服',
+    char_count: 499,
+    modern: '王如此说：父歆啊，大文王武王，皇天大大地嘉许他们的功德……（499字西周宪政史）',
+    translation: '周宣王对毛公说：毛公啊，文王武王因德行被皇天认可，接受了天命，安抚了不顺从的方国……',
+    key_chars: ['王','毛','公','天','命','文','武'],
+  },
+  'da_yu_ding': {
+    name: '大盂鼎',
+    dynasty: '西周',
+    chars: '王若曰盂不显文王受天有大命在武王嗣文作邦辟厥慝告亦维有若虢侯苏',
+    char_count: 291,
+    modern: '周康王说：盂啊，伟大的文王接受了天的大命，武王继承文王建立国家，斥除邪恶……',
+    translation: '大盂鼎铭文 291 字，周康王册命贵族盂，赐以土地奴隶，是西周早期礼制的重要史料。',
+    key_chars: ['王','盂','天','命','文','武'],
+  },
+  'li_gui': {
+    name: '利簋',
+    dynasty: '西周',
+    chars: '武王征商唯甲子朝岁鼎克昏夙有商辛未王在阑师赐有事利金用作旅于彝',
+    char_count: 32,
+    modern: '武王征商，在甲子日早晨，岁星当空，克敌。辛未日，王在阑，赐给利铜……',
+    translation: '武王征伐商朝，在甲子日早晨，（辛未日）王在阑地，赐给名叫"利"的有司铜料，利因此铸此簋作纪念。',
+    key_chars: ['武','王','商','利'],
+  },
+};
+
+let currentInscription = null;
+let currentLayer = 'rubbings';
+let sessionRecognized = new Set();
+
+function loadInscription(id) {
+  currentInscription = INSCRIPTIONS[id] || INSCRIPTIONS['he_zun'];
+  renderInscription();
+}
+
+function renderInscription() {
+  const insc = currentInscription;
+  document.getElementById('inscription-title').textContent = insc.name + ' 铭文';
+  document.getElementById('inscription-stats').textContent = `${insc.char_count} 字 · ${insc.dynasty} · ${sessionRecognized.size} 字已识`;
+
+  // Char grid
+  const grid = document.getElementById('char-grid');
+  grid.innerHTML = '';
+  const chars = insc.chars.split('');
+  chars.forEach((c, i) => {
+    const info = JINWEN_DICT[c];
+    const isKey = (insc.key_chars||[]).includes(c);
+    const isCaster = info && info.caster_ref;
+    const isRec = sessionRecognized.has(c);
+    const cell = document.createElement('span');
+    cell.className = `char-cell ${isRec?'recognized':''} ${isCaster?'caster-ref':''}`;
+    cell.innerHTML = `${c}
+      <div class="char-tooltip">
+        <div style="font-size:16px;">${c}</div>
+        ${info ? `<div style="font-size:11px;color:var(--text-muted);">${info.meaning.slice(0,30)}</div>` : '<div style="font-size:11px;color:#aaa;">点击识别</div>'}
+        ${isKey ? '<div style="font-size:10px;color:var(--accent-red);">★ 关键字</div>' : ''}
+      </div>`;
+    cell.addEventListener('click', () => recognizeChar(c, info, cell));
+    grid.appendChild(cell);
+  });
+
+  // Modern and translation
+  document.getElementById('modern-text').textContent = insc.modern || '（暂无现代释文）';
+  document.getElementById('trans-text').textContent = insc.translation || '（暂无白话大意）';
+}
+
+function recognizeChar(c, info, cell) {
+  sessionRecognized.add(c);
+  cell.classList.add('recognized', 'highlighted');
+  setTimeout(() => cell.classList.remove('highlighted'), 1200);
+
+  // Show char detail
+  const detail = document.getElementById('char-detail');
+  detail.innerHTML = `
+    <div class="dim-card-title">字义解读</div>
+    <div style="text-align:center; padding:12px 0; border-bottom:1px solid var(--border-light); margin-bottom:12px;">
+      <div style="font-size:48px; font-family:'Noto Serif SC';">${c}</div>
+      <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">${info ? '已识' : '待考'}</div>
+    </div>
+    ${info ? `
+    <div style="font-size:13px; line-height:1.7; color:var(--text-ink); margin-bottom:10px;">${info.meaning}</div>
+    ` : '<div style="font-size:12px; color:var(--text-muted);">此字暂无详细释义</div>'}
+    ${info && info.caster_ref ? `
+    <div style="margin-top:10px; padding:8px; background:var(--bg-cream); border-radius:6px; cursor:pointer;"
+      onclick="showCasterMiniCard('${info.caster_ref}', event)">
+      <div style="font-size:11px; color:var(--accent-red); margin-bottom:2px;">铸主关联</div>
+      <div style="font-size:13px; font-weight:600;">${info.caster_ref} →</div>
+      <div style="font-size:11px; color:var(--text-muted);">点击查看铸主档案</div>
+    </div>
+    ` : ''}
+  `;
+
+  // Update session recognized
+  document.getElementById('session-recognized').innerHTML = `
+    <div style="font-size:13px; font-weight:600; color:var(--accent-bronze);">已识 ${sessionRecognized.size} 字</div>
+    <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">${Array.from(sessionRecognized).join(' · ')}</div>
+  `;
+
+  // Emit caster-focus if applicable
+  if (info && info.caster_ref) {
+    document.dispatchEvent(new CustomEvent('caster-focus', { detail: { caster_ref: info.caster_ref, char: c, triggered_by: 'inscription-reader' } }));
+  }
+}
+
+function showCasterMiniCard(caster, event) {
+  const CASTERS = {
+    '妇好': { name: '妇好 (Fu Hao)', desc: '殷王武丁王后，商代第一位有名女将。统兵万三千，征讨土方羌方，随葬 468 件铜器。', era: '商·约1250-1200BC', artifacts: ['妇好鸮尊','司母辛鼎','妇好方斝'] },
+    '周成王': { name: '周成王 (King Cheng)', desc: '周朝第二代君主，武王之子。在位期间周公辅政，制礼作乐，营建成周。', era: '西周早期·约1042-1021BC', artifacts: ['何尊','班簋'] },
+    '毛公': { name: '毛公（毛伯卫）', desc: '西周晚期周宣王卿士，主持国政。毛公鼎 499 字铭文是西周礼制最重要的文字史料。', era: '西周晚期·约825BC', artifacts: ['毛公鼎'] },
+    '何': { name: '何 (He)', desc: '西周成王时贵族，铸何尊纪念成王册命。何尊铭文含"宅兹中国"最早"中国"字样。', era: '西周早期·约1038BC', artifacts: ['何尊'] },
+    '盂': { name: '盂', desc: '西周康王时贵族，大盂鼎受命者。康王册命盂，赐以土地奴隶，鼎铭 291 字。', era: '西周早期·约1000BC', artifacts: ['大盂鼎'] },
+    '利': { name: '利', desc: '周武王近臣，随军征商，因功受赐铜料，铸利簋纪念牧野之战。', era: '西周初年·约1046BC', artifacts: ['利簋'] },
+    '周武王': { name: '周武王 (King Wu)', desc: '周朝开国君主，牧野之战克商。利簋铭文以天文记事确证牧野之战年份为公元前1046年。', era: '西周初年·约1046BC', artifacts: ['利簋'] },
+  };
+  const c = CASTERS[caster];
+  if (!c) return;
+  const card = document.getElementById('caster-minicard');
+  document.getElementById('caster-card-content').innerHTML = `
+    <div style="font-size:15px; font-weight:700; margin-bottom:6px;">${c.name}</div>
+    <div style="font-size:11px; color:var(--accent-bronze); margin-bottom:8px;">${c.era}</div>
+    <div style="font-size:12px; color:var(--text-ink); line-height:1.6; margin-bottom:10px;">${c.desc}</div>
+    <div style="font-size:11px; font-weight:600; color:var(--text-muted); margin-bottom:4px;">传世器：</div>
+    ${c.artifacts.map(a=>`<div style="font-size:12px; padding:3px 0; border-bottom:1px solid var(--border-light);">🏺 ${a}</div>`).join('')}
+    <div style="margin-top:10px;">
+      <a href="caster-profile.html" style="color:var(--accent-bronze); font-size:12px; text-decoration:none;">查看完整档案 →</a>
+    </div>
+  `;
+  card.style.display = 'block';
+  card.style.left = Math.min(event.pageX + 10, window.innerWidth - 300) + 'px';
+  card.style.top = Math.min(event.pageY - 10, window.innerHeight - 350) + 'px';
+}
+
+function setLayer(layer) {
+  currentLayer = layer;
+  document.querySelectorAll('.layer-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('layer-rubbings').style.display = layer === 'rubbings' ? 'block' : 'none';
+  document.getElementById('layer-modern').style.display = layer === 'modern' ? 'block' : 'none';
+  document.getElementById('layer-translation').style.display = layer === 'translation' ? 'block' : 'none';
+}
+
+// Close caster card on click elsewhere
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('#caster-minicard') && !e.target.closest('.caster-ref')) {
+    document.getElementById('caster-minicard').style.display = 'none';
+  }
+});
+
+// Load from URL param
+const params = new URLSearchParams(location.search);
+const artifactId = params.get('id') || 'he_zun';
+document.getElementById('artifact-selector').value = artifactId;
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadInscription(artifactId);
+});
+</script>
+</body>
+</html>

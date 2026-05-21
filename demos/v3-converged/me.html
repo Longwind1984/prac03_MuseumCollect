@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的图鉴 — MuseumCollect v3</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<link rel="stylesheet" href="css/converged.css">
+<style>
+.profile-header {
+  background: linear-gradient(150deg, #1a1510 0%, #2a2018 100%);
+  padding: 48px 24px; color: white; position: relative; overflow: hidden;
+}
+.profile-avatar {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: var(--accent-bronze); display: flex; align-items: center;
+  justify-content: center; font-size: 32px; margin-bottom: 16px;
+  border: 3px solid var(--accent-gold); position: relative;
+}
+.avatar-badge {
+  position: absolute; bottom: -4px; right: -4px;
+  background: var(--accent-red); color: white; font-size: 9px;
+  padding: 2px 5px; border-radius: 10px; border: 2px solid white;
+  font-family: 'Noto Serif SC', serif;
+}
+.title-chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 12px; border-radius: 20px; font-size: 12px;
+  border: 1px solid rgba(164,115,44,.5); color: var(--accent-gold);
+  background: rgba(164,115,44,.1); margin: 4px 4px 4px 0;
+}
+.era-mini-bar {
+  display: inline-block; border-radius: 3px 3px 0 0; cursor: pointer; transition: all .3s;
+  position: relative; min-width: 32px;
+}
+.era-mini-bar:hover { opacity: .8; filter: brightness(1.2); }
+.era-mini-bar:hover::after {
+  content: attr(data-tooltip); position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+  background: rgba(0,0,0,.85); color: white; font-size: 11px; padding: 4px 8px;
+  border-radius: 4px; white-space: nowrap; margin-bottom: 4px; pointer-events: none;
+}
+.pattern-slot {
+  width: 52px; height: 52px; border-radius: 8px; border: 1px solid var(--border-light);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  cursor: pointer; transition: all .25s; background: white; position: relative;
+}
+.pattern-slot.identified { border-color: var(--accent-bronze); background: #fdf8f0; }
+.pattern-slot.not-identified { opacity: .4; filter: grayscale(.8); }
+.pattern-slot:hover { transform: scale(1.1); z-index: 5; }
+.pattern-slot img { width: 28px; height: 28px; }
+.pattern-label { font-size: 9px; color: var(--text-muted); margin-top: 2px; white-space: nowrap; overflow: hidden; max-width: 48px; text-align: center; }
+.rank-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: 600;
+  border: 2px solid var(--accent-bronze); color: var(--accent-bronze); background: #fdf8f0;
+}
+.collection-item {
+  display: flex; align-items: center; gap: 12px; padding: 12px;
+  border: 1px solid var(--border-light); border-radius: 8px; background: white;
+  cursor: pointer; transition: all .2s;
+}
+.collection-item:hover { border-color: var(--accent-bronze); box-shadow: var(--shadow-sm); }
+.collection-item.treasure { border-color: var(--accent-gold); background: #fffbf0; }
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo">器·<span>集</span></a>
+  <div class="nav-links">
+    <a href="catalog.html" class="nav-link">图鉴</a>
+    <a href="time-pillar.html" class="nav-link">时代柱</a>
+    <a href="geo-system.html" class="nav-link">地理</a>
+    <a href="pattern-tree.html" class="nav-link">纹饰树</a>
+    <a href="inscription-reader.html" class="nav-link">铭文</a>
+    <a href="purpose-scene.html" class="nav-link">礼制场景</a>
+    <a href="caster-profile.html" class="nav-link">铸主</a>
+    <a href="me.html" class="nav-link active">我的图鉴</a>
+    <a href="scan.html" class="nav-link">识别</a>
+  </div>
+  <button class="linkage-toggle">
+    <div class="linkage-dot"></div>
+    <span class="linkage-label">穿越模式 ●</span>
+  </button>
+</nav>
+
+<!-- Profile Header -->
+<div class="profile-header">
+  <div class="page-container" style="position:relative; z-index:1;">
+    <div style="display:flex; align-items:flex-start; gap:24px;">
+      <div>
+        <div class="profile-avatar">
+          铜
+          <div class="avatar-badge">入门</div>
+        </div>
+        <div style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap;">
+          <div class="title-chip">方鼎专家</div>
+          <div class="title-chip">殷商考据者</div>
+          <div class="title-chip">金文入门</div>
+        </div>
+      </div>
+      <div style="flex:1;">
+        <div style="font-size:28px; font-weight:700; margin-bottom:6px;">青铜器爱好者</div>
+        <div style="font-size:14px; color:rgba(255,255,255,.6); margin-bottom:16px;">
+          您已收藏 <strong style="color:var(--accent-gold);">35</strong> 件 / 277 件
+          · 主要关注<strong style="color:var(--accent-gold);">商代</strong>与<strong style="color:var(--accent-gold);">西周</strong>
+          · 偏好<strong style="color:var(--accent-gold);">方鼎</strong>类
+        </div>
+        <!-- Clean honest progress: no fake 90% bars -->
+        <div style="background:rgba(255,255,255,.1); border-radius:8px; padding:16px; max-width:480px;">
+          <div style="font-size:12px; color:rgba(255,255,255,.5); margin-bottom:8px;">真实进度（无虚假完成率）</div>
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="flex:1;">
+              <div style="font-size:11px; color:rgba(255,255,255,.5); margin-bottom:4px;">收藏进度</div>
+              <div style="background:rgba(255,255,255,.15); height:6px; border-radius:3px; overflow:hidden;">
+                <div style="height:100%; width:12.6%; background:var(--accent-gold); border-radius:3px;"></div>
+              </div>
+              <div style="font-size:11px; color:rgba(255,255,255,.4); margin-top:2px;">35/277</div>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:11px; color:rgba(255,255,255,.5); margin-bottom:4px;">铭文段位</div>
+              <div style="background:rgba(255,255,255,.15); height:6px; border-radius:3px; overflow:hidden;">
+                <div style="height:100%; width:57%; background:var(--accent-bronze); border-radius:3px;"></div>
+              </div>
+              <div style="font-size:11px; color:rgba(255,255,255,.4); margin-top:2px;">85/150 字 → 一段</div>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:11px; color:rgba(255,255,255,.5); margin-bottom:4px;">国宝覆盖</div>
+              <div style="background:rgba(255,255,255,.15); height:6px; border-radius:3px; overflow:hidden;">
+                <div style="height:100%; width:4.6%; background:#d4a857; border-radius:3px;"></div>
+              </div>
+              <div style="font-size:11px; color:rgba(255,255,255,.4); margin-top:2px;">9/195 件</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-container" style="padding: 32px 24px;">
+  <div style="display:grid; grid-template-columns:2fr 1fr; gap:24px;">
+
+    <!-- Left column -->
+    <div>
+      <!-- Time Pillar Mini -->
+      <div class="dim-card" style="margin-bottom:24px;">
+        <div class="dim-card-title">⏳ 时代密度分布</div>
+        <div id="me-time-pillar" style="height:120px; display:flex; align-items:flex-end; gap:6px; padding:0 8px 0 0;"></div>
+        <div id="me-era-labels" style="display:flex; gap:6px; margin-top:4px;"></div>
+        <p class="poetic-caption">商晚期，是您目前最深耕的年代。</p>
+      </div>
+
+      <!-- Collected artifacts list -->
+      <div class="dim-card" style="margin-bottom:24px;">
+        <div class="dim-card-title">🏺 已收藏器物 (35 件)</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;" id="collection-list">
+          <!-- Rendered by JS -->
+        </div>
+        <div style="margin-top:16px; text-align:center;">
+          <a href="catalog.html" style="color:var(--accent-bronze); font-size:13px; text-decoration:none;">浏览全部 277 件图鉴 →</a>
+        </div>
+      </div>
+
+      <!-- Pattern grid -->
+      <div class="dim-card" style="margin-bottom:24px;">
+        <div class="dim-card-title">🌿 纹饰识别记录</div>
+        <div id="pattern-grid" style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px;"></div>
+        <p class="poetic-caption">已识别 12 种纹饰。饕餮、夔龙是您的长项。</p>
+      </div>
+    </div>
+
+    <!-- Right column -->
+    <div>
+      <!-- Inscription rank -->
+      <div class="dim-card" style="margin-bottom:20px;">
+        <div class="dim-card-title">金 铭文段位</div>
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+          <div class="rank-badge">
+            <span>入门</span>
+            <span style="font-size:11px; opacity:.7;">鉴读者</span>
+          </div>
+          <div>
+            <div style="font-size:12px; color:var(--text-muted);">已识 85 字</div>
+            <div style="font-size:11px; color:var(--text-muted);">距一段：65 字</div>
+          </div>
+        </div>
+        <div class="progress-bar" style="margin-bottom:6px;">
+          <div class="progress-fill" style="width:57%;"></div>
+        </div>
+        <div style="font-size:11px; color:var(--text-muted);">初窥→入门→<strong>一段</strong>→二段→鉴师→大宗师</div>
+        <div style="margin-top:12px; padding:10px; background:var(--bg-cream); border-radius:6px; font-size:12px; color:var(--text-muted);">
+          您当前可探索的方向：<br>
+          <a href="inscription-reader.html" style="color:var(--accent-bronze); text-decoration:none;">→ 大盂鼎铭文 (含 78 个您尚未识的字)</a>
+        </div>
+      </div>
+
+      <!-- Implicit titles -->
+      <div class="dim-card" style="margin-bottom:20px;">
+        <div class="dim-card-title">称号（隐式推导）</div>
+        <div style="display:flex; flex-direction:column; gap:8px;" id="titles-list">
+          <!-- Rendered by JS -->
+        </div>
+        <p style="font-size:11px; color:var(--text-muted); margin-top:12px; font-style:italic;">称号由您的实际收藏自动推导，不记分，不排名。</p>
+      </div>
+
+      <!-- Sites visited mini map -->
+      <div class="dim-card" style="margin-bottom:20px;">
+        <div class="dim-card-title">🗺 遗址足迹</div>
+        <div id="me-sites" style="display:flex; flex-direction:column; gap:6px;"></div>
+        <div style="margin-top:12px;">
+          <a href="geo-system.html" style="color:var(--accent-bronze); font-size:12px; text-decoration:none;">查看完整地理系统 →</a>
+        </div>
+      </div>
+
+      <!-- Bus debug panel toggle (me.html exclusive) -->
+      <div class="dim-card" style="background:#0a0804; color:#ccc;">
+        <div class="dim-card-title" style="color:var(--accent-gold);">⚡ 事件总线调试</div>
+        <div style="font-size:12px; color:#888; margin-bottom:8px;">点击维度组件触发联动，此处显示事件流。</div>
+        <div id="bus-debug-panel" style="display:block; position:static; width:auto; max-height:160px; border:none; padding:0;"></div>
+        <div style="display:flex; gap:8px; margin-top:10px;">
+          <button onclick="testEraFocus('商')" style="background:#2a2018; color:#ccc; border:1px solid #444; padding:4px 8px; font-size:11px; border-radius:4px; cursor:pointer;">TEST: 商</button>
+          <button onclick="testEraFocus('西周')" style="background:#2a2018; color:#ccc; border:1px solid #444; padding:4px 8px; font-size:11px; border-radius:4px; cursor:pointer;">TEST: 西周</button>
+          <button onclick="testEraFocus('战国')" style="background:#2a2018; color:#ccc; border:1px solid #444; padding:4px 8px; font-size:11px; border-radius:4px; cursor:pointer;">TEST: 战国</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/state.js"></script>
+<script src="js/cross-dim-wiring.js"></script>
+<script>
+const ERAS = [
+  {name:'夏',  collected:1,  total:12, color:'#6e4a2e'},
+  {name:'商',  collected:10, total:85, color:'#4a5a3a'},
+  {name:'西周', collected:8, total:72, color:'#a73a2a'},
+  {name:'春秋', collected:4, total:45, color:'#2a2a3a'},
+  {name:'战国', collected:5, total:38, color:'#7a3a2a'},
+  {name:'秦',  collected:2, total:8,  color:'#1a1a1a'},
+  {name:'西汉', collected:3, total:28, color:'#b89046'},
+  {name:'东汉', collected:2, total:18, color:'#9a7838'},
+];
+
+const MOCK_COLLECTED = [
+  {id:'houmuwu_ding', name:'后母戊鼎', dynasty:'商', form:'方鼎', rarity:'国宝'},
+  {id:'fuhao_owl_zun', name:'妇好鸮尊', dynasty:'商', form:'鸮尊', rarity:'国宝'},
+  {id:'siyang_fang_zun', name:'四羊方尊', dynasty:'商', form:'方尊', rarity:'国宝'},
+  {id:'da_yu_ding', name:'大盂鼎', dynasty:'西周', form:'圆鼎', rarity:'国宝'},
+  {id:'he_zun', name:'何尊', dynasty:'西周', form:'尊', rarity:'国宝'},
+  {id:'mao_gong_ding', name:'毛公鼎', dynasty:'西周', form:'圆鼎', rarity:'国宝'},
+  {id:'li_gui', name:'利簋', dynasty:'西周', form:'簋', rarity:'国宝'},
+  {id:'yuewang_goujian_jian', name:'越王勾践剑', dynasty:'春秋', form:'剑', rarity:'国宝'},
+  {id:'zeng_houyi_bianzhong', name:'曾侯乙编钟', dynasty:'战国', form:'编钟', rarity:'国宝'},
+  {id:'changxin_gonglamp', name:'长信宫灯', dynasty:'西汉', form:'灯', rarity:'国宝'},
+  {id:'sanxingdui_bronze_standfigure', name:'三星堆大立人', dynasty:'商', form:'人像', rarity:'国宝'},
+  {id:'san_shi_pan', name:'散氏盘', dynasty:'西周', form:'盘', rarity:'国宝'},
+  {id:'da_ke_ding', name:'大克鼎', dynasty:'西周', form:'圆鼎', rarity:'国宝'},
+  {id:'lian_he_fang_hu', name:'莲鹤方壶', dynasty:'春秋', form:'方壶', rarity:'国宝'},
+  {id:'zeng_houyi_zunpan', name:'曾侯乙尊盘', dynasty:'战国', form:'尊盘', rarity:'国宝'},
+  {id:'erlitou_tong_jue', name:'二里头铜爵', dynasty:'夏', form:'爵', rarity:'一级'},
+  {id:'panlongcheng_fang_ding', name:'盘龙城方鼎', dynasty:'商', form:'方鼎', rarity:'一级'},
+  {id:'zilong_ding', name:'子龙鼎', dynasty:'商', form:'圆鼎', rarity:'国宝'},
+  {id:'cuo_jin_boshanluo', name:'错金博山炉', dynasty:'西汉', form:'炉', rarity:'国宝'},
+  {id:'shang_yang_fang_sheng', name:'商鞅方升', dynasty:'战国', form:'量器', rarity:'国宝'},
+];
+
+const PATTERNS_DATA = [
+  {slug:'taotie', name:'饕餮纹', identified:true},
+  {slug:'kuilong', name:'夔龙纹', identified:true},
+  {slug:'yunlei', name:'云雷纹', identified:true},
+  {slug:'fengniao', name:'凤鸟纹', identified:true},
+  {slug:'panchi', name:'蟠螭纹', identified:true},
+  {slug:'qiequ', name:'窃曲纹', identified:true},
+  {slug:'chonghuan', name:'重环纹', identified:true},
+  {slug:'chan', name:'蝉纹', identified:true},
+  {slug:'jiaoye', name:'焦叶纹', identified:true},
+  {slug:'xian', name:'弦纹', identified:true},
+  {slug:'rudding', name:'乳钉纹', identified:true},
+  {slug:'wo', name:'涡纹', identified:true},
+  {slug:'panhui', name:'蟠虺纹', identified:false},
+  {slug:'jihe', name:'几何纹', identified:false},
+  {slug:'yanle', name:'宴乐纹', identified:false},
+  {slug:'shoulie', name:'狩猎纹', identified:false},
+  {slug:'sishen', name:'四神纹', identified:false},
+  {slug:'sanjiao', name:'三角纹', identified:false},
+  {slug:'boqu', name:'波曲纹', identified:false},
+  {slug:'niao', name:'鸟纹', identified:false},
+];
+
+const SITES = [
+  {name:'殷墟', count:8, dynasty:'商', lit:true},
+  {name:'周原', count:5, dynasty:'西周', lit:true},
+  {name:'三星堆', count:3, dynasty:'商', lit:true},
+  {name:'随州', count:4, dynasty:'战国', lit:true},
+  {name:'江陵·楚', count:2, dynasty:'春秋', lit:true},
+  {name:'西安·汉长安', count:2, dynasty:'西汉', lit:true},
+  {name:'盘龙城', count:1, dynasty:'商', lit:true},
+  {name:'二里头', count:1, dynasty:'夏', lit:true},
+  {name:'晋·侯马', count:0, dynasty:'春秋', lit:false},
+  {name:'齐·临淄', count:0, dynasty:'战国', lit:false},
+];
+
+const TITLES = [
+  {title:'方鼎专家', basis:'收藏方鼎 4 件（您的最多器型）', unlocked:true},
+  {title:'殷商考据者', basis:'商代收藏 10 件，覆盖率 11.7%', unlocked:true},
+  {title:'金文入门', basis:'已识铭文字 85 字，入门段位', unlocked:true},
+  {title:'国宝学徒', basis:'已收藏 9 件禁出境文物', unlocked:true},
+  {title:'三重文明见证者', basis:'同时收藏殷墟、三星堆、二里头出土器', unlocked:true},
+  {title:'西周礼制研究者', basis:'西周收藏 8 件，含完整鼎簋组', unlocked:false},
+  {title:'何尊见证者', basis:'完成何尊长卷释读', unlocked:false},
+  {title:'曾侯乙乐工', basis:'收藏曾侯乙编钟全套', unlocked:false},
+];
+
+// Render time pillar mini
+(function renderTimePillar() {
+  const container = document.getElementById('me-time-pillar');
+  const labels = document.getElementById('me-era-labels');
+  const maxH = 100;
+  const maxC = Math.max(...ERAS.map(e=>e.collected));
+  ERAS.forEach(era => {
+    const barH = Math.max(12, (era.collected/maxC)*maxH);
+    const pct = (era.collected/era.total*100).toFixed(0);
+    const bar = document.createElement('div');
+    bar.className = 'era-mini-bar';
+    bar.style.cssText = `height:${barH}px; background:${era.color}; flex:1;`;
+    bar.setAttribute('data-era-highlight', era.name);
+    bar.setAttribute('data-tooltip', `${era.name}: ${era.collected}/${era.total} (${pct}%)`);
+    bar.addEventListener('mouseenter', () => {
+      if (window.CrossDimWiring) window.CrossDimWiring.emitEra(era.name, 'me.time-pillar');
+    });
+    container.appendChild(bar);
+    const lbl = document.createElement('div');
+    lbl.style.cssText = 'flex:1; text-align:center; font-size:9px; color:var(--text-muted);';
+    lbl.textContent = era.name;
+    labels.appendChild(lbl);
+  });
+})();
+
+// Render collection list
+(function renderCollection() {
+  const list = document.getElementById('collection-list');
+  MOCK_COLLECTED.forEach(item => {
+    const el = document.createElement('a');
+    el.href = `artifact.html?id=${item.id}`;
+    el.className = 'collection-item' + (item.rarity === '国宝' ? ' treasure' : '');
+    el.style.textDecoration = 'none; color:inherit;';
+    el.innerHTML = `
+      <div style="width:36px; height:36px; border-radius:6px; background:var(--bg-cream); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;">🏺</div>
+      <div style="min-width:0;">
+        <div style="font-size:13px; font-weight:600; color:var(--text-ink);">${item.name}</div>
+        <div style="font-size:11px; color:var(--text-muted);">${item.dynasty} · ${item.form}${item.rarity==='国宝'?' · <span style="color:var(--accent-red);">国宝</span>':''}</div>
+      </div>
+    `;
+    list.appendChild(el);
+  });
+})();
+
+// Render patterns
+(function renderPatterns() {
+  const grid = document.getElementById('pattern-grid');
+  PATTERNS_DATA.forEach(p => {
+    const slot = document.createElement('div');
+    slot.className = 'pattern-slot ' + (p.identified ? 'identified' : 'not-identified');
+    slot.setAttribute('data-pattern', p.name);
+    slot.title = p.name + (p.identified ? ' (已识别)' : ' (未识别)');
+    slot.innerHTML = `
+      <img src="../../assets/patterns/${p.slug}.svg" alt="${p.name}" onerror="this.style.display='none'; this.parentNode.innerHTML='<span style=\\'font-size:14px;\\'>${p.name.charAt(0)}</span><span class=\\"pattern-label\\">${p.name}</span>'">
+      <div class="pattern-label">${p.name.replace('纹','')}</div>
+    `;
+    slot.addEventListener('click', () => {
+      if (window.CrossDimWiring) {
+        document.dispatchEvent(new CustomEvent('pattern-focus', { detail: { pattern: p.name, triggered_by: 'me.pattern-grid' } }));
+      }
+    });
+    grid.appendChild(slot);
+  });
+})();
+
+// Render sites
+(function renderSites() {
+  const container = document.getElementById('me-sites');
+  SITES.forEach(site => {
+    const el = document.createElement('div');
+    el.style.cssText = 'display:flex; align-items:center; gap:8px; padding:6px 8px; border-radius:6px; ' + (site.lit ? 'background:#fdf8f0;' : 'opacity:.5;');
+    el.innerHTML = `
+      <div style="width:8px; height:8px; border-radius:50%; background:${site.lit ? 'var(--accent-bronze)' : '#ccc'}; flex-shrink:0;"></div>
+      <div style="flex:1; font-size:12px;">${site.name}</div>
+      <div style="font-size:11px; color:var(--text-muted);">${site.lit ? site.count+'件' : '未涉足'}</div>
+    `;
+    container.appendChild(el);
+  });
+})();
+
+// Render titles
+(function renderTitles() {
+  const list = document.getElementById('titles-list');
+  TITLES.forEach(t => {
+    const el = document.createElement('div');
+    el.style.cssText = 'display:flex; align-items:flex-start; gap:8px; padding:8px; border-radius:6px; ' + (t.unlocked ? 'background:var(--bg-cream);' : 'opacity:.4;');
+    el.innerHTML = `
+      <div style="width:16px; height:16px; border-radius:50%; background:${t.unlocked ? 'var(--accent-bronze)' : '#ccc'}; flex-shrink:0; margin-top:2px; display:flex; align-items:center; justify-content:center; font-size:10px; color:white;">${t.unlocked ? '✓' : ''}</div>
+      <div>
+        <div style="font-size:12px; font-weight:600; color:${t.unlocked ? 'var(--text-ink)' : 'var(--text-muted)'};">${t.title}</div>
+        <div style="font-size:11px; color:var(--text-muted);">${t.basis}</div>
+      </div>
+    `;
+    list.appendChild(el);
+  });
+})();
+
+// Bus test buttons
+function testEraFocus(era) {
+  if (window.CrossDimWiring) window.CrossDimWiring.emitEra(era, 'me.test-button');
+  else document.dispatchEvent(new CustomEvent('era-focus', { detail: { dynasty: era, triggered_by: 'me.test' } }));
+}
+</script>
+</body>
+</html>

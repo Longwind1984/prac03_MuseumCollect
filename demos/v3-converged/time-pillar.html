@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>时代柱 — MuseumCollect v3</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<link rel="stylesheet" href="css/converged.css">
+<style>
+#pillar-root { position: relative; }
+.dynasty-bar {
+  cursor: pointer; transition: all .2s;
+}
+.dynasty-bar:hover rect { filter: brightness(1.25); }
+.dynasty-bar.active rect { filter: brightness(1.35); stroke: var(--accent-gold); stroke-width: 2; }
+.event-dot { cursor: pointer; }
+.event-dot:hover circle { r: 7; }
+.side-card {
+  background: white; border: 1px solid var(--border-light);
+  border-radius: 12px; padding: 20px; box-shadow: var(--shadow-md);
+  min-height: 200px; transition: all .3s;
+}
+.mini-artifact {
+  display: flex; align-items: center; gap: 8px; padding: 8px;
+  border-radius: 6px; cursor: pointer; transition: all .2s;
+  background: var(--bg-cream); margin-bottom: 6px;
+}
+.mini-artifact:hover { background: #fdf0e0; }
+.breathing {
+  animation: breathe 4s ease-in-out infinite;
+}
+@keyframes breathe {
+  0%, 100% { opacity: .45; }
+  50% { opacity: .75; }
+}
+.zoom-controls { display: flex; gap: 4px; }
+.zoom-btn {
+  width: 28px; height: 28px; border: 1px solid var(--border-medium);
+  border-radius: 4px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 14px; color: var(--text-muted);
+  background: white; transition: all .2s;
+}
+.zoom-btn:hover { border-color: var(--accent-bronze); color: var(--accent-bronze); }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo">器·<span>集</span></a>
+  <div class="nav-links">
+    <a href="catalog.html" class="nav-link">图鉴</a>
+    <a href="time-pillar.html" class="nav-link active">时代柱</a>
+    <a href="geo-system.html" class="nav-link">地理</a>
+    <a href="pattern-tree.html" class="nav-link">纹饰树</a>
+    <a href="inscription-reader.html" class="nav-link">铭文</a>
+    <a href="purpose-scene.html" class="nav-link">礼制场景</a>
+    <a href="caster-profile.html" class="nav-link">铸主</a>
+    <a href="me.html" class="nav-link">我的图鉴</a>
+    <a href="scan.html" class="nav-link">识别</a>
+  </div>
+  <button class="linkage-toggle">
+    <div class="linkage-dot"></div>
+    <span class="linkage-label">穿越模式 ●</span>
+  </button>
+</nav>
+
+<div class="page-container" style="padding:32px 24px;">
+  <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:24px;">
+    <div>
+      <h1 class="page-title">时代柱</h1>
+      <p class="page-subtitle">朝代真比例 · hover 触发三维联动 · 收藏密度可视</p>
+    </div>
+    <div style="display:flex; align-items:center; gap:12px;">
+      <div class="zoom-controls">
+        <div class="zoom-btn" onclick="setZoom(1)" id="zoom-1x" title="1× 总览">1×</div>
+        <div class="zoom-btn" onclick="setZoom(2)" id="zoom-2x" title="2× 子分期">2×</div>
+        <div class="zoom-btn" onclick="setZoom(4)" id="zoom-4x" title="4× 王世">4×</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:grid; grid-template-columns:auto 1fr 360px; gap:24px; align-items:flex-start;">
+    <!-- Year axis + pillar -->
+    <div id="pillar-root" style="width:340px;"></div>
+
+    <!-- Events panel -->
+    <div>
+      <div class="section-title">历史事件</div>
+      <div id="events-panel" style="font-size:13px;">
+        <p class="text-muted text-sm" style="margin-top:8px;">Hover 时代柱中的事件标记，或点击朝代查看详情</p>
+      </div>
+    </div>
+
+    <!-- Side card (dynasty detail + artifacts) -->
+    <div>
+      <div class="side-card" id="dynasty-detail">
+        <div style="color:var(--text-muted); font-size:13px; text-align:center; padding:40px 0;">
+          <div style="font-size:24px; margin-bottom:8px;">⏳</div>
+          Hover 时代柱查看详情
+        </div>
+      </div>
+      <!-- Cross-dim response indicator -->
+      <div id="linkage-indicator" style="margin-top:12px; padding:10px 12px; background:#fdf8f0; border:1px solid var(--border-light); border-radius:8px; font-size:12px; color:var(--text-muted); display:none;">
+        <strong style="color:var(--accent-bronze);">联动触发：</strong> <span id="linkage-msg"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/state.js"></script>
+<script src="js/cross-dim-wiring.js"></script>
+<script>
+const DYNASTIES = [
+  {name:'夏',  color:'#6e4a2e', start:-1750, end:-1500, collected:1, total:12,
+   desc:'史料极稀薄·邀请探索', note:'二里头文明肇始，中华最早宫殿遗址与铸铜遗存。',
+   patterns:['乳钉纹','弦纹'],
+   artifacts:[{name:'二里头铜爵',id:'erlitou_tong_jue',rarity:'一级'}],
+   events:[{year:-1750,name:'二里头文明肇始'},{year:-1600,name:'二里头四期·青铜礼器定型'}]
+  },
+  {name:'商',  color:'#4a5a3a', start:-1600, end:-1046, collected:10, total:85,
+   desc:'青铜文明鼎盛·饕餮纹极盛',
+   note:'554年商朝。殷墟甲骨文与后母戊鼎（832kg）同期问世，神权与王权的铸铜巅峰。',
+   patterns:['饕餮纹','夔龙纹','云雷纹','蝉纹'],
+   artifacts:[{name:'后母戊鼎',id:'houmuwu_ding',rarity:'国宝'},{name:'四羊方尊',id:'siyang_fang_zun',rarity:'国宝'},{name:'妇好鸮尊',id:'fuhao_owl_zun',rarity:'国宝'}],
+   events:[{year:-1600,name:'商汤建国'},{year:-1300,name:'盘庚迁殷'},{year:-1250,name:'武丁中兴·妇好征伐'},{year:-1046,name:'牧野之战·周灭商'}],
+   subPeriods:['商早(二里岗)','商中(过渡)','商晚(殷墟)'],
+   subCounts:[0,0,10]
+  },
+  {name:'西周', color:'#a73a2a', start:-1046, end:-771, collected:8, total:72,
+   desc:'周礼·凤鸟纹兴起·金文全盛',
+   note:'275年西周。周礼制度的铜铸记录，从利簋到毛公鼎（499字），礼乐文明的书面史诗。',
+   patterns:['凤鸟纹','窃曲纹','重环纹','波曲纹'],
+   artifacts:[{name:'何尊',id:'he_zun',rarity:'国宝'},{name:'利簋',id:'li_gui',rarity:'国宝'},{name:'毛公鼎',id:'mao_gong_ding',rarity:'国宝'}],
+   events:[{year:-1046,name:'武王伐纣'},{year:-1038,name:'何尊铸成·宅兹中国'},{year:-841,name:'国人暴动·共和元年'},{year:-828,name:'宣王中兴·毛公鼎'}]
+  },
+  {name:'春秋', color:'#2a2a3a', start:-771, end:-476, collected:4, total:45,
+   desc:'礼乐崩坏·蟠螭纹兴起',
+   note:'295年春秋。周天子式微，列国争霸，青铜工艺从神权转向世俗，莲鹤方壶开生动之风。',
+   patterns:['蟠螭纹','窃曲纹','重环纹'],
+   artifacts:[{name:'莲鹤方壶',id:'lian_he_fang_hu',rarity:'国宝'},{name:'越王勾践剑',id:'yuewang_goujian_jian',rarity:'国宝'}],
+   events:[{year:-771,name:'平王东迁'},{year:-600,name:'莲鹤方壶时代'},{year:-476,name:'三家分晋'}]
+  },
+  {name:'战国', color:'#7a3a2a', start:-476, end:-221, collected:5, total:38,
+   desc:'失蜡法·错金银·繁缛之美',
+   note:'255年战国。失蜡法普及，曾侯乙尊盘镂空精绝，青铜器在礼制终结前的最后辉煌。',
+   patterns:['蟠虺纹','几何纹','宴乐纹'],
+   artifacts:[{name:'曾侯乙编钟',id:'zeng_houyi_bianzhong',rarity:'国宝'},{name:'曾侯乙尊盘',id:'zeng_houyi_zunpan',rarity:'国宝'}],
+   events:[{year:-433,name:'曾侯乙入葬'},{year:-361,name:'商鞅变法'},{year:-221,name:'秦灭六国'}]
+  },
+  {name:'秦',   color:'#1a1a1a', start:-221, end:-206, collected:2, total:8,
+   desc:'极短盛世·度量衡标准化',
+   note:'仅15年秦朝。铜车马以1:2比例铸就，写实主义的青铜奇迹。',
+   patterns:['云气纹','几何纹'],
+   artifacts:[{name:'商鞅方升',id:'shang_yang_fang_sheng',rarity:'国宝'}],
+   events:[{year:-221,name:'秦统一·始皇帝'},{year:-210,name:'铜车马陪葬'}]
+  },
+  {name:'西汉', color:'#b89046', start:-206, end:9, collected:3, total:28,
+   desc:'鎏金工艺·生活化转型',
+   note:'215年西汉。长信宫灯与错金博山炉，青铜器从礼器走向生活，工艺从厚重走向精巧。',
+   patterns:['云气纹','四神纹','狩猎纹'],
+   artifacts:[{name:'长信宫灯',id:'changxin_gonglamp',rarity:'国宝'},{name:'错金博山炉',id:'cuo_jin_boshanluo',rarity:'国宝'}],
+   events:[{year:-113,name:'中山靖王刘胜墓'},{year:-141,name:'武帝即位·拓边西域'}]
+  },
+  {name:'东汉', color:'#9a7838', start:25, end:220, collected:2, total:18,
+   desc:'写实主义·马踏飞燕',
+   note:'195年东汉。马踏飞燕单足踏燕，力学奇迹。青铜礼器史落幕于汉。',
+   patterns:['写实雕塑','云气纹'],
+   artifacts:[],
+   events:[{year:169,name:'马踏飞燕铸造期'},{year:220,name:'汉亡·青铜礼器史终结'}]
+  },
+];
+
+let currentZoom = 1;
+let activeDynasty = null;
+
+const PX_PER_YEAR = 0.28;
+const PILLAR_W = 180;
+const AXIS_W = 60;
+const TOTAL_W = AXIS_W + PILLAR_W + 100;
+const TOTAL_YEARS = 1750 + 220; // 1750 BC to 220 AD = 1970 years
+const TOTAL_H = Math.round(TOTAL_YEARS * PX_PER_YEAR) + 40;
+
+function yearToY(year) {
+  return Math.round((year - (-1750)) * PX_PER_YEAR);
+}
+
+function buildPillar() {
+  const root = document.getElementById('pillar-root');
+  root.innerHTML = '';
+
+  const svg = d3.select(root)
+    .append('svg')
+    .attr('width', TOTAL_W)
+    .attr('height', TOTAL_H + 40)
+    .style('overflow', 'visible');
+
+  // Background
+  svg.append('rect').attr('width', TOTAL_W).attr('height', TOTAL_H + 40)
+    .attr('fill', 'var(--bg-paper)');
+
+  const g = svg.append('g').attr('transform', 'translate(0, 20)');
+
+  // Year axis ticks
+  const yearTicks = [-1750, -1600, -1500, -1300, -1046, -771, -476, -221, 0, 100, 220];
+  yearTicks.forEach(yr => {
+    const y = yearToY(yr);
+    g.append('line')
+      .attr('x1', AXIS_W - 8).attr('x2', AXIS_W + PILLAR_W)
+      .attr('y1', y).attr('y2', y)
+      .attr('stroke', '#e0d0b0').attr('stroke-width', 0.5).attr('stroke-dasharray', '3,3');
+    g.append('text')
+      .attr('x', AXIS_W - 12).attr('y', y + 4)
+      .attr('text-anchor', 'end')
+      .attr('font-size', 10).attr('fill', '#888')
+      .text(yr < 0 ? `${Math.abs(yr)}BC` : `${yr}AD`);
+  });
+
+  // Dynasty bars
+  DYNASTIES.forEach((dyn, i) => {
+    const y0 = yearToY(dyn.start);
+    const y1 = yearToY(dyn.end);
+    const h = y1 - y0;
+    const pct = dyn.collected / dyn.total;
+
+    const group = g.append('g').attr('class', `dynasty-bar`).attr('id', `dyn-${dyn.name}`);
+
+    // Base bar (full height, desaturated)
+    group.append('rect')
+      .attr('x', AXIS_W).attr('y', y0)
+      .attr('width', PILLAR_W - 20).attr('height', h)
+      .attr('fill', dyn.color).attr('opacity', 0.25)
+      .attr('rx', 2);
+
+    // Collected density fill
+    const fillH = Math.max(4, h * pct);
+    const collectedRect = group.append('rect')
+      .attr('x', AXIS_W).attr('y', y0)
+      .attr('width', PILLAR_W - 20).attr('height', fillH)
+      .attr('fill', dyn.color).attr('opacity', 0.9)
+      .attr('rx', 2);
+
+    // Breathing animation for empty dynasties
+    if (dyn.collected === 0) {
+      group.attr('class', 'dynasty-bar breathing');
+    }
+
+    // Dynasty name label
+    group.append('text')
+      .attr('x', AXIS_W + 8).attr('y', y0 + Math.min(h/2, 20))
+      .attr('font-size', h > 30 ? 13 : 10).attr('fill', 'white').attr('font-weight', 600)
+      .attr('pointer-events', 'none')
+      .text(dyn.name);
+
+    // Collected count
+    if (h > 40) {
+      group.append('text')
+        .attr('x', AXIS_W + 8).attr('y', y0 + Math.min(h/2, 20) + 15)
+        .attr('font-size', 10).attr('fill', 'rgba(255,255,255,.7)')
+        .attr('pointer-events', 'none')
+        .text(`${dyn.collected}/${dyn.total}件`);
+    }
+
+    // Hover interactions
+    group
+      .on('mouseenter', function() {
+        d3.select(this).select('rect').attr('filter', 'brightness(1.3)');
+        showDynastyDetail(dyn);
+        // Emit era-focus via event bus
+        document.dispatchEvent(new CustomEvent('era-focus', {
+          detail: { dynasty: dyn.name, triggered_by: 'time-pillar.hover' }
+        }));
+        showLinkageIndicator(dyn.name);
+      })
+      .on('mouseleave', function() {
+        d3.select(this).select('rect').attr('filter', null);
+      })
+      .on('click', function() {
+        activeDynasty = dyn.name;
+        document.querySelectorAll('.dynasty-bar').forEach(el => el.classList.remove('active'));
+        this.classList.add('active');
+      });
+
+    // Event markers (right side)
+    if (dyn.events) {
+      dyn.events.forEach(ev => {
+        const ey = yearToY(ev.year);
+        const evG = g.append('g').attr('class', 'event-dot').style('cursor', 'pointer');
+        evG.append('circle')
+          .attr('cx', AXIS_W + PILLAR_W - 10).attr('cy', ey)
+          .attr('r', 4).attr('fill', 'var(--accent-red)').attr('opacity', .85);
+        evG.append('line')
+          .attr('x1', AXIS_W + PILLAR_W - 10).attr('x2', AXIS_W + PILLAR_W + 6)
+          .attr('y1', ey).attr('y2', ey)
+          .attr('stroke', 'var(--accent-red)').attr('stroke-width', .8).attr('opacity', .6);
+        evG.append('text')
+          .attr('x', AXIS_W + PILLAR_W + 8).attr('y', ey + 4)
+          .attr('font-size', 9).attr('fill', '#666')
+          .text(ev.name.length > 12 ? ev.name.slice(0,12)+'…' : ev.name);
+        evG.on('mouseenter', function() {
+          showEventInPanel(ev, dyn);
+        });
+      });
+    }
+  });
+}
+
+function showDynastyDetail(dyn) {
+  const card = document.getElementById('dynasty-detail');
+  card.style.borderColor = dyn.color;
+  card.innerHTML = `
+    <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+      <div style="width:16px; height:16px; border-radius:3px; background:${dyn.color};"></div>
+      <div style="font-size:18px; font-weight:700;">${dyn.name}</div>
+      <div style="font-size:12px; color:var(--text-muted);">${Math.abs(dyn.start)}${dyn.start<0?'BC':'AD'}–${Math.abs(dyn.end)}${dyn.end<0?'BC':'AD'} (${dyn.end-dyn.start}年)</div>
+    </div>
+    <div class="progress-bar" style="margin-bottom:6px;">
+      <div class="progress-fill" style="width:${(dyn.collected/dyn.total*100).toFixed(0)}%; background:${dyn.color};"></div>
+    </div>
+    <div style="font-size:11px; color:var(--text-muted); margin-bottom:12px;">${dyn.collected}/${dyn.total} 件 · ${(dyn.collected/dyn.total*100).toFixed(1)}% 覆盖</div>
+    <div style="font-size:13px; color:var(--text-ink); margin-bottom:12px; line-height:1.7;">${dyn.note}</div>
+    <div style="font-size:11px; color:var(--text-muted); margin-bottom:8px;">主流纹饰：${dyn.patterns.join('  ')}</div>
+    ${dyn.artifacts.length > 0 ? `
+    <div style="font-size:11px; font-weight:600; color:var(--accent-bronze); margin-bottom:6px;">您的收藏：</div>
+    ${dyn.artifacts.map(a=>`
+      <div class="mini-artifact" onclick="location.href='artifact.html?id=${a.id}'">
+        <div style="font-size:18px;">🏺</div>
+        <div>
+          <div style="font-size:12px; font-weight:600;">${a.name}</div>
+          <div style="font-size:10px; color:${a.rarity==='国宝'?'var(--accent-red)':'var(--text-muted)'};">${a.rarity}</div>
+        </div>
+      </div>
+    `).join('')}
+    ` : '<div style="font-size:12px; color:var(--text-muted); font-style:italic;">尚无该朝代收藏</div>'}
+  `;
+}
+
+function showEventInPanel(ev, dyn) {
+  const panel = document.getElementById('events-panel');
+  panel.innerHTML = `
+    <div style="padding:16px; background:white; border:1px solid var(--border-light); border-radius:8px; margin-bottom:12px;">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+        <div style="width:8px; height:8px; border-radius:50%; background:var(--accent-red);"></div>
+        <div style="font-size:14px; font-weight:600;">${ev.name}</div>
+        <div style="font-size:11px; color:var(--text-muted);">${Math.abs(ev.year)}${ev.year<0?'BC':'AD'}</div>
+      </div>
+      <div style="font-size:13px; color:var(--text-ink); line-height:1.7;">${ev.desc || '（暂无详细描述）'}</div>
+      <div style="margin-top:10px; font-size:11px; color:var(--text-muted);">所属朝代：${dyn.name}（${Math.abs(dyn.start)}BC–${dyn.end<0?Math.abs(dyn.end)+'BC':dyn.end+'AD'}）</div>
+    </div>
+  `;
+}
+
+function showLinkageIndicator(dynasty) {
+  const ind = document.getElementById('linkage-indicator');
+  const msg = document.getElementById('linkage-msg');
+  const patterns = {
+    '商': '饕餮纹/夔龙纹高亮 · 地图切至殷墟',
+    '西周': '凤鸟纹/窃曲纹高亮 · 地图切至周原',
+    '春秋': '蟠螭纹高亮 · 地图切至列国遗址',
+    '战国': '蟠虺纹高亮 · 地图切至随州/江陵',
+    '秦': '云气纹高亮 · 地图切至咸阳',
+    '西汉': '四神纹高亮 · 地图切至长安',
+  };
+  msg.textContent = `${dynasty} · ${patterns[dynasty] || '地图与纹饰树已联动'}`;
+  ind.style.display = 'block';
+  clearTimeout(ind._timeout);
+  ind._timeout = setTimeout(() => { ind.style.display = 'none'; }, 3500);
+}
+
+function setZoom(level) {
+  currentZoom = level;
+  document.querySelectorAll('.zoom-btn').forEach(b => b.style.borderColor = '');
+  document.getElementById(`zoom-${level}x`).style.borderColor = 'var(--accent-bronze)';
+  document.getElementById(`zoom-${level}x`).style.color = 'var(--accent-bronze)';
+  buildPillar(); // Re-render with zoom (simplified: same layout, future: scale transform)
+}
+
+// Listen for external era-focus events
+document.addEventListener('era-focus', function(e) {
+  const { dynasty } = e.detail || {};
+  if (dynasty) {
+    const found = DYNASTIES.find(d => d.name === dynasty);
+    if (found) showDynastyDetail(found);
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  buildPillar();
+  // Show first dynasty on load
+  showDynastyDetail(DYNASTIES[1]); // 商
+});
+</script>
+</body>
+</html>

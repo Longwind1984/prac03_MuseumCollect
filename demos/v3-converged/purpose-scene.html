@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>礼制场景 — MuseumCollect v3</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/converged.css">
+<style>
+.scene-container {
+  background: linear-gradient(180deg, #1a0d05 0%, #2a1a0a 60%, #1a0d05 100%);
+  border-radius: 16px; padding: 32px; position: relative; overflow: hidden;
+  min-height: 400px;
+}
+.scene-bg {
+  position: absolute; inset: 0; opacity: .15;
+  background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(164,115,44,.05) 10px, rgba(164,115,44,.05) 11px);
+}
+.vessel-slot {
+  width: 80px; height: 80px; border-radius: 12px;
+  border: 2px dashed rgba(164,115,44,.4); display: flex; flex-direction: column;
+  align-items: center; justify-content: center; cursor: pointer; transition: all .3s;
+  position: relative; background: rgba(0,0,0,.3); flex-shrink: 0;
+}
+.vessel-slot.filled {
+  border-style: solid; border-color: rgba(164,115,44,.7);
+  background: rgba(164,115,44,.1);
+}
+.vessel-slot.empty-call {
+  animation: slot-breathe 3s ease-in-out infinite;
+}
+@keyframes slot-breathe {
+  0%, 100% { border-color: rgba(164,115,44,.2); }
+  50% { border-color: rgba(164,115,44,.6); }
+}
+.vessel-slot img { width: 50px; height: 50px; object-fit: contain; filter: invert(1) sepia(1) saturate(2) hue-rotate(5deg); opacity: .85; }
+.vessel-slot .slot-label { font-size: 10px; color: rgba(164,115,44,.7); margin-top: 4px; }
+.vessel-slot.filled .slot-label { color: #d4a857; }
+.rank-banner {
+  background: rgba(164,115,44,.15); border: 1px solid rgba(164,115,44,.4);
+  border-radius: 8px; padding: 10px 20px; text-align: center;
+  font-size: 16px; font-weight: 700; color: #d4a857; transition: all .5s;
+  margin-bottom: 20px;
+}
+.fire-effect {
+  position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+  width: 20px; height: 30px; pointer-events: none;
+}
+.scene-tab { padding: 8px 16px; border-radius: 6px; font-size: 12px; cursor: pointer; transition: all .2s; border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.6); background: transparent; }
+.scene-tab.active { background: rgba(164,115,44,.3); color: #d4a857; border-color: rgba(164,115,44,.5); }
+.drag-source {
+  width: 60px; height: 60px; border-radius: 8px; border: 1px solid var(--border-light);
+  background: white; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; cursor: grab; transition: all .2s; user-select: none;
+}
+.drag-source:hover { border-color: var(--accent-bronze); background: #fdf8f0; }
+.drag-source.dragging { opacity: .5; cursor: grabbing; }
+.drag-source img { width: 36px; height: 36px; object-fit: contain; }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo">器·<span>集</span></a>
+  <div class="nav-links">
+    <a href="catalog.html" class="nav-link">图鉴</a>
+    <a href="time-pillar.html" class="nav-link">时代柱</a>
+    <a href="geo-system.html" class="nav-link">地理</a>
+    <a href="pattern-tree.html" class="nav-link">纹饰树</a>
+    <a href="inscription-reader.html" class="nav-link">铭文</a>
+    <a href="purpose-scene.html" class="nav-link active">礼制场景</a>
+    <a href="caster-profile.html" class="nav-link">铸主</a>
+    <a href="me.html" class="nav-link">我的图鉴</a>
+    <a href="scan.html" class="nav-link">识别</a>
+  </div>
+  <button class="linkage-toggle"><div class="linkage-dot"></div><span class="linkage-label">穿越模式 ●</span></button>
+</nav>
+
+<div class="page-container" style="padding:24px;">
+  <div style="margin-bottom:20px;">
+    <h1 class="page-title" style="margin-bottom:4px;">礼制场景 · 礼器归位</h1>
+    <p class="page-subtitle">五套周礼场景 · 拖拽归位 · 自动判定礼制等级</p>
+  </div>
+
+  <!-- Scene tabs -->
+  <div style="display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap;">
+    <button class="scene-tab active" onclick="switchScene('taolao')">太牢祭祀</button>
+    <button class="scene-tab" onclick="switchScene('yanxiang')">燕飨礼</button>
+    <button class="scene-tab" onclick="switchScene('chaoping')">朝聘礼</button>
+    <button class="scene-tab" onclick="switchScene('junli')">军礼</button>
+    <button class="scene-tab" onclick="switchScene('zangli')">葬礼</button>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr 320px; gap:20px;">
+    <!-- Scene area -->
+    <div>
+      <!-- Rank banner -->
+      <div class="rank-banner" id="rank-banner">⟨ 摆放器物以判定礼制等级 ⟩</div>
+
+      <!-- Scene -->
+      <div class="scene-container" id="scene-container">
+        <div class="scene-bg"></div>
+
+        <!-- Scene title -->
+        <div id="scene-title" style="font-size:20px; font-weight:700; color:#d4a857; text-align:center; margin-bottom:4px; position:relative; z-index:1;"></div>
+        <div id="scene-desc" style="font-size:12px; color:rgba(255,255,255,.5); text-align:center; margin-bottom:20px; position:relative; z-index:1;"></div>
+
+        <!-- Ritual arrangement -->
+        <div id="ritual-grid" style="position:relative; z-index:1;"></div>
+
+        <!-- Poetic caption -->
+        <div id="scene-poem" style="position:absolute; bottom:16px; right:20px; font-size:11px; color:rgba(164,115,44,.5); font-style:italic;"></div>
+      </div>
+
+      <!-- Rank legend -->
+      <div style="margin-top:16px; background:white; border:1px solid var(--border-light); border-radius:8px; padding:16px;">
+        <div style="font-size:13px; font-weight:600; margin-bottom:10px;">列鼎制度参考</div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap; font-size:12px;">
+          <div style="padding:6px 12px; background:#fdf8f0; border-radius:6px; border-left:3px solid #d4a857;">天子：九鼎八簋</div>
+          <div style="padding:6px 12px; background:#f5f5f5; border-radius:6px; border-left:3px solid #888;">诸侯：七鼎六簋</div>
+          <div style="padding:6px 12px; background:#f5f5f5; border-radius:6px; border-left:3px solid #888;">卿大夫：五鼎四簋</div>
+          <div style="padding:6px 12px; background:#f5f5f5; border-radius:6px; border-left:3px solid #888;">士：三鼎二簋</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: vessel library -->
+    <div>
+      <div class="dim-card">
+        <div class="dim-card-title">您的收藏（可归位）</div>
+        <div id="vessel-library" style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;"></div>
+        <div style="font-size:11px; color:var(--text-muted); border-top:1px solid var(--border-light); padding-top:10px;">
+          点击器物将其放入当前场景的对应位置
+        </div>
+      </div>
+
+      <!-- Scene explanation -->
+      <div class="dim-card" style="margin-top:16px;" id="scene-explanation">
+        <div class="dim-card-title">礼制背景</div>
+        <div id="scene-context" style="font-size:13px; color:var(--text-ink); line-height:1.7;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/state.js"></script>
+<script src="js/cross-dim-wiring.js"></script>
+<script>
+const SCENES = {
+  taolao: {
+    name: '太牢祭祀', subtitle: '宗庙祭祖 · 牛羊豕三牲',
+    desc: '天子宗庙大祀，九鼎列陈，牛羊豕三牲为太牢',
+    poem: '太牢祀祖先，九鼎列八簋。钟鸣礼成，天子立于尊。',
+    context: '太牢礼是周代最高等级祭祀，"太牢"指用牛、羊、猪三牲。天子太庙用九鼎配八簋，列于庭中，钟磬奏乐，主祭者在礼乐声中献祭先祖。',
+    slots: [
+      {id:'d1', type:'鼎', label:'鼎一', required:true},
+      {id:'d2', type:'鼎', label:'鼎二', required:true},
+      {id:'d3', type:'鼎', label:'鼎三', required:true},
+      {id:'d4', type:'鼎', label:'鼎四', optional:true},
+      {id:'d5', type:'鼎', label:'鼎五', optional:true},
+      {id:'d6', type:'鼎', label:'鼎六', optional:true},
+      {id:'d7', type:'鼎', label:'鼎七', optional:true},
+      {id:'d8', type:'鼎', label:'鼎八', optional:true},
+      {id:'d9', type:'鼎', label:'鼎九', optional:true},
+      {id:'g1', type:'簋', label:'簋一', required:true},
+      {id:'g2', type:'簋', label:'簋二', required:true},
+      {id:'g3', type:'簋', label:'簋三', optional:true},
+      {id:'g4', type:'簋', label:'簋四', optional:true},
+      {id:'g5', type:'簋', label:'簋五', optional:true},
+      {id:'g6', type:'簋', label:'簋六', optional:true},
+      {id:'g7', type:'簋', label:'簋七', optional:true},
+      {id:'g8', type:'簋', label:'簋八', optional:true},
+    ]
+  },
+  yanxiang: {
+    name: '燕飨礼', subtitle: '诸侯宴飨宾客',
+    desc: '诸侯燕飨，簠盨豆觥列陈，钟鸣响宴',
+    poem: '飨宾以礼，觥筹交错，钟声绕梁，礼乐文明。',
+    context: '燕礼是周代诸侯宴飨宾客的礼仪制度。以酒食为主，设酒器列食器，宾主分席，按爵位高低依次行礼。',
+    slots: [
+      {id:'h1', type:'壶', label:'壶一'},
+      {id:'h2', type:'壶', label:'壶二'},
+      {id:'z1', type:'尊', label:'尊一'},
+      {id:'jue1', type:'爵', label:'爵一'},
+      {id:'jue2', type:'爵', label:'爵二'},
+      {id:'d1', type:'鼎', label:'鼎一'},
+      {id:'g1', type:'簋', label:'簋一'},
+    ]
+  },
+  chaoping: {
+    name: '朝聘礼', subtitle: '诸侯入觐天子',
+    desc: '诸侯五年一觐，持贽礼见天子',
+    poem: '诸侯执贽，朝见天子。礼器陈列，家国有序。',
+    context: '朝聘礼是诸侯定期朝见天子的礼仪。三年一次称"聘"，五年一次称"朝"。使者需持各类礼器作为贽礼呈献。',
+    slots: [
+      {id:'p1', type:'盘', label:'大盘'},
+      {id:'h1', type:'壶', label:'壶'},
+      {id:'d1', type:'鼎', label:'鼎'},
+      {id:'g1', type:'簋', label:'簋'},
+    ]
+  },
+  junli: {
+    name: '军礼', subtitle: '师出有名，礼以伐',
+    desc: '出征前大礼，钟鼓铙钲，钺钟列阵',
+    poem: '师出以律，钟鼓声宣。礼在旗鼓，义在刀钺。',
+    context: '军礼是周代战争出征前后的礼仪。出征时有"命将"之礼，以钺授权，钟鼓铙钲为军乐。',
+    slots: [
+      {id:'yue1', type:'钺', label:'钺（授权）'},
+      {id:'bell1', type:'编钟', label:'钟一'},
+      {id:'bell2', type:'编钟', label:'钟二'},
+      {id:'d1', type:'鼎', label:'食鼎'},
+    ]
+  },
+  zangli: {
+    name: '葬礼', subtitle: '随葬列鼎，地下礼制',
+    desc: '墓葬随葬器，以死者生前等级为准',
+    poem: '列鼎随葬，铜器永守。三千年后出土，礼制重现。',
+    context: '周代葬礼严格按照等级制度配置随葬铜器。同一套列鼎在地下保存，成为后世考古发现最重要的实物证据。',
+    slots: [
+      {id:'d1', type:'鼎', label:'列鼎一'},
+      {id:'d2', type:'鼎', label:'列鼎二'},
+      {id:'d3', type:'鼎', label:'列鼎三'},
+      {id:'g1', type:'簋', label:'簋一'},
+      {id:'g2', type:'簋', label:'簋二'},
+      {id:'misc', type:'其他', label:'明器'},
+    ]
+  },
+};
+
+const COLLECTED_VESSELS = [
+  {id:'houmuwu_ding', name:'后母戊鼎', type:'鼎', subtype:'方鼎', silhouette:'fangding', rarity:'国宝'},
+  {id:'da_yu_ding', name:'大盂鼎', type:'鼎', subtype:'圆鼎', silhouette:'yuanding', rarity:'国宝'},
+  {id:'mao_gong_ding', name:'毛公鼎', type:'鼎', subtype:'圆鼎', silhouette:'yuanding', rarity:'国宝'},
+  {id:'da_ke_ding', name:'大克鼎', type:'鼎', subtype:'圆鼎', silhouette:'yuanding', rarity:'国宝'},
+  {id:'li_gui', name:'利簋', type:'簋', subtype:'簋', silhouette:'gui', rarity:'国宝'},
+  {id:'ban_gui', name:'班簋', type:'簋', subtype:'簋', silhouette:'gui', rarity:'国宝'},
+  {id:'he_zun', name:'何尊', type:'尊', subtype:'尊', silhouette:'fang_zun', rarity:'国宝'},
+  {id:'lian_he_fang_hu', name:'莲鹤方壶', type:'壶', subtype:'方壶', silhouette:'fanghu', rarity:'国宝'},
+  {id:'san_shi_pan', name:'散氏盘', type:'盘', subtype:'盘', silhouette:'pan', rarity:'国宝'},
+  {id:'zeng_houyi_bianzhong', name:'曾侯乙编钟', type:'编钟', subtype:'编钟', silhouette:'bianzhong', rarity:'国宝'},
+  {id:'yuewang_goujian_jian', name:'越王勾践剑', type:'兵器', subtype:'剑', silhouette:'yuewang_jian', rarity:'国宝'},
+  {id:'changxin_gonglamp', name:'长信宫灯', type:'灯', subtype:'灯', silhouette:'changxin_gongdeng', rarity:'国宝'},
+];
+
+let currentScene = 'taolao';
+let slotFills = {}; // slotId -> vessel
+
+function switchScene(sceneId) {
+  currentScene = sceneId;
+  slotFills = {};
+  document.querySelectorAll('.scene-tab').forEach(t => t.classList.toggle('active', t.textContent.includes(SCENES[sceneId].name.slice(0,2))));
+  renderScene();
+}
+
+function renderScene() {
+  const scene = SCENES[currentScene];
+  document.getElementById('scene-title').textContent = scene.name;
+  document.getElementById('scene-desc').textContent = scene.subtitle;
+  document.getElementById('scene-poem').textContent = scene.poem;
+  document.getElementById('scene-context').textContent = scene.context;
+  updateRankBanner();
+  renderRitualGrid();
+  renderVesselLibrary();
+}
+
+function renderRitualGrid() {
+  const scene = SCENES[currentScene];
+  const grid = document.getElementById('ritual-grid');
+
+  // Split slots by type for layout
+  const dingSlots = scene.slots.filter(s => s.type === '鼎');
+  const otherSlots = scene.slots.filter(s => s.type !== '鼎');
+
+  grid.innerHTML = `
+    <div style="margin-bottom:12px;">
+      <div style="font-size:10px; color:rgba(164,115,44,.5); margin-bottom:6px;">鼎</div>
+      <div style="display:flex; flex-wrap:wrap; gap:8px;">${dingSlots.map(slot => renderSlot(slot)).join('')}</div>
+    </div>
+    ${otherSlots.length > 0 ? `
+    <div>
+      <div style="font-size:10px; color:rgba(164,115,44,.5); margin-bottom:6px;">配器</div>
+      <div style="display:flex; flex-wrap:wrap; gap:8px;">${otherSlots.map(slot => renderSlot(slot)).join('')}</div>
+    </div>` : ''}
+  `;
+}
+
+function renderSlot(slot) {
+  const filled = slotFills[slot.id];
+  if (filled) {
+    return `
+    <div class="vessel-slot filled" onclick="clearSlot('${slot.id}')" title="点击取出 ${filled.name}">
+      <img src="../../assets/silhouettes/${filled.silhouette}.svg" onerror="this.style.display='none'">
+      <div class="slot-label">${filled.name.slice(0,4)}</div>
+      ${filled.rarity === '国宝' ? '<div style="position:absolute;top:2px;right:2px;background:var(--accent-red);color:white;font-size:7px;padding:1px 3px;border-radius:2px;">国宝</div>' : ''}
+    </div>`;
+  }
+  return `
+  <div class="vessel-slot empty-call" onclick="promptFillSlot('${slot.id}','${slot.type}')" title="${slot.label} — 点击归位">
+    <div style="font-size:20px; opacity:.4;">?</div>
+    <div class="slot-label">${slot.label}</div>
+  </div>`;
+}
+
+function renderVesselLibrary() {
+  const lib = document.getElementById('vessel-library');
+  lib.innerHTML = COLLECTED_VESSELS.map(v => `
+    <div class="drag-source" onclick="placeVessel('${v.id}')" title="${v.name}">
+      <img src="../../assets/silhouettes/${v.silhouette}.svg" onerror="this.style.display='none'; this.parentNode.innerHTML+='<span style=\\'font-size:20px;\\'>🏺</span>'">
+      <div style="font-size:8px; color:var(--text-muted); margin-top:2px; text-align:center;">${v.name.slice(0,4)}</div>
+    </div>
+  `).join('');
+}
+
+let pendingSlotId = null;
+let pendingSlotType = null;
+
+function promptFillSlot(slotId, type) {
+  pendingSlotId = slotId;
+  pendingSlotType = type;
+  // Find matching vessels
+  const matching = COLLECTED_VESSELS.filter(v => v.type === type || (type === '鼎' && v.type === '鼎'));
+  if (matching.length > 0) {
+    placeVessel(matching[0].id);
+  }
+}
+
+function placeVessel(vesselId) {
+  const vessel = COLLECTED_VESSELS.find(v => v.id === vesselId);
+  if (!vessel) return;
+  const scene = SCENES[currentScene];
+
+  // Find first empty slot that matches type
+  const emptySlot = scene.slots.find(s => !slotFills[s.id] && (s.type === vessel.type || (s.type === '鼎' && vessel.type === '鼎') || (s.type === '簋' && vessel.type === '簋') || s.type === '其他'));
+  if (!emptySlot) {
+    alert(`没有合适的${vessel.type}空位了`);
+    return;
+  }
+  slotFills[emptySlot.id] = vessel;
+  renderRitualGrid();
+  updateRankBanner();
+}
+
+function clearSlot(slotId) {
+  delete slotFills[slotId];
+  renderRitualGrid();
+  updateRankBanner();
+}
+
+function updateRankBanner() {
+  const dingCount = Object.values(slotFills).filter(v => v.type === '鼎').length;
+  const guiCount = Object.values(slotFills).filter(v => v.type === '簋').length;
+  const banner = document.getElementById('rank-banner');
+  let rank = '未定级';
+  let color = 'rgba(255,255,255,.4)';
+  if (dingCount >= 9 && guiCount >= 8) { rank = '⭐ 天子之礼 (九鼎八簋)'; color = '#d4a857'; }
+  else if (dingCount >= 7 && guiCount >= 6) { rank = '诸侯之礼 (七鼎六簋)'; color = '#b89046'; }
+  else if (dingCount >= 5 && guiCount >= 4) { rank = '卿大夫之礼 (五鼎四簋)'; color = '#a4732c'; }
+  else if (dingCount >= 3 && guiCount >= 2) { rank = '士之礼 (三鼎两簋)'; color = '#7a5a30'; }
+  else if (dingCount > 0 || guiCount > 0) { rank = `已置 ${dingCount} 鼎 ${guiCount} 簋`; color = 'rgba(255,255,255,.5)'; }
+  else { rank = '⟨ 点击空位归位器物以判定礼制等级 ⟩'; color = 'rgba(255,255,255,.3)'; }
+  banner.textContent = rank;
+  banner.style.color = color;
+  banner.style.borderColor = dingCount >= 9 ? 'rgba(212,168,87,.6)' : 'rgba(164,115,44,.3)';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderScene();
+  // Pre-fill a few slots for demo
+  setTimeout(() => {
+    const houmuwu = COLLECTED_VESSELS.find(v => v.id === 'houmuwu_ding');
+    const dayu = COLLECTED_VESSELS.find(v => v.id === 'da_yu_ding');
+    const maogong = COLLECTED_VESSELS.find(v => v.id === 'mao_gong_ding');
+    if (houmuwu) { slotFills['d1'] = houmuwu; }
+    if (dayu) { slotFills['d2'] = dayu; }
+    if (maogong) { slotFills['d3'] = maogong; }
+    const ligui = COLLECTED_VESSELS.find(v => v.id === 'li_gui');
+    if (ligui) { slotFills['g1'] = ligui; }
+    renderRitualGrid();
+    updateRankBanner();
+  }, 200);
+});
+</script>
+</body>
+</html>
