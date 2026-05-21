@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>地理系统 v3 — MuseumCollect</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&display=swap" />
+  <style>
+    :root {
+      --ink-black: #0a0805;
+      --ink-dark:  #16120e;
+      --ink-mid:   #2a2318;
+      --paper:     #f4ebd9;
+      --paper-dark:#e8dcc4;
+      --gold:      #d4a857;
+      --gold-dim:  #a07838;
+      --bronze:    #7a5a3a;
+      --cinnabar:  #a73a2a;
+      --jade:      #3a6a4a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--ink-black);
+      color: var(--paper);
+      font-family: 'Noto Serif SC', 'Source Han Serif', 'STSong', serif;
+      min-height: 100vh;
+    }
+
+    /* Era toggle pills */
+    .era-pill {
+      padding: 6px 16px;
+      border-radius: 3px;
+      border: 1px solid rgba(212,168,87,0.3);
+      background: rgba(212,168,87,0.05);
+      color: #c0a880;
+      cursor: pointer;
+      font-size: 13px;
+      font-family: inherit;
+      transition: all 0.2s ease;
+      letter-spacing: 0.05em;
+    }
+    .era-pill:hover {
+      border-color: rgba(212,168,87,0.6);
+      background: rgba(212,168,87,0.1);
+      color: #e8d090;
+    }
+    .era-pill.active {
+      border-color: var(--gold);
+      background: rgba(212,168,87,0.15);
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* View mode tabs */
+    .view-tab {
+      padding: 5px 14px;
+      border-radius: 3px;
+      border: 1px solid rgba(167,58,42,0.3);
+      background: rgba(167,58,42,0.05);
+      color: #b09070;
+      cursor: pointer;
+      font-size: 12px;
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+    .view-tab:hover {
+      border-color: rgba(167,58,42,0.6);
+      background: rgba(167,58,42,0.1);
+      color: #e0b090;
+    }
+    .view-tab.active {
+      border-color: var(--cinnabar);
+      background: rgba(167,58,42,0.15);
+      color: #e8c0a0;
+    }
+
+    /* Map container */
+    #map-container {
+      width: 100%;
+      height: calc(100vh - 180px);
+      min-height: 480px;
+      position: relative;
+      border: 1px solid rgba(212,168,87,0.2);
+      border-radius: 4px;
+      overflow: hidden;
+      background: #1a1510;
+    }
+
+    /* Info bar */
+    .info-bar {
+      display: flex;
+      gap: 24px;
+      padding: 10px 20px;
+      background: rgba(26,21,16,0.95);
+      border-bottom: 1px solid rgba(212,168,87,0.15);
+    }
+    .info-stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 80px;
+    }
+    .info-stat-value {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--gold);
+    }
+    .info-stat-label {
+      font-size: 10px;
+      color: #806050;
+      letter-spacing: 0.1em;
+      margin-top: 2px;
+    }
+
+    /* Era legend */
+    .era-legend {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #a09070;
+    }
+    .era-legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+      opacity: 0.7;
+    }
+
+    /* Event log / notification */
+    #event-log {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      z-index: 200;
+      max-width: 320px;
+    }
+    .event-notification {
+      background: rgba(10,8,5,0.92);
+      border: 1px solid rgba(212,168,87,0.4);
+      border-radius: 4px;
+      padding: 8px 14px;
+      font-size: 12px;
+      color: #e8d090;
+      margin-top: 6px;
+      animation: fadeInUp 0.3s ease, fadeOut 0.4s ease 3s forwards;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; }
+    }
+
+    /* Gold pulse for treasure markers */
+    @keyframes goldPulse {
+      0%, 100% { opacity: 0.4; r: 14; }
+      50%       { opacity: 0.8; r: 18; }
+    }
+    .glow-ring {
+      animation: goldPulse 2.5s ease-in-out infinite;
+    }
+
+    /* Compass rose */
+    .compass {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 48px;
+      height: 48px;
+      opacity: 0.5;
+      z-index: 30;
+      pointer-events: none;
+    }
+
+    /* Scale bar */
+    .scale-bar {
+      position: absolute;
+      bottom: 16px;
+      right: 80px;
+      z-index: 30;
+      pointer-events: none;
+    }
+    .scale-bar-line {
+      height: 2px;
+      width: 80px;
+      background: linear-gradient(90deg, transparent, #c0a880, transparent);
+      position: relative;
+    }
+    .scale-bar-text {
+      font-size: 9px;
+      color: #806050;
+      text-align: center;
+      margin-top: 2px;
+    }
+
+    /* Dynasty label pill in top-left of map */
+    #dynasty-pill {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 40;
+      padding: 6px 14px;
+      border-radius: 3px;
+      font-size: 14px;
+      font-family: inherit;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      border: 1px solid rgba(212,168,87,0.4);
+      background: rgba(10,8,5,0.85);
+      color: var(--gold);
+      transition: all 0.4s ease;
+    }
+
+    /* Event bus demo panel */
+    #event-demo {
+      background: rgba(26,21,16,0.95);
+      border: 1px solid rgba(212,168,87,0.2);
+      border-radius: 4px;
+      padding: 16px 20px;
+      margin-top: 12px;
+    }
+
+    .demo-btn {
+      padding: 6px 14px;
+      border-radius: 3px;
+      border: 1px solid rgba(212,168,87,0.3);
+      background: rgba(212,168,87,0.06);
+      color: #c0a880;
+      cursor: pointer;
+      font-size: 12px;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+    .demo-btn:hover {
+      background: rgba(212,168,87,0.12);
+      color: var(--gold);
+      border-color: rgba(212,168,87,0.6);
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--ink-dark); }
+    ::-webkit-scrollbar-thumb { background: rgba(212,168,87,0.3); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+  <!-- ─── Header ──────────────────────────────────────────────── -->
+  <header style="border-bottom:1px solid rgba(212,168,87,0.2);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;background:rgba(16,12,8,0.98);">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span style="font-size:10px;letter-spacing:0.4em;color:#806050;">MUSEUMCOLLECT</span>
+      <span style="color:rgba(212,168,87,0.3);">|</span>
+      <span style="font-size:14px;color:#d4a857;letter-spacing:0.08em;">地理系统 v3</span>
+    </div>
+    <div style="font-size:11px;color:#605040;">B1 Phase · Geo System Demo</div>
+  </header>
+
+  <!-- ─── Controls bar ────────────────────────────────────────── -->
+  <div style="padding:10px 24px;background:rgba(20,16,10,0.98);border-bottom:1px solid rgba(212,168,87,0.12);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+
+    <!-- Era toggles -->
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+      <span style="font-size:11px;color:#705040;letter-spacing:0.2em;margin-right:4px;">时代</span>
+      <button class="era-pill" data-era="夏">夏</button>
+      <button class="era-pill active" data-era="商">商</button>
+      <button class="era-pill" data-era="西周">西周</button>
+      <button class="era-pill" data-era="春秋">春秋</button>
+      <button class="era-pill" data-era="战国">战国</button>
+      <button class="era-pill" data-era="汉">汉</button>
+      <button class="era-pill" data-era="现代">现代</button>
+    </div>
+
+    <!-- View mode tabs -->
+    <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+      <span style="font-size:11px;color:#705040;letter-spacing:0.2em;margin-right:4px;">视图</span>
+      <button class="view-tab active" data-view="excavation">考古遗址</button>
+      <button class="view-tab" data-view="museum">馆藏分布</button>
+      <button class="view-tab" data-view="overseas">海外流散</button>
+    </div>
+  </div>
+
+  <!-- ─── Stats bar ────────────────────────────────────────────── -->
+  <div class="info-bar">
+    <div class="info-stat">
+      <span class="info-stat-value" id="stat-sites">—</span>
+      <span class="info-stat-label">遗址点</span>
+    </div>
+    <div class="info-stat">
+      <span class="info-stat-value" id="stat-collected">16</span>
+      <span class="info-stat-label">已收藏器物</span>
+    </div>
+    <div class="info-stat">
+      <span class="info-stat-value" id="stat-museums">—</span>
+      <span class="info-stat-label">已踏足博物馆</span>
+    </div>
+    <div class="info-stat">
+      <span class="info-stat-value" style="color:#a73a2a;" id="stat-treasure">9</span>
+      <span class="info-stat-label">国宝级器物</span>
+    </div>
+    <div style="margin-left:auto;display:flex;align-items:center;gap:12px;">
+      <!-- Era legend -->
+      <div class="era-legend" id="era-legend"></div>
+    </div>
+  </div>
+
+  <!-- ─── Map area ─────────────────────────────────────────────── -->
+  <div style="padding:0 24px;padding-top:8px;">
+
+    <div id="map-container">
+      <!-- D3 map renders here -->
+      <div id="dynasty-pill">商 · 约1600-1046 BC</div>
+
+      <!-- Compass rose (SVG) -->
+      <svg class="compass" viewBox="0 0 48 48" fill="none">
+        <circle cx="24" cy="24" r="20" stroke="rgba(212,168,87,0.3)" stroke-width="1"/>
+        <path d="M24 4 L27 20 L24 18 L21 20 Z" fill="rgba(212,168,87,0.7)"/>
+        <path d="M24 44 L27 28 L24 30 L21 28 Z" fill="rgba(200,168,120,0.4)"/>
+        <path d="M4 24 L20 27 L18 24 L20 21 Z" fill="rgba(200,168,120,0.4)"/>
+        <path d="M44 24 L28 27 L30 24 L28 21 Z" fill="rgba(200,168,120,0.4)"/>
+        <text x="24" y="12" text-anchor="middle" font-size="7" fill="rgba(212,168,87,0.8)">北</text>
+        <circle cx="24" cy="24" r="2" fill="rgba(212,168,87,0.6)"/>
+      </svg>
+
+      <!-- Scale bar -->
+      <div class="scale-bar" id="scale-bar">
+        <div class="scale-bar-line"></div>
+        <div class="scale-bar-text">约 500 km</div>
+      </div>
+
+      <!-- Event log (bottom-left) -->
+      <div id="event-log"></div>
+    </div>
+
+    <!-- ─── Event bus demo + Legend ──────────────────────────────── -->
+    <div id="event-demo">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <span style="font-size:12px;color:#d4a857;letter-spacing:0.08em;">跨组件联动测试</span>
+        <span style="font-size:10px;color:#605040;">发送 era-focus CustomEvent → 地图自动切换时代</span>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+        <span style="font-size:11px;color:#806050;">触发 era-focus：</span>
+        <button class="demo-btn" onclick="fireEraFocus('商')">商</button>
+        <button class="demo-btn" onclick="fireEraFocus('西周')">西周</button>
+        <button class="demo-btn" onclick="fireEraFocus('春秋')">春秋</button>
+        <button class="demo-btn" onclick="fireEraFocus('战国')">战国</button>
+        <span style="font-size:11px;color:#504030;margin-left:8px;">接收到的事件：</span>
+        <span id="event-received" style="font-size:11px;color:#a09070;min-width:180px;">—</span>
+      </div>
+      <div style="margin-top:10px;font-size:10px;color:#504030;line-height:1.5;">
+        监听 region-focus：<span id="region-received" style="color:#9090a0;">—</span><br>
+        监听 site-focus：<span id="site-received" style="color:#9090a0;">—</span>
+      </div>
+    </div>
+
+    <!-- ─── Legend ───────────────────────────────────────────────── -->
+    <div style="margin-top:10px;padding:12px 20px;background:rgba(20,16,10,0.95);border:1px solid rgba(212,168,87,0.12);border-radius:4px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+      <span style="font-size:11px;color:#705040;letter-spacing:0.15em;">图例</span>
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#a09070;">
+        <svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="7" fill="rgba(212,168,87,0.2)" stroke="#d4a857" stroke-width="1.5"/><circle cx="9" cy="9" r="11" fill="none" stroke="#d4a857" stroke-width="1" opacity="0.4"/></svg>
+        国宝级遗址 / 博物馆
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#a09070;">
+        <svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="6" fill="rgba(201,168,95,0.2)" stroke="#c9a85f" stroke-width="1.5"/></svg>
+        一级文物点
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#a09070;">
+        <svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="4" fill="rgba(107,74,138,0.2)" stroke="#6b4a8a" stroke-width="1.5"/></svg>
+        二级 / 普通遗址
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#a09070;">
+        <svg width="22" height="12" viewBox="0 0 22 12"><path d="M0 6 L22 6" stroke="#c8a96e" stroke-width="2.5"/></svg>
+        黄河
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#a09070;">
+        <svg width="22" height="12" viewBox="0 0 22 12"><path d="M0 6 L22 6" stroke="#7ab0d4" stroke-width="3"/></svg>
+        长江
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#a09070;">
+        <svg width="22" height="12" viewBox="0 0 22 12">
+          <rect width="20" height="10" x="1" y="1" fill="rgba(74,90,58,0.25)" stroke="rgba(74,90,58,0.6)" stroke-width="1" stroke-dasharray="4,2"/>
+        </svg>
+        古国疆域 overlay
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#a09070;">
+        <svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="6" fill="#d4a857" stroke="#d4a857" stroke-width="1.5"/><text x="9" y="13" text-anchor="middle" font-size="6" fill="#000">已</text></svg>
+        用户已收藏
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ─── Scripts ──────────────────────────────────────────────── -->
+  <script src="geo-system.js"></script>
+  <script>
+    // ── Resolve correct assets path ─────────────────────────────────
+    // We are in /demos/v3-shared/geo-system/index.html
+    // Assets are in /assets/geo/
+    // So relative path is ../../../assets/geo/
+    const ASSETS_BASE = '../../../assets/geo/';
+
+    // Patch geo-system.js asset loading (override ASSETS_PATH derivation)
+    // We do this by monkey-patching before initGeoSystem is called
+    const _origFetch = window.fetch;
+    window.fetch = function(url, ...args) {
+      // Rewrite any /assets/geo/ request to use correct relative path
+      if (typeof url === 'string' && url.includes('assets/geo/')) {
+        const filename = url.split('assets/geo/').pop();
+        return _origFetch(ASSETS_BASE + filename, ...args);
+      }
+      return _origFetch(url, ...args);
+    };
+
+    // ── State ──────────────────────────────────────────────────────
+    let geoCtrl = null;
+    let currentEra = '商';
+    let currentView = 'excavation';
+
+    // Dynasty display info
+    const DYNASTY_INFO = {
+      '夏':   { label: '夏 · 约1750-1500 BC', color: '#6e4a2e' },
+      '商':   { label: '商 · 约1600-1046 BC', color: '#4a5a3a' },
+      '西周': { label: '西周 · 1046-771 BC', color: '#a73a2a' },
+      '春秋': { label: '春秋 · 771-476 BC',  color: '#2a2a3a' },
+      '战国': { label: '战国 · 476-221 BC',  color: '#7a3a2a' },
+      '汉':   { label: '汉 · 202 BC-220 AD', color: '#b89046' },
+      '现代': { label: '现代', color: '#3a3a5a' },
+    };
+
+    // ── Init geo system ─────────────────────────────────────────────
+    async function initMap() {
+      const container = document.getElementById('map-container');
+      geoCtrl = await initGeoSystem(container, {
+        initialEra: '商',
+        initialView: 'excavation',
+        onSiteClick: (props, viewMode) => {
+          logEvent(`site-click: ${props.name}`);
+        },
+        onRegionClick: (props) => {
+          logEvent(`region-click: ${props.name} (${props.dynasty})`);
+        }
+      });
+
+      // Update stats
+      updateStats();
+    }
+
+    function updateStats() {
+      // Mock stats based on view
+      const siteCount = currentView === 'excavation' ? 28 : currentView === 'museum' ? 15 : 10;
+      const museumsVisited = 3;
+      document.getElementById('stat-sites').textContent = siteCount;
+      document.getElementById('stat-museums').textContent = museumsVisited;
+    }
+
+    // ── Era pill click handler ──────────────────────────────────────
+    document.querySelectorAll('.era-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const era = btn.dataset.era;
+        switchEra(era);
+      });
+    });
+
+    function switchEra(era) {
+      currentEra = era;
+
+      // Update pills
+      document.querySelectorAll('.era-pill').forEach(b => {
+        b.classList.toggle('active', b.dataset.era === era);
+      });
+
+      // Update dynasty pill label
+      const info = DYNASTY_INFO[era] || {};
+      const pill = document.getElementById('dynasty-pill');
+      pill.textContent = info.label || era;
+      pill.style.borderColor = info.color ? info.color + '80' : 'rgba(212,168,87,0.4)';
+      pill.style.color = info.color || '#d4a857';
+
+      // Switch map
+      if (geoCtrl) geoCtrl.setEra(era);
+
+      logEvent(`切换时代：${era}`);
+    }
+
+    // ── View tab click handler ──────────────────────────────────────
+    document.querySelectorAll('.view-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const view = btn.dataset.view;
+        switchView(view);
+      });
+    });
+
+    function switchView(view) {
+      currentView = view;
+
+      document.querySelectorAll('.view-tab').forEach(b => {
+        b.classList.toggle('active', b.dataset.view === view);
+      });
+
+      if (geoCtrl) geoCtrl.setView(view);
+      updateStats();
+      logEvent(`切换视图：${view === 'excavation' ? '考古遗址' : view === 'museum' ? '馆藏分布' : '海外流散'}`);
+    }
+
+    // ── Event bus demo ──────────────────────────────────────────────
+    function fireEraFocus(dynasty) {
+      document.dispatchEvent(new CustomEvent('era-focus', {
+        detail: { dynasty }
+      }));
+    }
+
+    // Listen to events for demo display
+    document.addEventListener('era-focus', e => {
+      const el = document.getElementById('event-received');
+      if (el) el.textContent = `era-focus → dynasty: "${e.detail.dynasty}" at ${new Date().toLocaleTimeString()}`;
+      // Also sync the pills
+      const era = e.detail.dynasty;
+      if (era && DYNASTY_INFO[era]) {
+        switchEra(era);
+      }
+    });
+
+    document.addEventListener('region-focus', e => {
+      const el = document.getElementById('region-received');
+      if (el) el.textContent = `${e.detail.name} (${e.detail.dynasty})`;
+    });
+
+    document.addEventListener('site-focus', e => {
+      const el = document.getElementById('site-received');
+      if (el) el.textContent = `${e.detail.name} [${e.detail.dynasty || ''}]`;
+    });
+
+    // ── Event log ────────────────────────────────────────────────────
+    function logEvent(msg) {
+      const log = document.getElementById('event-log');
+      const note = document.createElement('div');
+      note.className = 'event-notification';
+      note.textContent = msg;
+      log.appendChild(note);
+      setTimeout(() => note.remove(), 4000);
+    }
+
+    // ── Build era legend ────────────────────────────────────────────
+    function buildEraLegend() {
+      const legendEl = document.getElementById('era-legend');
+      const eras = [
+        { label: '商', color: '#4a5a3a' },
+        { label: '西周', color: '#a73a2a' },
+        { label: '春秋', color: '#2a2a3a' },
+        { label: '战国', color: '#7a3a2a' },
+        { label: '汉', color: '#b89046' },
+      ];
+      eras.forEach(e => {
+        const item = document.createElement('div');
+        item.className = 'era-legend';
+        item.innerHTML = `
+          <div class="era-legend-dot" style="background:${e.color};"></div>
+          <span>${e.label}</span>
+        `;
+        legendEl.appendChild(item);
+      });
+    }
+
+    // ── Boot ────────────────────────────────────────────────────────
+    buildEraLegend();
+    initMap().catch(err => {
+      console.error('[GeoSystem Demo] Init failed:', err);
+      document.getElementById('map-container').innerHTML =
+        `<div style="color:#d4a857;padding:40px;text-align:center;font-size:14px;">
+          地图加载失败: ${err.message}<br>
+          <span style="font-size:11px;color:#806050;margin-top:8px;display:block;">
+            请确保从 HTTP 服务器访问（不能用 file:// 协议）
+          </span>
+        </div>`;
+    });
+  </script>
+
+</body>
+</html>

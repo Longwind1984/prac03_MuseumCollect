@@ -1,0 +1,44 @@
+<!-- 兽体卷曲纹 | 西周晚-春秋 | typical on: 鼎 簋 盨 盘 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+  <!-- Shouti juanqu: coiled beast body — kuilong variant, body fully curled into spiral -->
+  <!-- The beast's body loops around itself like a filled S or C -->
+
+  <!-- Main beast (large, body coiling in S) -->
+  <!-- Head (upper right, looking down-left) -->
+  <path d="M58 12 C66 10 72 16 70 24 C68 30 62 32 56 30" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  <!-- Eye -->
+  <circle cx="66" cy="20" r="3" stroke="currentColor" stroke-width="1.5"/>
+  <circle cx="66" cy="20" r="1.2" fill="currentColor"/>
+  <!-- Jaw (open) -->
+  <path d="M58 12 C56 16 54 22 56 30" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- C-horn -->
+  <path d="M60 10 C64 4 70 4 70 10 C70 14 66 14 64 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Neck connecting to body -->
+  <path d="M56 30 C50 34 44 34 40 38" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Body curling: first major loop (outer) -->
+  <path d="M40 38 C34 44 26 46 22 52 C18 58 20 66 28 68 C36 70 44 64 46 56 C48 48 44 40 38 38" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Body inner coil -->
+  <path d="M38 38 C34 42 30 46 28 52 C26 58 28 64 34 64 C40 64 42 58 40 52 C38 46 34 42 36 38" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+
+  <!-- Inner-inner coil (core of the spiral) -->
+  <path d="M36 44 C32 48 30 52 32 56 C34 60 38 58 38 54 C38 50 36 46 36 44" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Center core point -->
+  <circle cx="35" cy="54" r="2.5" fill="currentColor"/>
+
+  <!-- Tail curling back upward-right -->
+  <path d="M46 56 C50 52 56 50 60 46 C64 42 64 36 58 32" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Tail tip curling into itself -->
+  <path d="M58 32 C54 28 50 28 50 32 C50 36 54 38 58 38 C62 38 64 34 62 30" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Spine fins (short spiky projections along back) -->
+  <path d="M50 36 L54 30 M44 40 L46 34 M40 46 L44 42" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+
+  <!-- Single leg (kuilong variant) hanging from body -->
+  <path d="M24 62 C20 66 18 72 20 76" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Claw -->
+  <path d="M20 76 L16 80 M20 76 L20 80 M20 76 L24 80" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+</svg>
