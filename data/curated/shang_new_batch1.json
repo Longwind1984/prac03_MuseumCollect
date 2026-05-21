@@ -1,0 +1,1130 @@
+[
+  {
+    "id": "simuxin_ding",
+    "name_zh": "司母辛鼎",
+    "name_pinyin": "Si Mu Xin Ding",
+    "name_alt": ["后母辛鼎"],
+    "dynasty": "商",
+    "period": "商代晚期(武丁时期)",
+    "approx_year": "约公元前1250年",
+    "excavation": {
+      "year": 1976,
+      "site": "河南省安阳市殷墟妇好墓(M5)",
+      "ancient_state": "商",
+      "method": "郑振香主持系统发掘",
+      "dating_method": "铭文+类型学",
+      "significance": "妇好之子为祭祀母亲所铸,殷墟博物馆镇馆之宝"
+    },
+    "current_museum": "中国社会科学院考古研究所 / 殷墟博物馆",
+    "size": { "height_cm": 80.1, "mouth_length_cm": 64.0, "mouth_width_cm": 48.0, "weight_kg": 117.5 },
+    "type": "食器",
+    "form_subtype": "方鼎",
+    "form_detail": "长方形腹,直立双耳,四柱足,口沿下、腹部及足部均有纹饰",
+    "distinctive_features": ["妇好子所铸祭母礼器", "殷墟出土方鼎中最重者之一"],
+    "patterns_structured": {
+      "main": ["兽面纹 — 腹四侧"],
+      "secondary": ["夔龙纹 — 腹下边带"],
+      "ground": ["云雷纹 — 全身底纹"],
+      "rim": ["兽面纹 — 口沿下及足部上段", "乳钉纹 — 腰部"]
+    },
+    "inscription": {
+      "has": true,
+      "text": "司母辛",
+      "char_count": 3,
+      "summary": "'辛'为妇好庙号,'司母辛'意为'祭祀母亲辛',由妇好之子铸造以祭祀其母",
+      "stage": "商晚期金文"
+    },
+    "purpose": {
+      "primary": "祭祀礼器",
+      "context": "妇好之子祖庚或祖甲为祭祀母亲妇好(庙号辛)所铸",
+      "user_class": "商王室"
+    },
+    "craft": {
+      "primary": "范铸法",
+      "details": "整体范铸,花纹精工",
+      "achievements": "商代晚期方鼎工艺典范"
+    },
+    "rarity_level": "国宝",
+    "scholarly_status": "妇好墓出土礼器中的核心重器,与后母戊鼎在题材上互为印证",
+    "provenance_timeline": [
+      {"year": 1976, "event": "妇好墓(M5)发掘出土"},
+      {"year": 1976, "event": "入藏中国社会科学院考古研究所,现陈列殷墟博物馆"}
+    ],
+    "related_artifacts": [
+      {"id": "fuhao_xiaozun", "relation": "同出妇好墓"},
+      {"id": "houmuwu_ding", "relation": "同为商王为母铸鼎,题材相同"}
+    ],
+    "story_brief": "司母辛鼎1976年出土于安阳殷墟妇好墓,由妇好之子为祭祀其母(庙号'辛')而铸。高80.1cm,重117.5kg,是妇好墓出土青铜器中的重器。与后母戊鼎('戊'为妇妌庙号)在题材上互为呼应——均为商王子孙为母铸鼎祭祀。器身兽面纹精工,展现商晚期范铸技艺。现陈列于殷墟博物馆,为该馆标志性藏品。",
+    "image_urls": [
+      {"url": "https://commons.wikimedia.org/wiki/Category:Tomb_of_Fu_Hao", "source": "Wikimedia Commons", "license": "CC BY-SA (各文件许可不一)", "attribution": "见各文件页", "caption": "妇好墓出土文物相关图片"}
+    ],
+    "3d_or_video": null,
+    "data_sources": [
+      {"field": "size,inscription,significance", "source": "Wikipedia EN (Simu Xin Ding)", "url": "https://en.wikipedia.org/wiki/Simu_Xin_Ding"},
+      {"field": "story,museum", "source": "Yinxu Museum / Artbaiguan article", "url": "https://abg.livemuseum.it/yinxu-museum-tomb-fuhao-simuxin-ding/"}
+    ]
+  },
+  {
+    "id": "fuhao_yue",
+    "name_zh": "妇好铜钺",
+    "name_pinyin": "Fu Hao Tong Yue",
+    "name_alt": ["妇好大钺", "Fu Hao Bronze Yue Axe"],
+    "dynasty": "商",
+    "period": "商代晚期(武丁时期)",
+    "approx_year": "约公元前1250年",
+    "excavation": {
+      "year": 1976,
+      "site": "河南省安阳市殷墟妇好墓(M5)",
+      "ancient_state": "商",
+      "method": "郑振香主持系统发掘",
+      "dating_method": "铭文+类型学",
+      "significance": "中国女性军事统帅权力的最直接实物证明"
+    },
+    "current_museum": "中国国家博物馆",
+    "size": { "length_cm": 39.5, "blade_width_cm": 37.5, "weight_kg": 9.0 },
+    "type": "兵器",
+    "form_subtype": "钺(礼仪兵器)",
+    "form_detail": "大型扁平铜钺,弧形刃,顶端两侧出虎形耳,刃部宽阔",
+    "distinctive_features": ["妇好铭文确证器主", "虎噬人头纹饰含军权象征", "中国最著名女性军事权力实物"],
+    "patterns_structured": {
+      "main": ["虎噬人头纹 — 钺面主纹(双虎对扑,中置人头)"],
+      "secondary": [],
+      "ground": [],
+      "rim": []
+    },
+    "inscription": {
+      "has": true,
+      "text": "妇好",
+      "char_count": 2,
+      "summary": "'妇好'二字铭文标明器主,确认为武丁之妻、女将军妇好的军权象征",
+      "stage": "商晚期金文"
+    },
+    "purpose": {
+      "primary": "军权象征礼器",
+      "context": "钺为授权出征的礼仪兵器,妇好持有代表商王授予其军事统帅权",
+      "user_class": "商王后/女将"
+    },
+    "craft": {
+      "primary": "范铸法",
+      "details": "整体范铸,虎噬人头纹精工浮雕",
+      "achievements": "纹饰与功能的完美统一"
+    },
+    "rarity_level": "国宝",
+    "scholarly_status": "中国最重要的女性权力实物之一,改写对商代女性社会地位的认知",
+    "provenance_timeline": [
+      {"year": 1976, "event": "妇好墓(M5)发掘出土"},
+      {"year": 1976, "event": "入藏中国国家博物馆"}
+    ],
+    "related_artifacts": [
+      {"id": "fuhao_xiaozun", "relation": "同出妇好墓,器主相同"},
+      {"id": "yachou_yue", "relation": "同为商代钺型兵器"}
+    ],
+    "story_brief": "妇好铜钺1976年出土于安阳殷墟妇好墓,长39.5cm,刃宽37.5cm,重9kg。正面铸双虎对扑噬人头纹,钺面两侧铸'妇好'二字。钺在商代是授权出征的礼仪兵器,商王赐予将领钺即代表授予军事统帅权。甲骨文记载妇好曾多次领兵出征,最多时率军13000人,是中国历史上有据可查的最早女性军事统帅。此钺是其军权最直接的实物证明。",
+    "image_urls": [
+      {"url": "https://commons.wikimedia.org/wiki/Category:Bronze_axes_of_the_Shang_Dynasty", "source": "Wikimedia Commons", "license": "CC BY-SA (各文件许可不一)", "attribution": "见各文件页", "caption": "商代铜钺相关图片"}
+    ],
+    "3d_or_video": null,
+    "data_sources": [
+      {"field": "size,inscription,significance", "source": "Smarthistory (Tomb of Fu Hao)", "url": "https://smarthistory.org/tomb-of-fu-hao/"},
+      {"field": "story,context", "source": "LitHub (The Woman With the Axe)", "url": "https://lithub.com/the-woman-with-the-axe-on-fu-hao-ancient-chinas-warrior-queen/"}
+    ]
+  },
+  {
+    "id": "fuhao_sanlian_yan",
+    "name_zh": "妇好三联甗",
+    "name_pinyin": "Fu Hao San Lian Yan",
+    "name_alt": ["Fu Hao Triple Bronze Yan Steamer"],
+    "dynasty": "商",
+    "period": "商代晚期(武丁时期)",
+    "approx_year": "约公元前1250年",
+    "excavation": {
+      "year": 1976,
+      "site": "河南省安阳市殷墟妇好墓(M5)",
+      "ancient_state": "商",
+      "method": "郑振香主持系统发掘",
+      "dating_method": "铭文+类型学",
+      "significance": "迄今出土最大商代三联甗,反映商代烹饪礼制"
+    },
+    "current_museum": "中国国家博物馆",
+    "size": { "height_cm": null, "length_cm": 103, "weight_kg": null, "_todo": "具体高度与重量待核实" },
+    "type": "食器",
+    "form_subtype": "三联甗(联体蒸食器)",
+    "form_detail": "上部三只甑(蒸锅),下部联体长方形鬲,蒸汽共用;全长逾百厘米",
+    "distinctive_features": ["迄今最大商代三联甗", "一次可蒸三品食物", "铭文多处刻'妇好'"],
+    "patterns_structured": {
+      "main": ["兽面纹 — 甗腹四面"],
+      "secondary": ["夔龙纹 — 边带"],
+      "ground": ["云雷纹"],
+      "rim": []
+    },
+    "inscription": {
+      "has": true,
+      "text": "妇好",
+      "char_count": 2,
+      "summary": "多处铸铭'妇好',标明器主",
+      "stage": "商晚期金文"
+    },
+    "purpose": {
+      "primary": "炊食礼器",
+      "context": "祭祀宴飨中同时蒸制三品食物",
+      "user_class": "商王后"
+    },
+    "craft": {
+      "primary": "范铸法",
+      "details": "上下分体铸造后组合",
+      "achievements": "世界最早已知多联蒸食器,体现商代饮食礼制精细化"
+    },
+    "rarity_level": "国宝",
+    "scholarly_status": "商代炊食礼器最重要代表,提供了商代宴飨礼制的直接证据",
+    "provenance_timeline": [
+      {"year": 1976, "event": "妇好墓(M5)发掘出土"},
+      {"year": 1976, "event": "入藏中国国家博物馆"}
+    ],
+    "related_artifacts": [
+      {"id": "fuhao_xiaozun", "relation": "同出妇好墓"},
+      {"id": "simuxin_ding", "relation": "同出妇好墓"}
+    ],
+    "story_brief": "妇好三联甗1976年出土于安阳殷墟妇好墓,全长逾百厘米,由三只甑与联体鬲组成,可同时蒸制三品食物。铭文多处刻'妇好'。这件3000余年前的'三格蒸锅'集功能与艺术于一体,是迄今出土最大的商代三联甗,展示了商代饮食礼制的精细化程度。",
+    "image_urls": [
+      {"url": "https://en.chnmuseum.cn/collections_577/collection_highlights_608/archaeological_discoveries_609/202108/t20210819_251067.html", "source": "National Museum of China (reference only — do NOT redistribute)", "license": "CITATION ONLY", "attribution": null, "caption": "国博官网展品页"}
+    ],
+    "3d_or_video": null,
+    "data_sources": [
+      {"field": "description,inscription,museum", "source": "National Museum of China official page (reference only)", "url": "https://en.chnmuseum.cn/collections_577/collection_highlights_608/archaeological_discoveries_609/202108/t20210819_251067.html"},
+      {"field": "function,context", "source": "govt.chinadaily.com.cn", "url": "https://govt.chinadaily.com.cn/s/202412/03/WS674ea129498eec7e1f7290be/ancient-triple-bronze-steamer.html"}
+    ]
+  },
+  {
+    "id": "fuhao_ou_fangyi",
+    "name_zh": "妇好偶方彝",
+    "name_pinyin": "Fu Hao Ou Fang Yi",
+    "name_alt": ["妇好双联方彝"],
+    "dynasty": "商",
+    "period": "商代晚期(武丁时期)",
+    "approx_year": "约公元前1250年",
+    "excavation": {
+      "year": 1976,
+      "site": "河南省安阳市殷墟妇好墓(M5)",
+      "ancient_state": "商",
+      "method": "郑振香主持系统发掘",
+      "dating_method": "铭文+类型学",
+      "significance": "迄今已知最早的双联方彝,形制极为罕见"
+    },
+    "current_museum": "中国国家博物馆",
+    "size": { "height_cm": null, "weight_kg": null, "_todo": "具体尺寸待核实" },
+    "type": "酒器",
+    "form_subtype": "方彝(双联)",
+    "form_detail": "两件方彝并列联体,盖如庑殿顶,腹部方正,圈足",
+    "distinctive_features": ["迄今已知最早双联方彝", "形制极罕见"],
+    "patterns_structured": {
+      "main": ["饕餮纹 — 腹身四面"],
+      "secondary": ["夔龙纹 — 边带"],
+      "ground": ["云雷纹"],
+      "rim": ["兽面纹 — 盖顶"]
+    },
+    "inscription": {
+      "has": true,
+      "text": "妇好",
+      "char_count": 2,
+      "summary": "铸铭'妇好'标明器主",
+      "stage": "商晚期金文"
+    },
+    "purpose": {
+      "primary": "盛酒礼器",
+      "context": "祭祀宴飨盛酒",
+      "user_class": "商王后"
+    },
+    "craft": {
+      "primary": "范铸法",
+      "details": "双联整体铸造",
+      "achievements": "双联方彝形制极为罕见,体现商代礼器的多样性"
+    },
+    "rarity_level": "国宝",
+    "scholarly_status": "迄今已知最早双联方彝,形制独特,为商代酒器研究提供重要标本",
+    "provenance_timeline": [
+      {"year": 1976, "event": "妇好墓(M5)发掘出土,入藏国博"}
+    ],
+    "related_artifacts": [
+      {"id": "fuhao_xiaozun", "relation": "同出妇好墓"}
+    ],
+    "story_brief": "妇好偶方彝1976年出土于安阳殷墟妇好墓,是迄今已知最早的双联方彝——两件方彝并列联体,形制在商代器物中极为罕见。方彝为商代重要酒器,盖如庑殿顶,器身满饰饕餮纹与云雷纹,铭'妇好'二字。其双联形制可能具有特殊的礼制意义。",
+    "image_urls": [
+      {"url": "https://en.chnmuseum.cn/collections_577/collection_highlights_608/archaeological_discoveries_609/202108/t20210819_251065.html", "source": "National Museum of China (reference only)", "license": "CITATION ONLY", "attribution": null, "caption": "国博官网展品页"}
+    ],
+    "3d_or_video": null,
+    "data_sources": [
+      {"field": "description,inscription", "source": "National Museum of China official page (reference only)", "url": "https://en.chnmuseum.cn/collections_577/collection_highlights_608/archaeological_discoveries_609/202108/t20210819_251065.html"},
+      {"field": "form_type", "source": "Wikipedia EN (Fangyi)", "url": "https://en.wikipedia.org/wiki/Fangyi"}
+    ]
+  },
+  {
+    "id": "longhu_wen_zun",
+    "name_zh": "龙虎纹尊",
+    "name_pinyin": "Long Hu Wen Zun",
+    "name_alt": ["龙虎铜尊", "Dragon-Tiger Zun"],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前1200-1046年",
+    "excavation": {
+      "year": 1957,
+      "site": "安徽省阜南县月儿河",
+      "ancient_state": "商(淮河流域方国)",
+      "method": "农民挖掘时发现",
+      "dating_method": "类型学",
+      "significance": "商代南方方国青铜工艺最高代表,虎噬人纹为商代最震撼纹饰之一"
+    },
+    "current_museum": "中国国家博物馆",
+    "size": { "height_cm": 50, "mouth_diameter_cm": 45, "weight_kg": 20 },
+    "type": "酒器",
+    "form_subtype": "尊(大口圆腹圈足)",
+    "form_detail": "侈口大圆腹高圈足,肩部三龙浮雕,腹部三组虎噬人纹以扉棱分隔",
+    "distinctive_features": ["虎噬人纹最震撼的商代表达", "肩部三龙立体浮雕", "商代南方方国代表作"],
+    "patterns_structured": {
+      "main": ["虎噬人纹 — 腹部三组(双虎对称,中夹人形)"],
+      "secondary": ["龙纹浮雕 — 肩部三只"],
+      "ground": ["云雷纹 — 全身底纹"],
+      "rim": ["扉棱分隔三组主纹"]
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文",
+      "stage": null
+    },
+    "purpose": {
+      "primary": "盛酒礼器",
+      "context": "淮河流域方国祭祀宴飨",
+      "user_class": "商代方国贵族"
+    },
+    "craft": {
+      "primary": "范铸法",
+      "details": "龙纹立体浮雕与器身整体范铸",
+      "achievements": "商代虎噬人纹最复杂精工的表达,铸造技艺极高"
+    },
+    "rarity_level": "国宝",
+    "scholarly_status": "商代南方方国青铜艺术最高成就,虎噬人纹研究核心标本",
+    "provenance_timeline": [
+      {"year": 1957, "event": "安徽阜南县月儿河出土"},
+      {"year": 1957, "event": "入藏中国国家博物馆"}
+    ],
+    "related_artifacts": [
+      {"id": "siyang_fangzun", "relation": "同属商代南方方国青铜文明"}
+    ],
+    "story_brief": "龙虎纹尊1957年出土于安徽阜南县月儿河,通高50cm,口径45cm,重约20kg。器肩部三只立体龙纹浮雕高耸,腹部三组虎噬人纹以扉棱分隔——两虎对称扑向中间人形,造型威猛震撼。这一纹饰在中原商文化中罕见,体现了淮河流域方国青铜艺术的独特审美——对'力量与威慑'的极致崇拜。全器无铭文,以造型和纹饰的精湛工艺成为商代南方方国青铜艺术的顶峰代表。",
+    "image_urls": [
+      {"url": "https://commons.wikimedia.org/wiki/Category:Zun", "source": "Wikimedia Commons", "license": "CC BY-SA (需逐文件确认)", "attribution": "见各文件页", "caption": "尊型器相关图片"}
+    ],
+    "3d_or_video": null,
+    "data_sources": [
+      {"field": "excavation,size,patterns,significance", "source": "govt.chinadaily.com.cn + sculpmart.com", "url": "https://govt.chinadaily.com.cn/s/202209/19/WS63280e6a498ea274927a3994/bronze-vessel-reflects-ferocious-aesthetics-of-shang-dynasty.html"}
+    ]
+  },
+  {
+    "id": "duling_fangding",
+    "name_zh": "杜岭方鼎",
+    "name_pinyin": "Du Ling Fang Ding",
+    "name_alt": ["郑州杜岭方鼎", "Duling Fangding"],
+    "dynasty": "商",
+    "period": "商代早中期(二里岗期)",
+    "approx_year": "约公元前1500-1300年",
+    "excavation": {
+      "year": 1974,
+      "site": "河南省郑州市杜岭附近",
+      "ancient_state": "商(郑州商城)",
+      "method": "建筑施工中发现",
+      "dating_method": "地层学+类型学",
+      "significance": "现存最早的大型青铜方鼎,比后母戊鼎早约200-300年"
+    },
+    "current_museum": "河南博物院(1号鼎) / 中国国家博物馆(2号鼎)",
+    "size": { "height_cm": 100, "weight_kg": 86 },
+    "type": "食器",
+    "form_subtype": "方鼎",
+    "form_detail": "直耳长方腹四柱足,形制古朴,纹饰简洁",
+    "distinctive_features": ["现存最早大型青铜方鼎", "二里岗期青铜铸造高峰代表", "比后母戊鼎早200-300年"],
+    "patterns_structured": {
+      "main": ["兽面纹 — 腹身四面"],
+      "secondary": [],
+      "ground": ["云雷纹"],
+      "rim": []
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文(二里岗期青铜器普遍无铭文)",
+      "stage": null
+    },
+    "purpose": {
+      "primary": "祭祀礼器",
+      "context": "郑州商城王室祭祀",
+      "user_class": "商王室"
+    },
+    "craft": {
+      "primary": "范铸法",
+      "details": "二里岗期范铸技术代表",
+      "achievements": "证明商代早中期已能铸造百公斤级大型青铜器"
+    },
+    "rarity_level": "国宝",
+    "scholarly_status": "重新认识商代早期铸铜水平的关键证据,比后母戊鼎早约200-300年",
+    "provenance_timeline": [
+      {"year": 1974, "event": "郑州杜岭建筑施工中出土"},
+      {"year": 1974, "event": "1号鼎入藏河南博物院,2号鼎调入中国国家博物馆"}
+    ],
+    "related_artifacts": [
+      {"id": "houmuwu_ding", "relation": "同为商代大型方鼎,时代相差约200-300年"}
+    ],
+    "story_brief": "杜岭方鼎1974年于郑州杜岭建筑施工中出土,共两件,通高约100cm,重约86kg。它们是迄今发现最早的大型青铜方鼎,属二里岗期(商代早中期),比后母戊鼎早约200-300年。杜岭方鼎的出土将商代大型青铜铸造的历史大幅前推,证明在郑州商城时期商王朝已拥有高度发达的青铜铸造体系。两件分藏河南博物院与中国国家博物馆。",
+    "image_urls": [
+      {"url": "https://commons.wikimedia.org/wiki/Category:Chinese_bronzeware", "source": "Wikimedia Commons", "license": "CC BY-SA (需逐文件确认)", "attribution": "见各文件页", "caption": "商代青铜器相关图片"}
+    ],
+    "3d_or_video": null,
+    "data_sources": [
+      {"field": "excavation,size,significance", "source": "chinaknowledge.de (Shang Period Art)", "url": "http://www.chinaknowledge.de/History/Myth/shang-art.html"},
+      {"field": "significance", "source": "Britannica (Chinese bronzes - Shang dynasty)", "url": "https://www.britannica.com/art/Chinese-bronzes/The-Shang-dynasty-c-1600-1046-bce"}
+    ]
+  },
+  {
+    "id": "dahe_fangding",
+    "name_zh": "大禾人面方鼎",
+    "name_pinyin": "Da He Ren Mian Fang Ding",
+    "name_alt": ["大禾方鼎", "Da He ding"],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前12-11世纪",
+    "excavation": {
+      "year": 1959,
+      "site": "湖南省宁乡县炭河里",
+      "ancient_state": "商(湘江流域方国)",
+      "method": "农民挖地时发现后作废铜卖出,后被文物工作者追回",
+      "dating_method": "类型学+铭文",
+      "significance": "中国唯一以人面纹为主饰的商代方鼎"
+    },
+    "current_museum": "湖南博物院",
+    "size": { "height_cm": 38.5, "weight_kg": null, "_todo": "重量待核实" },
+    "current_museum": "湖南博物院",
+    "type": "食器",
+    "form_subtype": "方鼎",
+    "form_detail": "长方形腹,直立双耳,四柱足,四侧铸高浮雕人面",
+    "distinctive_features": ["唯一以人面纹为主饰的商代方鼎", "人面纹含义至今争议", "湖南博物院五大镇馆之宝之一"],
+    "patterns_structured": {
+      "main": ["人面纹(高浮雕) — 腹身四面各一"],
+      "secondary": [],
+      "ground": [],
+      "rim": []
+    },
+    "inscription": {
+      "has": true,
+      "text": "大禾",
+      "char_count": 2,
+      "summary": "内壁铸铭'大禾'二字,可能指器主族名或祭祀对象,学界倾向'大禾'为族徽",
+      "stage": "商晚期金文"
+    },
+    "purpose": {
+      "primary": "祭祀礼器",
+      "context": "可能用于谷物丰收祭祀,或为特定祖先祭器",
+      "user_class": "商代湘江流域方国贵族"
+    },
+    "craft": {
+      "primary": "范铸法",
+      "details": "人面高浮雕精工铸造",
+      "achievements": "人面纹主饰在商代极为罕见,铸造工艺需特殊处理"
+    },
+    "rarity_level": "国宝",
+    "scholarly_status": "商代青铜器中最特殊的装饰风格,人面纹含义引发持续学术争论",
+    "provenance_timeline": [
+      {"year": 1959, "event": "湖南宁乡炭河里农民挖出后作废铜卖出"},
+      {"year": 1959, "event": "文物工作者追回,入藏湖南省博物馆"}
+    ],
+    "related_artifacts": [
+      {"id": "siyang_fangzun", "relation": "同属湘江流域商代青铜文明"},
+      {"id": "siyangshou_bu", "relation": "同出宁乡地区"}
+    ],
+    "story_brief": "大禾人面方鼎1959年出土于湖南宁乡炭河里,是中国唯一以人面纹为主饰的商代方鼎——四面各铸一高浮雕人脸,大眼宽鼻,形象介于人与神之间。这种装饰在商代青铜器中极为罕见(典型商器以兽面饕餮纹为主),其含义至今众说纷纭:保护性神灵?祖先崇拜?图腾面具?内壁铭'大禾'二字,可能为族徽。器高38.5cm,是湖南博物院五大镇馆之宝之一。",
+    "image_urls": [
+      {"url": "https://commons.wikimedia.org/wiki/Category:Da_He_ding", "source": "Wikimedia Commons", "license": "CC BY-SA (需逐文件确认)", "attribution": "见各文件页", "caption": "大禾人面方鼎相关图片"}
+    ],
+    "3d_or_video": null,
+    "data_sources": [
+      {"field": "all", "source": "Wikipedia via Grokipedia (Da He ding)", "url": "https://grokipedia.com/page/da_he_ding"},
+      {"field": "excavation,museum", "source": "Hunan Museum official site (reference only)", "url": "https://www.hnmuseum.com/en/"}
+    ]
+  },
+  {
+    "id": "yachou_yue",
+    "name_zh": "亚醜钺",
+    "name_pinyin": "Ya Chou Yue",
+    "name_alt": ["亚丑钺", "Yachou Bronze Axe"],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前12-11世纪",
+    "excavation": {
+      "year": 1965,
+      "site": "山东省青州市苏埠屯商代墓葬",
+      "ancient_state": "商(亚醜族)",
+      "method": "考古发掘",
+      "dating_method": "类型学+铭文",
+      "significance": "亚醜族权力象征,近年成为网络热门'表情包文物'"
+    },
+    "current_museum": "山东博物馆",
+    "size": { "height_cm": 32.7, "blade_width_cm": 34.5 },
+    "type": "兵器",
+    "form_subtype": "钺(礼仪兵器)",
+    "form_detail": "扁平刃部宽阔,钺面铸憨笑人面,大眼宽口齐牙,肩部铸'亚醜'框形族徽",
+    "distinctive_features": ["钺面憨笑人面极为罕见", "近年'最萌文物'网络热度极高", "亚醜族徽标识"],
+    "patterns_structured": {
+      "main": ["人面纹(憨笑) — 钺面中央"],
+      "secondary": [],
+      "ground": [],
+      "rim": ["亚醜铭文框 — 肩部"]
+    },
+    "inscription": {
+      "has": true,
+      "text": "亚醜",
+      "char_count": 2,
+      "summary": "肩部铸'亚醜'二字(亚形框内),为亚醜族族徽,标明器物归属",
+      "stage": "商晚期金文"
+    },
+    "purpose": {
+      "primary": "军权象征礼器",
+      "context": "亚醜族首领军权象征",
+      "user_class": "亚醜族首领"
+    },
+    "craft": {
+      "primary": "范铸法",
+      "details": "人面纹精工铸造",
+      "achievements": "表情张力与礼仪功能结合的独特成就"
+    },
+    "rarity_level": "国宝",
+    "scholarly_status": "亚醜族考古研究核心文物,近年因'最萌表情'成为最具传播力的商代文物之一",
+    "provenance_timeline": [
+      {"year": 1965, "event": "山东青州苏埠屯商代墓葬出土"},
+      {"year": 1965, "event": "入藏山东博物馆"}
+    ],
+    "related_artifacts": [
+      {"id": "fuhao_yue", "relation": "同为商代大型铜钺,均为权力象征"}
+    ],
+    "story_brief": "亚醜钺1965年出土于山东青州苏埠屯商代墓葬,高32.7cm,刃宽34.5cm。钺面中央铸一憨笑人面——圆眼宽鼻,大嘴露出整齐牙齿,神情介于威慑与憨萌之间,与商代典型严肃的兽面纹形成强烈反差。肩部'亚醜'族徽标明其为亚醜氏族首领的权威象征。近年因其表情酷似现代表情包而在网络走红,被称为'最萌国宝',吸引大量年轻人关注商代历史。",
+    "image_urls": [
+      {"url": "https://commons.wikimedia.org/wiki/Category:Bronze_axes_of_the_Shang_Dynasty", "source": "Wikimedia Commons", "license": "CC BY-SA (需逐文件确认)", "attribution": "见各文件页", "caption": "商代铜钺相关图片"}
+    ],
+    "3d_or_video": null,
+    "data_sources": [
+      {"field": "size,excavation,inscription,significance", "source": "newhanfu.com (The Yachou Yue)", "url": "https://www.newhanfu.com/74176.html"},
+      {"field": "museum,story", "source": "govt.chinadaily.com.cn", "url": "https://govt.chinadaily.com.cn/s/202501/22/WS6790b2c6498eec7e1f72df42/shang-dynasty-axe-blade-a-symbol-of-royalty-and-power.html"}
+    ]
+  },
+  {
+    "id": "xiang_zun_hunan",
+    "name_zh": "象尊",
+    "name_pinyin": "Xiang Zun",
+    "name_alt": ["象形铜尊", "Elephant-shaped Bronze Zun"],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前12-11世纪",
+    "excavation": {
+      "year": 1975,
+      "site": "湖南省醴陵县狮形山",
+      "ancient_state": "商(湘江流域方国)",
+      "method": "农民挖土发现",
+      "dating_method": "类型学",
+      "significance": "商代象形尊中造型最完整者之一,反映南方古代大象分布"
+    },
+    "current_museum": "湖南博物院",
+    "size": { "height_cm": null, "weight_kg": null, "_todo": "精确尺寸待核实" },
+    "type": "酒器",
+    "form_subtype": "象形尊(动物形)",
+    "form_detail": "整体塑大象形,背开椭圆口注酒,象鼻上扬为流,腹内可盛酒",
+    "distinctive_features": ["象形铸造写实精工", "象鼻作流兼顾功能与造型", "南方商代象形器代表"],
+    "patterns_structured": {
+      "main": ["龙纹/兽面纹 — 全身装饰"],
+      "secondary": ["凤鸟纹 — 象额"],
+      "ground": ["云雷纹"],
+      "rim": []
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 6,
+      "summary": "腹内铸六字铭文,具体文字待核实",
+      "_todo": "铭文具体内容待湖南博物院资料核实",
+      "stage": "商晚期金文"
+    },
+    "purpose": {
+      "primary": "盛酒礼器",
+      "context": "祭祀宴飨盛酒",
+      "user_class": "商代南方方国贵族"
+    },
+    "craft": {
+      "primary": "范铸法",
+      "details": "象形整体范铸,写实风格",
+      "achievements": "商代动物形尊的高峰之作"
+    },
+    "rarity_level": "国宝",
+    "scholarly_status": "商代南方方国象形器代表,同时提供3000年前湖南有大象的生态证据",
+    "provenance_timeline": [
+      {"year": 1975, "event": "湖南醴陵狮形山出土"},
+      {"year": 1975, "event": "入藏湖南博物院"}
+    ],
+    "related_artifacts": [
+      {"id": "siyang_fangzun", "relation": "同属湘江流域商代青铜文明"}
+    ],
+    "story_brief": "象尊1975年出土于湖南醴陵,整体塑大象形,背开椭圆口注酒,象鼻上扬作流,腹内藏酒。全器饰龙纹、凤鸟纹与云雷纹,腹内有六字铭文。这件器物不仅是商代动物形尊的精品,更是重要的生态史证据——证明3000年前湖南确有大象生存。商代南方方国能铸造如此精工的象形器,说明湘江流域青铜文明与中原商文化相互交流、各有特色。",
+    "image_urls": [
+      {"url": "https://www.hnmuseum.com/en/", "source": "Hunan Museum (reference only)", "license": "CITATION ONLY", "attribution": null, "caption": "湖南博物院官网(参考)"}
+    ],
+    "3d_or_video": null,
+    "data_sources": [
+      {"field": "excavation,description,significance", "source": "govt.chinadaily.com.cn", "url": "https://govt.chinadaily.com.cn/s/202501/21/WS678f33d6498eec7e1f72dc4f/elephant-shaped-bronze-zun-vessel-from-the-shang-dynasty.html"},
+      {"field": "patterns,inscription", "source": "Hunan Museum official site (reference only)", "url": "https://www.hnmuseum.com/en/zuixintuijie/round-bronze-zun-wine-vessel-sacrificial-animal-shaped-heads-and-animal-mask-motif"}
+    ]
+  },
+  {
+    "id": "nao_da_xiang_wen",
+    "name_zh": "大铙(象纹大铙)",
+    "name_pinyin": "Da Nao Xiang Wen",
+    "name_alt": ["象纹铜铙", "Elephant-pattern Nao Bell"],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前12-11世纪",
+    "excavation": {
+      "year": 1983,
+      "site": "湖南省宁乡市月山铺",
+      "ancient_state": "商(湘江流域方国)",
+      "method": "农民挖掘发现",
+      "dating_method": "类型学",
+      "significance": "迄今出土最大的商周时代铜铙,高103cm,重221.5kg"
+    },
+    "current_museum": "湖南博物院",
+    "size": { "height_cm": 103, "weight_kg": 221.5 },
+    "type": "乐器",
+    "form_subtype": "铙(口朝上立奏)",
+    "form_detail": "甬柄粗壮,舞部宽阔,鼓面铸象纹与兽面纹",
+    "distinctive_features": ["迄今出土最大商周铜铙", "高103cm重221.5kg", "湘江流域乐器文明代表"],
+    "patterns_structured": {
+      "main": ["象纹 — 鼓面主纹"],
+      "secondary": ["兽面纹 — 舞部"],
+      "ground": ["云雷纹"],
+      "rim": []
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文",
+      "stage": null
+    },
+    "purpose": {
+      "primary": "礼乐器",
+      "context": "祭祀仪式中演奏,口朝上置于架上以槌击奏",
+      "user_class": "商代南方方国贵族"
+    },
+    "craft": {
+      "primary": "范铸法",
+      "details": "大型单体范铸",
+      "achievements": "体积重量超越中原同类器物,显示湘江流域铸铜能力"
+    },
+    "rarity_level": "国宝",
+    "scholarly_status": "商周最大铜铙,湘江流域青铜礼乐文明的顶级代表",
+    "provenance_timeline": [
+      {"year": 1983, "event": "湖南宁乡月山铺出土"},
+      {"year": 1983, "event": "入藏湖南博物院"}
+    ],
+    "related_artifacts": [
+      {"id": "siyang_fangzun", "relation": "同出宁乡地区,湘江流域青铜文明"}
+    ],
+    "story_brief": "象纹大铙1983年出土于湖南宁乡月山铺,高103cm,重221.5kg,是迄今出土最大的商周铜铙。铙是商代重要礼乐器,口朝上置于架上以槌击奏。这件大铙体量远超中原同类器物,鼓面饰象纹与兽面纹,展示了湘江流域商代青铜文明的独特性——在礼乐器制作上不逊于甚至超越中原王朝。宁乡地区迄今出土商代青铜器逾千件,被称为'青铜之乡'。",
+    "image_urls": [
+      {"url": "https://www.hnmuseum.com/en/content/bronze-nao-musical-instrumentwith-elephant-design", "source": "Hunan Museum (reference only)", "license": "CITATION ONLY", "attribution": null, "caption": "湖南博物院官网参考页"}
+    ],
+    "3d_or_video": null,
+    "data_sources": [
+      {"field": "size,excavation,significance", "source": "Hunan Museum official site (reference only)", "url": "https://www.hnmuseum.com/en/content/bronze-nao-musical-instrumentwith-elephant-design"},
+      {"field": "nao bell type,context", "source": "Nature article (bronze bells in Changsha)", "url": "https://www.nature.com/articles/s40494-024-01377-0"}
+    ]
+  },
+  {
+    "id": "fuhao_jue",
+    "name_zh": "妇好铜爵",
+    "name_pinyin": "Fu Hao Tong Jue",
+    "name_alt": ["妇好爵杯"],
+    "dynasty": "商",
+    "period": "商代晚期(武丁时期)",
+    "approx_year": "约公元前1250年",
+    "excavation": {
+      "year": 1976,
+      "site": "河南省安阳市殷墟妇好墓(M5)",
+      "ancient_state": "商",
+      "method": "郑振香主持系统发掘",
+      "dating_method": "铭文+类型学",
+      "significance": "商代爵的标准型器,妇好礼器组合中的核心酒器"
+    },
+    "current_museum": "中国历史博物馆(今国博)",
+    "size": { "height_cm": 26.3, "mouth_width_cm": 21.6 },
+    "type": "酒器",
+    "form_subtype": "爵",
+    "form_detail": "长流尖尾,伞形柱帽,深腹鼓腹,三棱锥形足,流下兽面纹门型扉",
+    "distinctive_features": ["商代爵形制的标准样本", "三棱锥足工艺精良"],
+    "patterns_structured": {
+      "main": ["兽面纹 — 腹身"],
+      "secondary": ["蝉纹 — 流与尾"],
+      "ground": ["云雷纹"],
+      "rim": []
+    },
+    "inscription": {
+      "has": true,
+      "text": "妇好",
+      "char_count": 2,
+      "summary": "铸铭'妇好'标明器主",
+      "stage": "商晚期金文"
+    },
+    "purpose": {
+      "primary": "温酒/饮酒礼器",
+      "context": "祭祀宴飨温酒与饮酒",
+      "user_class": "商王后"
+    },
+    "craft": {
+      "primary": "范铸法",
+      "details": "三棱锥足精工铸造",
+      "achievements": "商代爵形制的完美范例"
+    },
+    "rarity_level": "一级文物",
+    "scholarly_status": "商代爵器标准型式的重要标本",
+    "provenance_timeline": [
+      {"year": 1976, "event": "妇好墓(M5)发掘出土,入藏国博"}
+    ],
+    "related_artifacts": [
+      {"id": "fuhao_xiaozun", "relation": "同出妇好墓,配套礼器"}
+    ],
+    "story_brief": "妇好铜爵1976年出土于安阳殷墟妇好墓,高26.3cm。爵为商代最重要的酒器之一,长流尖尾,腹下三棱锥足,用于温酒与饮酒。妇好墓出土铜爵多件,均铸'妇好'铭文。这批器物是研究商代爵形制演变的重要标本,也是商代礼器配套制度的直接证据。",
+    "image_urls": [
+      {"url": "https://commons.wikimedia.org/wiki/Category:Tomb_of_Fu_Hao", "source": "Wikimedia Commons", "license": "CC BY-SA (需逐文件确认)", "attribution": "见各文件页", "caption": "妇好墓出土文物相关图片"}
+    ],
+    "3d_or_video": null,
+    "data_sources": [
+      {"field": "size,description", "source": "China Online Museum (Wine Cup Jue of Fuhao)", "url": "http://www.chinaonlinemuseum.com/bronzes-shang-fuhao-jue.php"},
+      {"field": "context", "source": "Smarthistory (Tomb of Fu Hao)", "url": "https://smarthistory.org/tomb-of-fu-hao/"}
+    ]
+  },
+  {
+    "id": "sanyang_zun",
+    "name_zh": "三羊尊",
+    "name_pinyin": "San Yang Zun",
+    "name_alt": ["三羊铜尊"],
+    "dynasty": "商",
+    "period": "商代早中期",
+    "approx_year": "约公元前14-13世纪",
+    "excavation": {
+      "year": null,
+      "site": "不详(传故宫旧藏)",
+      "ancient_state": "商",
+      "method": null,
+      "dating_method": "类型学",
+      "significance": "商代羊形装饰尊的早期代表,与四羊方尊属同类传统",
+      "_todo": "出土地点待核实"
+    },
+    "current_museum": "故宫博物院",
+    "size": { "height_cm": 52, "mouth_diameter_cm": 41.2, "weight_kg": 51.3 },
+    "type": "酒器",
+    "form_subtype": "尊",
+    "form_detail": "肩部三只立体羊首,腹部鼓出,圈足",
+    "distinctive_features": ["肩部三羊首立体装饰", "商代早中期罕见大型尊"],
+    "patterns_structured": {
+      "main": ["兽面纹 — 腹身"],
+      "secondary": ["火纹 — 腹上"],
+      "ground": ["亚形纹"],
+      "rim": ["羊首立体 — 肩部三角位"]
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文",
+      "stage": null
+    },
+    "purpose": {
+      "primary": "盛酒礼器",
+      "context": "祭祀宴飨",
+      "user_class": "商代贵族"
+    },
+    "craft": {
+      "primary": "范铸法",
+      "details": "分铸法铸羊首再合铸器身",
+      "achievements": "早期分铸技术代表"
+    },
+    "rarity_level": "一级文物",
+    "scholarly_status": "商代早中期羊形装饰尊的重要标本,与四羊方尊属同一装饰传统",
+    "provenance_timeline": [
+      {"year": null, "event": "来源不详,入故宫旧藏", "_todo": "流传经历待核"}
+    ],
+    "related_artifacts": [
+      {"id": "siyang_fangzun", "relation": "同属羊形装饰尊传统,时代略早"}
+    ],
+    "story_brief": "三羊尊高52cm,口径41.2cm,重51.3kg,现藏故宫博物院。肩部铸三只立体羊首,腹部鼓出,与四羊方尊同属商代'以羊为饰'的青铜装饰传统。器腹饰火纹与亚形纹,是商代早中期罕见的大型尊,在研究商代方国与中原青铜传统关系上具有重要价值。",
+    "image_urls": [
+      {"url": "http://www.chinaonlinemuseum.com/bronzes-shang-sanyang-zun.php", "source": "China Online Museum (reference only)", "license": "CITATION ONLY", "attribution": null, "caption": "三羊尊参考页"}
+    ],
+    "3d_or_video": null,
+    "data_sources": [
+      {"field": "size,description", "source": "China Online Museum", "url": "http://www.chinaonlinemuseum.com/bronzes-shang-sanyang-zun.php"}
+    ]
+  },
+  {
+    "id": "fuhao_gu",
+    "name_zh": "妇好铜觚",
+    "name_pinyin": "Fu Hao Tong Gu",
+    "name_alt": ["妇好觚"],
+    "dynasty": "商",
+    "period": "商代晚期(武丁时期)",
+    "approx_year": "约公元前1250年",
+    "excavation": {
+      "year": 1976,
+      "site": "河南省安阳市殷墟妇好墓(M5)",
+      "ancient_state": "商",
+      "method": "系统发掘",
+      "dating_method": "铭文+类型学",
+      "significance": "商代觚形制的标准器,妇好礼器配套组合重要成员"
+    },
+    "current_museum": "中国国家博物馆 / 河南博物院",
+    "size": { "height_cm": 25.5, "mouth_diameter_cm": 14.2 },
+    "type": "酒器",
+    "form_subtype": "觚",
+    "form_detail": "喇叭形大口,细腰,高圈足,器身轻薄典雅",
+    "distinctive_features": ["商代觚形制标准器", "铭文'妇好'确认器主"],
+    "patterns_structured": {
+      "main": ["蕉叶纹 — 颈部"],
+      "secondary": ["蝉纹 — 腹身"],
+      "ground": ["云雷纹"],
+      "rim": []
+    },
+    "inscription": {
+      "has": true,
+      "text": "妇好",
+      "char_count": 2,
+      "summary": "铸铭'妇好'标明器主",
+      "stage": "商晚期金文"
+    },
+    "purpose": {
+      "primary": "饮酒礼器",
+      "context": "祭祀宴飨饮酒",
+      "user_class": "商王后"
+    },
+    "craft": {
+      "primary": "范铸法",
+      "details": "轻薄壁体精工铸造",
+      "achievements": "商代觚轻薄工艺代表"
+    },
+    "rarity_level": "一级文物",
+    "scholarly_status": "商代觚形制的重要标本",
+    "provenance_timeline": [
+      {"year": 1976, "event": "妇好墓(M5)发掘出土"}
+    ],
+    "related_artifacts": [
+      {"id": "fuhao_jue", "relation": "同出妇好墓,爵觚配套礼器"}
+    ],
+    "story_brief": "妇好铜觚1976年出土于安阳殷墟妇好墓,高25.5cm,口径14.2cm。觚为商代重要饮酒器,喇叭形大口细腰,器身轻薄典雅。妇好墓出土铜觚多件,均铸'妇好'铭文。爵与觚成对使用是商代礼制的重要体现,被称为'觚爵之礼'。",
+    "image_urls": [
+      {"url": "https://commons.wikimedia.org/wiki/Category:Tomb_of_Fu_Hao", "source": "Wikimedia Commons", "license": "CC BY-SA (需逐文件确认)", "attribution": "见各文件页", "caption": "妇好墓出土文物相关图片"}
+    ],
+    "3d_or_video": null,
+    "data_sources": [
+      {"field": "size,description", "source": "Wikipedia EN (Gu vessel) + Tomb of Fu Hao", "url": "https://en.wikipedia.org/wiki/Gu_(vessel)"}
+    ]
+  },
+  {
+    "id": "siyangshou_bu",
+    "name_zh": "四羊首铜瓿",
+    "name_pinyin": "Si Yang Shou Tong Bu",
+    "name_alt": [],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前12-11世纪",
+    "excavation": {
+      "year": null,
+      "site": "湖南省宁乡(传)",
+      "ancient_state": "商(湘江流域方国)",
+      "method": null,
+      "dating_method": "类型学",
+      "significance": "湘江流域商代青铜文明重要酒器",
+      "_todo": "出土年代与具体地点仍待湖南博物院出版物核实"
+    },
+    "current_museum": "湖南博物院",
+    "size": { "height_cm": null, "weight_kg": null, "_todo": "尺寸待湖南博物院出版物核实" },
+    "type": "酒器/盛贮器",
+    "form_subtype": "瓿",
+    "form_detail": "圆腹圈足,肩部铸四只立体羊首",
+    "distinctive_features": ["肩部四羊首立体装饰"],
+    "patterns_structured": {
+      "main": ["饕餮纹 — 腹身"],
+      "secondary": [],
+      "ground": ["云雷纹"],
+      "rim": ["羊首立体 — 肩部四角"]
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "暂无确认铭文",
+      "_todo": "铭文情况待核实"
+    },
+    "purpose": { "primary": "盛贮酒礼器", "context": "祭祀宴飨", "user_class": "商代方国贵族" },
+    "craft": { "primary": "范铸法", "details": "羊首分铸再合范", "achievements": null },
+    "rarity_level": "一级文物",
+    "scholarly_status": "与四羊方尊同属湘江流域商代青铜文明",
+    "provenance_timeline": [{"year": null, "event": "湖南宁乡出土(具体年代不详)", "_todo": "待核实"}],
+    "related_artifacts": [{"id": "siyang_fangzun", "relation": "同属湘江流域商代青铜文明,均出宁乡地区"}],
+    "story_brief": "四羊首铜瓿与四羊方尊同属湖南宁乡地区出土的商代晚期青铜器,以肩部四只立体羊首装饰为特征。具体出土情况与详细尺寸待湖南博物院出版物补充。",
+    "image_urls": [],
+    "3d_or_video": null,
+    "data_sources": [{"field": "all", "source": "TODO: 开放数据不足", "url": null}]
+  },
+  {
+    "id": "xijue_fuhao",
+    "name_zh": "妇好铜觯",
+    "name_pinyin": "Fu Hao Tong Zhi",
+    "name_alt": [],
+    "dynasty": "商",
+    "period": "商代晚期(武丁时期)",
+    "approx_year": "约公元前1250年",
+    "excavation": {
+      "year": 1976,
+      "site": "河南省安阳市殷墟妇好墓(M5)",
+      "ancient_state": "商",
+      "method": "系统发掘",
+      "dating_method": "铭文+类型学",
+      "significance": "商代觯形制标准器"
+    },
+    "current_museum": "中国国家博物馆",
+    "size": { "height_cm": null, "_todo": "精确尺寸待核" },
+    "type": "酒器",
+    "form_subtype": "觯",
+    "form_detail": "圆腹椭口,圈足,有盖,形似小壶",
+    "distinctive_features": ["商代觯形制典型器"],
+    "patterns_structured": {
+      "main": ["兽面纹 — 腹身"],
+      "secondary": [],
+      "ground": ["云雷纹"],
+      "rim": []
+    },
+    "inscription": {
+      "has": true,
+      "text": "妇好",
+      "char_count": 2,
+      "summary": "铸铭'妇好'",
+      "stage": "商晚期金文"
+    },
+    "purpose": { "primary": "饮酒礼器", "context": "祭祀宴飨", "user_class": "商王后" },
+    "craft": { "primary": "范铸法", "details": "整体范铸", "achievements": null },
+    "rarity_level": "一级文物",
+    "scholarly_status": "商代觯形制重要标本",
+    "provenance_timeline": [{"year": 1976, "event": "妇好墓(M5)发掘出土"}],
+    "related_artifacts": [{"id": "fuhao_jue", "relation": "同出妇好墓,礼器配套"}],
+    "story_brief": "妇好铜觯1976年出土于安阳殷墟妇好墓,铸'妇好'铭文。觯为商代晚期至西周初常见酒器,圆腹椭口有盖,用于盛酒饮酒。妇好墓出土觯多件,是商代礼器配套制度的重要组成。",
+    "image_urls": [{"url": "https://commons.wikimedia.org/wiki/Category:Tomb_of_Fu_Hao", "source": "Wikimedia Commons", "license": "CC BY-SA", "attribution": "见各文件页", "caption": "妇好墓文物"}],
+    "3d_or_video": null,
+    "data_sources": [{"field": "context", "source": "Wikipedia EN (Tomb of Fu Hao)", "url": "https://en.wikipedia.org/wiki/Tomb_of_Fu_Hao"}]
+  },
+  {
+    "id": "sixi_zun",
+    "name_zh": "兕觥(犀牛形觥)",
+    "name_pinyin": "Si Gong",
+    "name_alt": ["犀形觥", "Rhinoceros-shaped Gong"],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前1100-1050年",
+    "excavation": {
+      "year": 1843,
+      "site": "山东省寿张县梁山(传)",
+      "ancient_state": "商",
+      "method": "偶然发现,同出七件青铜器",
+      "dating_method": "铭文+类型学+铭文纪年",
+      "significance": "唯一明确可定年至帝辛(商纣王)时期的青铜器之一"
+    },
+    "current_museum": "上海博物馆",
+    "size": { "height_cm": null, "weight_kg": null, "_todo": "精确尺寸待核" },
+    "type": "酒器",
+    "form_subtype": "觥(兽形)",
+    "form_detail": "整体塑犀牛形,腹内盛酒,腿足支撑,背开口注酒,犀牛头为流",
+    "distinctive_features": ["写实犀牛造型极罕见", "铭文可定年至帝辛时期", "提供商末年代证据"],
+    "patterns_structured": {
+      "main": ["写实犀牛造型 — 素面(无繁缛纹饰)"],
+      "secondary": [],
+      "ground": [],
+      "rim": []
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 27,
+      "summary": "腹内铸27字铭文,记商王对某'小臣觉'赐予贝币,同年商王出征人方国,据此可定年至帝辛(纣王)时期",
+      "stage": "商晚期金文"
+    },
+    "purpose": {
+      "primary": "盛酒礼器",
+      "context": "商末王室宴飨赐赏",
+      "user_class": "商王室"
+    },
+    "craft": {
+      "primary": "范铸法",
+      "details": "写实动物形整体范铸",
+      "achievements": "商代写实主义铸铜艺术代表"
+    },
+    "rarity_level": "国宝",
+    "scholarly_status": "唯一可定年至帝辛时期的重要青铜器,同时是商代犀牛分布的生态证据",
+    "provenance_timeline": [
+      {"year": 1843, "event": "山东梁山同坑七件青铜器出土"},
+      {"year": 1843, "event": "清代入宫廷收藏"},
+      {"year": null, "event": "辗转归上海博物馆"}
+    ],
+    "related_artifacts": [
+      {"id": "longhu_wen_zun", "relation": "同为商代写实动物形青铜器"}
+    ],
+    "story_brief": "兕觥1843年于山东梁山与六件青铜器同坑出土,整体塑犀牛形,素面无繁缛纹饰,造型写实精准。腹内27字铭文记商王赐贝于'小臣觉',且同年出征人方国——这一记载与甲骨文互证,可将此器定年至商末帝辛(纣王)时期,使其成为极少数可明确纪年的商代青铜器之一。此器同时证明商末山东一带确有犀牛生存。现藏上海博物馆。",
+    "image_urls": [
+      {"url": "https://www.worldhistory.org/image/8888/bronze-ritual-vessel-in-the-shape-of-a-rhinoceros/", "source": "World History Encyclopedia (reference)", "license": "CITATION ONLY", "attribution": null, "caption": "犀形觥参考图"}
+    ],
+    "3d_or_video": null,
+    "data_sources": [
+      {"field": "inscription,significance,excavation", "source": "World History Encyclopedia + Asian Art Museum", "url": "https://www.worldhistory.org/image/8888/bronze-ritual-vessel-in-the-shape-of-a-rhinoceros/"},
+      {"field": "description", "source": "Asian Art Museum (ritual vessel rhinoceros)", "url": "https://searchcollection.asianart.org/objects/5145/ritual-vessel-in-the-shape-of-a-rhinoceros"}
+    ]
+  },
+  {
+    "id": "fuhao_pan",
+    "name_zh": "妇好铜盘",
+    "name_pinyin": "Fu Hao Tong Pan",
+    "name_alt": [],
+    "dynasty": "商",
+    "period": "商代晚期(武丁时期)",
+    "approx_year": "约公元前1250年",
+    "excavation": {
+      "year": 1976,
+      "site": "河南省安阳市殷墟妇好墓(M5)",
+      "ancient_state": "商",
+      "method": "系统发掘",
+      "dating_method": "铭文+类型学",
+      "significance": "商代水器重要标本,妇好礼器组合中的盥洗器"
+    },
+    "current_museum": "中国国家博物馆",
+    "size": { "height_cm": null, "_todo": "精确尺寸待核" },
+    "type": "水器",
+    "form_subtype": "盘",
+    "form_detail": "宽口浅腹,圈足或兽足,用于盥洗承水",
+    "distinctive_features": ["妇好铭文确证器主", "商代盥洗礼制的直接证据"],
+    "patterns_structured": {
+      "main": ["兽面纹 — 盘内壁"],
+      "secondary": [],
+      "ground": ["云雷纹"],
+      "rim": []
+    },
+    "inscription": {
+      "has": true,
+      "text": "妇好",
+      "char_count": 2,
+      "summary": "铸铭'妇好'",
+      "stage": "商晚期金文"
+    },
+    "purpose": { "primary": "盥洗礼器", "context": "宴飨祭祀前盥手", "user_class": "商王后" },
+    "craft": { "primary": "范铸法", "details": "整体范铸", "achievements": null },
+    "rarity_level": "一级文物",
+    "scholarly_status": "商代水器礼制研究重要标本",
+    "provenance_timeline": [{"year": 1976, "event": "妇好墓(M5)发掘出土"}],
+    "related_artifacts": [{"id": "fuhao_xiaozun", "relation": "同出妇好墓,礼器配套"}],
+    "story_brief": "妇好铜盘1976年出土于安阳殷墟妇好墓,铸'妇好'铭文。盘为商代重要水器,用于祭祀宴飨前盥洗承水。妇好墓出土水器数件,与食器酒器共同构成商代礼器的完整配套体系。",
+    "image_urls": [{"url": "https://commons.wikimedia.org/wiki/Category:Tomb_of_Fu_Hao", "source": "Wikimedia Commons", "license": "CC BY-SA", "attribution": "见各文件页", "caption": "妇好墓文物"}],
+    "3d_or_video": null,
+    "data_sources": [{"field": "context", "source": "Wikipedia EN (Tomb of Fu Hao)", "url": "https://en.wikipedia.org/wiki/Tomb_of_Fu_Hao"}]
+  },
+  {
+    "id": "fuhao_he",
+    "name_zh": "妇好铜盉",
+    "name_pinyin": "Fu Hao Tong He",
+    "name_alt": [],
+    "dynasty": "商",
+    "period": "商代晚期(武丁时期)",
+    "approx_year": "约公元前1250年",
+    "excavation": {
+      "year": 1976,
+      "site": "河南省安阳市殷墟妇好墓(M5)",
+      "ancient_state": "商",
+      "method": "系统发掘",
+      "dating_method": "铭文+类型学",
+      "significance": "商代盉形制标准器,调酒与水器"
+    },
+    "current_museum": "中国国家博物馆",
+    "size": { "height_cm": null, "_todo": "精确尺寸待核" },
+    "type": "水器",
+    "form_subtype": "盉",
+    "form_detail": "袋足或圆腹,有流有盖有提梁,用于调和酒水",
+    "distinctive_features": ["商代盉形制典型器", "妇好铭文确证器主"],
+    "patterns_structured": {
+      "main": ["兽面纹 — 腹身"],
+      "secondary": [],
+      "ground": ["云雷纹"],
+      "rim": []
+    },
+    "inscription": {
+      "has": true,
+      "text": "妇好",
+      "char_count": 2,
+      "summary": "铸铭'妇好'",
+      "stage": "商晚期金文"
+    },
+    "purpose": { "primary": "调酒水器", "context": "祭祀宴飨调和酒与水", "user_class": "商王后" },
+    "craft": { "primary": "范铸法", "details": "整体范铸", "achievements": null },
+    "rarity_level": "一级文物",
+    "scholarly_status": "商代盉形制重要标本",
+    "provenance_timeline": [{"year": 1976, "event": "妇好墓(M5)发掘出土"}],
+    "related_artifacts": [{"id": "fuhao_pan", "relation": "同出妇好墓,水器配套"}],
+    "story_brief": "妇好铜盉1976年出土于安阳殷墟妇好墓,铸'妇好'铭文。盉为商代重要水器,有流有盖有提梁,用于调和酒水。妇好墓出土盉多件,与盘共同构成商代水器礼制的完整标本。",
+    "image_urls": [{"url": "https://commons.wikimedia.org/wiki/Category:Tomb_of_Fu_Hao", "source": "Wikimedia Commons", "license": "CC BY-SA", "attribution": "见各文件页", "caption": "妇好墓文物"}],
+    "3d_or_video": null,
+    "data_sources": [{"field": "context", "source": "Wikipedia EN (Tomb of Fu Hao)", "url": "https://en.wikipedia.org/wiki/Tomb_of_Fu_Hao"}]
+  },
+  {
+    "id": "fuhao_gui",
+    "name_zh": "妇好铜簋",
+    "name_pinyin": "Fu Hao Tong Gui",
+    "name_alt": [],
+    "dynasty": "商",
+    "period": "商代晚期(武丁时期)",
+    "approx_year": "约公元前1250年",
+    "excavation": {
+      "year": 1976,
+      "site": "河南省安阳市殷墟妇好墓(M5)",
+      "ancient_state": "商",
+      "method": "系统发掘",
+      "dating_method": "铭文+类型学",
+      "significance": "商代簋形制早期代表,商晚期到西周食器主流转变标本"
+    },
+    "current_museum": "中国国家博物馆",
+    "size": { "height_cm": null, "_todo": "精确尺寸待核" },
+    "type": "食器",
+    "form_subtype": "簋",
+    "form_detail": "大圆腹圈足,双耳,用于盛饭食",
+    "distinctive_features": ["商代早期簋形制典型器", "妇好铭文确证"],
+    "patterns_structured": {
+      "main": ["兽面纹 — 腹身"],
+      "secondary": ["乳钉纹 — 圈足"],
+      "ground": ["云雷纹"],
+      "rim": []
+    },
+    "inscription": {
+      "has": true,
+      "text": "妇好",
+      "char_count": 2,
+      "summary": "铸铭'妇好'",
+      "stage": "商晚期金文"
+    },
+    "purpose": { "primary": "盛饭食礼器", "context": "祭祀宴飨盛黍稷等谷物", "user_class": "商王后" },
+    "craft": { "primary": "范铸法", "details": "整体范铸", "achievements": null },
+    "rarity_level": "一级文物",
+    "scholarly_status": "商代簋形制向西周演变的重要标本",
+    "provenance_timeline": [{"year": 1976, "event": "妇好墓(M5)发掘出土"}],
+    "related_artifacts": [{"id": "simuxin_ding", "relation": "同出妇好墓,食器配套"}],
+    "story_brief": "妇好铜簋1976年出土于安阳殷墟妇好墓,铸'妇好'铭文。簋为商周时期重要食器,大圆腹圈足双耳,用于盛黍稷等谷物。妇好墓出土簋多件,是研究商代簋形制发展的重要标本。",
+    "image_urls": [{"url": "https://commons.wikimedia.org/wiki/Category:Tomb_of_Fu_Hao", "source": "Wikimedia Commons", "license": "CC BY-SA", "attribution": "见各文件页", "caption": "妇好墓文物"}],
+    "3d_or_video": null,
+    "data_sources": [{"field": "context", "source": "Wikipedia EN (Tomb of Fu Hao)", "url": "https://en.wikipedia.org/wiki/Tomb_of_Fu_Hao"}]
+  }
+]
