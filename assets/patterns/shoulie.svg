@@ -1,0 +1,65 @@
+<!-- 狩猎纹 | 战国晚期-西汉 | typical on: 壶 鉴 盘 铜镜 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+  <!-- Shoulie: hunting scene — archer on horse + fleeing deer, compressed into icon -->
+  <!-- Key elements: mounted archer with drawn bow + galloping deer in flight -->
+
+  <!-- Mounted archer (facing right) -->
+  <!-- Horse body (running, four legs extended) -->
+  <path d="M8 50 C14 46 22 44 30 44 C36 44 40 46 40 50" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  <!-- Horse back -->
+  <path d="M8 50 C8 46 10 42 14 40 C18 38 22 40 24 42" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Horse head + neck -->
+  <path d="M8 50 C4 48 2 46 2 44 C2 40 6 38 10 40 C12 41 12 44 8 46" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Horse ear -->
+  <path d="M6 40 C6 36 8 34 10 36" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+  <!-- Horse eye -->
+  <circle cx="5" cy="42" r="1.2" fill="currentColor"/>
+  <!-- Horse legs (galloping: front pair forward, back pair back) -->
+  <path d="M12 50 L10 60 L8 62 M14 50 L16 62 L14 64" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M26 50 L24 62 L22 64 M30 48 L32 60 L34 62" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Horse tail -->
+  <path d="M40 50 C44 48 46 44 44 40" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Archer (sitting on horse, drawing bow) -->
+  <!-- Body/torso -->
+  <path d="M20 38 C22 32 24 28 24 26" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  <!-- Head -->
+  <circle cx="24" cy="24" r="4" stroke="currentColor" stroke-width="1.5"/>
+  <!-- Helmet crest -->
+  <path d="M22 20 L22 16 L26 18" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+  <!-- Arms drawing bow -->
+  <path d="M20 28 C16 26 12 26 10 28" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M24 28 C28 26 32 24 34 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Bow -->
+  <path d="M10 24 C8 30 10 36 14 38" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Bowstring -->
+  <line x1="10" y1="24" x2="14" y2="38" stroke="currentColor" stroke-width="1"/>
+  <!-- Arrow -->
+  <line x1="12" y1="31" x2="38" y2="20" stroke="currentColor" stroke-width="1.2"/>
+  <path d="M38 20 L34 18 L36 22" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/>
+
+  <!-- Fleeing deer (right side, galloping away) -->
+  <!-- Deer body -->
+  <path d="M50 50 C56 46 64 44 70 44 C74 44 76 46 74 48" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Deer back arch (fleeing deer arches back) -->
+  <path d="M50 50 C50 44 52 38 56 36" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  <!-- Deer neck + head (turning back, looking at archer) -->
+  <path d="M56 36 C58 32 62 30 64 32 C66 34 64 38 60 38" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  <!-- Deer eye -->
+  <circle cx="63" cy="32" r="1.2" fill="currentColor"/>
+  <!-- Deer antler -->
+  <path d="M58 30 L56 24 L54 20 M56 24 L58 22 M60 28 L62 22 L64 18 M62 22 L64 24" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+  <!-- Deer legs (leaping) -->
+  <path d="M54 50 L52 60 M58 50 L58 62 L56 64 M64 48 L66 60 L64 62 M68 46 L72 56 L74 58" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  <!-- Deer tail (white flash of fleeing deer) -->
+  <path d="M74 48 C78 46 80 44 78 42" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+
+  <!-- Arrow in flight (second arrow, showing action) -->
+  <line x1="36" y1="38" x2="58" y2="32" stroke="currentColor" stroke-width="1" stroke-dasharray="3 2"/>
+  <path d="M58 32 L54 30 L56 34" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/>
+
+  <!-- Ground line -->
+  <line x1="4" y1="68" x2="76" y2="68" stroke="currentColor" stroke-width="1.2"/>
+  <!-- Ground texture (short grass) -->
+  <path d="M10 68 L10 64 M18 68 L18 64 M28 68 L28 64 M38 68 L36 62 M48 68 L48 62 M58 68 L58 64 M68 68 L68 64" stroke="currentColor" stroke-width="0.8" stroke-linecap="round"/>
+</svg>

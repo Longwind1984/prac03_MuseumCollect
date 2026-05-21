@@ -1,0 +1,58 @@
+<!-- 焦叶纹 | 商西周 | typical on: 尊 卣 圈足 器颈 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+  <!-- Jiaoye (banana/plantain leaf): long pointed leaf shapes in a ring, each with central rib, points up -->
+  <!-- Classic collar/neck decoration on zun and you vessels -->
+
+  <!-- Band of upward-pointing long triangular leaves with central rib -->
+  <!-- Leaf 1 -->
+  <path d="M8 72 L8 24 C8 20 12 16 16 20 L16 72 Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+  <line x1="12" y1="72" x2="12" y2="28" stroke="currentColor" stroke-width="0.8"/>
+  <!-- Leaf vein lines -->
+  <path d="M9 50 L12 46 M9 60 L12 56 M9 40 L12 36" stroke="currentColor" stroke-width="0.7" stroke-linecap="round"/>
+  <path d="M15 50 L12 46 M15 60 L12 56 M15 40 L12 36" stroke="currentColor" stroke-width="0.7" stroke-linecap="round"/>
+
+  <!-- Leaf 2 -->
+  <path d="M16 72 L16 24 C16 20 20 16 24 20 L24 72 Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+  <line x1="20" y1="72" x2="20" y2="28" stroke="currentColor" stroke-width="0.8"/>
+  <path d="M17 50 L20 46 M17 60 L20 56 M17 40 L20 36" stroke="currentColor" stroke-width="0.7" stroke-linecap="round"/>
+  <path d="M23 50 L20 46 M23 60 L20 56 M23 40 L20 36" stroke="currentColor" stroke-width="0.7" stroke-linecap="round"/>
+
+  <!-- Leaf 3 -->
+  <path d="M24 72 L24 24 C24 20 28 16 32 20 L32 72 Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+  <line x1="28" y1="72" x2="28" y2="28" stroke="currentColor" stroke-width="0.8"/>
+  <path d="M25 50 L28 46 M25 60 L28 56 M25 40 L28 36" stroke="currentColor" stroke-width="0.7" stroke-linecap="round"/>
+  <path d="M31 50 L28 46 M31 60 L28 56 M31 40 L28 36" stroke="currentColor" stroke-width="0.7" stroke-linecap="round"/>
+
+  <!-- Leaf 4 -->
+  <path d="M32 72 L32 24 C32 20 36 16 40 20 L40 72 Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+  <line x1="36" y1="72" x2="36" y2="28" stroke="currentColor" stroke-width="0.8"/>
+  <path d="M33 50 L36 46 M33 60 L36 56 M33 40 L36 36" stroke="currentColor" stroke-width="0.7" stroke-linecap="round"/>
+  <path d="M39 50 L36 46 M39 60 L36 56 M39 40 L36 36" stroke="currentColor" stroke-width="0.7" stroke-linecap="round"/>
+
+  <!-- Leaf 5 -->
+  <path d="M40 72 L40 24 C40 20 44 16 48 20 L48 72 Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+  <line x1="44" y1="72" x2="44" y2="28" stroke="currentColor" stroke-width="0.8"/>
+  <path d="M41 50 L44 46 M41 60 L44 56 M41 40 L44 36" stroke="currentColor" stroke-width="0.7" stroke-linecap="round"/>
+  <path d="M47 50 L44 46 M47 60 L44 56 M47 40 L44 36" stroke="currentColor" stroke-width="0.7" stroke-linecap="round"/>
+
+  <!-- Leaf 6 -->
+  <path d="M48 72 L48 24 C48 20 52 16 56 20 L56 72 Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+  <line x1="52" y1="72" x2="52" y2="28" stroke="currentColor" stroke-width="0.8"/>
+  <path d="M49 50 L52 46 M49 60 L52 56 M49 40 L52 36" stroke="currentColor" stroke-width="0.7" stroke-linecap="round"/>
+  <path d="M55 50 L52 46 M55 60 L52 56 M55 40 L52 36" stroke="currentColor" stroke-width="0.7" stroke-linecap="round"/>
+
+  <!-- Leaf 7 -->
+  <path d="M56 72 L56 24 C56 20 60 16 64 20 L64 72 Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+  <line x1="60" y1="72" x2="60" y2="28" stroke="currentColor" stroke-width="0.8"/>
+  <path d="M57 50 L60 46 M57 60 L60 56 M57 40 L60 36" stroke="currentColor" stroke-width="0.7" stroke-linecap="round"/>
+  <path d="M63 50 L60 46 M63 60 L60 56 M63 40 L60 36" stroke="currentColor" stroke-width="0.7" stroke-linecap="round"/>
+
+  <!-- Leaf 8 -->
+  <path d="M64 72 L64 24 C64 20 68 16 72 20 L72 72 Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+  <line x1="68" y1="72" x2="68" y2="28" stroke="currentColor" stroke-width="0.8"/>
+  <path d="M65 50 L68 46 M65 60 L68 56 M65 40 L68 36" stroke="currentColor" stroke-width="0.7" stroke-linecap="round"/>
+  <path d="M71 50 L68 46 M71 60 L68 56 M71 40 L68 36" stroke="currentColor" stroke-width="0.7" stroke-linecap="round"/>
+
+  <!-- Top band line (where leaves originate from) -->
+  <line x1="4" y1="72" x2="76" y2="72" stroke="currentColor" stroke-width="1.5"/>
+</svg>

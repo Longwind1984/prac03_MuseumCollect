@@ -104,3 +104,5 @@
 Total active background agents: 9 (5 DE + 4 Phase B)
 
 [2026-05-21 H2-3] [data-engineer-v3-dongzhou] DONE — segment-3 (52/61 fully filled, 9 TODO: all excavation_year on 传世 pieces — not hallucinated, genuinely unknown)
+
+[2026-05-21 H4] [builder-timepillar-b3] DONE — time-pillar v3 + event-bus + dynasties.json

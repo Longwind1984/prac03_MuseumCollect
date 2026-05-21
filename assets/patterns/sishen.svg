@@ -1,0 +1,59 @@
+<!-- 四神纹 | 汉代 | typical on: 铜镜 壶 鉴 铺首 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+  <!-- Sishen: Four Divine Beasts — Azure Dragon (E), White Tiger (W), Vermilion Bird (S), Black Tortoise (N) -->
+  <!-- Arranged in 4 quadrants -->
+
+  <!-- Center dividing cross + circle -->
+  <circle cx="40" cy="40" r="6" stroke="currentColor" stroke-width="1.5"/>
+  <circle cx="40" cy="40" r="2" fill="currentColor"/>
+
+  <!-- Top: Vermilion Bird (朱雀 - South in Chinese cosmology, shown top for visual clarity) -->
+  <!-- Phoenix-like bird, wings spread -->
+  <path d="M30 22 C34 16 40 12 40 8 C40 12 46 16 50 22" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  <!-- Bird body -->
+  <ellipse cx="40" cy="22" rx="6" ry="4" stroke="currentColor" stroke-width="1.5"/>
+  <!-- Bird head -->
+  <circle cx="40" cy="16" r="3" stroke="currentColor" stroke-width="1.3"/>
+  <circle cx="41" cy="15" r="1" fill="currentColor"/>
+  <!-- Tail feathers sweeping down -->
+  <path d="M36 24 C32 28 30 32 32 34 M40 26 C40 30 38 34 36 36 M44 24 C48 28 50 32 48 34" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+
+  <!-- Right: Azure Dragon (青龙 - East) -->
+  <!-- Serpentine dragon -->
+  <path d="M52 30 C58 26 66 28 68 34 C70 40 66 46 60 46 C56 46 54 42 56 38" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Dragon head (right side, small) -->
+  <circle cx="68" cy="34" r="3.5" stroke="currentColor" stroke-width="1.3"/>
+  <circle cx="69.5" cy="33" r="1" fill="currentColor"/>
+  <!-- Horn -->
+  <path d="M68 30 C70 26 72 24 72 28" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+  <!-- Tail curl -->
+  <path d="M56 38 C54 34 56 30 60 30 C62 30 62 34 60 36" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+
+  <!-- Bottom: Black Tortoise (玄武 - North, shown bottom) — tortoise entwined with snake -->
+  <!-- Tortoise shell -->
+  <ellipse cx="40" cy="58" rx="8" ry="6" stroke="currentColor" stroke-width="1.6"/>
+  <!-- Shell pattern (hexagonal suggestion) -->
+  <path d="M36 56 L40 54 L44 56 L44 60 L40 62 L36 60 Z" stroke="currentColor" stroke-width="1"/>
+  <!-- Snake entwining tortoishell -->
+  <path d="M32 58 C28 54 30 50 34 50 C38 50 40 54 38 56" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  <path d="M48 58 C52 54 50 50 46 50 C42 50 40 54 42 56" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  <!-- Snake head at top of the entwining -->
+  <ellipse cx="36" cy="48" rx="2" ry="1.5" stroke="currentColor" stroke-width="1"/>
+  <circle cx="35" cy="47" r="0.6" fill="currentColor"/>
+  <!-- Tortoise legs -->
+  <path d="M34 62 L32 68 M38 64 L36 70 M42 64 L44 70 M46 62 L48 68" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+
+  <!-- Left: White Tiger (白虎 - West) -->
+  <!-- Tiger in profile, crouching -->
+  <path d="M28 38 C22 34 14 36 12 42 C10 48 14 52 20 52 C24 52 26 48 24 44" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Tiger head -->
+  <circle cx="12" cy="42" r="4" stroke="currentColor" stroke-width="1.3"/>
+  <circle cx="10.5" cy="41" r="1.1" fill="currentColor"/>
+  <!-- Tiger ear -->
+  <path d="M10 38 C10 34 12 32 14 34" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+  <!-- Tiger stripes -->
+  <path d="M16 42 C16 40 18 38 18 42" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
+  <path d="M20 46 C20 44 22 42 22 46" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
+  <!-- Tiger tail -->
+  <path d="M24 44 C28 40 30 36 28 32" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+</svg>

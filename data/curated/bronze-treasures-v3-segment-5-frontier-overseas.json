@@ -1155,5 +1155,1538 @@
         "url": "http://www.silkroads.org.cn/portal.php?mod=view&aid=15131"
       }
     ]
+  },
+  {
+    "id": "met_shang_gong_owl",
+    "name_zh": "商代鸮形觥（大都会）",
+    "name_pinyin": "Shang Dai Xiao Xing Gong MET",
+    "name_alt": [
+      "Wine Pouring Vessel Gong",
+      "商代鸮尊式觥"
+    ],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前13-11世纪",
+    "excavation_year": "传世",
+    "excavation_site": "河南省安阳地区（可能）",
+    "ancient_state": "商",
+    "current_museum": "大都会艺术博物馆（纽约）",
+    "met_object_id": 44781,
+    "met_object_url": "https://www.metmuseum.org/art/collection/search/44781",
+    "size": {
+      "height_cm": 21.6
+    },
+    "type": "酒器",
+    "form_subtype": "觥（酒注器）",
+    "patterns": [
+      "鸮形主体",
+      "蟠蛇翼纹",
+      "兽面纹",
+      "夔龙纹"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "温酒注酒礼器",
+    "craft": "范铸法",
+    "rarity_level": "国宝级海外藏",
+    "story_brief": "大都会博物馆藏商代鸮形酒注器，高21.6厘米。器身呈鸮（猫头鹰）形，头部在壶嘴之下，两翼各以盘卷蛇纹构成，器柄亦以钩喙鸟形装饰。注温酒时，蒸汽从鸮口飘出，颇具神秘氛围。是商代动物形铜器的精品代表。",
+    "image_urls": [
+      {
+        "url": "https://www.metmuseum.org/art/collection/search/44781",
+        "source": "大都会艺术博物馆 Open Access",
+        "license": "CC0 (Public Domain)",
+        "caption": "商代鸮形觥，MET藏，objectID 44781。MET Open Access图像CC0可免费使用。"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "size,type,patterns,story",
+        "source": "MET Museum collection page objectID 44781 (CC0)",
+        "url": "https://www.metmuseum.org/art/collection/search/44781"
+      }
+    ]
+  },
+  {
+    "id": "met_shang_jue_nipple",
+    "name_zh": "商代乳钉纹爵（大都会）",
+    "name_pinyin": "Shang Dai Ru Ding Wen Jue MET",
+    "name_alt": [
+      "Ritual Wine Warmer Jue",
+      "商代青铜爵"
+    ],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前13-11世纪",
+    "excavation_year": "传世",
+    "excavation_site": "河南省（可能）",
+    "ancient_state": "商",
+    "current_museum": "大都会艺术博物馆（纽约）",
+    "met_object_id": 61034,
+    "met_object_url": "https://www.metmuseum.org/art/collection/search/61034",
+    "size": {
+      "height_cm": "TODO"
+    },
+    "type": "酒器",
+    "form_subtype": "爵",
+    "patterns": [
+      "乳钉纹",
+      "饕餮纹",
+      "云雷纹"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "温酒礼器",
+    "craft": "范铸法",
+    "rarity_level": "国宝级海外藏",
+    "story_brief": "爵是商周礼器体系中最易辨识的器型之一：流翘（长弧形流口）、尾翘（尖状尾部）、三棱柱足、腹侧双柱。用于温酒并向宾客分酒。乳钉纹爵是商代早中期典型器型，大都会藏品保存完好，是欧美重要的商代青铜爵标本。",
+    "image_urls": [
+      {
+        "url": "https://www.metmuseum.org/art/collection/search/61034",
+        "source": "大都会艺术博物馆 Open Access",
+        "license": "CC0 (Public Domain)",
+        "caption": "商代爵，MET藏，objectID 61034"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "type,form_subtype,purpose,story",
+        "source": "MET Museum collection page objectID 61034 (CC0)",
+        "url": "https://www.metmuseum.org/art/collection/search/61034"
+      }
+    ]
+  },
+  {
+    "id": "met_western_zhou_gui",
+    "name_zh": "西周粢盛簋（大都会）",
+    "name_pinyin": "Xi Zhou Gui MET",
+    "name_alt": [
+      "Grain Serving Vessel Gui",
+      "西周青铜簋"
+    ],
+    "dynasty": "西周",
+    "period": "西周中期",
+    "approx_year": "约公元前10-9世纪",
+    "excavation_year": "传世",
+    "excavation_site": "陕西省（可能）",
+    "ancient_state": "周",
+    "current_museum": "大都会艺术博物馆（纽约）",
+    "met_object_id": 61318,
+    "met_object_url": "https://www.metmuseum.org/art/collection/search/61318",
+    "size": {
+      "height_cm": "TODO"
+    },
+    "type": "食器",
+    "form_subtype": "簋",
+    "patterns": [
+      "兽首耳",
+      "瓦纹",
+      "窃曲纹",
+      "圈足饕餮纹"
+    ],
+    "inscription": {
+      "has": true,
+      "text": "TODO",
+      "char_count": "TODO",
+      "summary": "铸铭，内容待查"
+    },
+    "purpose": "盛黍稷等粒食礼器",
+    "craft": "范铸法",
+    "rarity_level": "国宝级海外藏",
+    "story_brief": "西周简是西周礼乐制度中盛放粒食的核心礼器，凸显周代贵族等级制度。大都会藏品具有典型西周中期造型特征，兽首双耳与圈足下连方座体现周礼严格的器用规范。",
+    "image_urls": [
+      {
+        "url": "https://www.metmuseum.org/art/collection/search/61318",
+        "source": "大都会艺术博物馆 Open Access",
+        "license": "CC0 (Public Domain)",
+        "caption": "西周簋，MET藏，objectID 61318"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "type,dynasty,form_subtype",
+        "source": "MET Museum collection page objectID 61318 (CC0)",
+        "url": "https://www.metmuseum.org/art/collection/search/61318"
+      }
+    ]
+  },
+  {
+    "id": "met_shang_ritual_altar",
+    "name_zh": "商周礼器祭祀组合（大都会）",
+    "name_pinyin": "Shang Zhou Li Qi Ji Si Zu He MET",
+    "name_alt": [
+      "Ritual Altar Set",
+      "段方鼎礼器组合"
+    ],
+    "dynasty": "商至西周",
+    "period": "商代晚期至西周早期",
+    "approx_year": "约公元前11世纪",
+    "excavation_year": "1901（陕西出土后入段方藏）",
+    "excavation_site": "陕西省（1901年出土）",
+    "ancient_state": "商/周",
+    "current_museum": "大都会艺术博物馆（纽约）",
+    "met_object_id": 76974,
+    "met_object_url": "https://www.metmuseum.org/art/collection/search/76974",
+    "size": {
+      "set_count": "多件"
+    },
+    "type": "礼器组合",
+    "form_subtype": "祭坛礼器组",
+    "patterns": [
+      "饕餮纹",
+      "夔龙纹",
+      "云雷纹"
+    ],
+    "inscription": {
+      "has": true,
+      "text": "各器铭文不一",
+      "char_count": "TODO",
+      "summary": "各器分别铸铭，反映同一王室系统"
+    },
+    "purpose": "宗庙祭祀礼器组合",
+    "craft": "范铸法",
+    "rarity_level": "国宝级海外藏",
+    "story_brief": "1901年陕西出土，进入清末收藏家段方（满族官僚兼古玩家）的收藏，后辗转流入大都会。该礼器组合涵盖鼎、簋、觚、爵等多种形制，展示商周之际宫廷祭祀礼器的完整配置，是大都会中国青铜器的镇馆级展品。",
+    "image_urls": [
+      {
+        "url": "https://www.metmuseum.org/art/collection/search/76974",
+        "source": "大都会艺术博物馆 Open Access",
+        "license": "CC0 (Public Domain)",
+        "caption": "商周礼器祭祀组合，MET藏，objectID 76974"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "MET Museum collection page objectID 76974 (CC0)",
+        "url": "https://www.metmuseum.org/art/collection/search/76974"
+      }
+    ]
+  },
+  {
+    "id": "met_shang_zun_wine",
+    "name_zh": "商代兽面纹铜尊（大都会）",
+    "name_pinyin": "Shang Dai Shou Mian Wen Tong Zun MET",
+    "name_alt": [
+      "Wine Vessel Zun MET",
+      "商代宽肩大口尊"
+    ],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前12-11世纪",
+    "excavation_year": "传世",
+    "excavation_site": "TODO",
+    "ancient_state": "商",
+    "current_museum": "大都会艺术博物馆（纽约）",
+    "met_object_id": 61323,
+    "met_object_url": "https://www.metmuseum.org/art/collection/search/61323",
+    "size": {
+      "height_cm": "TODO"
+    },
+    "type": "酒器",
+    "form_subtype": "尊",
+    "patterns": [
+      "饕餮纹（腹部）",
+      "蕉叶纹（颈部）",
+      "云雷纹（地纹）"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "盛酒礼器",
+    "craft": "范铸法",
+    "rarity_level": "国宝级海外藏",
+    "story_brief": "宽肩大口尊是商代盛酒礼器的代表性器型，口部宽展，腹部饰三层花纹：颈部蕉叶纹、腹部主体饕餮纹、地纹云雷纹，构成商晚期典型三层花纹范式。大都会藏品工艺精湛，是西方公众认识中国青铜文明的经典器物。",
+    "image_urls": [
+      {
+        "url": "https://www.metmuseum.org/art/collection/search/61323",
+        "source": "大都会艺术博物馆 Open Access",
+        "license": "CC0 (Public Domain)",
+        "caption": "商代铜尊，MET藏，objectID 61323"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "type,patterns,dynasty",
+        "source": "MET Museum collection page objectID 61323 (CC0)",
+        "url": "https://www.metmuseum.org/art/collection/search/61323"
+      }
+    ]
+  },
+  {
+    "id": "met_western_zhou_hu",
+    "name_zh": "西周对铜壶（大都会）",
+    "name_pinyin": "Xi Zhou Dui Tong Hu MET",
+    "name_alt": [
+      "Wine Container Hu MET",
+      "西周扁壶一对"
+    ],
+    "dynasty": "西周",
+    "period": "西周中期",
+    "approx_year": "约公元前10-9世纪",
+    "excavation_year": "传世",
+    "excavation_site": "陕西省（可能）",
+    "ancient_state": "周",
+    "current_museum": "大都会艺术博物馆（纽约）",
+    "met_object_id": 44515,
+    "met_object_url": "https://www.metmuseum.org/art/collection/search/44515",
+    "size": {
+      "height_cm": "TODO",
+      "set_count": 2
+    },
+    "type": "酒器",
+    "form_subtype": "壶",
+    "patterns": [
+      "环带纹",
+      "兽衔环铺首"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "盛酒礼器",
+    "craft": "范铸法",
+    "rarity_level": "国宝级海外藏",
+    "story_brief": "大都会博物馆藏西周礼器中最重要的是这对西周铜壶，扁梨形腹，器型雄浑，双铺首衔环。一对礼器成套保存极为罕见，是西周中期酒器规格的杰出代表，也是大都会中国古铜器部分的核心展品之一。",
+    "image_urls": [
+      {
+        "url": "https://www.metmuseum.org/art/collection/search/44515",
+        "source": "大都会艺术博物馆 Open Access",
+        "license": "CC0 (Public Domain)",
+        "caption": "西周铜壶，MET藏，objectID 44515"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "type,dynasty,form_subtype,story",
+        "source": "MET Museum collection page objectID 44515 (CC0)",
+        "url": "https://www.metmuseum.org/art/collection/search/44515"
+      }
+    ]
+  },
+  {
+    "id": "bm_double_ram_zun",
+    "name_zh": "商代双羊尊（大英）",
+    "name_pinyin": "Shang Dai Shuang Yang Zun BM",
+    "name_alt": [
+      "双羊背对背尊",
+      "Double Ram Zun"
+    ],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前13-11世纪",
+    "excavation_year": "清代乾隆年间（传出）",
+    "excavation_site": "湖南省宁乡（推测）",
+    "ancient_state": "商（湘江流域方国）",
+    "current_museum": "大英博物馆（伦敦）",
+    "bm_accession": "1936,1118.1",
+    "size": {
+      "height_cm": 45
+    },
+    "type": "酒器",
+    "form_subtype": "尊",
+    "patterns": [
+      "双羊背对背",
+      "鳞纹（羊身）",
+      "饕餮纹（双羊臀部）",
+      "夔龙纹"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "盛酒礼器",
+    "craft": "范铸法（双羊分铸后对接，背部圆柱形口）",
+    "rarity_level": "国宝级海外藏",
+    "story_brief": "全球仅存两件双羊尊，另一件藏东京根津美术馆。此器以两头背对背的雄羊支撑壶形器身，羊角卷曲、羊身饰鳞纹，构思奇绝。1936年大英博物馆购自乔治·尤摩福普罗斯（George Eumorfopoulos）。湖南宁乡地区出土大量商代青铜器，与殷墟中心区相距遥远，证明商文化向南的深度渗透。2013年学者对其进行X射线荧光与中子衍射分析，揭示其铸造细节。",
+    "image_urls": [
+      {
+        "url": "https://www.britishmuseum.org/collection/object/A_1936-1118-1",
+        "source": "大英博物馆 Collections Online",
+        "license": "CC BY-NC-SA 4.0（大英博物馆图片）",
+        "caption": "双羊尊，大英博物馆藏，馆藏编号1936,1118.1"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "size,excavation_site,dynasty,accession",
+        "source": "大英博物馆 Collections Online",
+        "url": "https://www.britishmuseum.org/collection/object/A_1936-1118-1"
+      },
+      {
+        "field": "technical_study",
+        "source": "ResearchGate·A technical study of the double-ram zun (British Museum)",
+        "url": "https://www.researchgate.net/publication/287968320_A_Technical_Study_of_the_Double-ram_Zun_Ancient_Chinese_Bronze_Vessel_in_the_British_Museum"
+      }
+    ]
+  },
+  {
+    "id": "bm_shang_gui",
+    "name_zh": "商代龙纹方彝（大英）",
+    "name_pinyin": "Shang Dai Long Wen Fang Yi BM",
+    "name_alt": [
+      "方彝",
+      "Fang Yi BM"
+    ],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前12-11世纪",
+    "excavation_year": "传世",
+    "excavation_site": "河南安阳或湖南地区",
+    "ancient_state": "商",
+    "current_museum": "大英博物馆（伦敦）",
+    "bm_accession": "1936,1118.2",
+    "size": {
+      "height_cm": "TODO"
+    },
+    "type": "酒器",
+    "form_subtype": "方彝",
+    "patterns": [
+      "夔龙纹",
+      "饕餮纹",
+      "云雷纹"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "盛酒祭祀礼器",
+    "craft": "范铸法",
+    "rarity_level": "国宝级海外藏",
+    "story_brief": "方彝是商代特有的方形盖壶式礼器，屋顶形盖是其标志。大英博物馆所藏同批1936年尤摩福普罗斯收藏中的商代礼器，与双羊尊同出一源，共同代表英国所藏中国商代青铜的核心批次。",
+    "image_urls": [
+      {
+        "url": "https://www.britishmuseum.org/collection/object/A_1936-1118-2",
+        "source": "大英博物馆 Collections Online",
+        "license": "CC BY-NC-SA 4.0",
+        "caption": "大英博物馆藏商代gui，馆藏编号1936,1118.2"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "accession,dynasty",
+        "source": "大英博物馆 Collections Online",
+        "url": "https://www.britishmuseum.org/collection/object/A_1936-1118-2"
+      }
+    ]
+  },
+  {
+    "id": "bm_western_zhou_food_set",
+    "name_zh": "西周青铜食器组（大英）",
+    "name_pinyin": "Xi Zhou Qing Tong Shi Qi Zu BM",
+    "name_alt": [
+      "Kang Hou gui 康侯簋",
+      "西周康侯簋"
+    ],
+    "dynasty": "西周",
+    "period": "西周早期",
+    "approx_year": "约公元前11世纪初",
+    "excavation_year": "传世（清代流出）",
+    "excavation_site": "河南省浚县辛村（卫国墓地，推测）",
+    "ancient_state": "卫国",
+    "current_museum": "大英博物馆（伦敦）",
+    "size": {
+      "height_cm": "TODO"
+    },
+    "type": "食器",
+    "form_subtype": "簋",
+    "patterns": [
+      "涡纹",
+      "蝉纹",
+      "兽首耳"
+    ],
+    "inscription": {
+      "has": true,
+      "text": "康侯（铭文内容涉及周初分封）",
+      "char_count": "TODO",
+      "summary": "铸铭记周初康侯封卫之事，与武王克商后分封史实相符"
+    },
+    "purpose": "盛食礼器，宗庙祭祀",
+    "craft": "范铸法",
+    "rarity_level": "国宝级海外藏",
+    "story_brief": "康侯簋铭文记周武王之弟封于卫国之事，是印证周初分封制度的重要金文实物。该器于清末流出中国，后入大英博物馆。铭文与史记记载相互印证，学术价值极高，也是中英学界探讨流失文物归还议题的标志性案例。",
+    "image_urls": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Kang_Hou_gui",
+        "source": "Wikipedia EN Kang Hou gui",
+        "license": "CC BY-SA",
+        "caption": "康侯簋词条"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "inscription,story",
+        "source": "Wikipedia EN Kang Hou gui",
+        "url": "https://en.wikipedia.org/wiki/Kang_Hou_gui"
+      }
+    ]
+  },
+  {
+    "id": "bm_shang_you_tiger",
+    "name_zh": "商代虎食人卣（大英）",
+    "name_pinyin": "Shang Dai Hu Shi Ren You BM",
+    "name_alt": [
+      "you BM",
+      "1936,1118.4"
+    ],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前13-11世纪",
+    "excavation_year": "湖南宁乡/安化传出",
+    "excavation_site": "湖南省（宁乡或安化一带）",
+    "ancient_state": "商",
+    "current_museum": "大英博物馆（伦敦）",
+    "bm_accession": "1936,1118.4",
+    "size": {
+      "height_cm": "TODO"
+    },
+    "type": "酒器",
+    "form_subtype": "卣",
+    "patterns": [
+      "虎食人纹",
+      "兽面纹",
+      "云雷纹"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "盛酒礼器",
+    "craft": "范铸法",
+    "rarity_level": "国宝级海外藏",
+    "story_brief": "与大英博物馆双羊尊同批入藏的商代卣，同属尤摩福普罗斯收藏。虎食人纹卣是商代动物纹饰的极端形态，以猛虎将人含于口中的造型表现权威与神力。湖南宁乡一带出土的商代青铜器因其独特的南方气息一直是学界关注的地域性铸造问题。",
+    "image_urls": [
+      {
+        "url": "https://www.britishmuseum.org/collection/object/A_1936-1118-4",
+        "source": "大英博物馆 Collections Online",
+        "license": "CC BY-NC-SA 4.0",
+        "caption": "商代虎食人卣，大英博物馆藏，馆藏编号1936,1118.4"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "accession,dynasty,excavation_site",
+        "source": "大英博物馆 Collections Online",
+        "url": "https://www.britishmuseum.org/collection/object/A_1936-1118-4"
+      }
+    ]
+  },
+  {
+    "id": "freer_elephant_he",
+    "name_zh": "商代象形铜盉（弗利尔）",
+    "name_pinyin": "Shang Dai Xiang Xing Tong He Freer",
+    "name_alt": [
+      "Elephant-shaped He",
+      "象形酒注器"
+    ],
+    "dynasty": "商",
+    "period": "商代晚期安阳期",
+    "approx_year": "约公元前12世纪",
+    "excavation_year": "传世",
+    "excavation_site": "TODO",
+    "ancient_state": "商",
+    "current_museum": "弗利尔艺廊/赛克勒美术馆（史密森尼，华盛顿）",
+    "accession_number": "F1936.6a-b",
+    "size": {
+      "height_cm": 17.2,
+      "width_cm": 10.7,
+      "depth_cm": 21.4
+    },
+    "type": "酒器",
+    "form_subtype": "盉",
+    "patterns": [
+      "象形主体",
+      "饕餮纹",
+      "夔龙纹",
+      "蛇纹"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "盛酒注酒礼器",
+    "craft": "范铸法",
+    "rarity_level": "国宝级海外藏",
+    "story_brief": "弗利尔美术馆藏象形盉是商代动物形铜器的传世精品。器型为小象立于大象背上，大象腹部盛酒，象鼻为流，小象作盖钮。酒从象鼻倾倒，构思巧绝。1936年弗利尔从Yamanaka公司购入。该器尺寸17.2×10.7×21.4厘米，属Smithsonian机构开放数据（可免费引用）。",
+    "image_urls": [
+      {
+        "url": "https://asia.si.edu/object/F1936.6a-b/",
+        "source": "史密森尼国家亚洲艺术博物馆",
+        "license": "CC0（Smithsonian Open Access）",
+        "caption": "象形盉，弗利尔藏，编号F1936.6a-b"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "size,accession,story",
+        "source": "Smithsonian National Museum of Asian Art — F1936.6a-b (CC0)",
+        "url": "https://asia.si.edu/object/F1936.6a-b/"
+      }
+    ]
+  },
+  {
+    "id": "freer_shang_fangding",
+    "name_zh": "商代亚丑方鼎（弗利尔）",
+    "name_pinyin": "Shang Dai Ya Chou Fang Ding Freer",
+    "name_alt": [
+      "亚丑方鼎",
+      "商代方鼎弗利尔"
+    ],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前12-11世纪",
+    "excavation_year": "传世",
+    "excavation_site": "河南安阳（可能）",
+    "ancient_state": "商",
+    "current_museum": "弗利尔艺廊（史密森尼，华盛顿）",
+    "size": {
+      "height_cm": "TODO"
+    },
+    "type": "食器",
+    "form_subtype": "方鼎",
+    "patterns": [
+      "饕餮纹",
+      "夔龙纹",
+      "云雷纹"
+    ],
+    "inscription": {
+      "has": true,
+      "text": "亚丑",
+      "char_count": 2,
+      "summary": "铭亚丑二字，为商代族徽，表明铸器者族属"
+    },
+    "purpose": "祭祀礼器",
+    "craft": "范铸法",
+    "rarity_level": "国宝级海外藏",
+    "story_brief": "亚丑是商代著名族徽铭文，多见于山东地区出土铜器，表明商代亚丑族群的分布与文化影响。弗利尔藏品具典型商代晚期方鼎造型，饕餮纹贯穿器身，铭文族徽为器物提供了族属信息。",
+    "image_urls": [
+      {
+        "url": "https://asia.si.edu/explore-art-culture/collections/",
+        "source": "史密森尼国家亚洲艺术博物馆",
+        "license": "CC0（Smithsonian Open Access）",
+        "caption": "弗利尔艺廊藏商代方鼎"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "general",
+        "source": "Smithsonian National Museum of Asian Art (CC0)",
+        "url": "https://asia.si.edu/"
+      }
+    ]
+  },
+  {
+    "id": "freer_zhou_zun",
+    "name_zh": "西周鸟纹铜尊（弗利尔）",
+    "name_pinyin": "Xi Zhou Niao Wen Tong Zun Freer",
+    "name_alt": [
+      "西周铜尊弗利尔",
+      "Zhou Zun Freer"
+    ],
+    "dynasty": "西周",
+    "period": "西周早中期",
+    "approx_year": "约公元前11-9世纪",
+    "excavation_year": "传世",
+    "excavation_site": "陕西省（可能）",
+    "ancient_state": "周",
+    "current_museum": "弗利尔艺廊（史密森尼，华盛顿）",
+    "size": {
+      "height_cm": "TODO"
+    },
+    "type": "酒器",
+    "form_subtype": "尊",
+    "patterns": [
+      "凤鸟纹",
+      "窃曲纹",
+      "瓦纹"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "盛酒礼器",
+    "craft": "范铸法",
+    "rarity_level": "国宝级海外藏",
+    "story_brief": "弗利尔艺廊拥有规模最大的美国境外中国古铜器收藏之一，尤以商代安阳期与西周早期礼器见长。西周鸟纹铜尊以凤鸟纹为主纹，体现西周礼制中凤鸟纹取代商代饕餮纹的审美转变。",
+    "image_urls": [
+      {
+        "url": "https://asia.si.edu/",
+        "source": "史密森尼国家亚洲艺术博物馆",
+        "license": "CC0（Smithsonian Open Access）",
+        "caption": "弗利尔艺廊西周铜尊"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "general",
+        "source": "Smithsonian National Museum of Asian Art (CC0)",
+        "url": "https://asia.si.edu/"
+      }
+    ]
+  },
+  {
+    "id": "sackler_shang_you",
+    "name_zh": "商代饕餮纹铜卣（赛克勒）",
+    "name_pinyin": "Shang Dai Tao Tie Wen Tong You Sackler",
+    "name_alt": [
+      "商代铜卣赛克勒",
+      "Shang You Sackler"
+    ],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前12世纪",
+    "excavation_year": "传世",
+    "excavation_site": "河南安阳地区（可能）",
+    "ancient_state": "商",
+    "current_museum": "赛克勒美术馆（史密森尼，华盛顿）",
+    "size": {
+      "height_cm": "TODO"
+    },
+    "type": "酒器",
+    "form_subtype": "卣",
+    "patterns": [
+      "饕餮纹",
+      "夔龙纹",
+      "云雷纹",
+      "提梁龙首"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "盛酒礼器",
+    "craft": "范铸法",
+    "rarity_level": "国宝级海外藏",
+    "story_brief": "赛克勒美术馆（Arthur M. Sackler Gallery）藏有大量商代礼器，卣是商代最重要的盛酒礼器之一，提梁设计便于携带与悬挂。赛克勒收藏的商代铜卣以饕餮纹为主纹，通体布满三层纹饰，是商代晚期安阳风格的代表。",
+    "image_urls": [
+      {
+        "url": "https://asia.si.edu/",
+        "source": "史密森尼国家亚洲艺术博物馆",
+        "license": "CC0（Smithsonian Open Access）",
+        "caption": "赛克勒美术馆商代铜卣"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "general",
+        "source": "Smithsonian National Museum of Asian Art (CC0)",
+        "url": "https://asia.si.edu/"
+      }
+    ]
+  },
+  {
+    "id": "mfa_boston_zhou_zun",
+    "name_zh": "西周铜尊（波士顿）",
+    "name_pinyin": "Xi Zhou Tong Zun MFA Boston",
+    "name_alt": [
+      "Ritual wine vessel zun MFA",
+      "MFA Boston 西周尊"
+    ],
+    "dynasty": "西周",
+    "period": "西周早期",
+    "approx_year": "约公元前11世纪",
+    "excavation_year": "传世",
+    "excavation_site": "陕西省（可能）",
+    "ancient_state": "周",
+    "current_museum": "波士顿美术馆",
+    "mfa_accession": "TODO",
+    "size": {
+      "height_cm": 27.6,
+      "width_cm": 24.0
+    },
+    "type": "酒器",
+    "form_subtype": "尊",
+    "patterns": [
+      "兽面纹",
+      "夔龙纹",
+      "云雷纹"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "盛酒礼器",
+    "craft": "范铸法",
+    "rarity_level": "国宝级海外藏",
+    "story_brief": "波士顿美术馆（MFA Boston）拥有东亚以外最重要的中国艺术品收藏之一，其中国青铜器以西周礼器见长。馆藏西周铜尊高27.6厘米，造型浑厚端庄，饕餮纹与夔龙纹相映成趣，是典型西周早期礼器风貌。",
+    "image_urls": [
+      {
+        "url": "https://www.mfa.org/collections/object/ritual-wine-vessel-zun-8667",
+        "source": "MFA Boston 馆藏页面",
+        "license": "参考来源（商业使用须向MFA申请授权）",
+        "caption": "西周铜尊，波士顿美术馆藏"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "size,dynasty,type",
+        "source": "MFA Boston Collection — ritual-wine-vessel-zun-8667",
+        "url": "https://www.mfa.org/collections/object/ritual-wine-vessel-zun-8667"
+      }
+    ]
+  },
+  {
+    "id": "mfa_boston_shang_ceremonial_zun",
+    "name_zh": "商代觚形铜尊（波士顿）",
+    "name_pinyin": "Shang Dai Gu Xing Tong Zun MFA",
+    "name_alt": [
+      "Ceremonial wine vessel zun MFA",
+      "MFA Boston 商代觚形尊"
+    ],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前12-11世纪",
+    "excavation_year": "传世",
+    "excavation_site": "河南省（可能）",
+    "ancient_state": "商",
+    "current_museum": "波士顿美术馆",
+    "size": {
+      "height_cm": "TODO"
+    },
+    "type": "酒器",
+    "form_subtype": "觚形尊",
+    "patterns": [
+      "饕餮纹",
+      "蕉叶纹",
+      "云雷纹"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "盛酒礼器",
+    "craft": "范铸法",
+    "rarity_level": "国宝级海外藏",
+    "story_brief": "波士顿美术馆藏商代觚形铜尊（Ceremonial wine vessel zun，馆藏编号待查）是商代礼器的海外重要藏品，以高挑喇叭口、腹部饕餮主纹为特征，是商代晚期典型器型。",
+    "image_urls": [
+      {
+        "url": "https://mfa.org/collections/object/ceremonial-wine-vessel-zun-29093",
+        "source": "MFA Boston 馆藏页面",
+        "license": "参考来源（商业使用须向MFA申请授权）",
+        "caption": "商代觚形尊，波士顿美术馆藏"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "general",
+        "source": "MFA Boston Collection — ceremonial-wine-vessel-zun-29093",
+        "url": "https://mfa.org/collections/object/ceremonial-wine-vessel-zun-29093"
+      }
+    ]
+  },
+  {
+    "id": "guimet_elephant_zun",
+    "name_zh": "象形铜尊·卡蒙多藏（吉美）",
+    "name_pinyin": "Xiang Xing Tong Zun Camondo Guimet",
+    "name_alt": [
+      "Éléphant Camondo",
+      "吉美大象形尊"
+    ],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前13-11世纪",
+    "excavation_year": "传世（长沙地区传出）",
+    "excavation_site": "湖南省长沙地区（推测）",
+    "ancient_state": "商",
+    "current_museum": "巴黎吉美国立亚洲艺术博物馆",
+    "guimet_accession": "EO 1545",
+    "size": {
+      "height_cm": 64
+    },
+    "type": "酒器",
+    "form_subtype": "尊",
+    "patterns": [
+      "象形主体",
+      "饕餮纹",
+      "龙纹",
+      "凤纹",
+      "云雷纹（地纹）"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "盛酒礼器",
+    "craft": "范铸法（象鼻为流，背部为盖，小象作盖钮）",
+    "rarity_level": "国宝级海外藏",
+    "story_brief": "吉美博物馆象形铜尊高64厘米，是全球最壮观的商代象形礼器之一。器型为大象站立，背负方口盖，象鼻上扬为流。腹身遍布饕餮、龙、凤的卷云纹饰，极为繁密。1911年由以萨克·卡蒙多捐赠吉美博物馆，是法国最重要的中国商代青铜器藏品。",
+    "image_urls": [
+      {
+        "url": "https://www.guimet.fr/fr/nos-collections/chine/elephant-camondo-recipient-alcool-zun",
+        "source": "吉美博物馆官网",
+        "license": "参考来源（版权归吉美博物馆，不可商用）",
+        "caption": "象形铜尊，吉美博物馆藏，编号EO 1545"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "size,accession,story",
+        "source": "吉美博物馆官网 — Éléphant Camondo",
+        "url": "https://www.guimet.fr/fr/nos-collections/chine/elephant-camondo-recipient-alcool-zun"
+      },
+      {
+        "field": "size,origin",
+        "source": "Alain R. Truong·Bronze Elephant-shaped zun Shang Dynasty Guimet",
+        "url": "https://www.alaintruong.com/archives/2015/06/20/32245292.html"
+      }
+    ]
+  },
+  {
+    "id": "guimet_western_zhou_vessel",
+    "name_zh": "西周凤鸟纹铜壶（吉美）",
+    "name_pinyin": "Xi Zhou Feng Niao Wen Tong Hu Guimet",
+    "name_alt": [
+      "Guimet 西周壶",
+      "吉美藏西周礼器"
+    ],
+    "dynasty": "西周",
+    "period": "西周中期",
+    "approx_year": "约公元前10-9世纪",
+    "excavation_year": "传世",
+    "excavation_site": "中国（具体不详）",
+    "ancient_state": "周",
+    "current_museum": "巴黎吉美国立亚洲艺术博物馆",
+    "size": {
+      "height_cm": "TODO"
+    },
+    "type": "酒器",
+    "form_subtype": "壶",
+    "patterns": [
+      "凤鸟纹",
+      "环带纹",
+      "垂鳞纹"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "盛酒礼器",
+    "craft": "范铸法",
+    "rarity_level": "国宝级海外藏",
+    "story_brief": "吉美博物馆中国馆拥有约20,000件中国艺术品，其中商周青铜器是重要组成部分。馆藏西周铜壶以凤鸟纹为标志纹饰，体现周代礼器审美从商代猛兽纹向柔美鸟纹的转变，是法国公众了解中国青铜文明的重要窗口。",
+    "image_urls": [
+      {
+        "url": "https://www.guimet.fr/en/collections/china",
+        "source": "吉美博物馆官网",
+        "license": "参考来源（版权归吉美博物馆）",
+        "caption": "吉美博物馆中国馆"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "general",
+        "source": "吉美博物馆官网",
+        "url": "https://www.guimet.fr/en/collections/china"
+      }
+    ]
+  },
+  {
+    "id": "tokyo_tnm_shang_gong",
+    "name_zh": "商代兽形铜觥（东京国立）",
+    "name_pinyin": "Shang Dai Shou Xing Tong Gong TNM",
+    "name_alt": [
+      "兽形觥",
+      "Yin Dynasty Gong TNM"
+    ],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前12-11世纪",
+    "excavation_year": "传世",
+    "excavation_site": "TODO",
+    "ancient_state": "商",
+    "current_museum": "东京国立博物馆",
+    "size": {
+      "height_cm": "TODO"
+    },
+    "type": "酒器",
+    "form_subtype": "觥",
+    "patterns": [
+      "兽形盖",
+      "饕餮纹",
+      "夔龙纹"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "盛酒礼器",
+    "craft": "范铸法",
+    "rarity_level": "国宝级海外藏",
+    "story_brief": "东京国立博物馆东洋馆（Toyokan）展出的商代兽形觥是日本所藏中国商代青铜器的代表。觥以完整兽形为器，盖背为兽头，整器仅3000余年前存世极稀，是日中文化交流史上重要的文物传播案例。",
+    "image_urls": [
+      {
+        "url": "https://www.tnm.jp/modules/r_exhibition/index.php?controller=item&id=6155&lang=en",
+        "source": "东京国立博物馆官网",
+        "license": "参考来源（TNM图像版权归东京国立博物馆所有）",
+        "caption": "东京国立博物馆中国青铜器陈列"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "general",
+        "source": "TNM Chinese Bronzes Item List",
+        "url": "https://www.tnm.jp/modules/r_exhibition/index.php?controller=item&id=6155&lang=en"
+      }
+    ]
+  },
+  {
+    "id": "senoku_tiger_you",
+    "name_zh": "商代虎卣（泉屋博古馆）",
+    "name_pinyin": "Shang Dai Hu You Senoku",
+    "name_alt": [
+      "住友虎卣",
+      "虎食人卣（泉屋）"
+    ],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前13-11世纪",
+    "excavation_year": "1903年入住友春翠收藏",
+    "excavation_site": "湖南省安化/宁乡交界（传出）",
+    "ancient_state": "商",
+    "current_museum": "泉屋博古馆（京都，住友收藏）",
+    "size": {
+      "height_cm": "TODO"
+    },
+    "type": "酒器",
+    "form_subtype": "卣",
+    "patterns": [
+      "虎食人造型（器盖为虎头）",
+      "饕餮纹",
+      "云雷纹"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "盛酒礼器",
+    "craft": "范铸法",
+    "rarity_level": "国宝级海外藏",
+    "story_brief": "泉屋博古馆（Sen-oku Hakukokan）是日本住友家族私立博物馆，收藏数量最多的商周中国青铜器，水准世界一流。馆藏虎卣由住友春翠于1903年购入，出自湖南宁乡-安化一带，以虎食人造型著称——猛虎张口，人被含于虎腹之中，既骇人又充满神力象征意味。",
+    "image_urls": [
+      {
+        "url": "https://sen-oku.or.jp/tokyo/en/",
+        "source": "泉屋博古馆东京馆官网",
+        "license": "参考来源（版权归泉屋博古馆）",
+        "caption": "泉屋博古馆展览信息"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "story,excavation_year",
+        "source": "澎湃新闻·住友春翠与泉屋博古馆的青铜器",
+        "url": "https://m.thepaper.cn/wifiKey_detail.jsp?contid=2075440&from=wifiKey"
+      },
+      {
+        "field": "general",
+        "source": "Wikipedia EN Sen-oku Hakuko Kan",
+        "url": "https://en.wikipedia.org/wiki/Sen-oku_Hakuko_Kan"
+      }
+    ]
+  },
+  {
+    "id": "shi_song_gui",
+    "name_zh": "史颂簋",
+    "name_pinyin": "Shi Song Gui",
+    "name_alt": [
+      "颂簋",
+      "西周晚期史颂簋"
+    ],
+    "dynasty": "西周",
+    "period": "西周晚期",
+    "approx_year": "约公元前9-8世纪（周宣王时期）",
+    "excavation_year": "嘉庆年间（1796-1820）出土",
+    "excavation_site": "陕西省（具体不详）",
+    "ancient_state": "周",
+    "current_museum": "上海博物馆 / 故宫博物院 / 台北故宫博物院（各藏1件，传世共3件）",
+    "size": {
+      "height_cm": "TODO"
+    },
+    "type": "食器",
+    "form_subtype": "簋",
+    "patterns": [
+      "窃曲纹",
+      "瓦纹",
+      "垂鳞纹",
+      "小兽面"
+    ],
+    "inscription": {
+      "has": true,
+      "text": "铭文共62字，记史颂受王命省视苏国",
+      "char_count": 62,
+      "summary": "记周王三年五月，周王命史颂视察苏国，完成使命获赐，铸器祭祖，子子孙孙永宝用"
+    },
+    "purpose": "盛食礼器",
+    "craft": "范铸法",
+    "rarity_level": "国宝",
+    "story_brief": "史颂簋与颂鼎、颂壶并称西周三颂，为嘉庆年间陕西出土，现分存三处顶级博物馆。铭文62字记周宣王命史颂赴苏国视察、归来受赏之事，是研究西周行政制度与金文书法的重要材料。簋身弇口鼓腹，兽首双耳，圈足外侈，器盖合一。",
+    "image_urls": [],
+    "data_sources": [
+      {
+        "field": "inscription,dynasty,story",
+        "source": "人民网·青铜三颂记录周代礼制",
+        "url": "http://art.people.com.cn/n1/2018/0508/c226026-29970845.html"
+      }
+    ]
+  },
+  {
+    "id": "bu_qi_gui",
+    "name_zh": "不其簋",
+    "name_pinyin": "Bu Qi Gui",
+    "name_alt": [
+      "秦公不其簋",
+      "西周晚期铜簋"
+    ],
+    "dynasty": "西周",
+    "period": "西周晚期",
+    "approx_year": "约公元前9世纪（周宣王时期）",
+    "excavation_year": "传世",
+    "excavation_site": "陕西省（传世）",
+    "ancient_state": "周/秦",
+    "current_museum": "上海博物馆",
+    "size": {
+      "height_cm": "TODO"
+    },
+    "type": "食器",
+    "form_subtype": "簋",
+    "patterns": [
+      "窃曲纹",
+      "兽首耳",
+      "瓦纹"
+    ],
+    "inscription": {
+      "has": true,
+      "text": "铭文记秦庄公破西戎受赏事",
+      "char_count": "TODO",
+      "summary": "作器者秦庄公，因大破戎敌建功受赏，与史记秦本纪周宣王召庄公昆弟五人使伐西戎记载相吻合"
+    },
+    "purpose": "盛食礼器",
+    "craft": "范铸法",
+    "rarity_level": "国宝",
+    "story_brief": "不其簋铭文是目前所见最早印证秦人历史的青铜器铭文之一。铭文记秦庄公受周宣王之命率兵破西戎，凯旋受赏后铸器。与史记秦本纪记载高度吻合，是研究西周晚期秦人崛起的核心文献。",
+    "image_urls": [],
+    "data_sources": [
+      {
+        "field": "inscription,story",
+        "source": "知乎·西周金文分类衰微期",
+        "url": "https://zhuanlan.zhihu.com/p/582660993"
+      }
+    ]
+  },
+  {
+    "id": "yong_yu",
+    "name_zh": "永盂",
+    "name_pinyin": "Yong Yu",
+    "name_alt": [
+      "西周永盂",
+      "周康王期永盂"
+    ],
+    "dynasty": "西周",
+    "period": "西周早期",
+    "approx_year": "约公元前11世纪（周康王时期）",
+    "excavation_year": "传世",
+    "excavation_site": "陕西省（传世）",
+    "ancient_state": "周",
+    "current_museum": "上海博物馆",
+    "size": {
+      "height_cm": "TODO"
+    },
+    "type": "水器",
+    "form_subtype": "盂",
+    "patterns": [
+      "饕餮纹",
+      "夔龙纹",
+      "云雷纹"
+    ],
+    "inscription": {
+      "has": true,
+      "text": "铭文记土地赏赐事",
+      "char_count": "TODO",
+      "summary": "铭文涉及周王赐地于永，是研究西周早期土地制度的重要金文"
+    },
+    "purpose": "盛水礼器",
+    "craft": "范铸法",
+    "rarity_level": "国宝",
+    "story_brief": "永盂铭文记载周王将土地赏赐给贵族永，详述赐地的地理边界与仪式过程，是研究西周早期土地分封制度、田土纠纷处理机制的珍贵金文史料，与大盂鼎同属西周早期土地铭文系统。",
+    "image_urls": [],
+    "data_sources": [
+      {
+        "field": "general",
+        "source": "上海博物馆青铜时代",
+        "url": "http://www.people.com.cn/24hour/n/2013/1109/c25408-23487661.html"
+      }
+    ]
+  },
+  {
+    "id": "hu_gui_gai",
+    "name_zh": "㝬簋盖",
+    "name_pinyin": "Hu Gui Gai",
+    "name_alt": [
+      "大簋盖",
+      "西周㝬簋"
+    ],
+    "dynasty": "西周",
+    "period": "西周晚期",
+    "approx_year": "约公元前9世纪（周孝王或夷王时期）",
+    "excavation_year": "传世",
+    "excavation_site": "陕西省（传世）",
+    "ancient_state": "周",
+    "current_museum": "故宫博物院",
+    "size": {
+      "height_cm": "TODO"
+    },
+    "type": "食器",
+    "form_subtype": "簋盖",
+    "patterns": [
+      "窃曲纹",
+      "瓦纹",
+      "圈状捉手"
+    ],
+    "inscription": {
+      "has": true,
+      "text": "铭文约150余字",
+      "char_count": 150,
+      "summary": "铭文记周王册命史颂相关事宜，与颂鼎颂簋铭文相互印证"
+    },
+    "purpose": "盛食礼器之盖",
+    "craft": "范铸法",
+    "rarity_level": "一级",
+    "story_brief": "㝬簋盖铭文150余字，内容与颂鼎、颂簋相关，均出西周晚期册命金文体系。簋盖单独传世亦属罕见，盖沿饰窃曲纹，盖面隆起有圈状捉手，是西周晚期簋盖形制的标准样本。",
+    "image_urls": [],
+    "data_sources": [
+      {
+        "field": "inscription,story",
+        "source": "雅墨客网·大簋盖铭文西周",
+        "url": "http://www.yamoke.com/a/202205/640.html"
+      }
+    ]
+  },
+  {
+    "id": "shi_xiong_gui",
+    "name_zh": "师訇簋",
+    "name_pinyin": "Shi Xiong Gui",
+    "name_alt": [
+      "西周师訇簋",
+      "周宣王师訇簋"
+    ],
+    "dynasty": "西周",
+    "period": "西周晚期",
+    "approx_year": "约公元前9-8世纪（周宣王时期）",
+    "excavation_year": "传世",
+    "excavation_site": "陕西省（传世）",
+    "ancient_state": "周",
+    "current_museum": "故宫博物院",
+    "size": {
+      "height_cm": "TODO"
+    },
+    "type": "食器",
+    "form_subtype": "簋",
+    "patterns": [
+      "窃曲纹",
+      "兽首双耳",
+      "瓦纹"
+    ],
+    "inscription": {
+      "has": true,
+      "text": "铭文记周王命师訇管理王族事务",
+      "char_count": "TODO",
+      "summary": "铭文记周王册命师訇，详述职官设置，是研究西周晚期官制的重要材料"
+    },
+    "purpose": "盛食礼器",
+    "craft": "范铸法",
+    "rarity_level": "一级",
+    "story_brief": "师訇簋铭文记载周宣王册命师訇担任王族内务管理职务的全过程，包括职官名称、赏赐内容与誓言，是西周晚期官制研究的第一手金文史料。铭文书法端庄，是西周晚期金文书法的典型代表。",
+    "image_urls": [],
+    "data_sources": [
+      {
+        "field": "general",
+        "source": "故宫博物院·故宫博物院藏青铜器与铭文研究",
+        "url": "https://www.dpm.org.cn/forum_detail/100136.html"
+      }
+    ]
+  },
+  {
+    "id": "zhongshan_wrong_gold_fang_an",
+    "name_zh": "错金银四龙四凤铜方案座",
+    "name_pinyin": "Cuo Jin Yin Si Long Si Feng Tong Fang An Zuo",
+    "name_alt": [
+      "中山王错金银方案",
+      "战国错金银铜案座"
+    ],
+    "dynasty": "战国",
+    "period": "战国中期",
+    "approx_year": "约公元前4世纪",
+    "excavation_year": "1977",
+    "excavation_site": "河北省平山县中山王墓",
+    "ancient_state": "中山国",
+    "current_museum": "河北博物院",
+    "size": {
+      "height_cm": 36.2,
+      "length_cm": 47.5
+    },
+    "type": "家具",
+    "form_subtype": "案座",
+    "patterns": [
+      "错金银",
+      "四龙四凤交缠",
+      "四蹄鹿承托",
+      "斗拱结构"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "王室案台底座",
+    "craft": "错金银+铸造+焊接，可能是最早的斗拱造型应用",
+    "rarity_level": "国宝",
+    "story_brief": "错金银四龙四凤铜方案座是战国错金银工艺的巅峰之作。底部四蹄鹿屈伏承托圆环，圆环上四龙四凤交错盘绕，龙凤之间以斗拱结构（类似建筑斗拱）支撑上部案面，是战国青铜工艺集铸造、嵌金银、焊接于一体的综合技术典范。1977年河北平山中山王墓出土。",
+    "image_urls": [],
+    "data_sources": [
+      {
+        "field": "size,excavation_year,craft,story",
+        "source": "访北京·错金银四龙四凤铜方案座",
+        "url": "https://www.visitbeijing.com.cn/article/47Qt5foKzrO"
+      }
+    ]
+  },
+  {
+    "id": "zhongshan_wrong_silver_rhino",
+    "name_zh": "错金银犀牛铜屏风座",
+    "name_pinyin": "Cuo Jin Yin Xi Niu Tong Ping Feng Zuo",
+    "name_alt": [
+      "中山王错金银铜犀牛",
+      "战国错金银犀牛铜器"
+    ],
+    "dynasty": "战国",
+    "period": "战国中期",
+    "approx_year": "约公元前4世纪",
+    "excavation_year": "1977",
+    "excavation_site": "河北省平山县中山王墓",
+    "ancient_state": "中山国",
+    "current_museum": "河北博物院",
+    "size": {
+      "length_cm": 55.5,
+      "height_cm": 22
+    },
+    "type": "家具",
+    "form_subtype": "屏风底座",
+    "patterns": [
+      "错金银卷云纹",
+      "犀牛写实造型"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "屏风承托底座",
+    "craft": "范铸+错金银",
+    "rarity_level": "国宝",
+    "story_brief": "错金银犀牛铜屏风座长55.5厘米，高22厘米，以写实手法塑造犀牛形态，全身遍布错金银卷云纹。战国时期中原尚有犀牛分布，此器是珍贵的古代动物分布记录。与四龙四凤铜案同出中山王墓，共同代表战国北方诸侯国工艺美术的最高水准。",
+    "image_urls": [],
+    "data_sources": [
+      {
+        "field": "size,excavation_year,story",
+        "source": "河北博物院馆藏文物·中山国篇",
+        "url": "http://www.360doc.com/content/24/1005/23/72341047_1135814984.shtml"
+      }
+    ]
+  },
+  {
+    "id": "zenghhouyi_zun_pan",
+    "name_zh": "曾侯乙铜尊盘",
+    "name_pinyin": "Zeng Hou Yi Tong Zun Pan",
+    "name_alt": [
+      "战国曾侯乙青铜尊盘",
+      "失蜡法尊盘"
+    ],
+    "dynasty": "战国",
+    "period": "战国早期",
+    "approx_year": "约公元前433年（墓主下葬年）",
+    "excavation_year": "1978",
+    "excavation_site": "湖北省随州市擂鼓墩曾侯乙墓",
+    "ancient_state": "曾国",
+    "current_museum": "湖北省博物馆",
+    "size": {
+      "zun_height_cm": 30.1,
+      "zun_mouth_diameter_cm": 25,
+      "pan_height_cm": 23.5,
+      "pan_diameter_cm": 58,
+      "total_weight_kg": 30
+    },
+    "type": "酒器",
+    "form_subtype": "尊盘套件",
+    "patterns": [
+      "蟠螭纹（镂空透雕，共28龙32蟠螭于尊）",
+      "龙纹（盘内56龙48蟠螭）",
+      "立体透雕镂空外层"
+    ],
+    "inscription": {
+      "has": true,
+      "text": "曾侯乙作持用终",
+      "char_count": 8,
+      "summary": "尊底内壁铸曾侯乙作持用终八字，表明器主身份"
+    },
+    "purpose": "盛酒礼器（尊盛酒，盘承尊）",
+    "craft": "失蜡法（熔模铸造）——战国失蜡铸造的最高代表",
+    "rarity_level": "国宝",
+    "story_brief": "曾侯乙尊盘是迄今所见先秦失蜡铸造工艺最复杂的青铜器，其外层镂空透雕纹饰与内层器壁完全分离，28条龙32条蟠螭纵横交错，以失蜡法一次浇铸而成。现代工艺专家认为若无精密铸造技术支撑，此器难以复制。1978年出土于曾侯乙墓西室。",
+    "image_urls": [
+      {
+        "url": "https://zh.wikipedia.org/wiki/%E6%9B%BE%E4%BE%AF%E4%B9%99%E9%9D%92%E9%93%9C%E5%B0%8A%E7%9B%98",
+        "source": "Wikipedia zh 曾侯乙青铜尊盘",
+        "license": "CC BY-SA",
+        "caption": "曾侯乙尊盘词条"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "size,inscription,craft,story",
+        "source": "Wikipedia zh 曾侯乙青铜尊盘",
+        "url": "https://zh.wikipedia.org/zh-hans/%E6%9B%BE%E4%BE%AF%E4%B9%99%E9%9D%92%E9%93%9C%E5%B0%8A%E7%9B%98"
+      }
+    ]
+  },
+  {
+    "id": "fuhao_bronze_fang_jia",
+    "name_zh": "妇好青铜方斝",
+    "name_pinyin": "Fu Hao Qing Tong Fang Jia",
+    "name_alt": [
+      "妇好方斝",
+      "商代妇好铜斝"
+    ],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前13-11世纪",
+    "excavation_year": "1976",
+    "excavation_site": "河南省安阳市殷墟妇好墓",
+    "ancient_state": "商",
+    "current_museum": "中国国家博物馆",
+    "size": {
+      "height_cm": "TODO"
+    },
+    "type": "酒器",
+    "form_subtype": "方斝",
+    "patterns": [
+      "饕餮纹",
+      "夔龙纹",
+      "云雷纹",
+      "蝉纹"
+    ],
+    "inscription": {
+      "has": true,
+      "text": "妇好",
+      "char_count": 2,
+      "summary": "铸铭妇好二字，确认器主为商王武丁之妻妇好"
+    },
+    "purpose": "温酒行酒礼器",
+    "craft": "范铸法（方形器型铸造难度高于圆器）",
+    "rarity_level": "国宝",
+    "story_brief": "妇好青铜方斝是妇好墓468件青铜器中工艺难度最高的器型之一。方形器身铸造需要精确控制四个面的合范精度，稍有偏差即报废。方斝铸铭妇好二字，确认器主身份。妇好是中国有文字记载的最早女性军事统帅，其墓出土的方斝是商代方形礼器铸造技术的顶峰。",
+    "image_urls": [
+      {
+        "url": "https://www.chnmuseum.cn/zp/zpml/kgfjp/202208/t20220830_257127.shtml",
+        "source": "中国国家博物馆官网",
+        "license": "参考来源（版权归国博）",
+        "caption": "妇好青铜方斝，国博藏"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "inscription,purpose,story",
+        "source": "中国国家博物馆官网·妇好青铜方斝",
+        "url": "https://www.chnmuseum.cn/zp/zpml/kgfjp/202208/t20220830_257127.shtml"
+      }
+    ]
+  },
+  {
+    "id": "zenghhouyi_bingjiаn",
+    "name_zh": "曾侯乙铜冰鉴",
+    "name_pinyin": "Zeng Hou Yi Tong Bing Jian",
+    "name_alt": [
+      "铜鉴缶",
+      "战国冰鉴"
+    ],
+    "dynasty": "战国",
+    "period": "战国早期",
+    "approx_year": "约公元前433年",
+    "excavation_year": "1978",
+    "excavation_site": "湖北省随州市擂鼓墩曾侯乙墓西室",
+    "ancient_state": "曾国",
+    "current_museum": "湖北省博物馆（另一件藏中国国家博物馆）",
+    "size": {
+      "height_cm": 61.5,
+      "side_length_cm": 62
+    },
+    "type": "生活器",
+    "form_subtype": "冰鉴（方鉴套方缶）",
+    "patterns": [
+      "蟠螭纹",
+      "兽面纹",
+      "勁草纹"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "古代冰箱（鉴内置冰，内层方缶放食物或酒）",
+    "craft": "范铸法（外方鉴+内方缶套合，间隙6厘米盛冰）",
+    "rarity_level": "国宝",
+    "story_brief": "曾侯乙铜冰鉴是中国最早有实物可考的冰箱，外层方鉴与内层方缶套合，两器之间6厘米间隙用于放置冰块，冰块使内缶降温，用以冰酒或冰食。1978年出土两件，一件藏湖北省博物馆，一件藏国博。礼记中的冰鉴记载于此得到印证。",
+    "image_urls": [
+      {
+        "url": "https://zh.wikipedia.org/wiki/%E6%9B%BE%E4%BE%AF%E4%B9%99%E9%93%9C%E9%89%B4%E7%BC%B6",
+        "source": "Wikipedia zh 曾侯乙铜鉴缶",
+        "license": "CC BY-SA",
+        "caption": "曾侯乙铜冰鉴词条"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "size,craft,story,purpose",
+        "source": "Wikipedia zh 曾侯乙铜鉴缶",
+        "url": "https://zh.wikipedia.org/zh-hans/%E6%9B%BE%E4%BE%AF%E4%B9%99%E9%89%B4%E7%BC%B6"
+      }
+    ]
   }
 ]

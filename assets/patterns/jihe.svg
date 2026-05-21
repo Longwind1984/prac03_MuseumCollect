@@ -1,0 +1,39 @@
+<!-- 几何纹 | 战国 | typical on: 壶 豆 鉴 盘 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+  <!-- Jihe: pure geometric repeat — diamond grid with inner subdivisions, Warring States style -->
+  <!-- Diamond lattice with cross-hatch and inner ornament -->
+
+  <!-- Main diamond grid -->
+  <path d="M40 4 L8 40 L40 76 L72 40 Z" stroke="currentColor" stroke-width="2"/>
+  <!-- Inner diamond -->
+  <path d="M40 14 L18 40 L40 66 L62 40 Z" stroke="currentColor" stroke-width="1.5"/>
+  <!-- Inner-inner diamond -->
+  <path d="M40 24 L28 40 L40 56 L52 40 Z" stroke="currentColor" stroke-width="1.3"/>
+  <!-- Center diamond (small) -->
+  <path d="M40 32 L34 40 L40 48 L46 40 Z" stroke="currentColor" stroke-width="1.2"/>
+  <!-- Center dot -->
+  <circle cx="40" cy="40" r="2.5" fill="currentColor"/>
+
+  <!-- Corner triangles (fill pattern) -->
+  <!-- Top-left corner: small repeated triangles -->
+  <path d="M8 40 L16 32 L16 40 Z" stroke="currentColor" stroke-width="1" fill="none"/>
+  <path d="M8 40 L16 48 L16 40 Z" stroke="currentColor" stroke-width="1" fill="none"/>
+
+  <!-- Top-right corner -->
+  <path d="M72 40 L64 32 L64 40 Z" stroke="currentColor" stroke-width="1" fill="none"/>
+  <path d="M72 40 L64 48 L64 40 Z" stroke="currentColor" stroke-width="1" fill="none"/>
+
+  <!-- Diagonal cross inside outer diamond -->
+  <line x1="8" y1="40" x2="72" y2="40" stroke="currentColor" stroke-width="1.2"/>
+  <line x1="40" y1="4" x2="40" y2="76" stroke="currentColor" stroke-width="1.2"/>
+
+  <!-- X-cross diagonals at 45deg -->
+  <line x1="24" y1="24" x2="56" y2="56" stroke="currentColor" stroke-width="0.8"/>
+  <line x1="56" y1="24" x2="24" y2="56" stroke="currentColor" stroke-width="0.8"/>
+
+  <!-- Outer corner fill: small step triangles at outer corners -->
+  <path d="M40 4 L30 14 L40 14 L50 14 Z" stroke="currentColor" stroke-width="1"/>
+  <path d="M40 76 L30 66 L40 66 L50 66 Z" stroke="currentColor" stroke-width="1"/>
+  <path d="M8 40 L18 30 L18 40 L18 50 Z" stroke="currentColor" stroke-width="1"/>
+  <path d="M72 40 L62 30 L62 40 L62 50 Z" stroke="currentColor" stroke-width="1"/>
+</svg>

@@ -1,0 +1,40 @@
+<!-- 弦纹 | 通用商-春秋 | typical on: 所有器型 颈部 圈足 腹部分割线 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+  <!-- Xian: simple encircling line bands — the most minimal Shang-Zhou pattern -->
+  <!-- Shown as multiple parallel horizontal lines of varying weight, demonstrating rhythm -->
+
+  <!-- Heavy single lines (the classic "xian" = string/line) -->
+  <line x1="6" y1="14" x2="74" y2="14" stroke="currentColor" stroke-width="2.5"/>
+  <!-- Fine paired lines below heavy line -->
+  <line x1="6" y1="18" x2="74" y2="18" stroke="currentColor" stroke-width="1"/>
+  <line x1="6" y1="20" x2="74" y2="20" stroke="currentColor" stroke-width="1"/>
+
+  <!-- Gap -->
+
+  <!-- Triple fine lines -->
+  <line x1="6" y1="30" x2="74" y2="30" stroke="currentColor" stroke-width="1"/>
+  <line x1="6" y1="32" x2="74" y2="32" stroke="currentColor" stroke-width="1.8"/>
+  <line x1="6" y1="34" x2="74" y2="34" stroke="currentColor" stroke-width="1"/>
+
+  <!-- Gap -->
+
+  <!-- Heavy single line -->
+  <line x1="6" y1="44" x2="74" y2="44" stroke="currentColor" stroke-width="3"/>
+
+  <!-- Gap -->
+
+  <!-- Paired fine -->
+  <line x1="6" y1="54" x2="74" y2="54" stroke="currentColor" stroke-width="1.2"/>
+  <line x1="6" y1="56" x2="74" y2="56" stroke="currentColor" stroke-width="1.2"/>
+
+  <!-- Gap -->
+
+  <!-- 4-line group representing ring division -->
+  <line x1="6" y1="64" x2="74" y2="64" stroke="currentColor" stroke-width="0.8"/>
+  <line x1="6" y1="66" x2="74" y2="66" stroke="currentColor" stroke-width="2"/>
+  <line x1="6" y1="68" x2="74" y2="68" stroke="currentColor" stroke-width="0.8"/>
+
+  <!-- End caps at left and right to suggest the "ring" nature -->
+  <line x1="6" y1="10" x2="6" y2="72" stroke="currentColor" stroke-width="1.5"/>
+  <line x1="74" y1="10" x2="74" y2="72" stroke="currentColor" stroke-width="1.5"/>
+</svg>
