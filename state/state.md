@@ -145,3 +145,12 @@ Total active background agents: 9 (5 DE + 4 Phase B)
 [2026-05-21 H7.5] [orchestrator] Launching Phase D: 5 Auditor squad parallel (UX/Aesthetic/Content/Motivation/PM), Comparative after.
 [2026-05-21 H8] [auditor-ux-v3] DONE — audits/d2-ux.md + audits/next-brief-ux-v3.md; 3 P0: (1)跨页联动不可用=same-document CustomEvent无法跨tab (2)Day-0/0-state依然缺失-第3轮 (3)me.html调试面板对用户可见; v3 UX > v1-C (+30%); 已修复: 统一nav/搜索框/段位口径; verdict: 穿越模式wow点仅在同页面生效，核心叙事失实
 [2026-05-21 H7.5] [auditor-content-v3] DONE (Orchestrator manual-saved audit files due to Auditor instruction misinterpretation)
+
+[2026-05-21 H8.5] [auditor-comparative-v3] DONE — audits/d2-comparative.md + audits/merged-spec-v3.md
+  - Cross-Auditor P0 convergence: 4/5 Auditors independently flagged cross-dim linkage as non-functional (same-document CustomEvent cannot cross pages)
+  - v3 vs v1 composite delta: +0.7 (6.5→7.2/10); Aesthetic slight regression (-0.5) due to emoji icons + debug panel; all other aspects improved
+  - Top v4 action: dashboard.html single-screen wow demo (3 components co-present) OR BroadcastChannel — this is the only unfulfilled v3 core claim
+  - PM ceiling-block: case-study §3-§5 still TBD; hire signal stuck at 7.8/10; potential 9.0/10 if written
+  - 3 content P0s: 大克鼎 period (西周晚→中), 唐兰 citation (1986→1976), FULL_TEXT truncation
+  - v4 plan: 3 parallel tracks — Track A: Product Owner writes case-study §3-§5 (2-3h); Track B: Builder fixes content P0 + debug + emoji + Day-0 (1.5h); Track C: Builder builds dashboard.html wow page (2h)
+  - Recommend: launch v4 close-loop tonight
