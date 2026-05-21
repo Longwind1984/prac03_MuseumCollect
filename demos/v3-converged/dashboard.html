@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>维度全景 · 三联动 Dashboard — MuseumCollect v3</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-dark:       #12100c;
+  --bg-panel:      #1a1510;
+  --bg-card:       #201c14;
+  --text-gold:     #d4a857;
+  --text-bronze:   #a4732c;
+  --text-cream:    #e8dcc8;
+  --text-muted:    #8a7a5a;
+  --border-dim:    rgba(164,115,44,0.18);
+  --border-bright: rgba(212,168,87,0.45);
+  --accent-red:    #c04030;
+  --xia-c:    #6e4a2e;
+  --shang-c:  #4a5a3a;
+  --xizhou-c: #a73a2a;
+  --chunqiu-c:#2a2a3a;
+  --zhanguo-c:#7a3a2a;
+  --qin-c:    #1a1a1a;
+  --xihan-c:  #b89046;
+  --donghan-c:#9a7838;
+  --PILLAR_W: 200px;
+  --MAP_W:    460px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  font-family: 'Noto Serif SC', '宋体', serif;
+  background: var(--bg-dark);
+  color: var(--text-cream);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── NAV ── */
+.top-nav {
+  height: 48px; min-height: 48px;
+  background: rgba(26,21,16,0.97);
+  border-bottom: 1px solid var(--border-dim);
+  display: flex; align-items: center; padding: 0 20px; gap: 0;
+  flex-shrink: 0; z-index: 200;
+}
+.nav-logo {
+  font-size: 16px; font-weight: 700; color: var(--text-cream);
+  text-decoration: none; margin-right: 24px; white-space: nowrap;
+}
+.nav-logo span { color: var(--text-bronze); }
+.nav-links { display: flex; gap: 0; flex: 1; overflow: hidden; }
+.nav-link {
+  padding: 0 12px; height: 48px; display: flex; align-items: center;
+  font-size: 12px; color: var(--text-muted); text-decoration: none;
+  border-bottom: 2px solid transparent; transition: all .2s; white-space: nowrap;
+}
+.nav-link:hover { color: var(--text-bronze); border-bottom-color: var(--text-bronze); }
+.nav-link.active { color: var(--text-gold); border-bottom-color: var(--text-gold); }
+.linkage-badge {
+  margin-left: auto; padding: 4px 12px; border-radius: 20px;
+  font-size: 11px; border: 1px solid var(--border-bright); color: var(--text-gold);
+  background: rgba(212,168,87,0.08); cursor: pointer; display: flex; align-items: center; gap: 6px;
+  white-space: nowrap; transition: all .2s;
+}
+.linkage-badge:hover { background: rgba(212,168,87,0.16); }
+.linkage-dot { width: 7px; height: 7px; border-radius: 50%; background: #4aed4a; flex-shrink: 0; }
+.linkage-dot.off { background: #666; }
+
+/* ── LAYOUT ── */
+.dashboard-layout {
+  flex: 1; display: grid; min-height: 0;
+  /* Left: time-pillar  |  Right: map + pattern-strip */
+  grid-template-columns: 240px 1fr;
+  grid-template-rows: 1fr;
+  gap: 0;
+}
+
+/* Left column: time-pillar + pattern strip stacked */
+.left-col {
+  display: flex; flex-direction: column;
+  border-right: 1px solid var(--border-dim);
+  min-height: 0;
+}
+.pillar-section {
+  flex: 1; overflow-y: auto; overflow-x: hidden;
+  padding: 0 0 0 0;
+  min-height: 0;
+}
+.pillar-section::-webkit-scrollbar { width: 4px; }
+.pillar-section::-webkit-scrollbar-thumb { background: var(--border-dim); }
+
+.pattern-strip-section {
+  flex-shrink: 0;
+  height: 110px;
+  border-top: 1px solid var(--border-dim);
+  background: rgba(26,21,16,0.6);
+  padding: 8px 10px 6px;
+  overflow: hidden;
+}
+.pattern-strip-label {
+  font-size: 9px; color: var(--text-muted); letter-spacing: .12em;
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.pattern-strip {
+  display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px;
+  scrollbar-width: thin;
+}
+.pattern-strip::-webkit-scrollbar { height: 3px; }
+.pattern-strip::-webkit-scrollbar-thumb { background: var(--border-dim); }
+.pattern-node {
+  flex-shrink: 0; width: 56px; text-align: center;
+  transition: all .25s ease;
+  cursor: pointer;
+}
+.pattern-node img {
+  width: 40px; height: 40px; display: block; margin: 0 auto 4px;
+  border-radius: 4px; border: 1px solid var(--border-dim);
+  transition: all .25s ease;
+  filter: brightness(0.5) sepia(1);
+  background: rgba(255,255,255,0.02);
+}
+.pattern-node.highlighted img {
+  filter: brightness(1) sepia(0.3) saturate(2);
+  border-color: var(--text-gold);
+  box-shadow: 0 0 10px rgba(212,168,87,0.5);
+  transform: scale(1.1);
+}
+.pattern-node.dominant img {
+  filter: brightness(1.2) sepia(0.1) saturate(2.5);
+  border-color: #f0d070;
+  box-shadow: 0 0 14px rgba(240,208,112,0.7);
+  transform: scale(1.15);
+}
+.pattern-node-name {
+  font-size: 9px; color: var(--text-muted); line-height: 1.2;
+  transition: color .25s;
+}
+.pattern-node.highlighted .pattern-node-name,
+.pattern-node.dominant .pattern-node-name {
+  color: var(--text-gold);
+}
+
+/* Right column: map + bottom panel */
+.right-col {
+  display: flex; flex-direction: column;
+  min-height: 0; min-width: 0;
+}
+.map-section {
+  flex: 1; position: relative; min-height: 0; overflow: hidden;
+}
+.map-header {
+  position: absolute; top: 12px; left: 16px; z-index: 10;
+  font-size: 10px; color: var(--text-muted); letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.map-era-badge {
+  position: absolute; top: 10px; right: 16px; z-index: 10;
+  padding: 4px 14px; border-radius: 4px;
+  font-size: 13px; font-weight: 600; color: var(--text-gold);
+  border: 1px solid var(--border-bright);
+  background: rgba(26,21,16,0.9);
+  transition: all .3s ease;
+}
+#map-svg {
+  width: 100%; height: 100%;
+}
+/* Map region polygons */
+.state-region {
+  transition: opacity .4s ease, fill .4s ease;
+  cursor: default;
+}
+.state-region.hidden { opacity: 0 !important; pointer-events: none; }
+.state-region.visible { opacity: 1; }
+/* Site dots */
+.site-dot {
+  transition: r .3s ease, fill .3s ease, opacity .3s ease;
+  cursor: pointer;
+}
+.site-dot:hover { opacity: 1 !important; }
+.site-label {
+  font-family: 'Noto Serif SC', serif;
+  pointer-events: none;
+  transition: opacity .3s ease;
+}
+
+/* Bottom panel */
+.bottom-panel {
+  flex-shrink: 0;
+  height: 130px;
+  border-top: 1px solid var(--border-dim);
+  background: rgba(26,21,16,0.9);
+  padding: 12px 20px;
+  display: flex; gap: 20px; align-items: center;
+  overflow: hidden;
+}
+.era-big-badge {
+  flex-shrink: 0;
+  text-align: center;
+  min-width: 80px;
+}
+.era-big-name {
+  font-size: 32px; font-weight: 700; line-height: 1;
+  transition: color .3s ease;
+}
+.era-big-period {
+  font-size: 10px; color: var(--text-muted); margin-top: 4px;
+  line-height: 1.4;
+}
+.era-big-count {
+  font-size: 12px; margin-top: 6px;
+}
+.era-separator {
+  width: 1px; height: 80px; background: var(--border-dim); flex-shrink: 0;
+}
+.artifact-cards {
+  display: flex; gap: 10px; overflow-x: auto; flex: 1;
+  scrollbar-width: thin; padding-bottom: 4px;
+  align-items: center;
+}
+.artifact-cards::-webkit-scrollbar { height: 3px; }
+.artifact-cards::-webkit-scrollbar-thumb { background: var(--border-dim); }
+.artifact-card-mini {
+  flex-shrink: 0; width: 70px; text-align: center; cursor: pointer;
+  transition: transform .2s;
+}
+.artifact-card-mini:hover { transform: translateY(-3px); }
+.artifact-card-mini img {
+  width: 50px; height: 50px; object-fit: contain; display: block; margin: 0 auto 4px;
+  border-radius: 4px; border: 1px solid var(--border-dim);
+  filter: sepia(0.5) brightness(0.8);
+}
+.artifact-card-mini.treasure img {
+  border-color: var(--text-gold);
+  box-shadow: 0 0 8px rgba(212,168,87,0.4);
+  filter: sepia(0.2) brightness(0.9);
+}
+.artifact-card-mini .card-name {
+  font-size: 9px; color: var(--text-muted); line-height: 1.2;
+}
+.artifact-card-mini .rarity-halo {
+  display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+  margin-right: 2px; vertical-align: middle;
+}
+
+/* Time pillar (inlined D3 target) */
+#pillar-container {
+  padding: 8px 6px 8px 4px;
+  min-height: 0;
+}
+/* Pillar title */
+.pillar-title {
+  font-size: 9px; color: var(--text-muted); letter-spacing: .1em;
+  text-transform: uppercase; padding: 8px 10px 4px;
+  border-bottom: 1px solid var(--border-dim);
+}
+
+/* Dynasty band styles */
+.dynasty-band-g { cursor: pointer; }
+.dynasty-band-g:hover .band-bg { opacity: 1 !important; }
+.dynasty-band-g .band-highlight { opacity: 0; transition: opacity .2s; }
+.dynasty-band-g.active .band-highlight { opacity: 1 !important; }
+.dynasty-band-g.active .band-bg { opacity: 1 !important; }
+
+/* Event markers */
+.event-dot { cursor: pointer; }
+.event-dot:hover { r: 5; }
+
+/* Breathing animation for empty bands */
+@keyframes breathe {
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 0.65; }
+}
+.breath-anim { animation: breathe 4s ease-in-out infinite; }
+
+/* Transition ring for reactions */
+@keyframes pulse-ring {
+  0%   { transform: scale(1);   opacity: 0.8; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+.pulse-ring { animation: pulse-ring 0.6s ease-out forwards; }
+
+/* Map tooltip */
+.map-tooltip {
+  position: fixed; z-index: 9999;
+  background: rgba(26,21,16,0.96); border: 1px solid var(--border-bright);
+  border-radius: 4px; padding: 8px 12px; font-size: 12px; color: var(--text-cream);
+  pointer-events: none; max-width: 200px; line-height: 1.6;
+  opacity: 0; transition: opacity .15s ease;
+}
+
+/* Linkage reaction flash */
+@keyframes flash-linkage {
+  0%   { box-shadow: 0 0 0 0 rgba(212,168,87,0); }
+  30%  { box-shadow: 0 0 20px 4px rgba(212,168,87,0.5); }
+  100% { box-shadow: 0 0 0 0 rgba(212,168,87,0); }
+}
+.flash-react { animation: flash-linkage 0.7s ease-out; }
+
+/* Debug indicator */
+.debug-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: rgba(10,8,5,0.92); border-top: 1px solid var(--border-dim);
+  padding: 4px 16px; font-size: 10px; color: var(--text-muted);
+  font-family: monospace; z-index: 9000; display: none;
+}
+.debug-bar.visible { display: block; }
+#debug-log { color: #7a9060; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo">器·<span>集</span></a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">首页</a>
+    <a href="catalog.html" class="nav-link">图鉴</a>
+    <a href="time-pillar.html" class="nav-link">时代柱</a>
+    <a href="geo-system.html" class="nav-link">地理</a>
+    <a href="pattern-tree.html" class="nav-link">纹饰树</a>
+    <a href="inscription-special-hezun.html" class="nav-link">铭文</a>
+    <a href="me.html" class="nav-link">我的图鉴</a>
+    <a href="dashboard.html" class="nav-link active">★ 三联动</a>
+  </div>
+  <div style="margin-left:auto; font-size:11px; color:var(--text-muted); margin-right:12px; white-space:nowrap;">
+    Hover 时代柱朝代带 → 三组件同时响应
+  </div>
+  <button class="linkage-badge" id="linkage-toggle" title="切换联动模式">
+    <div class="linkage-dot" id="linkage-dot"></div>
+    <span id="linkage-label">联动 ON</span>
+  </button>
+</nav>
+
+<!-- MAIN LAYOUT -->
+<div class="dashboard-layout">
+
+  <!-- LEFT COL: Time Pillar + Pattern Strip -->
+  <div class="left-col">
+    <div class="pillar-title">时代柱 · Dynasty Pillar</div>
+    <div class="pillar-section">
+      <div id="pillar-container"></div>
+    </div>
+
+    <!-- Pattern Strip -->
+    <div class="pattern-strip-section" id="pattern-strip-section">
+      <div class="pattern-strip-label" id="pattern-strip-era-label">纹饰演化 · Patterns (hover 朝代高亮)</div>
+      <div class="pattern-strip" id="pattern-strip"></div>
+    </div>
+  </div>
+
+  <!-- RIGHT COL: Map + Bottom Panel -->
+  <div class="right-col">
+
+    <!-- Map -->
+    <div class="map-section" id="map-section">
+      <div class="map-header">古国地图 · Ancient States</div>
+      <div class="map-era-badge" id="map-era-badge">— 选择朝代 —</div>
+      <svg id="map-svg"></svg>
+    </div>
+
+    <!-- Bottom Selected-Era Panel -->
+    <div class="bottom-panel" id="bottom-panel">
+      <div class="era-big-badge" id="era-badge">
+        <div class="era-big-name" id="era-big-name" style="color:var(--text-muted);">—</div>
+        <div class="era-big-period" id="era-big-period">hover 左侧时代柱<br>查看朝代详情</div>
+        <div class="era-big-count" id="era-big-count" style="color:var(--text-muted);"></div>
+      </div>
+      <div class="era-separator"></div>
+      <div class="artifact-cards" id="artifact-cards">
+        <div style="font-size:12px; color:var(--text-muted); padding: 0 12px;">
+          悬停左侧时代柱，三组件同时反应 →
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Map Tooltip -->
+<div class="map-tooltip" id="map-tooltip"></div>
+
+<!-- Debug bar (hidden by default, ?debug to show) -->
+<div class="debug-bar" id="debug-bar">
+  <span>事件总线：</span><span id="debug-log">待机</span>
+</div>
+
+<script>
+// ============================================================
+//  INLINE EVENT BUS (same contract as event-bus.js)
+// ============================================================
+const bus = {
+  emit(name, payload) {
+    document.dispatchEvent(new CustomEvent(name, { detail: payload, bubbles: false }));
+    _debugLog('→ ' + name + ' : ' + JSON.stringify(payload).slice(0, 120));
+  },
+  on(name, handler) {
+    const w = e => handler(e.detail);
+    document.addEventListener(name, w);
+    return () => document.removeEventListener(name, w);
+  }
+};
+window.MuseumBus = bus;
+
+let _linkageEnabled = true;
+function _debugLog(msg) {
+  const el = document.getElementById('debug-log');
+  if (el) el.textContent = new Date().toLocaleTimeString() + ' ' + msg;
+}
+
+// Show debug bar if ?debug
+if (new URLSearchParams(location.search).has('debug')) {
+  document.getElementById('debug-bar').classList.add('visible');
+}
+
+// Linkage toggle
+document.getElementById('linkage-toggle').addEventListener('click', () => {
+  _linkageEnabled = !_linkageEnabled;
+  const dot = document.getElementById('linkage-dot');
+  const label = document.getElementById('linkage-label');
+  dot.classList.toggle('off', !_linkageEnabled);
+  label.textContent = _linkageEnabled ? '联动 ON' : '联动 OFF';
+});
+
+// ============================================================
+//  DATA
+// ============================================================
+
+// Dynasties (from dynasties.json, inlined for single-file)
+const DYNASTIES = [
+  { name:'夏',  name_en:'Xia',           start:-1750, end:-1500, dur:250,  color:'#6e4a2e',
+    dominant_patterns:['乳钉纹','弦纹','兽面纹(初形)'],
+    geo_era: null,
+    pool:12, collected:1,
+    artifacts:[
+      { id:'erlitou_jue', name:'二里头铜爵', silhouette:'yuanding', treasure:false, rarity:'tier-1' }
+    ],
+    desc:'史料极稀薄·二里头文明' },
+  { name:'商',  name_en:'Shang',          start:-1600, end:-1046, dur:554,  color:'#4a5a3a',
+    dominant_patterns:['饕餮纹','夔龙纹','云雷纹','蝉纹','虎噬人头纹'],
+    geo_era: 'shang',
+    pool:85, collected:8,
+    artifacts:[
+      { id:'houmuwu_ding',    name:'后母戊鼎',   silhouette:'fangding',          treasure:true,  rarity:'tier-treasure' },
+      { id:'siyang_fangzun',  name:'四羊方尊',   silhouette:'fang_zun',          treasure:true,  rarity:'tier-treasure' },
+      { id:'fuhaoxiaozun',    name:'妇好鸮尊',   silhouette:'xiao_zun',          treasure:true,  rarity:'tier-treasure' },
+      { id:'zhulong_ding',    name:'子龙鼎',     silhouette:'yuanding',          treasure:true,  rarity:'tier-treasure' },
+      { id:'sanxd_dali_ren',  name:'三星堆大立人',silhouette:'sanxingdui_dali_ren',treasure:true, rarity:'tier-treasure' },
+      { id:'sanxd_zongmu',   name:'三星堆面具',  silhouette:'sanxingdui_zongmu', treasure:true,  rarity:'tier-treasure' }
+    ],
+    desc:'商代 · 前1600—前1046' },
+  { name:'西周', name_en:'Western Zhou',  start:-1046, end:-771,  dur:275,  color:'#a73a2a',
+    dominant_patterns:['饕餮纹(简化)','凤鸟纹','重环纹','窃曲纹','波曲纹'],
+    geo_era: 'xizhou',
+    pool:72, collected:6,
+    artifacts:[
+      { id:'he_zun',       name:'何尊',      silhouette:'fang_zun',  treasure:true,  rarity:'tier-treasure' },
+      { id:'li_gui',       name:'利簋',      silhouette:'gui',       treasure:true,  rarity:'tier-treasure' },
+      { id:'mao_gong_ding',name:'毛公鼎',   silhouette:'yuanding',  treasure:true,  rarity:'tier-treasure' },
+      { id:'da_yu_ding',   name:'大盂鼎',   silhouette:'yuanding',  treasure:false, rarity:'tier-1' },
+      { id:'da_ke_ding',   name:'大克鼎',   silhouette:'yuanding',  treasure:false, rarity:'tier-1' }
+    ],
+    desc:'西周 · 前1046—前771' },
+  { name:'春秋', name_en:'Spring & Autumn',start:-771, end:-476, dur:295, color:'#2a2a3a',
+    dominant_patterns:['蟠螭纹','窃曲纹','重环纹','垂鳞纹','莲瓣纹'],
+    geo_era: 'chunqiu',
+    pool:45, collected:2,
+    artifacts:[
+      { id:'lianhe_fanghu', name:'莲鹤方壶', silhouette:'fanghu',   treasure:true, rarity:'tier-treasure' },
+      { id:'yuewang_jian',  name:'越王勾践剑',silhouette:'yuewang_jian', treasure:true, rarity:'tier-treasure' }
+    ],
+    desc:'春秋 · 前771—前476' },
+  { name:'战国', name_en:'Warring States', start:-476, end:-221, dur:255, color:'#7a3a2a',
+    dominant_patterns:['蟠虺纹','几何纹','宴乐纹','透空蟠螭纹','错金银纹'],
+    geo_era: 'zhanguo',
+    pool:38, collected:3,
+    artifacts:[
+      { id:'zenghouyi_zhong',name:'曾侯乙编钟',silhouette:'bianzhong', treasure:true, rarity:'tier-treasure' },
+      { id:'zenghouyi_zunpan',name:'曾侯乙尊盘',silhouette:'fang_zun', treasure:false, rarity:'tier-1' },
+      { id:'shangyangfangsheng',name:'商鞅方升',silhouette:'yuanding', treasure:false, rarity:'tier-1' }
+    ],
+    desc:'战国 · 前476—前221' },
+  { name:'秦',  name_en:'Qin',            start:-221, end:-206, dur:15,  color:'#1a1a1a',
+    dominant_patterns:['云气纹','几何纹','写实风格'],
+    geo_era: null,
+    pool:8, collected:1,
+    artifacts:[
+      { id:'qin_bronze_chariot',name:'秦陵铜车马',silhouette:'fangding', treasure:true, rarity:'tier-treasure' }
+    ],
+    desc:'秦 · 前221—前206' },
+  { name:'西汉', name_en:'Western Han',   start:-206, end:9,   dur:215, color:'#b89046',
+    dominant_patterns:['云气纹','四神纹','错金银','狩猎纹'],
+    geo_era: null,
+    pool:28, collected:2,
+    artifacts:[
+      { id:'boshanlv',        name:'错金博山炉',  silhouette:'pan',           treasure:true, rarity:'tier-treasure' },
+      { id:'changxin_lamp',   name:'长信宫灯',    silhouette:'changxin_gongdeng',treasure:true, rarity:'tier-treasure' }
+    ],
+    desc:'西汉 · 前206—公元9年' },
+  { name:'东汉', name_en:'Eastern Han',   start:25,   end:220, dur:195, color:'#9a7838',
+    dominant_patterns:['四神纹','狩猎纹','写实雕塑'],
+    geo_era: null,
+    pool:18, collected:1,
+    artifacts:[
+      { id:'matafeiyan',name:'马踏飞燕',silhouette:'fangding', treasure:true, rarity:'tier-treasure' }
+    ],
+    desc:'东汉 · 公元25—220年' }
+];
+
+// Pattern data (slugs matching assets/patterns/)
+const PATTERNS = [
+  { slug:'taotie',    name:'饕餮纹',  eras:['夏','商'] },
+  { slug:'kuilong',   name:'夔龙纹',  eras:['商','西周'] },
+  { slug:'yunlei',    name:'云雷纹',  eras:['商','西周'] },
+  { slug:'lei',       name:'雷纹',    eras:['商','西周'] },
+  { slug:'rudding',   name:'乳钉纹',  eras:['夏','商'] },
+  { slug:'hu',        name:'虎纹',    eras:['商'] },
+  { slug:'niao',      name:'鸟纹',    eras:['商'] },
+  { slug:'fengniao',  name:'凤鸟纹',  eras:['西周'] },
+  { slug:'qiequ',     name:'窃曲纹',  eras:['西周','春秋'] },
+  { slug:'chonghuan', name:'重环纹',  eras:['西周','春秋'] },
+  { slug:'boqu',      name:'波曲纹',  eras:['西周'] },
+  { slug:'chuilin',   name:'垂鳞纹',  eras:['西周','春秋'] },
+  { slug:'panchi',    name:'蟠螭纹',  eras:['春秋','战国'] },
+  { slug:'panhui',    name:'蟠虺纹',  eras:['战国'] },
+  { slug:'jihe',      name:'几何纹',  eras:['战国'] },
+  { slug:'sanjiao',   name:'三角纹',  eras:['商','西周','春秋','战国'] },
+  { slug:'yuchi',     name:'羽翅纹',  eras:['战国'] },
+  { slug:'shoulie',   name:'狩猎纹',  eras:['战国','西汉'] },
+  { slug:'yanle',     name:'宴乐纹',  eras:['战国','西汉'] },
+  { slug:'sishen',    name:'四神纹',  eras:['西汉','东汉'] },
+  { slug:'chan',      name:'蝉纹',    eras:['商','西周'] },
+  { slug:'jiaoye',    name:'焦叶纹',  eras:['商','西周'] },
+  { slug:'xian',      name:'弦纹',    eras:['夏','商','西周','春秋'] },
+  { slug:'wo',        name:'涡纹',    eras:['商'] },
+  { slug:'shouti_juanqu',name:'兽体卷曲',eras:['西周','春秋'] }
+];
+
+// Era → dominant pattern slugs (for priority highlighting)
+const ERA_DOMINANT_PATTERNS = {
+  '夏':   ['taotie','rudding','xian'],
+  '商':   ['taotie','kuilong','yunlei','chan','hu'],
+  '西周': ['fengniao','qiequ','chonghuan','boqu','chuilin'],
+  '春秋': ['panchi','qiequ','chonghuan','chuilin','shouti_juanqu'],
+  '战国': ['panhui','jihe','yanle','shoulie'],
+  '秦':   ['jihe'],
+  '西汉': ['shoulie','sishen','yanle'],
+  '东汉': ['sishen','shoulie']
+};
+
+// Ancient state GeoJSON polygons (inline from assets/geo/*.geojson, simplified)
+// We store per era key: shang, xizhou, chunqiu, zhanguo
+const GEO_DATA = {
+  shang: {
+    label: '商代疆域 (约前1600—前1046)',
+    regions: [
+      { id:'shang-core', name:'商王畿', color:'#4a5a3a', opacity:0.45,
+        coords:[[108,36.5],[109.5,37],[111,37.5],[113,37.5],[114.5,37],[116,36.5],[117,35.5],[117,34],[116,33],[114.5,32.5],[113,32.5],[111.5,33],[110.5,33.5],[109.5,34],[108.5,34.5],[108,35.5],[108,36.5]] },
+      { id:'zhou-fang', name:'周方', color:'#a73a2a', opacity:0.25,
+        coords:[[104.5,34.5],[106,34],[107.5,34.2],[108.5,34.5],[108,35.5],[107,35.8],[105.5,35.5],[104.5,35],[104.5,34.5]] },
+      { id:'gushu',  name:'古蜀 (三星堆)', color:'#7a5a2a', opacity:0.3,
+        coords:[[102.5,29.5],[104,29],[105.5,29.5],[106,30.5],[105,31.5],[103.5,31.5],[102.5,31],[102.5,29.5]] },
+      { id:'panlongcheng', name:'盘龙城', color:'#2a5a4a', opacity:0.3,
+        coords:[[113,29.5],[114,29.5],[115,30],[115,31],[113.5,31],[112.5,30.5],[113,29.5]] }
+    ],
+    sites: [
+      { id:'yinxu',   name:'殷墟', x:114.3, y:36.1, r:9,  dy:12,  collected:true,  dynasty:'商',  desc:'商晚期王都，1899年甲骨文发现地。出土后母戊鼎等重器。' },
+      { id:'erlitou', name:'二里岗',x:113.5,y:34.8, r:6,  dy:12,  collected:true,  dynasty:'商',  desc:'商早期都城遗址，发现最早的城市宫殿建筑。' },
+      { id:'sanxd',   name:'三星堆',x:103.7,y:31.1, r:8,  dy:12,  collected:true,  dynasty:'商',  desc:'古蜀王国遗址，与商并存的另一文明。1986年出土青铜大立人。' },
+      { id:'panlong', name:'盘龙城',x:114.3,y:30.5, r:5,  dy:12,  collected:false, dynasty:'商',  desc:'商代南方军事据点，长江流域最早的商文化遗址。' },
+      { id:'zhouyuan',name:'周原',  x:107.6,y:34.4, r:5,  dy:-16, collected:false, dynasty:'商',  desc:'周族发源地，后来的西周都城前身。出土大量卜骨与铜器。' }
+    ]
+  },
+  xizhou: {
+    label: '西周疆域 (约前1046—前771)',
+    regions: [
+      { id:'xizhou-core', name:'王畿 (关中+洛阳)', color:'#a73a2a', opacity:0.4,
+        coords:[[104,33.5],[107.5,33],[109,33.5],[112,34],[113,35],[112,36],[110,36.5],[107,36],[105,35.5],[104,34.5],[104,33.5]] },
+      { id:'yan-state',  name:'燕国', color:'#8a3a1a', opacity:0.25,
+        coords:[[115,39],[117.5,39],[118.5,40],[117,41],[115,41],[114,40],[115,39]] },
+      { id:'qi-state',   name:'齐国', color:'#5a4a3a', opacity:0.25,
+        coords:[[116.5,35],[119,35.5],[121,36.5],[120,38],[118,38],[116,37],[115.5,36],[116.5,35]] },
+      { id:'lu-state',   name:'鲁国', color:'#3a5a3a', opacity:0.25,
+        coords:[[116,34],[118,34.5],[119.5,35.5],[119,36],[116.5,35],[115.5,34.5],[116,34]] }
+    ],
+    sites: [
+      { id:'hao',     name:'镐京',  x:108.9,y:34.2, r:8,  dy:12,  collected:true,  dynasty:'西周', desc:'西周西都，周武王始建，礼乐文明中心。前771年犬戎攻破。' },
+      { id:'luoyi',   name:'成周(洛邑)',x:112.5,y:34.6,r:7, dy:12, collected:true,  dynasty:'西周', desc:'西周东都，周公营建，《何尊》所记"宅兹中国"即指此地。' },
+      { id:'zhouyuan',name:'周原',  x:107.6,y:34.4, r:6,  dy:-16, collected:true,  dynasty:'西周', desc:'西周宗庙遗址，出土大量有铭文铜器，包括利簋、大盂鼎。' },
+      { id:'yanjing', name:'燕都',  x:116.2,y:39.9, r:5,  dy:12,  collected:false, dynasty:'西周', desc:'燕国都城，今北京房山琉璃河，出土伯矩鬲等重器。' }
+    ]
+  },
+  chunqiu: {
+    label: '春秋列国 (约前771—前476)',
+    regions: [
+      { id:'qi-sa',   name:'齐国', color:'#4a6a3a', opacity:0.35,
+        coords:[[116,34.5],[119.5,35],[121,36.5],[120,38.5],[118,38.5],[116.5,37.5],[115.5,35.5],[116,34.5]] },
+      { id:'jin-sa',  name:'晋国', color:'#6a4a2a', opacity:0.35,
+        coords:[[110,34.5],[114,34.5],[115,36],[113.5,37.5],[111,38],[109.5,37],[109,35.5],[110,34.5]] },
+      { id:'chu-sa',  name:'楚国', color:'#2a4a5a', opacity:0.35,
+        coords:[[107,29],[113,28],[116,30],[117,32],[113,34],[110,34],[107,33],[106,31],[107,29]] },
+      { id:'qin-sa',  name:'秦国', color:'#3a3a2a', opacity:0.3,
+        coords:[[102,33.5],[107,33.5],[108.5,34.5],[107.5,36],[104.5,36],[102,35],[102,33.5]] },
+      { id:'wu-sa',   name:'吴越', color:'#2a5a4a', opacity:0.25,
+        coords:[[119,29],[122,30],[122,32],[120,33],[118,33],[116,31],[117,29.5],[119,29]] }
+    ],
+    sites: [
+      { id:'houma',   name:'侯马(晋)',x:111.2,y:35.6, r:6,  dy:12,  collected:true, dynasty:'春秋', desc:'晋国都城新田遗址，出土铸铜遗存，晋侯编钟发现地。' },
+      { id:'linzi',   name:'临淄(齐)',x:118.3,y:36.8, r:6,  dy:12,  collected:false,dynasty:'春秋', desc:'齐国都城，大型城市遗址，出土齐侯铜器群。' },
+      { id:'ying_chu',name:'郢(楚)',  x:112.2,y:30.3, r:7,  dy:12,  collected:true, dynasty:'春秋', desc:'楚国都城，莲鹤方壶出土于此区域郑国贵族墓。' },
+      { id:'kuaiji',  name:'会稽(越)',x:120.2,y:30.0, r:5,  dy:12,  collected:true, dynasty:'春秋', desc:'越国都城，越王勾践剑出土地区。' }
+    ]
+  },
+  zhanguo: {
+    label: '战国七雄 (约前476—前221)',
+    regions: [
+      { id:'qin-z',   name:'秦', color:'#3a2a1a', opacity:0.45,
+        coords:[[98,33],[107,33],[110,34],[113,34],[113,36],[110,38],[106,38],[100,37],[98,35],[98,33]] },
+      { id:'chu-z',   name:'楚', color:'#1a3a4a', opacity:0.35,
+        coords:[[110,24],[117,26],[120,28],[121,31],[119,33],[113,34],[110,34],[107,33],[106,30],[107,27],[110,24]] },
+      { id:'zhao-z',  name:'赵', color:'#3a2a4a', opacity:0.3,
+        coords:[[110,36],[114,35.5],[117,36],[118.5,38],[116,40],[113,40],[110.5,39],[110,37.5],[110,36]] },
+      { id:'wei-z',   name:'魏', color:'#2a3a1a', opacity:0.3,
+        coords:[[110,34],[113.5,33.5],[115,34.5],[114,36.5],[112,37],[110,37],[110,35],[110,34]] },
+      { id:'han-z',   name:'韩', color:'#2a1a3a', opacity:0.3,
+        coords:[[111,33],[114,33],[115,34.5],[113.5,35.5],[112,35.5],[110.5,34.5],[111,33]] },
+      { id:'yan-z',   name:'燕', color:'#1a2a3a', opacity:0.3,
+        coords:[[113,38],[119,37],[121,39],[120,42],[116,42],[113,41],[113,38]] },
+      { id:'qi-z',    name:'齐', color:'#3a4a2a', opacity:0.3,
+        coords:[[116,34.5],[119.5,35],[121.5,36.5],[120,38.5],[117,38.5],[115.5,37],[115,35],[116,34.5]] }
+    ],
+    sites: [
+      { id:'suizhou',  name:'随州(曾)',x:113.3,y:31.7,  r:8,  dy:12,  collected:true, dynasty:'战国', desc:'曾侯乙墓所在，1978年出土编钟65件·总重4421kg。' },
+      { id:'xianyang', name:'咸阳(秦)',x:108.7,y:34.3,  r:7,  dy:12,  collected:true, dynasty:'战国', desc:'秦国都城，商鞅变法在此实施，前350年迁都咸阳。' },
+      { id:'handan',   name:'邯郸(赵)',x:114.5,y:36.6,  r:5,  dy:12,  collected:false,dynasty:'战国', desc:'赵国都城，赵武灵王胡服骑射改革中心。' }
+    ]
+  }
+};
+
+// Artifact silhouette paths
+const SILHOUETTE_PATH = '../../assets/silhouettes/';
+const PATTERN_PATH = '../../assets/patterns/';
+
+// ============================================================
+//  TIME PILLAR (Inline D3 implementation)
+// ============================================================
+
+let _activeEra = null;
+let _lockedEra = null;
+
+function buildTimePillar() {
+  const container = document.getElementById('pillar-container');
+  const containerWidth = 230; // left col is 240px
+
+  // Total years for height calculation
+  const PX_PER_YEAR = 0.52;
+  const MIN_H = 24;
+
+  // Compute layout
+  let yOff = 0;
+  const layouts = DYNASTIES.map(d => {
+    const h = Math.max(d.dur * PX_PER_YEAR, MIN_H);
+    const r = { ...d, y: yOff, h };
+    yOff += h;
+    return r;
+  });
+  const totalH = yOff;
+
+  const PILLAR_W = 140;
+  const AXIS_W = 50;
+  const svgW = containerWidth;
+  const svgH = totalH + 20;
+
+  const svg = d3.select(container)
+    .append('svg')
+    .attr('width', svgW)
+    .attr('height', svgH)
+    .attr('viewBox', `0 0 ${svgW} ${svgH}`)
+    .style('display', 'block');
+
+  const defs = svg.append('defs');
+  // Breath gradient
+  const bg = defs.append('linearGradient').attr('id','breath-grad')
+    .attr('x1','0%').attr('y1','0%').attr('x2','0%').attr('y2','100%');
+  bg.append('stop').attr('offset','0%').attr('stop-color','#3a3a3a').attr('stop-opacity','0.15');
+  bg.append('stop').attr('offset','100%').attr('stop-color','#3a3a3a').attr('stop-opacity','0.05');
+
+  // Gold glow filter
+  const glow = defs.append('filter').attr('id','glow-gold-p');
+  glow.append('feGaussianBlur').attr('stdDeviation','2').attr('result','b');
+  const m = glow.append('feMerge');
+  m.append('feMergeNode').attr('in','b');
+  m.append('feMergeNode').attr('in','SourceGraphic');
+
+  const g = svg.append('g').attr('transform', `translate(${AXIS_W},10)`);
+
+  layouts.forEach(d => {
+    const density = d.collected / d.pool;
+    const isEmpty = d.collected === 0;
+    const baseColor = d.color;
+    const fillOp = isEmpty ? 0.18 : 0.25 + density * 0.6;
+
+    const bandG = g.append('g')
+      .attr('class', 'dynasty-band-g')
+      .attr('data-dynasty', d.name)
+      .style('cursor', 'pointer');
+
+    // Main rect
+    bandG.append('rect')
+      .attr('class', 'band-bg')
+      .attr('x', 0).attr('y', d.y)
+      .attr('width', PILLAR_W).attr('height', d.h)
+      .attr('fill', baseColor)
+      .attr('fill-opacity', fillOp)
+      .attr('stroke', baseColor)
+      .attr('stroke-opacity', 0.4)
+      .attr('stroke-width', 0.5)
+      .style('transition', 'fill-opacity 0.2s');
+
+    // Density bar (left edge)
+    if (!isEmpty) {
+      bandG.append('rect')
+        .attr('x', 0).attr('y', d.y + d.h * (1 - density))
+        .attr('width', 4).attr('height', d.h * density)
+        .attr('fill', baseColor).attr('fill-opacity', 0.9).attr('rx', 1);
+    }
+
+    // Breath overlay for empty
+    if (isEmpty) {
+      bandG.append('rect')
+        .attr('class', 'breath-anim')
+        .attr('x', 0).attr('y', d.y)
+        .attr('width', PILLAR_W).attr('height', d.h)
+        .attr('fill', 'url(#breath-grad)');
+    }
+
+    // Highlight rect (visible on hover/active)
+    bandG.append('rect')
+      .attr('class', 'band-highlight')
+      .attr('x', 0).attr('y', d.y)
+      .attr('width', PILLAR_W).attr('height', d.h)
+      .attr('fill', 'none')
+      .attr('stroke', '#e8d8b8')
+      .attr('stroke-width', 1.5)
+      .attr('opacity', 0)
+      .style('pointer-events', 'none')
+      .style('transition', 'opacity 0.15s');
+
+    // Dynasty name
+    const labelSz = d.h > 50 ? 13 : d.h > 30 ? 11 : 9;
+    bandG.append('text')
+      .attr('x', 10).attr('y', d.y + Math.min(d.h / 2, 22))
+      .attr('dominant-baseline', 'middle')
+      .attr('fill', '#e8d8c8').attr('fill-opacity', 0.9)
+      .attr('font-size', labelSz)
+      .attr('font-family', 'Noto Serif SC, STSong, serif')
+      .attr('letter-spacing', '1')
+      .text(d.name);
+
+    // Duration label
+    if (d.h > 36) {
+      bandG.append('text')
+        .attr('x', 10).attr('y', d.y + Math.min(d.h / 2 + 14, 38))
+        .attr('dominant-baseline', 'middle')
+        .attr('fill', baseColor).attr('fill-opacity', 0.6)
+        .attr('font-size', '8').attr('font-family', 'monospace')
+        .text(`${d.dur}yr`);
+    }
+
+    // Collection badge
+    if (d.h > 24) {
+      bandG.append('text')
+        .attr('x', PILLAR_W - 6).attr('y', d.y + 12)
+        .attr('text-anchor', 'end')
+        .attr('fill', isEmpty ? '#5a4a3a' : '#c8a860')
+        .attr('font-size', '8').attr('font-family', 'monospace')
+        .text(`${d.collected}/${d.pool}`);
+    }
+
+    // Dominant pattern text at bottom of tall bands
+    if (d.h > 70 && d.dominant_patterns) {
+      bandG.append('text')
+        .attr('x', 8).attr('y', d.y + d.h - 8)
+        .attr('fill', baseColor).attr('fill-opacity', 0.5)
+        .attr('font-size', '7')
+        .attr('font-family', 'Noto Serif SC, STSong, serif')
+        .text(d.dominant_patterns.slice(0,2).join(' · '));
+    }
+
+    // Hover / click
+    bandG
+      .on('mouseenter', (event) => {
+        if (!_lockedEra) onPillarHover(d);
+      })
+      .on('mouseleave', () => {
+        if (!_lockedEra) onPillarLeave();
+      })
+      .on('click', () => {
+        _lockedEra = (_lockedEra === d.name) ? null : d.name;
+        if (_lockedEra) onPillarHover(d);
+        else onPillarLeave();
+      });
+  });
+
+  // Axis (left side, year ticks)
+  const axisG = svg.append('g').attr('transform', `translate(0,10)`);
+  layouts.forEach(d => {
+    const yr = d.start;
+    const label = yr < 0 ? `前${Math.abs(yr)}` : `${yr}`;
+    axisG.append('line')
+      .attr('x1', AXIS_W - 4).attr('x2', AXIS_W).attr('y1', d.y).attr('y2', d.y)
+      .attr('stroke', '#5a4a3a').attr('stroke-width', 0.5);
+    axisG.append('text')
+      .attr('x', AXIS_W - 6).attr('y', d.y + 3)
+      .attr('text-anchor', 'end')
+      .attr('fill', '#7a6a4a').attr('font-size', '7').attr('font-family', 'monospace')
+      .text(label);
+  });
+  // Last tick
+  const last = layouts[layouts.length - 1];
+  const lastYr = last.end;
+  const lastLabel = lastYr > 0 ? `${lastYr}AD` : `前${Math.abs(lastYr)}`;
+  axisG.append('text')
+    .attr('x', AXIS_W - 6).attr('y', last.y + last.h + 3)
+    .attr('text-anchor', 'end')
+    .attr('fill', '#7a6a4a').attr('font-size', '7').attr('font-family', 'monospace')
+    .text(lastLabel);
+
+  return { layouts };
+}
+
+function onPillarHover(d) {
+  _activeEra = d.name;
+  updatePillarHighlight(d.name);
+  // Emit era-focus — other components react
+  bus.emit('era-focus', {
+    dynasty: d.name,
+    dominant_patterns: d.dominant_patterns,
+    collected: d.collected,
+    geo_era: d.geo_era,
+    triggered_by: 'time-pillar'
+  });
+}
+function onPillarLeave() {
+  if (_lockedEra) return;
+  _activeEra = null;
+  updatePillarHighlight(null);
+  // Don't clear other components; let them show last active state
+}
+
+function updatePillarHighlight(name) {
+  d3.selectAll('.dynasty-band-g').each(function() {
+    const dn = this.getAttribute('data-dynasty');
+    const highlight = d3.select(this).select('.band-highlight');
+    const bg = d3.select(this).select('.band-bg');
+    if (dn === name) {
+      highlight.attr('opacity', 1);
+      bg.attr('fill-opacity', 0.85);
+      d3.select(this).raise();
+    } else {
+      highlight.attr('opacity', 0);
+      const dData = DYNASTIES.find(x => x.name === dn);
+      if (dData) {
+        const density = dData.collected / dData.pool;
+        bg.attr('fill-opacity', dData.collected === 0 ? 0.18 : 0.25 + density * 0.6);
+      }
+    }
+  });
+}
+
+// ============================================================
+//  GEO MAP (Inline D3 SVG map)
+// ============================================================
+
+let _currentGeoEra = null;
+let _mapProjection = null;
+
+function buildMap() {
+  const section = document.getElementById('map-section');
+  const W = section.offsetWidth || 700;
+  const H = section.offsetHeight || 480;
+
+  const svg = d3.select('#map-svg')
+    .attr('width', W)
+    .attr('height', H);
+
+  // China bounds approximately: lon 73-135, lat 18-54
+  // Use simple linear projection scaled to fit
+  const lonMin=96, lonMax=128, latMin=23, latMax=44;
+  const padX=30, padY=20;
+  const scaleX = (W - padX*2) / (lonMax - lonMin);
+  const scaleY = (H - padY*2) / (latMax - latMin);
+  const scale = Math.min(scaleX, scaleY);
+
+  _mapProjection = ([lon, lat]) => [
+    padX + (lon - lonMin) * scale,
+    H - padY - (lat - latMin) * scale  // flip Y
+  ];
+
+  // Background
+  svg.append('rect').attr('x',0).attr('y',0).attr('width',W).attr('height',H)
+    .attr('fill', '#0e0c08');
+
+  // Simple China outline (simplified polygon for "recognizable as China")
+  const chinaOutlineCoords = [
+    [73.5,39.5],[76,37],[80,35],[83,33],[84,28],[88,27],[90,26.5],[92,27],[94,28],
+    [97,27.5],[100,22],[102,22],[104,21.5],[106,22],[108,21],[110,20],[112,20.5],
+    [114,22],[116,23],[118,24],[120,24.5],[121.5,25],[122,27],[121,28.5],
+    [121.5,30],[122,31],[122,32],[121.5,33],[120.5,34],[121,36],[122,37],
+    [121.5,39],[122,40.5],[120,41],[118,42],[116,43],[115,44],[113,44],
+    [111,44.5],[109,44],[107,43.5],[105,42.5],[102,42],[100,41],[98,41],
+    [96,40.5],[94,41],[92,42],[90,43],[88,44],[85,44.5],[82,44],[80,43.5],
+    [78,42],[76,41],[73.5,41],[73.5,39.5]
+  ];
+  const chinaPath = 'M' + chinaOutlineCoords.map(c => _mapProjection(c).map(v=>v.toFixed(1)).join(',')).join(' L') + ' Z';
+
+  svg.append('path').attr('d', chinaPath)
+    .attr('fill', '#1a1f14').attr('stroke', '#3a4a2a').attr('stroke-width', 1)
+    .attr('fill-opacity', 0.6);
+
+  // Major rivers
+  const yellowRiver = [
+    [96,35.5],[100,36],[103,35.5],[105,35],[107,34.5],[109,35],[111,35.5],
+    [112,35],[113,35.5],[114.5,35],[115.5,35.5],[117,37],[119,38]
+  ];
+  const yangtzeRiver = [
+    [98,28],[102,29],[104,29.5],[106,29.5],[108,30.5],[111,30],[113,29.5],
+    [116,29.5],[118,29.5],[120,30],[121.5,31.5]
+  ];
+
+  const riverPath = (pts) => 'M' + pts.map(c => _mapProjection(c).map(v=>v.toFixed(1)).join(',')).join(' L');
+  svg.append('path').attr('d', riverPath(yellowRiver))
+    .attr('fill','none').attr('stroke','#2a5a8a').attr('stroke-width',1.5).attr('stroke-opacity',0.4);
+  svg.append('path').attr('d', riverPath(yangtzeRiver))
+    .attr('fill','none').attr('stroke','#2a6a9a').attr('stroke-width',1.5).attr('stroke-opacity',0.35);
+
+  // River labels
+  const yrMid = _mapProjection([110, 35.2]);
+  const ytzMid = _mapProjection([113, 29.3]);
+  svg.append('text').attr('x', yrMid[0]).attr('y', yrMid[1])
+    .attr('fill','#2a5a8a').attr('fill-opacity',0.6).attr('font-size','8')
+    .attr('font-family','Noto Serif SC,serif').text('黄河');
+  svg.append('text').attr('x', ytzMid[0]).attr('y', ytzMid[1])
+    .attr('fill','#2a6a9a').attr('fill-opacity',0.6).attr('font-size','8')
+    .attr('font-family','Noto Serif SC,serif').text('长江');
+
+  // Group for era regions (toggled per era)
+  const regionsG = svg.append('g').attr('id','map-regions-group');
+
+  // Group for sites (always visible, react to era)
+  const sitesG = svg.append('g').attr('id','map-sites-group');
+
+  // Build all era regions (hidden initially)
+  Object.keys(GEO_DATA).forEach(eraKey => {
+    const era = GEO_DATA[eraKey];
+    const eraG = regionsG.append('g').attr('class', `era-group era-${eraKey} hidden`);
+
+    era.regions.forEach(region => {
+      const pathStr = 'M' + region.coords.map(c => _mapProjection(c).map(v=>v.toFixed(1)).join(',')).join(' L') + ' Z';
+      eraG.append('path')
+        .attr('class', 'state-region')
+        .attr('id', `region-${eraKey}-${region.id}`)
+        .attr('d', pathStr)
+        .attr('fill', region.color)
+        .attr('fill-opacity', region.opacity)
+        .attr('stroke', region.color)
+        .attr('stroke-opacity', 0.55)
+        .attr('stroke-width', 1)
+        .attr('stroke-dasharray', '4,3');
+
+      // Region name label
+      const centroid = region.coords.reduce((acc, c) => [acc[0]+c[0], acc[1]+c[1]], [0,0]);
+      const cx = centroid[0] / region.coords.length;
+      const cy = centroid[1] / region.coords.length;
+      const [lx, ly] = _mapProjection([cx, cy]);
+      eraG.append('text')
+        .attr('x', lx).attr('y', ly)
+        .attr('text-anchor', 'middle')
+        .attr('dominant-baseline', 'middle')
+        .attr('fill', region.color)
+        .attr('fill-opacity', 0.85)
+        .attr('font-size', '9')
+        .attr('font-family', 'Noto Serif SC, serif')
+        .attr('letter-spacing', '1')
+        .style('pointer-events', 'none')
+        .text(region.name);
+    });
+  });
+
+  // Render all site dots (across all eras)
+  const allSites = [];
+  Object.keys(GEO_DATA).forEach(eraKey => {
+    GEO_DATA[eraKey].sites.forEach(site => allSites.push({ ...site, eraKey }));
+  });
+  // Deduplicate by id (same site may appear in multiple eras)
+  const seenSites = new Set();
+  const uniqueSites = allSites.filter(s => {
+    if (seenSites.has(s.id)) return false;
+    seenSites.add(s.id);
+    return true;
+  });
+
+  uniqueSites.forEach(site => {
+    const [sx, sy] = _mapProjection([site.x, site.y]);
+    const siteG = sitesG.append('g')
+      .attr('class', `site-group site-${site.id}`)
+      .attr('data-site', site.id)
+      .attr('data-era', site.eraKey)
+      .style('opacity', 0.35);
+
+    siteG.append('circle')
+      .attr('class', 'site-dot')
+      .attr('cx', sx).attr('cy', sy)
+      .attr('r', site.collected ? site.r : site.r * 0.7)
+      .attr('fill', site.collected ? '#c8a860' : '#5a5a4a')
+      .attr('fill-opacity', site.collected ? 0.85 : 0.4)
+      .attr('stroke', site.collected ? '#f0d080' : '#6a6a5a')
+      .attr('stroke-width', site.collected ? 1.5 : 0.5)
+      .style('transition', 'r .3s, fill .3s');
+
+    // Label
+    siteG.append('text')
+      .attr('class', 'site-label')
+      .attr('x', sx + 8).attr('y', sy + (site.dy || 0) * 0.5)
+      .attr('fill', site.collected ? '#d4a857' : '#7a7a5a')
+      .attr('font-size', '9')
+      .attr('font-family', 'Noto Serif SC, serif')
+      .style('pointer-events', 'none')
+      .text(site.name);
+
+    // Interaction
+    const tooltip = document.getElementById('map-tooltip');
+    siteG
+      .on('mouseenter', (event) => {
+        tooltip.innerHTML = `<strong style="color:#d4a857">${site.name}</strong><br><span style="font-size:11px;color:#9a8060">${site.dynasty} · ${site.collected ? '已收藏器物' : '待探索'}</span><br><span style="font-size:11px">${site.desc}</span>`;
+        tooltip.style.opacity = '1';
+        tooltip.style.left = (event.clientX + 12) + 'px';
+        tooltip.style.top = (event.clientY - 8) + 'px';
+      })
+      .on('mousemove', (event) => {
+        tooltip.style.left = (event.clientX + 12) + 'px';
+        tooltip.style.top = (event.clientY - 8) + 'px';
+      })
+      .on('mouseleave', () => { tooltip.style.opacity = '0'; });
+  });
+}
+
+function showMapEra(eraKey) {
+  // Hide all era groups
+  d3.selectAll('.era-group').classed('hidden', true);
+  // Show target era
+  if (eraKey) {
+    d3.selectAll(`.era-${eraKey}`).classed('hidden', false);
+  }
+  // Update site visibility: highlight sites for this era
+  d3.selectAll('.site-group').each(function() {
+    const siteEra = this.getAttribute('data-era');
+    if (!eraKey || siteEra === eraKey) {
+      d3.select(this).style('opacity', 1)
+        .select('.site-dot').attr('r', function() {
+          const siteId = this.parentElement.getAttribute('data-site');
+          const allSites = Object.values(GEO_DATA).flatMap(e => e.sites);
+          const site = allSites.find(s => s.id === siteId);
+          return site ? (site.collected ? site.r * 1.2 : site.r * 0.8) : 5;
+        });
+    } else {
+      d3.select(this).style('opacity', 0.18);
+    }
+  });
+
+  // Flash the map section
+  if (eraKey) {
+    const mapSec = document.getElementById('map-section');
+    mapSec.classList.remove('flash-react');
+    void mapSec.offsetWidth; // force reflow
+    mapSec.classList.add('flash-react');
+  }
+}
+
+// ============================================================
+//  PATTERN STRIP
+// ============================================================
+
+function buildPatternStrip() {
+  const strip = document.getElementById('pattern-strip');
+  strip.innerHTML = '';
+  PATTERNS.forEach(p => {
+    const node = document.createElement('div');
+    node.className = 'pattern-node';
+    node.dataset.slug = p.slug;
+    node.dataset.eras = JSON.stringify(p.eras);
+    node.innerHTML = `
+      <img src="${PATTERN_PATH}${p.slug}.svg" alt="${p.name}" title="${p.name}"
+           onerror="this.style.background='rgba(100,80,40,0.3)';this.src='';this.alt='${p.name[0]}'">
+      <div class="pattern-node-name">${p.name}</div>
+    `;
+    strip.appendChild(node);
+  });
+}
+
+function updatePatternStrip(dynastyName, dominantPatterns) {
+  const stripSection = document.getElementById('pattern-strip-section');
+  stripSection.classList.remove('flash-react');
+  void stripSection.offsetWidth;
+  stripSection.classList.add('flash-react');
+
+  const eraLabel = document.getElementById('pattern-strip-era-label');
+  eraLabel.textContent = dynastyName
+    ? `纹饰演化 · ${dynastyName}代主流 (金=主导纹饰)`
+    : '纹饰演化 · Patterns';
+
+  const dominantSet = new Set(dominantPatterns || []);
+
+  document.querySelectorAll('.pattern-node').forEach(node => {
+    const slug = node.dataset.slug;
+    const eras = JSON.parse(node.dataset.eras || '[]');
+    const isDominant = dominantSet.has(slug) ||
+      (dominantPatterns && dominantPatterns.some(p => p.includes(slug.slice(0,4))));
+    const isEraMatch = eras.includes(dynastyName);
+
+    node.classList.remove('highlighted', 'dominant');
+    if (isDominant) {
+      node.classList.add('dominant');
+      // Scroll dominant pattern into view
+      node.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    } else if (isEraMatch) {
+      node.classList.add('highlighted');
+    }
+  });
+}
+
+// ============================================================
+//  BOTTOM PANEL
+// ============================================================
+
+function updateBottomPanel(dynasty) {
+  const bottomPanel = document.getElementById('bottom-panel');
+  bottomPanel.classList.remove('flash-react');
+  void bottomPanel.offsetWidth;
+  bottomPanel.classList.add('flash-react');
+
+  const bigName = document.getElementById('era-big-name');
+  const bigPeriod = document.getElementById('era-big-period');
+  const bigCount = document.getElementById('era-big-count');
+  const cardsEl = document.getElementById('artifact-cards');
+
+  bigName.textContent = dynasty.name;
+  bigName.style.color = dynasty.color;
+  bigPeriod.textContent = dynasty.desc;
+
+  const pct = Math.round((dynasty.collected / dynasty.pool) * 100);
+  bigCount.innerHTML = `<span style="color:${dynasty.color};font-weight:600;">${dynasty.collected}</span>` +
+    `<span style="color:var(--text-muted);"> / ${dynasty.pool} 件 · ${pct}%</span>`;
+
+  // Render artifact cards
+  cardsEl.innerHTML = '';
+  if (dynasty.artifacts && dynasty.artifacts.length > 0) {
+    dynasty.artifacts.forEach(artifact => {
+      const card = document.createElement('div');
+      card.className = 'artifact-card-mini' + (artifact.treasure ? ' treasure' : '');
+
+      // Rarity halo color
+      const rarityColors = {
+        'tier-treasure': '#d4a857',
+        'tier-1': '#a4732c',
+        'tier-2': '#6b4a8a',
+        'tier-3': '#666'
+      };
+      const rarityColor = rarityColors[artifact.rarity] || '#666';
+
+      // Try silhouette image, fallback to colored block
+      card.innerHTML = `
+        <img src="${SILHOUETTE_PATH}${artifact.silhouette}.svg"
+             alt="${artifact.name}"
+             onerror="this.style.background='${dynasty.color}44';this.src=''">
+        <div class="card-name">
+          <span class="rarity-halo" style="background:${rarityColor}"></span>${artifact.name}
+        </div>
+      `;
+      if (artifact.treasure) {
+        card.title = artifact.name + ' · 禁止出境文物';
+      }
+      cardsEl.appendChild(card);
+    });
+
+    // "More" placeholder
+    if (dynasty.collected > dynasty.artifacts.length) {
+      const more = document.createElement('div');
+      more.style.cssText = 'flex-shrink:0;padding:0 8px;font-size:11px;color:var(--text-muted);white-space:nowrap;';
+      more.innerHTML = `<a href="catalog.html?era=${dynasty.name}" style="color:var(--text-bronze);text-decoration:none;">+更多 ${dynasty.name}代器物 →</a>`;
+      cardsEl.appendChild(more);
+    }
+  } else {
+    cardsEl.innerHTML = `<div style="font-size:12px;color:var(--text-muted);padding:0 8px;">
+      ${dynasty.name}代器物待探索 · <a href="catalog.html?era=${dynasty.name}" style="color:var(--text-bronze)">浏览图鉴</a>
+    </div>`;
+  }
+}
+
+// ============================================================
+//  ERA-FOCUS HANDLER (the critical 3-way linkage)
+// ============================================================
+
+function handleEraFocus(payload) {
+  if (!_linkageEnabled) return;
+
+  const { dynasty: dynastyName, geo_era, dominant_patterns } = payload;
+
+  // Find dynasty data
+  const dynasty = DYNASTIES.find(d => d.name === dynastyName);
+  if (!dynasty) return;
+
+  // ① Map: swap era overlay
+  const geoKey = geo_era || dynasty.geo_era;
+  if (_currentGeoEra !== geoKey) {
+    _currentGeoEra = geoKey;
+    showMapEra(geoKey);
+    const badge = document.getElementById('map-era-badge');
+    badge.textContent = dynastyName;
+    badge.style.color = dynasty.color || 'var(--text-gold)';
+    badge.style.borderColor = dynasty.color ? dynasty.color + '88' : 'var(--border-bright)';
+  }
+
+  // ② Pattern strip: highlight dominant patterns
+  const patterns = dominant_patterns || dynasty.dominant_patterns || [];
+  const dominantSlugs = ERA_DOMINANT_PATTERNS[dynastyName] || [];
+  updatePatternStrip(dynastyName, [...dominantSlugs, ...patterns]);
+
+  // ③ Bottom panel: update era badge + artifacts
+  updateBottomPanel(dynasty);
+}
+
+// Listen for era-focus from any source (including pillar's own emit)
+bus.on('era-focus', (payload) => {
+  handleEraFocus(payload);
+});
+
+// ============================================================
+//  MAP ERA-FOCUS LINKAGE (map can also emit back)
+// ============================================================
+
+function onSiteClick(site) {
+  // Find which dynasty this site belongs to
+  const dynastyMatch = DYNASTIES.find(d => d.name === site.dynasty);
+  if (dynastyMatch) {
+    bus.emit('era-focus', {
+      dynasty: dynastyMatch.name,
+      geo_era: dynastyMatch.geo_era,
+      dominant_patterns: dynastyMatch.dominant_patterns,
+      triggered_by: 'geo-map'
+    });
+    // Also update pillar
+    updatePillarHighlight(dynastyMatch.name);
+  }
+}
+
+// ============================================================
+//  INIT
+// ============================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Build components
+  buildTimePillar();
+  buildMap();
+  buildPatternStrip();
+
+  // Auto-focus 商 dynasty on load after short delay (wow demo effect)
+  setTimeout(() => {
+    const shang = DYNASTIES.find(d => d.name === '商');
+    if (shang) {
+      bus.emit('era-focus', {
+        dynasty: '商',
+        geo_era: 'shang',
+        dominant_patterns: shang.dominant_patterns,
+        triggered_by: 'auto-init'
+      });
+      updatePillarHighlight('商');
+      _lockedEra = '商';
+      // Highlight the 商 band visually
+      setTimeout(() => {
+        updatePillarHighlight('商');
+      }, 100);
+    }
+  }, 400);
+});
+
+// Resize handler for map
+window.addEventListener('resize', () => {
+  // Rebuild map on significant resize
+  const mapSvg = document.getElementById('map-svg');
+  if (mapSvg) {
+    mapSvg.innerHTML = '';
+    buildMap();
+    if (_currentGeoEra) showMapEra(_currentGeoEra);
+  }
+});
+</script>
+
+</body>
+</html>
