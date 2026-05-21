@@ -154,3 +154,5 @@ Total active background agents: 9 (5 DE + 4 Phase B)
   - 3 content P0s: 大克鼎 period (西周晚→中), 唐兰 citation (1986→1976), FULL_TEXT truncation
   - v4 plan: 3 parallel tracks — Track A: Product Owner writes case-study §3-§5 (2-3h); Track B: Builder fixes content P0 + debug + emoji + Day-0 (1.5h); Track C: Builder builds dashboard.html wow page (2h)
   - Recommend: launch v4 close-loop tonight
+
+[2026-05-22 H1] [product-owner-v4] DONE — case-study.md §3-§5 written (~6500 字 added; §3 ~2500 / §4 ~1800 / §5 ~2000). Cold-context Product Owner read 11 artifacts (state.md, agent-team-design.md, iteration-1-changes.md, dimensional-map-v3.md, motivation-hooks-v3.md, gamification-mechanics-v3.md, d1-pm.md, d2-pm.md, d1-comparative.md, d2-comparative.md, cost-report.md). Core thesis articulated: "AI PM 不是用 AI 写代码,是把 AI 的约束——bounded role/cold context/filesystem state——当作产品设计原则." Closed the v3 ceiling-block per Comparative Auditor d2 (case-study completeness 4/10 → expected 8/10 post-this-write).

@@ -219,7 +219,14 @@ function matchesFilters(item) {
 }
 
 function getSilhouette(form) {
-  const m = {'方鼎':'fangding','圆鼎':'yuanding','簋':'gui','尊':'fang_zun','方尊':'fang_zun','鸮尊':'xiao_zun','剑':'yuewang_jian','编钟':'bianzhong','灯':'changxin_gongdeng','方壶':'fanghu','盘':'pan'};
+  const m = {
+    '方鼎':'fangding','圆鼎':'yuanding','簋':'gui',
+    '尊':'fang_zun','方尊':'fang_zun','鸮尊':'xiao_zun',
+    '剑':'yuewang_jian','编钟':'bianzhong',
+    '灯':'changxin_gongdeng','方壶':'fanghu','盘':'pan',
+    '人像':'sanxingdui_dali_ren','立人像':'sanxingdui_dali_ren',
+    '面具':'sanxingdui_zongmu','纵目面具':'sanxingdui_zongmu'
+  };
   return m[form] || 'fangding';
 }
 

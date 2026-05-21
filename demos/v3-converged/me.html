@@ -215,8 +215,8 @@
         </div>
       </div>
 
-      <!-- Bus debug panel toggle (me.html exclusive) -->
-      <div class="dim-card" style="background:#0a0804; color:#ccc;">
+      <!-- Bus debug panel: hidden unless ?debug=1 -->
+      <div id="debug-panel-wrapper" class="dim-card" style="display:none; background:#0a0804; color:#ccc;">
         <div class="dim-card-title" style="color:var(--accent-gold);">⚡ 事件总线调试</div>
         <div style="font-size:12px; color:#888; margin-bottom:8px;">点击维度组件触发联动，此处显示事件流。</div>
         <div id="bus-debug-panel" style="display:block; position:static; width:auto; max-height:160px; border:none; padding:0;"></div>
@@ -394,21 +394,31 @@ const TITLES = [
   });
 })();
 
-// Render titles
+// Render titles — only show unlocked titles; locked count shown as summary button
 (function renderTitles() {
   const list = document.getElementById('titles-list');
-  TITLES.forEach(t => {
+  const unlocked = TITLES.filter(t => t.unlocked);
+  const lockedCount = TITLES.filter(t => !t.unlocked).length;
+
+  unlocked.forEach(t => {
     const el = document.createElement('div');
-    el.style.cssText = 'display:flex; align-items:flex-start; gap:8px; padding:8px; border-radius:6px; ' + (t.unlocked ? 'background:var(--bg-cream);' : 'opacity:.4;');
+    el.style.cssText = 'display:flex; align-items:flex-start; gap:8px; padding:8px; border-radius:6px; background:var(--bg-cream);';
     el.innerHTML = `
-      <div style="width:16px; height:16px; border-radius:50%; background:${t.unlocked ? 'var(--accent-bronze)' : '#ccc'}; flex-shrink:0; margin-top:2px; display:flex; align-items:center; justify-content:center; font-size:10px; color:white;">${t.unlocked ? '✓' : ''}</div>
+      <div style="width:16px; height:16px; border-radius:50%; background:var(--accent-bronze); flex-shrink:0; margin-top:2px; display:flex; align-items:center; justify-content:center; font-size:10px; color:white;">✓</div>
       <div>
-        <div style="font-size:12px; font-weight:600; color:${t.unlocked ? 'var(--text-ink)' : 'var(--text-muted)'};">${t.title}</div>
+        <div style="font-size:12px; font-weight:600; color:var(--text-ink);">${t.title}</div>
         <div style="font-size:11px; color:var(--text-muted);">${t.basis}</div>
       </div>
     `;
     list.appendChild(el);
   });
+
+  if (lockedCount > 0) {
+    const summaryEl = document.createElement('div');
+    summaryEl.style.cssText = 'margin-top:8px; font-size:11px; color:var(--text-muted); font-style:italic; padding:4px 8px;';
+    summaryEl.textContent = `还有 ${lockedCount} 个称号尚待解锁`;
+    list.appendChild(summaryEl);
+  }
 })();
 
 // Bus test buttons
@@ -416,6 +426,14 @@ function testEraFocus(era) {
   if (window.CrossDimWiring) window.CrossDimWiring.emitEra(era, 'me.test-button');
   else document.dispatchEvent(new CustomEvent('era-focus', { detail: { dynasty: era, triggered_by: 'me.test' } }));
 }
+
+// Show debug panel only when ?debug=1
+document.addEventListener('DOMContentLoaded', function() {
+  if (new URLSearchParams(location.search).has('debug')) {
+    const dbg = document.getElementById('debug-panel-wrapper');
+    if (dbg) dbg.style.display = '';
+  }
+});
 </script>
 </body>
 </html>
