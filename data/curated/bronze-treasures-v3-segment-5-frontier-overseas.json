@@ -577,5 +577,583 @@
         "url": "http://yn.chinadaily.com.cn/a/202208/13/WS62f7a64ba3101c3ee7ae39d8.html"
       }
     ]
+  },
+  {
+    "id": "ordos_tiger_gold_plaque",
+    "name_zh": "鄂尔多斯虎豖争斗纹金牌",
+    "name_pinyin": "E Er Duo Si Hu Zhu Zheng Dou Wen Jin Pai",
+    "name_alt": [
+      "鄂尔多斯金牌饰",
+      "虎豖纹金牌"
+    ],
+    "dynasty": "战国",
+    "period": "战国晚期",
+    "approx_year": "约公元前3世纪",
+    "excavation_year": "1979",
+    "excavation_site": "内蒙古自治区准格尔旗西沟畔2号墓",
+    "ancient_state": "匈奴/鄂尔多斯文化",
+    "current_museum": "内蒙古博物院",
+    "size": {
+      "length_cm": 12.5,
+      "width_cm": 6.5
+    },
+    "type": "装饰器",
+    "form_subtype": "牌饰",
+    "patterns": [
+      "虎豖争斗纹",
+      "卷云纹"
+    ],
+    "inscription": {
+      "has": true,
+      "text": "汉字刻款（内容涉及所有者）",
+      "char_count": "TODO",
+      "summary": "金牌上刻有汉字，表明与汉文化的接触"
+    },
+    "purpose": "贵族腰带扣饰，彰显身份",
+    "craft": "锻造+雕刻",
+    "rarity_level": "一级",
+    "story_brief": "准格尔旗西沟畔战国墓出土的虎豖争斗纹金牌是鄂尔多斯草原文化动物纹风格的代表。矩形金牌正面以写实手法表现虎与野猪搏斗，动感十足。金牌上刻有汉字铭款，证明战国晚期长城内外文化的密切交流。",
+    "image_urls": [],
+    "data_sources": [
+      {
+        "field": "excavation_year,excavation_site",
+        "source": "宾大博物馆·鄂尔多斯式青铜器PDF",
+        "url": "https://www.dpm.org.cn/Uploads/File/2019/04/26/u5cc2d3d120b8c.pdf"
+      }
+    ]
+  },
+  {
+    "id": "ordos_deer_plaque",
+    "name_zh": "鄂尔多斯卧式铜鹿",
+    "name_pinyin": "E Er Duo Si Wo Shi Tong Lu",
+    "name_alt": [
+      "战国无角卧鹿铜饰",
+      "草原鹿纹铜饰"
+    ],
+    "dynasty": "战国",
+    "period": "战国中晚期",
+    "approx_year": "约公元前4-3世纪",
+    "excavation_year": "TODO",
+    "excavation_site": "内蒙古地区",
+    "ancient_state": "匈奴/鄂尔多斯文化",
+    "current_museum": "内蒙古博物院",
+    "size": {
+      "height_cm": 7.6,
+      "length_cm": 15.5
+    },
+    "type": "装饰器",
+    "form_subtype": "动物形铜饰",
+    "patterns": [
+      "写实鹿形",
+      "背脊凸棱"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "马具或服饰附件",
+    "craft": "范铸法，腹腔中空",
+    "rarity_level": "一级",
+    "story_brief": "内蒙古博物院藏卧式无角铜鹿高7.6厘米，身长15.5厘米，屈足昂首，两耳竖起，背部有一道凸棱，腹腔中空。鹿是草原民族的神圣图腾，象征速度与生命力。鄂尔多斯动物纹铜饰是欧亚草原艺术的东端代表。",
+    "image_urls": [],
+    "data_sources": [
+      {
+        "field": "size",
+        "source": "内蒙古日报·战国卧式无角青铜鹿",
+        "url": "https://szb.northnews.cn/nmgrb/resfile/2024-05-07/10/nmgrb2024050710.pdf"
+      }
+    ]
+  },
+  {
+    "id": "ordos_bronze_sword",
+    "name_zh": "鄂尔多斯式铜短剑",
+    "name_pinyin": "E Er Duo Si Shi Tong Duan Jian",
+    "name_alt": [
+      "北方草原式短剑",
+      "匈奴铜剑"
+    ],
+    "dynasty": "春秋至战国",
+    "period": "春秋晚期至战国",
+    "approx_year": "约公元前6-3世纪",
+    "excavation_year": "TODO",
+    "excavation_site": "内蒙古、宁夏、陕北等长城沿线地区",
+    "ancient_state": "北方草原文化",
+    "current_museum": "鄂尔多斯博物馆",
+    "size": {
+      "length_cm": 35
+    },
+    "type": "兵器",
+    "form_subtype": "短剑",
+    "patterns": [
+      "动物纹剑首",
+      "几何纹护格"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "实战兵器",
+    "craft": "范铸法",
+    "rarity_level": "二级",
+    "story_brief": "鄂尔多斯式短剑以兽首形剑首、环形或扁茎剑柄为标志，是欧亚草原武器文化的重要组成部分。春秋战国时期广泛分布于长城内外，是研究北方游牧民族兵器技术与文化传播的核心器型。",
+    "image_urls": [],
+    "data_sources": [
+      {
+        "field": "general",
+        "source": "知乎·鄂尔多斯北方青铜器",
+        "url": "https://zhuanlan.zhihu.com/p/2019399962719430142"
+      }
+    ]
+  },
+  {
+    "id": "yanglang_bronze_helmet",
+    "name_zh": "杨郎墓地铜胄",
+    "name_pinyin": "Yang Lang Mu Di Tong Zhou",
+    "name_alt": [
+      "宁夏杨郎铜胄"
+    ],
+    "dynasty": "春秋至战国",
+    "period": "春秋晚期至战国早期",
+    "approx_year": "约公元前6-5世纪",
+    "excavation_year": "1986",
+    "excavation_site": "宁夏固原市杨郎乡杨郎村墓地",
+    "ancient_state": "北方草原文化（义渠戎）",
+    "current_museum": "宁夏博物馆",
+    "size": {
+      "height_cm": "TODO"
+    },
+    "type": "兵器",
+    "form_subtype": "铜胄",
+    "patterns": [
+      "动物纹饰",
+      "几何纹"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "战士头部防护",
+    "craft": "范铸法",
+    "rarity_level": "一级",
+    "story_brief": "杨郎墓地是宁夏固原地区春秋战国时期北方草原文化的重要考古遗址，出土铜胄、铜剑、马具等兵器及动物纹饰品，代表义渠戎文化与中原及草原文化的三元交汇。",
+    "image_urls": [],
+    "data_sources": [
+      {
+        "field": "general",
+        "source": "吉林大学·矩形动物纹牌饰研究",
+        "url": "https://www.sinoss.net/uploadfile/2010/1130/3002.pdf"
+      }
+    ]
+  },
+  {
+    "id": "inner_mongolia_wolf_plaque",
+    "name_zh": "内蒙古双虎夺鹿铜牌饰",
+    "name_pinyin": "Nei Meng Gu Shuang Hu Duo Lu Tong Pai Shi",
+    "name_alt": [
+      "两虎争鹿纹铜牌",
+      "草原动物搏斗纹饰牌"
+    ],
+    "dynasty": "战国",
+    "period": "战国晚期",
+    "approx_year": "约公元前3世纪",
+    "excavation_year": "TODO",
+    "excavation_site": "内蒙古地区",
+    "ancient_state": "匈奴文化",
+    "current_museum": "内蒙古博物院",
+    "size": {
+      "length_cm": 14,
+      "width_cm": 8
+    },
+    "type": "装饰器",
+    "form_subtype": "牌饰",
+    "patterns": [
+      "双虎夺鹿纹",
+      "卷草纹"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "腰带装饰",
+    "craft": "范铸法",
+    "rarity_level": "一级",
+    "story_brief": "双虎夺鹿纹是欧亚草原动物纹艺术的经典母题，表现两虎共同捕食鹿的瞬间，构图充满张力。内蒙古博物院收藏的这类牌饰是匈奴贵族阶层身份的象征，同类器物在中亚、西伯利亚均有发现，体现草原文化的广阔联系。",
+    "image_urls": [],
+    "data_sources": [
+      {
+        "field": "general",
+        "source": "知乎·鄂尔多斯北方青铜器",
+        "url": "https://zhuanlan.zhihu.com/p/2019399962719430142"
+      }
+    ]
+  },
+  {
+    "id": "yue_wang_jian",
+    "name_zh": "越王者旨于睗剑",
+    "name_pinyin": "Yue Wang Zhe Zhi Yu Ci Jian",
+    "name_alt": [
+      "越王剑（浙博藏）",
+      "越王不光剑"
+    ],
+    "dynasty": "春秋",
+    "period": "春秋晚期",
+    "approx_year": "约公元前5世纪",
+    "excavation_year": "传世",
+    "excavation_site": "浙江越国故地（传世）",
+    "ancient_state": "越国",
+    "current_museum": "浙江省博物馆",
+    "size": {
+      "length_cm": 52.4
+    },
+    "type": "兵器",
+    "form_subtype": "剑",
+    "patterns": [
+      "菱形暗格纹（剑身）",
+      "兽面纹（剑格）"
+    ],
+    "inscription": {
+      "has": true,
+      "text": "者旨於賜",
+      "char_count": 4,
+      "summary": "鸟篆铭'者旨於賜'四字，者旨为越王名，於賜为其私名"
+    },
+    "purpose": "王室礼兵器",
+    "craft": "复合铸造法（高锡青铜剑身+低锡剑脊）",
+    "rarity_level": "国宝",
+    "story_brief": "越王剑以极高的冶金水准著称——铸造时以高锡铜合金打造锋刃，以低锡铜合金打造剑脊，两种配方精确控制使剑既坚且韧。者旨于睗即越王鼫与（勾践之子），浙博藏品与湖北博物馆所藏越王勾践剑并称越剑双绝。",
+    "image_urls": [
+      {
+        "url": "https://zh.wikipedia.org/wiki/%E8%B6%8A%E7%8E%8B%E8%80%85%E6%97%A8%E6%96%BC%E7%9D%97%E5%89%91_(%E6%B5%99%E6%B1%9F%E7%9C%81%E5%8D%9A%E7%89%A9%E9%A6%86%E8%97%8F)",
+        "source": "Wikipedia zh 越王者旨于睗剑（浙博）",
+        "license": "CC BY-SA",
+        "caption": "越王者旨于睗剑词条"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "Wikipedia zh 越王者旨于睗剑（浙江省博物馆藏）",
+        "url": "https://zh.wikipedia.org/zh-hans/%E8%B6%8A%E7%8E%8B%E8%80%85%E6%97%A8%E6%96%BC%E7%9D%97%E5%89%91_(%E6%B5%99%E6%B1%9F%E7%9C%81%E5%8D%9A%E7%89%A9%E9%A6%86%E8%97%8F)"
+      }
+    ]
+  },
+  {
+    "id": "yue_gou_diao",
+    "name_zh": "越国铜句鑃",
+    "name_pinyin": "Yue Guo Tong Gou Diao",
+    "name_alt": [
+      "吴越铜句鑃",
+      "春秋越国打击乐器"
+    ],
+    "dynasty": "春秋",
+    "period": "春秋晚期",
+    "approx_year": "约公元前5世纪",
+    "excavation_year": "2016",
+    "excavation_site": "浙江省绍兴市",
+    "ancient_state": "越国",
+    "current_museum": "绍兴博物馆",
+    "size": {
+      "height_cm": "TODO"
+    },
+    "type": "乐器",
+    "form_subtype": "句鑃",
+    "patterns": [
+      "几何纹",
+      "云纹"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "祭祀礼乐，口向上击奏",
+    "craft": "范铸法",
+    "rarity_level": "一级",
+    "story_brief": "句鑃是吴越地区特有的打击乐器，口向上用木槌敲击，盛行于春秋战国，以长江下游吴越出土最多。2016年绍兴首次发现越国铜句鑃，填补了会稽古越文化礼乐器考古的空白，是研究越文化礼制的重要实物。",
+    "image_urls": [],
+    "data_sources": [
+      {
+        "field": "excavation_year,excavation_site",
+        "source": "浙江在线·绍兴首次发现越国古乐器青铜句鑃",
+        "url": "https://zjnews.zjol.com.cn/zjnews/sxnews/201608/t20160816_1851276.shtml"
+      }
+    ]
+  },
+  {
+    "id": "wuyue_bronze_mirror",
+    "name_zh": "吴越铜镜（透雕蟠螭纹）",
+    "name_pinyin": "Wu Yue Tong Jing Tou Diao Pan Chi Wen",
+    "name_alt": [
+      "越式铜镜",
+      "春秋吴越透雕镜"
+    ],
+    "dynasty": "春秋至战国",
+    "period": "春秋晚期至战国早期",
+    "approx_year": "约公元前5-4世纪",
+    "excavation_year": "TODO",
+    "excavation_site": "浙江、江苏吴越故地",
+    "ancient_state": "吴国/越国",
+    "current_museum": "浙江省博物馆",
+    "size": {
+      "diameter_cm": 18
+    },
+    "type": "生活器",
+    "form_subtype": "铜镜",
+    "patterns": [
+      "透雕蟠螭纹",
+      "羽翅纹",
+      "几何纹"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "梳妆用镜兼礼器",
+    "craft": "透雕范铸法（镜背透雕工艺极为精湛）",
+    "rarity_level": "一级",
+    "story_brief": "吴越透雕铜镜以高超的透雕技术为标志，镜背饰精细蟠螭纹，部分采用三层叠铸透雕工艺，代表东周青铜工艺南方路线的最高水准。与中原铜镜风格迥异，是古代吴越文化独特审美的集中体现。",
+    "image_urls": [],
+    "data_sources": [
+      {
+        "field": "general",
+        "source": "澎湃新闻·浙博越颂展",
+        "url": "https://www.thepaper.cn/newsDetail_forward_19944172"
+      }
+    ]
+  },
+  {
+    "id": "nanyue_wrong_gold_tiger",
+    "name_zh": "错金铭文铜虎节",
+    "name_pinyin": "Cuo Jin Ming Wen Tong Hu Jie",
+    "name_alt": [
+      "南越王错金虎节"
+    ],
+    "dynasty": "西汉",
+    "period": "西汉早期",
+    "approx_year": "约公元前206-前113年",
+    "excavation_year": "1983",
+    "excavation_site": "广州市解放北路象岗山南越文王墓",
+    "ancient_state": "南越国",
+    "current_museum": "西汉南越王博物馆",
+    "size": {
+      "length_cm": "TODO",
+      "height_cm": "TODO"
+    },
+    "type": "符信器",
+    "form_subtype": "铜节",
+    "patterns": [
+      "错金虎形",
+      "错金铭文"
+    ],
+    "inscription": {
+      "has": true,
+      "text": "王命命车徒",
+      "char_count": 5,
+      "summary": "正面错金五字王命命车徒，是调动车兵的信符"
+    },
+    "purpose": "军事调兵符信（调动车兵）",
+    "craft": "范铸+错金工艺",
+    "rarity_level": "国宝",
+    "story_brief": "南越王墓出土的错金铭文铜虎节是迄今发现的唯一错金铭文铜虎节。虎形器身正面以错金工艺嵌五字王命命车徒，是南越国调动车兵的军事凭信。错金与虎形的组合兼具工艺美术与历史文献双重价值。",
+    "image_urls": [],
+    "data_sources": [
+      {
+        "field": "inscription,purpose",
+        "source": "南越王博物院·错金铭文铜虎节",
+        "url": "http://www.360doc.com/content/25/0611/11/9305059_1155284160.shtml"
+      },
+      {
+        "field": "excavation_site",
+        "source": "Wikipedia zh 南越文王墓",
+        "url": "https://zh.wikipedia.org/zh-hans/%E5%8D%97%E8%B6%8A%E6%96%87%E7%8E%8B%E5%A2%93"
+      }
+    ]
+  },
+  {
+    "id": "nanyue_fangyu_ding",
+    "name_zh": "蕃禺铭文铜鼎",
+    "name_pinyin": "Fan Yu Ming Wen Tong Ding",
+    "name_alt": [
+      "南越蕃禺鼎",
+      "南越国铜鼎"
+    ],
+    "dynasty": "西汉",
+    "period": "西汉早期",
+    "approx_year": "约公元前206-前113年",
+    "excavation_year": "1983",
+    "excavation_site": "广州市解放北路象岗山南越文王墓",
+    "ancient_state": "南越国",
+    "current_museum": "西汉南越王博物馆",
+    "size": {
+      "height_cm": "TODO"
+    },
+    "type": "食器",
+    "form_subtype": "铜鼎",
+    "patterns": [
+      "素面",
+      "三蹄足"
+    ],
+    "inscription": {
+      "has": true,
+      "text": "蕃禺",
+      "char_count": 2,
+      "summary": "铸铭蕃禺，为南越国都城广州古称，是广州建城史的重要物证"
+    },
+    "purpose": "宫廷饮食礼器",
+    "craft": "范铸法",
+    "rarity_level": "一级",
+    "story_brief": "南越文王墓出土铜鼎36件，其中9件刻有蕃禺铭文。蕃禺是广州的古名，这批铜鼎由南越国都城工匠铸造，铭文蕃禺是迄今所见最早的广州地名实物记录，是广州建城2200余年历史的直接物证。",
+    "image_urls": [],
+    "data_sources": [
+      {
+        "field": "inscription,purpose,excavation_site",
+        "source": "Wikipedia zh 南越文王墓",
+        "url": "https://zh.wikipedia.org/zh-hans/%E5%8D%97%E8%B6%8A%E6%96%87%E7%8E%8B%E5%A2%93"
+      }
+    ]
+  },
+  {
+    "id": "nanyue_bronze_jian",
+    "name_zh": "南越国铜鉴",
+    "name_pinyin": "Nan Yue Guo Tong Jian",
+    "name_alt": [
+      "南越王铜鉴",
+      "广州象岗铜鉴"
+    ],
+    "dynasty": "西汉",
+    "period": "西汉早期",
+    "approx_year": "约公元前206-前113年",
+    "excavation_year": "1983",
+    "excavation_site": "广州市解放北路象岗山南越文王墓",
+    "ancient_state": "南越国",
+    "current_museum": "西汉南越王博物馆",
+    "size": {
+      "diameter_cm": "TODO",
+      "height_cm": "TODO"
+    },
+    "type": "水器",
+    "form_subtype": "铜鉴",
+    "patterns": [
+      "蟠螭纹",
+      "云纹"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "盛水照影或盛冰降温",
+    "craft": "范铸法",
+    "rarity_level": "二级",
+    "story_brief": "铜鉴是先秦两汉的大型盛水铜器，既可用作镜鉴，又可盛冰。南越文王墓出土的铜鉴工艺精良，纹饰典雅，兼具楚汉风格，体现南越国贵族与中原文化的深度交融。",
+    "image_urls": [],
+    "data_sources": [
+      {
+        "field": "excavation_site",
+        "source": "Wikipedia zh 南越文王墓",
+        "url": "https://zh.wikipedia.org/zh-hans/%E5%8D%97%E8%B6%8A%E6%96%87%E7%8E%8B%E5%A2%93"
+      }
+    ]
+  },
+  {
+    "id": "yelang_bronze_fu",
+    "name_zh": "夜郎立虎辫索纹耳大铜釜",
+    "name_pinyin": "Ye Lang Li Hu Bian Suo Wen Er Da Tong Fu",
+    "name_alt": [
+      "可乐铜釜",
+      "夜郎铜釜"
+    ],
+    "dynasty": "西汉",
+    "period": "西汉中期",
+    "approx_year": "约公元前2-1世纪",
+    "excavation_year": "TODO",
+    "excavation_site": "贵州省毕节市赫章县可乐遗址",
+    "ancient_state": "夜郎国",
+    "current_museum": "贵州省博物馆",
+    "size": {
+      "height_cm": "TODO"
+    },
+    "type": "食器",
+    "form_subtype": "铜釜",
+    "patterns": [
+      "立虎耳",
+      "辫索纹"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "炊煮器（亦作套头葬用具）",
+    "craft": "范铸法",
+    "rarity_level": "一级",
+    "story_brief": "可乐遗址是夜郎文化核心区。夜郎铜釜以套头葬方式使用，将铜釜套于死者头部入葬，是西南夷独特的葬俗。立虎辫索纹耳大铜釜出土于可乐最大规格套头葬墓，立虎耳与辫索纹装饰精美，是同类器物中工艺最高者。",
+    "image_urls": [],
+    "data_sources": [
+      {
+        "field": "excavation_site,purpose",
+        "source": "贵州考古·夜郎与夜郎考古",
+        "url": "https://www.gzrd.gov.cn/gzwh/201908/t20190829_77669446.html"
+      }
+    ]
+  },
+  {
+    "id": "yelang_bronze_drum",
+    "name_zh": "夜郎铜鼓",
+    "name_pinyin": "Ye Lang Tong Gu",
+    "name_alt": [
+      "贵州铜鼓",
+      "西南夷铜鼓"
+    ],
+    "dynasty": "西汉至东汉",
+    "period": "西汉晚期至东汉",
+    "approx_year": "约公元前1世纪至公元2世纪",
+    "excavation_year": "TODO",
+    "excavation_site": "贵州省黔西南州普安县铜鼓山遗址",
+    "ancient_state": "夜郎国",
+    "current_museum": "贵州省博物馆",
+    "size": {
+      "diameter_cm": "TODO",
+      "height_cm": "TODO"
+    },
+    "type": "乐器",
+    "form_subtype": "铜鼓",
+    "patterns": [
+      "太阳纹（鼓面中心）",
+      "蛙形装饰",
+      "云雷纹",
+      "羽人纹"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "祭祀礼乐、集会号召",
+    "craft": "范铸法",
+    "rarity_level": "一级",
+    "story_brief": "铜鼓是西南少数民族文化的象征。夜郎铜鼓鼓面中心铸太阳纹，周饰蛙形纹与羽人纹，象征太阳崇拜与祖先信仰。贵州铜鼓山遗址出土的铜鼓年代跨战国至东汉，为铜鼓文化的早期发展提供了珍贵实物。",
+    "image_urls": [],
+    "data_sources": [
+      {
+        "field": "excavation_site",
+        "source": "丝绸之路网·铜鼓山考古",
+        "url": "http://www.silkroads.org.cn/portal.php?mod=view&aid=15131"
+      }
+    ]
   }
 ]

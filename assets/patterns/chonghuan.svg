@@ -1,0 +1,32 @@
+<!-- 重环纹 | 西周中晚期 | typical on: 簋 鼎 盘 壶 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+  <!-- Chonghuan: concentric oval/teardrop rings in horizontal bands -->
+  <!-- Each unit = pointed teardrop shape with concentric inner ring -->
+
+  <!-- Top band (3 units) -->
+  <!-- Unit 1 -->
+  <path d="M17 8 C8 10 6 18 10 24 C14 30 22 30 26 24 C30 18 28 10 17 8 Z" stroke="currentColor" stroke-width="1.8"/>
+  <path d="M17 12 C11 14 10 20 13 24 C16 27 22 26 24 22 C26 18 24 13 17 12 Z" stroke="currentColor" stroke-width="1.2"/>
+  <!-- Unit 2 -->
+  <path d="M40 8 C31 10 29 18 33 24 C37 30 45 30 49 24 C53 18 51 10 40 8 Z" stroke="currentColor" stroke-width="1.8"/>
+  <path d="M40 12 C34 14 33 20 36 24 C39 27 45 26 47 22 C49 18 47 13 40 12 Z" stroke="currentColor" stroke-width="1.2"/>
+  <!-- Unit 3 -->
+  <path d="M63 8 C54 10 52 18 56 24 C60 30 68 30 72 24 C76 18 74 10 63 8 Z" stroke="currentColor" stroke-width="1.8"/>
+  <path d="M63 12 C57 14 56 20 59 24 C62 27 68 26 70 22 C72 18 70 13 63 12 Z" stroke="currentColor" stroke-width="1.2"/>
+
+  <!-- Separator line -->
+  <line x1="4" y1="36" x2="76" y2="36" stroke="currentColor" stroke-width="1.2"/>
+
+  <!-- Middle band (3 units, elongated teardrop pointing down) -->
+  <path d="M17 40 C8 42 6 50 10 56 C14 62 22 62 26 56 C30 50 28 42 17 40 Z" stroke="currentColor" stroke-width="1.8"/>
+  <path d="M17 44 C11 46 10 52 13 56 C16 59 22 58 24 54 C26 50 24 45 17 44 Z" stroke="currentColor" stroke-width="1.2"/>
+
+  <path d="M40 40 C31 42 29 50 33 56 C37 62 45 62 49 56 C53 50 51 42 40 40 Z" stroke="currentColor" stroke-width="1.8"/>
+  <path d="M40 44 C34 46 33 52 36 56 C39 59 45 58 47 54 C49 50 47 45 40 44 Z" stroke="currentColor" stroke-width="1.2"/>
+
+  <path d="M63 40 C54 42 52 50 56 56 C60 62 68 62 72 56 C76 50 74 42 63 40 Z" stroke="currentColor" stroke-width="1.8"/>
+  <path d="M63 44 C57 46 56 52 59 56 C62 59 68 58 70 54 C72 50 70 45 63 44 Z" stroke="currentColor" stroke-width="1.2"/>
+
+  <!-- Bottom separator -->
+  <line x1="4" y1="68" x2="76" y2="68" stroke="currentColor" stroke-width="1.2"/>
+</svg>

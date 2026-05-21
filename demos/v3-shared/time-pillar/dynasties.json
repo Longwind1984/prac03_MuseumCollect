@@ -1,0 +1,198 @@
+[
+  {
+    "name": "夏",
+    "name_en": "Xia",
+    "start": -1750,
+    "end": -1500,
+    "duration_years": 250,
+    "color": "#6e4a2e",
+    "color_label": "夏褐·土夯色",
+    "sub_periods": [
+      { "name": "二里头一期", "start": -1750, "end": -1680, "color_mod": 0.7 },
+      { "name": "二里头二期", "start": -1680, "end": -1620, "color_mod": 0.8 },
+      { "name": "二里头三期", "start": -1620, "end": -1560, "color_mod": 0.9 },
+      { "name": "二里头四期", "start": -1560, "end": -1500, "color_mod": 1.0 }
+    ],
+    "events": [
+      { "year": -1750, "name": "二里头文明肇始", "desc": "二里头遗址出现迄今最早宫殿遗址与铸铜遗存，或为夏都斟鄩所在。" },
+      { "year": -1600, "name": "二里头四期·青铜礼器定型", "desc": "铜爵、铜斝等礼器定型，奠定华夏礼制青铜器制度基础。" },
+      { "year": -1500, "name": "夏商之际", "desc": "二里岗文化兴起，二里头文化衰落，商汤建国在即。" }
+    ],
+    "dominant_patterns": ["乳钉纹", "弦纹", "兽面纹(初形)"],
+    "artifact_count_pool": 12,
+    "user_collected": 1,
+    "note": "史料极稀薄·邀请探索",
+    "representative_artifacts": ["二里头青铜爵(残)"]
+  },
+  {
+    "name": "商",
+    "name_en": "Shang",
+    "start": -1600,
+    "end": -1046,
+    "duration_years": 554,
+    "color": "#4a5a3a",
+    "color_label": "商青铜·锈青色",
+    "sub_periods": [
+      { "name": "商早期·二里岗", "start": -1600, "end": -1300, "color_mod": 0.6 },
+      { "name": "商中期·过渡", "start": -1300, "end": -1200, "color_mod": 0.8 },
+      { "name": "商晚期·殷墟期", "start": -1200, "end": -1046, "color_mod": 1.0 }
+    ],
+    "events": [
+      { "year": -1600, "name": "商汤建国·鸣条之战", "desc": "商汤灭夏，建商朝，定都毫邑。青铜礼器制度由此正式确立为王权象征。" },
+      { "year": -1300, "name": "盘庚迁殷", "desc": "盘庚迁都至殷（今河南安阳），殷商晚期文明大爆发，甲骨文与青铜器双双达到巅峰。" },
+      { "year": -1250, "name": "武丁中兴·妇好征伐", "desc": "武王武丁开创中兴，其妻妇好统兵万三千，战功赫赫。妇好墓1976年出土468件铜器。" },
+      { "year": -1200, "name": "殷墟期大繁荣", "desc": "饕餮纹、夔龙纹发展至极盛，后母戊鼎（832kg）等超大型礼器问世。" },
+      { "year": -1046, "name": "牧野之战·周灭商", "desc": "周武王联军在牧野大败商军，商纣王鹿台自焚，商朝灭亡。利簋铭文确证此役。" }
+    ],
+    "dominant_patterns": ["饕餮纹", "夔龙纹", "云雷纹", "蝉纹", "虎噬人头纹"],
+    "artifact_count_pool": 85,
+    "user_collected": 8,
+    "representative_artifacts": ["后母戊鼎", "四羊方尊", "妇好鸮尊", "子龙鼎", "三星堆大立人"]
+  },
+  {
+    "name": "西周",
+    "name_en": "Western Zhou",
+    "start": -1046,
+    "end": -771,
+    "duration_years": 275,
+    "color": "#a73a2a",
+    "color_label": "周朱·朱漆色",
+    "sub_periods": [
+      { "name": "西周早期·武成康昭", "start": -1046, "end": -900, "color_mod": 0.85 },
+      { "name": "西周中期·穆恭懿孝", "start": -900, "end": -830, "color_mod": 0.95 },
+      { "name": "西周晚期·夷厉宣幽", "start": -830, "end": -771, "color_mod": 1.0 }
+    ],
+    "events": [
+      { "year": -1046, "name": "武王伐纣·西周建立", "desc": "周武王牧野之战克商，西周开国。利簋以天文记事确证此年为前1046年。" },
+      { "year": -1038, "name": "成王·何尊铸成", "desc": "成王五年，贵族'何'铸何尊，铭文'宅兹中国'四字——'中国'二字最早出处，前1038年。" },
+      { "year": -1000, "name": "周公东征·制礼作乐", "desc": "周公旦平定三监之乱，营建成周（洛阳），制礼作乐，奠定周代礼制框架。" },
+      { "year": -841, "name": "国人暴动·共和行政", "desc": "周厉王暴政引发国人暴动，厉王出奔彘，周公召公共同摄政（共和元年，前841年是中国历史上最早可考的确切纪年）。" },
+      { "year": -828, "name": "宣王中兴·毛公鼎", "desc": "周宣王中兴，铸毛公鼎（499字，现存最长青铜铭文），命毛公佐辅国政。" },
+      { "year": -816, "name": "虢季子白盘·征伐玁狁", "desc": "宣王十二年，虢季子白大败玁狁，铸虢季子白盘（111字），现存最大青铜盘。" },
+      { "year": -771, "name": "犬戎破镐·西周终结", "desc": "犬戎攻破镐京，周幽王被杀，平王东迁洛邑，西周亡。" }
+    ],
+    "dominant_patterns": ["饕餮纹(简化)", "凤鸟纹", "重环纹", "窃曲纹", "波曲纹", "弦纹"],
+    "artifact_count_pool": 72,
+    "user_collected": 6,
+    "representative_artifacts": ["大盂鼎", "大克鼎", "毛公鼎", "散氏盘", "何尊", "利簋", "虢季子白盘"]
+  },
+  {
+    "name": "春秋",
+    "name_en": "Spring & Autumn",
+    "start": -771,
+    "end": -476,
+    "duration_years": 295,
+    "color": "#2a2a3a",
+    "color_label": "春墨·墨色",
+    "sub_periods": [
+      { "name": "春秋早期", "start": -771, "end": -650, "color_mod": 0.75 },
+      { "name": "春秋中晚期·列国分化", "start": -650, "end": -476, "color_mod": 1.0 }
+    ],
+    "events": [
+      { "year": -771, "name": "平王东迁·春秋开始", "desc": "周平王东迁洛邑，天下共主权威大损，诸侯列国兴起，礼乐征伐自诸侯出。" },
+      { "year": -685, "name": "齐桓公首霸", "desc": "齐桓公任管仲，尊王攘夷，成春秋第一霸主。" },
+      { "year": -632, "name": "城濮之战·晋楚争霸", "desc": "晋楚城濮之战，晋文公大败楚军，晋国称霸，'退避三舍'典出。" },
+      { "year": -600, "name": "莲鹤方壶时代·郑国铸器", "desc": "郑国工匠铸造莲鹤方壶，标志青铜艺术从神性走向写实，从肃穆走向生动。" },
+      { "year": -496, "name": "越王勾践·会稽之辱", "desc": "吴越战争，越王勾践会稽兵败被囚，卧薪尝胆。越王勾践剑可能铸于此期。" },
+      { "year": -476, "name": "三家分晋·春秋末", "desc": "韩赵魏三家实际分割晋国，史称春秋战国分界，诸侯分立时代终。" }
+    ],
+    "dominant_patterns": ["蟠螭纹", "蟠虺纹(早期)", "窃曲纹", "重环纹", "莲瓣纹", "鳞纹"],
+    "artifact_count_pool": 45,
+    "user_collected": 2,
+    "representative_artifacts": ["莲鹤方壶", "越王勾践剑(春秋晚期)"]
+  },
+  {
+    "name": "战国",
+    "name_en": "Warring States",
+    "start": -476,
+    "end": -221,
+    "duration_years": 255,
+    "color": "#7a3a2a",
+    "color_label": "战赭·赭土色",
+    "sub_periods": [
+      { "name": "战国早期", "start": -476, "end": -380, "color_mod": 0.8 },
+      { "name": "战国中期·百家争鸣", "start": -380, "end": -280, "color_mod": 0.9 },
+      { "name": "战国晚期·秦并天下", "start": -280, "end": -221, "color_mod": 1.0 }
+    ],
+    "events": [
+      { "year": -433, "name": "曾侯乙入葬", "desc": "战国早期曾侯乙薨，随葬65件编钟（4421kg）、尊盘（失蜡法）等，湖北随州擂鼓墩。" },
+      { "year": -361, "name": "商鞅变法", "desc": "秦孝公任商鞅，推行变法，废井田、开阡陌，商鞅方升铸于前344年作为度量衡标准器。" },
+      { "year": -350, "name": "失蜡法大规模应用", "desc": "曾侯乙尊盘（前433年已用）至此普及，精密镂空纹饰成为战国工艺标志。" },
+      { "year": -260, "name": "长平之战", "desc": "秦赵长平之战，白起坑杀赵卒四十万，秦并天下大势已定。" },
+      { "year": -221, "name": "秦灭六国·天下一统", "desc": "秦王嬴政灭六国，建立秦朝，称始皇帝，推行书同文车同轨。" }
+    ],
+    "dominant_patterns": ["蟠虺纹(繁密)", "透空蟠螭纹", "几何纹(失蜡精密)", "错金银纹", "宴乐攻战纹"],
+    "artifact_count_pool": 38,
+    "user_collected": 3,
+    "representative_artifacts": ["曾侯乙编钟", "曾侯乙尊盘", "商鞅方升"]
+  },
+  {
+    "name": "秦",
+    "name_en": "Qin",
+    "start": -221,
+    "end": -206,
+    "duration_years": 15,
+    "color": "#1a1a1a",
+    "color_label": "秦玄·玄色",
+    "sub_periods": [
+      { "name": "秦统一", "start": -221, "end": -206, "color_mod": 1.0 }
+    ],
+    "events": [
+      { "year": -221, "name": "秦统一·始皇帝", "desc": "嬴政称始皇帝，书同文车同轨，度量衡标准化（商鞅方升加刻秦始皇二十六年诏书）。" },
+      { "year": -210, "name": "始皇崩·铜车马陪葬", "desc": "秦始皇在沙丘驾崩，秦陵铜车马二乘同穴随葬，比例1/2，工艺'青铜之冠'。" },
+      { "year": -206, "name": "楚汉战·秦亡", "desc": "刘邦项羽灭秦，楚汉战争开始，秦朝仅历15年而亡。" }
+    ],
+    "dominant_patterns": ["云气纹", "几何纹(彩绘)", "写实风格(人马)"],
+    "artifact_count_pool": 8,
+    "user_collected": 1,
+    "representative_artifacts": ["秦陵铜车马", "商鞅方升(秦统一诏书加刻)"]
+  },
+  {
+    "name": "西汉",
+    "name_en": "Western Han",
+    "start": -206,
+    "end": 9,
+    "duration_years": 215,
+    "color": "#b89046",
+    "color_label": "汉黄·鎏金色",
+    "sub_periods": [
+      { "name": "西汉早期·高祖文景", "start": -206, "end": -140, "color_mod": 0.8 },
+      { "name": "西汉中期·武帝盛世", "start": -140, "end": -48, "color_mod": 1.0 },
+      { "name": "西汉晚期·成哀", "start": -48, "end": 9, "color_mod": 0.85 }
+    ],
+    "events": [
+      { "year": -202, "name": "西汉建立·刘邦称帝", "desc": "刘邦击败项羽，建西汉，定都长安。" },
+      { "year": -180, "name": "文景之治", "desc": "文帝景帝休养生息，国力大增，错金工艺蓬勃发展，铜器趋向日用生活化。" },
+      { "year": -141, "name": "武帝即位·拓边西域", "desc": "汉武帝即位，派张骞通西域，北击匈奴，国力达到顶峰，丝绸之路开通。" },
+      { "year": -113, "name": "中山靖王刘胜墓", "desc": "中山靖王刘胜薨，与其妻窦绾同穴陪葬错金博山炉、长信宫灯、金缕玉衣，1968年出土。" }
+    ],
+    "dominant_patterns": ["云气纹", "错金银", "神兽纹(汉化)", "山岳人物纹"],
+    "artifact_count_pool": 28,
+    "user_collected": 2,
+    "representative_artifacts": ["错金博山炉", "长信宫灯"]
+  },
+  {
+    "name": "东汉",
+    "name_en": "Eastern Han",
+    "start": 25,
+    "end": 220,
+    "duration_years": 195,
+    "color": "#9a7838",
+    "color_label": "汉黄变·黄褐色",
+    "sub_periods": [
+      { "name": "东汉早期·光武明章", "start": 25, "end": 100, "color_mod": 0.85 },
+      { "name": "东汉中晚期·写实鼎盛", "start": 100, "end": 220, "color_mod": 1.0 }
+    ],
+    "events": [
+      { "year": 25, "name": "刘秀中兴·东汉建立", "desc": "刘秀光武帝重建汉朝，定都洛阳，史称东汉。铜器日用化趋势加速。" },
+      { "year": 100, "name": "雷台东汉墓·马踏飞燕时代", "desc": "东汉中晚期，甘肃武威雷台一带铸造铜奔马等随葬铜俑，写实主义达到高峰。" },
+      { "year": 169, "name": "马踏飞燕可能铸造期", "desc": "东汉中晚期（约2世纪），甘肃武威马踏飞燕铸成，单足踏燕，力学奇迹。" },
+      { "year": 184, "name": "黄巾起义", "desc": "张角领黄巾军起义，东汉进入乱世。" },
+      { "year": 220, "name": "汉亡·三国始", "desc": "曹操之子曹丕废汉献帝，建魏，东汉灭亡，三国时代开始。" }
+    ],
+    "dominant_patterns": ["写实雕塑(素面)", "云气纹", "奔马动物纹"],
+    "artifact_count_pool": 18,
+    "user_collected": 1,
+    "representative_artifacts": ["马踏飞燕"]
+  }
+]

@@ -1,0 +1,277 @@
+[
+  {
+    "id": "da_yu_ding",
+    "name_zh": "大盂鼎",
+    "name_pinyin": "Da Yu Ding",
+    "name_alt": ["盂鼎"],
+    "dynasty": "西周",
+    "period": "西周早期(康王时期)",
+    "approx_year": "约公元前1020-996年(康王二十三年)",
+    "excavation_year": "约1849年(道光年间)",
+    "excavation_site": "陕西省岐山县京当镇礼村",
+    "ancient_state": "周",
+    "current_museum": "中国国家博物馆",
+    "size": { "height_cm": 101.9, "diameter_cm": 77.8, "weight_kg": 153.5 },
+    "type": "食器",
+    "form_subtype": "圆鼎(立耳三柱足)",
+    "patterns": ["饕餮纹", "云雷纹", "弦纹"],
+    "patterns_structured": {
+      "main": ["饕餮纹"],
+      "secondary": ["云雷纹"],
+      "local": ["弦纹(口沿下)"]
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 291,
+      "summary": "鼎腹内壁铸铭文19行291字。分三段:①周王以商代酗酒亡国为戒告诫盂;②命盂辅佐王室、统领军事;③赐予盂鬯酒、铜、车马、奴隶(臣千又五十夫)、土地(邦司四伯、人鬲自驭至于庶人六百又五十又九夫)。是研究西周早期册命制度与酒礼观的核心文献",
+      "literary_value": "西周金文四大长铭之一;康王时代政治哲学(殷鉴)最完整表述"
+    },
+    "purpose": "祭祀礼器(纪功册命)",
+    "craft": "范铸法",
+    "rarity_level": "国宝(2002年首批禁止出境文物)",
+    "story_brief": "大盂鼎1849年前后出土于陕西岐山县礼村,先后辗转宋金鉴、左宗棠、潘祖荫等名家手中。抗战期间潘氏家族将其与大克鼎一同埋土避险,1951年潘达于女士无偿捐国,1959年入藏国博。与大克鼎、毛公鼎并称'海内三宝'。鼎高101.9 cm,重153.5 kg,腹内291字铭文是研究西周康王时期历史与册命制度的核心材料,记'酒戒商鉴'政治哲学。铭文第23年定年使学界将其精确系于康王二十三年(约公元前998年)。",
+    "image_urls": [
+      { "url": "https://commons.wikimedia.org/wiki/Category:Dayu_Ding", "source": "Wikimedia Commons", "license": "CC BY-SA (各文件许可不一,使用前须确认单文件)", "caption": "大盂鼎相册" }
+    ],
+    "data_sources": [
+      { "field": "size,inscription,excavation", "source": "Wikipedia EN (Da Yu ding)", "url": "https://en.wikipedia.org/wiki/Da_Yu_ding" },
+      { "field": "inscription content", "source": "CGTN (2023-08-25)", "url": "https://news.cgtn.com/news/2023-08-25/Inscriptions-on-Da-Yu-Ding-vessel-exemplify-early-bronze-script-1myBf5iTnj2/index.html" }
+    ]
+  },
+  {
+    "id": "da_ke_ding",
+    "name_zh": "大克鼎",
+    "name_pinyin": "Da Ke Ding",
+    "name_alt": ["克鼎"],
+    "dynasty": "西周",
+    "period": "西周晚期(孝王时期)",
+    "approx_year": "约公元前10世纪中期",
+    "excavation_year": "1890",
+    "excavation_site": "陕西省扶风县法门镇任家村",
+    "ancient_state": "周",
+    "current_museum": "上海博物馆",
+    "size": { "height_cm": 93.1, "diameter_cm": 75.6, "weight_kg": 201.5 },
+    "type": "食器",
+    "form_subtype": "圆鼎(附耳三柱足)",
+    "patterns": ["饕餮纹", "波曲纹(环带纹)", "夔龙纹"],
+    "patterns_structured": {
+      "main": ["波曲纹(环带纹,腹部主体)"],
+      "secondary": ["饕餮纹(口沿下)"],
+      "local": ["夔龙纹(颈部)"]
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 290,
+      "summary": "鼎腹内壁铸铭文28行290字。分两段:①膳夫克颂扬祖父师华父仕周功德;②周王册命克继承祖职、赐克土地(田于野、田于渒等)及奴隶(人鬲1000余)。'膳夫'为王室膳食总管,此铭是西周晚期册命金文代表作,书法端庄匀称",
+      "literary_value": "西周晚期册命制度最详尽记录之一;书法为孝王时代金文精品"
+    },
+    "purpose": "祭祀礼器(纪功册命)",
+    "craft": "范铸法",
+    "rarity_level": "国宝(2002年首批禁止出境文物)",
+    "story_brief": "大克鼎1890年出土于陕西扶风法门寺附近窖藏,同坑出土小克鼎7件、编钟等逾1200件青铜器。先归柯劭忞,后归潘祖荫。抗战时潘达于女士将其与大盂鼎同埋地下。1952年捐献国家,藏上海博物馆。高93.1 cm,重201.5 kg,腹饰西周晚期流行之波曲纹(环带纹),290字铭文是膳夫克的册命录,与大盂鼎、毛公鼎并称'海内三宝'。",
+    "image_urls": [
+      { "url": "https://commons.wikimedia.org/wiki/Category:Da_Ke_ding", "source": "Wikimedia Commons", "license": "CC BY-SA (各文件许可不一)", "caption": "大克鼎相册" }
+    ],
+    "data_sources": [
+      { "field": "all fields", "source": "Wikipedia EN (Da Ke ding)", "url": "https://en.wikipedia.org/wiki/Da_Ke_ding" }
+    ]
+  },
+  {
+    "id": "maogong_ding",
+    "name_zh": "毛公鼎",
+    "name_pinyin": "Mao Gong Ding",
+    "name_alt": [],
+    "dynasty": "西周",
+    "period": "西周晚期(宣王时期)",
+    "approx_year": "约公元前828-782年",
+    "excavation_year": "1843",
+    "excavation_site": "陕西省岐山县董家村",
+    "ancient_state": "周",
+    "current_museum": "台北故宫博物院",
+    "size": { "height_cm": 53.8, "diameter_cm": 47.9, "weight_kg": 34.7 },
+    "type": "食器",
+    "form_subtype": "圆鼎(附耳三柱足)",
+    "patterns": ["重环纹", "弦纹"],
+    "patterns_structured": {
+      "main": ["重环纹(颈部)"],
+      "secondary": ["弦纹"],
+      "local": []
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 499,
+      "summary": "鼎腹内壁铸铭文32行约499字,是现存青铜器铭文最长者。全文为周宣王对叔父毛公(毛班)的长篇册命诏书:①追述文武功德;②宣王自述政务艰难;③告诫毛公辅政;④列赏赐清单(车马、兵器、玉器、衣服等);⑤毛公铭功铸鼎。被誉为'抵得一篇《尚书》'",
+      "literary_value": "现存最长青铜铭文;宣王中兴政治史最权威物证;金文书法教学经典"
+    },
+    "purpose": "祭祀礼器(册命纪功)",
+    "craft": "范铸法",
+    "rarity_level": "国宝",
+    "story_brief": "毛公鼎1843年出土于陕西岐山,因器主为周宣王叔父毛公而得名。499字铭文是世界最长青铜器铭文,内容涵盖宣王中兴政治蓝图。鼎几经辗转:陈介祺—端方—叶恭绰—陈咏仁。抗战时叶氏密藏沪上避日军,1946年陈咏仁捐出,1948年随国宝迁台,现为台北故宫三大镇馆之宝之一。与大盂鼎、大克鼎并称'海内三宝'。",
+    "image_urls": [
+      { "url": "https://commons.wikimedia.org/wiki/Category:Mao_Gong_ding", "source": "Wikimedia Commons", "license": "CC BY-SA (各文件许可不一)", "caption": "毛公鼎相册" }
+    ],
+    "data_sources": [
+      { "field": "size,inscription", "source": "Wikipedia EN (Mao Gong ding)", "url": "https://en.wikipedia.org/wiki/Mao_Gong_ding" }
+    ]
+  },
+  {
+    "id": "sanshi_pan",
+    "name_zh": "散氏盘",
+    "name_pinyin": "San Shi Pan",
+    "name_alt": ["散盘", "矢人盘"],
+    "dynasty": "西周",
+    "period": "西周晚期(厉王时期)",
+    "approx_year": "约公元前9世纪中期",
+    "excavation_year": "约1810年(清嘉庆年间)",
+    "excavation_site": "陕西省宝鸡市凤翔县(传)",
+    "ancient_state": "周(矢国与散国)",
+    "current_museum": "台北故宫博物院",
+    "size": { "height_cm": 20.6, "diameter_cm": 54.6, "weight_kg": 21.31 },
+    "type": "水器",
+    "form_subtype": "盘(圆形浅腹,双附耳,圈足)",
+    "patterns": ["夔龙纹", "兽面纹"],
+    "patterns_structured": {
+      "main": ["夔龙纹(腹外壁)"],
+      "secondary": ["兽面纹"],
+      "local": []
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 357,
+      "summary": "盘内底铸铭文19行357字。记矢国入侵散国后,双方议和:矢国以土地赔偿,详列田界走向(以道路、山川为界)及双方划界官员、立誓程序。是现存最早的'土地契约'文献。书法错落率意,字字古朴,与毛公鼎之严整形成鲜明对比,为金文书法两大流派代表",
+      "literary_value": "中国最早土地契约;金文书法'奔放派'代表;研究西周土地制度与诸侯关系核心材料"
+    },
+    "purpose": "盥洗礼器(承载协议铸器纪念)",
+    "craft": "范铸法",
+    "rarity_level": "国宝",
+    "story_brief": "散氏盘约1810年出土于陕西宝鸡凤翔,357字铭文是现存最早土地契约,详述矢国侵散国后赔偿田界之事。清末入宫,后随文物迁台,藏台北故宫。书法散逸古朴、错落有致,与毛公鼎庄严并称金文两极。台北故宫三大青铜镇宝之一(与毛公鼎、宗周钟并列)。",
+    "image_urls": [
+      { "url": "https://commons.wikimedia.org/wiki/Category:San_Shi_Pan", "source": "Wikimedia Commons", "license": "CC BY-SA (各文件许可不一,使用前确认)", "caption": "散氏盘相关图片" }
+    ],
+    "data_sources": [
+      { "field": "size,inscription", "source": "台北故宫博物院 3D Gallery (public info)", "url": "https://theme.npm.edu.tw/3d/Content.aspx?sno=04001043&l=2" },
+      { "field": "literary value", "source": "Wikipedia EN (Chinese bronze inscriptions)", "url": "https://en.wikipedia.org/wiki/Chinese_bronze_inscriptions" }
+    ]
+  },
+  {
+    "id": "he_zun",
+    "name_zh": "何尊",
+    "name_pinyin": "He Zun",
+    "name_alt": [],
+    "dynasty": "西周",
+    "period": "西周早期(成王时期)",
+    "approx_year": "约公元前1038年(成王五年)",
+    "excavation_year": "1963",
+    "excavation_site": "陕西省宝鸡市贾村塬陈家村",
+    "ancient_state": "周",
+    "current_museum": "宝鸡青铜器博物院",
+    "size": { "height_cm": 38.8, "width_cm": 28.8, "weight_kg": 14.6 },
+    "type": "酒器",
+    "form_subtype": "尊(圆口方腹,四隅有扉棱)",
+    "patterns": ["饕餮纹", "蕉叶纹", "云雷纹"],
+    "patterns_structured": {
+      "main": ["饕餮纹(腹部四面)"],
+      "secondary": ["蕉叶纹(颈部)"],
+      "local": ["云雷纹(地纹)"]
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 122,
+      "summary": "尊底内壁铸铭文12行122字(其中119字可识)。记成王迁都成周(洛邑)、召集宗族子弟训诰之事,追述武王克商时宣称'宅兹中国'(在天下之中建都)。'中国'二字在此为'中央之国/王畿所在'之义,是迄今所知'中国'二字作为合成词最早出处",
+      "literary_value": "'中国'一词文献最早出处;西周初年营建成周史料;成王告诫宗族政治思想"
+    },
+    "purpose": "祭祀礼器(纪事)",
+    "craft": "范铸法",
+    "rarity_level": "国宝(2002年首批禁止出境文物)",
+    "story_brief": "何尊1963年由宝鸡贾村塬陈氏农民挖出,因不识其价值,1965年以30元卖入废品收购站。文物干部佟太放慧眼识宝抢救入库。1975年马承源除锈时发现底部122字铭文,'宅兹中国'四字震惊学界——这是'中国'二字最早出处。何尊见证了武王克商、成王迁洛、营建成周的关键史实。现为宝鸡青铜器博物院镇馆之宝。",
+    "image_urls": [
+      { "url": "https://commons.wikimedia.org/wiki/Category:He_Zun", "source": "Wikimedia Commons", "license": "CC BY-SA (各文件许可不一)", "caption": "何尊相册" }
+    ],
+    "data_sources": [
+      { "field": "size,inscription,site", "source": "Wikipedia EN (He zun)", "url": "https://en.wikipedia.org/wiki/He_zun" }
+    ]
+  },
+  {
+    "id": "li_gui",
+    "name_zh": "利簋",
+    "name_pinyin": "Li Gui",
+    "name_alt": ["武王征商簋", "西周利簋"],
+    "dynasty": "西周",
+    "period": "西周早期(武王时期)",
+    "approx_year": "约公元前1046年(武王克商后数日内)",
+    "excavation_year": "1976",
+    "excavation_site": "陕西省临潼县零口镇",
+    "ancient_state": "周",
+    "current_museum": "中国国家博物馆",
+    "size": { "height_cm": 28, "diameter_cm": 22, "weight_kg": 7.95 },
+    "type": "食器",
+    "form_subtype": "簋(方座圆簋,双兽耳)",
+    "patterns": ["饕餮纹", "夔龙纹", "云雷纹"],
+    "patterns_structured": {
+      "main": ["饕餮纹(腹部)"],
+      "secondary": ["夔龙纹"],
+      "local": ["云雷纹(地纹)"]
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 32,
+      "summary": "簋内底铸铭文4行32字:'珷征商,惟甲子朝,岁鼎,克昏夙有商。辛未,王在阑师,赐有事利金,用作檀公宝尊彝。'记武王伐纣发生于甲子日清晨、木星(岁)正当中天,器主利以赏赐铜料铸器纪功。是确定牧野之战绝对年代的唯一物证",
+      "literary_value": "牧野之战唯一直接物证;夏商周断代工程关键器物;'甲子朝,岁鼎'天文记录使学界定牧野之战于公元前1046年2月20日"
+    },
+    "purpose": "祭祀礼器(纪功)",
+    "craft": "范铸法",
+    "rarity_level": "国宝",
+    "story_brief": "利簋1976年3月出土于陕西临潼零口镇西周窖藏。32字铭文记'甲子朝,岁鼎'——武王伐纣的牧野之战发生在甲子日凌晨、木星正当中天。此天文记录与《尚书》《国语》等典籍互证,是夏商周断代工程将牧野之战精确定于公元前1046年2月20日的核心证据。现为国博最重要的断代文物之一。",
+    "image_urls": [
+      { "url": "https://commons.wikimedia.org/wiki/Category:Li_gui", "source": "Wikimedia Commons", "license": "CC BY-SA (各文件许可不一)", "caption": "利簋相册" }
+    ],
+    "data_sources": [
+      { "field": "size,inscription", "source": "Wikipedia EN (Li gui)", "url": "https://en.wikipedia.org/wiki/Li_Gui_(vessel)" }
+    ]
+  },
+  {
+    "id": "guoji_zibai_pan",
+    "name_zh": "虢季子白盘",
+    "name_pinyin": "Guo Ji Zi Bai Pan",
+    "name_alt": [],
+    "dynasty": "西周",
+    "period": "西周晚期(宣王时期)",
+    "approx_year": "公元前816年(宣王十二年)",
+    "excavation_year": "约1843年(道光年间)",
+    "excavation_site": "陕西省宝鸡市陈仓区(原虢国故地)",
+    "ancient_state": "周(虢国)",
+    "current_museum": "中国国家博物馆",
+    "size": { "height_cm": 39.5, "width_cm": 86.5, "length_cm": 137.2, "weight_kg": 215.3 },
+    "type": "水器",
+    "form_subtype": "长方形盘(四兽首衔环,四矩形足)",
+    "patterns": ["窃曲纹", "环带纹", "兽首衔环"],
+    "patterns_structured": {
+      "main": ["窃曲纹(四壁主体)"],
+      "secondary": ["环带纹"],
+      "local": ["四面兽首衔环立体装饰"]
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 111,
+      "summary": "盘内底铸铭文8行111字。记宣王十二年(前816年)虢季子白率师征伐玁狁于洛水之北:斩首500、俘获50,献馘于王庙。周王赐车马、弓矢、斧钺以彰其功。书法工整严谨,为西周晚期金文规范体代表",
+      "literary_value": "西周对外战争最详尽记录;玁狁(原匈奴)早期史料;宣王中兴武功物证"
+    },
+    "purpose": "盥洗礼器(纪功)",
+    "craft": "范铸法",
+    "rarity_level": "国宝(现存最大青铜盘)",
+    "story_brief": "虢季子白盘约1843年道光年间出土于宝鸡陈仓,是现存世界最大青铜盘(长137.2 cm)。先归徐燮均,后归刘铭传家族。刘氏将其埋藏地下70年,屡拒列强、军阀索取,1949年献交国家。111字铭文记虢季子白奉宣王命大败玁狁于洛水之北的史实。",
+    "image_urls": [
+      { "url": "https://commons.wikimedia.org/wiki/Category:Guoji_Zibai_pan", "source": "Wikimedia Commons", "license": "CC BY-SA (各文件许可不一)", "caption": "虢季子白盘相册" }
+    ],
+    "data_sources": [
+      { "field": "all", "source": "Wikipedia EN (Guoji Zibai pan)", "url": "https://en.wikipedia.org/wiki/Guoji_Zibai_pan" }
+    ]
+  }
+]

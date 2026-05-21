@@ -3,7 +3,10 @@
     "id": "lianhe_fanghu",
     "name_zh": "莲鹤方壶",
     "name_pinyin": "Lian He Fang Hu",
-    "name_alt": ["莲鹤铜方壶", "立鹤方壶"],
+    "name_alt": [
+      "莲鹤铜方壶",
+      "立鹤方壶"
+    ],
     "dynasty": "春秋",
     "period": "春秋中期(郑国)",
     "approx_year": "约公元前620-550年",
@@ -11,33 +14,72 @@
     "excavation_site": "河南省新郑市李家楼郑公大墓",
     "ancient_state": "郑",
     "current_museum": "故宫博物院 / 河南博物院(两件一对,分藏)",
-    "size": { "height_cm": 122, "width_cm": 54, "length_cm": null, "weight_kg": 64 },
+    "size": {
+      "height_cm": 122,
+      "width_cm": 54,
+      "length_cm": null,
+      "weight_kg": 64
+    },
     "type": "酒器",
     "form_subtype": "方壶(莲瓣透雕盖,顶立鹤)",
-    "patterns": ["蟠螭纹", "莲瓣纹", "兽面纹", "立体盘龙(四角)", "立体仙鹤(盖顶)"],
+    "patterns": [
+      "蟠螭纹",
+      "莲瓣纹",
+      "兽面纹",
+      "立体盘龙(四角)",
+      "立体仙鹤(盖顶)"
+    ],
     "patterns_structured": {
-      "main": ["蟠螭纹"],
-      "secondary": ["莲瓣纹", "兽面纹"],
-      "local": ["立体盘龙(四角附件)", "立体仙鹤(盖顶)", "云雷地纹"]
+      "main": [
+        "蟠螭纹"
+      ],
+      "secondary": [
+        "莲瓣纹",
+        "兽面纹"
+      ],
+      "local": [
+        "立体盘龙(四角附件)",
+        "立体仙鹤(盖顶)",
+        "云雷地纹"
+      ]
     },
-    "inscription": { "has": false, "text": null, "char_count": 0, "summary": "无铭文" },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
     "purpose": "盛酒礼器(贵族宴饮/祭祀)",
     "craft": "复合工艺:分铸 + 圆雕 + 浮雕 + 焊接;盖顶莲瓣与螭龙疑用失蜡法早期工艺",
     "rarity_level": "国宝(2002年首批禁止出境文物)",
     "story_brief": "莲鹤方壶1923年出土于河南新郑李家楼郑公大墓,一对两件,分藏北京故宫与河南博物院。其器盖以双层透雕莲瓣为饰,中央一展翅仙鹤振翮欲飞,器身四角立体盘龙仿佛腾腾欲空,腹部满饰蟠螭纹,精密繁复至极。郭沫若视之为'时代精神之一象征',从商周的肃穆神秘转向春秋的生动写实,是青铜艺术由神性走向人性的里程碑。出土时同墓还发现立鹤方壶一对(器形相近而盖顶装饰略异)。",
     "image_urls": [
-      { "url": "https://commons.wikimedia.org/wiki/Category:Lotus_and_Crane_Square_Pot", "source": "Wikimedia Commons", "license": "CC BY-SA(各文件许可不一,使用前确认单文件)" }
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Lotus_and_Crane_Square_Pot",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(各文件许可不一,使用前确认单文件)"
+      }
     ],
     "data_sources": [
-      { "field": "size,site,description", "source": "Wikipedia EN (Lotus and Crane Vase)", "url": "https://en.wikipedia.org/wiki/Lotus_and_Crane_Vase" },
-      { "field": "craft,郭沫若评语", "source": "China Online Museum", "url": "http://www.chinaonlinemuseum.com/bronzes-zhou-lianhe-fanghu.php" }
+      {
+        "field": "size,site,description",
+        "source": "Wikipedia EN (Lotus and Crane Vase)",
+        "url": "https://en.wikipedia.org/wiki/Lotus_and_Crane_Vase"
+      },
+      {
+        "field": "craft,郭沫若评语",
+        "source": "China Online Museum",
+        "url": "http://www.chinaonlinemuseum.com/bronzes-zhou-lianhe-fanghu.php"
+      }
     ]
   },
   {
     "id": "yuewang_goujian_jian",
     "name_zh": "越王勾践剑",
     "name_pinyin": "Yue Wang Gou Jian Jian",
-    "name_alt": ["Sword of Goujian"],
+    "name_alt": [
+      "Sword of Goujian"
+    ],
     "dynasty": "春秋",
     "period": "春秋晚期(越国)",
     "approx_year": "约公元前496-465年(勾践在位期间)",
@@ -45,14 +87,30 @@
     "excavation_site": "湖北省江陵县望山一号楚墓",
     "ancient_state": "越(出土于楚墓,推测为越楚联姻陪嫁)",
     "current_museum": "湖北省博物馆",
-    "size": { "height_cm": null, "width_cm": 4.6, "length_cm": 55.6, "weight_kg": 0.875 },
+    "size": {
+      "height_cm": null,
+      "width_cm": 4.6,
+      "length_cm": 55.6,
+      "weight_kg": 0.875
+    },
     "type": "兵器",
     "form_subtype": "剑(青铜复合剑)",
-    "patterns": ["菱形暗格纹(剑身)", "鸟篆错金铭文(近格处)", "蓝色玻璃+绿松石嵌饰(剑格)"],
+    "patterns": [
+      "菱形暗格纹(剑身)",
+      "鸟篆错金铭文(近格处)",
+      "蓝色玻璃+绿松石嵌饰(剑格)"
+    ],
     "patterns_structured": {
-      "main": ["菱形暗格纹"],
-      "secondary": ["鸟篆错金铭文"],
-      "local": ["蓝色玻璃嵌饰", "绿松石嵌饰"]
+      "main": [
+        "菱形暗格纹"
+      ],
+      "secondary": [
+        "鸟篆错金铭文"
+      ],
+      "local": [
+        "蓝色玻璃嵌饰",
+        "绿松石嵌饰"
+      ]
     },
     "inscription": {
       "has": true,
@@ -65,17 +123,27 @@
     "rarity_level": "国宝(2013年首批禁止出境文物)",
     "story_brief": "越王勾践剑1965年12月出土于湖北江陵望山一号楚墓,出土时寒光依旧、锋利如新,试纸应手而断,埋地2400余年几乎无锈。剑刃含锡量高(硬而锋利),剑脊含锡低(韧不易折),为典型'复合金属'工艺;菱形暗格纹系含硫处理而成,兼具防腐与装饰功能。剑格嵌蓝色玻璃和绿松石,近格处错金鸟篆'越王鸠浅自作用剑'8字。出现于楚墓,学界主流推测为越楚联姻时勾践女陪嫁之物。",
     "image_urls": [
-      { "url": "https://commons.wikimedia.org/wiki/Category:Sword_of_Goujian", "source": "Wikimedia Commons", "license": "CC BY-SA(各文件许可不一)" }
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Sword_of_Goujian",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(各文件许可不一)"
+      }
     ],
     "data_sources": [
-      { "field": "size,inscription,craft", "source": "Wikipedia EN (Sword of Goujian)", "url": "https://en.wikipedia.org/wiki/Sword_of_Goujian" }
+      {
+        "field": "size,inscription,craft",
+        "source": "Wikipedia EN (Sword of Goujian)",
+        "url": "https://en.wikipedia.org/wiki/Sword_of_Goujian"
+      }
     ]
   },
   {
     "id": "zenghouyi_bianzhong",
     "name_zh": "曾侯乙编钟",
     "name_pinyin": "Zeng Hou Yi Bian Zhong",
-    "name_alt": ["Bianzhong of Marquis Yi of Zeng"],
+    "name_alt": [
+      "Bianzhong of Marquis Yi of Zeng"
+    ],
     "dynasty": "战国",
     "period": "战国早期(曾国)",
     "approx_year": "约公元前433年",
@@ -83,14 +151,32 @@
     "excavation_site": "湖北省随州市擂鼓墩曾侯乙墓",
     "ancient_state": "曾(随)",
     "current_museum": "湖北省博物馆",
-    "size": { "height_cm": 273, "width_cm": 335, "length_cm": 748, "weight_kg": 4421.48 },
+    "size": {
+      "height_cm": 273,
+      "width_cm": 335,
+      "length_cm": 748,
+      "weight_kg": 4421.48
+    },
     "type": "乐器",
     "form_subtype": "编钟(钮钟+甬钟+镈钟共65件,三层八组)",
-    "patterns": ["蟠螭纹", "云雷纹", "蟠龙纹", "人物狩猎纹(钟架)"],
+    "patterns": [
+      "蟠螭纹",
+      "云雷纹",
+      "蟠龙纹",
+      "人物狩猎纹(钟架)"
+    ],
     "patterns_structured": {
-      "main": ["蟠螭纹"],
-      "secondary": ["云雷纹", "蟠龙纹"],
-      "local": ["人物狩猎纹(钟架木雕)", "鎏金铭文字格"]
+      "main": [
+        "蟠螭纹"
+      ],
+      "secondary": [
+        "云雷纹",
+        "蟠龙纹"
+      ],
+      "local": [
+        "人物狩猎纹(钟架木雕)",
+        "鎏金铭文字格"
+      ]
     },
     "inscription": {
       "has": true,
@@ -103,18 +189,32 @@
     "rarity_level": "国宝(2002年首批禁止出境文物,2024年入UNESCO世界记忆名录)",
     "story_brief": "曾侯乙编钟1978年出土于湖北随州擂鼓墩,共65件分三层八组悬于7.48米长曲尺形钟架,总重逾4421公斤。每枚甬钟可发两个相差三度的音(一钟双音),音域跨越5个半八度,12律俱全。3755字铭文是世界乐律学最早系统文献,展示公元前5世纪中国已有十二平均律雏形。中央最大镈钟为楚惠王熊章赠予曾侯乙的纪念品。2024年入选联合国教科文组织《世界记忆名录》。",
     "image_urls": [
-      { "url": "https://commons.wikimedia.org/wiki/Category:Bianzhong_of_Marquis_Yi_of_Zeng", "source": "Wikimedia Commons", "license": "CC BY-SA(132个文件,各许可不一)" }
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Bianzhong_of_Marquis_Yi_of_Zeng",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(132个文件,各许可不一)"
+      }
     ],
     "data_sources": [
-      { "field": "size,inscription", "source": "Wikipedia EN (Bianzhong of Marquis Yi of Zeng)", "url": "https://en.wikipedia.org/wiki/Bianzhong_of_Marquis_Yi_of_Zeng" },
-      { "field": "UNESCO", "source": "UNESCO Memory of the World", "url": "https://www.unesco.org/en/memory-world/suizhou-bianzhong-marquis-yi-zeng" }
+      {
+        "field": "size,inscription",
+        "source": "Wikipedia EN (Bianzhong of Marquis Yi of Zeng)",
+        "url": "https://en.wikipedia.org/wiki/Bianzhong_of_Marquis_Yi_of_Zeng"
+      },
+      {
+        "field": "UNESCO",
+        "source": "UNESCO Memory of the World",
+        "url": "https://www.unesco.org/en/memory-world/suizhou-bianzhong-marquis-yi-zeng"
+      }
     ]
   },
   {
     "id": "zenghouyi_zunpan",
     "name_zh": "曾侯乙尊盘",
     "name_pinyin": "Zeng Hou Yi Zun Pan",
-    "name_alt": ["Marquis Yi of Zeng Zun-Pan"],
+    "name_alt": [
+      "Marquis Yi of Zeng Zun-Pan"
+    ],
     "dynasty": "战国",
     "period": "战国早期(曾国)",
     "approx_year": "约公元前433年",
@@ -122,14 +222,31 @@
     "excavation_site": "湖北省随州市擂鼓墩曾侯乙墓",
     "ancient_state": "曾(随)",
     "current_museum": "湖北省博物馆",
-    "size": { "height_cm": 33.1, "width_cm": null, "length_cm": null, "weight_kg": 30 },
+    "size": {
+      "height_cm": 33.1,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": 30
+    },
     "type": "酒器/水器",
     "form_subtype": "尊盘组合(尊置盘中)",
-    "patterns": ["透空蟠螭纹(口沿)", "立体蟠虺(盘壁)", "饕餮纹", "云雷地纹"],
+    "patterns": [
+      "透空蟠螭纹(口沿)",
+      "立体蟠虺(盘壁)",
+      "饕餮纹",
+      "云雷地纹"
+    ],
     "patterns_structured": {
-      "main": ["透空蟠螭纹"],
-      "secondary": ["蟠虺纹"],
-      "local": ["饕餮纹", "云雷地纹"]
+      "main": [
+        "透空蟠螭纹"
+      ],
+      "secondary": [
+        "蟠虺纹"
+      ],
+      "local": [
+        "饕餮纹",
+        "云雷地纹"
+      ]
     },
     "inscription": {
       "has": true,
@@ -142,17 +259,28 @@
     "rarity_level": "国宝(2002年首批禁止出境文物)",
     "story_brief": "曾侯乙尊盘1978年出土于湖北随州擂鼓墩,尊置盘中组合使用,盘内可注水温酒或冰酒。尊与盘口沿满布透空蟠螭龙纹,层层叠叠、互相缠绕,以传统范铸法几乎不可能实现。学界经论证认为此为中国已知最早大规模使用失蜡法(熔模铸造)的青铜器,将失蜡法起源前推至战国早期。其工艺精密程度至今令现代工匠叹为观止。",
     "image_urls": [
-      { "url": "https://commons.wikimedia.org/wiki/Category:Zenghouyi_Zunpan", "source": "Wikimedia Commons", "license": "CC BY-SA(各文件许可不一)" }
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Zenghouyi_Zunpan",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(各文件许可不一)"
+      }
     ],
     "data_sources": [
-      { "field": "all", "source": "CCTV English + Smarthistory", "url": "https://smarthistory.org/marquis-yi-of-zeng-zun-pan/" }
+      {
+        "field": "all",
+        "source": "CCTV English + Smarthistory",
+        "url": "https://smarthistory.org/marquis-yi-of-zeng-zun-pan/"
+      }
     ]
   },
   {
     "id": "longxing_gong",
     "name_zh": "龙形觥",
     "name_pinyin": "Long Xing Gong",
-    "name_alt": ["Dragon-shaped Gong", "旌介龙形觥"],
+    "name_alt": [
+      "Dragon-shaped Gong",
+      "旌介龙形觥"
+    ],
     "dynasty": "商",
     "period": "商代晚期(山西方国)",
     "approx_year": "约公元前12-11世纪",
@@ -160,14 +288,31 @@
     "excavation_site": "山西省灵石县旌介村商墓",
     "ancient_state": "商方国('丙'国/狄方区域)",
     "current_museum": "山西博物院",
-    "size": { "height_cm": 21.7, "width_cm": 10, "length_cm": 23.8, "weight_kg": null },
+    "size": {
+      "height_cm": 21.7,
+      "width_cm": 10,
+      "length_cm": 23.8,
+      "weight_kg": null
+    },
     "type": "酒器",
     "form_subtype": "觥(龙形船型)",
-    "patterns": ["鼍纹(扬子鳄)", "夔龙纹", "兽面纹", "立体龙首盖钮"],
+    "patterns": [
+      "鼍纹(扬子鳄)",
+      "夔龙纹",
+      "兽面纹",
+      "立体龙首盖钮"
+    ],
     "patterns_structured": {
-      "main": ["鼍纹(扬子鳄)"],
-      "secondary": ["夔龙纹", "兽面纹"],
-      "local": ["立体龙首盖钮"]
+      "main": [
+        "鼍纹(扬子鳄)"
+      ],
+      "secondary": [
+        "夔龙纹",
+        "兽面纹"
+      ],
+      "local": [
+        "立体龙首盖钮"
+      ]
     },
     "inscription": {
       "has": true,
@@ -180,17 +325,28 @@
     "rarity_level": "国宝(山西博物院镇馆之宝)",
     "story_brief": "龙形觥1976年出土于山西灵石旌介村商代墓葬,造型独特如停泊龙舟,前端塑昂首龙头,双目突出,龙腹平阔可容酒约1.5升。器身满饰鼍纹(扬子鳄)——此纹在中原青铜器中极罕见,提示3000年前山西气候温润有沼泽鳄鱼栖息。风格与中原商文化典型范式有别,是商代晚期山西方国文化独特性的体现。",
     "image_urls": [
-      { "url": "https://commons.wikimedia.org/wiki/Category:Shanxi_Museum", "source": "Wikimedia Commons", "license": "CC BY-SA(需在类目中逐一核实龙形觥具体文件)" }
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Shanxi_Museum",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需在类目中逐一核实龙形觥具体文件)"
+      }
     ],
     "data_sources": [
-      { "field": "size,site,patterns", "source": "山西博物院科普资源 + 太原道", "url": "http://www.tydao.com/2010/shengbo/sb001lonxin.htm" }
+      {
+        "field": "size,site,patterns",
+        "source": "山西博物院科普资源 + 太原道",
+        "url": "http://www.tydao.com/2010/shengbo/sb001lonxin.htm"
+      }
     ]
   },
   {
     "id": "shangyang_fangsheng",
     "name_zh": "商鞅方升",
     "name_pinyin": "Shang Yang Fang Sheng",
-    "name_alt": ["秦商鞅铜方升", "Rectangular Sheng of Shang Yang"],
+    "name_alt": [
+      "秦商鞅铜方升",
+      "Rectangular Sheng of Shang Yang"
+    ],
     "dynasty": "战国/秦",
     "period": "战国晚期秦国(商鞅变法时期) + 秦统一后加刻诏文",
     "approx_year": "公元前344年(秦孝公十八年初铸)",
@@ -198,14 +354,25 @@
     "excavation_site": "陕西(传世)",
     "ancient_state": "秦",
     "current_museum": "上海博物馆",
-    "size": { "height_cm": 2.32, "width_cm": 6.9, "length_cm": 18.7, "weight_kg": 0.69 },
+    "size": {
+      "height_cm": 2.32,
+      "width_cm": 6.9,
+      "length_cm": 18.7,
+      "weight_kg": 0.69
+    },
     "type": "度量衡",
     "form_subtype": "方升(长方形量器)",
-    "patterns": ["素面 + 刻铭"],
+    "patterns": [
+      "素面 + 刻铭"
+    ],
     "patterns_structured": {
-      "main": ["素面"],
+      "main": [
+        "素面"
+      ],
       "secondary": [],
-      "local": ["多面刻铭文"]
+      "local": [
+        "多面刻铭文"
+      ]
     },
     "inscription": {
       "has": true,
@@ -218,17 +385,28 @@
     "rarity_level": "国宝(2002年首批禁止出境文物)",
     "story_brief": "商鞅方升铸于公元前344年,由商鞅督造,作为秦国法定容量基准器,实测容积约202.15毫升。秦始皇统一六国后将其重新启用为全国标准并加刻诏书。是研究中国古代标准化制度的独一无二实物史料,横跨商鞅变法与秦统一两个关键历史节点。",
     "image_urls": [
-      { "url": "https://commons.wikimedia.org/wiki/Category:Shang_Yang_fangsheng", "source": "Wikimedia Commons", "license": "CC BY-SA(各文件许可不一)" }
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Shang_Yang_fangsheng",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(各文件许可不一)"
+      }
     ],
     "data_sources": [
-      { "field": "all", "source": "ChinaServicesInfo + The Paper 文物细读", "url": "https://www.chinaservicesinfo.com/s/202109/10/WS613b0c99498e6a12c12057ea/ancient-rectangular-measuring-vessel-set-standard-for-measuring.html" }
+      {
+        "field": "all",
+        "source": "ChinaServicesInfo + The Paper 文物细读",
+        "url": "https://www.chinaservicesinfo.com/s/202109/10/WS613b0c99498e6a12c12057ea/ancient-rectangular-measuring-vessel-set-standard-for-measuring.html"
+      }
     ]
   },
   {
     "id": "wangziwu_ding",
     "name_zh": "王子午鼎",
     "name_pinyin": "Wang Zi Wu Ding",
-    "name_alt": ["子庚鼎", "楚令尹子庚鼎"],
+    "name_alt": [
+      "子庚鼎",
+      "楚令尹子庚鼎"
+    ],
     "dynasty": "春秋",
     "period": "春秋中期(楚国)",
     "approx_year": "约公元前552年",
@@ -236,14 +414,31 @@
     "excavation_site": "河南省淅川县下寺楚墓(二号墓)",
     "ancient_state": "楚",
     "current_museum": "河南博物院",
-    "size": { "height_cm": 61, "width_cm": null, "length_cm": null, "weight_kg": 100 },
+    "size": {
+      "height_cm": 61,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": 100
+    },
     "type": "食器",
     "form_subtype": "升鼎(圆鼎,附六条立体攀龙)",
-    "patterns": ["蟠螭纹", "云雷纹", "立体攀龙(六条附耳下攀)", "兽面纹"],
+    "patterns": [
+      "蟠螭纹",
+      "云雷纹",
+      "立体攀龙(六条附耳下攀)",
+      "兽面纹"
+    ],
     "patterns_structured": {
-      "main": ["蟠螭纹"],
-      "secondary": ["云雷纹"],
-      "local": ["六条立体攀龙(从耳下攀附器腹)", "兽面纹"]
+      "main": [
+        "蟠螭纹"
+      ],
+      "secondary": [
+        "云雷纹"
+      ],
+      "local": [
+        "六条立体攀龙(从耳下攀附器腹)",
+        "兽面纹"
+      ]
     },
     "inscription": {
       "has": true,
@@ -256,18 +451,33 @@
     "rarity_level": "国宝(2002年首批禁止出境文物)",
     "story_brief": "王子午鼎1978年出土于河南淅川下寺楚墓二号墓,器主为楚共王之子王子午(字子庚),曾任楚国令尹。鼎身六条立体攀龙从耳下蜿蜒攀附器腹,龙身以失蜡法铸成,层次繁复、姿态生动。此器与同墓出土的七件升鼎构成完整的楚式列鼎制度实证,是春秋中期失蜡法工艺在楚国发展的典范。腹内84字铭文是研究楚系金文与楚国政治的珍贵材料。",
     "image_urls": [
-      { "url": "https://commons.wikimedia.org/wiki/Category:Wang_Zi_Wu_Ding", "source": "Wikimedia Commons", "license": "CC BY-SA(需确认具体文件)" }
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Wang_Zi_Wu_Ding",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
     ],
     "data_sources": [
-      { "field": "size,site,inscription", "source": "Wikipedia EN (Wang Zi Wu Ding)", "url": "https://en.wikipedia.org/wiki/Wang_Zi_Wu_Ding" },
-      { "field": "craft,context", "source": "河南博物院官网(reference only)", "url": "https://www.chnmus.net" }
+      {
+        "field": "size,site,inscription",
+        "source": "Wikipedia EN (Wang Zi Wu Ding)",
+        "url": "https://en.wikipedia.org/wiki/Wang_Zi_Wu_Ding"
+      },
+      {
+        "field": "craft,context",
+        "source": "河南博物院官网(reference only)",
+        "url": "https://www.chnmus.net"
+      }
     ]
   },
   {
     "id": "zhongshan_wang_cuo_ding",
     "name_zh": "中山王厝鼎",
     "name_pinyin": "Zhong Shan Wang Cuo Ding",
-    "name_alt": ["中山王大鼎", "铁足铜鼎"],
+    "name_alt": [
+      "中山王大鼎",
+      "铁足铜鼎"
+    ],
     "dynasty": "战国",
     "period": "战国晚期(中山国)",
     "approx_year": "约公元前309年(中山王厝六年)",
@@ -275,13 +485,25 @@
     "excavation_site": "河北省平山县三汲乡中山王厝墓(1号墓)",
     "ancient_state": "中山",
     "current_museum": "河北博物院",
-    "size": { "height_cm": 51.5, "width_cm": null, "length_cm": null, "weight_kg": 35.6 },
+    "size": {
+      "height_cm": 51.5,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": 35.6
+    },
     "type": "食器",
     "form_subtype": "升鼎(圆鼎,铁足)",
-    "patterns": ["素面(器身简洁)", "错金铭文"],
+    "patterns": [
+      "素面(器身简洁)",
+      "错金铭文"
+    ],
     "patterns_structured": {
-      "main": ["素面"],
-      "secondary": ["错金铭文"],
+      "main": [
+        "素面"
+      ],
+      "secondary": [
+        "错金铭文"
+      ],
       "local": []
     },
     "inscription": {
@@ -295,18 +517,32 @@
     "rarity_level": "国宝",
     "story_brief": "中山王厝鼎1977年出土于河北平山县中山王厝墓,是现存战国青铜器中铭文最多的圆鼎,腹内469字铭文记述了中山王厝讨伐燕国、奖惩忠奸的政治史实。器身以铁足支撑,铁铜复合工艺在战国青铜器中极为罕见。此器与同墓出土的方壶、圆壶构成'中山王三器',铭文总计逾千字,是研究中山国历史的核心史料群。",
     "image_urls": [
-      { "url": "https://commons.wikimedia.org/wiki/Category:Zhongshan_bronzes", "source": "Wikimedia Commons", "license": "CC BY-SA(需确认具体文件)" }
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Zhongshan_bronzes",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
     ],
     "data_sources": [
-      { "field": "size,inscription,site", "source": "Wikipedia EN (King Cuo of Zhongshan)", "url": "https://en.wikipedia.org/wiki/King_Cuo_of_Zhongshan" },
-      { "field": "craft,museum", "source": "河北博物院官网(reference only)", "url": "https://www.hebeimuseum.org" }
+      {
+        "field": "size,inscription,site",
+        "source": "Wikipedia EN (King Cuo of Zhongshan)",
+        "url": "https://en.wikipedia.org/wiki/King_Cuo_of_Zhongshan"
+      },
+      {
+        "field": "craft,museum",
+        "source": "河北博物院官网(reference only)",
+        "url": "https://www.hebeimuseum.org"
+      }
     ]
   },
   {
     "id": "zhongshan_wang_cuo_fanghu",
     "name_zh": "中山王厝方壶",
     "name_pinyin": "Zhong Shan Wang Cuo Fang Hu",
-    "name_alt": ["中山王方壶"],
+    "name_alt": [
+      "中山王方壶"
+    ],
     "dynasty": "战国",
     "period": "战国晚期(中山国)",
     "approx_year": "约公元前309年",
@@ -314,14 +550,29 @@
     "excavation_site": "河北省平山县三汲乡中山王厝墓(1号墓)",
     "ancient_state": "中山",
     "current_museum": "河北博物院",
-    "size": { "height_cm": 63, "width_cm": 30, "length_cm": null, "weight_kg": 21.48 },
+    "size": {
+      "height_cm": 63,
+      "width_cm": 30,
+      "length_cm": null,
+      "weight_kg": 21.48
+    },
     "type": "酒器",
     "form_subtype": "方壶",
-    "patterns": ["蟠螭纹", "云雷纹", "错金铭文"],
+    "patterns": [
+      "蟠螭纹",
+      "云雷纹",
+      "错金铭文"
+    ],
     "patterns_structured": {
-      "main": ["蟠螭纹"],
-      "secondary": ["云雷纹"],
-      "local": ["错金铭文(腹内壁)"]
+      "main": [
+        "蟠螭纹"
+      ],
+      "secondary": [
+        "云雷纹"
+      ],
+      "local": [
+        "错金铭文(腹内壁)"
+      ]
     },
     "inscription": {
       "has": true,
@@ -334,17 +585,27 @@
     "rarity_level": "国宝",
     "story_brief": "中山王厝方壶与鼎、圆壶同出于河北平山中山王厝墓,铭文约450字记述王厝政绩与对后代的训诫,文辞雅丽,是战国散文的珍贵标本。三器铭文合计逾千字,学界称为'中山三器',是了解战国时期这一独特北方诸侯国的最重要文献。",
     "image_urls": [
-      { "url": "https://commons.wikimedia.org/wiki/Category:Zhongshan_bronzes", "source": "Wikimedia Commons", "license": "CC BY-SA(需确认具体文件)" }
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Zhongshan_bronzes",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
     ],
     "data_sources": [
-      { "field": "size,inscription,site", "source": "Wikipedia EN (King Cuo of Zhongshan)", "url": "https://en.wikipedia.org/wiki/King_Cuo_of_Zhongshan" }
+      {
+        "field": "size,inscription,site",
+        "source": "Wikipedia EN (King Cuo of Zhongshan)",
+        "url": "https://en.wikipedia.org/wiki/King_Cuo_of_Zhongshan"
+      }
     ]
   },
   {
     "id": "zhongshan_wang_cuo_yuanhu",
     "name_zh": "中山王厝圆壶",
     "name_pinyin": "Zhong Shan Wang Cuo Yuan Hu",
-    "name_alt": ["中山王圆壶"],
+    "name_alt": [
+      "中山王圆壶"
+    ],
     "dynasty": "战国",
     "period": "战国晚期(中山国)",
     "approx_year": "约公元前309年",
@@ -352,13 +613,25 @@
     "excavation_site": "河北省平山县三汲乡中山王厝墓(1号墓)",
     "ancient_state": "中山",
     "current_museum": "河北博物院",
-    "size": { "height_cm": 54, "width_cm": null, "length_cm": null, "weight_kg": 13.35 },
+    "size": {
+      "height_cm": 54,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": 13.35
+    },
     "type": "酒器",
     "form_subtype": "圆壶",
-    "patterns": ["蟠螭纹", "云雷纹"],
+    "patterns": [
+      "蟠螭纹",
+      "云雷纹"
+    ],
     "patterns_structured": {
-      "main": ["蟠螭纹"],
-      "secondary": ["云雷纹"],
+      "main": [
+        "蟠螭纹"
+      ],
+      "secondary": [
+        "云雷纹"
+      ],
       "local": []
     },
     "inscription": {
@@ -372,17 +645,28 @@
     "rarity_level": "国宝",
     "story_brief": "中山王厝圆壶是'中山三器'之一,181字铭文与鼎铭、方壶铭内容呼应、互补,共同构成研究中山国历史的完整铭文体系。三器于1977年同出于河北平山中山王厝墓,现俱藏河北博物院。",
     "image_urls": [
-      { "url": "https://commons.wikimedia.org/wiki/Category:Zhongshan_bronzes", "source": "Wikimedia Commons", "license": "CC BY-SA(需确认具体文件)" }
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Zhongshan_bronzes",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
     ],
     "data_sources": [
-      { "field": "size,inscription", "source": "Wikipedia EN (King Cuo of Zhongshan)", "url": "https://en.wikipedia.org/wiki/King_Cuo_of_Zhongshan" }
+      {
+        "field": "size,inscription",
+        "source": "Wikipedia EN (King Cuo of Zhongshan)",
+        "url": "https://en.wikipedia.org/wiki/King_Cuo_of_Zhongshan"
+      }
     ]
   },
   {
     "id": "zhongshan_zhaoyutu_tongban",
     "name_zh": "中山王兆域图铜版",
     "name_pinyin": "Zhong Shan Wang Zhao Yu Tu Tong Ban",
-    "name_alt": ["中山王陵兆域图", "中山王墓兆域图铜板"],
+    "name_alt": [
+      "中山王陵兆域图",
+      "中山王墓兆域图铜板"
+    ],
     "dynasty": "战国",
     "period": "战国晚期(中山国)",
     "approx_year": "约公元前309年",
@@ -390,13 +674,25 @@
     "excavation_site": "河北省平山县三汲乡中山王厝墓(1号墓)",
     "ancient_state": "中山",
     "current_museum": "河北博物院",
-    "size": { "height_cm": 1, "width_cm": 48, "length_cm": 94, "weight_kg": 32 },
+    "size": {
+      "height_cm": 1,
+      "width_cm": 48,
+      "length_cm": 94,
+      "weight_kg": 32
+    },
     "type": "杂器(建筑规划图)",
     "form_subtype": "铜版平面图",
-    "patterns": ["错金银线描建筑平面图", "刻铭文字"],
+    "patterns": [
+      "错金银线描建筑平面图",
+      "刻铭文字"
+    ],
     "patterns_structured": {
-      "main": ["错金银线条(建筑平面)"],
-      "secondary": ["刻铭"],
+      "main": [
+        "错金银线条(建筑平面)"
+      ],
+      "secondary": [
+        "刻铭"
+      ],
       "local": []
     },
     "inscription": {
@@ -410,18 +706,32 @@
     "rarity_level": "国宝(★稀——世界现存最早建筑规划图)",
     "story_brief": "中山王兆域图铜版1977年出土于河北平山中山王厝墓,是世界现存最早的建筑规划图,比例尺约1:500。铜版以错金银精细描绘中山王陵园建筑布局,包括王堂、哀后堂、诸宫室的位置与尺寸,并附448字铭文说明规划原则与施工要求。这件文物证明战国时期中国已有成熟的建筑设计图绘制传统与比例制图能力,是建筑史、制图史的重要里程碑。",
     "image_urls": [
-      { "url": "https://commons.wikimedia.org/wiki/Category:Zhongshan_bronzes", "source": "Wikimedia Commons", "license": "CC BY-SA(需确认兆域图具体文件)" }
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Zhongshan_bronzes",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认兆域图具体文件)"
+      }
     ],
     "data_sources": [
-      { "field": "size,inscription,significance", "source": "Wikipedia EN (Zhongshan Bronze Plates)", "url": "https://en.wikipedia.org/wiki/Zhongshan_Bronze_Plates" },
-      { "field": "比例尺,建筑史意义", "source": "河北博物院官网(reference only)", "url": "https://www.hebeimuseum.org" }
+      {
+        "field": "size,inscription,significance",
+        "source": "Wikipedia EN (Zhongshan Bronze Plates)",
+        "url": "https://en.wikipedia.org/wiki/Zhongshan_Bronze_Plates"
+      },
+      {
+        "field": "比例尺,建筑史意义",
+        "source": "河北博物院官网(reference only)",
+        "url": "https://www.hebeimuseum.org"
+      }
     ]
   },
   {
     "id": "wusun_fuzhai_zhong",
     "name_zh": "王孙诰编钟",
     "name_pinyin": "Wang Sun Gao Bian Zhong",
-    "name_alt": ["楚王孙诰编钟"],
+    "name_alt": [
+      "楚王孙诰编钟"
+    ],
     "dynasty": "春秋",
     "period": "春秋晚期(楚国)",
     "approx_year": "约公元前6世纪中期",
@@ -429,13 +739,25 @@
     "excavation_site": "河南省淅川县下寺楚墓(传,确切出土地点有争议)",
     "ancient_state": "楚",
     "current_museum": "湖北省博物馆",
-    "size": { "height_cm": null, "width_cm": null, "length_cm": null, "weight_kg": null },
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
     "type": "乐器",
     "form_subtype": "编钟(甬钟26件一套)",
-    "patterns": ["蟠螭纹", "云雷纹"],
+    "patterns": [
+      "蟠螭纹",
+      "云雷纹"
+    ],
     "patterns_structured": {
-      "main": ["蟠螭纹"],
-      "secondary": ["云雷纹"],
+      "main": [
+        "蟠螭纹"
+      ],
+      "secondary": [
+        "云雷纹"
+      ],
       "local": []
     },
     "inscription": {
@@ -449,17 +771,27 @@
     "rarity_level": "一级文物",
     "story_brief": "王孙诰编钟是春秋晚期楚国贵族王孙诰所铸的一组甬钟,共26件,是曾侯乙编钟以外保存最完整的春秋编钟组合之一。各钟铭文记铸器者及用途,是研究楚系音乐礼制的重要文献。其音律体系与曾侯乙编钟可互相比对,展示春秋至战国楚系编钟技术的演变脉络。",
     "image_urls": [
-      { "url": "https://commons.wikimedia.org/wiki/Category:Hubei_Provincial_Museum", "source": "Wikimedia Commons", "license": "CC BY-SA(需确认具体文件)" }
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Hubei_Provincial_Museum",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
     ],
     "data_sources": [
-      { "field": "all", "source": "湖北省博物馆官网(reference only) + 学术文献综合", "url": "https://www.hbww.org" }
+      {
+        "field": "all",
+        "source": "湖北省博物馆官网(reference only) + 学术文献综合",
+        "url": "https://www.hbww.org"
+      }
     ]
   },
   {
     "id": "zifu_he_zhong",
     "name_zh": "子犯和钟",
     "name_pinyin": "Zi Fan He Zhong",
-    "name_alt": ["晋子犯编钟"],
+    "name_alt": [
+      "晋子犯编钟"
+    ],
     "dynasty": "春秋",
     "period": "春秋中期(晋国)",
     "approx_year": "约公元前632年(城濮之战前后)",
@@ -467,13 +799,25 @@
     "excavation_site": "山西省(传)",
     "ancient_state": "晋",
     "current_museum": "美国大都会艺术博物馆(MET)",
-    "size": { "height_cm": null, "width_cm": null, "length_cm": null, "weight_kg": null },
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
     "type": "乐器",
     "form_subtype": "编钟(甬钟,传世8件)",
-    "patterns": ["蟠螭纹", "云雷纹"],
+    "patterns": [
+      "蟠螭纹",
+      "云雷纹"
+    ],
     "patterns_structured": {
-      "main": ["蟠螭纹"],
-      "secondary": ["云雷纹"],
+      "main": [
+        "蟠螭纹"
+      ],
+      "secondary": [
+        "云雷纹"
+      ],
       "local": []
     },
     "inscription": {
@@ -487,17 +831,27 @@
     "rarity_level": "国宝级(流散海外)",
     "story_brief": "子犯和钟为春秋晋国卿子犯(狐偃)铸造,铭文记述公元前632年城濮之战中晋国大败楚国、晋文公确立霸主地位的史实。铭文总约356字,与《左传》《史记》等文献高度契合,是先秦史研究的珍贵一手资料。现传世8件藏于美国大都会艺术博物馆,为流散海外的重要先秦青铜器之一。",
     "image_urls": [
-      { "url": "https://www.metmuseum.org/art/collection/search", "source": "MET Open Access", "license": "CC0(MET开放获取)" }
+      {
+        "url": "https://www.metmuseum.org/art/collection/search",
+        "source": "MET Open Access",
+        "license": "CC0(MET开放获取)"
+      }
     ],
     "data_sources": [
-      { "field": "all", "source": "MET Open Access + Wikipedia EN (Zifu and Bell)", "url": "https://www.metmuseum.org/art/collection/search" }
+      {
+        "field": "all",
+        "source": "MET Open Access + Wikipedia EN (Zifu and Bell)",
+        "url": "https://www.metmuseum.org/art/collection/search"
+      }
     ]
   },
   {
     "id": "wuwang_fucha_mao",
     "name_zh": "吴王夫差矛",
     "name_pinyin": "Wu Wang Fu Cha Mao",
-    "name_alt": ["夫差矛"],
+    "name_alt": [
+      "夫差矛"
+    ],
     "dynasty": "春秋",
     "period": "春秋晚期(吴国)",
     "approx_year": "约公元前495-473年(夫差在位期间)",
@@ -505,13 +859,25 @@
     "excavation_site": "湖北省江陵县马山5号楚墓",
     "ancient_state": "吴(出土于楚墓)",
     "current_museum": "湖北省博物馆",
-    "size": { "height_cm": null, "width_cm": null, "length_cm": 29.5, "weight_kg": null },
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": 29.5,
+      "weight_kg": null
+    },
     "type": "兵器",
     "form_subtype": "矛(青铜矛头)",
-    "patterns": ["菱形暗格纹", "错金鸟篆铭文"],
+    "patterns": [
+      "菱形暗格纹",
+      "错金鸟篆铭文"
+    ],
     "patterns_structured": {
-      "main": ["菱形暗格纹"],
-      "secondary": ["错金鸟篆铭文"],
+      "main": [
+        "菱形暗格纹"
+      ],
+      "secondary": [
+        "错金鸟篆铭文"
+      ],
       "local": []
     },
     "inscription": {
@@ -525,17 +891,28 @@
     "rarity_level": "国宝(2013年首批禁止出境文物)",
     "story_brief": "吴王夫差矛1983年出土于湖北江陵马山楚墓,长29.5厘米,矛骹错金鸟篆'吴王夫差自作用矛'8字。与越王勾践剑出土于同一楚墓区域,两件兵器分属吴越两国,出现在楚墓中,折射出春秋末年吴越争霸、楚并吴越的复杂历史。矛的制作工艺与越王勾践剑相似,菱形暗格纹防腐技术展示了吴越青铜冶铸的高超水准。",
     "image_urls": [
-      { "url": "https://commons.wikimedia.org/wiki/Category:Hubei_Provincial_Museum", "source": "Wikimedia Commons", "license": "CC BY-SA(需确认夫差矛具体文件)" }
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Hubei_Provincial_Museum",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认夫差矛具体文件)"
+      }
     ],
     "data_sources": [
-      { "field": "size,inscription,site", "source": "Wikipedia EN (Spear of Fuchai)", "url": "https://en.wikipedia.org/wiki/Spear_of_Fuchai" }
+      {
+        "field": "size,inscription,site",
+        "source": "Wikipedia EN (Spear of Fuchai)",
+        "url": "https://en.wikipedia.org/wiki/Spear_of_Fuchai"
+      }
     ]
   },
   {
     "id": "wuwang_guang_jian",
     "name_zh": "吴王光剑",
     "name_pinyin": "Wu Wang Guang Jian",
-    "name_alt": ["攻吴王光剑", "吴王阖闾剑"],
+    "name_alt": [
+      "攻吴王光剑",
+      "吴王阖闾剑"
+    ],
     "dynasty": "春秋",
     "period": "春秋晚期(吴国)",
     "approx_year": "约公元前514-496年(阖闾在位期间)",
@@ -543,13 +920,25 @@
     "excavation_site": "湖北省江陵县望山一号楚墓",
     "ancient_state": "吴",
     "current_museum": "湖北省博物馆",
-    "size": { "height_cm": null, "width_cm": null, "length_cm": 77.2, "weight_kg": null },
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": 77.2,
+      "weight_kg": null
+    },
     "type": "兵器",
     "form_subtype": "剑(青铜长剑)",
-    "patterns": ["素面(近格有装饰)", "错金鸟篆铭文"],
+    "patterns": [
+      "素面(近格有装饰)",
+      "错金鸟篆铭文"
+    ],
     "patterns_structured": {
-      "main": ["素面"],
-      "secondary": ["错金鸟篆铭文"],
+      "main": [
+        "素面"
+      ],
+      "secondary": [
+        "错金鸟篆铭文"
+      ],
       "local": []
     },
     "inscription": {
@@ -563,17 +952,28 @@
     "rarity_level": "一级文物",
     "story_brief": "吴王光剑与越王勾践剑同出于湖北江陵望山一号楚墓,是研究春秋末年吴越争霸史的重要实物。器主吴王光即著名的阖闾,孙武《孙子兵法》即献于此王。两件王剑同出楚墓,生动折射出吴越楚三国间的历史纠葛。",
     "image_urls": [
-      { "url": "https://commons.wikimedia.org/wiki/Category:Hubei_Provincial_Museum", "source": "Wikimedia Commons", "license": "CC BY-SA(需确认具体文件)" }
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Hubei_Provincial_Museum",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
     ],
     "data_sources": [
-      { "field": "all", "source": "Wikipedia EN (Sword of Helü)", "url": "https://en.wikipedia.org/wiki/Sword_of_Hel%C3%BC" }
+      {
+        "field": "all",
+        "source": "Wikipedia EN (Sword of Helü)",
+        "url": "https://en.wikipedia.org/wiki/Sword_of_Hel%C3%BC"
+      }
     ]
   },
   {
     "id": "yuewang_zhezhi_yusi_jian",
     "name_zh": "越王者旨于赐剑",
     "name_pinyin": "Yue Wang Zhe Zhi Yu Si Jian",
-    "name_alt": ["越王朱勾剑", "越王翳剑"],
+    "name_alt": [
+      "越王朱勾剑",
+      "越王翳剑"
+    ],
     "dynasty": "春秋",
     "period": "春秋晚期(越国)",
     "approx_year": "约公元前448-411年(越王翳在位期间)",
@@ -581,13 +981,25 @@
     "excavation_site": "浙江(传)",
     "ancient_state": "越",
     "current_museum": "浙江省博物馆",
-    "size": { "height_cm": null, "width_cm": null, "length_cm": 52, "weight_kg": null },
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": 52,
+      "weight_kg": null
+    },
     "type": "兵器",
     "form_subtype": "剑(青铜剑)",
-    "patterns": ["菱形暗格纹", "鸟篆铭文"],
+    "patterns": [
+      "菱形暗格纹",
+      "鸟篆铭文"
+    ],
     "patterns_structured": {
-      "main": ["菱形暗格纹"],
-      "secondary": ["鸟篆铭文"],
+      "main": [
+        "菱形暗格纹"
+      ],
+      "secondary": [
+        "鸟篆铭文"
+      ],
       "local": []
     },
     "inscription": {
@@ -601,17 +1013,27 @@
     "rarity_level": "一级文物",
     "story_brief": "越王者旨于赐剑是继越王勾践剑之后,越国出土有铭王剑的重要代表,铭文'越王者旨于赐'确认器主为越王翳。越国铸剑工艺举世闻名,菱形暗格纹、复合金属铸造是其核心技术标志。该剑现藏浙江省博物馆,是浙江地区越文化的代表性器物。",
     "image_urls": [
-      { "url": "https://commons.wikimedia.org/wiki/Category:Zhejiang_Museum", "source": "Wikimedia Commons", "license": "CC BY-SA(需确认具体文件)" }
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Zhejiang_Museum",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
     ],
     "data_sources": [
-      { "field": "all", "source": "Wikipedia ZH 越国青铜剑 + 浙江省博物馆资料(reference only)", "url": "https://zh.wikipedia.org/wiki/%E8%B6%8A%E7%8E%8B%E8%80%85%E6%97%A8%E6%96%BC%E8%B3%9C%E5%8A%8D" }
+      {
+        "field": "all",
+        "source": "Wikipedia ZH 越国青铜剑 + 浙江省博物馆资料(reference only)",
+        "url": "https://zh.wikipedia.org/wiki/%E8%B6%8A%E7%8E%8B%E8%80%85%E6%97%A8%E6%96%BC%E8%B3%9C%E5%8A%8D"
+      }
     ]
   },
   {
     "id": "cuojinyin_niaoshu_tonghu",
     "name_zh": "错金银鸟书铜壶",
     "name_pinyin": "Cuo Jin Yin Niao Shu Tong Hu",
-    "name_alt": ["战国错金银鸟虫书铜壶"],
+    "name_alt": [
+      "战国错金银鸟虫书铜壶"
+    ],
     "dynasty": "战国",
     "period": "战国中期",
     "approx_year": "约公元前4世纪",
@@ -619,14 +1041,29 @@
     "excavation_site": "河南省(传)",
     "ancient_state": "楚或韩",
     "current_museum": "上海博物馆",
-    "size": { "height_cm": 35, "width_cm": null, "length_cm": null, "weight_kg": null },
+    "size": {
+      "height_cm": 35,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
     "type": "酒器",
     "form_subtype": "壶(圆壶)",
-    "patterns": ["错金银几何纹", "鸟虫书铭文(口沿)", "蟠螭纹"],
+    "patterns": [
+      "错金银几何纹",
+      "鸟虫书铭文(口沿)",
+      "蟠螭纹"
+    ],
     "patterns_structured": {
-      "main": ["错金银几何纹"],
-      "secondary": ["蟠螭纹"],
-      "local": ["鸟虫书铭文(口沿一周)"]
+      "main": [
+        "错金银几何纹"
+      ],
+      "secondary": [
+        "蟠螭纹"
+      ],
+      "local": [
+        "鸟虫书铭文(口沿一周)"
+      ]
     },
     "inscription": {
       "has": true,
@@ -639,17 +1076,28 @@
     "rarity_level": "一级文物",
     "story_brief": "错金银鸟书铜壶是战国中期错金银工艺与鸟虫书铭文的综合展示,器身以金银丝错出精密几何纹,口沿一周鸟虫书铭文华美流丽,充分体现战国时代青铜装饰工艺从商周神秘符号转向精巧世俗美感的转变。",
     "image_urls": [
-      { "url": "https://commons.wikimedia.org/wiki/Category:Shanghai_Museum_bronzes", "source": "Wikimedia Commons", "license": "CC BY-SA(需确认具体文件)" }
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Shanghai_Museum_bronzes",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
     ],
     "data_sources": [
-      { "field": "all", "source": "上海博物馆官网(reference only) + 学术文献", "url": "https://www.shanghaimuseum.net" }
+      {
+        "field": "all",
+        "source": "上海博物馆官网(reference only) + 学术文献",
+        "url": "https://www.shanghaimuseum.net"
+      }
     ]
   },
   {
     "id": "zhanguo_yanle_yulie_gongzhan_tonghu",
     "name_zh": "宴乐渔猎攻战纹铜壶",
     "name_pinyin": "Yan Le Yu Lie Gong Zhan Wen Tong Hu",
-    "name_alt": ["宴乐攻战纹铜壶", "河南淮阳宴乐壶"],
+    "name_alt": [
+      "宴乐攻战纹铜壶",
+      "河南淮阳宴乐壶"
+    ],
     "dynasty": "战国",
     "period": "战国早中期",
     "approx_year": "约公元前5-4世纪",
@@ -657,32 +1105,66 @@
     "excavation_site": "河南省淮阳县平粮台(古陈国故地)",
     "ancient_state": "楚(占领陈国故地)",
     "current_museum": "中国国家博物馆",
-    "size": { "height_cm": 40, "width_cm": null, "length_cm": null, "weight_kg": null },
+    "size": {
+      "height_cm": 40,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
     "type": "酒器",
     "form_subtype": "壶(圆壶,四带纹饰图)",
-    "patterns": ["宴乐图", "狩猎图", "渔猎图", "攻战图", "采桑图"],
+    "patterns": [
+      "宴乐图",
+      "狩猎图",
+      "渔猎图",
+      "攻战图",
+      "采桑图"
+    ],
     "patterns_structured": {
-      "main": ["宴乐图(第一带)"],
-      "secondary": ["狩猎图", "渔猎图"],
-      "local": ["攻战图(城池攻防)", "采桑图"]
+      "main": [
+        "宴乐图(第一带)"
+      ],
+      "secondary": [
+        "狩猎图",
+        "渔猎图"
+      ],
+      "local": [
+        "攻战图(城池攻防)",
+        "采桑图"
+      ]
     },
-    "inscription": { "has": false, "text": null, "char_count": 0, "summary": "无铭文" },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
     "purpose": "盛酒礼器",
     "craft": "范铸法 + 刻画(剔地法)",
     "rarity_level": "一级文物",
     "story_brief": "宴乐渔猎攻战纹铜壶以四条水平带状图像呈现战国时代贵族生活的全景:宴饮宾客、田猎骑射、渔猎采桑、攻城野战,人物生动,场景丰富。这类图像铜壶是研究战国时代社会生活、军事技术、礼制场景的图像史料,与文献记载可相互印证。",
     "image_urls": [
-      { "url": "https://commons.wikimedia.org/wiki/Category:National_Museum_of_China", "source": "Wikimedia Commons", "license": "CC BY-SA(需确认具体文件)" }
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:National_Museum_of_China",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
     ],
     "data_sources": [
-      { "field": "all", "source": "Wikipedia EN (Hunting and warfare ritual bronzes) + 国博官网(reference only)", "url": "https://en.wikipedia.org/wiki/Bronze_vessels_with_hunting_and_warfare_scenes" }
+      {
+        "field": "all",
+        "source": "Wikipedia EN (Hunting and warfare ritual bronzes) + 国博官网(reference only)",
+        "url": "https://en.wikipedia.org/wiki/Bronze_vessels_with_hunting_and_warfare_scenes"
+      }
     ]
   },
   {
     "id": "lehe_fanghu_er",
     "name_zh": "立鹤方壶(郑公大墓乙件)",
     "name_pinyin": "Li He Fang Hu Er",
-    "name_alt": ["立鹤铜方壶(河南博物院藏)"],
+    "name_alt": [
+      "立鹤铜方壶(河南博物院藏)"
+    ],
     "dynasty": "春秋",
     "period": "春秋中期(郑国)",
     "approx_year": "约公元前620-550年",
@@ -690,25 +1172,2588 @@
     "excavation_site": "河南省新郑市李家楼郑公大墓",
     "ancient_state": "郑",
     "current_museum": "河南博物院",
-    "size": { "height_cm": 117, "width_cm": 52, "length_cm": null, "weight_kg": null },
+    "size": {
+      "height_cm": 117,
+      "width_cm": 52,
+      "length_cm": null,
+      "weight_kg": null
+    },
     "type": "酒器",
     "form_subtype": "方壶(莲瓣盖,顶立鹤)",
-    "patterns": ["蟠螭纹", "莲瓣纹", "立体盘龙", "立体仙鹤"],
+    "patterns": [
+      "蟠螭纹",
+      "莲瓣纹",
+      "立体盘龙",
+      "立体仙鹤"
+    ],
     "patterns_structured": {
-      "main": ["蟠螭纹"],
-      "secondary": ["莲瓣纹"],
-      "local": ["立体盘龙(四角)", "立体仙鹤(盖顶)"]
+      "main": [
+        "蟠螭纹"
+      ],
+      "secondary": [
+        "莲瓣纹"
+      ],
+      "local": [
+        "立体盘龙(四角)",
+        "立体仙鹤(盖顶)"
+      ]
     },
-    "inscription": { "has": false, "text": null, "char_count": 0, "summary": "无铭文" },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
     "purpose": "盛酒礼器",
     "craft": "复合工艺:分铸 + 圆雕 + 浮雕 + 焊接",
     "rarity_level": "国宝",
     "story_brief": "立鹤方壶与莲鹤方壶同出于1923年河南新郑李家楼郑公大墓,为同墓出土的另一件,造型与莲鹤方壶相近而尺寸略小。两壶构成一对王室酒器的完整组合,共同代表了春秋中期郑国青铜艺术的最高成就。此件现藏河南博物院,为该馆镇馆之宝之一。",
     "image_urls": [
-      { "url": "https://commons.wikimedia.org/wiki/Category:Henan_Museum", "source": "Wikimedia Commons", "license": "CC BY-SA(需确认具体文件)" }
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Henan_Museum",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
     ],
     "data_sources": [
-      { "field": "all", "source": "河南博物院官网(reference only) + Wikipedia EN (Lotus and Crane Vase)", "url": "https://en.wikipedia.org/wiki/Lotus_and_Crane_Vase" }
+      {
+        "field": "all",
+        "source": "河南博物院官网(reference only) + Wikipedia EN (Lotus and Crane Vase)",
+        "url": "https://en.wikipedia.org/wiki/Lotus_and_Crane_Vase"
+      }
+    ]
+  },
+  {
+    "id": "cuojin_xiniudaigou",
+    "name_zh": "错金银犀牛带钩",
+    "name_pinyin": "Cuo Jin Yin Xi Niu Dai Gou",
+    "name_alt": [
+      "战国错金银犀牛形带钩"
+    ],
+    "dynasty": "战国",
+    "period": "战国中晚期",
+    "approx_year": "约公元前4-3世纪",
+    "excavation_year": "TODO",
+    "excavation_site": "河北省(传)",
+    "ancient_state": "赵或燕",
+    "current_museum": "故宫博物院",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": 12,
+      "weight_kg": null
+    },
+    "type": "服饰器",
+    "form_subtype": "带钩(犀牛形)",
+    "patterns": [
+      "错金银云气纹",
+      "立体犀牛造型"
+    ],
+    "patterns_structured": {
+      "main": [
+        "错金银云气纹"
+      ],
+      "secondary": [
+        "立体犀牛造型"
+      ],
+      "local": []
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "服饰器(束带用钩)",
+    "craft": "范铸法 + 错金银工艺",
+    "rarity_level": "一级文物",
+    "story_brief": "错金银犀牛带钩以犀牛为造型,通体以金银丝错成云气纹,工艺精湛。战国时期带钩盛行,贵族以带钩材质、纹饰彰显身份,错金银犀牛带钩是其中最顶级的品类。犀牛造型提示战国时期中国中部地区或仍有犀牛分布,或以此为异域珍奇题材。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Palace_Museum_bronzes",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "故宫博物院官网(reference only) + 学术文献综合",
+        "url": "https://www.dpm.org.cn"
+      }
+    ]
+  },
+  {
+    "id": "zhongshan_hushi_lu_tongpingzuo",
+    "name_zh": "虎噬鹿铜屏座",
+    "name_pinyin": "Hu Shi Lu Tong Ping Zuo",
+    "name_alt": [
+      "错金银虎噬鹿器座",
+      "中山王墓虎噬鹿"
+    ],
+    "dynasty": "战国",
+    "period": "战国晚期(中山国)",
+    "approx_year": "约公元前309年",
+    "excavation_year": "1977",
+    "excavation_site": "河北省平山县三汲乡中山王厝墓",
+    "ancient_state": "中山",
+    "current_museum": "河北博物院",
+    "size": {
+      "height_cm": 21.9,
+      "width_cm": 26,
+      "length_cm": 51,
+      "weight_kg": null
+    },
+    "type": "杂器(器座/屏风座)",
+    "form_subtype": "立体写实铜雕(虎噬鹿)",
+    "patterns": [
+      "错金银斑点纹(虎体)",
+      "写实雕塑"
+    ],
+    "patterns_structured": {
+      "main": [
+        "写实雕塑造型"
+      ],
+      "secondary": [
+        "错金银斑点纹"
+      ],
+      "local": []
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "杂器(屏风底座,兼装饰)",
+    "craft": "范铸法 + 错金银",
+    "rarity_level": "国宝",
+    "story_brief": "虎噬鹿铜屏座出土于河北平山中山王厝墓,一只猛虎张口咬住鹿颈,鹿作挣扎状,构成充满张力的捕食瞬间。错金银的斑点纹精准再现虎纹,写实程度极高。此器原为屏风底座,是中山国贵族文化中动物题材写实铜雕的代表作,体现了北方草原艺术与中原铸铜工艺的交融。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Zhongshan_bronzes",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "Wikipedia EN (Zhongshan bronzes) + 河北博物院官网(reference only)",
+        "url": "https://en.wikipedia.org/wiki/Zhongshan_bronzes"
+      }
+    ]
+  },
+  {
+    "id": "zhongshan_guizuo_ren_qideng",
+    "name_zh": "跽坐人漆绘铜灯",
+    "name_pinyin": "Gui Zuo Ren Qi Hui Tong Deng",
+    "name_alt": [
+      "跪坐人形铜灯",
+      "中山王墓跽坐人灯"
+    ],
+    "dynasty": "战国",
+    "period": "战国晚期(中山国)",
+    "approx_year": "约公元前309年",
+    "excavation_year": "1977",
+    "excavation_site": "河北省平山县三汲乡中山王厝墓",
+    "ancient_state": "中山",
+    "current_museum": "河北博物院",
+    "size": {
+      "height_cm": 66.4,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "杂器(灯具)",
+    "form_subtype": "人形灯(跽坐人双臂举灯)",
+    "patterns": [
+      "漆绘彩色几何纹(衣纹)",
+      "写实人物"
+    ],
+    "patterns_structured": {
+      "main": [
+        "写实人物雕塑"
+      ],
+      "secondary": [
+        "漆绘彩色几何纹"
+      ],
+      "local": []
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "照明器(贵族宫室)",
+    "craft": "范铸法 + 漆绘(彩色几何纹)",
+    "rarity_level": "国宝",
+    "story_brief": "跽坐人漆绘铜灯出土于河北平山中山王厝墓,造型为一跽坐(正式跪坐)的人物双臂上举托灯盘,衣饰以彩色漆绘几何纹装饰。铜与漆的复合工艺在战国中山国器物中颇具特色,人物面部写实生动,是中山国工艺美术的精品。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Zhongshan_bronzes",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "河北博物院官网(reference only) + 中山国考古文献",
+        "url": "https://www.hebeimuseum.org"
+      }
+    ]
+  },
+  {
+    "id": "cuojin_jihewen_fangjian",
+    "name_zh": "错金银几何纹方鉴",
+    "name_pinyin": "Cuo Jin Yin Ji He Wen Fang Jian",
+    "name_alt": [
+      "战国错金银方鉴"
+    ],
+    "dynasty": "战国",
+    "period": "战国中期",
+    "approx_year": "约公元前4世纪",
+    "excavation_year": "TODO",
+    "excavation_site": "河南省(传)",
+    "ancient_state": "魏或韩",
+    "current_museum": "故宫博物院",
+    "size": {
+      "height_cm": 40,
+      "width_cm": 40,
+      "length_cm": 40,
+      "weight_kg": null
+    },
+    "type": "水器/冰器",
+    "form_subtype": "方鉴(方形大盒,可置冰或温水)",
+    "patterns": [
+      "错金银几何纹",
+      "蟠螭纹",
+      "兽首衔环"
+    ],
+    "patterns_structured": {
+      "main": [
+        "错金银几何纹"
+      ],
+      "secondary": [
+        "蟠螭纹"
+      ],
+      "local": [
+        "兽首衔环(四壁)"
+      ]
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "冰鉴(内置冰块冷藏食物或冷酒)",
+    "craft": "范铸法 + 错金银",
+    "rarity_level": "一级文物",
+    "story_brief": "错金银几何纹方鉴是战国时代贵族生活精品,方鉴内部可置冰块冷藏食物或冷酒,外壁以错金银工艺装饰精密几何纹与蟠螭纹。战国鉴是中国古代'冰箱'的原型,此件以错金银装饰展示了战国中期三晋地区贵族器用的极致精工。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Palace_Museum_bronzes",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "故宫博物院官网(reference only) + 学术文献",
+        "url": "https://www.dpm.org.cn"
+      }
+    ]
+  },
+  {
+    "id": "baoshan_chumu_tongqi_zu",
+    "name_zh": "包山楚墓铜器组",
+    "name_pinyin": "Bao Shan Chu Mu Tong Qi Zu",
+    "name_alt": [
+      "包山大冢铜器"
+    ],
+    "dynasty": "战国",
+    "period": "战国中期(楚国)",
+    "approx_year": "约公元前316年",
+    "excavation_year": "1987",
+    "excavation_site": "湖北省荆门市包山二号楚墓",
+    "ancient_state": "楚",
+    "current_museum": "湖北省博物馆",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "礼器组合",
+    "form_subtype": "鼎簋壶豆组合(列鼎七件+配套器)",
+    "patterns": [
+      "蟠虺纹",
+      "蟠螭纹",
+      "云雷纹"
+    ],
+    "patterns_structured": {
+      "main": [
+        "蟠虺纹"
+      ],
+      "secondary": [
+        "蟠螭纹",
+        "云雷纹"
+      ],
+      "local": []
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 50,
+      "summary": "各器有简短楚系铭文记器主官职(左尹邵佗)"
+    },
+    "purpose": "祭祀礼器(贵族列鼎制度)",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "包山二号楚墓1987年出土,墓主为楚国左尹邵佗,死于公元前316年。出土完整铜器、漆器、竹简(包山楚简)组合。铜器组完整呈现楚国中期贵族列鼎礼制,与简文互证,是了解战国中期楚国贵族日常生活与礼制的第一手资料。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Hubei_Provincial_Museum",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "Wikipedia EN (Baoshan tombs) + 湖北省博物馆(reference only)",
+        "url": "https://en.wikipedia.org/wiki/Baoshan_tombs"
+      }
+    ]
+  },
+  {
+    "id": "chu_zhenmu_shou",
+    "name_zh": "楚国镇墓兽",
+    "name_pinyin": "Chu Guo Zhen Mu Shou",
+    "name_alt": [
+      "楚式镇墓兽",
+      "曾侯乙墓镇墓兽"
+    ],
+    "dynasty": "战国",
+    "period": "战国早期(楚/曾国)",
+    "approx_year": "约公元前433年",
+    "excavation_year": "1978",
+    "excavation_site": "湖北省随州市擂鼓墩曾侯乙墓",
+    "ancient_state": "曾(楚文化圈)",
+    "current_museum": "湖北省博物馆",
+    "size": {
+      "height_cm": 79,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "礼器(葬具)",
+    "form_subtype": "镇墓兽(双头鹿角,木铜复合)",
+    "patterns": [
+      "鹿角形分叉",
+      "写实兽面",
+      "漆绘彩纹"
+    ],
+    "patterns_structured": {
+      "main": [
+        "写实兽面造型"
+      ],
+      "secondary": [
+        "漆绘彩纹"
+      ],
+      "local": [
+        "鹿角形分叉附件"
+      ]
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "镇墓(辟邪驱煞,守护墓室)",
+    "craft": "木铜复合工艺(木身铜饰 + 真鹿角或仿角) + 漆绘",
+    "rarity_level": "一级文物",
+    "story_brief": "楚国镇墓兽是楚文化最具代表性的独特器物,以木铜复合工艺制成,兽面狰狞夸张,头顶插真鹿角或仿鹿角,通体漆绘彩色几何纹。置于墓室四角或正中以辟邪护墓。曾侯乙墓出土的镇墓兽是此类器物中保存最为完整的标本之一,体现楚文化浓烈的巫鬼色彩与独特的艺术想象力。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Bianzhong_of_Marquis_Yi_of_Zeng",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认镇墓兽具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "Wikipedia EN (Antlered wooden tomb guardian) + 湖北省博物馆(reference only)",
+        "url": "https://en.wikipedia.org/wiki/Antlered_wooden_tomb_guardian"
+      }
+    ]
+  },
+  {
+    "id": "ba_shu_tongmao",
+    "name_zh": "巴蜀符号铜矛",
+    "name_pinyin": "Ba Shu Fu Hao Tong Mao",
+    "name_alt": [
+      "巴蜀图语铜矛"
+    ],
+    "dynasty": "战国",
+    "period": "战国中晚期(巴国)",
+    "approx_year": "约公元前4-3世纪",
+    "excavation_year": "1972",
+    "excavation_site": "四川省成都市羊子山",
+    "ancient_state": "巴",
+    "current_museum": "四川博物院",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": 25,
+      "weight_kg": null
+    },
+    "type": "兵器",
+    "form_subtype": "矛(青铜矛头)",
+    "patterns": [
+      "巴蜀符号(巴蜀图语)",
+      "虎纹",
+      "手心纹"
+    ],
+    "patterns_structured": {
+      "main": [
+        "巴蜀符号(尚未全部破译)"
+      ],
+      "secondary": [
+        "虎纹"
+      ],
+      "local": [
+        "手心纹"
+      ]
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": null,
+      "summary": "器面刻有多个'巴蜀符号'(巴蜀图语),这些符号是巴蜀文化独有的徽记系统,尚无法完全解读,可能兼有族徽、祭祀、计数等功能"
+    },
+    "purpose": "兵器(实战+礼仪)",
+    "craft": "范铸法 + 刻画",
+    "rarity_level": "一级文物",
+    "story_brief": "巴蜀符号铜矛是研究古代巴蜀文明独特符号系统的重要标本。巴蜀图语是一套尚未完全破译的古代符号系统,广泛出现在巴蜀青铜器、兵器上,可能代表氏族徽记或某种记事系统,是中华文明多元性的重要体现。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Sichuan_Museum",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "Wikipedia EN (Ba-Shu script) + 四川博物院(reference only)",
+        "url": "https://en.wikipedia.org/wiki/Ba-Shu_script"
+      }
+    ]
+  },
+  {
+    "id": "ba_ren_hunniu_chunyu",
+    "name_zh": "虎纽錞于",
+    "name_pinyin": "Hu Niu Chun Yu",
+    "name_alt": [
+      "巴人虎纽錞于",
+      "虎钮錞于"
+    ],
+    "dynasty": "战国",
+    "period": "战国中晚期(巴国)",
+    "approx_year": "约公元前4-3世纪",
+    "excavation_year": "1972",
+    "excavation_site": "四川省成都市",
+    "ancient_state": "巴",
+    "current_museum": "四川博物院",
+    "size": {
+      "height_cm": 58,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "乐器",
+    "form_subtype": "錞于(顶部虎纽)",
+    "patterns": [
+      "素面(器身)",
+      "立体虎形钮(顶部)"
+    ],
+    "patterns_structured": {
+      "main": [
+        "素面"
+      ],
+      "secondary": [],
+      "local": [
+        "立体虎形钮(顶部)"
+      ]
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "乐器(军阵鼓励士气,击打发声)",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "虎纽錞于是巴文化最具标志性的青铜乐器,錞于为战争中使用的打击乐器,顶部铸立体虎形,体现巴人崇虎的文化传统。《华阳国志》记巴人'勇锐善战',錞于是其军阵文化的象征。巴人崇虎的信仰与其居住的巴蜀山地环境密切相关。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Sichuan_Museum",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "Wikipedia EN (Ba people) + 四川博物院官网(reference only)",
+        "url": "https://en.wikipedia.org/wiki/Ba_people"
+      }
+    ]
+  },
+  {
+    "id": "shu_wang_ge",
+    "name_zh": "蜀王戈",
+    "name_pinyin": "Shu Wang Ge",
+    "name_alt": [
+      "古蜀王戈",
+      "战国蜀戈"
+    ],
+    "dynasty": "战国",
+    "period": "战国中晚期(蜀国)",
+    "approx_year": "约公元前4-3世纪",
+    "excavation_year": "1970年代",
+    "excavation_site": "四川省成都市附近(传)",
+    "ancient_state": "蜀",
+    "current_museum": "四川博物院",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": 28,
+      "weight_kg": null
+    },
+    "type": "兵器",
+    "form_subtype": "戈(青铜戈头)",
+    "patterns": [
+      "巴蜀符号",
+      "几何纹"
+    ],
+    "patterns_structured": {
+      "main": [
+        "巴蜀符号"
+      ],
+      "secondary": [
+        "几何纹"
+      ],
+      "local": []
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": null,
+      "summary": "戈援面刻有巴蜀符号,或为族徽或地名标记"
+    },
+    "purpose": "兵器",
+    "craft": "范铸法 + 刻画",
+    "rarity_level": "一级文物",
+    "story_brief": "蜀王戈是古蜀国末期青铜兵器的代表,其上巴蜀符号是研究古蜀文明的重要证据。古蜀国于公元前316年被秦所灭,蜀王戈见证了古蜀文明的最后阶段。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Sichuan_Museum",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "四川博物院官网(reference only) + 考古发掘报告",
+        "url": "https://www.scmuseum.cn"
+      }
+    ]
+  },
+  {
+    "id": "caihou_shen_bianzhong",
+    "name_zh": "蔡侯申编钟",
+    "name_pinyin": "Cai Hou Shen Bian Zhong",
+    "name_alt": [
+      "蔡昭侯编钟"
+    ],
+    "dynasty": "春秋",
+    "period": "春秋晚期(蔡国)",
+    "approx_year": "约公元前518-491年(蔡昭侯在位期间)",
+    "excavation_year": "1955",
+    "excavation_site": "安徽省寿县蔡侯墓",
+    "ancient_state": "蔡",
+    "current_museum": "安徽省博物馆 / 上海博物馆(分藏)",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "乐器",
+    "form_subtype": "编钟(甬钟一组)",
+    "patterns": [
+      "蟠螭纹",
+      "云雷纹"
+    ],
+    "patterns_structured": {
+      "main": [
+        "蟠螭纹"
+      ],
+      "secondary": [
+        "云雷纹"
+      ],
+      "local": []
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 186,
+      "summary": "各钟铭文共约186字,记蔡昭侯申铸钟之事,是研究蔡国历史与春秋南方礼乐文化的重要文献"
+    },
+    "purpose": "乐器(宫廷礼乐)",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "蔡侯申编钟1955年出土于安徽寿县蔡侯墓,器主蔡昭侯申曾多次被楚国欺凌,后联合吴国伍子胥攻破楚都郢,是春秋末年复仇故事的主角之一。编钟铭文是研究蔡国历史的珍贵文献,与《左传》可互相印证。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Anhui_Provincial_Museum",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "Wikipedia EN (Cai state) + 安徽省博物馆(reference only)",
+        "url": "https://en.wikipedia.org/wiki/Cai_(state)"
+      }
+    ]
+  },
+  {
+    "id": "caihou_shen_fangjian",
+    "name_zh": "蔡侯申方鉴",
+    "name_pinyin": "Cai Hou Shen Fang Jian",
+    "name_alt": [
+      "蔡昭侯方鉴"
+    ],
+    "dynasty": "春秋",
+    "period": "春秋晚期(蔡国)",
+    "approx_year": "约公元前518-491年",
+    "excavation_year": "1955",
+    "excavation_site": "安徽省寿县蔡侯墓",
+    "ancient_state": "蔡",
+    "current_museum": "安徽省博物馆",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "水器/冰器",
+    "form_subtype": "方鉴",
+    "patterns": [
+      "蟠螭纹",
+      "兽首衔环"
+    ],
+    "patterns_structured": {
+      "main": [
+        "蟠螭纹"
+      ],
+      "secondary": [],
+      "local": [
+        "兽首衔环(四壁)"
+      ]
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 30,
+      "summary": "铸铭约30字,记蔡侯申铸器"
+    },
+    "purpose": "冰鉴(冷藏食物/冷酒)",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "蔡侯申方鉴与编钟同出安徽寿县蔡侯墓,是蔡国礼器制度的实物证据。春秋时期诸侯以冰鉴冷藏食物与酒,是贵族生活精致化的体现。与编钟、铜器组合共同展现了蔡国作为南方小国的礼制文化。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Anhui_Provincial_Museum",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "安徽省博物馆官网(reference only) + 考古发掘报告",
+        "url": "https://www.ahm.cn"
+      }
+    ]
+  },
+  {
+    "id": "panhu_wen_chunqiu_biaozhunqi",
+    "name_zh": "蟠虺纹铜壶",
+    "name_pinyin": "Pan Hui Wen Tong Hu",
+    "name_alt": [
+      "春秋蟠虺纹方壶标准器"
+    ],
+    "dynasty": "春秋",
+    "period": "春秋晚期",
+    "approx_year": "约公元前6-5世纪",
+    "excavation_year": "TODO",
+    "excavation_site": "河南省(传)",
+    "ancient_state": "郑或宋",
+    "current_museum": "上海博物馆",
+    "size": {
+      "height_cm": 50,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "酒器",
+    "form_subtype": "方壶",
+    "patterns": [
+      "蟠虺纹(满饰)",
+      "云雷地纹"
+    ],
+    "patterns_structured": {
+      "main": [
+        "蟠虺纹(主纹满布全器)"
+      ],
+      "secondary": [
+        "云雷地纹"
+      ],
+      "local": []
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "盛酒礼器",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "蟠虺纹是春秋晚期最具代表性的装饰纹样之一,以细密盘曲的小蛇(虺)构成满地纹饰,是商周饕餮纹演变的产物,反映了春秋时代对纹饰细密化、几何化的审美追求。此壶是春秋蟠虺纹铜器的标准器式样。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Shanghai_Museum_bronzes",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "上海博物馆官网(reference only) + 青铜器纹饰学术文献",
+        "url": "https://www.shanghaimuseum.net"
+      }
+    ]
+  },
+  {
+    "id": "panchimen_tonghu_chunqiu",
+    "name_zh": "蟠螭纹铜壶(春秋标准器)",
+    "name_pinyin": "Pan Chi Wen Tong Hu Chun Qiu",
+    "name_alt": [
+      "春秋蟠螭纹圆壶"
+    ],
+    "dynasty": "春秋",
+    "period": "春秋中晚期",
+    "approx_year": "约公元前6世纪",
+    "excavation_year": "TODO",
+    "excavation_site": "山西省(传)",
+    "ancient_state": "晋",
+    "current_museum": "山西博物院",
+    "size": {
+      "height_cm": 45,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "酒器",
+    "form_subtype": "圆壶",
+    "patterns": [
+      "蟠螭纹(主纹)",
+      "云雷地纹"
+    ],
+    "patterns_structured": {
+      "main": [
+        "蟠螭纹"
+      ],
+      "secondary": [
+        "云雷地纹"
+      ],
+      "local": []
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "盛酒礼器",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "蟠螭纹是春秋至战国青铜器最普遍的主纹,以盘曲的无角龙(螭)构成密集纹样,是夔龙纹解体后演化的主流形式。此壶是晋国春秋中晚期铜壶的标准器,代表了这一时期北方诸侯国的审美风格。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Shanxi_Museum",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "山西博物院官网(reference only) + 学术文献",
+        "url": "https://www.shanximuseum.com"
+      }
+    ]
+  },
+  {
+    "id": "zhi_junzi_jian",
+    "name_zh": "智君子鉴",
+    "name_pinyin": "Zhi Jun Zi Jian",
+    "name_alt": [
+      "晋智君子鉴"
+    ],
+    "dynasty": "春秋",
+    "period": "春秋晚期(晋国)",
+    "approx_year": "约公元前5世纪初",
+    "excavation_year": "传世",
+    "excavation_site": "山西省(传)",
+    "ancient_state": "晋",
+    "current_museum": "故宫博物院",
+    "size": {
+      "height_cm": 39,
+      "width_cm": null,
+      "length_cm": 66,
+      "weight_kg": null
+    },
+    "type": "水器",
+    "form_subtype": "长方鉴",
+    "patterns": [
+      "蟠螭纹",
+      "兽首衔环"
+    ],
+    "patterns_structured": {
+      "main": [
+        "蟠螭纹"
+      ],
+      "secondary": [],
+      "local": [
+        "兽首衔环"
+      ]
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 67,
+      "summary": "铸铭67字,记晋国智氏家族(智君子)铸器。是春秋晚期智氏卿族史的文献材料"
+    },
+    "purpose": "盥洗礼器",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "智君子鉴是晋国卿族智氏的礼器,铭文记智君子铸器事宜。春秋末年智、赵、魏、韩四家分晋,智氏最终被三家联合所灭(前453年,智伯之役)。此鉴是智氏家族留存于世的重要文物,见证了那段历史的尾声。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Palace_Museum_bronzes",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "故宫博物院官网(reference only) + Wikipedia EN (Zhi clan)",
+        "url": "https://en.wikipedia.org/wiki/Zhi_clan"
+      }
+    ]
+  },
+  {
+    "id": "huang_zhi_ding",
+    "name_zh": "黄之鼎",
+    "name_pinyin": "Huang Zhi Ding",
+    "name_alt": [
+      "春秋黄国铜鼎"
+    ],
+    "dynasty": "春秋",
+    "period": "春秋中期(黄国)",
+    "approx_year": "约公元前7世纪",
+    "excavation_year": "1983",
+    "excavation_site": "河南省潢川县春秋黄国墓地",
+    "ancient_state": "黄",
+    "current_museum": "河南省文物考古研究院",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "食器",
+    "form_subtype": "圆鼎",
+    "patterns": [
+      "蟠虺纹",
+      "云雷纹"
+    ],
+    "patterns_structured": {
+      "main": [
+        "蟠虺纹"
+      ],
+      "secondary": [
+        "云雷纹"
+      ],
+      "local": []
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 25,
+      "summary": "铸铭约25字,记黄国贵族铸器。黄国是淮河流域春秋小国,约前648年被楚所灭"
+    },
+    "purpose": "祭祀礼器",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "黄之鼎出土于河南潢川春秋黄国墓地,是研究淮河流域春秋小国黄国的重要器物。黄国是嬴姓诸侯,约公元前648年被楚国所灭,是春秋兼并历史的见证。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Henan_Museum",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "Wikipedia EN (Huang state) + 河南考古(reference only)",
+        "url": "https://en.wikipedia.org/wiki/Huang_(state)"
+      }
+    ]
+  },
+  {
+    "id": "zhanguo_ding_zu_liding",
+    "name_zh": "战国列鼎组(附盖鼎)",
+    "name_pinyin": "Zhan Guo Ding Zu",
+    "name_alt": [
+      "楚式附盖铜鼎七件组"
+    ],
+    "dynasty": "战国",
+    "period": "战国中期(楚国)",
+    "approx_year": "约公元前4世纪",
+    "excavation_year": "1978",
+    "excavation_site": "湖北省随州市擂鼓墩曾侯乙墓",
+    "ancient_state": "曾(楚文化圈)",
+    "current_museum": "湖北省博物馆",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "食器",
+    "form_subtype": "列鼎七件(升鼎,带盖,尺寸递减)",
+    "patterns": [
+      "蟠螭纹",
+      "云雷纹"
+    ],
+    "patterns_structured": {
+      "main": [
+        "蟠螭纹"
+      ],
+      "secondary": [
+        "云雷纹"
+      ],
+      "local": []
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": null,
+      "summary": "各鼎有简短铭文记器主曾侯乙"
+    },
+    "purpose": "祭祀礼器(列鼎制度:诸侯七鼎)",
+    "craft": "范铸法",
+    "rarity_level": "国宝(曾侯乙墓整体)",
+    "story_brief": "曾侯乙墓出土的七件列鼎完整呈现了周代诸侯用鼎礼制:天子九鼎八簋,诸侯七鼎六簋,卿大夫五鼎四簋,依次递减。曾侯乙以七鼎下葬,体现了其诸侯地位。七件鼎尺寸依次递减,配套簋、豆等器,构成完整礼器组合。是研究周代礼制的最完整实物证据之一。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Bianzhong_of_Marquis_Yi_of_Zeng",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认列鼎具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "Wikipedia EN (Marquis Yi of Zeng) + 湖北省博物馆(reference only)",
+        "url": "https://en.wikipedia.org/wiki/Marquis_Yi_of_Zeng"
+      }
+    ]
+  },
+  {
+    "id": "zhanguo_gui_zu",
+    "name_zh": "战国铜簋组(曾侯乙)",
+    "name_pinyin": "Zhan Guo Tong Gui Zu",
+    "name_alt": [
+      "曾侯乙铜簋八件组"
+    ],
+    "dynasty": "战国",
+    "period": "战国早期(曾国)",
+    "approx_year": "约公元前433年",
+    "excavation_year": "1978",
+    "excavation_site": "湖北省随州市擂鼓墩曾侯乙墓",
+    "ancient_state": "曾",
+    "current_museum": "湖北省博物馆",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "食器",
+    "form_subtype": "簋(八件组,带盖带座)",
+    "patterns": [
+      "蟠螭纹",
+      "云雷纹"
+    ],
+    "patterns_structured": {
+      "main": [
+        "蟠螭纹"
+      ],
+      "secondary": [
+        "云雷纹"
+      ],
+      "local": []
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": null,
+      "summary": "各簋铭文记曾侯乙"
+    },
+    "purpose": "食礼器(盛黍稷,与列鼎配套)",
+    "craft": "范铸法",
+    "rarity_level": "国宝(曾侯乙墓整体)",
+    "story_brief": "曾侯乙墓出土八件铜簋,与七件列鼎配套,完整体现诸侯七鼎六簋(实为八簋,史料或有差异)的礼制组合。簋是周代礼制中盛放黍稷的核心器物,与鼎共同构成周代饮食礼制的物质基础。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Bianzhong_of_Marquis_Yi_of_Zeng",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "Wikipedia EN (Marquis Yi of Zeng) + 湖北省博物馆(reference only)",
+        "url": "https://en.wikipedia.org/wiki/Marquis_Yi_of_Zeng"
+      }
+    ]
+  },
+  {
+    "id": "chunqiu_jin_ding_zu",
+    "name_zh": "春秋晋国列鼎组",
+    "name_pinyin": "Chun Qiu Jin Guo Lie Ding Zu",
+    "name_alt": [
+      "侯马晋国铜鼎组"
+    ],
+    "dynasty": "春秋",
+    "period": "春秋晚期(晋国)",
+    "approx_year": "约公元前5世纪",
+    "excavation_year": "1960年代",
+    "excavation_site": "山西省侯马市晋国遗址区",
+    "ancient_state": "晋",
+    "current_museum": "山西博物院",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "食器",
+    "form_subtype": "列鼎(五件组)",
+    "patterns": [
+      "蟠螭纹",
+      "兽面纹",
+      "云雷纹"
+    ],
+    "patterns_structured": {
+      "main": [
+        "蟠螭纹"
+      ],
+      "secondary": [
+        "兽面纹",
+        "云雷纹"
+      ],
+      "local": []
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文或少量族徽符号"
+    },
+    "purpose": "祭祀礼器(卿大夫五鼎制)",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "侯马晋国遗址是春秋时代晋国铸铜作坊的所在地,出土了大量铸铜陶范与成品。晋国列鼎组是春秋晚期北方诸侯国礼制体系的实物代表,体现卿大夫五鼎礼制。侯马遗址出土的陶范还揭示了春秋铸铜技术的精细化程度。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Shanxi_Museum",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "Wikipedia EN (Houma foundry site) + 山西博物院(reference only)",
+        "url": "https://en.wikipedia.org/wiki/Houma_foundry_site"
+      }
+    ]
+  },
+  {
+    "id": "qin_guo_tongqi_zu",
+    "name_zh": "秦国铜礼器组",
+    "name_pinyin": "Qin Guo Tong Li Qi Zu",
+    "name_alt": [
+      "秦公大墓铜礼器"
+    ],
+    "dynasty": "春秋",
+    "period": "春秋中期(秦国)",
+    "approx_year": "约公元前7世纪",
+    "excavation_year": "1986",
+    "excavation_site": "陕西省凤翔县秦公一号大墓",
+    "ancient_state": "秦",
+    "current_museum": "陕西省考古研究院",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "礼器组合",
+    "form_subtype": "鼎壶盆鬲组合",
+    "patterns": [
+      "重环纹",
+      "窃曲纹",
+      "蟠螭纹"
+    ],
+    "patterns_structured": {
+      "main": [
+        "重环纹"
+      ],
+      "secondary": [
+        "窃曲纹",
+        "蟠螭纹"
+      ],
+      "local": []
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": null,
+      "summary": "部分器物铸有秦公铭文"
+    },
+    "purpose": "祭祀礼器",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "秦公一号大墓是中国迄今发掘最大的先秦墓葬,墓主为秦景公(一说穆公)。墓内出土青铜礼器组合,纹饰风格融合西周晚期传统与秦国地方特色,重环纹与窃曲纹是这一时期秦国器物的标志纹样。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Shaanxi_History_Museum",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "Wikipedia EN (Qin Duke No.1 Tomb) + 陕西考古(reference only)",
+        "url": "https://en.wikipedia.org/wiki/Duke_of_Qin_No._1_Tomb"
+      }
+    ]
+  },
+  {
+    "id": "qi_guo_tong_dou",
+    "name_zh": "齐国铜豆(附盖)",
+    "name_pinyin": "Qi Guo Tong Dou",
+    "name_alt": [
+      "春秋齐国高足豆"
+    ],
+    "dynasty": "春秋",
+    "period": "春秋晚期(齐国)",
+    "approx_year": "约公元前6-5世纪",
+    "excavation_year": "1970年代",
+    "excavation_site": "山东省临淄市齐国故城遗址",
+    "ancient_state": "齐",
+    "current_museum": "山东省博物馆",
+    "size": {
+      "height_cm": 32,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "食器",
+    "form_subtype": "豆(高足,带盖)",
+    "patterns": [
+      "蟠螭纹",
+      "云雷纹"
+    ],
+    "patterns_structured": {
+      "main": [
+        "蟠螭纹"
+      ],
+      "secondary": [
+        "云雷纹"
+      ],
+      "local": []
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 10,
+      "summary": "铸铭约10字,记齐国器主"
+    },
+    "purpose": "食礼器(盛肉酱或腌菜)",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "齐国铜豆出土于山东临淄齐国故城遗址,是研究春秋东方大国齐国礼制的实物证据。临淄遗址是东周时代最繁荣的城市之一,出土大量礼器体现了齐国的文化发达。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Shandong_Museum",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "山东省博物馆官网(reference only) + 临淄考古报告",
+        "url": "https://www.sdmuseum.com"
+      }
+    ]
+  },
+  {
+    "id": "zhanguo_han_guo_tongqi",
+    "name_zh": "韩国铜鼎(战国)",
+    "name_pinyin": "Han Guo Tong Ding Zhan Guo",
+    "name_alt": [
+      "战国韩式铜鼎"
+    ],
+    "dynasty": "战国",
+    "period": "战国中期(韩国)",
+    "approx_year": "约公元前4世纪",
+    "excavation_year": "1970年代",
+    "excavation_site": "河南省新郑市战国韩墓",
+    "ancient_state": "韩",
+    "current_museum": "河南博物院",
+    "size": {
+      "height_cm": 28,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "食器",
+    "form_subtype": "圆鼎(蹄足)",
+    "patterns": [
+      "蟠螭纹",
+      "云雷纹"
+    ],
+    "patterns_structured": {
+      "main": [
+        "蟠螭纹"
+      ],
+      "secondary": [
+        "云雷纹"
+      ],
+      "local": []
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "食礼器",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "战国韩国铜鼎出土于河南新郑(韩国故都),体现了三家分晋后韩国的礼制传统。新郑在春秋时代是郑国都城,后成为韩都,莲鹤方壶亦出于此地,这一地区是东周青铜器出土最集中的地区之一。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Henan_Museum",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "河南博物院官网(reference only)",
+        "url": "https://www.chnmus.net"
+      }
+    ]
+  },
+  {
+    "id": "zhanguo_zhao_tongqi",
+    "name_zh": "赵国铜壶(战国)",
+    "name_pinyin": "Zhao Guo Tong Hu Zhan Guo",
+    "name_alt": [
+      "战国赵式圆壶"
+    ],
+    "dynasty": "战国",
+    "period": "战国中期(赵国)",
+    "approx_year": "约公元前4世纪",
+    "excavation_year": "1970年代",
+    "excavation_site": "河北省邯郸市赵国故城遗址",
+    "ancient_state": "赵",
+    "current_museum": "邯郸市博物馆",
+    "size": {
+      "height_cm": 35,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "酒器",
+    "form_subtype": "圆壶",
+    "patterns": [
+      "蟠螭纹"
+    ],
+    "patterns_structured": {
+      "main": [
+        "蟠螭纹"
+      ],
+      "secondary": [],
+      "local": []
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "盛酒礼器",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "赵国铜壶出土于河北邯郸赵国故城遗址,赵国是战国七雄之一,邯郸是其国都。战国赵国青铜器风格受北方草原文化影响,同时延续晋国礼制传统。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Hebei_bronzes",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "Wikipedia EN (Zhao state) + 邯郸博物馆(reference only)",
+        "url": "https://en.wikipedia.org/wiki/Zhao_(state)"
+      }
+    ]
+  },
+  {
+    "id": "zhanguo_wei_tongqi",
+    "name_zh": "魏国错金铜壶(战国)",
+    "name_pinyin": "Wei Guo Cuo Jin Tong Hu",
+    "name_alt": [
+      "战国魏式错金圆壶"
+    ],
+    "dynasty": "战国",
+    "period": "战国早中期(魏国)",
+    "approx_year": "约公元前4世纪",
+    "excavation_year": "1970年代",
+    "excavation_site": "河南省辉县市固围村魏国贵族墓地",
+    "ancient_state": "魏",
+    "current_museum": "中国国家博物馆",
+    "size": {
+      "height_cm": 40,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "酒器",
+    "form_subtype": "圆壶(错金)",
+    "patterns": [
+      "错金几何纹",
+      "蟠螭纹"
+    ],
+    "patterns_structured": {
+      "main": [
+        "错金几何纹"
+      ],
+      "secondary": [
+        "蟠螭纹"
+      ],
+      "local": []
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "盛酒礼器",
+    "craft": "范铸法 + 错金",
+    "rarity_level": "一级文物",
+    "story_brief": "魏国错金铜壶出土于河南辉县固围村魏国贵族墓地,错金几何纹是战国三晋(韩赵魏)地区铜器的典型装饰风格,展现了战国时代错金工艺在中原地区的广泛运用。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:National_Museum_of_China",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "Wikipedia EN (Wei state) + 国博官网(reference only)",
+        "url": "https://en.wikipedia.org/wiki/Wei_(state)"
+      }
+    ]
+  },
+  {
+    "id": "yan_guo_tongqi",
+    "name_zh": "燕国铜鼎(战国)",
+    "name_pinyin": "Yan Guo Tong Ding Zhan Guo",
+    "name_alt": [
+      "战国燕式铜鼎"
+    ],
+    "dynasty": "战国",
+    "period": "战国中晚期(燕国)",
+    "approx_year": "约公元前4-3世纪",
+    "excavation_year": "1966",
+    "excavation_site": "北京市房山区燕下都遗址",
+    "ancient_state": "燕",
+    "current_museum": "首都博物馆",
+    "size": {
+      "height_cm": 25,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "食器",
+    "form_subtype": "圆鼎",
+    "patterns": [
+      "蟠螭纹"
+    ],
+    "patterns_structured": {
+      "main": [
+        "蟠螭纹"
+      ],
+      "secondary": [],
+      "local": []
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "食礼器",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "燕国铜鼎出土于北京房山燕下都遗址,燕下都是战国燕国的陪都,遗址规模宏大,出土了大量青铜器。燕国是战国七雄之一,地处北方,其青铜器风格受北方文化与中原传统双重影响。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Capital_Museum_Beijing",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "Wikipedia EN (Yan state) + 首都博物馆(reference only)",
+        "url": "https://en.wikipedia.org/wiki/Yan_(state)"
+      }
+    ]
+  },
+  {
+    "id": "zhanguo_chu_tong_fudou",
+    "name_zh": "楚国铜敦(战国)",
+    "name_pinyin": "Chu Guo Tong Dun",
+    "name_alt": [
+      "楚式铜敦",
+      "战国楚式铜球形敦"
+    ],
+    "dynasty": "战国",
+    "period": "战国早中期(楚国)",
+    "approx_year": "约公元前5-4世纪",
+    "excavation_year": "1978",
+    "excavation_site": "湖北省随州市擂鼓墩曾侯乙墓",
+    "ancient_state": "曾(楚文化圈)",
+    "current_museum": "湖北省博物馆",
+    "size": {
+      "height_cm": 24,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "食器",
+    "form_subtype": "敦(楚式球形敦,上下对称)",
+    "patterns": [
+      "蟠螭纹",
+      "云雷纹"
+    ],
+    "patterns_structured": {
+      "main": [
+        "蟠螭纹"
+      ],
+      "secondary": [
+        "云雷纹"
+      ],
+      "local": []
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 6,
+      "summary": "铸铭记曾侯乙"
+    },
+    "purpose": "食礼器(盛黍稷)",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "楚式铜敦是战国楚文化圈特有的食器形制,上下两半球形对扣,形似苹果或西瓜,与中原地区鼎、簋的传统形式迥异,体现了楚文化的独创性。曾侯乙墓出土了多件这类楚式敦,是研究楚式礼器体系演变的重要标本。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Bianzhong_of_Marquis_Yi_of_Zeng",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "湖北省博物馆官网(reference only) + 学术文献",
+        "url": "https://www.hbww.org"
+      }
+    ]
+  },
+  {
+    "id": "chunqiu_wu_yue_tong_ju_zu",
+    "name_zh": "春秋吴越铜器组",
+    "name_pinyin": "Chun Qiu Wu Yue Tong Qi Zu",
+    "name_alt": [
+      "吴国铜礼器组"
+    ],
+    "dynasty": "春秋",
+    "period": "春秋晚期(吴国)",
+    "approx_year": "约公元前6-5世纪",
+    "excavation_year": "1990年代",
+    "excavation_site": "江苏省苏州市吴国故城附近",
+    "ancient_state": "吴",
+    "current_museum": "苏州博物馆",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "礼器组合",
+    "form_subtype": "鼎壶盘匜组合",
+    "patterns": [
+      "蟠虺纹",
+      "几何纹"
+    ],
+    "patterns_structured": {
+      "main": [
+        "蟠虺纹"
+      ],
+      "secondary": [
+        "几何纹"
+      ],
+      "local": []
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": null,
+      "summary": "部分器物有吴国铭文"
+    },
+    "purpose": "祭祀礼器",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "吴越地区是春秋晚期青铜铸造技术最发达的地区之一,吴越工匠创造了独具特色的菱形暗格纹、复合金属铸造等技术。吴国铜器组体现了吴国在鼎盛期(夫差时代)的礼制文化,苏州地区保存了吴文化最完整的考古遗存。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Suzhou_Museum",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "Wikipedia EN (Wu (state)) + 苏州博物馆(reference only)",
+        "url": "https://en.wikipedia.org/wiki/Wu_(state)"
+      }
+    ]
+  },
+  {
+    "id": "zhongshan_wang_cuo_cuojinyin_huzhixing",
+    "name_zh": "中山王厝错金银虎形饰",
+    "name_pinyin": "Zhong Shan Wang Cuo Cuo Jin Yin Hu Xing Shi",
+    "name_alt": [
+      "中山国错金银虎形铜器"
+    ],
+    "dynasty": "战国",
+    "period": "战国晚期(中山国)",
+    "approx_year": "约公元前309年",
+    "excavation_year": "1977",
+    "excavation_site": "河北省平山县三汲乡中山王厝墓",
+    "ancient_state": "中山",
+    "current_museum": "河北博物院",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": 20,
+      "weight_kg": null
+    },
+    "type": "杂器(装饰器)",
+    "form_subtype": "虎形铜饰件",
+    "patterns": [
+      "错金银云气纹",
+      "写实虎形"
+    ],
+    "patterns_structured": {
+      "main": [
+        "写实虎形"
+      ],
+      "secondary": [
+        "错金银云气纹"
+      ],
+      "local": []
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "装饰器(器物附件或服饰配件)",
+    "craft": "范铸法 + 错金银",
+    "rarity_level": "一级文物",
+    "story_brief": "中山国错金银虎形饰件出土于中山王厝墓,是中山国北方草原文化影响的体现。中山国是白狄族建立的国家,受北方草原艺术风格浸染,动物纹饰尤其是虎、鹿、鸟形等在其器物中频繁出现,与中原的蟠螭纹系统形成鲜明对比。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Zhongshan_bronzes",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "Wikipedia EN (Zhongshan bronzes) + 河北博物院(reference only)",
+        "url": "https://en.wikipedia.org/wiki/Zhongshan_bronzes"
+      }
+    ]
+  },
+  {
+    "id": "chunqiu_tongge_ming",
+    "name_zh": "吕行戈(铭文有铸地)",
+    "name_pinyin": "Lü Xing Ge",
+    "name_alt": [
+      "春秋有铭铜戈"
+    ],
+    "dynasty": "春秋",
+    "period": "春秋晚期",
+    "approx_year": "约公元前5世纪",
+    "excavation_year": "传世",
+    "excavation_site": "陕西省(传)",
+    "ancient_state": "秦或晋",
+    "current_museum": "陕西历史博物馆",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": 26,
+      "weight_kg": null
+    },
+    "type": "兵器",
+    "form_subtype": "戈(青铜戈头)",
+    "patterns": [
+      "素面"
+    ],
+    "patterns_structured": {
+      "main": [
+        "素面"
+      ],
+      "secondary": [],
+      "local": []
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 12,
+      "summary": "戈援面铸铭约12字,记铸造地点及工匠名,是研究春秋武器生产管理制度的材料"
+    },
+    "purpose": "兵器(实战)",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "此类有铭铜戈是研究先秦武器生产管理制度的重要实物。春秋战国时期,兵器铸造有严格的工官管理制度,戈上铸铭记录铸地、工匠名,便于追责问责,是中国最早的产品质量管理制度的雏形。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Shaanxi_History_Museum",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "陕西历史博物馆官网(reference only) + 学术文献",
+        "url": "https://www.sxhm.com"
+      }
+    ]
+  },
+  {
+    "id": "zhanguo_lihe_tongpan",
+    "name_zh": "战国铜盘(龙耳)",
+    "name_pinyin": "Zhan Guo Tong Pan Long Er",
+    "name_alt": [
+      "战国龙耳铜盘"
+    ],
+    "dynasty": "战国",
+    "period": "战国中期",
+    "approx_year": "约公元前4世纪",
+    "excavation_year": "TODO",
+    "excavation_site": "湖南省(传)",
+    "ancient_state": "楚",
+    "current_museum": "湖南博物院",
+    "size": {
+      "height_cm": 16,
+      "width_cm": null,
+      "length_cm": 56,
+      "weight_kg": null
+    },
+    "type": "水器",
+    "form_subtype": "盘(龙首耳)",
+    "patterns": [
+      "蟠螭纹",
+      "云雷纹",
+      "龙首形耳"
+    ],
+    "patterns_structured": {
+      "main": [
+        "蟠螭纹"
+      ],
+      "secondary": [
+        "云雷纹"
+      ],
+      "local": [
+        "龙首形双耳"
+      ]
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "盥洗礼器",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "战国龙耳铜盘是楚国南方风格铜器的代表,龙首形双耳夸张生动,蟠螭纹密布器身,展现了楚国铜器独特的装饰风格。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Hunan_Museum",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "湖南博物院官网(reference only)",
+        "url": "https://www.hnmuseum.com"
+      }
+    ]
+  },
+  {
+    "id": "cuojin_banshe_tonghu",
+    "name_zh": "错金蟠蛇纹铜壶",
+    "name_pinyin": "Cuo Jin Pan She Wen Tong Hu",
+    "name_alt": [
+      "战国错金蛇纹壶"
+    ],
+    "dynasty": "战国",
+    "period": "战国早期(楚国)",
+    "approx_year": "约公元前5世纪",
+    "excavation_year": "1978",
+    "excavation_site": "湖北省随州市擂鼓墩曾侯乙墓",
+    "ancient_state": "曾(楚文化圈)",
+    "current_museum": "湖北省博物馆",
+    "size": {
+      "height_cm": 48,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "酒器",
+    "form_subtype": "圆壶",
+    "patterns": [
+      "错金蟠蛇纹",
+      "云雷纹"
+    ],
+    "patterns_structured": {
+      "main": [
+        "错金蟠蛇纹"
+      ],
+      "secondary": [
+        "云雷纹"
+      ],
+      "local": []
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 6,
+      "summary": "铸铭约6字,记曾侯乙"
+    },
+    "purpose": "盛酒礼器",
+    "craft": "范铸法 + 错金",
+    "rarity_level": "一级文物",
+    "story_brief": "错金蟠蛇纹铜壶出土于曾侯乙墓,以错金工艺呈现蟠蛇纹饰,蛇身蜿蜒盘绕,金光熠熠。楚文化对蛇纹有特别的崇尚,体现了楚国神秘的巫鬼文化背景。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Bianzhong_of_Marquis_Yi_of_Zeng",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "湖北省博物馆官网(reference only)",
+        "url": "https://www.hbww.org"
+      }
+    ]
+  },
+  {
+    "id": "zhanguo_niushouwenhu",
+    "name_zh": "战国牛首纹铜壶",
+    "name_pinyin": "Zhan Guo Niu Shou Wen Tong Hu",
+    "name_alt": [
+      "战国铺首衔环圆壶"
+    ],
+    "dynasty": "战国",
+    "period": "战国中晚期",
+    "approx_year": "约公元前4-3世纪",
+    "excavation_year": "TODO",
+    "excavation_site": "山东省(传)",
+    "ancient_state": "齐",
+    "current_museum": "山东省博物馆",
+    "size": {
+      "height_cm": 38,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "酒器",
+    "form_subtype": "圆壶(铺首衔环耳)",
+    "patterns": [
+      "铺首衔环(牛首形)",
+      "蟠螭纹"
+    ],
+    "patterns_structured": {
+      "main": [
+        "蟠螭纹"
+      ],
+      "secondary": [],
+      "local": [
+        "铺首衔环(牛首形双耳)"
+      ]
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "盛酒礼器",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "战国牛首纹铜壶以铺首衔环作为双耳,铺首为牛首造型。铺首衔环是战国至汉代器物最常见的装饰形式之一,兼具实用(提耳)与辟邪功能。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Shandong_Museum",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "山东省博物馆官网(reference only)",
+        "url": "https://www.sdmuseum.com"
+      }
+    ]
+  },
+  {
+    "id": "zhanguo_cuojinyin_tongdaigou_zu",
+    "name_zh": "战国错金银铜带钩组",
+    "name_pinyin": "Zhan Guo Cuo Jin Yin Tong Dai Gou Zu",
+    "name_alt": [
+      "战国错金银带钩一组"
+    ],
+    "dynasty": "战国",
+    "period": "战国中晚期",
+    "approx_year": "约公元前4-3世纪",
+    "excavation_year": "1968",
+    "excavation_site": "河北省满城县中山靖王刘胜墓(附近汉代前身)",
+    "ancient_state": "中山(战国) / 西汉(器物入墓时代)",
+    "current_museum": "河北博物院",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": 18,
+      "weight_kg": null
+    },
+    "type": "服饰器",
+    "form_subtype": "带钩(多件组合,各形各异)",
+    "patterns": [
+      "错金银云气纹",
+      "龙纹",
+      "几何纹"
+    ],
+    "patterns_structured": {
+      "main": [
+        "错金银云气纹"
+      ],
+      "secondary": [
+        "龙纹"
+      ],
+      "local": [
+        "几何纹"
+      ]
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "服饰器(束腰带用钩)",
+    "craft": "范铸法 + 错金银",
+    "rarity_level": "一级文物",
+    "story_brief": "战国错金银带钩是贵族身份的标志性配件,以错金银工艺装饰各类动物纹与云气纹,是战国至汉代最精美的个人饰品。带钩材质与纹饰直接体现主人等级,错金银带钩只有高级贵族才能使用。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Zhongshan_bronzes",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "Wikipedia EN (Belt hook) + 河北博物院(reference only)",
+        "url": "https://en.wikipedia.org/wiki/Belt_hook"
+      }
+    ]
+  },
+  {
+    "id": "chu_wang_yizhang_ge",
+    "name_zh": "楚王酓璋戈",
+    "name_pinyin": "Chu Wang Yan Zhang Ge",
+    "name_alt": [
+      "楚王戈(酓璋铭)"
+    ],
+    "dynasty": "战国",
+    "period": "战国中期(楚国)",
+    "approx_year": "约公元前4世纪",
+    "excavation_year": "传世",
+    "excavation_site": "湖北省(传)",
+    "ancient_state": "楚",
+    "current_museum": "上海博物馆",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": 22,
+      "weight_kg": null
+    },
+    "type": "兵器",
+    "form_subtype": "戈(青铜戈头)",
+    "patterns": [
+      "素面",
+      "错金铭文"
+    ],
+    "patterns_structured": {
+      "main": [
+        "素面"
+      ],
+      "secondary": [
+        "错金铭文"
+      ],
+      "local": []
+    },
+    "inscription": {
+      "has": true,
+      "text": "楚王酓璋",
+      "char_count": 4,
+      "summary": "戈援面错金铭文'楚王酓璋'4字,器主为楚王'酓璋'(学界对具体楚王对应有争议)"
+    },
+    "purpose": "兵器(王者礼仪用戈)",
+    "craft": "范铸法 + 错金",
+    "rarity_level": "一级文物",
+    "story_brief": "楚王酓璋戈铭文'楚王酓璋',是研究楚国王室谱系的重要文献实物。楚王名多用'酓'字开头,学界对'酓璋'对应哪位楚王尚有讨论。此戈是楚王礼仪兵器的典型代表。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Shanghai_Museum_bronzes",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "上海博物馆官网(reference only) + 楚系铭文学术文献",
+        "url": "https://www.shanghaimuseum.net"
+      }
+    ]
+  },
+  {
+    "id": "chu_wang_xiongfu_fangdou",
+    "name_zh": "楚王熊负方斗",
+    "name_pinyin": "Chu Wang Xiong Fu Fang Dou",
+    "name_alt": [
+      "楚王方斗"
+    ],
+    "dynasty": "春秋",
+    "period": "春秋晚期(楚国)",
+    "approx_year": "约公元前6-5世纪",
+    "excavation_year": "传世",
+    "excavation_site": "湖北省(传)",
+    "ancient_state": "楚",
+    "current_museum": "上海博物馆",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "度量衡",
+    "form_subtype": "方斗(量器)",
+    "patterns": [
+      "素面 + 刻铭"
+    ],
+    "patterns_structured": {
+      "main": [
+        "素面"
+      ],
+      "secondary": [
+        "刻铭"
+      ],
+      "local": []
+    },
+    "inscription": {
+      "has": true,
+      "text": "楚王熊负",
+      "char_count": 4,
+      "summary": "铸铭'楚王熊负'4字,确认器主为楚王熊负(楚昭王或其附近时期)。是研究楚国度量衡制度的珍贵实物"
+    },
+    "purpose": "度量衡标准器",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "楚王熊负方斗是楚国王室度量衡标准器,铭文记'楚王熊负',是研究楚国量制的重要实物。楚国有独立的度量衡体系,与秦制、齐制均有差异,此斗是了解楚国标准化制度的珍贵文物。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Shanghai_Museum_bronzes",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "上海博物馆官网(reference only) + 楚国历史文献",
+        "url": "https://www.shanghaimuseum.net"
+      }
+    ]
+  },
+  {
+    "id": "chu_wang_yanren_ding",
+    "name_zh": "楚王酓忎鼎",
+    "name_pinyin": "Chu Wang Yan Ren Ding",
+    "name_alt": [
+      "楚王鼎(酓忎铭)"
+    ],
+    "dynasty": "战国",
+    "period": "战国晚期(楚国)",
+    "approx_year": "约公元前3世纪",
+    "excavation_year": "传世",
+    "excavation_site": "湖北省(传)",
+    "ancient_state": "楚",
+    "current_museum": "故宫博物院",
+    "size": {
+      "height_cm": 35,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "食器",
+    "form_subtype": "圆鼎",
+    "patterns": [
+      "蟠螭纹"
+    ],
+    "patterns_structured": {
+      "main": [
+        "蟠螭纹"
+      ],
+      "secondary": [],
+      "local": []
+    },
+    "inscription": {
+      "has": true,
+      "text": "楚王酓忎",
+      "char_count": 4,
+      "summary": "'楚王酓忎'铭文,器主为楚考烈王或楚幽王一代的楚王"
+    },
+    "purpose": "祭祀礼器",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "楚王酓忎鼎是楚国末期王室礼器的代表,铭文'楚王酓忎'学界对应楚国晚期某代楚王。战国末年楚国连遭秦国打击,都城多次东迁,楚王礼器散落各地。此鼎见证了楚国最后阶段的礼制传统。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Palace_Museum_bronzes",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "故宫博物院官网(reference only) + 楚系金文文献",
+        "url": "https://www.dpm.org.cn"
+      }
+    ]
+  },
+  {
+    "id": "zhanguo_tongrenqishou",
+    "name_zh": "铜人骑兽(中山)",
+    "name_pinyin": "Tong Ren Qi Shou",
+    "name_alt": [
+      "中山墓铜人骑兽形器"
+    ],
+    "dynasty": "战国",
+    "period": "战国晚期(中山国)",
+    "approx_year": "约公元前309年",
+    "excavation_year": "1977",
+    "excavation_site": "河北省平山县三汲乡中山王厝墓",
+    "ancient_state": "中山",
+    "current_museum": "河北博物院",
+    "size": {
+      "height_cm": 18,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "杂器(装饰/车饰)",
+    "form_subtype": "立体铜雕(人骑神兽)",
+    "patterns": [
+      "写实人物+神兽造型",
+      "错金银局部"
+    ],
+    "patterns_structured": {
+      "main": [
+        "写实雕塑造型"
+      ],
+      "secondary": [
+        "错金银局部装饰"
+      ],
+      "local": []
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "杂器(器物附件或车舆装饰)",
+    "craft": "范铸法 + 错金银",
+    "rarity_level": "一级文物",
+    "story_brief": "铜人骑兽出土于中山王厝墓,造型为一人骑于神兽之上,写实与神秘并存。中山国受北方草原文化影响,动物与人物主题的立体铜雕在其墓葬中频繁出现,体现了中山国融合中原礼制与北方草原艺术的独特文化面貌。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Zhongshan_bronzes",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "河北博物院官网(reference only) + Wikipedia EN (Zhongshan bronzes)",
+        "url": "https://en.wikipedia.org/wiki/Zhongshan_bronzes"
+      }
+    ]
+  },
+  {
+    "id": "zhanguo_niaoshou_tongyu",
+    "name_zh": "鸟首形辕饰",
+    "name_pinyin": "Niao Shou Xing Yuan Shi",
+    "name_alt": [
+      "战国鸟首铜辕饰"
+    ],
+    "dynasty": "战国",
+    "period": "战国中期",
+    "approx_year": "约公元前4世纪",
+    "excavation_year": "TODO",
+    "excavation_site": "山西省(传)",
+    "ancient_state": "赵",
+    "current_museum": "山西博物院",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": 15,
+      "weight_kg": null
+    },
+    "type": "车马器",
+    "form_subtype": "辕饰(鸟首形)",
+    "patterns": [
+      "写实鸟首造型",
+      "几何纹"
+    ],
+    "patterns_structured": {
+      "main": [
+        "写实鸟首造型"
+      ],
+      "secondary": [
+        "几何纹"
+      ],
+      "local": []
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "车马器(车辕端部装饰)",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "鸟首形辕饰是战国贵族车舆装饰的精品,安装于车辕端部,以鸟首为造型,体现了战国时代对车马装饰的极度重视。贵族出行车马之华丽是身份的重要象征,精美的辕饰是其组成部分。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Shanxi_Museum",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "山西博物院官网(reference only)",
+        "url": "https://www.shanximuseum.com"
+      }
+    ]
+  },
+  {
+    "id": "chunqiu_wuyue_tongjian",
+    "name_zh": "吴越铜鉴",
+    "name_pinyin": "Wu Yue Tong Jian",
+    "name_alt": [
+      "春秋吴越式铜鉴"
+    ],
+    "dynasty": "春秋",
+    "period": "春秋晚期(吴或越国)",
+    "approx_year": "约公元前5世纪",
+    "excavation_year": "TODO",
+    "excavation_site": "江苏省或浙江省(传)",
+    "ancient_state": "吴或越",
+    "current_museum": "南京博物院",
+    "size": {
+      "height_cm": 28,
+      "width_cm": null,
+      "length_cm": 55,
+      "weight_kg": null
+    },
+    "type": "水器",
+    "form_subtype": "鉴(长方形大盆)",
+    "patterns": [
+      "蟠虺纹",
+      "兽首衔环"
+    ],
+    "patterns_structured": {
+      "main": [
+        "蟠虺纹"
+      ],
+      "secondary": [],
+      "local": [
+        "兽首衔环(四壁)"
+      ]
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "盥洗器(照容/盛水)",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "吴越铜鉴是春秋晚期吴越文化圈的典型水器,蟠虺纹密布器身,是这一地区青铜器独特纹饰风格的体现。吴越地区在春秋晚期青铜冶铸技术高度发达,留下了众多精美器物。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Nanjing_Museum",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "南京博物院官网(reference only)",
+        "url": "https://www.njmuseum.com"
+      }
+    ]
+  },
+  {
+    "id": "zhanguo_tongfang_tongqian",
+    "name_zh": "战国铜方鼎(楚式)",
+    "name_pinyin": "Zhan Guo Tong Fang Ding Chu Shi",
+    "name_alt": [
+      "楚式战国方鼎"
+    ],
+    "dynasty": "战国",
+    "period": "战国早中期(楚国)",
+    "approx_year": "约公元前5-4世纪",
+    "excavation_year": "1978",
+    "excavation_site": "湖北省随州市擂鼓墩曾侯乙墓",
+    "ancient_state": "曾(楚文化圈)",
+    "current_museum": "湖北省博物馆",
+    "size": {
+      "height_cm": 40,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "食器",
+    "form_subtype": "方鼎(楚式,腹部较浅)",
+    "patterns": [
+      "蟠螭纹",
+      "云雷纹"
+    ],
+    "patterns_structured": {
+      "main": [
+        "蟠螭纹"
+      ],
+      "secondary": [
+        "云雷纹"
+      ],
+      "local": []
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 8,
+      "summary": "铸铭8字,记曾侯乙"
+    },
+    "purpose": "食礼器",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "楚式战国方鼎是楚文化圈方鼎的典型形制,较商周方鼎腹更浅,足更细,纹饰以蟠螭纹为主,展示了楚式青铜器在继承西周礼制同时发展出的独特地域风格。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Bianzhong_of_Marquis_Yi_of_Zeng",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "湖北省博物馆官网(reference only)",
+        "url": "https://www.hbww.org"
+      }
+    ]
+  },
+  {
+    "id": "zhanguo_chu_qin_tongli_zu",
+    "name_zh": "战国铜鬲组(附三足)",
+    "name_pinyin": "Zhan Guo Tong Li Zu",
+    "name_alt": [
+      "战国铜鬲三件组"
+    ],
+    "dynasty": "战国",
+    "period": "战国早期",
+    "approx_year": "约公元前5世纪",
+    "excavation_year": "1978",
+    "excavation_site": "湖北省随州市擂鼓墩曾侯乙墓",
+    "ancient_state": "曾",
+    "current_museum": "湖北省博物馆",
+    "size": {
+      "height_cm": 20,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null
+    },
+    "type": "食器",
+    "form_subtype": "鬲(三袋足)",
+    "patterns": [
+      "蟠螭纹",
+      "云雷纹"
+    ],
+    "patterns_structured": {
+      "main": [
+        "蟠螭纹"
+      ],
+      "secondary": [
+        "云雷纹"
+      ],
+      "local": []
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 6,
+      "summary": "铸铭记曾侯乙"
+    },
+    "purpose": "炊煮器(煮食)",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "铜鬲是源于新石器时代的炊器,三袋足设计增大受热面积。至战国时期,铜鬲在礼器组合中地位下降,但仍作为礼器组合的成员出现在高级贵族墓葬中。曾侯乙墓出土的铜鬲是战国早期保存最完好的此类器物之一。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Bianzhong_of_Marquis_Yi_of_Zeng",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "湖北省博物馆官网(reference only)",
+        "url": "https://www.hbww.org"
+      }
+    ]
+  },
+  {
+    "id": "zhanguo_tongliubo_qi",
+    "name_zh": "战国铜六博棋局",
+    "name_pinyin": "Zhan Guo Tong Liu Bo Qi Ju",
+    "name_alt": [
+      "战国铜博局",
+      "铜棋局"
+    ],
+    "dynasty": "战国",
+    "period": "战国晚期",
+    "approx_year": "约公元前3世纪",
+    "excavation_year": "1972",
+    "excavation_site": "河北省石家庄市战国墓",
+    "ancient_state": "赵",
+    "current_museum": "河北博物院",
+    "size": {
+      "height_cm": 4,
+      "width_cm": 40,
+      "length_cm": 40,
+      "weight_kg": null
+    },
+    "type": "杂器(游戏器)",
+    "form_subtype": "六博棋局(铜质棋盘)",
+    "patterns": [
+      "几何刻线(棋格)",
+      "素面"
+    ],
+    "patterns_structured": {
+      "main": [
+        "几何刻线棋格"
+      ],
+      "secondary": [],
+      "local": []
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "游戏器(六博棋)",
+    "craft": "范铸法 + 刻线",
+    "rarity_level": "一级文物",
+    "story_brief": "铜六博棋局是先秦时代贵族娱乐文化的实物见证,六博棋是中国古代最早有史料记载的棋类游戏之一,《楚辞·招魂》中有\"菎蔽象棊，有六博些\"的描述。此铜质棋盘精确复原了战国贵族的日常休闲生活图景。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Hebei_Museum",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "Wikipedia EN (Liubo) + 河北博物院(reference only)",
+        "url": "https://en.wikipedia.org/wiki/Liubo"
+      }
+    ]
+  },
+  {
+    "id": "zhongshan_wang_tonglu",
+    "name_zh": "中山王铜鹿",
+    "name_pinyin": "Zhong Shan Wang Tong Lu",
+    "name_alt": [
+      "中山王墓卧鹿铜器"
+    ],
+    "dynasty": "战国",
+    "period": "战国晚期(中山国)",
+    "approx_year": "约公元前309年",
+    "excavation_year": "1977",
+    "excavation_site": "河北省平山县三汲乡中山王厝墓",
+    "ancient_state": "中山",
+    "current_museum": "河北博物院",
+    "size": {
+      "height_cm": 12,
+      "width_cm": null,
+      "length_cm": 23,
+      "weight_kg": null
+    },
+    "type": "杂器(器座或陈设器)",
+    "form_subtype": "卧鹿形铜器",
+    "patterns": [
+      "写实卧鹿造型",
+      "错金银斑纹"
+    ],
+    "patterns_structured": {
+      "main": [
+        "写实卧鹿造型"
+      ],
+      "secondary": [
+        "错金银斑纹"
+      ],
+      "local": []
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "陈设器(室内摆件或器物底座)",
+    "craft": "范铸法 + 错金银",
+    "rarity_level": "一级文物",
+    "story_brief": "中山王铜卧鹿出土于河北平山中山王厝墓，以错金银工艺精确再现卧鹿的斑点花纹，写实程度极高。鹿在中山国文化中具有特殊意义，与中山国白狄族群的游牧祖先文化密切相关。此器与虎噬鹿铜屏座共同体现了中山国动物题材铜器的卓越成就。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Zhongshan_bronzes",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA(需确认具体文件)"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "Wikipedia EN (Zhongshan bronzes) + 河北博物院(reference only)",
+        "url": "https://en.wikipedia.org/wiki/Zhongshan_bronzes"
+      }
     ]
   }
 ]

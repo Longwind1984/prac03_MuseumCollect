@@ -1,0 +1,29 @@
+<!-- 鸟纹 | 商代 | typical on: 尊 卣 簋 盉 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+  <!-- Shang bird: abstract, side-facing, hooked beak, large eye, short legs, squared tail (differs from Zhou fengniao) -->
+  <!-- Head and hooked beak -->
+  <path d="M56 20 C62 18 68 22 68 28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  <!-- Hooked beak -->
+  <path d="M58 18 C62 12 66 12 68 16 C70 20 66 22 64 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Beak hook tip -->
+  <path d="M68 16 L72 18 L70 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Crest (short, stiff — Shang style, not flamboyant) -->
+  <path d="M58 16 L56 8 L60 10 L58 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Eye (large, prominent) -->
+  <circle cx="62" cy="24" r="3.5" stroke="currentColor" stroke-width="1.8"/>
+  <circle cx="62" cy="24" r="1.4" fill="currentColor"/>
+  <!-- Neck + body -->
+  <path d="M56 28 C50 30 42 30 36 34 C30 38 26 46 26 54" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  <!-- Wing (angular, not sweeping — Shang style) -->
+  <path d="M50 30 C52 22 56 16 56 12 M52 14 L48 10 M52 18 L46 16 M50 22 L44 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Body back line -->
+  <path d="M56 28 C58 36 56 46 52 54" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Squared tail (Shang birds have squared/angular tail unlike Zhou curved) -->
+  <path d="M26 54 L20 60 L20 70 L30 70 L34 62 L52 54" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Tail feather lines -->
+  <path d="M22 62 L30 62 M22 66 L32 66" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+  <!-- Legs (short, sturdy) -->
+  <path d="M32 66 C32 72 28 74 26 76 M32 70 C34 74 34 76 32 78" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  <!-- Talons -->
+  <path d="M24 76 L20 78 M26 76 L26 80 M28 76 L32 78" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,33 @@
+<!-- 虎纹 | 商代 | typical on: 卣 觥 尊 兵器 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+  <!-- Tiger: side profile, crouching posture. Key: striped body, open jaw, rounded ears, powerful haunches -->
+  <!-- Head facing right -->
+  <path d="M54 16 C60 14 68 18 70 26 C72 32 68 38 62 40 C58 41 54 40 52 38" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  <!-- Lower jaw (open) -->
+  <path d="M56 28 C58 32 62 36 66 36 L62 40" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Teeth suggestion -->
+  <path d="M60 32 L58 36 M64 30 L62 34" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+  <!-- Ear (round, small) -->
+  <path d="M56 14 C56 10 60 8 62 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Eye -->
+  <circle cx="64" cy="24" r="3" stroke="currentColor" stroke-width="1.5"/>
+  <circle cx="64" cy="24" r="1.2" fill="currentColor"/>
+  <!-- Whisker lines -->
+  <path d="M66 32 L72 30 M66 34 L72 34 M66 36 L72 38" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+  <!-- Neck into body -->
+  <path d="M52 38 C46 42 40 40 34 44 C26 50 20 58 18 66" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  <!-- Back arching -->
+  <path d="M52 38 C54 44 50 52 44 58 C38 64 30 66 24 68" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  <!-- Body belly line -->
+  <path d="M18 66 C20 70 24 68 24 68" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Front legs -->
+  <path d="M34 44 C32 50 30 56 30 62 L26 64 M30 62 L34 64" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Hind legs -->
+  <path d="M24 68 C20 72 18 74 16 76 M18 76 L22 76 M18 66 C16 70 14 74 14 76" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Tail curving up -->
+  <path d="M24 68 C28 64 36 58 40 50 C44 44 42 36 44 30 C46 24 50 22 54 22" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  <!-- Tiger stripes (3 body stripes) -->
+  <path d="M36 46 C34 48 32 50 32 52" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+  <path d="M42 44 C40 48 38 52 38 56" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+  <path d="M46 48 C44 54 42 58 40 62" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+</svg>
