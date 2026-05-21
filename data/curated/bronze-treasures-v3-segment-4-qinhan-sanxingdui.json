@@ -1889,5 +1889,1462 @@
       {"field": "basic, form_detail", "source": "Wikipedia ZH: 镇墓兽", "url": "https://zh.wikipedia.org/wiki/镇墓兽", "license": "CC BY-SA 4.0"},
       {"field": "academic_status", "source": "Wikidata", "url": "https://www.wikidata.org/", "license": "CC0"}
     ]
+  },
+  {
+    "id": "sanxingdui_da_mianju",
+    "name_zh": "三星堆青铜大面具",
+    "name_pinyin": "San Xing Dui Qing Tong Da Mian Ju",
+    "name_alt": ["三星堆1.38米大面具", "八号坑青铜大面具"],
+    "dynasty": "商",
+    "period": "商代晚期(古蜀文化)",
+    "approx_year": "约公元前1300-1100年",
+    "excavation_year": "2021",
+    "excavation_site": "四川省广汉市三星堆遗址八号祭祀坑",
+    "ancient_state": "古蜀(三星堆文化)",
+    "current_museum": "三星堆博物馆",
+    "size": {
+      "height_cm": 71,
+      "width_cm": 138,
+      "length_cm": null,
+      "weight_kg": 131,
+      "note": "宽138cm(最宽处), 高71cm, 重131kg; 是迄今出土最大青铜面具"
+    },
+    "type": "礼器",
+    "form_subtype": "平面式大型面具",
+    "patterns": ["素面", "夸张五官", "鎏金"],
+    "patterns_detail": {
+      "main": [
+        {
+          "name": "夸张五官造型",
+          "icon_ref": "taotie",
+          "position": "整体面部",
+          "style": "宽阔额头, 平直眉弓, 斜眼, 宽鼻, 阔嘴, 大耳上扬; 规模宏大但眼部不外凸(与纵目面具区别)",
+          "meaning": "古蜀神祇或王者的神化形象; 夸张造型非写实人面而是神格化处理"
+        }
+      ],
+      "ground": []
+    },
+    "inscription": {"has": false, "text": null, "char_count": 0, "summary": "无铭文"},
+    "inscription_detail": {"has": false, "note": "古蜀无成熟文字系统"},
+    "purpose": "祭祀礼器",
+    "usage_history": {
+      "primary_purpose": "祭祀礼器",
+      "ritual_scene": "太牢祭祀",
+      "user_class": "古蜀祭司或王",
+      "transmission_in_use": "祭祀后埋入祭祀坑"
+    },
+    "craft": "范铸法+鎏金(部分)",
+    "rarity_level": "禁止出境",
+    "story_brief": "三星堆青铜大面具2021年出土于三星堆遗址八号祭祀坑, 宽达1.38米、重131公斤, 是迄今出土最大的青铜面具。面具五官平和舒展(有别于纵目面具的夸张外凸), 双眼微闭, 眉宇开阔, 展现出一种威严而内敛的神圣气质。2021年三星堆'重启发掘'引发全球关注, 多个坑出土大量新器物, 大面具是其中最具震撼力的。其局部鎏金处理反映古蜀对金的崇尚(三星堆同出金面具、黄金权杖等)。",
+    "excavation_detail": {
+      "discoverer": "三星堆考古工作站",
+      "discovery_date": "2021",
+      "discovery_method": "考古发掘",
+      "co_excavated_group_id": "sanxingdui_k8_2021",
+      "dating_evidence": {
+        "style_phase": "三星堆三期(商代晚期)",
+        "confidence": "确认"
+      },
+      "significance_of_discovery": "2021年三星堆重启发掘8个坑出土逾万件, 大面具为最具代表性单件"
+    },
+    "form_detail": {
+      "main_body": {
+        "shape": "平面式宽幅面具, 宽大于高, 耳部微上扬",
+        "feature": "规模宏大, 宽138cm, 是纵目面具的1.62倍宽"
+      },
+      "distinctive_features": [
+        "迄今出土最大青铜面具, 宽138cm重131kg",
+        "五官平和内敛(与纵目面具夸张外凸形成对比)",
+        "局部鎏金, 反映古蜀金的崇拜"
+      ],
+      "craft": {
+        "method": "范铸法",
+        "surface_treatment": "部分鎏金"
+      }
+    },
+    "academic_status": {
+      "representativeness": "三星堆最大单件面具; 2021年重启发掘的标志性器物",
+      "scholarly_consensus": "古蜀神权政治与祭祀文化的最高实物证据之一"
+    },
+    "provenance_timeline": [
+      {"year": "约-1300至-1100", "event": "铸造, 用于祭祀", "location": "古蜀三星堆", "actor": "古蜀国", "evidence": "地层断代"},
+      {"year": "约-1100", "event": "埋入祭祀坑", "location": "三星堆八号坑", "actor": "古蜀祭司", "evidence": "考古地层"},
+      {"year": "2021", "event": "考古出土", "location": "四川广汉三星堆", "actor": "三星堆考古工作站", "evidence": "官方发布"}
+    ],
+    "related_artifacts": [
+      {"id": "sanxingdui_zongmu_mianju", "name_zh": "三星堆纵目面具", "relation_type": "same_excavation_site", "reason": "同为三星堆面具, 但风格迥异(平和vs夸张外凸)", "strength": "strong"},
+      {"id": "sanxingdui_dajintai_mianju", "name_zh": "戴金面罩青铜人头像", "relation_type": "same_excavation_group", "reason": "同出三星堆(多批次坑)", "strength": "strong"},
+      {"id": "sanxingdui_dali_ren", "name_zh": "三星堆青铜大立人", "relation_type": "same_excavation_site", "reason": "同为三星堆祭祀礼器核心", "strength": "strong"}
+    ],
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Category:Sanxingdui",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA (各文件许可不一, 使用前确认单文件)",
+        "caption": "三星堆出土文物相册",
+        "view": "overview"
+      }
+    ],
+    "media_3d_video": [],
+    "data_sources": [
+      {"field": "basic, size, excavation_detail", "source": "Wikipedia EN: Sanxingdui", "url": "https://en.wikipedia.org/wiki/Sanxingdui", "license": "CC BY-SA 4.0"},
+      {"field": "story_brief, academic_status", "source": "Wikipedia ZH: 三星堆遗址", "url": "https://zh.wikipedia.org/wiki/三星堆遗址", "license": "CC BY-SA 4.0"}
+    ]
+  },
+  {
+    "id": "sanxingdui_dajintai_mianju",
+    "name_zh": "戴金面罩青铜人头像",
+    "name_pinyin": "Dai Jin Mian Zhao Qing Tong Ren Tou Xiang",
+    "name_alt": ["三星堆金面具人头像", "金面铜人头"],
+    "dynasty": "商",
+    "period": "商代晚期(古蜀文化)",
+    "approx_year": "约公元前1300-1100年",
+    "excavation_year": "1986",
+    "excavation_site": "四川省广汉市三星堆遗址二号祭祀坑(部分为2021年新坑)",
+    "ancient_state": "古蜀(三星堆文化)",
+    "current_museum": "三星堆博物馆",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null,
+      "note": "尺寸因具体件而异, 铜人头高约40-60cm; 金面罩为薄金片贴附"
+    },
+    "type": "礼器",
+    "form_subtype": "人头像(戴金面罩)",
+    "patterns": ["素面铜头", "贴金面罩"],
+    "patterns_detail": {
+      "main": [
+        {
+          "name": "贴金面罩",
+          "icon_ref": "geometric",
+          "position": "面部",
+          "style": "黄金薄片锤揲成面具形, 贴附铜头面部(眼耳部分镂空)",
+          "meaning": "金代表神圣与权威; 三星堆以金覆面象征神格身份"
+        }
+      ],
+      "ground": []
+    },
+    "inscription": {"has": false, "text": null, "char_count": 0, "summary": "无铭文"},
+    "inscription_detail": {"has": false, "note": "古蜀无文字"},
+    "purpose": "祭祀礼器",
+    "usage_history": {
+      "primary_purpose": "祭祀礼器",
+      "user_class": "古蜀国",
+      "transmission_in_use": "祭祀后埋入祭祀坑"
+    },
+    "craft": "范铸法(铜头)+锤揲法(金面罩)",
+    "rarity_level": "禁止出境",
+    "story_brief": "戴金面罩青铜人头像是三星堆最具视觉冲击力的器物类型之一。铜头以范铸法铸成, 五官端正, 面部贴附以黄金薄片锤揲而成的金面罩, 眼、耳部镂空。铜的威严与金的神圣合为一体, 代表古蜀最高级神祇或祖先形象。三星堆共出土多件金面铜人头, 大小、面相各异, 推测分别代表不同等级的神祇。",
+    "excavation_detail": {
+      "discovery_date": "1986(部分2021)",
+      "discovery_method": "考古发掘",
+      "co_excavated_group_id": "sanxingdui_k2_1986",
+      "dating_evidence": {"confidence": "确认"}
+    },
+    "form_detail": {
+      "main_body": {"shape": "青铜铸人头, 圆形平顶, 五官立体; 金面罩贴附面部"},
+      "distinctive_features": [
+        "铜+金双材质组合, 三星堆特有工艺",
+        "黄金面罩反映古蜀对金的神圣崇拜",
+        "多件存世, 面相各异"
+      ],
+      "craft": {"method": "范铸法", "specifics": "铜头范铸, 金面罩锤揲后贴附", "surface_treatment": "贴金"}
+    },
+    "academic_status": {
+      "representativeness": "三星堆金铜合体礼器的最高代表",
+      "scholarly_consensus": "古蜀对黄金神圣性认知的实物证据; 与埃及金面具存在文明平行现象"
+    },
+    "provenance_timeline": [
+      {"year": "约-1300至-1100", "event": "铸造+贴金, 用于祭祀", "location": "古蜀三星堆", "actor": "古蜀国", "evidence": "地层断代"},
+      {"year": "约-1100", "event": "埋入祭祀坑", "location": "三星堆二号坑", "actor": "古蜀祭司", "evidence": "考古地层"},
+      {"year": "1986", "event": "出土", "location": "三星堆博物馆", "actor": "三星堆考古队", "evidence": "考古报告"}
+    ],
+    "related_artifacts": [
+      {"id": "sanxingdui_da_mianju", "name_zh": "三星堆青铜大面具", "relation_type": "same_excavation_site", "reason": "同为三星堆面具类器物", "strength": "strong"},
+      {"id": "sanxingdui_zongmu_mianju", "name_zh": "三星堆纵目面具", "relation_type": "same_excavation_group", "reason": "同出三星堆祭祀坑", "strength": "strong"},
+      {"id": "sanxingdui_dali_ren", "name_zh": "三星堆青铜大立人", "relation_type": "same_excavation_site", "reason": "同为三星堆核心礼器", "strength": "strong"}
+    ],
+    "image_urls": [{"url": "https://commons.wikimedia.org/wiki/Category:Sanxingdui", "source": "Wikimedia Commons", "license": "CC BY-SA", "caption": "三星堆文物相册", "view": "overview"}],
+    "media_3d_video": [],
+    "data_sources": [
+      {"field": "basic, form_detail, story_brief", "source": "Wikipedia EN: Sanxingdui", "url": "https://en.wikipedia.org/wiki/Sanxingdui", "license": "CC BY-SA 4.0"},
+      {"field": "academic_status", "source": "Wikipedia ZH: 三星堆遗址", "url": "https://zh.wikipedia.org/wiki/三星堆遗址", "license": "CC BY-SA 4.0"}
+    ]
+  },
+  {
+    "id": "sanxingdui_shoumianju",
+    "name_zh": "三星堆青铜兽面具",
+    "name_pinyin": "San Xing Dui Qing Tong Shou Mian Ju",
+    "name_alt": ["三星堆兽形面具", "三星堆怪兽面具"],
+    "dynasty": "商",
+    "period": "商代晚期(古蜀文化)",
+    "approx_year": "约公元前1300-1100年",
+    "excavation_year": "1986",
+    "excavation_site": "四川省广汉市三星堆遗址祭祀坑",
+    "ancient_state": "古蜀(三星堆文化)",
+    "current_museum": "三星堆博物馆",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null,
+      "note": "多件存世, 尺寸各异"
+    },
+    "type": "礼器",
+    "form_subtype": "兽形面具",
+    "patterns": ["兽面夸张", "角形耳", "獠牙"],
+    "patterns_detail": {
+      "main": [
+        {
+          "name": "兽面夸张造型",
+          "icon_ref": "taotie",
+          "position": "整体",
+          "style": "巨眼、阔嘴、獠牙、角形耳, 兼有人面与兽面特征",
+          "meaning": "古蜀神兽崇拜; 学界认为可能代表蜀地传说中的神兽或祖灵"
+        }
+      ],
+      "ground": []
+    },
+    "inscription": {"has": false, "text": null, "char_count": 0, "summary": "无铭文"},
+    "inscription_detail": {"has": false},
+    "purpose": "祭祀礼器",
+    "usage_history": {
+      "primary_purpose": "祭祀礼器",
+      "user_class": "古蜀国",
+      "transmission_in_use": "祭祀后埋入坑"
+    },
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "三星堆青铜兽面具是三星堆祭祀坑出土面具中兽化特征最强的类型, 巨眼、獠牙、角形耳, 介于人面与兽面之间。其造型与中原商代饕餮纹既有相似(神兽凝视)又有本质差异(古蜀独立审美). 三星堆出土面具分平面人面型、纵目型、兽面型等多种, 兽面具代表古蜀神兽崇拜的一支。",
+    "excavation_detail": {
+      "discovery_date": "1986",
+      "discovery_method": "考古发掘",
+      "co_excavated_group_id": "sanxingdui_k2_1986",
+      "dating_evidence": {"confidence": "确认"}
+    },
+    "form_detail": {
+      "main_body": {"shape": "平面或半立体兽形面具, 宽耳、獠牙"},
+      "distinctive_features": [
+        "兽人合体造型, 独立于中原青铜传统",
+        "多件存世, 形态各异"
+      ],
+      "craft": {"method": "范铸法"}
+    },
+    "academic_status": {
+      "representativeness": "三星堆面具体系中兽面类型代表",
+      "scholarly_consensus": "古蜀神兽崇拜的实物证据"
+    },
+    "provenance_timeline": [
+      {"year": "约-1300至-1100", "event": "铸造祭祀埋坑", "location": "三星堆", "actor": "古蜀国", "evidence": "地层"},
+      {"year": "1986", "event": "出土", "location": "三星堆博物馆", "actor": "考古队", "evidence": "考古报告"}
+    ],
+    "related_artifacts": [
+      {"id": "sanxingdui_zongmu_mianju", "name_zh": "三星堆纵目面具", "relation_type": "same_excavation_group", "reason": "同出三星堆祭祀坑", "strength": "strong"},
+      {"id": "sanxingdui_da_mianju", "name_zh": "三星堆青铜大面具", "relation_type": "same_excavation_site", "reason": "同为三星堆面具", "strength": "strong"},
+      {"id": "sanxingdui_dali_ren", "name_zh": "三星堆青铜大立人", "relation_type": "same_excavation_site", "reason": "同出三星堆坑", "strength": "medium"}
+    ],
+    "image_urls": [{"url": "https://commons.wikimedia.org/wiki/Category:Sanxingdui", "source": "Wikimedia Commons", "license": "CC BY-SA", "caption": "三星堆文物相册", "view": "overview"}],
+    "media_3d_video": [],
+    "data_sources": [
+      {"field": "basic, form_detail, story_brief", "source": "Wikipedia EN: Sanxingdui", "url": "https://en.wikipedia.org/wiki/Sanxingdui", "license": "CC BY-SA 4.0"},
+      {"field": "academic_status", "source": "Wikipedia ZH: 三星堆遗址", "url": "https://zh.wikipedia.org/wiki/三星堆遗址", "license": "CC BY-SA 4.0"}
+    ]
+  },
+  {
+    "id": "sanxingdui_qingtong_niao",
+    "name_zh": "三星堆青铜鸟",
+    "name_pinyin": "San Xing Dui Qing Tong Niao",
+    "name_alt": ["三星堆铜神鸟", "三星堆鸟形器"],
+    "dynasty": "商",
+    "period": "商代晚期(古蜀文化)",
+    "approx_year": "约公元前1300-1100年",
+    "excavation_year": "1986",
+    "excavation_site": "四川省广汉市三星堆遗址二号祭祀坑",
+    "ancient_state": "古蜀(三星堆文化)",
+    "current_museum": "三星堆博物馆",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null,
+      "note": "三星堆出土铜鸟多件, 尺寸各异, 最大者翼展逾30cm"
+    },
+    "type": "礼器",
+    "form_subtype": "立体鸟形铜器",
+    "patterns": ["写实鸟形", "凤鸟特征", "立体"],
+    "patterns_detail": {
+      "main": [
+        {
+          "name": "立体神鸟",
+          "icon_ref": "fengniao",
+          "position": "整体",
+          "style": "立体铜鸟, 展翅或站立, 部分有冠羽, 眼大圆睁",
+          "meaning": "古蜀太阳崇拜; 鸟为太阳神的化身(与神树顶端鸟同类); 古蜀传说中的'金乌'"
+        }
+      ],
+      "ground": []
+    },
+    "inscription": {"has": false, "text": null, "char_count": 0, "summary": "无铭文"},
+    "inscription_detail": {"has": false},
+    "purpose": "祭祀礼器",
+    "usage_history": {
+      "primary_purpose": "祭祀礼器",
+      "user_class": "古蜀国",
+      "transmission_in_use": "祭祀后埋入坑, 部分原插于神树枝头"
+    },
+    "craft": "范铸法+分铸",
+    "rarity_level": "一级文物",
+    "story_brief": "三星堆青铜鸟是三星堆祭祀坑出土数量最多的动物形铜器之一, 多件存世, 形态各异。学界认为铜鸟原本安插于青铜神树枝头(神树一号上有九鸟), 是古蜀太阳神崇拜的核心符号——鸟为太阳(金乌)的化身, 神树为太阳鸟栖息之处。与成都金沙遗址出土的'太阳神鸟'金箔构成古蜀鸟-日崇拜的完整图像体系。",
+    "excavation_detail": {
+      "discovery_date": "1986",
+      "discovery_method": "考古发掘",
+      "co_excavated_group_id": "sanxingdui_k2_1986",
+      "dating_evidence": {"confidence": "确认"}
+    },
+    "form_detail": {
+      "main_body": {"shape": "立体铜鸟, 圆睛大眼, 部分展翅"},
+      "distinctive_features": [
+        "古蜀太阳崇拜核心符号",
+        "原插于神树枝头, 九鸟象征九日",
+        "与金沙太阳神鸟金箔共构古蜀鸟日神话体系"
+      ],
+      "craft": {"method": "范铸法", "specifics": "部分为分铸后焊接"}
+    },
+    "academic_status": {
+      "representativeness": "三星堆鸟形铜器代表",
+      "scholarly_consensus": "古蜀太阳崇拜与神树信仰的核心器物"
+    },
+    "provenance_timeline": [
+      {"year": "约-1300至-1100", "event": "铸造, 用于神树及祭祀", "location": "三星堆", "actor": "古蜀国", "evidence": "考古地层"},
+      {"year": "约-1100", "event": "埋入二号坑", "location": "三星堆", "actor": "古蜀祭司", "evidence": "考古"},
+      {"year": "1986", "event": "出土", "location": "三星堆博物馆", "actor": "考古队", "evidence": "考古报告"}
+    ],
+    "related_artifacts": [
+      {"id": "sanxingdui_shenshu", "name_zh": "三星堆青铜神树", "relation_type": "same_excavation_group", "reason": "铜鸟原插于神树枝头, 不可分割", "strength": "strong"},
+      {"id": "sanxingdui_taiyanglun", "name_zh": "三星堆太阳轮形器", "relation_type": "same_excavation_group", "reason": "同为三星堆太阳崇拜系统", "strength": "strong"},
+      {"id": "sanxingdui_dali_ren", "name_zh": "三星堆青铜大立人", "relation_type": "same_excavation_site", "reason": "同出三星堆坑", "strength": "medium"}
+    ],
+    "image_urls": [{"url": "https://commons.wikimedia.org/wiki/Category:Sanxingdui", "source": "Wikimedia Commons", "license": "CC BY-SA", "caption": "三星堆文物相册", "view": "overview"}],
+    "media_3d_video": [],
+    "data_sources": [
+      {"field": "basic, form_detail, story_brief", "source": "Wikipedia EN: Sanxingdui", "url": "https://en.wikipedia.org/wiki/Sanxingdui", "license": "CC BY-SA 4.0"},
+      {"field": "academic_status", "source": "Wikipedia ZH: 三星堆遗址", "url": "https://zh.wikipedia.org/wiki/三星堆遗址", "license": "CC BY-SA 4.0"}
+    ]
+  },
+  {
+    "id": "sanxingdui_taiyanglun",
+    "name_zh": "三星堆太阳轮形器",
+    "name_pinyin": "San Xing Dui Tai Yang Lun Xing Qi",
+    "name_alt": ["三星堆铜太阳轮", "三星堆车轮形铜器"],
+    "dynasty": "商",
+    "period": "商代晚期(古蜀文化)",
+    "approx_year": "约公元前1300-1100年",
+    "excavation_year": "1986",
+    "excavation_site": "四川省广汉市三星堆遗址二号祭祀坑",
+    "ancient_state": "古蜀(三星堆文化)",
+    "current_museum": "三星堆博物馆",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null,
+      "note": "直径约84cm; 重量待确认"
+    },
+    "type": "礼器",
+    "form_subtype": "轮形铜器(太阳象征)",
+    "patterns": ["辐条圆形", "放射纹"],
+    "patterns_detail": {
+      "main": [
+        {
+          "name": "放射辐条纹",
+          "icon_ref": "geometric",
+          "position": "整体",
+          "style": "五条或六条辐条从中心向外放射, 形如车轮/太阳光芒",
+          "meaning": "太阳形象的几何化; 古蜀以轮形象征太阳, 是古蜀太阳崇拜的核心符号"
+        }
+      ],
+      "ground": []
+    },
+    "inscription": {"has": false, "text": null, "char_count": 0, "summary": "无铭文"},
+    "inscription_detail": {"has": false},
+    "purpose": "祭祀礼器",
+    "usage_history": {
+      "primary_purpose": "祭祀礼器",
+      "ritual_scene": "太牢祭祀",
+      "user_class": "古蜀国",
+      "transmission_in_use": "祭祀后埋坑"
+    },
+    "craft": "范铸法",
+    "rarity_level": "禁止出境",
+    "story_brief": "三星堆太阳轮形器是古蜀太阳崇拜最直接的视觉符号, 圆形铜器有多条辐条向外放射如车轮, 象征太阳及其光芒。学界认为三星堆'太阳崇拜'系统包括: 太阳轮形器(象形)、青铜神树(太阳鸟的栖息地)、铜鸟(太阳使者)三位一体。直径约84cm的太阳轮既不实用也不可佩戴, 显然为纯粹的祭祀符号器。这一'轮形太阳'图像与世界多个古代文明的太阳象征惊人相似, 是比较文明研究的重要议题。",
+    "excavation_detail": {
+      "discovery_date": "1986",
+      "discovery_method": "考古发掘",
+      "co_excavated_group_id": "sanxingdui_k2_1986",
+      "dating_evidence": {"confidence": "确认"}
+    },
+    "form_detail": {
+      "main_body": {"shape": "圆形辐条轮, 直径约84cm, 有中心轮毂和外圈"},
+      "distinctive_features": [
+        "古蜀太阳崇拜最直接视觉符号",
+        "轮形太阳图像具有跨文明比较意义",
+        "纯祭祀符号器, 不实用"
+      ],
+      "craft": {"method": "范铸法"}
+    },
+    "academic_status": {
+      "representativeness": "三星堆太阳崇拜体系核心器物",
+      "scholarly_consensus": "古蜀太阳信仰的直接证据; 比较文明研究热点"
+    },
+    "provenance_timeline": [
+      {"year": "约-1300至-1100", "event": "铸造祭祀埋坑", "location": "三星堆", "actor": "古蜀国", "evidence": "地层"},
+      {"year": "1986", "event": "出土", "location": "三星堆博物馆", "actor": "考古队", "evidence": "考古报告"}
+    ],
+    "related_artifacts": [
+      {"id": "sanxingdui_qingtong_niao", "name_zh": "三星堆青铜鸟", "relation_type": "same_excavation_group", "reason": "同为三星堆太阳崇拜系统", "strength": "strong"},
+      {"id": "sanxingdui_shenshu", "name_zh": "三星堆青铜神树", "relation_type": "same_excavation_group", "reason": "神树+鸟+太阳轮构成三星堆太阳信仰三位一体", "strength": "strong"},
+      {"id": "sanxingdui_yanxingqi", "name_zh": "三星堆青铜眼形器", "relation_type": "same_excavation_group", "reason": "同出三星堆坑, 同为神秘祭祀器", "strength": "medium"}
+    ],
+    "image_urls": [{"url": "https://commons.wikimedia.org/wiki/Category:Sanxingdui", "source": "Wikimedia Commons", "license": "CC BY-SA", "caption": "三星堆文物相册", "view": "overview"}],
+    "media_3d_video": [],
+    "data_sources": [
+      {"field": "basic, form_detail, story_brief", "source": "Wikipedia EN: Sanxingdui", "url": "https://en.wikipedia.org/wiki/Sanxingdui", "license": "CC BY-SA 4.0"},
+      {"field": "size", "source": "Wikipedia ZH: 三星堆遗址", "url": "https://zh.wikipedia.org/wiki/三星堆遗址", "license": "CC BY-SA 4.0"}
+    ]
+  },
+  {
+    "id": "sanxingdui_yanxingqi",
+    "name_zh": "三星堆青铜眼形器",
+    "name_pinyin": "San Xing Dui Qing Tong Yan Xing Qi",
+    "name_alt": ["三星堆铜眼形饰", "三星堆青铜眼睛"],
+    "dynasty": "商",
+    "period": "商代晚期(古蜀文化)",
+    "approx_year": "约公元前1300-1100年",
+    "excavation_year": "1986",
+    "excavation_site": "四川省广汉市三星堆遗址二号祭祀坑",
+    "ancient_state": "古蜀(三星堆文化)",
+    "current_museum": "三星堆博物馆",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null,
+      "note": "最大件长约60cm, 具体尺寸待确认"
+    },
+    "type": "礼器",
+    "form_subtype": "眼形铜器(抽象形制)",
+    "patterns": ["眼形抽象", "素面"],
+    "patterns_detail": {
+      "main": [
+        {
+          "name": "眼形",
+          "icon_ref": "geometric",
+          "position": "整体",
+          "style": "铜板制成菱形或梭形(模拟眼睛形状), 两端尖锐, 中有瞳状突起",
+          "meaning": "学界争议多种: 太阳崇拜(眼似日轮); 蚕丛'纵目'之眼; 保护性神眼符号"
+        }
+      ],
+      "ground": []
+    },
+    "inscription": {"has": false, "text": null, "char_count": 0, "summary": "无铭文"},
+    "inscription_detail": {"has": false},
+    "purpose": "祭祀礼器",
+    "usage_history": {"primary_purpose": "祭祀礼器", "user_class": "古蜀国", "transmission_in_use": "祭祀后埋坑"},
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "三星堆青铜眼形器是三星堆出土最神秘的器物之一, 菱形或梭形, 模拟眼睛轮廓。二号坑出土眼形器约20余件, 大小不一。用途至今众说纷纭: 有学者认为代表太阳(古代以眼喻日); 有学者认为与蚕丛始祖'纵目'传说相关; 也有学者认为是附着于神殿木柱上的装饰。眼形器是三星堆尚未完全解读的谜之器物类型之一。",
+    "excavation_detail": {
+      "discovery_date": "1986",
+      "discovery_method": "考古发掘",
+      "co_excavated_group_id": "sanxingdui_k2_1986",
+      "dating_evidence": {"confidence": "确认"}
+    },
+    "form_detail": {
+      "main_body": {"shape": "菱形/梭形铜板, 两端尖, 中有瞳孔状圆突"},
+      "distinctive_features": [
+        "三星堆独有器物类型, 功能未定",
+        "约20余件出土, 大小不一",
+        "眼形象征争议多: 太阳/纵目祖先/神眼符号"
+      ],
+      "craft": {"method": "范铸法"}
+    },
+    "academic_status": {
+      "representativeness": "三星堆未解之谜的代表性器物",
+      "scholarly_consensus": "眼形器功能至今无定论, 是古蜀文化研究热点",
+      "dating_value": "眼形器的出现时间和分布有助于研究三星堆祭祀制度"
+    },
+    "provenance_timeline": [
+      {"year": "约-1300至-1100", "event": "铸造祭祀埋坑", "location": "三星堆", "actor": "古蜀国", "evidence": "地层"},
+      {"year": "1986", "event": "出土", "location": "三星堆博物馆", "actor": "考古队", "evidence": "考古报告"}
+    ],
+    "related_artifacts": [
+      {"id": "sanxingdui_zongmu_mianju", "name_zh": "三星堆纵目面具", "relation_type": "cited_together_academically", "reason": "眼形器与纵目面具同涉'眼'崇拜, 学界常并论", "strength": "strong"},
+      {"id": "sanxingdui_taiyanglun", "name_zh": "三星堆太阳轮形器", "relation_type": "same_excavation_group", "reason": "同出三星堆坑, 学界或认为眼形器与太阳崇拜相关", "strength": "medium"},
+      {"id": "sanxingdui_da_mianju", "name_zh": "三星堆青铜大面具", "relation_type": "same_excavation_site", "reason": "同出三星堆", "strength": "medium"}
+    ],
+    "image_urls": [{"url": "https://commons.wikimedia.org/wiki/Category:Sanxingdui", "source": "Wikimedia Commons", "license": "CC BY-SA", "caption": "三星堆文物相册", "view": "overview"}],
+    "media_3d_video": [],
+    "data_sources": [
+      {"field": "basic, form_detail, story_brief", "source": "Wikipedia EN: Sanxingdui", "url": "https://en.wikipedia.org/wiki/Sanxingdui", "license": "CC BY-SA 4.0"},
+      {"field": "academic_status", "source": "Wikipedia ZH: 三星堆遗址", "url": "https://zh.wikipedia.org/wiki/三星堆遗址", "license": "CC BY-SA 4.0"}
+    ]
+  },
+  {
+    "id": "sanxingdui_dingzun_guizuo",
+    "name_zh": "三星堆顶尊跪坐青铜人像",
+    "name_pinyin": "San Xing Dui Ding Zun Gui Zuo Qing Tong Ren Xiang",
+    "name_alt": ["三星堆跪坐顶尊人像", "顶尊人像"],
+    "dynasty": "商",
+    "period": "商代晚期(古蜀文化)",
+    "approx_year": "约公元前1300-1100年",
+    "excavation_year": "2021",
+    "excavation_site": "四川省广汉市三星堆遗址三号祭祀坑",
+    "ancient_state": "古蜀(三星堆文化)",
+    "current_museum": "三星堆博物馆",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null,
+      "note": "尺寸待确认; 跪坐人像约40-60cm, 头顶铜尊高约20-30cm"
+    },
+    "type": "礼器",
+    "form_subtype": "人像+尊组合(顶尊跪坐)",
+    "patterns": ["写实人形", "尊形器", "几何纹"],
+    "patterns_detail": {
+      "main": [
+        {
+          "name": "顶尊人形",
+          "icon_ref": "niaoshou",
+          "position": "整体",
+          "style": "跪坐铜人双手上举, 头顶铜尊(酒器), 形成人+器组合",
+          "meaning": "祭祀进献场景的具象化; 人作为神灵或祖先进献酒器的象征"
+        }
+      ],
+      "ground": []
+    },
+    "inscription": {"has": false, "text": null, "char_count": 0, "summary": "无铭文"},
+    "inscription_detail": {"has": false},
+    "purpose": "祭祀礼器",
+    "usage_history": {
+      "primary_purpose": "祭祀礼器",
+      "user_class": "古蜀国",
+      "transmission_in_use": "祭祀后埋坑"
+    },
+    "craft": "范铸法+组合装配",
+    "rarity_level": "禁止出境",
+    "story_brief": "三星堆顶尊跪坐青铜人像2021年出土于三号祭祀坑, 是2021年重启发掘中最令学界震惊的发现之一。铜人跪坐, 双手上举头顶一件铜尊, 构成'人托尊'的祭祀进献姿态。此组合形象将人类礼仪行为固化为铜器, 展示古蜀祭祀场景的具体形态。更令人惊奇的是, 该人像头顶的铜尊风格与中原商代铜尊高度相似, 而底部跪坐人像则完全是古蜀风格, 直接证明了三星堆文化与中原商文化的交流互鉴。",
+    "excavation_detail": {
+      "discoverer": "三星堆考古工作站",
+      "discovery_date": "2021",
+      "discovery_method": "考古发掘",
+      "co_excavated_group_id": "sanxingdui_k3_2021",
+      "dating_evidence": {
+        "style_phase": "三星堆三期(商代晚期)",
+        "confidence": "确认"
+      },
+      "significance_of_discovery": "顶部铜尊为中原风格而底部人像为古蜀风格, 直接证明三星堆与中原商代的文化交流"
+    },
+    "form_detail": {
+      "main_body": {
+        "shape": "跪坐人像(双膝着地, 双手上举), 头顶铜尊",
+        "feature": "人与器一体化组合, 展示祭祀进献动作"
+      },
+      "distinctive_features": [
+        "中原铜尊+古蜀人像的文化混合体",
+        "祭祀进献场景的铜器具象化",
+        "直接证据: 三星堆与中原商文化交流"
+      ],
+      "craft": {
+        "method": "范铸法",
+        "specifics": "人像与顶尊可能分铸后组合"
+      }
+    },
+    "academic_status": {
+      "representativeness": "三星堆文化与中原商文化交流的最直接实物证据之一",
+      "scholarly_consensus": "2021年重启发掘最重要发现之一, 解决了三星堆与商文化关系的关键学术争议"
+    },
+    "provenance_timeline": [
+      {"year": "约-1300至-1100", "event": "铸造祭祀埋坑", "location": "三星堆三号坑", "actor": "古蜀国", "evidence": "地层"},
+      {"year": "2021", "event": "出土", "location": "三星堆博物馆", "actor": "三星堆考古工作站", "evidence": "2021年发掘报告"}
+    ],
+    "related_artifacts": [
+      {"id": "sanxingdui_dali_ren", "name_zh": "三星堆青铜大立人", "relation_type": "same_excavation_site", "reason": "同为三星堆人形铜器, 一立一跪", "strength": "strong"},
+      {"id": "sanxingdui_da_mianju", "name_zh": "三星堆青铜大面具", "relation_type": "same_excavation_group", "reason": "同出三星堆(近期新坑)", "strength": "strong"},
+      {"id": "sanxingdui_qingtong_niao", "name_zh": "三星堆青铜鸟", "relation_type": "same_excavation_site", "reason": "同出三星堆坑", "strength": "medium"}
+    ],
+    "image_urls": [{"url": "https://commons.wikimedia.org/wiki/Category:Sanxingdui", "source": "Wikimedia Commons", "license": "CC BY-SA", "caption": "三星堆文物相册", "view": "overview"}],
+    "media_3d_video": [],
+    "data_sources": [
+      {"field": "basic, excavation_detail, story_brief", "source": "Wikipedia EN: Sanxingdui", "url": "https://en.wikipedia.org/wiki/Sanxingdui", "license": "CC BY-SA 4.0"},
+      {"field": "academic_status", "source": "Wikipedia ZH: 三星堆遗址", "url": "https://zh.wikipedia.org/wiki/三星堆遗址", "license": "CC BY-SA 4.0"}
+    ]
+  },
+  {
+    "id": "sanxingdui_shentai",
+    "name_zh": "三星堆八号坑铜神坛",
+    "name_pinyin": "San Xing Dui Ba Hao Keng Tong Shen Tan",
+    "name_alt": ["三星堆铜神坛", "三星堆神坛器"],
+    "dynasty": "商",
+    "period": "商代晚期(古蜀文化)",
+    "approx_year": "约公元前1300-1100年",
+    "excavation_year": "2021",
+    "excavation_site": "四川省广汉市三星堆遗址八号祭祀坑",
+    "ancient_state": "古蜀(三星堆文化)",
+    "current_museum": "三星堆博物馆",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null,
+      "note": "铜神坛体量较大, 具体尺寸待修复后确认"
+    },
+    "type": "礼器",
+    "form_subtype": "神坛(多层次组合祭祀台)",
+    "patterns": ["人物立体", "神兽", "山形", "层叠结构"],
+    "patterns_detail": {
+      "main": [
+        {
+          "name": "多层次神坛结构",
+          "icon_ref": "niaoshou",
+          "position": "整体",
+          "style": "下层为山形底座, 中层人物面向四方, 上层为神兽或祭器, 层层叠叠构成宇宙模型",
+          "meaning": "古蜀宇宙观的具象化: 大地-人界-天界的三层次结构"
+        }
+      ],
+      "ground": []
+    },
+    "inscription": {"has": false, "text": null, "char_count": 0, "summary": "无铭文"},
+    "inscription_detail": {"has": false},
+    "purpose": "祭祀礼器",
+    "usage_history": {
+      "primary_purpose": "祭祀礼器",
+      "user_class": "古蜀国",
+      "transmission_in_use": "祭祀后埋入八号坑"
+    },
+    "craft": "范铸法+分铸组合",
+    "rarity_level": "禁止出境",
+    "story_brief": "三星堆八号坑铜神坛2021年出土于三星堆八号祭祀坑, 是迄今三星堆出土结构最为复杂的单件祭祀器物。神坛为多层叠置结构, 底层为山形台座, 中层有面向四方的人物形象(神职人员或神祇), 上层为神兽或祭器, 整体构成一个象征性的宇宙三界模型。出土时已碎裂成多件, 正在修复中。",
+    "excavation_detail": {
+      "discovery_date": "2021",
+      "discovery_method": "考古发掘",
+      "co_excavated_group_id": "sanxingdui_k8_2021",
+      "dating_evidence": {"confidence": "确认"}
+    },
+    "form_detail": {
+      "main_body": {
+        "shape": "多层次叠置结构: 底座山形+中层人物+顶层神兽",
+        "feature": "多个人物面朝四方, 象征天地四方的祭祀"
+      },
+      "distinctive_features": [
+        "三星堆出土结构最复杂的单件祭祀器",
+        "多层宇宙观的具象化",
+        "2021年重启发掘重要发现"
+      ],
+      "craft": {"method": "范铸法", "specifics": "多件分铸后组合"}
+    },
+    "academic_status": {
+      "representativeness": "三星堆祭祀场景复原的最重要实物",
+      "scholarly_consensus": "古蜀宇宙观与祭祀制度研究的关键器物"
+    },
+    "provenance_timeline": [
+      {"year": "约-1300至-1100", "event": "铸造祭祀埋坑", "location": "三星堆八号坑", "actor": "古蜀国", "evidence": "地层"},
+      {"year": "2021", "event": "出土(正在修复)", "location": "三星堆博物馆", "actor": "三星堆考古工作站", "evidence": "2021年发掘"}
+    ],
+    "related_artifacts": [
+      {"id": "sanxingdui_da_mianju", "name_zh": "三星堆青铜大面具", "relation_type": "same_excavation_group", "reason": "同出三星堆八号坑", "strength": "strong"},
+      {"id": "sanxingdui_dali_ren", "name_zh": "三星堆青铜大立人", "relation_type": "cited_together_academically", "reason": "大立人站立于神坛上, 与铜神坛代表同一祭祀场景的不同层次", "strength": "strong"},
+      {"id": "sanxingdui_shenshu", "name_zh": "三星堆青铜神树", "relation_type": "same_excavation_site", "reason": "同为三星堆宇宙观的实物化", "strength": "strong"}
+    ],
+    "image_urls": [{"url": "https://commons.wikimedia.org/wiki/Category:Sanxingdui", "source": "Wikimedia Commons", "license": "CC BY-SA", "caption": "三星堆文物相册", "view": "overview"}],
+    "media_3d_video": [],
+    "data_sources": [
+      {"field": "basic, excavation_detail, story_brief", "source": "Wikipedia EN: Sanxingdui", "url": "https://en.wikipedia.org/wiki/Sanxingdui", "license": "CC BY-SA 4.0"},
+      {"field": "academic_status", "source": "Wikipedia ZH: 三星堆遗址", "url": "https://zh.wikipedia.org/wiki/三星堆遗址", "license": "CC BY-SA 4.0"}
+    ]
+  },
+  {
+    "id": "sanxingdui_xiaoliren",
+    "name_zh": "三星堆青铜小立人",
+    "name_pinyin": "San Xing Dui Qing Tong Xiao Li Ren",
+    "name_alt": ["三星堆小立人像", "三星堆铜俑"],
+    "dynasty": "商",
+    "period": "商代晚期(古蜀文化)",
+    "approx_year": "约公元前1300-1100年",
+    "excavation_year": "1986",
+    "excavation_site": "四川省广汉市三星堆遗址祭祀坑",
+    "ancient_state": "古蜀(三星堆文化)",
+    "current_museum": "三星堆博物馆",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null,
+      "note": "小立人高约10-30cm, 多件存世, 尺寸不一"
+    },
+    "type": "礼器",
+    "form_subtype": "小型立体人像",
+    "patterns": ["写实人形", "服饰纹样"],
+    "patterns_detail": {
+      "main": [
+        {
+          "name": "写实人形",
+          "icon_ref": "niaoshou",
+          "position": "整体",
+          "style": "小型立人, 服饰纹样细密, 头戴冠或高帽, 双手呈持握状或垂立",
+          "meaning": "祭祀助手/侍从形象; 或为神职人员的象征性缩小版"
+        }
+      ],
+      "ground": []
+    },
+    "inscription": {"has": false, "text": null, "char_count": 0, "summary": "无铭文"},
+    "inscription_detail": {"has": false},
+    "purpose": "祭祀礼器",
+    "usage_history": {"primary_purpose": "祭祀礼器", "user_class": "古蜀国", "transmission_in_use": "祭祀后埋坑"},
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "三星堆青铜小立人是三星堆出土人像系列中的小型版, 多件存世, 形态各异。与大立人(高262cm)相比, 小立人高度一般在10-30cm左右, 但同样具有古蜀独特的宽脸大耳、服饰繁复等特征。学界认为小立人可能代表神职助手或侍从, 与大立人构成古蜀神权体系的等级层次。",
+    "excavation_detail": {
+      "discovery_date": "1986",
+      "discovery_method": "考古发掘",
+      "co_excavated_group_id": "sanxingdui_k2_1986",
+      "dating_evidence": {"confidence": "确认"}
+    },
+    "form_detail": {
+      "main_body": {"shape": "小型铜立人, 10-30cm高, 服饰纹样细密"},
+      "distinctive_features": [
+        "与大立人形成等级体系",
+        "服饰纹样保存古蜀服饰信息",
+        "多件存世, 形态各异"
+      ],
+      "craft": {"method": "范铸法"}
+    },
+    "academic_status": {
+      "representativeness": "三星堆人像系列的小型代表",
+      "scholarly_consensus": "研究古蜀神权等级体系的重要材料"
+    },
+    "provenance_timeline": [
+      {"year": "约-1300至-1100", "event": "铸造祭祀埋坑", "location": "三星堆", "actor": "古蜀国", "evidence": "地层"},
+      {"year": "1986", "event": "出土", "location": "三星堆博物馆", "actor": "考古队", "evidence": "考古报告"}
+    ],
+    "related_artifacts": [
+      {"id": "sanxingdui_dali_ren", "name_zh": "三星堆青铜大立人", "relation_type": "same_excavation_group", "reason": "小立人与大立人构成古蜀神权等级体系", "strength": "strong"},
+      {"id": "sanxingdui_dajintai_mianju", "name_zh": "戴金面罩青铜人头像", "relation_type": "same_excavation_group", "reason": "同出三星堆坑, 同属人形礼器体系", "strength": "strong"},
+      {"id": "sanxingdui_dingzun_guizuo", "name_zh": "顶尊跪坐青铜人像", "relation_type": "same_excavation_site", "reason": "同为三星堆人形铜器", "strength": "medium"}
+    ],
+    "image_urls": [{"url": "https://commons.wikimedia.org/wiki/Category:Sanxingdui", "source": "Wikimedia Commons", "license": "CC BY-SA", "caption": "三星堆文物相册", "view": "overview"}],
+    "media_3d_video": [],
+    "data_sources": [
+      {"field": "basic, form_detail, story_brief", "source": "Wikipedia EN: Sanxingdui", "url": "https://en.wikipedia.org/wiki/Sanxingdui", "license": "CC BY-SA 4.0"},
+      {"field": "academic_status", "source": "Wikipedia ZH: 三星堆遗址", "url": "https://zh.wikipedia.org/wiki/三星堆遗址", "license": "CC BY-SA 4.0"}
+    ]
+  },
+  {
+    "id": "sanxingdui_qingtong_zun",
+    "name_zh": "三星堆青铜尊(本地化)",
+    "name_pinyin": "San Xing Dui Qing Tong Zun",
+    "name_alt": ["三星堆铜尊", "三星堆古蜀尊"],
+    "dynasty": "商",
+    "period": "商代晚期(古蜀文化)",
+    "approx_year": "约公元前1300-1100年",
+    "excavation_year": "1986",
+    "excavation_site": "四川省广汉市三星堆遗址祭祀坑",
+    "ancient_state": "古蜀(三星堆文化)",
+    "current_museum": "三星堆博物馆",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null,
+      "note": "尺寸待具体件确认"
+    },
+    "type": "酒器",
+    "form_subtype": "尊(中原尊形制+古蜀纹饰)",
+    "patterns": ["饕餮纹(变体)", "兽面纹(古蜀化)", "云雷纹"],
+    "patterns_detail": {
+      "main": [
+        {
+          "name": "兽面纹(古蜀化)",
+          "icon_ref": "taotie",
+          "position": "器腹",
+          "style": "形制仿中原商代铜尊, 但纹饰经古蜀本地化改造, 饕餮更为夸张",
+          "meaning": "古蜀与中原商文化交流的直接证据; 引进中原器型但改造纹饰"
+        }
+      ],
+      "ground": [{"name": "云雷纹", "icon_ref": "yunlei", "position": "地纹", "style": "继承中原云雷地纹"}]
+    },
+    "inscription": {"has": false, "text": null, "char_count": 0, "summary": "无铭文"},
+    "inscription_detail": {"has": false},
+    "purpose": "祭祀礼器",
+    "usage_history": {
+      "primary_purpose": "祭祀礼器",
+      "user_class": "古蜀国",
+      "transmission_in_use": "祭祀后埋坑"
+    },
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "三星堆出土铜尊在形制上仿效中原商代铜尊(圆口、束颈、鼓腹、圈足), 但纹饰经过明显的本地化改造, 加入更强烈的古蜀夸张风格。这类器物是研究三星堆与中原商文化关系的重要材料: 古蜀工匠引进了中原先进的尊形制, 但在装饰语言上保持了独立性。此类文化融合现象证明三星堆并非孤立文明。",
+    "excavation_detail": {
+      "discovery_date": "1986",
+      "discovery_method": "考古发掘",
+      "co_excavated_group_id": "sanxingdui_k2_1986",
+      "dating_evidence": {"confidence": "确认"}
+    },
+    "form_detail": {
+      "main_body": {"shape": "喇叭口, 束颈, 鼓腹, 圈足 — 仿中原商尊形制"},
+      "distinctive_features": [
+        "中原尊形制+古蜀化纹饰的文化融合体",
+        "三星堆与中原商文化交流的实物证据"
+      ],
+      "craft": {"method": "范铸法"}
+    },
+    "academic_status": {
+      "representativeness": "三星堆文化对中原商文化吸收改造的代表性器物",
+      "scholarly_consensus": "古蜀文化非孤立发展的重要实物证据"
+    },
+    "provenance_timeline": [
+      {"year": "约-1300至-1100", "event": "铸造祭祀埋坑", "location": "三星堆", "actor": "古蜀国", "evidence": "地层"},
+      {"year": "1986", "event": "出土", "location": "三星堆博物馆", "actor": "考古队", "evidence": "考古报告"}
+    ],
+    "related_artifacts": [
+      {"id": "sanxingdui_dingzun_guizuo", "name_zh": "顶尊跪坐青铜人像", "relation_type": "cited_together_academically", "reason": "顶尊人像中的铜尊与三星堆本地尊为同类对比研究", "strength": "strong"},
+      {"id": "siyang_fangzun", "name_zh": "四羊方尊", "relation_type": "contrastive_pair", "reason": "中原商代铜尊与三星堆本地化尊的对比", "strength": "medium"},
+      {"id": "sanxingdui_dali_ren", "name_zh": "三星堆青铜大立人", "relation_type": "same_excavation_group", "reason": "同出三星堆坑", "strength": "medium"}
+    ],
+    "image_urls": [{"url": "https://commons.wikimedia.org/wiki/Category:Sanxingdui", "source": "Wikimedia Commons", "license": "CC BY-SA", "caption": "三星堆文物相册", "view": "overview"}],
+    "media_3d_video": [],
+    "data_sources": [
+      {"field": "basic, form_detail, story_brief", "source": "Wikipedia EN: Sanxingdui", "url": "https://en.wikipedia.org/wiki/Sanxingdui", "license": "CC BY-SA 4.0"},
+      {"field": "academic_status", "source": "Wikipedia ZH: 三星堆遗址", "url": "https://zh.wikipedia.org/wiki/三星堆遗址", "license": "CC BY-SA 4.0"}
+    ]
+  },
+  {
+    "id": "sanxingdui_qingtong_lei",
+    "name_zh": "三星堆青铜罍",
+    "name_pinyin": "San Xing Dui Qing Tong Lei",
+    "name_alt": ["三星堆铜罍", "三星堆古蜀铜罍"],
+    "dynasty": "商",
+    "period": "商代晚期(古蜀文化)",
+    "approx_year": "约公元前1300-1100年",
+    "excavation_year": "1986",
+    "excavation_site": "四川省广汉市三星堆遗址二号祭祀坑",
+    "ancient_state": "古蜀(三星堆文化)",
+    "current_museum": "三星堆博物馆",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null,
+      "note": "尺寸待确认"
+    },
+    "type": "酒器",
+    "form_subtype": "罍(大型盛酒器)",
+    "patterns": ["兽面纹(古蜀化)", "云雷纹", "饕餮纹变体"],
+    "patterns_detail": {
+      "main": [
+        {
+          "name": "兽面纹(古蜀变体)",
+          "icon_ref": "taotie",
+          "position": "器腹",
+          "style": "仿中原商代罍形, 兽面纹融入古蜀夸张风格",
+          "meaning": "同三星堆铜尊, 中原器型+古蜀纹饰的融合"
+        }
+      ],
+      "ground": [{"name": "云雷纹", "icon_ref": "yunlei", "position": "地纹"}]
+    },
+    "inscription": {"has": false, "text": null, "char_count": 0, "summary": "无铭文"},
+    "inscription_detail": {"has": false},
+    "purpose": "祭祀礼器",
+    "usage_history": {"primary_purpose": "祭祀礼器", "user_class": "古蜀国", "transmission_in_use": "祭祀后埋坑"},
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "三星堆青铜罍与三星堆铜尊类似, 形制仿效中原商代铜罍, 但装饰语言经古蜀本地化。罍为大型盛酒器, 三星堆出土数件, 与铜尊共同构成三星堆祭祀酒礼器群。这些器物进一步证实三星堆与中原商文化存在深度交流。",
+    "excavation_detail": {
+      "discovery_date": "1986", "discovery_method": "考古发掘",
+      "co_excavated_group_id": "sanxingdui_k2_1986",
+      "dating_evidence": {"confidence": "确认"}
+    },
+    "form_detail": {
+      "main_body": {"shape": "大型宽肩收腹罍形, 仿中原商代"},
+      "distinctive_features": [
+        "三星堆罍为中原罍形+古蜀纹饰的融合体",
+        "与三星堆铜尊共构古蜀酒礼器体系"
+      ],
+      "craft": {"method": "范铸法"}
+    },
+    "academic_status": {
+      "representativeness": "三星堆与中原酒礼器交流的代表",
+      "scholarly_consensus": "证明古蜀酒礼文化与中原同源异流"
+    },
+    "provenance_timeline": [
+      {"year": "约-1300至-1100", "event": "铸造祭祀埋坑", "location": "三星堆", "actor": "古蜀国", "evidence": "地层"},
+      {"year": "1986", "event": "出土", "location": "三星堆博物馆", "actor": "考古队", "evidence": "考古报告"}
+    ],
+    "related_artifacts": [
+      {"id": "sanxingdui_qingtong_zun", "name_zh": "三星堆青铜尊", "relation_type": "same_excavation_group", "reason": "同出三星堆坑, 尊罍为酒礼器搭档", "strength": "strong"},
+      {"id": "sanxingdui_dali_ren", "name_zh": "三星堆青铜大立人", "relation_type": "same_excavation_group", "reason": "同出三星堆坑", "strength": "medium"},
+      {"id": "sanxingdui_shenshu", "name_zh": "三星堆青铜神树", "relation_type": "same_excavation_group", "reason": "同出三星堆二号坑", "strength": "medium"}
+    ],
+    "image_urls": [{"url": "https://commons.wikimedia.org/wiki/Category:Sanxingdui", "source": "Wikimedia Commons", "license": "CC BY-SA", "caption": "三星堆文物相册", "view": "overview"}],
+    "media_3d_video": [],
+    "data_sources": [
+      {"field": "basic, form_detail, story_brief", "source": "Wikipedia EN: Sanxingdui", "url": "https://en.wikipedia.org/wiki/Sanxingdui", "license": "CC BY-SA 4.0"},
+      {"field": "academic_status", "source": "Wikipedia ZH: 三星堆遗址", "url": "https://zh.wikipedia.org/wiki/三星堆遗址", "license": "CC BY-SA 4.0"}
+    ]
+  },
+  {
+    "id": "sanxingdui_hutolong",
+    "name_zh": "三星堆青铜虎头龙身像",
+    "name_pinyin": "San Xing Dui Qing Tong Hu Tou Long Shen Xiang",
+    "name_alt": ["三星堆龙虎合体器", "三星堆三号坑龙虎"],
+    "dynasty": "商",
+    "period": "商代晚期(古蜀文化)",
+    "approx_year": "约公元前1300-1100年",
+    "excavation_year": "2020",
+    "excavation_site": "四川省广汉市三星堆遗址三号祭祀坑",
+    "ancient_state": "古蜀(三星堆文化)",
+    "current_museum": "三星堆博物馆",
+    "size": {
+      "height_cm": null,
+      "width_cm": null,
+      "length_cm": null,
+      "weight_kg": null,
+      "note": "尺寸待修复后确认"
+    },
+    "type": "礼器",
+    "form_subtype": "神兽立体(龙虎合体)",
+    "patterns": ["虎头", "龙身", "鳞纹"],
+    "patterns_detail": {
+      "main": [
+        {
+          "name": "龙虎合体",
+          "icon_ref": "niaoshou",
+          "position": "整体",
+          "style": "虎头龙身, 融合两种神兽特征",
+          "meaning": "古蜀复合神兽崇拜; 虎与龙在不同文化中均为神权象征, 合体代表超越性力量"
+        }
+      ],
+      "ground": []
+    },
+    "inscription": {"has": false, "text": null, "char_count": 0, "summary": "无铭文"},
+    "inscription_detail": {"has": false},
+    "purpose": "祭祀礼器",
+    "usage_history": {"primary_purpose": "祭祀礼器", "user_class": "古蜀国", "transmission_in_use": "祭祀后埋坑"},
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "三星堆青铜虎头龙身像2020年出土于三星堆三号祭祀坑, 是近年新发掘的代表性器物之一。器形为虎头龙身的神兽合体, 在三星堆出土器物中较为独特。其造型融合了虎(力量、勇猛)与龙(神权、变化)两种神兽符号, 体现古蜀神兽崇拜的多元性。正在修复中, 完整形态有待揭示。",
+    "excavation_detail": {
+      "discovery_date": "2020",
+      "discovery_method": "考古发掘",
+      "co_excavated_group_id": "sanxingdui_k3_2021",
+      "dating_evidence": {"confidence": "确认"}
+    },
+    "form_detail": {
+      "main_body": {"shape": "虎头+龙形身体, 神兽合体形象"},
+      "distinctive_features": [
+        "虎头龙身, 复合神兽崇拜的独特类型",
+        "三号坑新出器物, 学界研究中"
+      ],
+      "craft": {"method": "范铸法"}
+    },
+    "academic_status": {
+      "representativeness": "三星堆复合神兽类型的代表",
+      "scholarly_consensus": "古蜀神兽体系研究的新材料"
+    },
+    "provenance_timeline": [
+      {"year": "约-1300至-1100", "event": "铸造祭祀埋坑", "location": "三星堆三号坑", "actor": "古蜀国", "evidence": "地层"},
+      {"year": "2020", "event": "出土(正在修复)", "location": "三星堆博物馆", "actor": "考古队", "evidence": "考古报告"}
+    ],
+    "related_artifacts": [
+      {"id": "sanxingdui_shoumianju", "name_zh": "三星堆青铜兽面具", "relation_type": "same_excavation_site", "reason": "同为三星堆神兽形礼器", "strength": "medium"},
+      {"id": "sanxingdui_dingzun_guizuo", "name_zh": "顶尊跪坐青铜人像", "relation_type": "same_excavation_group", "reason": "同出三星堆三号坑", "strength": "strong"},
+      {"id": "sanxingdui_dali_ren", "name_zh": "三星堆青铜大立人", "relation_type": "same_excavation_site", "reason": "同出三星堆", "strength": "medium"}
+    ],
+    "image_urls": [{"url": "https://commons.wikimedia.org/wiki/Category:Sanxingdui", "source": "Wikimedia Commons", "license": "CC BY-SA", "caption": "三星堆文物相册", "view": "overview"}],
+    "media_3d_video": [],
+    "data_sources": [
+      {"field": "basic, excavation_detail, story_brief", "source": "Wikipedia ZH: 三星堆遗址", "url": "https://zh.wikipedia.org/wiki/三星堆遗址", "license": "CC BY-SA 4.0"},
+      {"field": "academic_status", "source": "Wikipedia EN: Sanxingdui", "url": "https://en.wikipedia.org/wiki/Sanxingdui", "license": "CC BY-SA 4.0"}
+    ]
+  },
+  {
+    "_upgrade_note": "v1 UPGRADE — adds v3 fields to existing qin_tongchema record. The canonical record above (id=qin_tongchema) serves as upgrade.",
+    "id": "qin_tongchema_v3upgrade",
+    "_skip_dedup": true,
+    "_note": "DEDUP: qin_tongchema above IS the upgraded record. This entry documents upgrade completion. Use id=qin_tongchema only."
+  },
+  {
+    "id": "cuojin_boshanlu_v3",
+    "_v1_id": "cuojin_boshanlu",
+    "_upgrade": true,
+    "name_zh": "错金博山炉",
+    "name_pinyin": "Cuo Jin Bo Shan Lu",
+    "dynasty": "汉",
+    "period": "西汉前期(中山靖王刘胜时期)",
+    "excavation_year": "1968",
+    "excavation_site": "河北省满城县中山靖王刘胜墓",
+    "current_museum": "河北博物院",
+    "rarity_level": "禁止出境",
+    "patterns_detail": {
+      "main": [
+        {"name": "山峦人兽纹", "icon_ref": "niaoshou", "position": "炉盖(博山)", "style": "错金丝高浮雕山峦, 山间猎人、奔兽、神兽出没, 极富立体感", "meaning": "博山仙境; 汉武帝时代流行的神仙思想具象化"}
+      ],
+      "secondary": [
+        {"name": "盘龙纹", "icon_ref": "kuilong", "position": "炉柄", "style": "盘龙环绕细柄", "meaning": "神兽守护仙炉"}
+      ],
+      "ground": [
+        {"name": "错金云气纹", "icon_ref": "yunlei", "position": "底座", "style": "金丝错出流动云气, 与仙山相呼应"}
+      ]
+    },
+    "excavation_detail": {
+      "discoverer": "中国人民解放军",
+      "discovery_date": "1968",
+      "discovery_method": "考古发掘(解放军工兵施工中发现)",
+      "co_excavated_group_id": "manche_liusheng_1968",
+      "co_excavated_with": ["金缕玉衣", "长信宫灯(窦绾墓)", "朱雀衔环杯"],
+      "dating_evidence": {"stratigraphy": "西汉前期地层(约前113年)", "confidence": "确认"},
+      "significance_of_discovery": "满城汉墓与兵马俑并列为1968年中国两大重要考古发现"
+    },
+    "form_detail": {
+      "main_body": {"shape": "圆形香炉, 博山形盖, 镂空山峦, 细柄, 圆盘形底座", "feature": "炉盖博山形, 镂空山缝透烟, 形成仙境云雾效果"},
+      "accessories": {"feet": "底座有三足(熊足形)", "handle": "细高柄"},
+      "distinctive_features": [
+        "西汉错金工艺巅峰: 错金丝细密精准, 全器金光灿烂",
+        "山间人物、猎兽、神兽栩栩如生, 立体感极强",
+        "博山形炉盖设计象征东海仙山, 是汉代神仙信仰最具美学价值的器物",
+        "错金底座盘龙+云气纹, 工艺水平与装饰理念均达西汉顶峰"
+      ],
+      "craft": {"method": "范铸法", "surface_treatment": "错金(金丝嵌入铜体凹槽)"}
+    },
+    "usage_history": {
+      "primary_purpose": "实用器",
+      "ritual_scene": null,
+      "user_class": "中山靖王刘胜",
+      "ritual_text_refs": ["汉代神仙思想文献"],
+      "transmission_in_use": "刘胜生前熏香使用, 随葬"
+    },
+    "academic_status": {
+      "representativeness": "西汉错金工艺最高代表; 汉代神仙信仰工艺化的巅峰作品",
+      "dating_value": "明确断代为西汉中山靖王时期(约前113年), 是研究西汉工艺史的绝对年代标尺",
+      "scholarly_consensus": "中国博物馆学界公认西汉最精美的单件铜器之一",
+      "key_scholars": [{"name": "满城汉墓发掘报告", "contribution": "1980年中国社科院考古研究所发布, 奠定满城汉墓研究基础"}]
+    },
+    "provenance_timeline": [
+      {"year": "前2世纪(约前113)", "event": "铸造使用", "location": "西汉少府工官", "actor": "少府工官", "evidence": "墓葬断代"},
+      {"year": "约前113", "event": "随葬于刘胜墓", "location": "河北满城", "actor": "中山国", "evidence": "考古"},
+      {"year": "1968", "event": "解放军施工意外发现, 随即组织考古发掘", "location": "河北满城", "actor": "中国人民解放军+考古队", "evidence": "Wikipedia EN: Mancheng_Han_Tombs"},
+      {"year": "1968至今", "event": "藏河北博物院", "location": "河北博物院", "actor": "河北博物院", "evidence": "馆藏"}
+    ],
+    "related_artifacts": [
+      {"id": "changxin_gongdeng", "name_zh": "长信宫灯", "relation_type": "same_excavation_site", "reason": "同出满城汉墓(灯出窦绾墓, 炉出刘胜墓), 并称满城汉墓两大镇馆之宝", "strength": "strong"},
+      {"id": "liujin_boshanlu_donghan", "name_zh": "鎏金博山炉(东汉)", "relation_type": "derivative_form", "reason": "东汉博山炉为错金博山炉的风格演变延续", "strength": "strong"},
+      {"id": "zhujue_huanbeibei", "name_zh": "朱雀衔环杯", "relation_type": "same_excavation_group", "reason": "同出满城汉墓刘胜墓", "strength": "strong"}
+    ],
+    "image_urls": [
+      {"url": "https://commons.wikimedia.org/wiki/Category:Boshanlu", "source": "Wikimedia Commons", "license": "CC BY-SA", "caption": "博山炉类目", "view": "overview"}
+    ],
+    "media_3d_video": [],
+    "data_sources": [
+      {"field": "basic, size, excavation_detail", "source": "Wikipedia EN: Mancheng Han Tombs", "url": "https://en.wikipedia.org/wiki/Mancheng_Han_Tombs", "license": "CC BY-SA 4.0"},
+      {"field": "form_detail, patterns_detail", "source": "Wikipedia EN: Hill censer", "url": "https://en.wikipedia.org/wiki/Hill_censer", "license": "CC BY-SA 4.0"},
+      {"field": "academic_status, story_brief", "source": "Wikipedia ZH: 错金博山炉", "url": "https://zh.wikipedia.org/wiki/错金博山炉", "license": "CC BY-SA 4.0"}
+    ]
+  },
+  {
+    "id": "changxin_gongdeng_v3",
+    "_v1_id": "changxin_gongdeng",
+    "_upgrade": true,
+    "name_zh": "长信宫灯",
+    "name_pinyin": "Chang Xin Gong Deng",
+    "dynasty": "汉",
+    "period": "西汉前期",
+    "excavation_year": "1968",
+    "excavation_site": "河北省满城县中山靖王刘胜之妻窦绾墓",
+    "current_museum": "河北博物院",
+    "rarity_level": "禁止出境",
+    "patterns_detail": {
+      "main": [
+        {"name": "鎏金宫女形", "icon_ref": "niaoshou", "position": "整体", "style": "跪坐宫女, 素面写实, 通体鎏金, 面部神情恬静", "meaning": "功能性美学: 宫女形态设计即功能所在(导烟+调光)"}
+      ],
+      "ground": [],
+      "notes": "器物设计以功能为美学核心, 无装饰性纹饰"
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 65,
+      "summary": "灯体多处刻铭65字, 记'长信尚浴'字样及重量, 说明其原为窦太后'长信宫'之物, 后转赐窦绾"
+    },
+    "inscription_detail": {
+      "has": true,
+      "original_text": "长信尚浴…(各部位铭文)",
+      "modern_text": "长信宫御用, 后转赐",
+      "vernacular": "原为汉景帝时期窦太后长信宫所用, 后转赐窦绾",
+      "char_count": 65,
+      "jinwen_stage": null,
+      "academic_consensus": "铭文记录了文物流转史, 是汉代宫廷器物转赐制度的实物证据"
+    },
+    "excavation_detail": {
+      "discoverer": "中国人民解放军(与刘胜墓同批)",
+      "discovery_date": "1968",
+      "discovery_method": "考古发掘",
+      "co_excavated_group_id": "manche_doubinwu_1968",
+      "co_excavated_with": ["金缕玉衣(窦绾)"],
+      "dating_evidence": {"stratigraphy": "西汉前期地层", "confidence": "确认"},
+      "significance_of_discovery": "被誉为'中华第一灯'; 2022年北京冬奥火炬以其为设计灵感"
+    },
+    "form_detail": {
+      "main_body": {"shape": "宫女跪坐, 左手托底盘, 右臂自然上抬, 右手持灯罩一侧"},
+      "accessories": {
+        "handle": "右臂为中空导烟管, 接入宫女腹腔(腹内贮水)",
+        "lid": "灯罩分两片, 可开合调节光向和光量"
+      },
+      "distinctive_features": [
+        "右臂中空导烟+腹内贮水: 世界最早'环保灯'设计(烟尘溶于水)",
+        "灯盘可360°旋转调向, 灯罩可开合调光: 最早可调节光源",
+        "65字铭文记录器物由长信宫转赐流转史",
+        "通体鎏金宫女形态写实, 汉代宫廷审美巅峰"
+      ],
+      "craft": {"method": "范铸法", "specifics": "分铸(宫女身体、灯盘、灯罩)后组合装配", "surface_treatment": "鎏金"}
+    },
+    "usage_history": {
+      "primary_purpose": "实用器",
+      "user_class": "窦太后(原) → 窦绾",
+      "transmission_in_use": "原用于长信宫(景帝母窦太后宫殿), 后转赐窦绾(刘胜之妻)"
+    },
+    "academic_status": {
+      "representativeness": "西汉照明器物最高代表; 世界古代'环保设计'典范",
+      "scholarly_consensus": "功能设计与艺术造型的完美统一, 被誉为'中华第一灯'",
+      "key_scholars": [{"name": "王仲殊", "contribution": "汉代考古与满城汉墓综合研究"}]
+    },
+    "provenance_timeline": [
+      {"year": "前2世纪(景帝时期)", "event": "铸造, 在长信宫使用", "location": "长信宫(汉长安)", "actor": "少府工官", "evidence": "铭文'长信尚浴'"},
+      {"year": "约前113", "event": "转赐窦绾, 随葬入墓", "location": "河北满城", "actor": "窦太后/朝廷", "evidence": "铭文流转记录"},
+      {"year": "1968", "event": "出土", "location": "河北满城", "actor": "考古队", "evidence": "考古简报"},
+      {"year": "1968至今", "event": "藏河北博物院, 成为镇馆之宝", "location": "河北博物院", "actor": "河北博物院", "evidence": "馆藏"}
+    ],
+    "related_artifacts": [
+      {"id": "cuojin_boshanlu_v3", "name_zh": "错金博山炉", "relation_type": "same_excavation_site", "reason": "同出满城汉墓(分属不同墓), 并称两大镇馆之宝", "strength": "strong"},
+      {"id": "haihohou_yanyudeng", "name_zh": "海昏侯雁鱼铜灯", "relation_type": "same_form_subtype", "reason": "同为西汉高级铜灯, 均有导烟环保设计", "strength": "strong"},
+      {"id": "manche_cuojinyinhu", "name_zh": "错金银凤鸟铜壶", "relation_type": "same_excavation_site", "reason": "同出满城汉墓(刘胜墓系)", "strength": "medium"}
+    ],
+    "image_urls": [
+      {"url": "https://commons.wikimedia.org/wiki/Category:Changxin_Palace_Lamp", "source": "Wikimedia Commons", "license": "CC BY-SA", "caption": "长信宫灯相册", "view": "overview"}
+    ],
+    "media_3d_video": [],
+    "data_sources": [
+      {"field": "basic, size, inscription_detail", "source": "Wikipedia EN: Changxin Palace Lamp", "url": "https://en.wikipedia.org/wiki/Changxin_Palace_Lamp", "license": "CC BY-SA 4.0"},
+      {"field": "form_detail, distinctive_features", "source": "Wikipedia ZH: 长信宫灯", "url": "https://zh.wikipedia.org/wiki/长信宫灯", "license": "CC BY-SA 4.0"},
+      {"field": "excavation_detail", "source": "Wikipedia EN: Mancheng Han Tombs", "url": "https://en.wikipedia.org/wiki/Mancheng_Han_Tombs", "license": "CC BY-SA 4.0"}
+    ]
+  },
+  {
+    "id": "matafeiyan_v3",
+    "_v1_id": "matafeiyan",
+    "_upgrade": true,
+    "name_zh": "马踏飞燕",
+    "name_pinyin": "Ma Ta Fei Yan",
+    "dynasty": "汉",
+    "period": "东汉中晚期",
+    "excavation_year": "1969",
+    "excavation_site": "甘肃省武威市雷台汉墓",
+    "current_museum": "甘肃省博物馆",
+    "rarity_level": "禁止出境",
+    "patterns_detail": {
+      "main": [
+        {"name": "写实奔马形", "icon_ref": "niaoshou", "position": "整体", "style": "铜奔马昂首嘶鸣, 三足腾空, 右后蹄踏飞鸟, 肌肉紧绷, 写实传神", "meaning": "汉代'天马'崇拜与军事骑兵实力的象征; '天马来, 从西极'(汉武帝时代"}
+      ],
+      "ground": []
+    },
+    "inscription": {"has": false, "text": null, "char_count": 0, "summary": "无铭文"},
+    "inscription_detail": {"has": false},
+    "excavation_detail": {
+      "discoverer": "武威新鲜公社农民",
+      "discovery_date": "1969",
+      "discovery_method": "农民偶然",
+      "co_excavated_group_id": "wuwei_leitai_1969",
+      "co_excavated_with": ["铜车马仪仗队99件铜俑45辆车"],
+      "dating_evidence": {"stratigraphy": "东汉墓葬地层", "style_phase": "东汉中晚期(2世纪)", "confidence": "确认"},
+      "significance_of_discovery": "1984年被国家旅游局选为中国旅游形象标志; 迄今中国最知名的单件青铜器之一"
+    },
+    "form_detail": {
+      "main_body": {"shape": "奔马右后蹄踏飞鸟, 三足腾空, 全身重量由飞鸟一点支撑"},
+      "distinctive_features": [
+        "力学奇迹: 全身重量由右后蹄踏鸟一点支撑, 达到完美平衡",
+        "飞鸟扭头惊视, 构图动感十足, 反衬马速之疾",
+        "1984年成为中国旅游形象标志, 知名度极高",
+        "失蜡法或范铸法兼用(学界有争议), 保证单点支撑的结构稳定"
+      ],
+      "craft": {"method": "范铸法", "specifics": "单点支撑需精确计算重心, 工艺高超", "surface_treatment": null}
+    },
+    "usage_history": {
+      "primary_purpose": "葬礼明器",
+      "ritual_scene": "葬礼",
+      "user_class": "东汉西北边疆军事将领(张姓)",
+      "transmission_in_use": "作为仪仗队领队马随葬于雷台汉墓"
+    },
+    "academic_status": {
+      "representativeness": "东汉铜雕塑最高代表; 中国现代旅游文化标志",
+      "scholarly_consensus": "力学设计与艺术造型完美统一的杰作",
+      "key_scholars": [{"name": "郭沫若", "contribution": "1969年鉴定, 命名'马踏飞燕', 确立其学术地位"}]
+    },
+    "provenance_timeline": [
+      {"year": "2世纪", "event": "铸造, 随葬", "location": "甘肃武威雷台汉墓", "actor": "张姓武官家族", "evidence": "地层与铭文"},
+      {"year": "1969", "event": "农民挖防空洞意外发现", "location": "甘肃武威", "actor": "武威新鲜公社农民", "evidence": "Wikipedia EN: Flying Horse of Gansu"},
+      {"year": "1969", "event": "郭沫若鉴定命名'马踏飞燕'", "location": "北京", "actor": "郭沫若", "evidence": "学术记录"},
+      {"year": "1984", "event": "被选为中国旅游形象标志", "location": "北京", "actor": "国家旅游局", "evidence": "官方记录"},
+      {"year": "1969至今", "event": "藏甘肃省博物馆", "location": "甘肃省博物馆", "actor": "甘肃省博物馆", "evidence": "馆藏"}
+    ],
+    "related_artifacts": [
+      {"id": "wuwei_tongjuma", "name_zh": "武威铜车马仪仗队", "relation_type": "same_excavation_group", "reason": "铜奔马即仪仗队领队马, 不可分割", "strength": "strong"},
+      {"id": "maoluling_liujinma", "name_zh": "鎏金铜马", "relation_type": "same_form_subtype", "reason": "同为汉代精品铜马, 秦汉马文化对比", "strength": "strong"},
+      {"id": "qin_tongchema", "name_zh": "秦陵铜车马", "relation_type": "contrastive_pair", "reason": "秦代整体性车马vs东汉单件写实马, 帝制早晚期铜马工艺对比", "strength": "medium"}
+    ],
+    "image_urls": [
+      {"url": "https://commons.wikimedia.org/wiki/Category:Galloping_Horse_Treading_on_a_Flying_Swallow", "source": "Wikimedia Commons", "license": "CC BY-SA", "caption": "马踏飞燕相册", "view": "overview"}
+    ],
+    "media_3d_video": [],
+    "data_sources": [
+      {"field": "basic, size, excavation_detail, story_brief", "source": "Wikipedia EN: Flying Horse of Gansu", "url": "https://en.wikipedia.org/wiki/Flying_Horse_of_Gansu", "license": "CC BY-SA 4.0"},
+      {"field": "form_detail, academic_status", "source": "Wikipedia ZH: 马踏飞燕", "url": "https://zh.wikipedia.org/wiki/马踏飞燕", "license": "CC BY-SA 4.0"},
+      {"field": "provenance_timeline", "source": "Wikidata Q707020", "url": "https://www.wikidata.org/wiki/Q707020", "license": "CC0"}
+    ]
+  },
+  {
+    "id": "sanxingdui_dali_ren_v3",
+    "_v1_id": "sanxingdui_dali_ren",
+    "_upgrade": true,
+    "name_zh": "三星堆青铜大立人",
+    "name_pinyin": "San Xing Dui Qing Tong Da Li Ren",
+    "dynasty": "商",
+    "period": "商代晚期(古蜀文化)",
+    "excavation_year": "1986",
+    "excavation_site": "四川省广汉市三星堆遗址二号祭祀坑",
+    "current_museum": "三星堆博物馆",
+    "rarity_level": "禁止出境",
+    "patterns_detail": {
+      "main": [
+        {"name": "龙纹(服饰)", "icon_ref": "kuilong", "position": "衣袍全身", "style": "衣袍满饰龙纹、兽面纹、鸟纹、虫纹及几何纹, 被誉为'最早的龙袍'", "meaning": "古蜀最高神权的视觉表达; 满饰纹样象征与诸神的连接"}
+      ],
+      "secondary": [
+        {"name": "兽面纹(服饰)", "icon_ref": "taotie", "position": "衣袍中部", "style": "兽面纹与龙纹交织"}
+      ],
+      "ground": []
+    },
+    "inscription": {"has": false, "text": null, "char_count": 0, "summary": "无铭文"},
+    "inscription_detail": {"has": false, "note": "古蜀无成熟文字系统"},
+    "excavation_detail": {
+      "discovery_date": "1986",
+      "discovery_method": "考古发掘",
+      "co_excavated_group_id": "sanxingdui_k2_1986",
+      "co_excavated_with": ["三星堆纵目面具", "三星堆青铜神树", "青铜头像群", "黄金权杖"],
+      "dating_evidence": {"stratigraphy": "三星堆三期文化层, 商代晚期", "confidence": "确认"},
+      "significance_of_discovery": "世界已知最早、最高、最完整的青铜立人像, 高262cm"
+    },
+    "form_detail": {
+      "main_body": {
+        "shape": "立体站立人像 + 四方台座, 总高262cm(人像172cm+座90cm)",
+        "feature": "双手环握(中空), 原应持某物(牙璋/玉琮/象牙等, 学界未定)",
+        "specifics": "双足赤裸站于四方台座, 头戴高冠, 身着三层礼服"
+      },
+      "distinctive_features": [
+        "世界最早最高最完整青铜立人像(262cm), 被誉为'世界铜像之王'",
+        "双手中空环握, 所持之物至今成谜",
+        "服饰满饰龙纹兽面纹, 研究者称为'最早龙袍'",
+        "古蜀独立文明的最高标志, 风格完全有别于同期中原商文化"
+      ],
+      "craft": {"method": "范铸法", "specifics": "身与座分铸, 人像空心铸造", "surface_treatment": null}
+    },
+    "usage_history": {
+      "primary_purpose": "祭祀礼器",
+      "ritual_scene": "太牢祭祀",
+      "ritual_position": "祭坛中央主神像",
+      "user_class": "古蜀国最高祭司或王",
+      "transmission_in_use": "作为主神像立于祭坛, 祭祀结束后埋入二号坑"
+    },
+    "academic_status": {
+      "representativeness": "三星堆出土最重要单件; 古蜀文明在国际上的形象标志",
+      "scholarly_consensus": "公认为古蜀政教合一最高统治者形象; 手中所持之物为学术争议焦点",
+      "primary_caster": "古蜀国(铸主不详)",
+      "key_scholars": [
+        {"name": "赵殿增", "contribution": "三星堆大立人身份研究主要学者"},
+        {"name": "张亚莎", "contribution": "大立人手持物与祭祀功能研究"}
+      ]
+    },
+    "provenance_timeline": [
+      {"year": "约-1200", "event": "铸造, 作为主神像使用", "location": "古蜀三星堆", "actor": "古蜀国", "evidence": "地层断代"},
+      {"year": "约-1100", "event": "祭祀后肢解埋入二号坑", "location": "三星堆二号坑", "actor": "古蜀祭司", "evidence": "考古地层"},
+      {"year": "1986", "event": "三星堆二号坑考古发掘出土", "location": "四川广汉", "actor": "三星堆考古队", "evidence": "考古报告"},
+      {"year": "1992至今", "event": "三星堆博物馆建立并展出", "location": "三星堆博物馆", "actor": "三星堆博物馆", "evidence": "馆藏"}
+    ],
+    "related_artifacts": [
+      {"id": "sanxingdui_zongmu_mianju", "name_zh": "三星堆纵目面具", "relation_type": "same_excavation_group", "reason": "同出三星堆二号坑, 代表古蜀神权体系两大核心图像", "strength": "strong"},
+      {"id": "sanxingdui_shenshu", "name_zh": "三星堆青铜神树", "relation_type": "same_excavation_group", "reason": "同出二号坑, 大立人+神树构成古蜀祭祀场景完整体系", "strength": "strong"},
+      {"id": "sanxingdui_da_mianju", "name_zh": "三星堆青铜大面具", "relation_type": "same_excavation_site", "reason": "同出三星堆, 大立人与面具共构古蜀神权系统", "strength": "strong"}
+    ],
+    "image_urls": [
+      {"url": "https://commons.wikimedia.org/wiki/Category:Large_bronze_standing_figure_of_Sanxingdui", "source": "Wikimedia Commons", "license": "CC BY-SA", "caption": "三星堆大立人相册", "view": "overview"}
+    ],
+    "media_3d_video": [],
+    "data_sources": [
+      {"field": "basic, size, excavation_detail", "source": "Wikipedia EN: Sanxingdui", "url": "https://en.wikipedia.org/wiki/Sanxingdui", "license": "CC BY-SA 4.0"},
+      {"field": "form_detail, patterns_detail", "source": "Wikipedia ZH: 三星堆遗址", "url": "https://zh.wikipedia.org/wiki/三星堆遗址", "license": "CC BY-SA 4.0"},
+      {"field": "academic_status", "source": "Wikidata Q3454851", "url": "https://www.wikidata.org/wiki/Q3454851", "license": "CC0"}
+    ]
+  },
+  {
+    "id": "sanxingdui_zongmu_mianju_v3",
+    "_v1_id": "sanxingdui_zongmu_mianju",
+    "_upgrade": true,
+    "name_zh": "三星堆纵目面具",
+    "name_pinyin": "San Xing Dui Zong Mu Mian Ju",
+    "dynasty": "商",
+    "period": "商代晚期(古蜀文化)",
+    "excavation_year": "1986",
+    "excavation_site": "四川省广汉市三星堆遗址二号祭祀坑",
+    "current_museum": "三星堆博物馆",
+    "rarity_level": "禁止出境",
+    "patterns_detail": {
+      "main": [
+        {"name": "夸张五官造型", "icon_ref": "taotie", "position": "整体面部", "style": "双眼瞳孔圆柱状外凸16cm, 双耳扁平上扬70cm, 额头宽大, 嘴角微上扬", "meaning": "古蜀始祖蚕丛'其目纵'的传说具象化; 超凡视觉能力的神格化表达"}
+      ],
+      "ground": []
+    },
+    "inscription": {"has": false, "text": null, "char_count": 0, "summary": "无铭文"},
+    "inscription_detail": {"has": false, "note": "古蜀无文字系统"},
+    "excavation_detail": {
+      "discovery_date": "1986",
+      "discovery_method": "考古发掘",
+      "co_excavated_group_id": "sanxingdui_k2_1986",
+      "co_excavated_with": ["三星堆青铜大立人", "青铜神树", "黄金权杖", "人头像群"],
+      "dating_evidence": {"stratigraphy": "三星堆三期(商代晚期)", "confidence": "确认"},
+      "significance_of_discovery": "眼柱外凸16cm, 耳翼宽达138cm, 世界独一无二的造型, 引发全球关注"
+    },
+    "form_detail": {
+      "main_body": {
+        "shape": "宽额、双眼外凸、大耳上扬的平面大型面具",
+        "feature": "眼球圆柱状外凸达16cm, 双耳扁宽上扬"
+      },
+      "distinctive_features": [
+        "双眼柱状外凸16cm: 世界青铜器唯一此类造型",
+        "总宽138cm, 重约100kg: 三星堆出土第二大面具(仅次于2021年大面具)",
+        "与蚕丛始祖'纵目'传说完美对应",
+        "古蜀文明最具辨识度的形象符号"
+      ],
+      "craft": {"method": "范铸法", "specifics": "眼柱与面具主体可能分铸后焊接", "surface_treatment": null}
+    },
+    "usage_history": {
+      "primary_purpose": "祭祀礼器",
+      "ritual_scene": "太牢祭祀",
+      "ritual_position": "神殿木柱上挂置(推测)",
+      "user_class": "古蜀国",
+      "transmission_in_use": "原悬挂于神殿, 以神之眼俯视祭祀场域; 祭祀后埋入二号坑"
+    },
+    "academic_status": {
+      "representativeness": "三星堆出土第二标志性器物(仅次于大立人); 古蜀文明在国际上的标志性形象",
+      "scholarly_consensus": "主流认为对应蚕丛始祖'纵目'形象; 也有学者认为象征'千里眼顺风耳'",
+      "academic_controversies": [
+        {"topic": "纵目含义", "schools": [{"school": "蚕丛派", "view": "对应古蜀始祖蚕丛'其目纵'的传说"}, {"school": "神能派", "view": "象征超凡视觉能力(千里眼)而非特定人物"}]}
+      ]
+    },
+    "provenance_timeline": [
+      {"year": "约-1200", "event": "铸造, 悬挂于神殿", "location": "古蜀三星堆", "actor": "古蜀国", "evidence": "地层断代"},
+      {"year": "约-1100", "event": "埋入二号坑", "location": "三星堆二号坑", "actor": "古蜀祭司", "evidence": "考古地层"},
+      {"year": "1986", "event": "出土", "location": "四川广汉", "actor": "三星堆考古队", "evidence": "考古报告"}
+    ],
+    "related_artifacts": [
+      {"id": "sanxingdui_dali_ren_v3", "name_zh": "三星堆青铜大立人", "relation_type": "same_excavation_group", "reason": "同出二号坑核心礼器", "strength": "strong"},
+      {"id": "sanxingdui_da_mianju", "name_zh": "三星堆青铜大面具", "relation_type": "contrastive_pair", "reason": "纵目面具(夸张外凸)vs大面具(平和内敛), 两种面具风格的学术对比", "strength": "strong"},
+      {"id": "sanxingdui_yanxingqi", "name_zh": "三星堆青铜眼形器", "relation_type": "cited_together_academically", "reason": "纵目与眼形器同涉'眼崇拜', 学界常并论", "strength": "strong"}
+    ],
+    "image_urls": [{"url": "https://commons.wikimedia.org/wiki/Category:Sanxingdui", "source": "Wikimedia Commons", "license": "CC BY-SA (单文件许可待确认)", "caption": "三星堆相册(纵目面具CC图待确认)", "view": "overview", "todo": "查找纵目面具开放许可单文件"}],
+    "media_3d_video": [],
+    "data_sources": [
+      {"field": "basic, size, form_detail", "source": "Wikipedia EN: Sanxingdui", "url": "https://en.wikipedia.org/wiki/Sanxingdui", "license": "CC BY-SA 4.0"},
+      {"field": "academic_status, academic_controversies", "source": "Wikipedia ZH: 三星堆遗址", "url": "https://zh.wikipedia.org/wiki/三星堆遗址", "license": "CC BY-SA 4.0"},
+      {"field": "excavation_detail", "source": "Wikidata Q3454851", "url": "https://www.wikidata.org/wiki/Q3454851", "license": "CC0"}
+    ]
+  },
+  {
+    "id": "sanxingdui_shenshu_v3",
+    "_v1_id": "sanxingdui_shenshu",
+    "_upgrade": true,
+    "name_zh": "三星堆青铜神树",
+    "name_pinyin": "San Xing Dui Qing Tong Shen Shu",
+    "dynasty": "商",
+    "period": "商代晚期(古蜀文化)",
+    "excavation_year": "1986",
+    "excavation_site": "四川省广汉市三星堆遗址二号祭祀坑",
+    "current_museum": "三星堆博物馆",
+    "rarity_level": "禁止出境",
+    "patterns_detail": {
+      "main": [
+        {"name": "写实树枝与鸟", "icon_ref": "fengniao", "position": "三层九枝, 各枝顶端有鸟", "style": "每枝顶端有一太阳鸟, 张翅欲飞; 枝上有花蕾状果实与悬铃", "meaning": "九日栖于扶桑树上(《山海经》), 神鸟(太阳化身)每日轮流出巡, 树为天地通道"}
+      ],
+      "local": [
+        {"name": "龙形下行纹", "icon_ref": "kuilong", "position": "树干一侧", "style": "一头朝下的蜿蜒铜龙顺干下行, 龙身节节有细钩", "meaning": "龙为载神升降的神物, 沟通天地的中介"}
+      ],
+      "ground": []
+    },
+    "inscription": {"has": false, "text": null, "char_count": 0, "summary": "无铭文"},
+    "inscription_detail": {"has": false},
+    "excavation_detail": {
+      "discovery_date": "1986",
+      "discovery_method": "考古发掘",
+      "co_excavated_group_id": "sanxingdui_k2_1986",
+      "co_excavated_with": ["大立人", "纵目面具", "金面铜人头像"],
+      "dating_evidence": {"stratigraphy": "三星堆三期", "confidence": "确认"},
+      "significance_of_discovery": "出土时碎成2479片; 文物修复专家杨晓邬历时10年(1986-1996)修复成功; 迄今最大单体青铜文物(396cm)"
+    },
+    "form_detail": {
+      "main_body": {
+        "shape": "三层分枝树形, 每层三枝共九枝, 各枝顶有一鸟; 主干一侧铜龙下行",
+        "feature": "树高396cm, 含底座; 三层共九鸟与《山海经》扶桑神话高度对应"
+      },
+      "distinctive_features": [
+        "迄今出土最大单体青铜文物(396cm)",
+        "三层九枝九鸟, 与《山海经》扶桑/建木神树传说精确对应",
+        "主干铜龙头朝下沿干而下, 全球独一无二造型",
+        "碎成2479片经10年修复, 是中国文物修复史传奇"
+      ],
+      "craft": {"method": "范铸法+分铸+焊接", "specifics": "各枝、各鸟、龙分铸后组合焊接; 修复历时10年"}
+    },
+    "usage_history": {
+      "primary_purpose": "祭祀礼器",
+      "ritual_scene": "太牢祭祀",
+      "ritual_position": "祭坛中央宇宙树(神树)",
+      "user_class": "古蜀国",
+      "transmission_in_use": "作为祭祀中心神树立于祭坛, 祭毕砸碎埋坑"
+    },
+    "academic_status": {
+      "representativeness": "三星堆出土体量最大文物; 古蜀宇宙观的最完整实物表达",
+      "scholarly_consensus": "与《山海经》扶桑/建木高度对应, 是研究中国上古神话与古蜀文明关系的核心器物",
+      "key_scholars": [
+        {"name": "杨晓邬", "contribution": "主持神树修复工作(1986-1996), 还原2479碎片"},
+        {"name": "赵殿增", "contribution": "三星堆宗教系统研究, 神树与宇宙树关系论证"}
+      ]
+    },
+    "provenance_timeline": [
+      {"year": "约-1200", "event": "铸造, 立于祭坛", "location": "古蜀三星堆", "actor": "古蜀国", "evidence": "地层"},
+      {"year": "约-1100", "event": "砸碎埋入二号坑", "location": "三星堆二号坑", "actor": "古蜀祭司", "evidence": "出土状态"},
+      {"year": "1986", "event": "出土(2479碎片)", "location": "四川广汉", "actor": "考古队", "evidence": "考古报告"},
+      {"year": "1986-1996", "event": "文物修复完成", "location": "三星堆博物馆实验室", "actor": "杨晓邬等", "evidence": "修复档案"},
+      {"year": "1992至今", "event": "展出于三星堆博物馆", "location": "三星堆博物馆", "actor": "三星堆博物馆", "evidence": "馆藏"}
+    ],
+    "related_artifacts": [
+      {"id": "sanxingdui_qingtong_niao", "name_zh": "三星堆青铜鸟", "relation_type": "same_excavation_group", "reason": "铜鸟原插于神树枝头, 两者不可分割", "strength": "strong"},
+      {"id": "sanxingdui_taiyanglun", "name_zh": "三星堆太阳轮形器", "relation_type": "same_excavation_group", "reason": "神树+铜鸟+太阳轮构成三星堆太阳崇拜三位一体", "strength": "strong"},
+      {"id": "donghan_shen_shu", "name_zh": "东汉摇钱树", "relation_type": "contrastive_pair", "reason": "三星堆神树(商代)与东汉摇钱树同为巴蜀树形神器, 相隔千年的文化对比", "strength": "strong"}
+    ],
+    "image_urls": [
+      {"url": "https://commons.wikimedia.org/wiki/Category:Sanxingdui_Sacred_Tree", "source": "Wikimedia Commons", "license": "CC BY-SA", "caption": "三星堆神树相册", "view": "overview"}
+    ],
+    "media_3d_video": [],
+    "data_sources": [
+      {"field": "basic, size, excavation_detail, form_detail", "source": "Wikipedia EN: Sanxingdui", "url": "https://en.wikipedia.org/wiki/Sanxingdui", "license": "CC BY-SA 4.0"},
+      {"field": "academic_status, story_brief", "source": "Wikipedia ZH: 三星堆遗址", "url": "https://zh.wikipedia.org/wiki/三星堆遗址", "license": "CC BY-SA 4.0"},
+      {"field": "repair_history", "source": "CGTN article on Sacred Tree restoration", "url": "https://govt.chinadaily.com.cn/s/202503/12/WS67d131ce498eec7e1f731a17/massive-bronze-sacred-tree-from-sanxingdui-site.html", "license": "fact citation"}
+    ]
   }
 ]

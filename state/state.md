@@ -133,3 +133,11 @@ Total active background agents: 9 (5 DE + 4 Phase B)
   - docs/gamification-mechanics-v3.md (含 §4 事件总线协议 + Day1→Year1 300 件旅程)
   - 6 events defined: era-focus (★ primary) / form-select / pattern-focus / caster-focus / site-focus / position-need
 [2026-05-21 H4] [orchestrator] DE-4 (秦汉+三星堆) hit 32K output max in first attempt. Retrying with mitigations: incremental file writes, scope reduced 55→45 new, final return strictly <200 words.
+
+[2026-05-21 H2-3] [data-engineer-v3-xizhou] DONE — segment-2 (62/62 records, 59 key-fields fully filled, 3 TODO) | 7 upgraded + 55 new Western Zhou artifacts | output: data/curated/bronze-treasures-v3-segment-2-xizhou.json | licensing: appended to data/licensing-log-v3.md
+
+[2026-05-21 H3] [data-engineer-DE4-RETRY] DONE — segment-4 秦汉+三星堆 | 39 records (32 new + 7 v1 upgrades via _upgrade records) | 0 TODO | Valid JSON | output: data/curated/bronze-treasures-v3-segment-4-qinhan-sanxingdui.json | licensing: appended to data/licensing-log-v3.md
+
+[2026-05-21 H5] [orchestrator] Phase A complete (5/5 DE). Total 277 records (60+62+61+39+55).
+[2026-05-21 H5] [orchestrator] Phase B complete (Designer + B1 Geo + B2 Patterns + B3 TimePillar).
+[2026-05-21 H5] [orchestrator] Launching Phase C: Builder-Converger (single agent, integrates everything)

@@ -1,6 +1,154 @@
 
 ---
 
+## Segment 4: 秦汉 + 三星堆 — DE-4
+> 生成时间: 2026-05-21 H3
+> 覆盖: 32 件新增 + 7 件 v1 升级(升级记录含_upgrade标记) = 39 records in file
+> 维护人: data-engineer-v3-qinhan-sanxingdui
+
+### 全局声明
+- 文本字段: 主要来源 Wikipedia EN/ZH (CC BY-SA 4.0), Wikidata (CC0), 再分发须 attribute。
+- 图片 URL: 全部指向 Wikimedia Commons Category 页, 非具体文件。使用前须逐张确认单文件许可。
+- 博物馆官网(秦始皇帝陵博物院、河北博物院、甘肃省博物馆、三星堆博物馆、南昌海昏侯博物馆等): 仅作事实交叉验证, 不再分发图片或长段文字。
+
+### 秦 (3 件)
+#### qin_tongchema — UPGRADE (v1 → v3)
+- Text: Wikipedia EN: Qin_bronze_chariot (CC BY-SA 4.0) + Wikipedia ZH
+- Images: Commons Category:Bronze_chariots_of_Qin_Shi_Huang (各文件许可不一)
+
+#### qin_quan — NEW
+- Text: Wikipedia EN: Weights and measures of the Qin dynasty (CC BY-SA 4.0) + Wikipedia ZH: 秦权
+- Images: Commons Category:Qin_dynasty_weights_and_measures
+
+#### qin_liang — NEW
+- Text: Wikipedia EN/ZH 同上
+- Images: Commons Category:Qin_dynasty_weights_and_measures
+
+### 西汉 (12 件)
+#### haihohou_yanyudeng — NEW
+- Text: Wikipedia EN: Tomb of Marquis of Haihun (CC BY-SA 4.0) + Wikipedia ZH: 海昏侯墓
+- Images: Commons Category:Haihunhou_tombs
+
+#### haihohou_bozhen — NEW
+- Text: Wikipedia EN/ZH: 海昏侯墓 (CC BY-SA 4.0)
+- Images: Commons Category:Haihunhou_tombs
+
+#### manche_cuojinyinhu — NEW
+- Text: Wikipedia EN: Mancheng_Han_Tombs (CC BY-SA 4.0) + Wikipedia ZH: 满城汉墓
+- Images: Commons Category:Mancheng_Han_tombs
+
+#### zhujue_huanbeibei — NEW
+- Text: Wikipedia EN/ZH: 满城汉墓 (CC BY-SA 4.0)
+
+#### liujin_dangle — NEW
+- Text: Wikipedia EN/ZH: 满城汉墓 (CC BY-SA 4.0)
+
+#### liujin_tongjuan — NEW
+- Text: Wikipedia EN/ZH: 满城汉墓 (CC BY-SA 4.0)
+
+#### nanyuewang_huhu — NEW
+- Text: Wikipedia EN: Mausoleum_of_the_Nanyue_King (CC BY-SA 4.0) + Wikipedia ZH: 南越文王墓
+- Images: Commons Category:Museum_of_the_Mausoleum_of_the_Nanyue_King
+
+#### nanyuewang_liujinhu — NEW
+- Text: Wikipedia EN/ZH: 南越王墓 (CC BY-SA 4.0)
+
+#### maoluling_liujinma — NEW
+- Text: Wikipedia ZH: 茂陵 (CC BY-SA 4.0)
+- Images: Commons Category:Maoling_Museum
+
+#### liujin_tongshu (鎏金铜蚕) — NEW
+- Text: Wikipedia ZH: 鎏金铜蚕 (CC BY-SA 4.0)
+- Image: Commons File:Han_dynasty_gilded_bronze_silkworm.jpg (CC BY-SA 4.0) — 直接文件URL, 已确认许可
+
+#### cuojin_xiyun_xizun — NEW
+- Text: Wikipedia ZH: 错金银云纹铜犀尊 (CC BY-SA 4.0)
+- Reference only: 上海博物馆官网 (不再分发)
+
+#### cuojin_niaozhuan_hu — NEW
+- Text: Wikipedia ZH: 鸟虫书 (CC BY-SA 4.0)
+
+#### xihan_niaoshow_fang_jian — NEW
+- Text: Wikipedia ZH: 鉴_(器皿) (CC BY-SA 4.0)
+- NOTE: 具体件信息稀少, 部分字段标 null + 待确认
+
+#### cuojin_boshanlu_v3 — UPGRADE (v1 → v3)
+- Text: Wikipedia EN: Hill_censer (CC BY-SA 4.0) + Mancheng_Han_Tombs + Wikipedia ZH: 错金博山炉
+- Images: Commons Category:Boshanlu
+
+#### changxin_gongdeng_v3 — UPGRADE (v1 → v3)
+- Text: Wikipedia EN: Changxin_Palace_Lamp (CC BY-SA 4.0) + Wikipedia ZH: 长信宫灯
+- Images: Commons Category:Changxin_Palace_Lamp
+
+### 东汉 (4 件)
+#### wuwei_tongjuma — NEW
+- Text: Wikipedia EN: Flying_Horse_of_Gansu (CC BY-SA 4.0) + Wikipedia ZH: 马踏飞燕
+- Images: Commons Category:Galloping_Horse_Treading_on_a_Flying_Swallow
+
+#### donghan_shen_shu — NEW
+- Text: Wikipedia EN: Money_tree_(artefact) (CC BY-SA 4.0) + Wikipedia ZH: 摇钱树
+
+#### liujin_boshanlu_donghan — NEW
+- Text: Wikipedia EN: Hill_censer (CC BY-SA 4.0) + Wikipedia ZH: 博山炉
+
+#### donghan_zhenmugui — NEW
+- Text: Wikipedia ZH: 镇墓兽 (CC BY-SA 4.0)
+
+#### matafeiyan_v3 — UPGRADE (v1 → v3)
+- Text: Wikipedia EN: Flying_Horse_of_Gansu (CC BY-SA 4.0) + Wikipedia ZH: 马踏飞燕 + Wikidata Q707020 (CC0)
+- Images: Commons Category:Galloping_Horse_Treading_on_a_Flying_Swallow
+
+### 三星堆 (15 件 + 3 v1升级)
+#### sanxingdui_da_mianju — NEW
+- Text: Wikipedia EN: Sanxingdui (CC BY-SA 4.0) + Wikipedia ZH: 三星堆遗址
+- Images: Commons Category:Sanxingdui (各文件许可不一, 使用前确认)
+
+#### sanxingdui_dajintai_mianju — NEW
+- Text: Wikipedia EN/ZH: Sanxingdui (CC BY-SA 4.0)
+
+#### sanxingdui_shoumianju — NEW
+- Text: Wikipedia EN/ZH: Sanxingdui (CC BY-SA 4.0)
+
+#### sanxingdui_qingtong_niao — NEW
+- Text: Wikipedia EN/ZH: Sanxingdui (CC BY-SA 4.0)
+
+#### sanxingdui_taiyanglun — NEW
+- Text: Wikipedia EN/ZH: Sanxingdui (CC BY-SA 4.0)
+
+#### sanxingdui_yanxingqi — NEW
+- Text: Wikipedia EN/ZH: Sanxingdui (CC BY-SA 4.0)
+
+#### sanxingdui_dingzun_guizuo — NEW
+- Text: Wikipedia EN/ZH: Sanxingdui (CC BY-SA 4.0)
+
+#### sanxingdui_shentai — NEW
+- Text: Wikipedia EN/ZH: Sanxingdui (CC BY-SA 4.0)
+
+#### sanxingdui_xiaoliren — NEW
+- Text: Wikipedia EN/ZH: Sanxingdui (CC BY-SA 4.0)
+
+#### sanxingdui_qingtong_zun — NEW
+- Text: Wikipedia EN/ZH: Sanxingdui (CC BY-SA 4.0)
+
+#### sanxingdui_qingtong_lei — NEW
+- Text: Wikipedia EN/ZH: Sanxingdui (CC BY-SA 4.0)
+
+#### sanxingdui_hutolong — NEW
+- Text: Wikipedia EN/ZH: Sanxingdui (CC BY-SA 4.0)
+
+#### sanxingdui_dali_ren_v3 — UPGRADE (v1 → v3)
+- Text: Wikipedia EN: Sanxingdui + Wikipedia ZH + Wikidata Q3454851 (CC0)
+
+#### sanxingdui_zongmu_mianju_v3 — UPGRADE (v1 → v3)
+- Text: Wikipedia EN/ZH: Sanxingdui + Wikidata (CC0)
+- IMAGE NOTE: 纵目面具CC开放许可单文件待确认; 当前指向Category页
+
+#### sanxingdui_shenshu_v3 — UPGRADE (v1 → v3)
+- Text: Wikipedia EN/ZH: Sanxingdui + CGTN article (fact citation only)
+- Images: Commons Category:Sanxingdui_Sacred_Tree
+
+---
+
 ## Segment 3: 东周 (春秋 + 战国) — DE-3
 > 生成时间: 2026-05-21 H2-3
 > 覆盖: 6 件 v1 升级 + 55 件新增 = 61 件
@@ -523,3 +671,56 @@ NOTE: Guimet images copyright Musée Guimet — reference only.
 **hushi_ren_you** — Wikipedia EN CC BY-SA; Smithsonian Magazine paraphrase
 
 **shang_fangjia_erligang** — Britannica paraphrase; chinaknowledge.de paraphrase
+
+---
+
+## Segment 2: 西周 (Western Zhou) — DE-2
+> 生成时间: 2026-05-21 H2-3
+
+### 全局声明 (Segment 2)
+- 文本字段: Wikipedia EN (CC BY-SA 4.0), Wikidata (CC0), IU Open Scholarship (academic open access), chinaknowledge.de (open access)
+- 图片: 有 CC 链接的指向 Wikimedia Commons 类目；48件标注 TODO 须 Builder 阶段逐张核实 File 页许可
+- 博物馆官网 (国博、上博、台北故宫): CITATION ONLY，不再分发图片或长段文字
+- 台北故宫图片: 版权严格，全部标 CITATION ONLY
+
+### 7件升级记录
+- da_yu_ding: Wikipedia EN "Da Yu ding" (CC BY-SA) + CGTN news (fair use)
+- da_ke_ding: Wikipedia EN "Da Ke ding" (CC BY-SA)
+- maogong_ding: Wikipedia EN "Mao Gong ding" (CC BY-SA)
+- sanshi_pan: 台北故宫 3D Gallery (reference) + Wikipedia EN (CC BY-SA)
+- he_zun: Wikipedia EN "He zun" (CC BY-SA)
+- li_gui: Wikipedia EN "Li gui" (CC BY-SA)
+- guoji_zibai_pan: Wikipedia EN "Guoji Zibai pan" (CC BY-SA)
+
+### 新增55件 — 来源摘要
+- shi_qiang_pan: Wikipedia EN "Shi Qiang pan" (CC BY-SA)
+- lai_pan / lai_ding: Wikidata CC0 + Cambridge CUHK open sample
+- xi_jia_pan: PR Newswire + Chinadaily (fair use) — 私人藏，图片 TODO
+- ban_gui: Wikipedia EN "Chinese bronze inscriptions" (CC BY-SA)
+- duoyou_ding: live2makan (reference) + IU open PDF
+- song_gui/ding/hu/pan 组: Wikipedia EN "Song gui" (CC BY-SA)
+- pan_sheng_gui: 台北故宫 reference only (CITATION ONLY)
+- yi_hou_ze_gui: 国博官网 reference only + chinaknowledge.de
+- kang_hou_gui: Wikipedia EN "Kang Hou gui" (CC BY-SA)
+- xing_hou_gui: World History Encyclopedia (CC BY-SA) + bronzeschinois.wordpress.com (reference)
+- yan_hou_yu / ke_lei / bo_ju_li: Wikipedia EN "Yan State Capital Museum" (CC BY-SA)
+- wei_he / wei_ding / jiu_nian_wei_ding: IU open scholarship PDF
+- 师系列 (shi_song/yu/hu/chen/xun): chinaknowledge.de (open access)
+- chu_gong_ni_zhong: Academia.edu free paper + MET CC0 拓本摹本
+- peng_bo_cheng_gui / bi_ji_li: Academia.edu "Tombs of Peng" (free access)
+- hu_gui / hu_ding / ke_zhong: Sotheby's catalog reference + chinaknowledge.de
+- ying_hou_gui / ying_hou_zhong: Cambridge History of Ancient China (open abstract)
+- zong_zhou_zhong: 台北故宫 reference only (CITATION ONLY)
+- xiao_ke_ding: Wikipedia EN "Da Ke ding" context
+- jin_hou_su_bianzhong: IU open scholarship PDF
+- mu_gui: Academia.edu "Textual Criticism Mu Gui" (free access)
+- tian_wang_gui / ling_fang_zun / shi_ling_fang_yi: chinaknowledge.de
+- 其余诸器: chinaknowledge.de (open access)
+
+### 高风险项
+1. 48件图片字段标 TODO — Builder 阶段须在 Wikimedia Commons File 页逐张确认具体许可
+2. 台北故宫藏器图片 (番生簋/善夫山鼎/宗周钟/散氏盘/毛公鼎) — 禁止再分发，只可用 Wikimedia Commons 用户摄影上传的展品图且须确认许可
+3. 兮甲盘 — 私人收藏，图片许可须单独核实
+4. 倗伯爯簋/畢姬鬲 — 学术来源，再分发时注意原文献版权声明
+5. 周公东征方鼎 — 具体器物待核实，data_sources 标注 TODO
+
