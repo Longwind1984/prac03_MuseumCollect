@@ -115,3 +115,15 @@ Total active background agents: 9 (5 DE + 4 Phase B)
   - 25 SVG files: /home/user/prac03_MuseumCollect/assets/patterns/*.svg
   - index.json: /home/user/prac03_MuseumCollect/assets/patterns/index.json
   - gallery: /home/user/prac03_MuseumCollect/demos/v3-shared/pattern-gallery/index.html
+
+[2026-05-21 H2] [visualization-designer-v3] DONE — 7 v3 component specs + rarity-halo + gamification-v3
+  - docs/component-specs-v3/shape-pokedex.md (Pokédex + 实景/线稿 toggle + 真比例尺寸条)
+  - docs/component-specs-v3/time-pillar.md (renamed from 时空柱, primary era-focus EMITTER)
+  - docs/component-specs-v3/geo-system.md (dual view + 真实 GeoJSON + 古国 overlay, primary era-focus LISTENER)
+  - docs/component-specs-v3/pattern-tree.md (25 SVG icons + era-focus LISTENER + 拓片本)
+  - docs/component-specs-v3/inscription-reader.md (★ 何尊长卷专题 + caster-focus EMITTER + v3 段位机制)
+  - docs/component-specs-v3/purpose-scene.md (5 套场景 + 4 档等级判定 + form-select LISTENER)
+  - docs/component-specs-v3/caster-profile.md (★ D3 force-directed graph + caster-focus LISTENER)
+  - docs/component-specs-v3/rarity-halo.md (4 档 + 国宝特殊, v3 anti-Skinner 修正: 删 vanity, 加 [关闭])
+  - docs/gamification-mechanics-v3.md (含 §4 事件总线协议 + Day1→Year1 300 件旅程)
+  - 6 events defined: era-focus (★ primary) / form-select / pattern-focus / caster-focus / site-focus / position-need
