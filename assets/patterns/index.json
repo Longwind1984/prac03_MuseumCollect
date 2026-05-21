@@ -1,0 +1,252 @@
+[
+  {
+    "slug": "taotie",
+    "name_zh": "饕餮纹",
+    "name_en": "Taotie / Animal Mask",
+    "era_main": "商",
+    "era_range": ["夏晚", "商早", "商中", "商晚", "西周早"],
+    "typical_on": ["方鼎", "圆鼎", "簋", "尊", "卣", "觥"],
+    "description": "商王朝核心纹饰，正面兽面，左右严格对称，巨眼大口，双角外展。学界分饕餮为单元式、分解式、顾首式、简化式四型，后世演化为窃曲纹。",
+    "file": "taotie.svg"
+  },
+  {
+    "slug": "kuilong",
+    "name_zh": "夔龙纹",
+    "name_en": "Kuilong / One-Legged Dragon",
+    "era_main": "商晚",
+    "era_range": ["商中", "商晚", "西周早", "西周中"],
+    "typical_on": ["鼎腹", "尊颈", "觥盖", "卣腹"],
+    "description": "侧面单足龙（夔以独足著称），张口，卷尾，背生鳍棘。商晚期流行，常与饕餮纹组合，出现于饕餮两侧作辅纹；西周后简化演变为窃曲纹。",
+    "file": "kuilong.svg"
+  },
+  {
+    "slug": "yunlei",
+    "name_zh": "云雷纹",
+    "name_en": "Yunlei / Cloud-Thunder",
+    "era_main": "商西周",
+    "era_range": ["商早", "商中", "商晚", "西周早", "西周中"],
+    "typical_on": ["所有器型底纹", "鼎腹", "簋腹", "尊腹"],
+    "description": "方形回旋螺线，以密集填充作为器表底纹。分云纹（圆回旋）和雷纹（方回旋）两系，学界统称"云雷纹"。是商周青铜器最普遍的背景装饰，衬托主纹层次。",
+    "file": "yunlei.svg"
+  },
+  {
+    "slug": "lei",
+    "name_zh": "雷纹",
+    "name_en": "Lei / Thunder Meander",
+    "era_main": "商西周",
+    "era_range": ["商", "西周"],
+    "typical_on": ["鼎腹", "簋腹", "尊腹底纹"],
+    "description": "纯方形回折螺旋，无圆弧过渡，比云雷纹更几何化。常以四格方形单元铺满器面，具强烈的秩序感；是云雷纹的方折变体。",
+    "file": "lei.svg"
+  },
+  {
+    "slug": "rudding",
+    "name_zh": "乳钉纹",
+    "name_en": "Rudding / Boss Dots",
+    "era_main": "商中",
+    "era_range": ["商早", "商中", "商晚"],
+    "typical_on": ["方鼎腹壁", "圆鼎腹", "瓿腹"],
+    "description": "规则排列的圆形凸起（浮雕乳丁），每钉外围有方格框线，以网格状均匀分布于器表。是商中期较简朴的装饰，也见于同时期无纹区的填充。",
+    "file": "rudding.svg"
+  },
+  {
+    "slug": "hu",
+    "name_zh": "虎纹",
+    "name_en": "Hu / Tiger",
+    "era_main": "商",
+    "era_range": ["商中", "商晚"],
+    "typical_on": ["卣腹", "觥盖", "钺面", "尊肩"],
+    "description": "猛虎侧面全身像，呈匍匐或行进姿态，条纹以细线表示。商代虎纹以圆耳、圆眼、宽吻为特征；常与饕餮纹共现，有"虎食人头"极罕见变体。",
+    "file": "hu.svg"
+  },
+  {
+    "slug": "niao",
+    "name_zh": "鸟纹（商鸟）",
+    "name_en": "Niao / Shang Bird",
+    "era_main": "商",
+    "era_range": ["商中", "商晚", "西周早"],
+    "typical_on": ["尊颈", "卣腹", "簋腹"],
+    "description": "商代抽象鸟形纹，方形短尾，钩喙，大圆眼，冠羽短直。与西周凤鸟纹有本质区别：商鸟尾部方折、风格紧张；西周凤鸟尾部长曲、风格舒展。",
+    "file": "niao.svg"
+  },
+  {
+    "slug": "fengniao",
+    "name_zh": "凤鸟纹",
+    "name_en": "Fengniao / Phoenix Bird",
+    "era_main": "西周中",
+    "era_range": ["西周早", "西周中", "西周晚"],
+    "typical_on": ["簋腹", "尊颈", "壶腹", "觥盖"],
+    "description": "西周中期主流纹饰，大尾长冠，昂首挺胸，姿态优雅。相比商代鸟纹，凤鸟纹线条更流动，长尾向后翻卷，冠羽高扬，体现西周礼乐文明的审美转变。",
+    "file": "fengniao.svg"
+  },
+  {
+    "slug": "qiequ",
+    "name_zh": "窃曲纹",
+    "name_en": "Qiequ / Interlocked S-Scroll",
+    "era_main": "西周中晚",
+    "era_range": ["西周中", "西周晚", "春秋早"],
+    "typical_on": ["鼎腹", "簋腹", "盨腹", "壶颈"],
+    "description": "由饕餮纹/夔龙纹高度简化而来的S形抽象纹，眼目残留为中心小椭圆，两侧为卷曲弧线。是商代神兽纹向西周几何纹转化的重要中间环节。",
+    "file": "qiequ.svg"
+  },
+  {
+    "slug": "chonghuan",
+    "name_zh": "重环纹",
+    "name_en": "Chonghuan / Concentric Oval Band",
+    "era_main": "西周中晚",
+    "era_range": ["西周中", "西周晚"],
+    "typical_on": ["簋腹", "鼎腹", "盘沿", "壶颈"],
+    "description": "以重叠椭圆形或尖顶卵形为单元的横向带饰，每单元含外环和内环两层。是西周中晚期典型装饰带，风格比商代神兽纹更素雅克制。",
+    "file": "chonghuan.svg"
+  },
+  {
+    "slug": "boqu",
+    "name_zh": "波曲纹",
+    "name_en": "Boqu / Wave-Scroll Band",
+    "era_main": "西周晚",
+    "era_range": ["西周晚", "春秋早"],
+    "typical_on": ["壶腹", "鼎腹", "盘内底", "簋腹"],
+    "description": "波浪状连续带饰，波峰处以紧密C形螺旋终结，螺旋中心保留兽眼残留。又称环带纹，是西周晚期最流行的主体纹饰之一。",
+    "file": "boqu.svg"
+  },
+  {
+    "slug": "chuilin",
+    "name_zh": "垂鳞纹",
+    "name_en": "Chuilin / Hanging Scales",
+    "era_main": "西周晚",
+    "era_range": ["西周中", "西周晚", "春秋早"],
+    "typical_on": ["鼎颈", "盘沿", "簋圈足", "壶颈"],
+    "description": "鱼鳞状弧形单元，上部圆钝下部尖，交叠排列如屋瓦。常用于器物颈部、圈足等带状区域，间隔均匀，秩序感强，是西周晚期常见边饰。",
+    "file": "chuilin.svg"
+  },
+  {
+    "slug": "panchi",
+    "name_zh": "蟠螭纹",
+    "name_en": "Panchi / Coiled Hornless Dragon",
+    "era_main": "春秋",
+    "era_range": ["春秋早", "春秋中", "春秋晚", "战国早"],
+    "typical_on": ["鼎腹", "簋腹", "盘内底", "壶腹"],
+    "description": "无角小龙相互缠绕交叠的繁密构图，每条螭龙身体细长，头部清晰但小。春秋时期最具代表性的纹饰，比战国蟠虺纹单体更大、头部更明显。",
+    "file": "panchi.svg"
+  },
+  {
+    "slug": "panhui",
+    "name_zh": "蟠虺纹",
+    "name_en": "Panhui / Coiled Serpent Micro-pattern",
+    "era_main": "战国早",
+    "era_range": ["春秋晚", "战国早", "战国中"],
+    "typical_on": ["鼎腹", "壶腹", "盘内底", "钟鼓"],
+    "description": "比蟠螭纹更细小密集的小蛇/小龙群，近乎纯纹理效果。单体极小，以填充满铺整个器面为特征，整体看呈织物质感。战国早期铜器大量使用。",
+    "file": "panhui.svg"
+  },
+  {
+    "slug": "jihe",
+    "name_zh": "几何纹",
+    "name_en": "Jihe / Geometric",
+    "era_main": "战国",
+    "era_range": ["战国中", "战国晚"],
+    "typical_on": ["壶腹", "豆盖", "鉴腹", "盘沿"],
+    "description": "纯几何形式的重复图案，脱离动物原型，以菱形、三角形、矩形组合构成。战国时期器物上摆脱神兽崇拜、走向世俗化装饰的代表。",
+    "file": "jihe.svg"
+  },
+  {
+    "slug": "sanjiao",
+    "name_zh": "三角纹",
+    "name_en": "Sanjiao / Triangle Band",
+    "era_main": "战国",
+    "era_range": ["商", "西周", "春秋", "战国"],
+    "typical_on": ["口沿", "颈部带饰", "圈足", "器腹分割线"],
+    "description": "上下交错排列的实心或空心三角形带饰，是中国青铜器最古老的几何纹之一，贯穿商至战国，常作为主纹之间的边饰分割带。",
+    "file": "sanjiao.svg"
+  },
+  {
+    "slug": "yuchi",
+    "name_zh": "羽翅纹",
+    "name_en": "Yuchi / Feather-Wing",
+    "era_main": "战国晚",
+    "era_range": ["战国中", "战国晚"],
+    "typical_on": ["壶腹", "盘内底", "鉴腹", "鸟形器"],
+    "description": "以展翅鸟羽为原型的放射状扇形纹，从中轴对称展开，每羽有清晰羽脉线。战国晚期写实主义倾向的代表，常见于楚地器物。",
+    "file": "yuchi.svg"
+  },
+  {
+    "slug": "shoulie",
+    "name_zh": "狩猎纹",
+    "name_en": "Shoulie / Hunting Scene",
+    "era_main": "战国晚-西汉",
+    "era_range": ["战国晚", "秦", "西汉"],
+    "typical_on": ["壶腹", "鉴腹", "盘内底", "铜镜"],
+    "description": "战车或骑射猎兽场景，包含弓箭手、奔马、逃跑的鹿/虎等元素。写实叙事风格，反映战国晚期至汉代贵族生活题材对神兽纹的替代。",
+    "file": "shoulie.svg"
+  },
+  {
+    "slug": "yanle",
+    "name_zh": "宴乐纹",
+    "name_en": "Yanle / Banquet and Music",
+    "era_main": "战国-汉",
+    "era_range": ["战国中", "战国晚", "西汉"],
+    "typical_on": ["壶腹", "鉴腹", "盘内底"],
+    "description": "宴饮奏乐舞蹈场景，包含案几、乐器、歌舞者、宴客等要素。与狩猎纹同属战国晚期写实叙事图像，是礼乐文化在器物上的直接表达。",
+    "file": "yanle.svg"
+  },
+  {
+    "slug": "sishen",
+    "name_zh": "四神纹",
+    "name_en": "Sishen / Four Divine Beasts",
+    "era_main": "汉",
+    "era_range": ["西汉", "东汉"],
+    "typical_on": ["铜镜背面", "壶腹", "鉴腹", "铺首"],
+    "description": "青龙（东）、白虎（西）、朱雀（南）、玄武（北）四方神兽组合。汉代宇宙观和方位神系在铜器装饰上的集中体现，铜镜背面四神纹是汉代标志性图像。",
+    "file": "sishen.svg"
+  },
+  {
+    "slug": "chan",
+    "name_zh": "蝉纹",
+    "name_en": "Chan / Cicada",
+    "era_main": "商西周",
+    "era_range": ["商中", "商晚", "西周早", "西周中"],
+    "typical_on": ["觚颈", "尊腹边", "圈足", "器腹边纹"],
+    "description": "高度抽象的三角形蝉形，正面视角，大复眼对称，腹部有横纹节段，双翼收折。商人视蝉为再生象征，常作为边饰出现于器物边缘带和圈足区域。",
+    "file": "chan.svg"
+  },
+  {
+    "slug": "jiaoye",
+    "name_zh": "焦叶纹",
+    "name_en": "Jiaoye / Plantain Leaf",
+    "era_main": "商西周",
+    "era_range": ["商晚", "西周早", "西周中"],
+    "typical_on": ["尊颈", "卣颈", "圈足内侧"],
+    "description": "长三角形叶片向上排列成一圈，每叶有中脊线和侧脉，形似香蕉叶。常装饰于尊、卣类器物的颈部或圈足上方，以竖向带状呈现，是商周典型的领状装饰。",
+    "file": "jiaoye.svg"
+  },
+  {
+    "slug": "xian",
+    "name_zh": "弦纹",
+    "name_en": "Xian / String Lines",
+    "era_main": "通用",
+    "era_range": ["商早", "商中", "商晚", "西周", "春秋"],
+    "typical_on": ["所有器型颈部", "器腹分割线", "圈足上缘"],
+    "description": "单条或多条平行环绕线，是青铜器最简洁的装饰手法。以线的粗细和组合节奏划分器型各段，兼具功能性（加强范铸合缝）和装饰性，是最普遍的通用底纹。",
+    "file": "xian.svg"
+  },
+  {
+    "slug": "wo",
+    "name_zh": "涡纹",
+    "name_en": "Wo / Vortex Spiral",
+    "era_main": "商",
+    "era_range": ["商早", "商中", "商晚"],
+    "typical_on": ["方器腹壁", "尊肩", "觥颈", "圈足"],
+    "description": "圆形螺旋漩涡，以多圈同心弧向中心收缩，中心为实点（涡眼）。常数个成组出现于器表，代表水流或天体旋转的宇宙意象，是商代早中期特有纹饰。",
+    "file": "wo.svg"
+  },
+  {
+    "slug": "shouti_juanqu",
+    "name_zh": "兽体卷曲纹",
+    "name_en": "Shouti Juanqu / Coiled Beast Body",
+    "era_main": "西周晚-春秋",
+    "era_range": ["西周晚", "春秋早", "春秋中"],
+    "typical_on": ["鼎腹", "簋腹", "盨腹", "盘沿"],
+    "description": "夔龙简化变体，兽体完全卷曲成螺旋状，头与尾相接，形成圆形或S形自缠结构。是夔龙纹向蟠螭纹过渡的中间形态，西周晚期至春秋早期流行。",
+    "file": "shouti_juanqu.svg"
+  }
+]

@@ -108,3 +108,5 @@ Total active background agents: 9 (5 DE + 4 Phase B)
 [2026-05-21 H4] [builder-timepillar-b3] DONE — time-pillar v3 + event-bus + dynasties.json
 
 [2026-05-21 H2-3] [data-engineer-v3-frontier] DONE — segment-5 (55/55, 12 TODO fields for sparse frontier data)
+
+[2026-05-21 H4] [builder-geo-b1] DONE — geo-system v3 (terrain + 4 era overlays + sites + museums + reusable module)
