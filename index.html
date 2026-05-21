@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MuseumCollect — 青铜器图鉴 · 3 个 persona 的 3 个答案</title>
+  <meta name="description" content="一夜跑,8 角色 AI agent team,3 differentiated persona,3 高保真原型 + 1 轮 audit 闭环。">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Source Han Serif SC", "Songti SC", serif; }
+    .card { transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+    .card:hover { transform: translateY(-4px); }
+  </style>
+</head>
+<body class="bg-stone-50 text-stone-900">
+  <div class="max-w-6xl mx-auto px-6 py-12 md:py-20">
+
+    <!-- Header -->
+    <header class="mb-12 md:mb-16">
+      <p class="text-xs uppercase tracking-widest text-stone-500 mb-3">MuseumCollect · v1 demos</p>
+      <h1 class="text-3xl md:text-5xl font-serif mb-4 leading-tight">青铜器图鉴<br class="md:hidden"><span class="text-stone-500"> — </span>3 个 persona 的 3 个答案</h1>
+      <p class="text-base md:text-lg text-stone-600 max-w-3xl leading-relaxed">
+        一夜跑,15 个 AI agent 调用,3 个差异化用户画像,3 版高保真 HTML 原型 + 6 视角 audit + 1 轮 close-loop iteration。
+        每个 demo 对同一个产品愿景给出不同的回答 — 任选一个开始浏览。
+      </p>
+    </header>
+
+    <!-- Demo cards -->
+    <div class="grid md:grid-cols-3 gap-6 mb-16">
+
+      <!-- Card A: 考据派 -->
+      <a href="./demos/v1-A-textual-research/" class="card block bg-white rounded-lg p-7 border border-stone-200 hover:border-stone-500 hover:shadow-xl">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-xs uppercase tracking-wider text-stone-500 font-mono">Version A</span>
+          <span class="text-xs px-2 py-0.5 rounded-full bg-stone-100 text-stone-700">Composite 7.8</span>
+        </div>
+        <h2 class="text-2xl font-serif mb-1">考据派</h2>
+        <p class="text-sm text-stone-500 mb-5 italic">for 陈翊安 · 北大考古博士</p>
+        <p class="text-stone-700 leading-relaxed text-sm mb-6">
+          青铜器是"证据链"。学术期刊电子版美学,段位用篆刻印章而非游戏 UI,artifact 详情页一屏集成 6 个维度形态,出处可复制 BibTeX。
+        </p>
+        <div class="text-xs text-stone-500 border-t border-stone-100 pt-3">
+          ★ 杀手锏: <code class="text-stone-700">artifact.html</code><br>
+          <span class="text-stone-400">Audit:Content / Aesthetic / Motivation 三冠</span>
+        </div>
+      </a>
+
+      <!-- Card B: 沉浸派 -->
+      <a href="./demos/v1-B-immersive/" class="card block bg-stone-900 text-stone-100 rounded-lg p-7 border border-stone-900 hover:shadow-2xl">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-xs uppercase tracking-wider text-stone-400 font-mono">Version B</span>
+          <span class="text-xs px-2 py-0.5 rounded-full bg-stone-800 text-amber-200">Composite 6.2</span>
+        </div>
+        <h2 class="text-2xl font-serif mb-1 text-amber-100">沉浸派</h2>
+        <p class="text-sm text-stone-400 mb-5 italic">for 苏念 · 《国家宝藏》圈粉</p>
+        <p class="text-stone-300 leading-relaxed text-sm mb-6">
+          青铜器是"穿越的入口"。墨色烛火氛围 + 国宝独白(诗化 200-300 字/件) + 等距宗庙礼器归位场景(22 位置 / 士→大夫→诸侯→天子等级判定)。
+        </p>
+        <div class="text-xs text-stone-400 border-t border-stone-700 pt-3">
+          ★ 杀手锏: <code class="text-amber-200">purpose-scene.html</code><br>
+          <span class="text-stone-500">上限最高 · Playwright 8/8 pages 0 errors</span>
+        </div>
+      </a>
+
+      <!-- Card C: 探索派 -->
+      <a href="./demos/v1-C-explorer/" class="card block bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 rounded-lg p-7 border border-amber-200 hover:border-amber-500 hover:shadow-xl">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-xs uppercase tracking-wider text-amber-700 font-mono">Version C</span>
+          <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Composite 6.8</span>
+        </div>
+        <h2 class="text-2xl font-serif mb-1">探索派</h2>
+        <p class="text-sm text-stone-500 mb-5 italic">for 阿K · 21 岁美院生 Z 世代</p>
+        <p class="text-stone-700 leading-relaxed text-sm mb-6">
+          青铜器是"PVE 副本里的稀有掉落"。Pokédex 风形制谱系 + 梗卡片 modal + 稀有度光晕(只给国宝)+ anti-Skinner "不必每天打开" banner。
+        </p>
+        <div class="text-xs text-stone-600 border-t border-amber-200 pt-3">
+          ★ 杀手锏: <code class="text-stone-800">me.html</code><br>
+          <span class="text-stone-500">Audit UX 第一 · K-factor 落地</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Stats strip -->
+    <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 text-center">
+      <div class="bg-white p-4 rounded border border-stone-200">
+        <div class="text-2xl font-serif text-stone-900">15</div>
+        <div class="text-xs text-stone-500 uppercase tracking-wider mt-1">subagent 调用</div>
+      </div>
+      <div class="bg-white p-4 rounded border border-stone-200">
+        <div class="text-2xl font-serif text-stone-900">2.4M</div>
+        <div class="text-xs text-stone-500 uppercase tracking-wider mt-1">tokens 用量</div>
+      </div>
+      <div class="bg-white p-4 rounded border border-stone-200">
+        <div class="text-2xl font-serif text-stone-900">2h 7m</div>
+        <div class="text-xs text-stone-500 uppercase tracking-wider mt-1">compute 时间</div>
+      </div>
+      <div class="bg-white p-4 rounded border border-stone-200">
+        <div class="text-2xl font-serif text-stone-900">25</div>
+        <div class="text-xs text-stone-500 uppercase tracking-wider mt-1">国宝结构化</div>
+      </div>
+    </section>
+
+    <!-- Process artifacts (link to GitHub for markdown rendering) -->
+    <section class="border-t border-stone-200 pt-10">
+      <h3 class="text-xl font-serif mb-2">作品集过程文档</h3>
+      <p class="text-sm text-stone-500 mb-6">这个项目的产出不只是 demo,更是 agent team 协作的完整证据链。下列文档在 GitHub 上以 Markdown 渲染。</p>
+
+      <div class="grid md:grid-cols-2 gap-x-8 gap-y-2 text-sm">
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/morning-report.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ morning-report.md(一页扫完所有结果)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/agent-team-design.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ agent-team-design.md(8 角色拓扑)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/case-study.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ case-study.md(portfolio narrative)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/dimensional-map.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ dimensional-map.md(10 维度 × 形态)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/motivation-hooks.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ motivation-hooks.md(6 动机系统)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/gamification-mechanics.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ gamification-mechanics.md(游戏化系统)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/tree/claude/museum-photo-sharing-8qJiz/docs/component-specs" class="text-stone-700 hover:text-stone-900 hover:underline">→ 10 component specs(组件规格)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/audits/merged-spec.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ merged-spec.md(v2 综合最优 spec)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/audits/iteration-1-changes.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ iteration-1-changes.md(audit 闭环实证)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/cost/cost-report.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ cost-report.md(token 用量)</a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-16 pt-6 border-t border-stone-200 text-xs text-stone-500">
+      <p class="mb-1">2026-05-20 night run · Generated by an 8-role AI agent team (Orchestrator / PM / Researcher / Designer / Builder×3 / AI Engineer / Data Engineer / Auditor×6)</p>
+      <p><a href="https://github.com/longwind1984/prac03_museumcollect" class="hover:underline text-stone-700">GitHub 仓库 →</a></p>
+    </footer>
+
+  </div>
+</body>
+</html>
