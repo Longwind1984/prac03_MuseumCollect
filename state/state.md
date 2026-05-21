@@ -83,3 +83,14 @@
   - converge to 1 polished demo
   - v3 night run one-shot
 [2026-05-21 D1-plan] [orchestrator] night-plan-d1.md committed. Awaiting "启动" trigger to launch.
+
+## Night Run D1 (v3) Events
+
+[2026-05-21 H0] [orchestrator] v3 night-run-started
+[2026-05-21 H0] [orchestrator] Phase A launching: domain-researcher v3 + 5 data-engineer parallel
+  - DE-1: 商代 (5 v1 upgrade + 55 new)
+  - DE-2: 西周 (7 v1 upgrade + 55 new)
+  - DE-3: 东周 春秋战国 (6 v1 upgrade + 55 new)
+  - DE-4: 秦汉 + 三星堆 (7 v1 upgrade + 55 new)
+  - DE-5: 边远文化 + 海外馆藏 (55 new)
+  - Total: 25 v1 upgrade + 275 new = 300 件
