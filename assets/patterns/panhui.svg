@@ -1,0 +1,70 @@
+<!-- 蟠虺纹 | 战国早期 | typical on: 鼎 壶 盘 盒 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+  <!-- Panhui: tiny coiling serpents/baby-dragons, even denser than panchi, almost texture-like -->
+  <!-- The key visual difference: smaller units, more filled field, no distinct heads -->
+
+  <!-- Dense field of tiny interlocked S-coils and C-curves -->
+  <!-- Row 1 tiny units -->
+  <path d="M6 8 C8 4 12 4 12 8 C12 12 8 12 8 16 C8 20 12 20 14 16" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M14 8 C16 4 20 4 20 8 C20 12 16 12 16 16 C16 20 20 20 22 16" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M22 8 C24 4 28 4 28 8 C28 12 24 12 24 16 C24 20 28 20 30 16" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M30 8 C32 4 36 4 36 8 C36 12 32 12 32 16 C32 20 36 20 38 16" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M38 8 C40 4 44 4 44 8 C44 12 40 12 40 16 C40 20 44 20 46 16" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M46 8 C48 4 52 4 52 8 C52 12 48 12 48 16 C48 20 52 20 54 16" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M54 8 C56 4 60 4 60 8 C60 12 56 12 56 16 C56 20 60 20 62 16" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M62 8 C64 4 68 4 68 8 C68 12 64 12 64 16 C64 20 68 20 70 16" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+
+  <!-- Tiny eyes for some units (suggesting they are creatures not patterns) -->
+  <circle cx="9" cy="8" r="1" fill="currentColor"/>
+  <circle cx="25" cy="8" r="1" fill="currentColor"/>
+  <circle cx="41" cy="8" r="1" fill="currentColor"/>
+  <circle cx="57" cy="8" r="1" fill="currentColor"/>
+
+  <!-- Row 2: inverted units -->
+  <path d="M6 20 C4 24 4 28 8 28 C12 28 12 24 16 24 C20 24 20 28 18 32" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M18 20 C16 24 16 28 20 28 C24 28 24 24 28 24 C32 24 32 28 30 32" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M30 20 C28 24 28 28 32 28 C36 28 36 24 40 24 C44 24 44 28 42 32" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M42 20 C40 24 40 28 44 28 C48 28 48 24 52 24 C56 24 56 28 54 32" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M54 20 C52 24 52 28 56 28 C60 28 60 24 64 24 C68 24 68 28 66 32" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <circle cx="9" cy="28" r="1" fill="currentColor"/>
+  <circle cx="33" cy="28" r="1" fill="currentColor"/>
+  <circle cx="57" cy="28" r="1" fill="currentColor"/>
+
+  <!-- Row 3 -->
+  <path d="M6 34 C8 30 12 30 12 34 C12 38 8 38 8 42 C8 46 12 46 14 42" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M14 34 C16 30 20 30 20 34 C20 38 16 38 16 42 C16 46 20 46 22 42" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M22 34 C24 30 28 30 28 34 C28 38 24 38 24 42 C24 46 28 46 30 42" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M30 34 C32 30 36 30 36 34 C36 38 32 38 32 42 C32 46 36 46 38 42" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M38 34 C40 30 44 30 44 34 C44 38 40 38 40 42 C40 46 44 46 46 42" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M46 34 C48 30 52 30 52 34 C52 38 48 38 48 42 C48 46 52 46 54 42" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M54 34 C56 30 60 30 60 34 C60 38 56 38 56 42 C56 46 60 46 62 42" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M62 34 C64 30 68 30 68 34 C68 38 64 38 64 42 C64 46 68 46 70 42" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <circle cx="9" cy="34" r="1" fill="currentColor"/>
+  <circle cx="25" cy="34" r="1" fill="currentColor"/>
+  <circle cx="41" cy="34" r="1" fill="currentColor"/>
+  <circle cx="57" cy="34" r="1" fill="currentColor"/>
+
+  <!-- Row 4 (inverted) -->
+  <path d="M6 46 C4 50 4 54 8 54 C12 54 12 50 16 50 C20 50 20 54 18 58" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M18 46 C16 50 16 54 20 54 C24 54 24 50 28 50 C32 54 32 58 30 62" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M30 46 C28 50 28 54 32 54 C36 54 36 50 40 50 C44 54 44 58 42 62" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M42 46 C40 50 40 54 44 54 C48 54 48 50 52 50 C56 54 56 58 54 62" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M54 46 C52 50 52 54 56 54 C60 54 60 50 64 50 C68 54 68 58 66 62" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <circle cx="9" cy="54" r="1" fill="currentColor"/>
+  <circle cx="33" cy="54" r="1" fill="currentColor"/>
+  <circle cx="57" cy="54" r="1" fill="currentColor"/>
+
+  <!-- Row 5 -->
+  <path d="M6 60 C8 56 12 56 12 60 C12 64 8 64 8 68 C8 72 12 72 14 68" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M14 60 C16 56 20 56 20 60 C20 64 16 64 16 68 C16 72 20 72 22 68" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M22 60 C24 56 28 56 28 60 C28 64 24 64 24 68 C24 72 28 72 30 68" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M30 60 C32 56 36 56 36 60 C36 64 32 64 32 68 C32 72 36 72 38 68" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M38 60 C40 56 44 56 44 60 C44 64 40 64 40 68 C40 72 44 72 46 68" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M46 60 C48 56 52 56 52 60 C52 64 48 64 48 68 C48 72 52 72 54 68" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M54 60 C56 56 60 56 60 60 C60 64 56 64 56 68 C56 72 60 72 62 68" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <path d="M62 60 C64 56 68 56 68 60 C68 64 64 64 64 68 C64 72 68 72 70 68" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  <circle cx="9" cy="60" r="1" fill="currentColor"/>
+  <circle cx="25" cy="60" r="1" fill="currentColor"/>
+  <circle cx="41" cy="60" r="1" fill="currentColor"/>
+  <circle cx="57" cy="60" r="1" fill="currentColor"/>
+</svg>
