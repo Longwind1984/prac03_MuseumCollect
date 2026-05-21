@@ -273,5 +273,602 @@
     "data_sources": [
       { "field": "all", "source": "Wikipedia EN (Guoji Zibai pan)", "url": "https://en.wikipedia.org/wiki/Guoji_Zibai_pan" }
     ]
+  },
+  {
+    "id": "shi_qiang_pan",
+    "name_zh": "史墙盘",
+    "name_pinyin": "Shi Qiang Pan",
+    "name_alt": ["墙盘"],
+    "dynasty": "西周",
+    "period": "西周中期(恭王时期)",
+    "approx_year": "约公元前10世纪末",
+    "excavation_year": "1976",
+    "excavation_site": "陕西省扶风县庄白村微氏家族窖藏",
+    "ancient_state": "周",
+    "current_museum": "宝鸡青铜器博物院",
+    "size": { "height_cm": 16.2, "diameter_cm": 47.3, "weight_kg": null },
+    "type": "水器",
+    "form_subtype": "盘(圆形浅腹,双附耳,圈足)",
+    "patterns": ["重环纹", "鸟纹", "波曲纹"],
+    "patterns_structured": {
+      "main": ["重环纹"],
+      "secondary": ["鸟纹", "波曲纹"],
+      "local": []
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 284,
+      "summary": "盘内底铸铭文18行284字。前半颂扬文、武、成、康、昭、穆、恭七代周王功德；后半记述器主史墙(微氏家族史官)的家族历史——祖先从东方迁至周王畿,历代为史官。被誉为'中国第一部史诗'",
+      "literary_value": "中国金文史学第一篇；西周七王纪事最系统记录；2002年列禁止出境文物"
+    },
+    "purpose": "盥洗礼器(纪史)",
+    "craft": "范铸法",
+    "rarity_level": "国宝(2002年首批禁止出境文物)",
+    "story_brief": "史墙盘1976年出土于陕西扶风庄白村微氏家族窖藏,同坑出土103件铜器。盘内284字铭文前半颂扬七代周王,后半叙述微氏家族史,被誉为'中国第一部史诗'。现为宝鸡青铜器博物院镇馆之宝。",
+    "image_urls": [
+      { "url": "https://commons.wikimedia.org/wiki/Category:Collections_of_the_Baoji_Bronze_Ware_Museum", "source": "Wikimedia Commons", "license": "CC BY-SA (各文件许可不一)", "caption": "宝鸡青铜器博物院藏品类目" }
+    ],
+    "data_sources": [
+      { "field": "size,inscription,site,period", "source": "Wikipedia EN (Shi Qiang pan)", "url": "https://en.wikipedia.org/wiki/Shi_Qiang_pan" }
+    ]
+  },
+  {
+    "id": "lai_pan",
+    "name_zh": "逨盘",
+    "name_pinyin": "Lai Pan",
+    "name_alt": ["四十二年逨盘"],
+    "dynasty": "西周",
+    "period": "西周晚期(宣王时期)",
+    "approx_year": "约公元前786年(宣王四十二年)",
+    "excavation_year": "2003",
+    "excavation_site": "陕西省宝鸡市眉县杨家村",
+    "ancient_state": "周",
+    "current_museum": "宝鸡青铜器博物院",
+    "size": { "height_cm": null, "diameter_cm": null, "weight_kg": null },
+    "type": "水器",
+    "form_subtype": "盘(圆形,双附耳,圈足)",
+    "patterns": ["波曲纹", "重环纹"],
+    "patterns_structured": { "main": ["波曲纹"], "secondary": ["重环纹"], "local": [] },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 373,
+      "summary": "盘内底铸铭文373字,记述西周文至宣王十二位周王功绩及器主逨(单氏家族,职衔'守')的家族功勋。与同坑逨鼎组合为2003年最重大金文发现,补充史墙盘止于恭王的缺环",
+      "literary_value": "西周十二王纪事最完整记录；2003年十大考古发现之首；与逨鼎组合构成完整王朝史"
+    },
+    "purpose": "盥洗礼器(纪史纪功)",
+    "craft": "范铸法",
+    "rarity_level": "国宝",
+    "story_brief": "逨盘2003年1月19日出土于陕西眉县杨家村,同坑出土27件铭文铜器。373字铭文与逨鼎合述西周十二王,补充史墙盘后的历史缺环。2003年被评为当年中国十大考古发现之首。",
+    "image_urls": [
+      { "url": "https://commons.wikimedia.org/wiki/Category:Collections_of_the_Baoji_Bronze_Ware_Museum", "source": "Wikimedia Commons", "license": "CC BY-SA (各文件许可不一)", "caption": "宝鸡青铜器博物院藏品类目" }
+    ],
+    "data_sources": [
+      { "field": "discovery,inscription,museum", "source": "Wikidata Q22100483 (CC0)", "url": "https://www.wikidata.org/wiki/Q22100483" },
+      { "field": "inscription content", "source": "Cambridge CUHK (Newest Sources WZhou History)", "url": "https://cup.cuhk.edu.hk/image/data/preview/preview2/9789629966393_sample.pdf" }
+    ]
+  },
+  {
+    "id": "lai_ding",
+    "name_zh": "逨鼎",
+    "name_pinyin": "Lai Ding",
+    "name_alt": ["四十三年逨鼎"],
+    "dynasty": "西周",
+    "period": "西周晚期(宣王时期)",
+    "approx_year": "约公元前785年(宣王四十三年)",
+    "excavation_year": "2003",
+    "excavation_site": "陕西省宝鸡市眉县杨家村",
+    "ancient_state": "周",
+    "current_museum": "宝鸡青铜器博物院",
+    "size": { "height_cm": null, "diameter_cm": null, "weight_kg": null },
+    "type": "食器",
+    "form_subtype": "圆鼎(附耳三柱足)",
+    "patterns": ["波曲纹", "重环纹"],
+    "patterns_structured": { "main": ["波曲纹"], "secondary": ["重环纹"], "local": [] },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 316,
+      "summary": "鼎腹内壁铸铭文316字(四十三年鼎),另有四十二年鼎铭281字。均记逨奉宣王命守卫疆土、受赐土地奴隶。与逨盘合构西周十二王史叙。一件鼎陶范嵌反(序3-2-1),是铸造工艺研究独特物证",
+      "literary_value": "与逨盘合为2003年眉县最重要发现；陶范顺序错乱提供铸造工艺研究独特案例"
+    },
+    "purpose": "祭祀礼器(纪功册命)",
+    "craft": "范铸法",
+    "rarity_level": "国宝",
+    "story_brief": "逨鼎与逨盘同出陕西眉县杨家村2003年窖藏。组合铭文叙述西周十二王历史。其中一件鼎铭文陶范嵌反,提供了西周铸铜工艺的直接物证。",
+    "image_urls": [
+      { "url": "https://commons.wikimedia.org/wiki/Category:Collections_of_the_Baoji_Bronze_Ware_Museum", "source": "Wikimedia Commons", "license": "CC BY-SA (各文件许可不一)", "caption": "宝鸡青铜器博物院藏品类目" }
+    ],
+    "data_sources": [
+      { "field": "inscription,mold-sequence", "source": "Cambridge (Writing before Inscribing, Early China)", "url": "https://www.cambridge.org/core/journals/early-china/article/abs/writing-before-inscribing-on-the-use-of-manuscripts-in-the-production-of-western-zhou-bronze-inscriptions/CEB5D75243532B0A78C628BFACB489E2" }
+    ]
+  },
+  {
+    "id": "xi_jia_pan",
+    "name_zh": "兮甲盘",
+    "name_pinyin": "Xi Jia Pan",
+    "name_alt": ["伯吉父盘"],
+    "dynasty": "西周",
+    "period": "西周晚期(宣王时期)",
+    "approx_year": "公元前823年(宣王五年)",
+    "excavation_year": "南宋皇室旧藏(传世品,唯一经皇室收藏的西周器)",
+    "excavation_site": "出土地不详",
+    "ancient_state": "周",
+    "current_museum": "私人收藏(2017年保利香港拍卖,2.1亿港元)",
+    "size": { "height_cm": null, "diameter_cm": null, "weight_kg": null },
+    "type": "水器",
+    "form_subtype": "盘",
+    "patterns": ["波曲纹", "重环纹"],
+    "patterns_structured": { "main": ["波曲纹"], "secondary": ["重环纹"], "local": [] },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 133,
+      "summary": "盘内铸铭文133字。记宣王五年(前823年)兮甲(即尹吉甫)从王征伐猃狁获胜,并制定淮夷贡赋之制。尹吉甫即《诗经》编纂者。王国维评其价值高于毛公鼎",
+      "literary_value": "《诗经》编者尹吉甫事迹物证；西周贡赋制度史料；2017年以2.1亿港元创中国青铜器拍卖纪录"
+    },
+    "purpose": "盥洗礼器(纪功)",
+    "craft": "范铸法",
+    "rarity_level": "国宝级(流散/私人藏)",
+    "story_brief": "兮甲盘是现存唯一经南宋皇室收藏的西周青铜器,133字铭文记宣王五年(前823年)尹吉甫(字兮甲)率军大败猃狁,并制定淮夷贡赋制度。王国维誉其价值超毛公鼎。2017年以2.1亿港元拍出,创中国青铜器拍卖纪录。",
+    "image_urls": [
+      { "url": "TODO", "source": "TODO", "license": "TODO — 私人藏品图待确认CC许可", "caption": "兮甲盘图待核" }
+    ],
+    "data_sources": [
+      { "field": "inscription,history,valuation", "source": "PR Newswire (2017-07-17)", "url": "https://www.prnewswire.com/news-releases/xi-jia-pan-823-bc-china-ancient-bronze-plate-breaks-auction-record-300494338.html" },
+      { "field": "inscription value", "source": "Chinadaily (2017-07-17)", "url": "https://www.chinadaily.com.cn/culture/2017-07/17/content_30139162.htm" }
+    ]
+  },
+  {
+    "id": "ban_gui",
+    "name_zh": "班簋",
+    "name_pinyin": "Ban Gui",
+    "name_alt": ["毛班簋"],
+    "dynasty": "西周",
+    "period": "西周中期(穆王时期)",
+    "approx_year": "约公元前10世纪中期",
+    "excavation_year": "清代(传世品)",
+    "excavation_site": "出土地不详",
+    "ancient_state": "周",
+    "current_museum": "中国国家博物馆",
+    "size": { "height_cm": 21.2, "diameter_cm": null, "weight_kg": null },
+    "type": "食器",
+    "form_subtype": "簋(圆腹圈足,双耳带珥)",
+    "patterns": ["饕餮纹", "夔龙纹", "云雷纹"],
+    "patterns_structured": {
+      "main": ["饕餮纹"],
+      "secondary": ["夔龙纹"],
+      "local": ["云雷纹(地纹)"]
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 198,
+      "summary": "簋内底铸铭文198字。记穆王命毛班(毛公之后)率师东征淮夷之战功与赏赐。是西周穆王对淮夷战争最重要文献",
+      "literary_value": "穆王时期对淮夷战争最详尽记录；西周中期铭文书法代表"
+    },
+    "purpose": "祭祀礼器(纪功册命)",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "班簋传世品,198字铭文记穆王命毛班率师东征淮夷战功,是研究西周对外扩张与穆王时代历史的核心文献。书法端庄,为西周中期金文代表作品。",
+    "image_urls": [
+      { "url": "TODO", "source": "TODO", "license": "TODO", "caption": "班簋图待核" }
+    ],
+    "data_sources": [
+      { "field": "inscription,period", "source": "Wikipedia EN (Chinese bronze inscriptions)", "url": "https://en.wikipedia.org/wiki/Chinese_bronze_inscriptions" }
+    ]
+  },
+  {
+    "id": "duoyou_ding",
+    "name_zh": "多友鼎",
+    "name_pinyin": "Duo You Ding",
+    "name_alt": [],
+    "dynasty": "西周",
+    "period": "西周晚期(厉王时期)",
+    "approx_year": "约公元前877-841年",
+    "excavation_year": "1980",
+    "excavation_site": "陕西省长安县下泉村",
+    "ancient_state": "周",
+    "current_museum": "陕西历史博物馆",
+    "size": { "height_cm": 51.5, "diameter_cm": 50, "weight_kg": null },
+    "type": "食器",
+    "form_subtype": "圆鼎(附耳三柱足)",
+    "patterns": ["重环纹", "波曲纹"],
+    "patterns_structured": { "main": ["重环纹"], "secondary": ["波曲纹"], "local": [] },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 279,
+      "summary": "鼎腹内壁铸铭文22行279字。记厉王时武将多友奉命抵御猃狁(北方游牧民,匈奴前身)四战皆捷,斩首俘获甚众,周王赏赐多友。是1949年后考古出土铭文字数最多的西周鼎",
+      "literary_value": "1949年后出土西周鼎最长铭文；猃狁(匈奴前身)早期史最详尽记录；陕历博十八国宝之一"
+    },
+    "purpose": "祭祀礼器(纪功)",
+    "craft": "范铸法",
+    "rarity_level": "国宝(陕历博十八件国宝之一)",
+    "story_brief": "多友鼎1980年出土于陕西长安县下泉村,279字铭文是1949年后考古出土西周鼎铭字数最多者。铭文记厉王时多友四战猃狁大捷,猃狁被学界认为是匈奴的前身。现为陕西历史博物馆十八件国宝之一。",
+    "image_urls": [
+      { "url": "TODO", "source": "TODO", "license": "TODO — 陕历博图待确认CC许可", "caption": "多友鼎图待核" }
+    ],
+    "data_sources": [
+      { "field": "inscription,period,museum", "source": "live2makan (Treasures – General Duoyou Bronze Ding)", "url": "https://live2makan.com/2025/01/22/treasures-general-duoyou-bronze-ding-western-zhou-dynasty/" }
+    ]
+  },
+  {
+    "id": "song_gui",
+    "name_zh": "颂簋",
+    "name_pinyin": "Song Gui",
+    "name_alt": [],
+    "dynasty": "西周",
+    "period": "西周晚期(宣王时期)",
+    "approx_year": "约公元前828-782年",
+    "excavation_year": "清代(传世品)",
+    "excavation_site": "出土地不详(陕西传)",
+    "ancient_state": "周",
+    "current_museum": "上海博物馆 / 台北故宫博物院(分藏数件)",
+    "size": { "height_cm": 30.1, "diameter_cm": null, "weight_kg": null },
+    "type": "食器",
+    "form_subtype": "簋(圆腹圈足,双耳带珥)",
+    "patterns": ["波曲纹", "重环纹"],
+    "patterns_structured": { "main": ["波曲纹"], "secondary": ["重环纹"], "local": [] },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 152,
+      "summary": "簋内底铸铭文152字。记宣王册命官员颂掌管成周(洛邑)及各地仓廪(储粮机构),赐予车马、服饰、玉器。颂铸簋、鼎、壶、盘等一组器物纪念",
+      "literary_value": "西周粮仓管理制度最详尽记录；颂器组(簋+鼎+壶+盘)为研究西周礼器组合的标准参照"
+    },
+    "purpose": "祭祀礼器(纪功册命)",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "颂簋为颂器组(颂鼎、颂簋、颂壶、颂盘)之一,传世品。152字铭文记宣王任命颂管理成周仓廪,赐予丰厚。颂器组是研究西周晚期礼器组合制度的标准参照器群,分藏上博、台北故宫等处。",
+    "image_urls": [
+      { "url": "TODO", "source": "TODO", "license": "TODO", "caption": "颂簋图待核" }
+    ],
+    "data_sources": [
+      { "field": "inscription,description", "source": "Wikipedia EN (Song gui)", "url": "https://en.wikipedia.org/wiki/Song_gui" }
+    ]
+  },
+  {
+    "id": "song_ding",
+    "name_zh": "颂鼎",
+    "name_pinyin": "Song Ding",
+    "name_alt": [],
+    "dynasty": "西周",
+    "period": "西周晚期(宣王时期)",
+    "approx_year": "约公元前828-782年",
+    "excavation_year": "清代(传世品)",
+    "excavation_site": "出土地不详",
+    "ancient_state": "周",
+    "current_museum": "中国国家博物馆",
+    "size": { "height_cm": null, "diameter_cm": null, "weight_kg": null },
+    "type": "食器",
+    "form_subtype": "圆鼎(附耳三柱足)",
+    "patterns": ["波曲纹", "重环纹"],
+    "patterns_structured": { "main": ["波曲纹"], "secondary": ["重环纹"], "local": [] },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 152,
+      "summary": "与颂簋同铭152字。颂鼎与颂簋、颂壶、颂盘同铸于一次册命,形成完整礼器组合",
+      "literary_value": "颂器组礼器组合最完整案例之一"
+    },
+    "purpose": "祭祀礼器(纪功册命)",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "颂鼎为颂器组食器成员,传世品。铭文内容与颂簋相同,均记宣王册命颂管理仓廪。与配套的簋、壶、盘构成西周晚期礼器组合标准形制。",
+    "image_urls": [
+      { "url": "TODO", "source": "TODO", "license": "TODO", "caption": "颂鼎图待核" }
+    ],
+    "data_sources": [
+      { "field": "inscription", "source": "Wikipedia EN (Song gui)", "url": "https://en.wikipedia.org/wiki/Song_gui" }
+    ]
+  },
+  {
+    "id": "song_hu",
+    "name_zh": "颂壶",
+    "name_pinyin": "Song Hu",
+    "name_alt": [],
+    "dynasty": "西周",
+    "period": "西周晚期(宣王时期)",
+    "approx_year": "约公元前828-782年",
+    "excavation_year": "清代(传世品)",
+    "excavation_site": "出土地不详",
+    "ancient_state": "周",
+    "current_museum": "故宫博物院(北京)",
+    "size": { "height_cm": 65, "diameter_cm": null, "weight_kg": null },
+    "type": "酒器",
+    "form_subtype": "壶(长颈圆腹,圈足,双贯耳)",
+    "patterns": ["波曲纹", "重环纹", "鸟纹"],
+    "patterns_structured": {
+      "main": ["波曲纹(腹部)"],
+      "secondary": ["重环纹", "鸟纹(颈部)"],
+      "local": []
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 152,
+      "summary": "与颂簋同铭152字。颂壶为颂器组酒器,与食器(鼎簋)、水器(盘)组合,体现西周礼乐制度三类礼器并配规范",
+      "literary_value": "颂器组礼器配置完整案例"
+    },
+    "purpose": "祭祀盛酒礼器",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "颂壶为颂器组盛酒礼器,传世品,故宫博物院藏。与颂鼎、颂簋(食器)和颂盘(水器)组成礼器全套。",
+    "image_urls": [
+      { "url": "TODO", "source": "TODO", "license": "TODO", "caption": "颂壶图待核" }
+    ],
+    "data_sources": [
+      { "field": "inscription,vessel type", "source": "Wikipedia EN (Song gui)", "url": "https://en.wikipedia.org/wiki/Song_gui" }
+    ]
+  },
+  {
+    "id": "song_pan",
+    "name_zh": "颂盘",
+    "name_pinyin": "Song Pan",
+    "name_alt": [],
+    "dynasty": "西周",
+    "period": "西周晚期(宣王时期)",
+    "approx_year": "约公元前828-782年",
+    "excavation_year": "清代(传世品)",
+    "excavation_site": "出土地不详",
+    "ancient_state": "周",
+    "current_museum": "台北故宫博物院",
+    "size": { "height_cm": null, "diameter_cm": null, "weight_kg": null },
+    "type": "水器",
+    "form_subtype": "盘(圆形,双附耳,圈足)",
+    "patterns": ["波曲纹", "重环纹"],
+    "patterns_structured": { "main": ["波曲纹"], "secondary": ["重环纹"], "local": [] },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 152,
+      "summary": "与颂簋同铭152字。颂盘为颂器组水器(盥洗用),完成食器+酒器+水器的礼器全套组合",
+      "literary_value": "颂器组礼器组合完整案例"
+    },
+    "purpose": "盥洗礼器",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "颂盘为颂器组水器成员,传世品,台北故宫藏。与颂鼎、颂簋、颂壶组成西周晚期礼器全套。",
+    "image_urls": [
+      { "url": "TODO", "source": "TODO", "license": "TODO", "caption": "颂盘图待核" }
+    ],
+    "data_sources": [
+      { "field": "inscription", "source": "Wikipedia EN (Song gui)", "url": "https://en.wikipedia.org/wiki/Song_gui" }
+    ]
+  },
+  {
+    "id": "pan_sheng_gui",
+    "name_zh": "番生簋",
+    "name_pinyin": "Pan Sheng Gui",
+    "name_alt": ["番生簋盖"],
+    "dynasty": "西周",
+    "period": "西周晚期(宣王时期)",
+    "approx_year": "约公元前828-782年",
+    "excavation_year": "清代(传世品)",
+    "excavation_site": "出土地不详",
+    "ancient_state": "周",
+    "current_museum": "台北故宫博物院",
+    "size": { "height_cm": null, "diameter_cm": null, "weight_kg": null },
+    "type": "食器",
+    "form_subtype": "簋(有盖圆簋,双耳带珥)",
+    "patterns": ["波曲纹", "重环纹"],
+    "patterns_structured": { "main": ["波曲纹"], "secondary": ["重环纹"], "local": [] },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 142,
+      "summary": "簋内底铸铭文142字。记宣王册命番生为'卿事寮'(王朝最高行政机构)首领,赐予大量物品。'卿事寮'一词是研究西周王朝行政体制的关键材料",
+      "literary_value": "西周'卿事寮'制度最直接文献依据；宣王行政改革物证"
+    },
+    "purpose": "祭祀礼器(纪功册命)",
+    "craft": "范铸法",
+    "rarity_level": "一级文物",
+    "story_brief": "番生簋传世品,台北故宫博物院藏。142字铭文记宣王任命番生为卿事寮首领,'卿事寮'一词的明确出现是研究西周行政体制的核心物证。",
+    "image_urls": [
+      { "url": "TODO", "source": "TODO", "license": "TODO — 台北故宫图片版权限制", "caption": "番生簋图待核" }
+    ],
+    "data_sources": [
+      { "field": "inscription,period", "source": "台北故宫博物院 bronzes exhibition (reference only)", "url": "https://www.npm.gov.tw/exh99/bronzes/en/page-1.html" }
+    ]
+  },
+  {
+    "id": "yi_hou_ze_gui",
+    "name_zh": "宜侯夨簋",
+    "name_pinyin": "Yi Hou Ze Gui",
+    "name_alt": ["矢侯簋"],
+    "dynasty": "西周",
+    "period": "西周早期(康王时期)",
+    "approx_year": "约公元前11世纪",
+    "excavation_year": "1954",
+    "excavation_site": "江苏省丹徒县烟墩山",
+    "ancient_state": "周(宜国)",
+    "current_museum": "中国国家博物馆",
+    "size": { "height_cm": 15.7, "diameter_cm": 22.5, "weight_kg": null },
+    "type": "食器",
+    "form_subtype": "簋(圆腹圈足,双耳)",
+    "patterns": ["饕餮纹", "云雷纹"],
+    "patterns_structured": {
+      "main": ["饕餮纹"],
+      "secondary": ["云雷纹"],
+      "local": []
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 126,
+      "summary": "簋内底铸铭文126字。记康王将虞侯夨的封地从虞改封于宜,详列赐予的山川土地、民众、礼器、兵器等。是研究西周早期诸侯分封制度、周文化向江南传播的最重要文献",
+      "literary_value": "西周南方诸侯封建制度最详尽早期记录；出土于江苏,体现西周势力范围延伸至长江南岸"
+    },
+    "purpose": "祭祀礼器(纪功册命)",
+    "craft": "范铸法",
+    "rarity_level": "国宝",
+    "story_brief": "宜侯夨簋1954年出土于江苏丹徒烟墩山,是迄今在江南地区出土的最重要西周铜器。126字铭文记康王将虞侯夨改封于宜(今江苏),是研究西周分封制度向南方延伸的核心文献。现藏国博。",
+    "image_urls": [
+      { "url": "TODO", "source": "中国国家博物馆官网(仅参考)", "license": "CITATION ONLY", "caption": "宜侯夨簋图待核" }
+    ],
+    "data_sources": [
+      { "field": "inscription,size,site,museum", "source": "中国国家博物馆官网 (reference only)", "url": "https://en.chnmuseum.cn/collections_577/collection_highlights_608/archaeological_discoveries_609/202109/t20210910_251194.html" }
+    ]
+  },
+  {
+    "id": "kang_hou_gui",
+    "name_zh": "康侯簋",
+    "name_pinyin": "Kang Hou Gui",
+    "name_alt": ["康侯丰簋"],
+    "dynasty": "西周",
+    "period": "西周早期(成王时期)",
+    "approx_year": "约公元前11世纪初",
+    "excavation_year": "出土地不详(传来自河南辉县)",
+    "excavation_site": "河南省辉县(传)",
+    "ancient_state": "周(卫国)",
+    "current_museum": "大英博物馆",
+    "size": { "height_cm": 23, "diameter_cm": 30, "weight_kg": null },
+    "type": "食器",
+    "form_subtype": "簋(深腹圈足,双兽耳)",
+    "patterns": ["饕餮纹", "夔龙纹", "云雷纹"],
+    "patterns_structured": {
+      "main": ["饕餮纹"],
+      "secondary": ["夔龙纹"],
+      "local": ["云雷纹(地纹)"]
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 24,
+      "summary": "簋内底铸铭文约24字。记周王之弟康侯(卫国始封之君)受封于卫的史实——三监之乱平定后周公重新分封殷商遗民之地的直接物证",
+      "literary_value": "周初'三监之乱'后重新分封卫国的直接物证；大英博物馆'百件藏品看世界'入选器"
+    },
+    "purpose": "祭祀礼器",
+    "craft": "范铸法",
+    "rarity_level": "一级文物(海外馆藏)",
+    "story_brief": "康侯簋传来自河南辉县,现藏大英博物馆。约24字铭文记康侯(周文王之子、武王之弟,卫国始君)受封于卫的史实,是三监之乱后西周重建北方秩序的直接物证,被选入大英博物馆百件代表性藏品。",
+    "image_urls": [
+      { "url": "https://commons.wikimedia.org/wiki/Category:Kang_Hou_gui", "source": "Wikimedia Commons", "license": "CC BY-SA (各文件许可不一)", "caption": "康侯簋相册" }
+    ],
+    "data_sources": [
+      { "field": "all", "source": "Wikipedia EN (Kang Hou gui)", "url": "https://en.wikipedia.org/wiki/Kang_Hou_gui" }
+    ]
+  },
+  {
+    "id": "xing_hou_gui",
+    "name_zh": "邢侯簋",
+    "name_pinyin": "Xing Hou Gui",
+    "name_alt": [],
+    "dynasty": "西周",
+    "period": "西周早期至中期(11-10世纪BCE)",
+    "approx_year": "约公元前11-10世纪",
+    "excavation_year": "出土地不详(传来自河南)",
+    "excavation_site": "出土地不详",
+    "ancient_state": "周(邢国)",
+    "current_museum": "大英博物馆",
+    "size": { "height_cm": null, "diameter_cm": null, "weight_kg": null },
+    "type": "食器",
+    "form_subtype": "簋(圆腹,四耳,圈足)",
+    "patterns": ["象纹(大象头部+夔龙纹综合)", "饕餮纹", "夔龙纹"],
+    "patterns_structured": {
+      "main": ["象纹(腹部四区,象鼻悬垂为特征)"],
+      "secondary": ["饕餮纹", "夔龙纹"],
+      "local": []
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 43,
+      "summary": "簋内底铸铭文约43字。记邢侯(周公之后,邢国始君)受周王赐予三批人马,器主铸此簋祭祀周公(邢侯的先祖)。邢侯为周初功臣周公旦的后代",
+      "literary_value": "周公旦后裔封建邢国的直接物证；西周诸侯与周公宗庙祭祀关系研究重要器"
+    },
+    "purpose": "祭祀礼器(祭祀先祖周公)",
+    "craft": "范铸法",
+    "rarity_level": "一级文物(海外馆藏)",
+    "story_brief": "邢侯簋现藏大英博物馆,器形特殊——腹部四区装饰均以象为主题,象鼻下垂,在中原西周青铜器中极为罕见。铭文约43字记邢侯祭祀其先祖周公旦,是研究西周诸侯分封与周公家族关系的重要物证。",
+    "image_urls": [
+      { "url": "https://www.britishmuseum.org/collection/object/A_1936-1118-2", "source": "大英博物馆官网(仅参考)", "license": "CITATION ONLY — 大英博物馆图片须确认许可", "caption": "邢侯簋大英博物馆页面" }
+    ],
+    "data_sources": [
+      { "field": "all", "source": "bronzeschinois.wordpress.com (Xing hou gui)", "url": "https://bronzeschinois.wordpress.com/nourriture-%E9%A3%9F%E5%99%A8/gui-%E7%B0%8B/xing-hou-gui-%E9%82%A2%E4%BE%AF%E7%B0%8B/" },
+      { "field": "inscription,description", "source": "World History Encyclopedia (Xing Hou Gui inscription)", "url": "https://www.worldhistory.org/image/9499/inscription-of-the-xing-hou-gui-ritual-vessel/" }
+    ]
+  },
+  {
+    "id": "yan_hou_yu",
+    "name_zh": "燕侯盂",
+    "name_pinyin": "Yan Hou Yu",
+    "name_alt": ["克盉", "克罍(同坑器)"],
+    "dynasty": "西周",
+    "period": "西周早期(成王时期)",
+    "approx_year": "约公元前11世纪(成王初年)",
+    "excavation_year": "1986",
+    "excavation_site": "北京市房山区琉璃河遗址M1193墓",
+    "ancient_state": "周(燕国)",
+    "current_museum": "首都博物馆 / 北京市文物局",
+    "size": { "height_cm": null, "diameter_cm": null, "weight_kg": null },
+    "type": "食器",
+    "form_subtype": "盂(大口深腹,圈足)",
+    "patterns": ["饕餮纹", "云雷纹"],
+    "patterns_structured": {
+      "main": ["饕餮纹"],
+      "secondary": ["云雷纹"],
+      "local": []
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 43,
+      "summary": "盂内底铸铭文约43字。记成王命召公之子克(燕国始封之君)受封于燕,驻守北方,赐予民众和器物。是西周燕国立国最直接物证,确认了燕国为召公后裔封国",
+      "literary_value": "西周北方诸侯燕国立国最直接物证；琉璃河M1193为燕侯克之墓，与克罍铭文互证燕国封建史"
+    },
+    "purpose": "祭祀礼器",
+    "craft": "范铸法",
+    "rarity_level": "国宝",
+    "story_brief": "燕侯盂出土于北京市房山区琉璃河燕都遗址M1193墓(燕侯克之墓),铭文约43字记成王封召公之子克于燕,是证实北京地区早在西周初即为燕国都邑的最直接证据,对北京历史起源具有极重要意义。",
+    "image_urls": [
+      { "url": "https://en.wikipedia.org/wiki/Western_Zhou_Yan_State_Capital_Museum", "source": "Wikipedia EN (Yan State Capital Museum)", "license": "CC BY-SA (页面可引用)", "caption": "燕都遗址博物馆相关信息" }
+    ],
+    "data_sources": [
+      { "field": "site,inscription,period", "source": "Wikipedia EN (Western Zhou Yan State Capital Museum)", "url": "https://en.wikipedia.org/wiki/Western_Zhou_Yan_State_Capital_Museum" },
+      { "field": "inscription content", "source": "IU scholarworks (Inscriptional Records Western Zhou)", "url": "https://scholarworks.iu.edu/dspace/bitstream/handle/2022/23466/3.10-WZhou_Bronzes-2010%20(updated).pdf?sequence=6" }
+    ]
+  },
+  {
+    "id": "shi_qiang_pan_replica",
+    "name_zh": "卫盉",
+    "name_pinyin": "Wei He",
+    "name_alt": ["五年卫鼎(同族)"],
+    "dynasty": "西周",
+    "period": "西周中期(恭王时期)",
+    "approx_year": "约公元前10世纪末(恭王时期)",
+    "excavation_year": "1975",
+    "excavation_site": "陕西省扶风县庄白村(微氏家族窖藏邻近地块)",
+    "ancient_state": "周",
+    "current_museum": "中国国家博物馆",
+    "size": { "height_cm": 28.6, "diameter_cm": null, "weight_kg": null },
+    "type": "水器(温酒)",
+    "form_subtype": "盉(三足,流,鋬)",
+    "patterns": ["环带纹", "重环纹"],
+    "patterns_structured": {
+      "main": ["环带纹"],
+      "secondary": ["重环纹"],
+      "local": []
+    },
+    "inscription": {
+      "has": true,
+      "text": null,
+      "char_count": 132,
+      "summary": "盉内壁铸铭文132字。记卫(Wei)以五田(五块土地)换取矩伯的器物,两方在周王室官员见证下完成土地交换契约。是研究西周土地私有化和土地交换制度的极重要文献,与散氏盘互为参照",
+      "literary_value": "西周土地交换制度最详尽记录之一；与散氏盘互为土地契约研究双璧；恭王时期社会经济史料"
+    },
+    "purpose": "水器(温酒兼盛水)",
+    "craft": "范铸法",
+    "rarity_level": "国宝",
+    "story_brief": "卫盉1975年出土于陕西扶风庄白村,132字铭文记卫以五田换取矩伯器物的土地交换契约,与散氏盘并称西周土地契约文献双璧,是研究西周土地制度与私有化进程的核心物证。现藏国博。",
+    "image_urls": [
+      { "url": "TODO", "source": "TODO", "license": "TODO", "caption": "卫盉图待核" }
+    ],
+    "data_sources": [
+      { "field": "inscription,period,site", "source": "IU scholarworks (Inscriptional Records Western Zhou)", "url": "https://scholarworks.iu.edu/dspace/bitstream/handle/2022/23466/3.10-WZhou_Bronzes-2010%20(updated).pdf?sequence=6" },
+      { "field": "site context (Zhuangbai hoard)", "source": "Wikipedia EN (Shi Qiang pan) — same hoard area", "url": "https://en.wikipedia.org/wiki/Shi_Qiang_pan" }
+    ]
   }
 ]

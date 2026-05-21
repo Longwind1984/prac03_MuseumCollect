@@ -103,6 +103,11 @@
   - builder-timepillar-b3: time-pillar + event-bus + dynasties.json
 Total active background agents: 9 (5 DE + 4 Phase B)
 
+[2026-05-21 H2-3] [data-engineer-v3-shang] DONE — segment-1 (60/60 records; ~48 fully filled, 12 with TODO marks on sparse/uncertain fields; 5 v1 upgraded + 55 new; licensing-log-v3.md Shang section appended)
+  - Output: data/curated/bronze-treasures-v3-segment-1-shang.json (60 records)
+  - TODO fields: mostly size/excavation_year on 传世 pieces and 3 sparse 湖南博物院 artifacts — not hallucinated, genuinely unknown
+  - NOTE: linggui_gong supersedes v1 longxing_gong (same artifact, upgraded ID); siyangshou_bu kept from v1, duplicate removed from batch merge
+
 [2026-05-21 H2-3] [data-engineer-v3-dongzhou] DONE — segment-3 (52/61 fully filled, 9 TODO: all excavation_year on 传世 pieces — not hallucinated, genuinely unknown)
 
 [2026-05-21 H4] [builder-timepillar-b3] DONE — time-pillar v3 + event-bus + dynasties.json

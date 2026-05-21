@@ -352,3 +352,174 @@ NOTE: Guimet images copyright Musée Guimet — reference only.
 | CC BY-SA (Wikipedia) | 20 records | Attribution required |
 | CC BY-NC-SA (British Museum) | 4 records | NON-COMMERCIAL only |
 | Reference only (museum sites, news) | 21 records | Fact reference, no image redistribution |
+
+---
+
+## Segment 1: 商代 (Shang Dynasty ~1600-1046 BCE) — DE-1
+> 生成时间: 2026-05-21 H2-3
+> 总记录数: 60 (5 v1升级 + 55 新增)
+
+### 数据来源总览
+
+| 来源 | 许可 | 商业可用 |
+|------|------|---------|
+| Wikipedia EN/ZH (CC BY-SA 4.0) | CC BY-SA | 是(须署名) |
+| Wikimedia Commons (各文件独立许可) | 多为CC BY-SA | 需逐文件确认 |
+| Wikidata | CC0 | 完全自由 |
+| MET Open Access | CC0 | 完全自由 |
+| Smarthistory | CC BY-NC-SA | 仅非商业 |
+| British Museum collection | CC BY-NC-SA 4.0 | 仅非商业 |
+| 国家博物馆/湖南博物院/上海博物馆官网 | 版权保留 | 仅引用,不可再分发 |
+| govt.chinadaily.com.cn | 参考引用 | 仅引用 |
+| live2makan.com / newhanfu.com | 参考引用 | 仅引用 |
+
+### 高风险条目(图片不可再分发)
+- fuhao_sanlian_yan: 国博官网图 — 仅引用
+- fuhao_ou_fangyi: 国博官网图 — 仅引用
+- xiang_zun_hunan: 湖南博物院官网 — 仅引用
+- nao_da_xiang_wen: 湖南博物院官网 — 仅引用
+- shuangyang_zun: 大英博物馆图 — CC BY-NC-SA (非商业限制)
+- shang_zun_niaoshou: 湖南博物院 — 仅引用
+- shang_pou_hunan: 湖南博物院 — 仅引用
+- sanyang_zun: China Online Museum — 仅引用
+
+### 完全商业安全(CC0)图片来源
+- shufu_fangding_anyang: MET CC0 (metmuseum.org/art/collection/search/60594)
+- shang_gu_standard: MET CC0 (metmuseum.org/art/collection/search/61323)
+- shang_jue_standard: MET CC0 (metmuseum.org/art/collection/search/61239)
+- shang_gong_anyang: MET CC0 (metmuseum.org/art/collection/search/44781)
+
+### 数据稀疏条目(待补充)
+以下条目因公开数据不足,含多处_todo标记,建议后续研究补充:
+- siyangshou_bu: 尺寸/出土年代待湖南博物院出版物核实
+- sanyang_zun: 出土地点/流传经历待核
+- zhengzhou_shou_mian_fangding: 精确尺寸待核
+- shang_zu_xin_you: 铭文内容待核
+- shang_zu_geng_ding: 馆藏地点/铭文待核
+- shang_hu_zun: 馆藏地点待核,注意与虎食人卣区分
+- shang_mianju_tao: 具体出土地点待核
+- yachou_lei: 出土地点/尺寸待核
+- xiao_chen_yu_zhi: 铭文字数待核
+- shang_yazhang_jade_bronze (shang_composite_spear): 具体器物待确认
+
+### 逐条许可记录
+
+**houmuwu_ding** — Wikipedia EN CC BY-SA; Wikimedia Commons CC BY-SA per file
+
+**siyang_fangzun** — Wikipedia EN CC BY-SA; Shanghai Daily paraphrase; Wikimedia Commons CC BY-SA
+
+**fuhao_xiaozun** — Wikipedia EN CC BY-SA; Smarthistory CC BY-NC-SA; Wikimedia Commons CC BY-SA
+
+**zilong_ding** — live2makan paraphrase; Wikimedia Commons CC BY-SA
+
+**siyangshou_bu** — 开放数据极少,TODO标记
+
+**simuxin_ding** — Wikipedia EN CC BY-SA; Wikimedia Commons CC BY-SA
+
+**fuhao_yue** — Smarthistory CC BY-NC-SA; LitHub paraphrase; Wikimedia Commons CC BY-SA
+
+**fuhao_sanlian_yan** — NMC官网 仅引用(图片不可再分发); chinadaily paraphrase
+
+**fuhao_ou_fangyi** — NMC官网 仅引用; Wikipedia EN (Fangyi) CC BY-SA
+
+**longhu_wen_zun** — chinadaily paraphrase; Wikimedia Commons CC BY-SA
+
+**duling_fangding** — chinaknowledge.de paraphrase; Britannica paraphrase
+
+**dahe_fangding** — Wikipedia/Grokipedia CC BY-SA; Hunan Museum 仅引用
+
+**yachou_yue** — newhanfu.com paraphrase; chinadaily paraphrase; Wikimedia Commons CC BY-SA
+
+**xiang_zun_hunan** — chinadaily paraphrase; Hunan Museum 仅引用(图片不可再分发)
+
+**nao_da_xiang_wen** — Hunan Museum 仅引用; Nature CC BY 4.0 (须署名)
+
+**fuhao_jue** — China Online Museum paraphrase; Smarthistory CC BY-NC-SA
+
+**sanyang_zun** — China Online Museum 仅引用
+
+**fuhao_gu** — Wikipedia EN (Gu vessel) CC BY-SA; Wikimedia Commons CC BY-SA
+
+**xijue_fuhao** — Wikipedia EN CC BY-SA
+
+**sixi_zun** — World History Encyclopedia paraphrase; Asian Art Museum paraphrase
+
+**fuhao_pan** — Wikipedia EN CC BY-SA
+
+**fuhao_he** — Wikipedia EN CC BY-SA
+
+**fuhao_gui** — Wikipedia EN CC BY-SA
+
+**xiao_chen_jue_fuhao** — Wikipedia EN CC BY-SA
+
+**fuhao_lei** — Wikipedia EN CC BY-SA
+
+**fuhao_you_owl** — SEAA article paraphrase
+
+**linggui_gong** — tydao.com paraphrase; Wikimedia Commons CC BY-SA
+
+**shuangyang_zun** — British Museum CC BY-NC-SA (非商业限制)
+
+**fuhao_maotou_gui** — Washington University paraphrase
+
+**zhengzhou_shou_mian_fangding** — Britannica paraphrase
+
+**shufu_fuhao_fangyi** — Wikipedia EN (Fangyi) CC BY-SA
+
+**shang_ge_fuhao** — Smarthistory CC BY-NC-SA
+
+**shang_jia_erligang** — Wikipedia EN CC BY-SA
+
+**shang_jia_fuhao** — Wikipedia EN CC BY-SA
+
+**shang_li_fuhao** — chinadaily paraphrase
+
+**fuhao_da_you** — Wikipedia EN CC BY-SA
+
+**xiao_chen_yu_zhi** — World History Encyclopedia paraphrase
+
+**shang_mao_spear** — Wikipedia EN CC BY-SA
+
+**shang_nao_bell_national** — Nature CC BY 4.0; Wikimedia Commons CC BY-SA
+
+**yachou_lei** — Orientations magazine paraphrase; 出土地点不详
+
+**shufu_fangding_anyang** — MET Open Access CC0 (完全商业安全)
+
+**shang_gu_standard** — Wikipedia EN CC BY-SA; MET CC0 image
+
+**shang_jue_standard** — Wikipedia EN CC BY-SA; MET CC0 image; Khan Academy CC BY-NC-SA
+
+**shang_you_taotie** — Wikipedia EN CC BY-SA
+
+**shang_gong_anyang** — Wikipedia EN CC BY-SA; MET CC0 image
+
+**shang_pou_hunan** — Hunan Museum 仅引用
+
+**shang_yan_fuhao** — Wikipedia EN CC BY-SA
+
+**shang_zu_xin_you** — Shanghai Museum 仅引用
+
+**shang_daxing_ge** — Wikipedia EN CC BY-SA
+
+**shang_mianju_tao** — Smithsonian paraphrase
+
+**shang_hu_zun** — Smarthistory CC BY-NC-SA
+
+**shang_da_zhong_yin** — Wikipedia EN CC BY-SA
+
+**shang_zun_niaoshou** — Hunan Museum 仅引用
+
+**shang_anyang_fanghu** — Wikipedia EN CC BY-SA
+
+**shang_zu_geng_ding** — Wikipedia EN CC BY-SA; 馆藏TODO
+
+**shang_wuding_nao** — Wikipedia EN CC BY-SA
+
+**fuhao_mirror** — Wikipedia EN CC BY-SA
+
+**shang_composite_spear** — Smarthistory CC BY-NC-SA
+
+**hushi_ren_you** — Wikipedia EN CC BY-SA; Smithsonian Magazine paraphrase
+
+**shang_fangjia_erligang** — Britannica paraphrase; chinaknowledge.de paraphrase
