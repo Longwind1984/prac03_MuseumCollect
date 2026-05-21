@@ -135,8 +135,12 @@ function getPhotoUrl(artifactId) {
   if (!img) return null;
   return img.direct_url || (img.local_path ? '../../' + img.local_path : null) || null;
 }
-// Mock catalog data (representative 50 items)
-const CATALOG_ITEMS = [
+// Fallback catalog items (used on first paint, before MuseumData loads).
+// Replaced with full 277-record list from window.MuseumData.artifacts via
+// the 'museum-data-ready' listener at the bottom of this script.
+// History: prior versions hardcoded da_sheng_pan / yuewang_zhouji_jian /
+// guoji_zibo_pan which don't exist in any segment JSON — BUG-001 cousin.
+let CATALOG_ITEMS = [
   {id:'houmuwu_ding', name:'后母戊鼎', dynasty:'商', form:'方鼎', site:'殷墟', rarity:'国宝', patterns:['饕餮纹','夔龙纹'], inscription:'有', char_count:3},
   {id:'siyang_fang_zun', name:'四羊方尊', dynasty:'商', form:'方尊', site:'湖南宁乡', rarity:'国宝', patterns:['饕餮纹','夔龙纹'], inscription:'有', char_count:0},
   {id:'fuhao_owl_zun', name:'妇好鸮尊', dynasty:'商', form:'鸮尊', site:'殷墟', rarity:'国宝', patterns:['饕餮纹','云雷纹'], inscription:'有', char_count:2},
@@ -148,7 +152,6 @@ const CATALOG_ITEMS = [
   {id:'da_ke_ding', name:'大克鼎', dynasty:'西周', form:'圆鼎', site:'陕西扶风', rarity:'国宝', patterns:['窃曲纹','凤鸟纹'], inscription:'有', char_count:290},
   {id:'san_shi_pan', name:'散氏盘', dynasty:'西周', form:'盘', site:'陕西宝鸡', rarity:'国宝', patterns:['重环纹'], inscription:'有', char_count:350},
   {id:'xu_ji_zi_bai_pan', name:'虢季子白盘', dynasty:'西周', form:'盘', site:'陕西宝鸡', rarity:'国宝', patterns:['鱼纹'], inscription:'有', char_count:111},
-  {id:'da_sheng_pan', name:'大盛鼎', dynasty:'西周', form:'圆鼎', site:'陕西', rarity:'一级', patterns:['窃曲纹'], inscription:'有', char_count:50},
   {id:'lian_he_fang_hu', name:'莲鹤方壶', dynasty:'春秋', form:'方壶', site:'河南新郑', rarity:'国宝', patterns:['莲瓣纹','蟠螭纹'], inscription:'无', char_count:0},
   {id:'yuewang_goujian_jian', name:'越王勾践剑', dynasty:'春秋', form:'剑', site:'湖北江陵', rarity:'国宝', patterns:['菱形暗纹'], inscription:'有', char_count:8},
   {id:'zeng_houyi_bianzhong', name:'曾侯乙编钟', dynasty:'战国', form:'编钟', site:'湖北随州', rarity:'国宝', patterns:['蟠虺纹'], inscription:'有', char_count:2828},
@@ -166,11 +169,44 @@ const CATALOG_ITEMS = [
   {id:'met_he_ding', name:'铭文大方鼎(MET)', dynasty:'商', form:'方鼎', site:'传殷墟', rarity:'一级', patterns:['饕餮纹'], inscription:'有', char_count:4},
   {id:'british_fang_yi', name:'大英方彝', dynasty:'商', form:'方彝', site:'传河南', rarity:'一级', patterns:['饕餮纹','夔龙纹'], inscription:'无', char_count:0},
   {id:'zhongshan_wang_ding', name:'中山王方壶', dynasty:'战国', form:'方壶', site:'河北平山', rarity:'国宝', patterns:['几何纹'], inscription:'有', char_count:450},
-  {id:'yuewang_zhouji_jian', name:'越王州句剑', dynasty:'春秋', form:'剑', site:'传越国', rarity:'一级', patterns:['鸟篆铭文'], inscription:'有', char_count:6},
   {id:'chu_wang_ding', name:'楚王熊章铜鼎', dynasty:'战国', form:'圆鼎', site:'湖南长沙', rarity:'一级', patterns:['蟠虺纹'], inscription:'有', char_count:10},
   {id:'jin_hou_su_bian', name:'晋侯苏编钟', dynasty:'西周', form:'编钟', site:'山西曲沃晋侯墓地', rarity:'国宝', patterns:['重环纹'], inscription:'有', char_count:355},
-  {id:'guoji_zibo_pan', name:'虢仲盨', dynasty:'西周', form:'盨', site:'传陕西', rarity:'一级', patterns:['窃曲纹'], inscription:'有', char_count:30},
 ];
+
+// Adapter: build full catalog from MuseumData.artifacts (277 records).
+// Maps segment JSON record shape → catalog item shape used by matchesFilters/renderGrid.
+function buildCatalogItemsFromMuseumData() {
+  if (!window.MuseumData || !Array.isArray(window.MuseumData.artifacts)) return null;
+  const SITE_HINTS = ['殷墟','三星堆','盘龙城','二里头','随州','满城','宝鸡','岐山','扶风','眉县','临潼','宁乡','江陵','新郑','武汉','广汉','曲沃','平山','长沙','诸城','安阳','洛阳','成都'];
+  return window.MuseumData.artifacts.map(a => {
+    const patterns = [];
+    const ps = a.patterns_structured || {};
+    ['main','secondary'].forEach(k => {
+      (ps[k] || []).forEach(s => {
+        const name = String(s).split(' — ')[0].split('—')[0].trim();
+        if (name && !patterns.includes(name)) patterns.push(name);
+      });
+    });
+    const fullSite = (a.excavation && a.excavation.site) || '';
+    let site = '';
+    for (const h of SITE_HINTS) if (fullSite.includes(h)) { site = h; break; }
+    if (!site) {
+      const m = fullSite.match(/^([^省市,、]+(?:省|市))/);
+      site = m ? m[1] : (fullSite.split(/[、,]/)[0] || fullSite.substring(0, 8));
+    }
+    return {
+      id: a.id,
+      name: a.name_zh,
+      dynasty: a.dynasty || '',
+      form: a.form_subtype || a.type || '',
+      site,
+      rarity: a.rarity_level || '一级',
+      patterns,
+      inscription: (a.inscription && a.inscription.has) ? '有' : '无',
+      char_count: (a.inscription && a.inscription.char_count) || 0,
+    };
+  });
+}
 
 const FORM_TREE = {
   '炊器': ['方鼎','圆鼎','鬲','甗'],
@@ -221,7 +257,7 @@ function matchesFilters(item) {
   if (activeFilters.inscription === 'long' && item.char_count < 100) return false;
   if (activeFilters.inscription === 'none' && item.inscription !== '无') return false;
   if (activeFilters.collected === 'yes') {
-    const collected = new Set(['houmuwu_ding','fuhao_owl_zun','siyang_fang_zun','da_yu_ding','he_zun','li_gui','mao_gong_ding','da_ke_ding','san_shi_pan','xu_ji_zi_bai_pan','lian_he_fang_hu','yuewang_goujian_jian','zeng_houyi_bianzhong','zeng_houyi_zunpan','changxin_gonglamp','cuo_jin_boshanluo','sanxingdui_bronze_standfigure','erlitou_tong_jue','panlongcheng_fang_ding','ban_gui','ling_fang_yi','nangong_hu','met_he_ding','british_fang_yi','zhongshan_wang_ding','shang_yang_fang_sheng','jin_hou_su_bian','chu_wang_ding','guoji_zibo_pan']);
+    const collected = (window.MuseumData && window.MuseumData.collected) || new Set();
     if (!collected.has(item.id)) return false;
   }
   if (activeFilters.rarity === '国宝' && item.rarity !== '国宝') return false;
@@ -244,7 +280,7 @@ function renderGrid() {
   const filtered = CATALOG_ITEMS.filter(matchesFilters);
   document.getElementById('count-num').textContent = filtered.length;
   const grid = document.getElementById('catalog-grid');
-  const collectedIds = new Set(['houmuwu_ding','fuhao_owl_zun','siyang_fang_zun','da_yu_ding','he_zun','li_gui','mao_gong_ding','da_ke_ding','san_shi_pan','xu_ji_zi_bai_pan','lian_he_fang_hu','yuewang_goujian_jian','zeng_houyi_bianzhong','zeng_houyi_zunpan','changxin_gonglamp','cuo_jin_boshanluo','sanxingdui_bronze_standfigure','erlitou_tong_jue','panlongcheng_fang_ding','ban_gui']);
+  const collectedIds = (window.MuseumData && window.MuseumData.collected) || new Set();
   grid.innerHTML = filtered.map(item => {
     const silh = getSilhouette(item.form);
     const isC = collectedIds.has(item.id);
@@ -357,8 +393,17 @@ document.addEventListener('DOMContentLoaded', () => {
   buildPatternFilters();
   buildGeoFilters();
   renderGrid();
-  // Re-render when MuseumData finishes loading photos
-  document.addEventListener('museum-data-ready', () => renderGrid());
+  // Swap to full 277-record catalog when MuseumData finishes loading
+  document.addEventListener('museum-data-ready', () => {
+    const full = buildCatalogItemsFromMuseumData();
+    if (full && full.length > 0) CATALOG_ITEMS = full;
+    renderGrid();
+  });
+  // Also try swap if MuseumData is already ready (race-safe)
+  if (window.MuseumData && Array.isArray(window.MuseumData.artifacts) && window.MuseumData.artifacts.length > 0) {
+    const full = buildCatalogItemsFromMuseumData();
+    if (full && full.length > 0) { CATALOG_ITEMS = full; renderGrid(); }
+  }
 
   // Listen for era-focus from other components (穿越模式)
   document.addEventListener('era-focus', (e) => {

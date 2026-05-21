@@ -12,18 +12,20 @@
 (function() {
   'use strict';
 
-  // Mock 35 collected artifact IDs (representative sample across eras)
+  // Mock collected artifact IDs (representative sample across eras).
+  // Removed da_sheng_pan / guoji_zibo_pan / yuewang_zhouji_jian / simuwu_ding /
+  // shangguo_fang_sheng — they aren't in any segment JSON (BUG-001 cousin).
   const MOCK_COLLECTED_IDS = new Set([
-    'houmuwu_ding', 'simuwu_ding', 'fuhao_owl_zun', 'siyang_fang_zun', 'zilong_ding',
+    'houmuwu_ding', 'fuhao_owl_zun', 'siyang_fang_zun', 'zilong_ding',
     'da_yu_ding', 'he_zun', 'li_gui', 'mao_gong_ding', 'da_ke_ding',
-    'san_shi_pan', 'xu_ji_zi_bai_pan', 'da_sheng_pan', 'guoji_zibo_pan',
+    'san_shi_pan', 'xu_ji_zi_bai_pan',
     'lian_he_fang_hu', 'yuewang_goujian_jian', 'zeng_houyi_bianzhong', 'zeng_houyi_zunpan',
-    'shangguo_fang_sheng', 'shang_yang_fang_sheng',
+    'shang_yang_fang_sheng',
     'cuo_jin_boshanluo', 'changxin_gonglamp',
     'sanxingdui_bronze_standfigure', 'sanxingdui_zongmu_mask',
     'met_he_ding', 'british_fang_yi',
     'erlitou_tong_jue', 'panlongcheng_fang_ding',
-    'zhongshan_wang_ding', 'yuewang_zhouji_jian',
+    'zhongshan_wang_ding',
     'chu_wang_ding', 'jin_hou_su_bian',
     'ban_gui', 'ling_fang_yi', 'nangong_hu'
   ]);

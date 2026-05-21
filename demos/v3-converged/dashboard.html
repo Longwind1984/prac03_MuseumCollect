@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>维度全景 · 三联动 Dashboard — MuseumCollect v3</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="../../assets/vendor/d3.v7.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -345,14 +345,14 @@ body {
   <!-- LEFT COL: Time Pillar + Pattern Strip -->
   <div class="left-col">
     <div class="pillar-title">时代柱 · Dynasty Pillar</div>
-    <div class="pillar-section">
+    <div class="pillar-section" tabindex="0" role="region" aria-label="时代柱朝代选择">
       <div id="pillar-container"></div>
     </div>
 
     <!-- Pattern Strip -->
     <div class="pattern-strip-section" id="pattern-strip-section">
       <div class="pattern-strip-label" id="pattern-strip-era-label">纹饰演化 · Patterns (hover 朝代高亮)</div>
-      <div class="pattern-strip" id="pattern-strip"></div>
+      <div class="pattern-strip" id="pattern-strip" tabindex="0" role="region" aria-label="花纹演化横向滚动条"></div>
     </div>
   </div>
 
@@ -374,7 +374,7 @@ body {
         <div class="era-big-count" id="era-big-count" style="color:var(--text-muted);"></div>
       </div>
       <div class="era-separator"></div>
-      <div class="artifact-cards" id="artifact-cards">
+      <div class="artifact-cards" id="artifact-cards" tabindex="0" role="region" aria-label="该朝代精品文物横向卡片">
         <div style="font-size:12px; color:var(--text-muted); padding: 0 12px;">
           悬停左侧时代柱，三组件同时反应 →
         </div>
@@ -858,9 +858,11 @@ function onPillarLeave() {
 function updatePillarHighlight(name) {
   d3.selectAll('.dynasty-band-g').each(function() {
     const dn = this.getAttribute('data-dynasty');
+    const isActive = dn === name;
+    this.setAttribute('class', isActive ? 'dynasty-band-g active' : 'dynasty-band-g');
     const highlight = d3.select(this).select('.band-highlight');
     const bg = d3.select(this).select('.band-bg');
-    if (dn === name) {
+    if (isActive) {
       highlight.attr('opacity', 1);
       bg.attr('fill-opacity', 0.85);
       d3.select(this).raise();

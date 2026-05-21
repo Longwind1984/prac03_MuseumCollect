@@ -40,3 +40,32 @@
 - artifact 详情页改成 sheet + tab(类似小红书/拼多多商品页)
 - 礼制场景 / 铸主档案适合 mobile 长卷形式
 - 考虑用 Taro 编译到小程序(case-study §5 已提)
+
+---
+
+## RUNTIME-AUDIT-002 — followup fixes for 3 bugs surfaced by d3 vendor unblock
+**Logged**: 2026-05-21 (immediately after first d3-runtime audit)
+**Severity**: P1 (one), P2 (two)
+**Context**: Vendoring d3 to `assets/vendor/d3.v7.min.js` unblocked the 2 skipped tests in d3-runtime. Running them surfaced 3 previously-hidden bugs:
+
+### BUG-002 (P1) — caster-profile: d3 force-graph `node not found: -1`
+- **Root cause**: `LINKS` referenced `target:'zhoukangwang'` but no such record in CASTERS (周武王 record also wrongly listed 周康王 as 父子 — 武王是康王祖父,不是父).
+- **Fix**: removed dangling LINK edge + corrected 周武王 relations.
+- **Verified**: `console-errors.spec.ts` passes (was failing on `pageerror: node not found: -1`).
+
+### BUG-003 (P2) — dashboard: click-lock doesn't add `.active` class
+- **Root cause**: CSS defined `.dynasty-band-g.active` rules but JS only set `attr('opacity')`, never added the class. Design-vs-implementation mismatch.
+- **Fix**: `updatePillarHighlight()` now sets `class="dynasty-band-g active"` via setAttribute (d3.classed unreliable on SVG `<g>` in some browsers).
+- **Verified**: `cross-dim-dashboard.spec.ts` click-lock test passes (was failing because class never updated).
+
+### BUG-004 (P2) — dashboard: 3 scrollable regions missing keyboard focus (a11y)
+- **Root cause**: `.pillar-section`, `.pattern-strip`, `.artifact-cards` all have `overflow:auto` but no `tabindex` → axe-core `scrollable-region-focusable` flag.
+- **Fix**: added `tabindex="0" role="region" aria-label="..."` to all three.
+- **Verified**: `axe-a11y.spec.ts` dashboard scan passes (was failing on 1 serious violation).
+
+### Surprise/clean discovery
+- **Sub-finding**: Playwright native click on SVG `<g>` doesn't trigger d3-attached pointer listeners (SVG hit-testing routes to inner `<rect>` instead). Test rewritten to use `d3.dispatch('click')` for SVG element clicks. Documented in test code.
+- **Sub-finding**: dashboard auto-focuses 商 dynasty 400ms after load (intentional wow demo effect). Original test clicked 商 → toggled OFF instead of locking. Test changed to click 西周 (no auto-focus) and verifies single-lock semantics (西周 ON, 商 OFF).
+
+### Test status (post-fix)
+- **16/16 passed, 0 failed, 0 skipped** (was 14 passed / 2 skipped pre-vendor).

@@ -77,26 +77,31 @@ test('dashboard cross-dim: hovering 商 band triggers map + pattern + panel upda
   expect(errors.filter(e => !e.includes('favicon') && !e.includes('Failed to load resource'))).toHaveLength(0);
 });
 
-test('dashboard cross-dim: clicking 商 band locks the era selection', async ({ page }) => {
+test('dashboard cross-dim: clicking 西周 band locks the era selection', async ({ page }) => {
   await page.goto(`${BASE}/dashboard.html`, { waitUntil: 'load' });
-  await page.waitForTimeout(3000);
+  await page.waitForTimeout(3000); // allow auto-focus-商 to settle first
   const d3Loaded = await page.evaluate(() => typeof (window as any).d3 !== 'undefined');
   if (!d3Loaded) test.skip(true, 'D3 CDN unreachable; dashboard cannot render');
   await page.waitForFunction(() => document.querySelectorAll('[data-dynasty]').length >= 8, { timeout: 10_000 });
-  // Use page.evaluate to manipulate SVG DOM directly (Playwright locators for SVG are flaky)
-  const result = await page.evaluate(() => {
-    const shang = document.querySelector('[data-dynasty="商"]') as HTMLElement;
-    if (!shang) return { found: false };
-    // dispatch a click via raw event
-    shang.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
-    return { found: true, classes: shang.className.baseVal || shang.className };
+  // d3.dispatch is the most reliable way to trigger d3-attached listeners on SVG <g>;
+  // Playwright native click + synthetic dispatchEvent both miss because SVG hit-testing
+  // routes the mouse event to the inner rect, which doesn't carry the d3 listener.
+  // Use 西周 not 商 — dashboard auto-focuses 商 on load (intentional wow effect),
+  // so clicking 商 would toggle OFF instead of lock.
+  await page.evaluate(() => {
+    const xizhou = document.querySelector('[data-dynasty="西周"]') as any;
+    (window as any).d3.select(xizhou).dispatch('click');
   });
   await page.waitForTimeout(500);
-  const isActive = await page.evaluate(() => {
-    const el = document.querySelector('[data-dynasty="商"]') as any;
-    const c = el?.className?.baseVal || el?.className || '';
-    return typeof c === 'string' ? c.includes('active') : false;
+  const result = await page.evaluate(() => {
+    const xizhou = document.querySelector('[data-dynasty="西周"]') as any;
+    const shang = document.querySelector('[data-dynasty="商"]') as any;
+    const cx = xizhou?.getAttribute('class') || '';
+    const cs = shang?.getAttribute('class') || '';
+    return { xizhouActive: cx.includes('active'), shangActive: cs.includes('active') };
   });
-  test.info().annotations.push({ type: 'click-result', description: JSON.stringify({ result, isActive }) });
-  expect(isActive).toBe(true);
+  test.info().annotations.push({ type: 'click-result', description: JSON.stringify(result) });
+  // Clicking 西周 should activate it AND deactivate 商 (single-lock semantics)
+  expect(result.xizhouActive).toBe(true);
+  expect(result.shangActive).toBe(false);
 });

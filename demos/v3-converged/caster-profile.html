@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>铸主档案 — MuseumCollect v3</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="../../assets/vendor/d3.v7.min.js"></script>
 <link rel="stylesheet" href="css/converged.css">
 <style>
 .caster-card {
@@ -119,7 +119,7 @@ const CASTERS = [
     bio_record: '文王之子，联合诸侯，牧野之战灭商，建立西周。利簋铭文确证牧野之战年份为前1046年。',
     bio_arch: '利簋以天文记事（岁星位置）精确到甲子日，是西周史学的重要依据',
     artifacts: [{name:'利簋(下属"利"铸)', rarity:'国宝', collected:true}],
-    relations: [{type:'父子', target:'zhouchengwang'},{type:'父子', target:'zhoukangwang'}],
+    relations: [{type:'父子', target:'zhouchengwang'}],
     size: 9, collected_count: 1, x: 200, y: 80, color: '#a73a2a'
   },
   {
@@ -175,7 +175,6 @@ const LINKS = [
   {source:'wuding', target:'zujia', label:'父子'},
   {source:'zugeng', target:'zujia', label:'兄弟'},
   {source:'zhouwuwang', target:'zhouchengwang', label:'父子'},
-  {source:'zhouchengwang', target:'zhoukangwang', label:'父子'},
   {source:'zhouxuanwang', target:'maogong', label:'君臣'},
 ];
 
