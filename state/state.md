@@ -127,3 +127,4 @@ Total active background agents: 9 (5 DE + 4 Phase B)
   - docs/component-specs-v3/rarity-halo.md (4 档 + 国宝特殊, v3 anti-Skinner 修正: 删 vanity, 加 [关闭])
   - docs/gamification-mechanics-v3.md (含 §4 事件总线协议 + Day1→Year1 300 件旅程)
   - 6 events defined: era-focus (★ primary) / form-select / pattern-focus / caster-focus / site-focus / position-need
+[2026-05-21 H4] [orchestrator] DE-4 (秦汉+三星堆) hit 32K output max in first attempt. Retrying with mitigations: incremental file writes, scope reduced 55→45 new, final return strictly <200 words.
