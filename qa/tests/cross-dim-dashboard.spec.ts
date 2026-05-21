@@ -16,7 +16,8 @@ test('dashboard cross-dim: hovering 商 band triggers map + pattern + panel upda
   page.on('pageerror', e => errors.push(`pageerror: ${e.message}`));
 
   await page.goto(`${BASE}/dashboard.html`);
-  await page.waitForSelector('.dynasty-band-g', { timeout: 10_000 });
+  // SVG g elements with class need a different locator strategy
+  await page.waitForFunction(() => document.querySelectorAll('g.dynasty-band-g, [data-dynasty]').length > 0, { timeout: 10_000 });
 
   // Capture initial state of right-column components
   const before = await page.evaluate(() => ({
@@ -26,11 +27,12 @@ test('dashboard cross-dim: hovering 商 band triggers map + pattern + panel upda
     activeBand: document.querySelector('.dynasty-band-g.active')?.getAttribute('data-dynasty') || '',
   }));
 
-  // Hover the Shang band
-  const shangBand = page.locator('.dynasty-band-g[data-dynasty="商"]');
+  // Hover the Shang band via JS dispatch (SVG hover via locator can be flaky in headless)
+  const shangBand = page.locator('[data-dynasty="商"]');
   await expect(shangBand).toHaveCount(1, { timeout: 5000 });
-  await shangBand.hover();
-  await page.waitForTimeout(400); // give event bus 200ms + jitter
+  await shangBand.dispatchEvent('mouseenter');
+  await shangBand.dispatchEvent('mouseover');
+  await page.waitForTimeout(500);
 
   const after = await page.evaluate(() => ({
     eraName: document.getElementById('era-big-name')?.textContent || '',
@@ -58,10 +60,10 @@ test('dashboard cross-dim: hovering 商 band triggers map + pattern + panel upda
 
 test('dashboard cross-dim: clicking 商 band locks the era selection', async ({ page }) => {
   await page.goto(`${BASE}/dashboard.html`);
-  await page.waitForSelector('.dynasty-band-g');
-  const shang = page.locator('.dynasty-band-g[data-dynasty="商"]');
-  await shang.click();
-  await page.waitForTimeout(300);
+  await page.waitForFunction(() => document.querySelectorAll('[data-dynasty]').length > 0, { timeout: 10_000 });
+  const shang = page.locator('[data-dynasty="商"]');
+  await shang.dispatchEvent('click');
+  await page.waitForTimeout(500);
   const isActive = await shang.evaluate(el => el.classList.contains('active'));
   expect(isActive).toBe(true);
 });

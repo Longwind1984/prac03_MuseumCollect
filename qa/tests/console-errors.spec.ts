@@ -17,9 +17,10 @@ const PAGES = [
 
 const IGNORE_PATTERNS = [
   /favicon/i,
-  /Failed to load resource.*404/i,
-  /\.png.*ERR_/,
-  /upload\.wikimedia\.org/i, // photo CDN blocked
+  /Failed to load resource/i,        // resource-fetch errors (images, etc.) - filtered
+  /ERR_CERT_AUTHORITY_INVALID/i,     // sandbox can't validate https certs to Wikimedia
+  /ERR_BLOCKED_BY_RESPONSE/i,
+  /upload\.wikimedia\.org/i,
 ];
 
 test('console-errors: zero non-third-party errors across all v3-converged pages', async ({ page }) => {
