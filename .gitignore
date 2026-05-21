@@ -1,0 +1,23 @@
+# Node
+node_modules/
+qa/node_modules/
+npm-debug.log
+yarn-error.log
+
+# Test artifacts
+qa/test-results/
+qa/playwright-report/
+qa/.lost-pixel/
+qa/lost-pixel-baseline/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Vercel
+.vercel/
+
+# Editor
+.vscode/
+.idea/
+*.swp
