@@ -1,0 +1,581 @@
+[
+  {
+    "id": "tiger_chun_yu",
+    "name_zh": "虎钮錞于王",
+    "name_pinyin": "Hu Niu Chun Yu Wang",
+    "name_alt": [
+      "巴王錞于",
+      "錞于王"
+    ],
+    "dynasty": "战国",
+    "period": "战国晚期",
+    "approx_year": "约公元前4-3世纪",
+    "excavation_year": "1989",
+    "excavation_site": "重庆市万州区甘宁乡红旗水库泄洪道",
+    "ancient_state": "巴国",
+    "current_museum": "重庆中国三峡博物馆",
+    "size": {
+      "height_cm": 68,
+      "weight_kg": 30
+    },
+    "type": "乐器",
+    "form_subtype": "錞于",
+    "patterns": [
+      "虎钮",
+      "人面纹",
+      "卷云纹",
+      "鱼纹",
+      "凤鸟纹",
+      "建鼓纹",
+      "手心纹"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文；盘面刻划六组巴蜀图语符号"
+    },
+    "purpose": "军乐礼器，战时击鼓出征",
+    "craft": "范铸法",
+    "rarity_level": "国宝",
+    "story_brief": "1989年夏洪水冲出，为迄今出土同类完整器中形体最大、保存最完好者，被誉为錞于王。顶部盘面正中铸一张口龇牙虎形钮，周围刻划人面、卷云、鱼、凤鸟、建鼓、手心纹六组图语，是研究巴文化廪君虎饮人血先祖记忆的核心材料。",
+    "image_urls": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/File:Chunyu_with_tiger_knob.jpg",
+        "source": "Wikimedia Commons",
+        "license": "CC BY-SA",
+        "caption": "虎钮錞于正面"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "size,excavation_year,excavation_site,purpose",
+        "source": "中国数字科技馆",
+        "url": "https://www.cdstm.cn/frontier/lswm/202201/t20220129_1063987.html"
+      },
+      {
+        "field": "general",
+        "source": "Wikipedia zh 巴国",
+        "url": "https://zh.wikipedia.org/zh-hans/%E5%B7%B4%E5%9B%BD"
+      }
+    ]
+  },
+  {
+    "id": "bashu_sword_tiger",
+    "name_zh": "巴蜀虎纹铜短剑",
+    "name_pinyin": "Ba Shu Hu Wen Tong Duan Jian",
+    "name_alt": [
+      "巴式柳叶剑",
+      "巴人铜剑"
+    ],
+    "dynasty": "战国",
+    "period": "战国中晚期",
+    "approx_year": "约公元前4-3世纪",
+    "excavation_year": "1972",
+    "excavation_site": "重庆涪陵小田溪墓群",
+    "ancient_state": "巴国",
+    "current_museum": "重庆中国三峡博物馆",
+    "size": {
+      "length_cm": 42
+    },
+    "type": "兵器",
+    "form_subtype": "短剑",
+    "patterns": [
+      "虎纹",
+      "手心纹",
+      "花蒂纹"
+    ],
+    "inscription": {
+      "has": true,
+      "text": "王（图语）",
+      "char_count": 1,
+      "summary": "部分器物铭王字图语，表明王室所属"
+    },
+    "purpose": "实战兵器兼礼器",
+    "craft": "范铸法",
+    "rarity_level": "一级",
+    "story_brief": "小田溪墓群为巴国王室墓葬，出土铜器涵盖礼器与兵器。巴式短剑以柳叶形剑身、巴蜀图语为标志，与中原铜剑风格迥异。虎纹是巴人图腾崇拜的核心符号。",
+    "image_urls": [],
+    "data_sources": [
+      {
+        "field": "excavation_site,purpose,craft",
+        "source": "Wikipedia zh 小田溪墓群",
+        "url": "https://zh.wikipedia.org/zh-hans/%E5%B0%8F%E7%94%B0%E6%BA%AA%E5%A2%93%E7%BE%A4"
+      }
+    ]
+  },
+  {
+    "id": "xiaotianxi_bianzhong",
+    "name_zh": "小田溪错金铜编钟",
+    "name_pinyin": "Xiao Tian Xi Cuo Jin Tong Bian Zhong",
+    "name_alt": [
+      "战国巴国错金编钟"
+    ],
+    "dynasty": "战国",
+    "period": "战国晚期",
+    "approx_year": "约公元前3世纪",
+    "excavation_year": "1972",
+    "excavation_site": "重庆涪陵小田溪1-3号墓",
+    "ancient_state": "巴国",
+    "current_museum": "重庆中国三峡博物馆",
+    "size": {
+      "set_count": 14
+    },
+    "type": "乐器",
+    "form_subtype": "编钟",
+    "patterns": [
+      "错金几何纹",
+      "云雷纹"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "礼乐重器，王室宴飨祭祀",
+    "craft": "范铸法+错金工艺",
+    "rarity_level": "国宝",
+    "story_brief": "14件套错金铜编钟，出土于小田溪巴王墓群1-3号墓。错金工艺证明战国晚期巴国已有与中原相近的礼乐制度。2022年原流散海外的部分编钟回归，成为文物回归典型案例。",
+    "image_urls": [],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "上游新闻·小田溪铜编钟回家",
+        "url": "https://www.cqcb.com/topics/guqinxinshengxianshangyaji/xiangguanxinwen/2022-10-17/5058166.html"
+      }
+    ]
+  },
+  {
+    "id": "bashu_luojia_lei",
+    "name_zh": "罗家坝铜罍",
+    "name_pinyin": "Luo Jia Ba Tong Lei",
+    "name_alt": [
+      "宣汉罗家坝铜罍"
+    ],
+    "dynasty": "春秋至战国",
+    "period": "春秋晚期至战国早期",
+    "approx_year": "约公元前6-5世纪",
+    "excavation_year": "1999",
+    "excavation_site": "四川省达州市宣汉县罗家坝遗址",
+    "ancient_state": "巴国",
+    "current_museum": "四川省文物考古研究院 / 达州博物馆",
+    "size": {
+      "height_cm": "TODO"
+    },
+    "type": "酒器",
+    "form_subtype": "罍",
+    "patterns": [
+      "饕餮纹",
+      "蟠螭纹",
+      "云雷纹"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "盛酒礼器",
+    "craft": "范铸法",
+    "rarity_level": "一级",
+    "story_brief": "罗家坝遗址是川东北地区最重要的巴文化遗址，出土大量巴蜀青铜器。铜罍造型与中原相近，但纹饰与铸造风格具有明显地方特色，是研究巴蜀与中原文化交流的重要实物。",
+    "image_urls": [],
+    "data_sources": [
+      {
+        "field": "excavation_site,dynasty",
+        "source": "四川省文物考古研究院",
+        "url": "TODO"
+      }
+    ]
+  },
+  {
+    "id": "shu_wang_ge",
+    "name_zh": "蜀王戈",
+    "name_pinyin": "Shu Wang Ge",
+    "name_alt": [
+      "巴蜀铭文铜戈"
+    ],
+    "dynasty": "战国",
+    "period": "战国中晚期",
+    "approx_year": "约公元前4-3世纪",
+    "excavation_year": "20世纪初出土",
+    "excavation_site": "四川成都地区",
+    "ancient_state": "蜀国",
+    "current_museum": "四川博物院",
+    "size": {
+      "length_cm": 27
+    },
+    "type": "兵器",
+    "form_subtype": "戈",
+    "patterns": [
+      "巴蜀图语符号",
+      "虎纹"
+    ],
+    "inscription": {
+      "has": true,
+      "text": "蜀王（巴蜀图语）",
+      "char_count": 2,
+      "summary": "援部铸巴蜀图语，表明王室归属，迄今未完全破解"
+    },
+    "purpose": "仪仗兵器",
+    "craft": "范铸法",
+    "rarity_level": "一级",
+    "story_brief": "蜀王戈是先秦蜀国王权的象征性器物，戈援部刻铸巴蜀图语，这些符号迄今仍未完全破解，是中国古文字学的重大悬案之一。戈的造型兼具实战与礼仪功能，与中原戈形制相近但装饰风格独特。",
+    "image_urls": [],
+    "data_sources": [
+      {
+        "field": "general",
+        "source": "四川博物院官网",
+        "url": "TODO"
+      }
+    ]
+  },
+  {
+    "id": "bashu_copper_seal",
+    "name_zh": "巴王铜玺",
+    "name_pinyin": "Ba Wang Tong Xi",
+    "name_alt": [
+      "涪陵小田溪铜印章"
+    ],
+    "dynasty": "战国",
+    "period": "战国晚期",
+    "approx_year": "约公元前3世纪",
+    "excavation_year": "1972",
+    "excavation_site": "重庆涪陵小田溪墓群",
+    "ancient_state": "巴国",
+    "current_museum": "重庆中国三峡博物馆",
+    "size": {
+      "side_cm": 3.5
+    },
+    "type": "符信器",
+    "form_subtype": "铜印",
+    "patterns": [
+      "巴蜀图语"
+    ],
+    "inscription": {
+      "has": true,
+      "text": "巴蜀图语符号",
+      "char_count": 4,
+      "summary": "印面刻巴蜀图语，学界尚未完全释读"
+    },
+    "purpose": "王权象征与符信",
+    "craft": "范铸法",
+    "rarity_level": "一级",
+    "story_brief": "小田溪巴王墓出土的铜印章是研究巴国王权制度的重要实物，印文为巴蜀图语，与中原篆书体系截然不同，证明巴国已建立成熟的符信制度。",
+    "image_urls": [],
+    "data_sources": [
+      {
+        "field": "excavation_site",
+        "source": "Wikipedia zh 小田溪墓群",
+        "url": "https://zh.wikipedia.org/zh-hans/%E5%B0%8F%E7%94%B0%E6%BA%AA%E5%A2%93%E7%BE%A4"
+      }
+    ]
+  },
+  {
+    "id": "shizhai_zhubei",
+    "name_zh": "杀人祭柱场面贮贝器",
+    "name_pinyin": "Sha Ren Ji Zhu Chang Mian Zhu Bei Qi",
+    "name_alt": [
+      "诅盟场面铜贮贝器",
+      "祭柱贮贝器"
+    ],
+    "dynasty": "西汉",
+    "period": "西汉中期",
+    "approx_year": "约公元前2-1世纪",
+    "excavation_year": "1955",
+    "excavation_site": "云南省晋宁区上蒜镇石寨山6号墓",
+    "ancient_state": "古滇国",
+    "current_museum": "中国国家博物馆",
+    "size": {
+      "height_cm": 53,
+      "diameter_cm": 32
+    },
+    "type": "贮藏器",
+    "form_subtype": "贮贝器",
+    "patterns": [
+      "写实人物场景",
+      "祭祀纹",
+      "动物纹"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文，以立体人物场景代替铭文叙事"
+    },
+    "purpose": "存储贝币兼记录祭祀场景",
+    "craft": "分铸组装法，立体人物范铸",
+    "rarity_level": "国宝",
+    "story_brief": "贮贝器是古滇国独有器型，以青铜代史书。盖面铸造诅盟祭柱场面：中央立祭柱，人被绑缚柱上献祭，群像围绕，场景繁复逼真，是研究古滇国宗教制度与社会等级的首要实物。1955年石寨山第一次发掘出土，现藏国博。",
+    "image_urls": [
+      {
+        "url": "https://zh.wikipedia.org/wiki/%E6%9D%80%E4%BA%BA%E7%A5%AD%E6%9F%B1%E5%9C%BA%E9%9D%A2%E8%B4%AE%E8%B4%9D%E5%99%A8",
+        "source": "Wikipedia zh",
+        "license": "CC BY-SA",
+        "caption": "杀人祭柱场面贮贝器词条"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "all",
+        "source": "Wikipedia zh 杀人祭柱场面贮贝器",
+        "url": "https://zh.wikipedia.org/zh-hans/%E6%9D%80%E4%BA%BA%E7%A5%AD%E6%9F%B1%E5%9C%BA%E9%9D%A2%E8%B4%AE%E8%B4%9D%E5%99%A8"
+      }
+    ]
+  },
+  {
+    "id": "niuhu_tongan",
+    "name_zh": "牛虎铜案",
+    "name_pinyin": "Niu Hu Tong An",
+    "name_alt": [
+      "战国牛虎铜俎"
+    ],
+    "dynasty": "战国",
+    "period": "战国晚期",
+    "approx_year": "约公元前4-3世纪",
+    "excavation_year": "1972",
+    "excavation_site": "云南省玉溪市江川区李家山24号墓",
+    "ancient_state": "古滇国",
+    "current_museum": "云南省博物馆",
+    "size": {
+      "height_cm": 43,
+      "length_cm": 76,
+      "width_cm": 36,
+      "weight_kg": 12.5
+    },
+    "type": "食器",
+    "form_subtype": "案（俎）",
+    "patterns": [
+      "写实动物造型",
+      "肌理纹"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "祭祀陈放食物之案台",
+    "craft": "分铸法（大牛、小牛、虎分别铸造后组合）",
+    "rarity_level": "国宝",
+    "story_brief": "云南省博物馆镇馆之宝。器型为一头大牛站立，背脊下凹成案面；牛尾端饰一缩小比例的猛虎攀咬牛尾；牛腹下悬一小牛。生命孕育与死亡同处一器，被誉为中国青铜文化最后的辉煌。1972年李家山24号墓出土，该墓为同批最大规格墓葬。",
+    "image_urls": [
+      {
+        "url": "https://zh.wikipedia.org/wiki/%E7%89%9B%E8%99%8E%E9%93%9C%E6%A1%88",
+        "source": "Wikipedia zh 牛虎铜案",
+        "license": "CC BY-SA",
+        "caption": "牛虎铜案词条页"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "size,excavation_year,excavation_site,purpose",
+        "source": "Wikipedia zh 牛虎铜案",
+        "url": "https://zh.wikipedia.org/zh-hans/%E7%89%9B%E8%99%8E%E9%93%9C%E6%A1%88"
+      },
+      {
+        "field": "story",
+        "source": "中新网·战国牛虎铜案为何是中国青铜文化最后的辉煌",
+        "url": "https://www.chinanews.com.cn/gn/2023/05-03/10001097.shtml"
+      }
+    ]
+  },
+  {
+    "id": "dian_wang_gold_seal",
+    "name_zh": "滇王之印",
+    "name_pinyin": "Dian Wang Zhi Yin",
+    "name_alt": [
+      "滇王金印",
+      "汉赐滇王金印"
+    ],
+    "dynasty": "西汉",
+    "period": "西汉中期",
+    "approx_year": "约公元前109年（汉武帝元封二年）",
+    "excavation_year": "1956",
+    "excavation_site": "云南省晋宁区上蒜镇石寨山古墓群",
+    "ancient_state": "古滇国",
+    "current_museum": "云南省博物馆",
+    "size": {
+      "side_cm": 2.4,
+      "height_cm": 2.0,
+      "weight_g": 90
+    },
+    "type": "符信器",
+    "form_subtype": "金印",
+    "patterns": [
+      "蛇纽",
+      "鳞纹"
+    ],
+    "inscription": {
+      "has": true,
+      "text": "滇王之印",
+      "char_count": 4,
+      "summary": "篆书白文四字，凿制而成（非铸），反映封赐之仓促"
+    },
+    "purpose": "汉廷赐封滇王之符信",
+    "craft": "黄金铸造+凿字",
+    "rarity_level": "国宝",
+    "story_brief": "史记西南夷列传记载汉武帝元封二年赐滇王王印，此印正与史料吻合，是云南最早归属中央的物证。蛇纽金印重90克，印文为凿制而非铸制，反映封赐之仓促。2013年列入第三批禁止出境展览文物目录。",
+    "image_urls": [
+      {
+        "url": "https://zh.wikipedia.org/wiki/%E6%BB%87%E7%8E%8B%E4%B9%8B%E5%8D%B0",
+        "source": "Wikipedia zh 滇王之印",
+        "license": "CC BY-SA",
+        "caption": "滇王之印词条"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "size,inscription,excavation_year,excavation_site",
+        "source": "Wikipedia zh 滇王之印",
+        "url": "https://zh.wikipedia.org/zh-hans/%E6%BB%87%E7%8E%8B%E4%B9%8B%E5%8D%B0"
+      },
+      {
+        "field": "purpose,story",
+        "source": "中国国家博物馆·滇王之印",
+        "url": "https://www.chnmuseum.cn/zp/zpml/kgfjp/202110/t20211028_251978.shtml"
+      }
+    ]
+  },
+  {
+    "id": "dabona_copper_coffin",
+    "name_zh": "云雷鸟兽纹铜棺",
+    "name_pinyin": "Yun Lei Niao Shou Wen Tong Guan",
+    "name_alt": [
+      "大波那铜棺",
+      "祥云大波那铜棺"
+    ],
+    "dynasty": "战国",
+    "period": "战国初期",
+    "approx_year": "约公元前5世纪",
+    "excavation_year": "1964",
+    "excavation_site": "云南省大理州祥云县大波那村",
+    "ancient_state": "滇西青铜文化",
+    "current_museum": "云南省博物馆",
+    "size": {
+      "length_cm": 200,
+      "width_cm": 62,
+      "height_cm": 64,
+      "weight_kg": 257
+    },
+    "type": "葬具",
+    "form_subtype": "铜棺",
+    "patterns": [
+      "云雷纹",
+      "蛇纹",
+      "鸟兽纹",
+      "双虎噬猪纹（棺盖）"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "王侯贵族葬具",
+    "craft": "7块青铜板斗合拼装，仿干栏式房屋屋顶造型",
+    "rarity_level": "国宝",
+    "story_brief": "迄今中国乃至世界范围内所见最大的青铜棺材，重达257千克，外形仿人字形干栏式房屋。棺壁铸云雷蛇纹，棺盖铸二虎噬猪及鹰燕豹等升腾动物。1964年祥云大波那村村民取石时发现。",
+    "image_urls": [
+      {
+        "url": "https://zh.wikipedia.org/wiki/%E4%BA%91%E9%9B%B7%E9%B8%9F%E5%85%BD%E7%BA%B9%E9%93%9C%E6%A3%BA",
+        "source": "Wikipedia zh 云雷鸟兽纹铜棺",
+        "license": "CC BY-SA",
+        "caption": "铜棺词条"
+      }
+    ],
+    "data_sources": [
+      {
+        "field": "size,excavation_year,craft",
+        "source": "Wikipedia zh 云雷鸟兽纹铜棺",
+        "url": "https://zh.wikipedia.org/zh-hans/%E4%BA%91%E9%9B%B7%E9%B8%9F%E5%85%BD%E7%BA%B9%E9%93%9C%E6%A3%BA"
+      }
+    ]
+  },
+  {
+    "id": "shizhai_rider_gilt",
+    "name_zh": "四牛鎏金骑士铜贮贝器",
+    "name_pinyin": "Si Niu Liu Jin Qi Shi Tong Zhu Bei Qi",
+    "name_alt": [
+      "鎏金骑士贮贝器"
+    ],
+    "dynasty": "西汉",
+    "period": "西汉中期",
+    "approx_year": "约公元前2-1世纪",
+    "excavation_year": "1955",
+    "excavation_site": "云南省晋宁区石寨山古墓群",
+    "ancient_state": "古滇国",
+    "current_museum": "云南省博物馆",
+    "size": {
+      "height_cm": "TODO"
+    },
+    "type": "贮藏器",
+    "form_subtype": "贮贝器",
+    "patterns": [
+      "四牛立柱",
+      "鎏金骑士",
+      "云纹底座"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "存储贝币兼祭祀展示",
+    "craft": "分铸组装+鎏金",
+    "rarity_level": "一级",
+    "story_brief": "贮贝器盖面中央立小铜鼓，鼓上延伸立柱，柱顶平台上立一鎏金椎髻跣足骑士佩剑骑马，平台四周环绕四头峰牛逆时针行走。骑士通体鎏金，象征滇国最高贵族身份，是滇文化贮贝器中工艺最精湛者之一。",
+    "image_urls": [],
+    "data_sources": [
+      {
+        "field": "general",
+        "source": "澎湃新闻·石寨山百年考古发现",
+        "url": "https://m.thepaper.cn/newsDetail_forward_16182818"
+      }
+    ]
+  },
+  {
+    "id": "dian_bronze_zu",
+    "name_zh": "立牛铜俎",
+    "name_pinyin": "Li Niu Tong Zu",
+    "name_alt": [
+      "滇文化铜俎"
+    ],
+    "dynasty": "战国至西汉",
+    "period": "战国晚期至西汉早期",
+    "approx_year": "约公元前3-2世纪",
+    "excavation_year": "1972",
+    "excavation_site": "云南省玉溪市江川区李家山墓地",
+    "ancient_state": "古滇国",
+    "current_museum": "云南江川李家山青铜器博物馆",
+    "size": {
+      "height_cm": "TODO"
+    },
+    "type": "食器",
+    "form_subtype": "俎（案）",
+    "patterns": [
+      "立牛装饰",
+      "几何纹"
+    ],
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文"
+    },
+    "purpose": "祭祀切肉陈食之台",
+    "craft": "范铸法",
+    "rarity_level": "一级",
+    "story_brief": "滇文化铜俎以牛为主题，与牛虎铜案同属滇国祭祀礼器体系。立牛铜俎将牛形立雕作为腿足支撑，将实用器与动物崇拜融为一体，体现古滇国以牛为财富核心的社会经济形态。",
+    "image_urls": [],
+    "data_sources": [
+      {
+        "field": "excavation_site",
+        "source": "云南网·李家山青铜器文化",
+        "url": "http://yn.chinadaily.com.cn/a/202208/13/WS62f7a64ba3101c3ee7ae39d8.html"
+      }
+    ]
+  }
+]

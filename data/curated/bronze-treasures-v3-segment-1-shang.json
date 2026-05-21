@@ -1,0 +1,329 @@
+[
+  {
+    "id": "houmuwu_ding",
+    "name_zh": "后母戊鼎",
+    "name_pinyin": "Hou Mu Wu Ding",
+    "name_alt": ["司母戊鼎", "司母戊大方鼎"],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前1300-1046年",
+    "excavation": {
+      "year": 1939,
+      "site": "河南省安阳市武官村殷墟遗址",
+      "ancient_state": "商",
+      "method": "村民吴希增等田间挖出,因日军逼近曾就地回埋",
+      "dating_method": "类型学+铭文+甲骨文比对",
+      "significance": "现存最大、最重商代青铜器,世界古代铸铜之最"
+    },
+    "current_museum": "中国国家博物馆",
+    "size": { "height_cm": 133, "width_cm": 79.2, "length_cm": 110, "weight_kg": 832.84 },
+    "type": "食器",
+    "form_subtype": "方鼎",
+    "form_detail": "直立双耳,腹部长方形,下接四柱足,整体呈方斗状",
+    "distinctive_features": ["现存最重商代青铜器", "三层花纹典范", "28块陶范合铸"],
+    "patterns_structured": {
+      "main": ["饕餮纹 — 腹身四面主纹"],
+      "secondary": ["夔龙纹 — 腹下边带"],
+      "ground": ["云雷纹 — 全身底纹"],
+      "rim": ["虎噬人头纹 — 耳外侧", "蝉纹 — 柱足上段"]
+    },
+    "inscription": {
+      "has": true,
+      "text": "后母戊",
+      "char_count": 3,
+      "summary": "鼎腹内壁铸铭'后母戊'三字。学界一度释为'司母戊',1977年李学勤等考证'后'读作hòu(王后/君),现主流倾向'后母戊'。'戊'为商王武丁之妻妇妌庙号",
+      "stage": "商晚期金文"
+    },
+    "purpose": {
+      "primary": "祭祀礼器",
+      "context": "商王祖庚或祖甲为祭祀其母妇妌(庙号母戊)而铸",
+      "user_class": "商王室"
+    },
+    "craft": {
+      "primary": "范铸法",
+      "details": "28块陶范分铸再合浇",
+      "achievements": "当时世界最大单体青铜铸件,展示商晚期范铸法巅峰"
+    },
+    "rarity_level": "国宝",
+    "scholarly_status": "商代礼器顶级代表,改写商代青铜冶铸史认知,2002年首批禁止出境文物",
+    "provenance_timeline": [
+      {"year": 1939, "event": "河南安阳武官村田间出土,因日军逼近就地回埋"},
+      {"year": 1946, "event": "抗战胜利后运抵南京国立中央博物院"},
+      {"year": 1959, "event": "调入中国历史博物馆(今国博)永久收藏"}
+    ],
+    "related_artifacts": [
+      {"id": "zilong_ding", "relation": "同时期重器,商代圆鼎之王与方鼎之王并称"},
+      {"id": "siyang_fangzun", "relation": "商晚期礼器代表"}
+    ],
+    "story_brief": "后母戊鼎是商王祖庚或祖甲为祭祀其母'戊'(武丁王后妇妌)所铸,是迄今出土最大、最重的商代青铜礼器,也是世界古代青铜器之最。1939年由河南安阳武官村农民吴希增等在田间发现,因日军逼近被就地回埋保护。抗战胜利后辗转运抵南京,新中国成立后由南京调归中国历史博物馆(今国博)。由28块陶范分铸再合铸而成,展示商晚期范铸法巅峰水准。其铭文'后母戊'曾长期误读为'司母戊',1977年李学勤等学者重新考证后确认正确读法。",
+    "image_urls": [
+      {"url": "https://commons.wikimedia.org/wiki/Category:Hou_Mu_Wu_Ding", "source": "Wikimedia Commons", "license": "CC BY-SA (各文件许可不一,使用前须确认单文件)", "attribution": "见各文件页", "caption": "后母戊鼎相册类目,内含多个CC许可文件"}
+    ],
+    "3d_or_video": null,
+    "data_sources": [
+      {"field": "size,excavation,inscription", "source": "Wikipedia EN (Houmuwu ding)", "url": "https://en.wikipedia.org/wiki/Houmuwu_ding"},
+      {"field": "provenance_timeline,story", "source": "live2makan National Treasure article", "url": "https://live2makan.com/2024/08/05/treasures-houmuwu-ding-shang-dynasty/"}
+    ]
+  },
+  {
+    "id": "siyang_fangzun",
+    "name_zh": "四羊方尊",
+    "name_pinyin": "Si Yang Fang Zun",
+    "name_alt": ["四羊青铜方尊", "Four-goat Square Zun"],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前13-11世纪",
+    "excavation": {
+      "year": 1938,
+      "site": "湖南省宁乡县黄材镇月山铺转耳仑山腰",
+      "ancient_state": "商(湘江流域方国)",
+      "method": "姜景舒兄弟种红薯时挖出",
+      "dating_method": "类型学",
+      "significance": "现存商代青铜方尊中最大者,湘江青铜文明代表作"
+    },
+    "current_museum": "中国国家博物馆",
+    "size": { "height_cm": 58.3, "width_cm": 52.4, "length_cm": 52.4, "weight_kg": 34.5 },
+    "type": "酒器",
+    "form_subtype": "方尊",
+    "form_detail": "高颈高圈足,四肩铸大卷角羊头浮雕,腹部与羊身融为一体",
+    "distinctive_features": ["现存最大商代方尊", "四角羊首立体浮雕分铸", "湘江地区独特风格"],
+    "patterns_structured": {
+      "main": ["饕餮纹 — 颈部四面"],
+      "secondary": ["夔龙纹 — 腹部边带", "凤鸟纹 — 颈部"],
+      "ground": ["云雷纹 — 全身底纹"],
+      "rim": ["蕉叶纹 — 颈口", "三角夔纹 — 颈部"]
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "无铭文",
+      "stage": null
+    },
+    "purpose": {
+      "primary": "盛酒礼器",
+      "context": "祭祀宴飨用盛酒器",
+      "user_class": "商代方国贵族"
+    },
+    "craft": {
+      "primary": "范铸法",
+      "details": "分铸法:先铸羊角与羊头,再合范浇铸器身",
+      "achievements": "分铸与整体铸造完美结合,体现商代铸铜技术高峰"
+    },
+    "rarity_level": "国宝",
+    "scholarly_status": "商代方尊最高代表,湘江流域青铜文明的核心证据",
+    "provenance_timeline": [
+      {"year": 1938, "event": "湖南宁乡黄材镇姜景舒兄弟挖出"},
+      {"year": 1938, "event": "抗战中在长沙被日机炸成20余片碎片"},
+      {"year": 1952, "event": "文物专家张欣如历经两月修复"},
+      {"year": 1956, "event": "湖南省博物馆收藏"},
+      {"year": 1959, "event": "调入中国国家博物馆"}
+    ],
+    "related_artifacts": [
+      {"id": "siyangshou_bu", "relation": "同属湘江流域商代青铜文明"},
+      {"id": "houmuwu_ding", "relation": "同为商晚期国宝级青铜器"}
+    ],
+    "story_brief": "四羊方尊是现存商代青铜方尊中最大的一件。1938年4月由宁乡黄材镇姜景舒兄弟在种红薯时挖出,后辗转至湖南省政府。抗战期间在长沙被日机炸成20余块碎片,深藏库房多年。1952年文物专家张欣如经过两个月修复使其重生,1956年湖南省博收藏,1959年调入中国国家博物馆。四肩四只大卷角羊立体浮雕由分铸法先成后合铸器身,是商代'湘江青铜文明'代表作。",
+    "image_urls": [
+      {"url": "https://commons.wikimedia.org/wiki/Category:Four-goat_Square_Zun", "source": "Wikimedia Commons", "license": "CC BY-SA (各文件许可不一)", "attribution": "见各文件页", "caption": "四羊方尊相册,16个文件"}
+    ],
+    "3d_or_video": null,
+    "data_sources": [
+      {"field": "size,excavation,patterns", "source": "Wikipedia EN (Four-goat Square Zun)", "url": "https://en.wikipedia.org/wiki/Four-goat_Square_Zun"},
+      {"field": "story,provenance", "source": "Shanghai Daily archive", "url": "https://archive.shine.cn/sunday/now-and-then/Ancient-zuns-turbulent-history/shdaily.shtml"}
+    ]
+  },
+  {
+    "id": "fuhao_xiaozun",
+    "name_zh": "妇好鸮尊",
+    "name_pinyin": "Fu Hao Xiao Zun",
+    "name_alt": ["妇好鸮形尊", "Fu Hao Owl Zun"],
+    "dynasty": "商",
+    "period": "商代晚期(武丁时期)",
+    "approx_year": "约公元前1250年",
+    "excavation": {
+      "year": 1976,
+      "site": "河南省安阳市殷墟妇好墓(M5)",
+      "ancient_state": "商",
+      "method": "郑振香主持的中国社科院安阳工作队系统发掘",
+      "dating_method": "甲骨文+器形类型学+铭文",
+      "significance": "迄今出土最早的鸟形青铜礼器,妇好身份证物"
+    },
+    "current_museum": "河南博物院 / 中国国家博物馆 (两件一对)",
+    "size": { "height_cm": 46.3, "mouth_length_cm": 16.4, "weight_kg": 16 },
+    "type": "酒器",
+    "form_subtype": "鸟兽形尊(鸮形)",
+    "form_detail": "整体作站立鸮(猫头鹰)状,小耳圆目宽喙,宽尾下垂与双足三点稳立,背有半圆形开口,盖钮立鸟立龙",
+    "distinctive_features": ["迄今最早鸟形青铜礼器", "一对两件分藏两馆", "通身三层满饰纹样"],
+    "patterns_structured": {
+      "main": ["饕餮纹 — 腹身主纹"],
+      "secondary": ["蝉纹 — 翅羽", "夔龙纹 — 胸腹", "蟠蛇纹 — 背部"],
+      "ground": ["云雷纹 — 全身底纹"],
+      "rim": ["盖钮立鸟立龙"]
+    },
+    "inscription": {
+      "has": true,
+      "text": "妇好",
+      "char_count": 2,
+      "summary": "口沿内壁铸铭'妇好'二字,标明器主为商王武丁之妻女将军妇好",
+      "stage": "商晚期早段金文"
+    },
+    "purpose": {
+      "primary": "祭祀盛酒礼器",
+      "context": "妇好生前或死后祭祀宴飨所用",
+      "user_class": "商王后/女将"
+    },
+    "craft": {
+      "primary": "范铸法",
+      "details": "分铸器身、提梁、盖再组合",
+      "achievements": "鸟兽形器与纹饰的高度统一,代表商晚期仿生铸铜艺术巅峰"
+    },
+    "rarity_level": "国宝",
+    "scholarly_status": "迄今已知最早鸟形青铜礼器,妇好墓出土诸器中艺术价值最高者之一",
+    "provenance_timeline": [
+      {"year": 1976, "event": "妇好墓(M5)系统发掘出土,分存两馆"},
+      {"year": 1976, "event": "一件藏中国国家博物馆,一件藏河南博物院"}
+    ],
+    "related_artifacts": [
+      {"id": "simuxin_ding", "relation": "同出妇好墓,祭祀礼器组合"},
+      {"id": "fuhao_yue", "relation": "同出妇好墓,权力象征"}
+    ],
+    "story_brief": "妇好鸮尊为一对,1976年出土于安阳殷墟妇好墓(中国唯一未被盗扰的商王室成员墓葬),分藏中国国家博物馆与河南博物院。器形整体作站立鸮(猫头鹰)状,小耳圆目,宽喙宽尾下垂,与双足三点稳立。盖钮立鸟立龙,通身满饰蝉纹、饕餮纹、蟠蛇纹、夔龙纹与云雷纹,工艺繁复。'妇好'是商王武丁之妻、能征善战的女将军,中国最早有记载的女性军事统帅,该器是其身份与权力的象征。",
+    "image_urls": [
+      {"url": "https://commons.wikimedia.org/wiki/Category:Bronze_owl-shaped_Zun_with_inscriptions_of_Fu_Hao", "source": "Wikimedia Commons", "license": "CC BY-SA (各文件许可不一)", "attribution": "见各文件页", "caption": "妇好鸮尊相册"}
+    ],
+    "3d_or_video": null,
+    "data_sources": [
+      {"field": "size,excavation,inscription,patterns", "source": "Wikipedia EN (Fu Hao owl zun)", "url": "https://en.wikipedia.org/wiki/Fu_Hao_owl_zun"},
+      {"field": "significance,story", "source": "Smarthistory (Tomb of Fu Hao)", "url": "https://smarthistory.org/tomb-of-fu-hao/"}
+    ]
+  },
+  {
+    "id": "zilong_ding",
+    "name_zh": "子龙鼎",
+    "name_pinyin": "Zi Long Ding",
+    "name_alt": ["Zi Long Bronze Ding"],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前12-11世纪",
+    "excavation": {
+      "year": null,
+      "site": "河南省辉县(传)",
+      "ancient_state": "商",
+      "method": "约1920年代出土后流入古玩市场,具体情况不详",
+      "dating_method": "类型学+铭文",
+      "significance": "现存商代圆鼎中最大者,铭文'龙'字是鼎类器物铭文最早'龙'字",
+      "_todo": "出土年代与情况待核实,目前仅有'约1920年代'传说"
+    },
+    "current_museum": "中国国家博物馆",
+    "size": { "height_cm": 103, "diameter_cm": 80, "belly_depth_cm": 43, "weight_kg": 230 },
+    "type": "食器",
+    "form_subtype": "圆鼎(三足深腹)",
+    "form_detail": "侈口折沿,深腹圆底,腹饰六组兽面纹,三柱足",
+    "distinctive_features": ["现存最大商代圆鼎", "铭文'龙'字为鼎类最早"],
+    "patterns_structured": {
+      "main": ["饕餮纹(兽面纹) — 腹身六组"],
+      "secondary": ["弦纹 — 口沿下"],
+      "ground": ["云雷纹 — 全身底纹"],
+      "rim": []
+    },
+    "inscription": {
+      "has": true,
+      "text": "子龙",
+      "char_count": 2,
+      "summary": "口沿内壁铸铭'子龙'二字,'龙'字是迄今所见鼎类青铜器铭文中最早的'龙'字。'子'为商代王室子弟称谓",
+      "stage": "商晚期金文"
+    },
+    "purpose": {
+      "primary": "祭祀礼器",
+      "context": "商代王室子弟祭祀用重器",
+      "user_class": "商王室"
+    },
+    "craft": {
+      "primary": "范铸法",
+      "details": "整体范铸,腹部六组兽面纹精工",
+      "achievements": "现存最大商代圆鼎,工艺与后母戊鼎并称圆鼎/方鼎双璧"
+    },
+    "rarity_level": "国宝",
+    "scholarly_status": "商代圆鼎之最,铭文'龙'字在文字史上具有重要价值",
+    "provenance_timeline": [
+      {"year": null, "event": "约1920年代河南辉县出土后流入古玩市场", "_todo": "年份待核"},
+      {"year": null, "event": "流至日本,由千石唯司收藏"},
+      {"year": null, "event": "转入香港古玩市场"},
+      {"year": 2006, "event": "国家文物局以海外文物征集形式抢救回归,入藏中国国家博物馆"}
+    ],
+    "related_artifacts": [
+      {"id": "houmuwu_ding", "relation": "商代圆鼎之王与方鼎之王并称双璧"}
+    ],
+    "story_brief": "子龙鼎是现存商代圆鼎中最大者,通高103cm、口径80cm、重230公斤,与方形的后母戊鼎并称'商代圆鼎之王/方鼎之王'。约1920年代出土于河南辉县后流落海外,先至日本(经千石唯司收藏),后转入香港。2006年国家文物局以海外文物征集形式抢救回归,藏中国国家博物馆。鼎铭'子龙'二字之'龙'是迄今所见鼎类青铜器铭文中最早的龙字,弥足珍贵。",
+    "image_urls": [
+      {"url": "https://commons.wikimedia.org/wiki/Category:Zilong_ding", "source": "Wikimedia Commons", "license": "CC BY-SA (各文件许可不一)", "attribution": "见各文件页", "caption": "子龙鼎相册"}
+    ],
+    "3d_or_video": null,
+    "data_sources": [
+      {"field": "size,inscription,provenance", "source": "live2makan National Treasure article", "url": "https://live2makan.com/2025/02/05/treasures-zi-long-bronze-ding-shang-dynasty/"},
+      {"field": "size", "source": "Baidu Baike EN (Shang Zilong Ding) — cross-check only", "url": "https://baike.baidu.com/en/item/Shang%20Zilong%20Ding/1526248"}
+    ]
+  },
+  {
+    "id": "siyangshou_bu",
+    "name_zh": "四羊首铜瓿",
+    "name_pinyin": "Si Yang Shou Tong Bu",
+    "name_alt": [],
+    "dynasty": "商",
+    "period": "商代晚期",
+    "approx_year": "约公元前12-11世纪",
+    "excavation": {
+      "year": null,
+      "site": "湖南省宁乡(传)",
+      "ancient_state": "商(湘江流域方国)",
+      "method": null,
+      "dating_method": "类型学",
+      "significance": "湘江流域商代青铜文明重要酒器",
+      "_todo": "出土年代与具体地点仍待湖南博物院出版物核实"
+    },
+    "current_museum": "湖南博物院",
+    "size": { "height_cm": null, "weight_kg": null, "_todo": "尺寸待湖南博物院出版物核实" },
+    "type": "酒器/盛贮器",
+    "form_subtype": "瓿(肩部四羊首装饰)",
+    "form_detail": "圆腹圈足,肩部铸四只立体羊首",
+    "distinctive_features": ["肩部四羊首立体装饰", "湘江风格"],
+    "patterns_structured": {
+      "main": ["饕餮纹 — 腹身主纹"],
+      "secondary": ["云雷纹 — 腹部"],
+      "ground": ["云雷纹"],
+      "rim": ["羊首立体 — 肩部四角"]
+    },
+    "inscription": {
+      "has": false,
+      "text": null,
+      "char_count": 0,
+      "summary": "暂无确认铭文记录",
+      "_todo": "铭文情况待湖南博物院资料核实"
+    },
+    "purpose": {
+      "primary": "盛贮酒礼器",
+      "context": "湘江流域商代方国祭祀宴飨",
+      "user_class": "商代方国贵族"
+    },
+    "craft": {
+      "primary": "范铸法",
+      "details": "羊首先铸再合范铸器身(分铸法)",
+      "achievements": null
+    },
+    "rarity_level": "一级文物",
+    "scholarly_status": "与四羊方尊同属湘江流域商代青铜文明,反映南方方国与商王朝的青铜技术交流",
+    "provenance_timeline": [
+      {"year": null, "event": "湖南宁乡出土(具体年代不详)", "_todo": "待核实"}
+    ],
+    "related_artifacts": [
+      {"id": "siyang_fangzun", "relation": "同属湘江流域商代青铜文明,均出宁乡地区"}
+    ],
+    "story_brief": "四羊首铜瓿与四羊方尊同属湖南宁乡地区出土的商代晚期青铜器,以肩部四只立体羊首装饰为特征,是湘江流域商代青铜文明的重要遗存。该地区出土的商代青铜器以动物立体装饰见长,在工艺风格上与中原商文化既有联系又有区别。具体出土情况与详细尺寸数据待湖南博物院出版物补充。",
+    "image_urls": [],
+    "3d_or_video": null,
+    "data_sources": [
+      {"field": "all", "source": "TODO: 维基百科与英文开放数据集对该器记载极少,建议参考湖南博物院出版物", "url": null}
+    ]
+  }
+]

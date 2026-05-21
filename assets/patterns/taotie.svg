@@ -1,0 +1,35 @@
+<!-- 饕餮纹 | 商代 | typical on: 方鼎 簋 尊 卣 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+  <!-- Taotie: symmetric frontal beast face — large eyes, central nose ridge, flanking horns, split jaw -->
+  <!-- Left horn -->
+  <path d="M22 12 C18 8 12 10 10 16 C8 22 12 26 16 24 C18 23 20 20 22 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Right horn (mirror) -->
+  <path d="M58 12 C62 8 68 10 70 16 C72 22 68 26 64 24 C62 23 60 20 58 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Left brow ridge -->
+  <path d="M16 26 C20 22 28 22 32 26" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  <!-- Right brow ridge (mirror) -->
+  <path d="M64 26 C60 22 52 22 48 26" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  <!-- Left eye: large oval -->
+  <ellipse cx="26" cy="32" rx="8" ry="7" stroke="currentColor" stroke-width="2"/>
+  <circle cx="26" cy="32" r="3.5" fill="currentColor"/>
+  <!-- Right eye: large oval (mirror) -->
+  <ellipse cx="54" cy="32" rx="8" ry="7" stroke="currentColor" stroke-width="2"/>
+  <circle cx="54" cy="32" r="3.5" fill="currentColor"/>
+  <!-- Central nose ridge / snout bridge -->
+  <path d="M36 28 L40 26 L44 28 L44 36 L40 38 L36 36 Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+  <!-- Left cheek curl -->
+  <path d="M16 38 C18 42 24 44 30 42 C34 40 36 38 36 36" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Right cheek curl (mirror) -->
+  <path d="M64 38 C62 42 56 44 50 42 C46 40 44 38 44 36" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Lower jaw: split in center -->
+  <path d="M20 48 C26 52 34 54 40 54" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  <path d="M60 48 C54 52 46 54 40 54" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  <!-- Left fang -->
+  <path d="M24 44 L20 52 L26 50" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Right fang (mirror) -->
+  <path d="M56 44 L60 52 L54 50" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Left body/claw -->
+  <path d="M10 44 C8 50 10 58 14 62 L18 60 L14 66 L20 64" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Right body/claw (mirror) -->
+  <path d="M70 44 C72 50 70 58 66 62 L62 60 L66 66 L60 64" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

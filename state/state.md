@@ -94,3 +94,11 @@
   - DE-4: 秦汉 + 三星堆 (7 v1 upgrade + 55 new)
   - DE-5: 边远文化 + 海外馆藏 (55 new)
   - Total: 25 v1 upgrade + 275 new = 300 件
+
+[2026-05-21 H1] [domain-researcher-v3] DONE — dimensional-map-v3.md + motivation-hooks-v3.md + data-schema-v3.md
+[2026-05-21 H1.5] [orchestrator] Phase B launched (4 agents parallel, joining 5 DE still running):
+  - visualization-designer-v3: 7 component-specs-v3/*.md
+  - builder-geo-b1: assets/geo/*.geojson + reusable module
+  - builder-patterns-b2: 25 pattern SVG icons + index.json
+  - builder-timepillar-b3: time-pillar + event-bus + dynasties.json
+Total active background agents: 9 (5 DE + 4 Phase B)
