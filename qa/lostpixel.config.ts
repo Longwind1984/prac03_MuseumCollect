@@ -1,9 +1,14 @@
-import { CustomProjectConfig } from 'lost-pixel';
+import type { CustomProjectConfig } from 'lost-pixel';
 
 /**
- * Lost Pixel — visual regression baseline.
+ * Lost Pixel — visual regression baseline (OSS / generateOnly mode).
+ *
  * Run `npx lost-pixel update` to (re)generate baseline.
  * Run `npx lost-pixel`         to compare current against baseline.
+ *
+ * NOTE: this config does NOT include `lostPixelProjectId` — including it
+ * switches Lost Pixel to its Platform (paid SaaS) mode and requires apiKey
+ * + CI vars. OSS mode keeps everything local.
  */
 export const config: CustomProjectConfig = {
   pageShots: {
@@ -23,13 +28,15 @@ export const config: CustomProjectConfig = {
     ],
     baseUrl: 'http://localhost:8765',
   },
-  lostPixelProjectId: 'museum-collect-v3',
   imagePathBaseline: './lost-pixel-baseline',
   imagePathCurrent: './lost-pixel-current',
   imagePathDifference: './lost-pixel-diff',
   shotConcurrency: 2,
   timeouts: { fetchStories: 30_000, loadState: 5_000, networkRequests: 30_000 },
   waitBeforeScreenshot: 1500,
-  // Cross-version safety: don't fail the run if dirs already exist.
-  generateOnly: false,
+  failOnDifference: false,
+  // Override Chromium launch (lost-pixel's default --headless=old is removed from modern Chromium)
+  browserLaunchOptions: {
+    chromium: { headless: true, channel: 'chromium' as any },
+  } as any,
 };

@@ -32,28 +32,28 @@ test('routing-bug001: random sample of catalog cards does NOT fall back to 后�
   type SampleResult = { id: string; name: string; renderedH1: string; renderedTitle: string; landed_on_houmuwu: boolean; data_missing: boolean; passed: boolean };
   const results: SampleResult[] = [];
 
+  // Get all 5 ids+names upfront, then navigate to each artifact page
+  const samples: Array<{ id: string; name: string; idx: number }> = [];
   for (const i of idxs) {
-    await page.goto(`${BASE}/catalog.html`, { waitUntil: 'domcontentloaded' });
-    await page.waitForSelector('.art-card');
     const card = page.locator('.art-card').nth(i);
-
     const onclick = await card.getAttribute('onclick') || '';
     const idMatch = onclick.match(/id=([^'"&]+)/);
     const id = idMatch ? idMatch[1] : '__unknown__';
     const name = (await card.locator('.art-card-name').textContent() || '').trim();
+    samples.push({ id, name, idx: i });
+  }
 
-    // Navigate directly via URL (more reliable than click which races with onclick=location.href)
-    await page.goto(`${BASE}/artifact.html?id=${id}`, { waitUntil: 'domcontentloaded' });
+  for (const s of samples) {
+    await page.goto(`${BASE}/artifact.html?id=${s.id}`, { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(1500);
 
     const h1 = (await page.locator('h1').first().textContent().catch(() => '') || '').trim();
     const title = await page.title().catch(() => '');
     const landed_on_houmuwu = h1.includes('后母戊') || title.includes('后母戊');
     const data_missing = h1.includes('未找到');
-    // BUG-001 = silent fallback to 后母戊鼎 when id != houmuwu_ding
-    const passed = !landed_on_houmuwu || id === 'houmuwu_ding';
+    const passed = !landed_on_houmuwu || s.id === 'houmuwu_ding';
 
-    results.push({ id, name, renderedH1: h1, renderedTitle: title, landed_on_houmuwu, data_missing, passed });
+    results.push({ id: s.id, name: s.name, renderedH1: h1, renderedTitle: title, landed_on_houmuwu, data_missing, passed });
   }
 
   test.info().annotations.push({ type: 'sample', description: JSON.stringify(results) });

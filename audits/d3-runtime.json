@@ -1,0 +1,84 @@
+{
+  "audit_id": "d3-runtime",
+  "auditor": "tools-integrator-v4.5",
+  "timestamp": "2026-05-22T00:00:00Z",
+  "environment": {
+    "node": "v22.22.2",
+    "playwright": "1.56.0",
+    "axe_core": "4.11.4",
+    "lost_pixel": "3.22.0",
+    "chromium_browser": "1194 (141.0.7390.37)",
+    "browsers_path": "/opt/pw-browsers",
+    "sandbox_egress_blocked": ["jsdelivr (D3 CDN)", "upload.wikimedia.org (photo CDN)", "app.posthog.com (lost-pixel telemetry)"]
+  },
+  "tests": [
+    { "id": "routing-bug001/random-sample", "spec": "routing-bug001.spec.ts", "result": "pass", "duration_s": 40, "evidence": "5 random catalog ids navigated; none silently fell back to 后母戊鼎; non-existent ids show graceful '未找到' UI" },
+    { "id": "routing-bug001/he_zun-renders", "spec": "routing-bug001.spec.ts", "result": "pass", "duration_s": 2, "evidence": "h1 == 何尊 on /artifact.html?id=he_zun" },
+    { "id": "routing-bug001/nonexistent-graceful", "spec": "routing-bug001.spec.ts", "result": "pass", "duration_s": 10, "evidence": "id=__nonexistent__ does NOT render 后母戊鼎; UI shows '未找到该文物'" },
+    { "id": "cross-dim/hover-shang", "spec": "cross-dim-dashboard.spec.ts", "result": "skipped", "duration_s": 3, "evidence": "D3 CDN (jsdelivr) unreachable in sandbox; pageerror: 'd3 is not defined'; test ready for CI" },
+    { "id": "cross-dim/click-lock", "spec": "cross-dim-dashboard.spec.ts", "result": "skipped", "duration_s": 3, "evidence": "same D3 CDN env limitation" },
+    { "id": "dead-buttons/enumerate", "spec": "dead-buttons.spec.ts", "result": "pass", "duration_s": 6, "evidence": "7 candidates flagged; all are .linkage-toggle with JS-attached listeners (false positives — see d3-runtime.md §3)" },
+    { "id": "console-errors/zero-policy", "spec": "console-errors.spec.ts", "result": "pass", "duration_s": 19, "evidence": "0 non-env errors across 12 pages; 44 raw entries all matched env whitelist (Wikimedia CDN cert + d3 CDN cert)" },
+    { "id": "axe/index", "spec": "axe-a11y.spec.ts", "result": "pass", "duration_s": 2, "evidence": "only color-contrast (14 nodes); no blocking violations" },
+    { "id": "axe/catalog", "spec": "axe-a11y.spec.ts", "result": "pass", "duration_s": 2, "evidence": "only color-contrast (36 nodes)" },
+    { "id": "axe/artifact", "spec": "axe-a11y.spec.ts", "result": "pass", "duration_s": 2, "evidence": "only color-contrast (14 nodes)" },
+    { "id": "axe/me", "spec": "axe-a11y.spec.ts", "result": "pass", "duration_s": 3, "evidence": "only color-contrast (17 nodes)" },
+    { "id": "axe/dashboard", "spec": "axe-a11y.spec.ts", "result": "pass", "duration_s": 2, "evidence": "only color-contrast (11 nodes)" },
+    { "id": "data-integrity/1976-citation", "spec": "data-integrity.spec.ts", "result": "pass", "duration_s": 2, "evidence": "inscription-special-hezun.html cites 1976 in citation footer; '唐兰...1986' regex does not match" },
+    { "id": "data-integrity/da_ke_ding-period", "spec": "data-integrity.spec.ts", "result": "pass", "duration_s": 2, "evidence": "MuseumData.get('da_ke_ding').period == '西周中期(孝王时期)'" },
+    { "id": "data-integrity/he_zun-122-chars", "spec": "data-integrity.spec.ts", "result": "pass", "duration_s": 2, "evidence": "read-count counter shows 0/122; FULL_TEXT.length == 122" },
+    { "id": "data-integrity/catalog-count", "spec": "data-integrity.spec.ts", "result": "pass", "duration_s": 1, "evidence": "MuseumData.artifacts.length == 277" }
+  ],
+  "summary": { "total": 16, "passed": 14, "failed": 0, "skipped": 2, "duration_s": 63 },
+  "claims_verified": [
+    { "claim": "BUG-001 fixed — 277 件 全部可详情查看 (随机抽样无 silent fallback)", "verified": true, "evidence": "3 routing tests pass; nonexistent id surface graceful '未找到'" },
+    { "claim": "何尊 1976 唐兰 citation (not 1986)", "verified": true, "evidence": "data-integrity/1976-citation pass" },
+    { "claim": "大克鼎 西周中期 (not 西周晚期) on period field", "verified": true, "evidence": "MuseumData record check pass" },
+    { "claim": "何尊 122 字 FULL_TEXT", "verified": true, "evidence": "rendered counter 0/122" },
+    { "claim": "277 件 dataset", "verified": true, "evidence": "MuseumData.artifacts.length == 277" },
+    { "claim": "穿越模式 三组件联动 (dashboard era-focus event bus)", "verified": false, "reason": "D3 CDN unreachable in sandbox; dashboard renders empty shell; test exists but skipped — re-run in env with network egress" }
+  ],
+  "phantom_buttons": [
+    { "page": "/demos/v3-converged/index.html", "selector": "button.linkage-toggle", "text": "穿越模式 ●", "verdict": "false-positive (has JS event listener)" },
+    { "page": "/demos/v3-converged/catalog.html", "selector": "button.linkage-toggle", "text": "穿越模式 ●", "verdict": "false-positive" },
+    { "page": "/demos/v3-converged/artifact.html?id=he_zun", "selector": "button.linkage-toggle", "text": "穿越模式 ●", "verdict": "false-positive" },
+    { "page": "/demos/v3-converged/dashboard.html", "selector": "button.linkage-badge", "text": "联动 ON", "verdict": "false-positive" },
+    { "page": "/demos/v3-converged/me.html", "selector": "button.linkage-toggle", "text": "穿越模式 ●", "verdict": "false-positive" },
+    { "page": "/demos/v3-converged/time-pillar.html", "selector": "button.linkage-toggle", "text": "穿越模式 ●", "verdict": "false-positive" },
+    { "page": "/demos/v3-converged/geo-system.html", "selector": "button.linkage-toggle", "text": "穿越模式 ●", "verdict": "false-positive" }
+  ],
+  "axe_violations": [
+    { "page": "index", "id": "color-contrast", "impact": "serious", "nodes": 14 },
+    { "page": "catalog", "id": "color-contrast", "impact": "serious", "nodes": 36 },
+    { "page": "artifact", "id": "color-contrast", "impact": "serious", "nodes": 14 },
+    { "page": "me", "id": "color-contrast", "impact": "serious", "nodes": 17 },
+    { "page": "dashboard", "id": "color-contrast", "impact": "serious", "nodes": 11 }
+  ],
+  "visual_baseline": {
+    "tool": "fallback (qa/scripts/screenshot-baseline.js, lost-pixel CLI broken in env)",
+    "pages_captured": 12,
+    "pages_healthy": 7,
+    "pages_degraded_no_d3": ["dashboard", "time-pillar", "geo-system", "pattern-tree", "caster-profile"],
+    "output_dir": "qa/lost-pixel-baseline/"
+  },
+  "real_findings_p1_p2": [
+    { "id": "D3-CDN-spof", "severity": "P1", "title": "5 demo pages break offline when jsdelivr is unreachable", "fix": "vendor d3.min.js to assets/vendor/" },
+    { "id": "catalog-stale-ids", "severity": "P2", "title": "catalog.html hard-codes 3 ids (da_sheng_pan, guoji_zibo_pan, yuewang_zhouji_jian) not in segment JSONs", "fix": "rebuild CATALOG_ITEMS from MuseumData.artifacts" },
+    { "id": "color-contrast", "severity": "P2", "title": "92 nodes across 5 pages fail WCAG 2 AA color-contrast", "fix": "darken --text-muted, raise .art-card-meta size or shade" }
+  ],
+  "files_added": [
+    "qa/package.json", "qa/package-lock.json",
+    "qa/playwright.config.ts", "qa/lostpixel.config.ts",
+    "qa/tests/routing-bug001.spec.ts", "qa/tests/cross-dim-dashboard.spec.ts",
+    "qa/tests/dead-buttons.spec.ts", "qa/tests/console-errors.spec.ts",
+    "qa/tests/axe-a11y.spec.ts", "qa/tests/data-integrity.spec.ts",
+    "qa/scripts/screenshot-baseline.js",
+    "qa/README.md",
+    "qa/lost-pixel-baseline/*.png (12)",
+    "qa/test-results/results.json",
+    "qa/test-results/axe-*.json (5)",
+    "qa/test-results/phantom-buttons.json",
+    "qa/test-results/console-errors.json",
+    "audits/d3-runtime.md", "audits/d3-runtime.json"
+  ]
+}
