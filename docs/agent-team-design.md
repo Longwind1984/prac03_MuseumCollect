@@ -272,3 +272,56 @@ Wake-up       = background agent 完成通知触发 Orchestrator 续跑
     ├── artifacts/                ← 20-30 件国宝详情
     └── dimensions/               ← 8 个维度的内容
 ```
+
+---
+
+## Appendix B: v4.5 Audit Squad Upgrade — 5+1 → 6+1
+
+> 2026-05-22 · Triggered by BUG-001 (artifact.html silent fallback affecting 275 of 277 records, missed by all 5 persona Auditors + Comparative in v3 review)
+
+### Why this upgrade exists
+
+In the v3 review round, all 5 persona Auditors (UX / Aesthetic / Content / Motivation / PM) plus the Comparative Auditor delivered passing reviews of `demos/v3-converged/`. A user then opened the deployed preview, clicked any artifact other than 后母戊鼎 or 何尊, and got... 后母戊鼎 every single time. Root cause: `artifact.html` lines 84-120 hardcoded a 2-entry `MOCK_ARTIFACTS` object with silent `|| MOCK_ARTIFACTS['houmuwu_ding']` fallback for the other 275 records.
+
+**The systemic gap exposed:** all 5 persona Auditors were *myopic readers* — they read source, looked at one or two pages, and rendered verdicts based on what the happy path showed them. None of them clicked more than 2 artifact IDs to verify per-record correctness. The audit squad audited the audit squad. This appendix documents the result.
+
+### The squad is now 6+1, not 5+1
+
+```
+旧 5 persona auditor (UX / Aesthetic / Content / Motivation / PM) — opinions about content & form
+NEW Runtime Auditor (7th, defined in .claude/agents/auditor-runtime.md) — only does mechanical execution, no opinions
+Comparative Auditor (8th in numbering but synthesizer role) — binding-bound to Runtime's findings
+```
+
+The Runtime Auditor (`.claude/agents/auditor-runtime.md`) is the only auditor with **mandatory tool execution**. It uses Sonnet (not Opus — fast and tool-heavy, not prose-heavy). Its dual output is `audits/{date}-runtime.json` (machine-readable test results, binding) + `audits/{date}-runtime.md` (human narrative).
+
+### The 8-item MANDATORY VERIFICATION CHECKLIST
+
+Every auditor (persona + runtime) now executes 8 mandatory checks before writing a report:
+
+1. **多 ID stress test** — ≥5 random IDs sampled across the dataset, each navigated to, each verified to render correctly
+2. **Console errors** — zero allowed in a passing audit
+3. **End-to-end flow** — ≥1 full user journey walked step-by-step
+4. **Claim-vs-reality table** — every product claim from README/case-study/merged-spec tested against the running app (✅/⚠️/❌)
+5. **Mobile viewport spot-check** — 375×667 or 375×812, screenshots of hero + one key interaction
+6. **Dead button audit** — every visible button verified to trigger something, phantom buttons = P1+
+7. **Routing parity** — every URL-param-reading page tested with ≥3 valid + 1 invalid value
+8. **Data dependency proof** — every "N records / N collected" claim verified by counting actual rendered records
+
+The Runtime Auditor executes Checks 1-8 at higher rigor (10 IDs, 3 flows, all README claims) plus 3 runtime-only checks:
+
+9. **Network tab inspection** — any 404 / failed fetch / >2s request flagged
+10. **LocalStorage state cleanup test** — clear → refresh → expect Day-0 state intact
+11. **Time-pillar emit → downstream listen latency** — < 200ms threshold for cross-component event propagation
+
+### Binding rule
+
+Runtime Auditor's `runtime.json` is **binding** for the Comparative Auditor. If Runtime says "broken", Content/Aesthetic/Motivation/PM cannot overrule it with "looks fine in screenshot". Persona Auditors decide whether a demo is *good*. Runtime Auditor decides whether the demo *exists*.
+
+### BUG-001 retrospective in one line
+
+The audit squad audited the audit squad. v4.5 is what came out. Don't let v4.6 need a v5.5 because someone read instead of clicked.
+
+### Portfolio implication
+
+The case-study reflection now has a third concrete lesson available: *"我们的 audit squad 自己被 audit 了 — 因为 5 个 persona auditor 都是 myopic readers, 错过了一个 P0 silent fallback。我们增加了 Runtime Auditor (7th persona) 和 8-item mandatory checklist。这是 portfolio 最强的 reflective signal: 我们不只设计 audit loop, 我们让 audit loop 自我审计了"。*
