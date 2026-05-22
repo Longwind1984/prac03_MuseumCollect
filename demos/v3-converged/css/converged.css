@@ -363,4 +363,15 @@ body {
     max-width: none !important;
     height: auto;
   }
+
+  /* Hero blocks: tighten the BIG inline font-size hero typography that
+     would otherwise occupy half the screen on mobile. */
+  h1[style*="font-size:52px"], h1[style*="font-size: 52px"],
+  h1[style*="font-size:64px"], h1[style*="font-size: 64px"] {
+    font-size: 34px !important;
+    line-height: 1.2 !important;
+  }
+  /* Hero padding inline on index */
+  [style*="padding: 60px"] { padding: 32px 12px !important; }
+  [style*="padding:60px"]  { padding: 32px 12px !important; }
 }
