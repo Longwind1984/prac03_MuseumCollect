@@ -883,6 +883,25 @@ function updatePillarHighlight(name) {
 
 let _currentGeoEra = null;
 let _mapProjection = null;
+let _mapGeoPath = null;
+let _realGeo = {}; // { terrain, shang, xizhou, chunqiu, zhanguo } once fetched
+
+async function loadRealGeoData() {
+  const eras = ['shang', 'xizhou', 'chunqiu', 'zhanguo'];
+  try {
+    const [terrain, ...states] = await Promise.all([
+      fetch('../../assets/geo/china-terrain.geojson').then(r => r.json()),
+      ...eras.map(e => fetch(`../../assets/geo/ancient-states-${e}.geojson`).then(r => r.json()))
+    ]);
+    _realGeo.terrain = terrain;
+    eras.forEach((e, i) => { _realGeo[e] = states[i]; });
+    // Rebuild map with real geo data
+    buildMap();
+    if (_currentGeoEra) renderEra(_currentGeoEra);
+  } catch (e) {
+    console.warn('[GeoData] fetch failed, keeping inline fallback:', e.message);
+  }
+}
 
 function buildMap() {
   const section = document.getElementById('map-section');
@@ -892,19 +911,30 @@ function buildMap() {
   const svg = d3.select('#map-svg')
     .attr('width', W)
     .attr('height', H);
+  svg.selectAll('*').remove();
 
-  // China bounds approximately: lon 73-135, lat 18-54
-  // Use simple linear projection scaled to fit
-  const lonMin=96, lonMax=128, latMin=23, latMax=44;
-  const padX=30, padY=20;
-  const scaleX = (W - padX*2) / (lonMax - lonMin);
-  const scaleY = (H - padY*2) / (latMax - latMin);
-  const scale = Math.min(scaleX, scaleY);
+  const padX = 30, padY = 20;
 
-  _mapProjection = ([lon, lat]) => [
-    padX + (lon - lonMin) * scale,
-    H - padY - (lat - latMin) * scale  // flip Y
-  ];
+  // Use d3.geoConicEqualArea for China-friendly projection if real geo is loaded,
+  // else fall back to simple linear projection on inline lon/lat.
+  if (_realGeo.terrain) {
+    _mapProjection = d3.geoConicEqualArea()
+      .parallels([25, 47])
+      .rotate([-105, 0])
+      .fitExtent([[padX, padY], [W - padX, H - padY]], _realGeo.terrain);
+    _mapGeoPath = d3.geoPath(_mapProjection);
+  } else {
+    const lonMin=96, lonMax=128, latMin=23, latMax=44;
+    const scaleX = (W - padX*2) / (lonMax - lonMin);
+    const scaleY = (H - padY*2) / (latMax - latMin);
+    const scale = Math.min(scaleX, scaleY);
+    _mapProjection = ([lon, lat]) => [
+      padX + (lon - lonMin) * scale,
+      H - padY - (lat - latMin) * scale  // flip Y
+    ];
+    // Construct a minimal GeoPath-compatible drawer for inline coord arrays
+    _mapGeoPath = null;
+  }
 
   // Background
   svg.append('rect').attr('x',0).attr('y',0).attr('width',W).attr('height',H)
@@ -921,11 +951,17 @@ function buildMap() {
     [96,40.5],[94,41],[92,42],[90,43],[88,44],[85,44.5],[82,44],[80,43.5],
     [78,42],[76,41],[73.5,41],[73.5,39.5]
   ];
-  const chinaPath = 'M' + chinaOutlineCoords.map(c => _mapProjection(c).map(v=>v.toFixed(1)).join(',')).join(' L') + ' Z';
-
-  svg.append('path').attr('d', chinaPath)
-    .attr('fill', '#1a1f14').attr('stroke', '#3a4a2a').attr('stroke-width', 1)
-    .attr('fill-opacity', 0.6);
+  // Use real China terrain if loaded; else linear-projected inline polygon.
+  if (_realGeo.terrain && _mapGeoPath) {
+    svg.append('path').datum(_realGeo.terrain).attr('d', _mapGeoPath)
+      .attr('fill', '#1a1f14').attr('stroke', '#3a4a2a').attr('stroke-width', 1)
+      .attr('fill-opacity', 0.6);
+  } else {
+    const chinaPath = 'M' + chinaOutlineCoords.map(c => _mapProjection(c).map(v=>v.toFixed(1)).join(',')).join(' L') + ' Z';
+    svg.append('path').attr('d', chinaPath)
+      .attr('fill', '#1a1f14').attr('stroke', '#3a4a2a').attr('stroke-width', 1)
+      .attr('fill-opacity', 0.6);
+  }
 
   // Major rivers
   const yellowRiver = [
@@ -960,39 +996,62 @@ function buildMap() {
   const sitesG = svg.append('g').attr('id','map-sites-group');
 
   // Build all era regions (hidden initially)
+  // Prefer real GeoJSON when loaded; fall back to inline GEO_DATA polygons.
   Object.keys(GEO_DATA).forEach(eraKey => {
     const era = GEO_DATA[eraKey];
     const eraG = regionsG.append('g').attr('class', `era-group era-${eraKey} hidden`);
 
-    era.regions.forEach(region => {
-      const pathStr = 'M' + region.coords.map(c => _mapProjection(c).map(v=>v.toFixed(1)).join(',')).join(' L') + ' Z';
+    const useReal = _realGeo[eraKey] && _mapGeoPath;
+    const features = useReal
+      ? _realGeo[eraKey].features
+      : era.regions.map(r => ({
+          // Wrap inline polygons in GeoJSON-like envelope for unified rendering
+          properties: { name: r.name, color: r.color, opacity: r.opacity, id: r.id, _inline: true },
+          _coords: r.coords
+        }));
+
+    features.forEach(feature => {
+      const p = feature.properties || {};
+      const id = p.id || (feature.id || '').toString().toLowerCase().replace(/[^a-z0-9]/g, '-');
+      const color = p.color || '#888';
+      const opacity = p.opacity != null ? p.opacity : 0.35;
+      const name = p.name || '';
+      let pathStr;
+      let labelLon, labelLat;
+      if (useReal) {
+        pathStr = _mapGeoPath(feature);
+        const c = d3.geoCentroid(feature);
+        [labelLon, labelLat] = c;
+      } else {
+        const coords = feature._coords;
+        pathStr = 'M' + coords.map(c => _mapProjection(c).map(v=>v.toFixed(1)).join(',')).join(' L') + ' Z';
+        const sum = coords.reduce((acc, c) => [acc[0]+c[0], acc[1]+c[1]], [0,0]);
+        labelLon = sum[0] / coords.length;
+        labelLat = sum[1] / coords.length;
+      }
       eraG.append('path')
         .attr('class', 'state-region')
-        .attr('id', `region-${eraKey}-${region.id}`)
+        .attr('id', `region-${eraKey}-${id}`)
         .attr('d', pathStr)
-        .attr('fill', region.color)
-        .attr('fill-opacity', region.opacity)
-        .attr('stroke', region.color)
+        .attr('fill', color)
+        .attr('fill-opacity', opacity)
+        .attr('stroke', color)
         .attr('stroke-opacity', 0.55)
         .attr('stroke-width', 1)
         .attr('stroke-dasharray', '4,3');
 
-      // Region name label
-      const centroid = region.coords.reduce((acc, c) => [acc[0]+c[0], acc[1]+c[1]], [0,0]);
-      const cx = centroid[0] / region.coords.length;
-      const cy = centroid[1] / region.coords.length;
-      const [lx, ly] = _mapProjection([cx, cy]);
+      const [lx, ly] = _mapProjection([labelLon, labelLat]);
       eraG.append('text')
         .attr('x', lx).attr('y', ly)
         .attr('text-anchor', 'middle')
         .attr('dominant-baseline', 'middle')
-        .attr('fill', region.color)
+        .attr('fill', color)
         .attr('fill-opacity', 0.85)
         .attr('font-size', '9')
         .attr('font-family', 'Noto Serif SC, serif')
         .attr('letter-spacing', '1')
         .style('pointer-events', 'none')
-        .text(region.name);
+        .text(name);
     });
   });
 
@@ -1282,6 +1341,8 @@ document.addEventListener('DOMContentLoaded', () => {
   buildTimePillar();
   buildMap();
   buildPatternStrip();
+  // Upgrade to real GeoJSON (B1 phase data) once available; rebuilds map.
+  loadRealGeoData();
 
   // Auto-focus 商 dynasty on load after short delay (wow demo effect)
   setTimeout(() => {

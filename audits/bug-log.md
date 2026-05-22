@@ -23,12 +23,19 @@
 **Logged**: 2026-05-21 (user-noted after Vercel preview review)
 **Severity**: P1 — 视觉廉价感来源,削弱 B1 阶段真实地形 GeoJSON 工作的价值
 **Root cause**: Builder-Converger Phase C trade-off — 因 file:// fetch CORS 限制把 B1 的 `assets/geo/*.geojson` 替换成 24-point 内联 polygon approximation。Aesthetic Auditor v3 已 flag 为 P0(programmer geometry 不像地图)。当前 vercel deploy 在 https:// 下应可解 CORS,但 Builder 当时为了"file:// 也能开"而妥协。
-**Decision (user, 2026-05-21)**: **不立即修**。和下一项 DEFERRED-002 (mobile 适配) 一起,在 **v5 mobile-first rebuild** 里同时处理。理由:两个都涉及 geo-system / dashboard / catalog 三页的重渲染逻辑,改两次不如一次过。
-**Fix plan (v5)**:
-- 用 `fetch('../../assets/geo/ancient-states-shang.geojson')` 重 wire B1 真实数据
-- D3 projection (geoMercator / geoConicEqualArea — 后者对中国地区更准)
-- 各朝代 overlay 切换保留 era-focus event bus 联动
-- mobile viewport 下用 touch-friendly pan/zoom
+**Decision (user, 2026-05-21)**: 和下一项 DEFERRED-002 (mobile 适配) 一起,在 **v5 mobile-first rebuild** 里同时处理。
+**Status update (2026-05-22, user reversed)**: "real GeoJSON 是 contained 的,先做"。dashboard.html PARTIALLY FIXED:
+- ✅ `_mapProjection` 从 linear projection → `d3.geoConicEqualArea(parallels=[25,47], rotate=[-105,0])`(中国友好)
+- ✅ `loadRealGeoData()` async fetch 5 个 GeoJSON 文件 (china-terrain + 4 ancient-states)
+- ✅ region 渲染 dual-path: real GeoJSON 优先 + inline GEO_DATA fallback
+- ✅ **39 个 region** 真实渲染(含 inline 缺失的 鬼方/羌方/燕国/齐国/鲁国 等)
+- ⚠️ B1 GeoJSON 本身简化(7-8K bytes / file,~17 coords / outer ring)— 非 GADM/Natural Earth 详细级
+- ⚠️ **geo-system.html 单独页仍用 normalized [0,1] 坐标**,未升级(改动量大,需要 lon/lat 数据 + projection 重做)
+- 16/16 Playwright test 仍绿
+**Remaining (geo-system.html only)**:
+- 单独页 renderMap 仍用 `[px*W, py*H]` 直接缩放,不是地理投影
+- EXCAVATION_SITES / MUSEUM_SITES 坐标是 normalized 而非经纬度
+- 改造同 dashboard 思路 + 替换 site 数据为 excavation-sites.geojson + museums.geojson
 
 ## DEFERRED-002 — mobile 适配 (P1)
 **Logged**: 2026-05-21 (user explicit deferral throughout v3)
