@@ -8,7 +8,8 @@ yarn-error.log
 qa/test-results/
 qa/playwright-report/
 qa/.lost-pixel/
-qa/lost-pixel-baseline/
+# Visual baseline IS committed — it's the reference for future regression diffs.
+# (qa/lost-pixel-baseline/ deliberately tracked.)
 
 # OS
 .DS_Store

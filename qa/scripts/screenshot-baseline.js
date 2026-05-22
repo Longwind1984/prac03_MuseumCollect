@@ -11,8 +11,10 @@ const { chromium } = require('@playwright/test');
 const fs = require('fs');
 const path = require('path');
 
-const BASE_URL = 'http://localhost:8765';
+const BASE_URL = process.env.BASE_URL || 'http://127.0.0.1:8000';
 const OUT_DIR = path.join(__dirname, '..', 'lost-pixel-baseline');
+const DESKTOP_DIR = path.join(OUT_DIR, 'desktop');
+const MOBILE_DIR = path.join(OUT_DIR, 'mobile');
 
 const PAGES = [
   { path: '/demos/v3-converged/index.html',                  name: 'index' },
@@ -29,31 +31,59 @@ const PAGES = [
   { path: '/demos/v3-converged/purpose-scene.html',          name: 'purpose-scene' },
 ];
 
-(async () => {
-  fs.mkdirSync(OUT_DIR, { recursive: true });
-  const browser = await chromium.launch({ headless: true });
-  const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
-
-  const log = [];
-  for (const p of PAGES) {
-    const page = await ctx.newPage();
-    const url = BASE_URL + p.path;
-    try {
-      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 15_000 });
-      await page.waitForTimeout(1800);
-      const file = path.join(OUT_DIR, p.name + '.png');
-      await page.screenshot({ path: file, fullPage: true });
-      const stat = fs.statSync(file);
-      log.push({ name: p.name, url: p.path, ok: true, bytes: stat.size });
-      console.log('  shot', p.name, '->', stat.size, 'bytes');
-    } catch (e) {
-      log.push({ name: p.name, url: p.path, ok: false, error: String(e).slice(0, 200) });
-      console.log('  FAIL', p.name, ':', String(e).slice(0, 120));
-    } finally {
-      await page.close();
-    }
+async function shoot(ctx, p, outDir) {
+  const page = await ctx.newPage();
+  const url = BASE_URL + p.path;
+  try {
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 15_000 });
+    await page.waitForTimeout(2000);
+    const file = path.join(outDir, p.name + '.png');
+    await page.screenshot({ path: file, fullPage: true });
+    const stat = fs.statSync(file);
+    return { name: p.name, url: p.path, ok: true, bytes: stat.size };
+  } catch (e) {
+    return { name: p.name, url: p.path, ok: false, error: String(e).slice(0, 200) };
+  } finally {
+    await page.close();
   }
-  fs.writeFileSync(path.join(OUT_DIR, 'baseline-log.json'), JSON.stringify(log, null, 2));
-  console.log('--- summary:', log.filter(l => l.ok).length, '/', log.length, 'pages captured');
+}
+
+(async () => {
+  fs.mkdirSync(DESKTOP_DIR, { recursive: true });
+  fs.mkdirSync(MOBILE_DIR, { recursive: true });
+  const browser = await chromium.launch({ headless: true });
+
+  // Desktop pass
+  const desktopCtx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  const desktopLog = [];
+  for (const p of PAGES) {
+    const r = await shoot(desktopCtx, p, DESKTOP_DIR);
+    desktopLog.push(r);
+    console.log('  [desktop]', p.name, '->', r.ok ? r.bytes + 'b' : 'FAIL');
+  }
+  await desktopCtx.close();
+
+  // Mobile pass — iPhone SE class
+  const mobileCtx = await browser.newContext({
+    viewport: { width: 375, height: 667 },
+    deviceScaleFactor: 2,
+    isMobile: true,
+    hasTouch: true,
+    userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/91.0.4472.80 Mobile/15E148',
+  });
+  const mobileLog = [];
+  for (const p of PAGES) {
+    const r = await shoot(mobileCtx, p, MOBILE_DIR);
+    mobileLog.push(r);
+    console.log('  [mobile] ', p.name, '->', r.ok ? r.bytes + 'b' : 'FAIL');
+  }
+  await mobileCtx.close();
+
+  fs.writeFileSync(
+    path.join(OUT_DIR, 'baseline-log.json'),
+    JSON.stringify({ desktop: desktopLog, mobile: mobileLog, captured_at: new Date().toISOString() }, null, 2)
+  );
+  console.log('--- desktop:', desktopLog.filter(l => l.ok).length, '/', desktopLog.length);
+  console.log('--- mobile: ', mobileLog.filter(l => l.ok).length, '/', mobileLog.length);
   await browser.close();
 })();
