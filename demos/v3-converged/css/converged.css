@@ -324,4 +324,29 @@ body {
 
   /* Prevent any inline-flex toolbar from forcing horizontal overflow */
   .row, .flex-row { flex-wrap: wrap; }
+
+  /* Catalog: 2-col card grid (小红书 / Pinterest style). Better density
+     than 1-col stack and shows photo prominently. */
+  .catalog-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+  .art-card-img { aspect-ratio: 1; max-height: 180px; }
+  .art-card-img img { width: 80%; height: 80%; }
+  .art-card-name { font-size: 12px; }
+  .art-card-meta { font-size: 9px; }
+
+  /* Inline grid layouts (artifact / index / scan etc) need explicit override
+     because inline style trumps regular media-query rules. Don't touch
+     dashboard-layout / catalog-grid (class-based, already handled). */
+  [style*="grid-template-columns"]:not(.dashboard-layout):not(.catalog-grid) {
+    grid-template-columns: 1fr !important;
+  }
+  /* Re-enable 2-col for known field-label tables inside artifact info panels */
+  .dim-card [style*="grid-template-columns"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+  }
+  /* Page padding tighter on mobile */
+  .page-container, [class*="page-"] { padding-left: 12px !important; padding-right: 12px !important; }
 }
