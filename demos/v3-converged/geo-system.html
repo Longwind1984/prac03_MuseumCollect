@@ -158,6 +158,32 @@ function onEraSlider(val) {
   }));
 }
 
+let _realGeo = {}; // { terrain, shang, xizhou, chunqiu, zhanguo, excavation, museums }
+let _mapProjection = null;
+let _mapGeoPath = null;
+
+async function loadRealGeoData() {
+  const eras = ['shang', 'xizhou', 'chunqiu', 'zhanguo'];
+  try {
+    const [terrain, excavation, museums, ...states] = await Promise.all([
+      fetch('../../assets/geo/china-terrain.geojson').then(r => r.json()),
+      fetch('../../assets/geo/excavation-sites.geojson').then(r => r.json()),
+      fetch('../../assets/geo/museums.geojson').then(r => r.json()),
+      ...eras.map(e => fetch(`../../assets/geo/ancient-states-${e}.geojson`).then(r => r.json()))
+    ]);
+    _realGeo.terrain = terrain;
+    _realGeo.excavation = excavation;
+    _realGeo.museums = museums;
+    eras.forEach((e, i) => { _realGeo[e] = states[i]; });
+    renderMap();
+  } catch (e) {
+    console.warn('[geo-system] real GeoJSON fetch failed, keeping inline fallback:', e.message);
+  }
+}
+
+// Era → GeoJSON key mapping
+const ERA_TO_GEO_KEY = { '商': 'shang', '西周': 'xizhou', '春秋': 'chunqiu', '战国': 'zhanguo' };
+
 function renderMap() {
   const svg = d3.select('#map-svg');
   const container = document.getElementById('map-container');
@@ -167,26 +193,46 @@ function renderMap() {
   svg.attr('width', W).attr('height', H);
   svg.selectAll('*').remove();
 
+  // Build projection: real China-friendly conic if terrain loaded, else legacy linear [0,1]→px
+  const padX = 30, padY = 20;
+  if (_realGeo.terrain) {
+    _mapProjection = d3.geoConicEqualArea()
+      .parallels([25, 47])
+      .rotate([-105, 0])
+      .fitExtent([[padX, padY], [W - padX, H - padY]], _realGeo.terrain);
+    _mapGeoPath = d3.geoPath(_mapProjection);
+  } else {
+    // Legacy normalized [0,1] → px (sites still use x/y percent)
+    _mapProjection = null;
+    _mapGeoPath = null;
+  }
+
   // Background
   svg.append('rect').attr('width', W).attr('height', H).attr('fill', '#f4ebd9');
 
-  // Simplified China boundary (key points as polygon)
-  const chinaOutline = [
-    [0.35,0.05],[0.50,0.02],[0.60,0.04],[0.72,0.08],[0.80,0.12],
-    [0.85,0.20],[0.82,0.28],[0.88,0.38],[0.85,0.46],[0.80,0.52],
-    [0.72,0.58],[0.68,0.68],[0.70,0.80],[0.62,0.88],[0.55,0.90],
-    [0.48,0.88],[0.42,0.80],[0.35,0.72],[0.28,0.65],[0.20,0.60],
-    [0.15,0.50],[0.12,0.40],[0.15,0.30],[0.20,0.22],[0.28,0.15],
-    [0.35,0.05]
-  ].map(([px,py]) => [px*W, py*H]);
-
-  // Mountain ranges (subtle)
-  svg.append('path')
-    .datum(chinaOutline)
-    .attr('d', d3.line()(chinaOutline) + 'Z')
-    .attr('fill', '#f0e6d0')
-    .attr('stroke', '#c8b890')
-    .attr('stroke-width', 1.5);
+  // China boundary: prefer real terrain GeoJSON, fallback to normalized inline polygon.
+  if (_realGeo.terrain && _mapGeoPath) {
+    svg.append('path').datum(_realGeo.terrain)
+      .attr('d', _mapGeoPath)
+      .attr('fill', '#f0e6d0')
+      .attr('stroke', '#c8b890')
+      .attr('stroke-width', 1.5);
+  } else {
+    const chinaOutline = [
+      [0.35,0.05],[0.50,0.02],[0.60,0.04],[0.72,0.08],[0.80,0.12],
+      [0.85,0.20],[0.82,0.28],[0.88,0.38],[0.85,0.46],[0.80,0.52],
+      [0.72,0.58],[0.68,0.68],[0.70,0.80],[0.62,0.88],[0.55,0.90],
+      [0.48,0.88],[0.42,0.80],[0.35,0.72],[0.28,0.65],[0.20,0.60],
+      [0.15,0.50],[0.12,0.40],[0.15,0.30],[0.20,0.22],[0.28,0.15],
+      [0.35,0.05]
+    ].map(([px,py]) => [px*W, py*H]);
+    svg.append('path')
+      .datum(chinaOutline)
+      .attr('d', d3.line()(chinaOutline) + 'Z')
+      .attr('fill', '#f0e6d0')
+      .attr('stroke', '#c8b890')
+      .attr('stroke-width', 1.5);
+  }
 
   // Rivers (simplified)
   const rivers = [
@@ -203,35 +249,99 @@ function renderMap() {
       .attr('opacity', 0.6);
   });
 
-  // Era overlay (simplified state boundaries as colored region)
-  const eraOverlays = {
-    '商': [[0.44,0.30],[0.62,0.30],[0.68,0.40],[0.65,0.52],[0.50,0.55],[0.42,0.48],[0.40,0.38]],
-    '西周': [[0.38,0.28],[0.68,0.28],[0.75,0.45],[0.65,0.58],[0.48,0.60],[0.35,0.52],[0.32,0.40]],
-    '春秋': [[0.30,0.25],[0.72,0.25],[0.78,0.48],[0.68,0.62],[0.50,0.66],[0.33,0.58],[0.25,0.45]],
-    '战国': [[0.28,0.22],[0.75,0.22],[0.80,0.50],[0.70,0.65],[0.52,0.68],[0.30,0.62],[0.22,0.48]],
-  };
-
-  if (eraOverlays[currentEra]) {
-    const pts = eraOverlays[currentEra].map(([px,py]) => [px*W, py*H]);
-    svg.append('path')
-      .datum(pts)
-      .attr('d', d3.line()(pts) + 'Z')
-      .attr('fill', ERA_COLORS[currentEra] || '#888')
-      .attr('opacity', 0.08)
-      .attr('stroke', ERA_COLORS[currentEra] || '#888')
-      .attr('stroke-width', 1.5)
-      .attr('stroke-dasharray', '6,4')
-      .attr('opacity', 0.3);
+  // Era overlay: prefer real ancient-states-{era}.geojson, else legacy 7-point polygon.
+  const eraKey = ERA_TO_GEO_KEY[currentEra];
+  if (eraKey && _realGeo[eraKey] && _mapGeoPath) {
+    // Render each ancient-state feature for this era
+    _realGeo[eraKey].features.forEach(f => {
+      const p = f.properties || {};
+      const color = p.color || ERA_COLORS[currentEra] || '#888';
+      const opacity = p.opacity != null ? p.opacity : 0.25;
+      svg.append('path').datum(f)
+        .attr('d', _mapGeoPath)
+        .attr('fill', color)
+        .attr('fill-opacity', opacity * 0.6)
+        .attr('stroke', color)
+        .attr('stroke-opacity', 0.5)
+        .attr('stroke-width', 1)
+        .attr('stroke-dasharray', '4,3');
+      // Label at centroid
+      const c = d3.geoCentroid(f);
+      const [lx, ly] = _mapProjection(c);
+      if (lx >= 0 && lx <= W && ly >= 0 && ly <= H) {
+        svg.append('text')
+          .attr('x', lx).attr('y', ly)
+          .attr('text-anchor', 'middle')
+          .attr('fill', color)
+          .attr('fill-opacity', 0.75)
+          .attr('font-size', 10)
+          .attr('font-family', 'Noto Serif SC, serif')
+          .style('pointer-events', 'none')
+          .text(p.name || '');
+      }
+    });
+  } else {
+    const eraOverlays = {
+      '商': [[0.44,0.30],[0.62,0.30],[0.68,0.40],[0.65,0.52],[0.50,0.55],[0.42,0.48],[0.40,0.38]],
+      '西周': [[0.38,0.28],[0.68,0.28],[0.75,0.45],[0.65,0.58],[0.48,0.60],[0.35,0.52],[0.32,0.40]],
+      '春秋': [[0.30,0.25],[0.72,0.25],[0.78,0.48],[0.68,0.62],[0.50,0.66],[0.33,0.58],[0.25,0.45]],
+      '战国': [[0.28,0.22],[0.75,0.22],[0.80,0.50],[0.70,0.65],[0.52,0.68],[0.30,0.62],[0.22,0.48]],
+    };
+    if (eraOverlays[currentEra]) {
+      const pts = eraOverlays[currentEra].map(([px,py]) => [px*W, py*H]);
+      svg.append('path')
+        .datum(pts)
+        .attr('d', d3.line()(pts) + 'Z')
+        .attr('fill', ERA_COLORS[currentEra] || '#888')
+        .attr('opacity', 0.08)
+        .attr('stroke', ERA_COLORS[currentEra] || '#888')
+        .attr('stroke-width', 1.5)
+        .attr('stroke-dasharray', '6,4')
+        .attr('opacity', 0.3);
+    }
   }
 
-  // Sites
-  const sites = currentView === 'museum' ? MUSEUM_SITES : EXCAVATION_SITES;
+  // Sites: prefer real GeoJSON (Point features with [lon,lat]) projected; fallback to inline x/y%.
+  const useRealSites = !!(_mapProjection && (
+    (currentView === 'museum' && _realGeo.museums) ||
+    (currentView !== 'museum' && _realGeo.excavation)
+  ));
+  let sites;
+  if (useRealSites) {
+    const fc = currentView === 'museum' ? _realGeo.museums : _realGeo.excavation;
+    sites = fc.features.map(f => {
+      const p = f.properties || {};
+      const [lon, lat] = f.geometry.coordinates;
+      return {
+        name: p.name,
+        dynasty: p.dynasty || '',
+        desc: p.brief || p.description || '',
+        count: p.artifact_count || p.bronze_count_approx || p.user_collected || 1,
+        artifacts: p.key_artifacts || [],
+        lit: p.user_collected !== undefined ? p.user_collected > 0 : true,
+        _lon: lon, _lat: lat,
+      };
+    });
+  } else {
+    sites = currentView === 'museum' ? MUSEUM_SITES : EXCAVATION_SITES;
+  }
+
   sites.forEach(site => {
-    const cx = site.x / 100 * W;
-    const cy = site.y / 100 * H;
+    let cx, cy;
+    if (useRealSites && _mapProjection) {
+      const proj = _mapProjection([site._lon, site._lat]);
+      if (!proj || isNaN(proj[0])) return;
+      [cx, cy] = proj;
+    } else {
+      cx = site.x / 100 * W;
+      cy = site.y / 100 * H;
+    }
     const isLit = currentView === 'museum' ? true : (site.lit && (site.dynasty === currentEra || currentView === 'excavation'));
     const color = ERA_COLORS[site.dynasty] || ERA_COLORS[currentEra] || '#888';
-    const r = Math.sqrt(site.count) * 2.5;
+    // Real GeoJSON counts are 10-500+ (artifact_count or bronze_count_approx);
+    // inline counts are 2-85. Use sqrt with a per-mode multiplier so both fit nicely.
+    const radMult = useRealSites ? 1.0 : 2.5;
+    const r = Math.max(5, Math.min(22, Math.sqrt(site.count) * radMult));
 
     const g = svg.append('g').attr('class', 'site-circle');
 
@@ -338,6 +448,8 @@ document.addEventListener('era-focus', function(e) {
 
 document.addEventListener('DOMContentLoaded', () => {
   renderMap();
+  // Upgrade to real GeoJSON (B1 phase data) once available; re-renders map.
+  loadRealGeoData();
   window.addEventListener('resize', renderMap);
 });
 </script>

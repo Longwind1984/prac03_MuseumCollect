@@ -30,12 +30,9 @@
 - ✅ region 渲染 dual-path: real GeoJSON 优先 + inline GEO_DATA fallback
 - ✅ **39 个 region** 真实渲染(含 inline 缺失的 鬼方/羌方/燕国/齐国/鲁国 等)
 - ⚠️ B1 GeoJSON 本身简化(7-8K bytes / file,~17 coords / outer ring)— 非 GADM/Natural Earth 详细级
-- ⚠️ **geo-system.html 单独页仍用 normalized [0,1] 坐标**,未升级(改动量大,需要 lon/lat 数据 + projection 重做)
+- ✅ **geo-system.html 已升级**(2026-05-22 follow-up):同样 d3.geoConicEqualArea + 真 GeoJSON(china-terrain + 4 ancient-states + 30 excavation-sites + 24 museums)
 - 16/16 Playwright test 仍绿
-**Remaining (geo-system.html only)**:
-- 单独页 renderMap 仍用 `[px*W, py*H]` 直接缩放,不是地理投影
-- EXCAVATION_SITES / MUSEUM_SITES 坐标是 normalized 而非经纬度
-- 改造同 dashboard 思路 + 替换 site 数据为 excavation-sites.geojson + museums.geojson
+**Resolution (2026-05-22)**: geo-system.html refactor done in same session — both pages now use real B1 GeoJSON. DEFERRED-001 FULLY CLOSED.
 
 ## DEFERRED-002 — mobile 适配 (P1)
 **Logged**: 2026-05-21 (user explicit deferral throughout v3)
