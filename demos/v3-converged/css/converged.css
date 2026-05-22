@@ -263,3 +263,65 @@ body {
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg-paper); }
 ::-webkit-scrollbar-thumb { background: var(--border-medium); border-radius: 3px; }
+
+/* ── Mobile (≤ 768px) ───────────────────── */
+/* v4.6 mobile retrofit: keep desktop layout, override to fit 375px without horizontal overflow.
+   Full mobile-first rebuild is a v5 scope item. */
+@media (max-width: 768px) {
+  /* Hard guard against horizontal scroll — desktop-first SVG / charts / wide flexes
+     would otherwise force viewport to scale up. Better to clip than to zoom out. */
+  html, body { overflow-x: hidden; max-width: 100vw; }
+
+  body { font-size: 14px; }
+
+  /* Top nav: shrink + horizontal-scroll links so 11 items don't blow up viewport */
+  .top-nav { padding: 0 12px; flex-wrap: nowrap; }
+  .nav-brand { font-size: 16px; flex-shrink: 0; }
+  .nav-links {
+    display: flex; gap: 0; flex: 1;
+    overflow-x: auto; overflow-y: hidden;
+    scrollbar-width: none; /* firefox */
+    -ms-overflow-style: none; /* edge legacy */
+    min-width: 0;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-link {
+    padding: 10px 10px;
+    font-size: 13px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-height: 44px;
+    display: flex; align-items: center;
+  }
+  /* Hide secondary nav actions on tiny viewports — keep brand + main links */
+  .nav-actions { display: none !important; }
+  .toolbar { padding: 8px 12px; flex-wrap: wrap; gap: 8px; }
+
+  /* Cards / panels: single-column, full-width */
+  .container, .page, main { padding: 12px !important; }
+  .grid, .grid-2, .grid-3, .grid-4 {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+  .card, .panel, .dim-card { padding: 14px; }
+
+  /* Buttons / tap targets: WCAG 2.5.5 recommends ≥ 44×44 */
+  button, .btn, a.button {
+    min-height: 44px;
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+
+  /* Tables → block-stacked rows */
+  table { font-size: 13px; }
+  .field-label { font-size: 10px; }
+  .field-value { font-size: 13px; }
+
+  /* Section headers slightly tighter */
+  h1 { font-size: 22px; }
+  h2 { font-size: 18px; }
+  h3 { font-size: 15px; }
+
+  /* Prevent any inline-flex toolbar from forcing horizontal overflow */
+  .row, .flex-row { flex-wrap: wrap; }
+}
