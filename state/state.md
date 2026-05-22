@@ -178,3 +178,18 @@ Total active background agents: 9 (5 DE + 4 Phase B)
 [2026-05-22 H6] [auditor-rewriter] DONE — auditor.md v4.5 + auditor-runtime.md + 8-item mandatory checklist
 
 [2026-05-22 H7] [tools-integrator] DONE — qa/ scaffold (Playwright 1.56 + axe-core 4.11 + lost-pixel 3.22), 6 specs / 16 cases written, 14 passed / 2 skipped (D3 CDN), visual baseline 12/12 via fallback (lost-pixel CLI's --headless=old broken with modern Chromium). BUG-001 confirmed fixed via 3 routing tests. Real findings: (P1) d3 jsdelivr CDN is SPOF — 5 pages render empty shell offline; (P2) catalog.html has 3 stale ids not in data; (P2) color-contrast WCAG fails on 92 nodes across 5 pages. Reports: audits/d3-runtime.md + audits/d3-runtime.json. ~90 min.
+
+[2026-05-22 H8] [main-thread] DONE — v4.5 polish + v4.6 GeoJSON & mobile retrofit (8 commits)
+  - `a1bda2b`: vendor d3.v7.9.0 to assets/vendor/ (274K) + rewire 6 v3 pages from jsdelivr/d3js.org → local. Fixed P1 SPOF.
+  - `a1bda2b` (same): catalog.html stops hardcoding 33 mock items (3 invalid) → derives from window.MuseumData.artifacts (277) via buildCatalogItemsFromMuseumData() on museum-data-ready. data-loader.js MOCK_COLLECTED_IDS cleaned too. BUG-002/003/004 fixed (caster-profile zhoukangwang dangling LINK; dashboard click-lock .active class missing; dashboard scrollable-region-focusable a11y).
+  - `01aaffb`: case-study v0.3 → v0.4 — added §5.7 "audit squad audited itself" (v4.5 二阶闭环 narrative). audits/d3-runtime.json is "last evidence piece" for §3-§5 thesis.
+  - `499cb12`: dashboard real GeoJSON. _mapProjection: linear → d3.geoConicEqualArea(parallels=[25,47], rotate=[-105,0]). loadRealGeoData() fetches china-terrain + 4 ancient-states. 39 regions render with real geography (Shang 8 features incl 鬼方/羌方/古蜀/盘龙城).
+  - `2f346b7`: geo-system real GeoJSON (matching dashboard pattern). 30 excavation sites + 24 museums real lon/lat. China terrain 197 points (was 24). DEFERRED-001 FULLY CLOSED.
+  - `dec08f2`: mobile retrofit via converged.css @media (max-width: 768px). Root cause was top-nav 11 links overflowing → viewport scaled up to 855. Fixed with nav-links horizontal-scroll + html/body overflow-x:hidden + max-width:100vw guard. 12 pages now report 375px true mobile width.
+  - `ebe4408`: 12-case mobile-viewport.spec.ts Playwright regression test.
+  - `573afd4`: catalog 2-col 小红书 grid + [style*="grid-template-columns"]:not(...) override for inline grids across 13 pages.
+  - `ab56205`: svg[width] max-width 100% scale-to-fit for SVG-heavy pages (time-pillar / caster-profile / pattern-tree / inscription-hezun).
+  - `3cdc539`: case-study v0.5 — §5.8 "defer 是 PM 工具箱里最危险的动词" reflection on the user-prompted "立马开始" reversal.
+  - Tests: 28/28 green (16 original + 12 mobile-viewport).
+  - DEFERRED-001: FULLY CLOSED. DEFERRED-002: PARTIALLY CLOSED (pragmatic retrofit done; true mobile-first rebuild still v5).
+  - Files: assets/vendor/d3.v7.min.js, audits/bug-log.md (updated), docs/case-study.md (v0.5), qa/tests/mobile-viewport.spec.ts, converged.css (+125 lines mobile block).
