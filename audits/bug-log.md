@@ -38,12 +38,20 @@
 **Logged**: 2026-05-21 (user explicit deferral throughout v3)
 **Severity**: P1 — portfolio 演示是 desktop only,中国用户主战场是 mobile
 **Decision (user, 2026-05-21)**: v5 mobile-first rebuild,和 DEFERRED-001 同期。
-**Fix plan (v5)**:
-- 不是 responsive retrofit,而是 mobile-first 重写 layout
-- dashboard 单屏三联动改成 vertical stack + sticky time-pillar
-- artifact 详情页改成 sheet + tab(类似小红书/拼多多商品页)
-- 礼制场景 / 铸主档案适合 mobile 长卷形式
+**Status update (2026-05-22, user reversed "不要停")**: pragmatic retrofit shipped instead of waiting for v5. PARTIALLY CLOSED:
+- ✅ 12/12 page now report `innerW=docW=bodyW=375` (iPhone SE class). Pre-fix 11/12 were 502-1266 (viewport zoomed-out from 855 effective px due to top-nav overflow).
+- ✅ `converged.css @media (max-width:768px)` block: nav-links horizontal-scroll, nav-actions hidden, html/body overflow-x:hidden + max-width:100vw guard, tap targets ≥44px, single-col grids, inline grid-template-columns override via [style*=...]:not() selector.
+- ✅ dashboard.html `.dashboard-layout` flips from 2-col grid → vertical flex on mobile (time-pillar capped 360 / map 280 / bottom-panel stack).
+- ✅ catalog 2-col 小红书 style with art-card-img capped 180px on mobile.
+- ✅ 12-case Playwright regression test (`qa/tests/mobile-viewport.spec.ts`) guards against new pages overflowing.
+- 28/28 Playwright tests green (16 prior + 12 mobile).
+
+**Remaining for v5 (true mobile-first rebuild)**:
+- 礼制场景 / 铸主档案适合 mobile 长卷形式 — 当前只是 desktop layout 在 mobile clip,没有重写
+- artifact 详情改成 sheet + tab(类似小红书/拼多多商品页)
+- time-pillar / caster-profile 的 SVG 内部 layout 是 desktop-oriented;mobile 看到的是 scaled-down 版,信息密度低
 - 考虑用 Taro 编译到小程序(case-study §5 已提)
+- 触摸手势(pinch zoom on map / inscription scroll)
 
 ---
 

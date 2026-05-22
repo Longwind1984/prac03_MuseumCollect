@@ -387,10 +387,28 @@ Comparative Auditor D2 综合判断:**6.5/10 (v1 composite) → 7.2/10 (v3) = +0
 
 这条论点 v3 阶段我做不出来,因为 5 persona 都是 read-only。v4.5 之后我可以做出来——`audits/d3-runtime.json` 是机器可读的 evidence,它是 case-study 整个 §3 §4 §5 论点的**最后一块拼图**。
 
+### 5.8 v4.6 当晚 follow-up:GeoJSON + 移动端的"先做了再说"
+
+§5.3 里我承认"移动端 Day 0 就该在 spec 里"。v4.5 收尾后我打算把它留给 v5 mobile-first rebuild,理由是"两个 P1(real GeoJSON + mobile)一起做更经济"。User 当场反驳:**"为什么要 defer?现在立马开始,不要停。"**
+
+我重新算了 trade-off:GeoJSON 是 contained 的 2-3 小时 retrofit(B1 phase data 早就备好);mobile 是 1-2 天工程,但**纯 retrofit**(加 media queries,不重写 layout)可以在 1-2 小时内让 12 个页面在 375px 真能用。两个一起做 = 4 小时 vs. v5 重新约定一周。**这是把"defer"识别为伪经济**——defer 的真实成本不是工时,是"portfolio 在演示桌上仍然是 desktop-only,中国主战场用户 0 触达"。
+
+**GeoJSON 落地**(commit `499cb12` + `2f346b7`):dashboard 和 geo-system 都接入 d3.geoConicEqualArea(parallels=[25,47],rotate=[-105,0])+ fetch B1 阶段的 7 个 GeoJSON 文件(china-terrain + 4 ancient-states + 30 excavation-sites + 24 museums)。商代 region 从 inline 4 个简化 polygon 升到 8 个真 feature(含 鬼方/羌方/古蜀/盘龙城/周方);出土地点从 14 个粗略 normalized x/y% 升到 30 个真经纬度 Point。中国轮廓 hardcode 24 points → 真 terrain 197 points。
+
+**Mobile retrofit**(commit `dec08f2` + `573afd4`):没有重写,只在 converged.css 加 `@media (max-width: 768px)` 块——`html/body overflow-x:hidden` 兜底,top-nav 11 个 link 在 mobile 改成 horizontal-scroll(不 wrap、不撑大 viewport),dashboard 三联动 flip 成 vertical stack,catalog 改成 2-col 小红书风。**关键 trick**:用 `[style*="grid-template-columns"]:not(.dashboard-layout):not(.catalog-grid)` 一次 override 13 个页面的 inline grid layout 到 1fr,**不动 HTML**。
+
+**测试同步升级**(commit `ebe4408`):新增 `qa/tests/mobile-viewport.spec.ts`,12-case 断言每个页面在 iPhone SE 375×667 都报 `innerW=docW=bodyW=375`。28/28 现在绿——16 原有 + 12 mobile regression。
+
+**这一段教我什么**:
+
+> **"defer" 是 PM 工具箱里最危险的动词**。它看上去节省决策成本,实际把"我没勇气现在做"包装成"等更好的窗口"。真实的 defer 应该 satisfy 两个条件:(1) 现在做的 cost > 等的 cost,(2) 等的过程中世界状态不会让 deliverable 变陈旧。BUG-001 之后第 6 天我承认:GeoJSON + mobile 都不 satisfy 这两条——它们的 cost 是 4h,等的过程 portfolio 一直 less impressive。
+
+这条 reframing 让 §5.3 "我会重来的事" 从"事后反省"升级为"当场识别"。**这件事过后我对自己 PM 决策的 calibration 提高了一个 step——defer 之前必须用 30 秒算实际成本对比**,不是 vibes。
+
 ---
 
-**Case Study 版本**:v0.4 (v4.5 Audit-Itself 闭环完成)
-**作者**:Product Owner agent (v4 iteration, Opus, cold context) + 项目主理人 (v4.5 §5.7 增补)
+**Case Study 版本**:v0.5 (v4.6 GeoJSON + Mobile Retrofit 同夜完成)
+**作者**:Product Owner agent (v4 iteration, Opus, cold context) + 项目主理人 (§5.7 §5.8 增补)
 **日期**:2026-05-22
-**字数**:~7300 字(v3+v4+v4.5 累计),其中 §3 ~2500 字 / §4 ~1800 字 / §5 ~2800 字
-**下次更新触发条件**:D7-D14 任一 Track 闭环完成,或 v5 mobile-first rebuild 启动
+**字数**:~7900 字(v3+v4+v4.5+v4.6 累计),其中 §3 ~2500 / §4 ~1800 / §5 ~3400
+**下次更新触发条件**:D7-D14 任一 Track 闭环完成,或 v5 真 mobile-first rebuild 启动
