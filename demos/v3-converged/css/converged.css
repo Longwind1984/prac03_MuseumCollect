@@ -374,4 +374,27 @@ body {
   /* Hero padding inline on index */
   [style*="padding: 60px"] { padding: 32px 12px !important; }
   [style*="padding:60px"]  { padding: 32px 12px !important; }
+
+  /* Tab bar (catalog): horizontal scroll so 5+ tabs don't wrap or shrink.
+     Same trick as top-nav. */
+  .tab-bar {
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-wrap: nowrap !important;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex-shrink: 0;
+    padding: 10px 12px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  /* Filter chip rows (.filter-chip wrappers via inline flex) → horizontal-scrollable */
+  [id$="-filters"], [id="pattern-filters"], [id="geo-filters"] {
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 }
