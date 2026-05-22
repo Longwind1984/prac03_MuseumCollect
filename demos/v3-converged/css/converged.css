@@ -349,4 +349,18 @@ body {
   }
   /* Page padding tighter on mobile */
   .page-container, [class*="page-"] { padding-left: 12px !important; padding-right: 12px !important; }
+
+  /* SVG charts: scale to fit container instead of overflowing viewport.
+     Most v3 SVGs already have viewBox set when width attr is fixed-px,
+     so max-width: 100% triggers proportional scale-down. */
+  svg[width] {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  /* Exempt dashboard's intentionally fixed-size SVGs (already handled by
+     dashboard-layout media query reflow). */
+  #map-svg, #pillar-container svg, .pattern-strip svg {
+    max-width: none !important;
+    height: auto;
+  }
 }
