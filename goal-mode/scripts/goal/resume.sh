@@ -44,13 +44,15 @@ EOF
   aborted|budget-limited)
     turn=$(goal_state_get turn_count)
     tokens=$(goal_state_get tokens_estimated)
-    new_turns=$(( ${turn:-0} + 100 ))
-    new_tokens=$(( ${tokens:-0} + 1000000 ))
+    [[ "$turn" =~ ^[0-9]+$ ]] || turn=0
+    [[ "$tokens" =~ ^[0-9]+$ ]] || tokens=0
+    new_turns=$(( turn + 100 ))
+    new_tokens=$(( tokens + 1000000 ))
     goal_state_set '.status = "active"'
     goal_state_set '.consecutive_blocks = 0'
     goal_state_set '.blocker.consecutive_count = 0'
-    goal_state_set ".budget.max_turns = $new_turns"
-    goal_state_set ".budget.max_tokens = $new_tokens"
+    goal_state_set '.budget.max_turns = $v' --argjson v "$new_turns"
+    goal_state_set '.budget.max_tokens = $v' --argjson v "$new_tokens"
     goal_history_append "resumed" "from $status; budget extended to ${new_turns} turns / ${new_tokens} tokens"
     extra=$(printf '\nBudget extended: +100 turns (-> %s) / +1M tokens (-> %s).' "$new_turns" "$new_tokens")
     ;;
@@ -61,6 +63,11 @@ EOF
     extra=""
     ;;
 esac
+
+# Clear the jq-independent kill sentinels so the re-armed loop isn't stopped on
+# its first fire (abort.sh — or a consumed STOP — leaves an ABORTED file that
+# the continuation hook treats as an authoritative stop).
+rm -f "$(goal_aborted_path)" "$(goal_stop_path)" 2>/dev/null || true
 
 cat <<EOF
 STATUS=active

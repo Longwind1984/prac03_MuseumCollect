@@ -31,7 +31,7 @@ set `CLAUDE_CONFIG_DIR`.
 /goal status                show state (turn/token budget, last audit, history)
 /goal pause                 stop the loop re-prompting (work is untouched)
 /goal resume                re-arm the loop (extends budget if it was exhausted)
-/goal abort                 terminate the current goal
+/goal abort                 terminate the current goal (a later /goal resume re-opens it)
 /goal show-spec             print the verbatim spec driving the loop
 /goal audit                 run the clean-context auditor against the spec now
 ```
@@ -68,8 +68,10 @@ Neither touches your working tree — nothing is reverted.
 - To finish, Claude emits a line `GOAL_COMPLETE: <summary>`. This does **not**
   self-close the goal — an **independent `claude -p` auditor** with no memory of
   the conversation re-derives the requirements from `spec.md` and verifies them
-  against the real working tree (files, tests, git). Only a `COMPLETE` verdict
-  closes the goal; otherwise the auditor's gaps are fed back into the contract.
+  against the real working tree using **read-only** tools (it reads files, git
+  state, and any test/build artifacts already present — it does not execute
+  tests or other code). Only a `COMPLETE` verdict closes the goal; otherwise the
+  auditor's gaps are fed back into the contract.
 - `GOAL_BLOCKED: <reason>` repeated for **3 consecutive turns** moves the goal to
   `blocked`. Budgets (`max_turns`, `max_tokens`) move it to `budget-limited`.
 
