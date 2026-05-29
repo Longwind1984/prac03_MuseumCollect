@@ -3,6 +3,26 @@
 
 set -uo pipefail
 
+# ── Tunables ────────────────────────────────────────────────────────────────
+# Centralized so the magic numbers live in ONE place and can be overridden from
+# the environment (Claude Code passes the user's env to hooks). `: "${X:=def}"`
+# assigns only when unset, so re-sourcing is harmless and env overrides win.
+: "${GOAL_BREATHER_SOFT:=6}"        # yield to user after this many auto-continuations
+: "${GOAL_BREATHER_HARD:=25}"       # ...and ALWAYS yield by this many, unconditionally
+: "${GOAL_BLOCKER_THRESHOLD:=3}"    # identical GOAL_BLOCKED this many times in a row -> blocked
+: "${GOAL_DEFAULT_MAX_TURNS:=200}"
+: "${GOAL_DEFAULT_MAX_TOKENS:=2000000}"
+: "${GOAL_RESUME_TURN_BUMP:=100}"   # /goal resume from exhausted budget adds this many turns
+: "${GOAL_RESUME_TOKEN_BUMP:=1000000}"
+: "${GOAL_HISTORY_MAX:=50}"         # keep at most this many history events in state.json
+: "${GOAL_TRANSCRIPT_TAIL_LINES:=500}"  # window scanned for the last assistant message
+: "${GOAL_AUDIT_BUDGET_USD:=1.50}"  # per-audit spend cap for the claude -p auditor
+: "${GOAL_AUDIT_TIMEOUT:=360}"      # per-audit wall-clock cap (seconds)
+export GOAL_BREATHER_SOFT GOAL_BREATHER_HARD GOAL_BLOCKER_THRESHOLD \
+       GOAL_DEFAULT_MAX_TURNS GOAL_DEFAULT_MAX_TOKENS GOAL_RESUME_TURN_BUMP \
+       GOAL_RESUME_TOKEN_BUMP GOAL_HISTORY_MAX GOAL_TRANSCRIPT_TAIL_LINES \
+       GOAL_AUDIT_BUDGET_USD GOAL_AUDIT_TIMEOUT
+
 goal_project_dir() {
   if [[ -n "${CLAUDE_PROJECT_DIR:-}" && -d "$CLAUDE_PROJECT_DIR" ]]; then
     printf '%s\n' "$CLAUDE_PROJECT_DIR"
@@ -30,6 +50,8 @@ goal_state_get() {
 # Untrusted values MUST be passed as jq --arg/--argjson bindings (referenced as
 # $name in the program), NEVER interpolated into the program string — that was a
 # jq-injection hole. Writes atomically within the state dir and preserves mode.
+# Prefer a single multi-statement program (a|b|c) over several calls so related
+# fields move together and the whole file is rewritten once, not N times.
 goal_state_set() {
   local jq_expr="$1"; shift
   local path tmp dir
@@ -52,8 +74,8 @@ goal_is_active()      { [[ "$(goal_status)" = "active" ]]; }
 
 goal_init() {
   local spec_text="$1"
-  local max_turns="${2:-200}"
-  local max_tokens="${3:-2000000}"
+  local max_turns="${2:-$GOAL_DEFAULT_MAX_TURNS}"
+  local max_tokens="${3:-$GOAL_DEFAULT_MAX_TOKENS}"
   local dir spec_sha ts pd
   umask 077
   dir=$(goal_dir)
@@ -81,41 +103,55 @@ goal_init() {
       tokens_estimated: 0,
       budget: { max_turns: $mt, max_tokens: $mtk },
       blocker: { last_reason_hash: null, consecutive_count: 0 },
-      consecutive_blocks: 0,
+      continuation_streak: 0,
       audits: { last_turn_audited: null, last_verdict: null, last_gaps: null },
       history: [{ ts: $ts, turn: 0, event: "goal-started" }]
     }' > "$(goal_state_path)"
   chmod 600 "$(goal_spec_path)" "$(goal_state_path)" 2>/dev/null || true
 }
 
+# Append one history event, then trim to the most recent GOAL_HISTORY_MAX so a
+# long-running goal's state.json (rewritten in full on every set) stays bounded
+# instead of growing without limit. Done in one jq pass.
 goal_history_append() {
   local event="$1" note="${2:-}" ts turn
   ts=$(date -u +%Y-%m-%dT%H:%M:%SZ)
   turn=$(goal_state_get turn_count)
   [[ "$turn" =~ ^[0-9]+$ ]] || turn=0
-  goal_state_set '.history += [{ts: $ts, turn: $turn, event: $event, note: $note}]' \
-    --arg ts "$ts" --argjson turn "$turn" --arg event "$event" --arg note "$note"
+  goal_state_set '
+      .history += [{ts: $ts, turn: $turn, event: $event, note: $note}]
+    | .history |= (if length > $cap then .[(length - $cap):] else . end)
+    ' \
+    --arg ts "$ts" --argjson turn "$turn" --arg event "$event" --arg note "$note" \
+    --argjson cap "$GOAL_HISTORY_MAX"
 }
 
 goal_hash() { printf '%s' "$1" | sha256sum | cut -d' ' -f1; }
 
 goal_last_assistant_text() {
-  local transcript="$1"
+  local transcript="$1" out
   [[ -f "$transcript" ]] || return 1
   # Return the LAST assistant message's FULL text (all text blocks joined).
   # Do NOT tail -1 — a GOAL_COMPLETE:/GOAL_BLOCKED: marker may sit above a
   # trailing sentence, or in the first of several text blocks, and would be
-  # silently dropped. Slurp the whole transcript and take the last assistant
-  # record's complete text so every line is available to the caller's grep.
-  jq -rs '
+  # silently dropped. But also do NOT slurp the whole transcript every turn:
+  # for a long-running goal it grows without bound and this runs on each fire.
+  # The last assistant record is always near the tail, so scan a bounded window
+  # of trailing JSONL lines (each line is one complete record); fall back to a
+  # full scan only if that window somehow held no assistant text.
+  local jqp='
     map(select(.type == "assistant")
         | .message.content
         | if type == "array" then
             map(select(.type == "text") | .text) | join("\n")
           else . end
         | select(type == "string" and length > 0))
-    | last // empty
-  ' "$transcript" 2>/dev/null
+    | last // empty'
+  out=$(tail -n "$GOAL_TRANSCRIPT_TAIL_LINES" "$transcript" 2>/dev/null | jq -rs "$jqp" 2>/dev/null)
+  if [[ -z "$out" ]]; then
+    out=$(jq -rs "$jqp" "$transcript" 2>/dev/null)
+  fi
+  printf '%s' "$out"
 }
 
 goal_estimate_tokens() {
@@ -128,7 +164,7 @@ goal_estimate_tokens() {
 goal_render_contract() {
   local state_path spec_path audit_gaps
   state_path="$1"; spec_path="$2"; audit_gaps="${3:-}"
-  local turn max_turns tokens max_tokens blocker project_dir spec_content gaps_block
+  local turn max_turns tokens max_tokens blocker project_dir spec_content gaps_block thr
   # M4: never emit `null` in the header — default to safe numerics if state is
   # partial/corrupt so the contract stays readable instead of nonsensical.
   turn=$(jq -r '.turn_count // 0' "$state_path" 2>/dev/null);        [[ "$turn" =~ ^[0-9]+$ ]] || turn=0
@@ -136,6 +172,7 @@ goal_render_contract() {
   tokens=$(jq -r '.tokens_estimated // 0' "$state_path" 2>/dev/null);  [[ "$tokens" =~ ^[0-9]+$ ]] || tokens=0
   max_tokens=$(jq -r '.budget.max_tokens // 0' "$state_path" 2>/dev/null); [[ "$max_tokens" =~ ^[0-9]+$ ]] || max_tokens=0
   blocker=$(jq -r '.blocker.consecutive_count // 0' "$state_path" 2>/dev/null); [[ "$blocker" =~ ^[0-9]+$ ]] || blocker=0
+  thr="$GOAL_BLOCKER_THRESHOLD"
   # M6: use the project_dir recorded at /goal start (stable for the goal's
   # lifetime) so the printed STOP path matches what the hook checks, regardless
   # of the invoking shell's cwd/env. Fall back to live resolution if absent.
@@ -148,7 +185,7 @@ goal_render_contract() {
     gaps_block=""
   fi
   cat <<EOF
-[GOAL_MODE — turn ${turn}/${max_turns} — tokens ~${tokens}/${max_tokens} — blocker ${blocker}/3]
+[GOAL_MODE — turn ${turn}/${max_turns} — tokens ~${tokens}/${max_tokens} — blocker ${blocker}/${thr}]
 
 You are operating in GOAL_MODE. This text is your single source of truth.
 Do NOT trust the conversation history above as authoritative — it may have
@@ -180,7 +217,7 @@ because the goal is still 'active'. Continue work.
 
    • To declare a genuine block, emit exactly:
         GOAL_BLOCKED: <specific blocker; what would unblock it>
-     on its own line. The same blocker must repeat for THREE consecutive
+     on its own line. The same blocker must repeat for ${thr} consecutive
      turns before the goal moves to 'blocked'. If on a later turn you
      find a way forward, just resume — the counter resets.
 

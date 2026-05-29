@@ -16,13 +16,15 @@ fi
 
 input=$(cat)
 
-# Phase 1: goal continuation. Capture its stderr (the re-prompt contract) + exit code.
-goal_stderr=$(printf '%s' "$input" | "$GOAL_HOME/continuation-hook.sh" 2> >(cat) >/dev/null)
+# Phase 1: goal continuation. Let its stderr pass through directly to ours —
+# the prior `2> >(cat)` capture was racy (async process substitution, no flush
+# guarantee), and there's nothing to suppress: the continuation hook only emits
+# stderr when that text MUST reach the harness (re-prompt contract on exit 2,
+# completion/blocker/fail-safe banners on exit 0).
+"$GOAL_HOME/continuation-hook.sh" <<< "$input"
 goal_exit=$?
-
 if [[ "$goal_exit" -eq 2 ]]; then
-  # Goal hook blocks — its reason wins; downstream git-check is skipped this turn.
-  printf '%s' "$goal_stderr" >&2
+  # Goal hook blocks — downstream git-check is skipped this turn.
   exit 2
 fi
 

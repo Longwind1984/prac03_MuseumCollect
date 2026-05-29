@@ -3,6 +3,18 @@
 # Input: Stop-event JSON on stdin.
 # Output: exit 2 with stderr reason to keep Claude going; exit 0 to let it stop.
 #
+# Control flow (order matters):
+#   1. kill switches (sentinel files, jq-independent)  -> stop
+#   2. not active                                       -> stop
+#   3. turn increment + budget ceilings                 -> stop if exhausted
+#   4. handle the last message's marker:
+#        GOAL_COMPLETE -> audit; COMPLETE stops, INCOMPLETE continues w/ gaps
+#        GOAL_BLOCKED  -> streak; threshold stops, else continues
+#        (neither)     -> reset blocker streak, continue
+#   5. for every CONTINUE outcome: bump the streak, then the periodic breather
+#      decides exit 0 (pause) vs exit 2 (re-prompt). The breather is applied
+#      LAST so it can never swallow an unprocessed completion/blocker claim.
+#
 # Recursion safety: GOAL_AUDITOR_SUBPROCESS=1 short-circuits this hook so
 # the auditor's `claude -p` subprocess never re-enters.
 
@@ -21,8 +33,8 @@ input=$(cat)
 # boolean false as empty, so `// "x"` would collapse both — read the raw value
 # instead: an absent key yields "null", which (like "true"/empty) is treated as
 # eligible for the periodic breather, while an explicit "false" is NOT (only the
-# hard cap applies then). This realizes the "treat unknown as true for the cap"
-# guidance without misreading a real false.
+# hard cap applies then). This realizes "treat unknown as true for the cap"
+# without misreading a real false.
 stop_hook_active=$(echo "$input" | jq -r '.stop_hook_active' 2>/dev/null)
 transcript=$(echo "$input" | jq -r '.transcript_path // ""' 2>/dev/null)
 
@@ -47,22 +59,6 @@ goal_is_initialized || exit 0
 
 status=$(goal_status)
 if [[ "$status" != "active" ]]; then
-  exit 0
-fi
-
-consecutive_blocks=$(goal_state_get consecutive_blocks)
-[[ "$consecutive_blocks" =~ ^[0-9]+$ ]] || consecutive_blocks=0
-
-# H2: periodic breather — return control to the user so an unattended loop
-# always has a natural pause point. Two tiers:
-#   • soft (>=6):  yield when we appear to be in an auto-continuation chain
-#                  (stop_hook_active != "false", which includes unknown/empty).
-#   • hard (>=25): yield unconditionally, so the loop ALWAYS pauses eventually
-#                  even if the harness never sets stop_hook_active=true.
-if [[ "$consecutive_blocks" -ge 25 ]] \
-   || { [[ "$consecutive_blocks" -ge 6 ]] && [[ "$stop_hook_active" != "false" ]]; }; then
-  goal_state_set '.consecutive_blocks = 0' || true
-  goal_history_append "batch-paused-near-cap" "periodic breather (soft 6 / hard 25); still active, /goal resume or just continue" || true
   exit 0
 fi
 
@@ -103,7 +99,12 @@ fi
 
 last_text=$(goal_last_assistant_text "$transcript" 2>/dev/null || true)
 
+# Gaps to attach to THIS turn's re-prompt (set only on an incomplete completion).
+contract_gaps=""
+
 if printf '%s\n' "$last_text" | grep -qE '^GOAL_COMPLETE:'; then
+  # ── Completion claim. Must be audited regardless of the breather, so a real
+  #    completion is never lost to a coincidental periodic pause.
   claim=$(printf '%s\n' "$last_text" | grep -E '^GOAL_COMPLETE:' | head -1)
   goal_history_append "completion-claimed" "$claim"
   audit_log="$(goal_audits_dir)/turn-${turn}.json"
@@ -115,16 +116,17 @@ if printf '%s\n' "$last_text" | grep -qE '^GOAL_COMPLETE:'; then
   verdict=$(jq -r '.verdict // "INCOMPLETE"' "$audit_log" 2>/dev/null || echo INCOMPLETE)
   # C1/H3: the verdict is attacker-influenceable (the auditor reads repo files).
   # Hard-validate against the literal enum BEFORE trusting it; anything else is
-  # forced to INCOMPLETE. Together with the --arg binding below this closes both
-  # the jq-injection path and the schema-bypass salvage path.
+  # forced to INCOMPLETE. Together with the --arg binding this closes both the
+  # jq-injection path and the schema-bypass salvage path.
   case "$verdict" in
     COMPLETE|INCOMPLETE) ;;
     *) verdict=INCOMPLETE ;;
   esac
-  goal_state_set '.audits.last_turn_audited = $t' --argjson t "$turn" || true
-  goal_state_set '.audits.last_verdict = $v' --arg v "$verdict" || true
+
   if [[ "$audit_exit" -eq 0 && "$verdict" = "COMPLETE" ]]; then
-    if goal_state_set '.status = "complete"'; then
+    # Terminal: audited complete. One consolidated state write.
+    if goal_state_set '.status="complete" | .audits.last_turn_audited=$t | .audits.last_verdict=$v | .audits.last_gaps=null' \
+         --argjson t "$turn" --arg v "$verdict"; then
       goal_history_append "audited-complete"
       cat >&2 <<EOF
 [GOAL_MODE — GOAL COMPLETE]
@@ -137,47 +139,66 @@ EOF
     echo "[GOAL_MODE] audit COMPLETE but state write failed; stopping loop. Run /goal status." >&2
     exit 0
   fi
-  gaps=$(jq -r '.gaps_for_main_agent // "Audit failed or unparseable; treat as incomplete."' "$audit_log" 2>/dev/null)
-  goal_state_set '.audits.last_gaps = $g' --arg g "$gaps" || true
-  goal_history_append "audited-incomplete" "$gaps"
-  # M-1: a completion attempt is not a blocker turn — clear any blocker streak.
-  goal_state_set '.blocker = {last_reason_hash: null, consecutive_count: 0}' || true
-  goal_state_set '.consecutive_blocks = (.consecutive_blocks + 1)' || true
-  goal_render_contract "$(goal_state_path)" "$(goal_spec_path)" "$gaps" >&2
-  exit 2
-fi
 
-blocker_line=$(printf '%s\n' "$last_text" | grep -E '^GOAL_BLOCKED:' | head -1 || true)
-if [[ -n "$blocker_line" ]]; then
+  # Incomplete completion claim → fall through to CONTINUE, carrying the gaps.
+  # A completion attempt is not a blocker turn, so reset the blocker streak in
+  # the same consolidated write that records the audit result.
+  gaps=$(jq -r '.gaps_for_main_agent // "Audit failed or unparseable; treat as incomplete."' "$audit_log" 2>/dev/null)
+  goal_state_set '.audits.last_turn_audited=$t | .audits.last_verdict=$v | .audits.last_gaps=$g | .blocker={last_reason_hash:null, consecutive_count:0}' \
+    --argjson t "$turn" --arg v "$verdict" --arg g "$gaps" || true
+  goal_history_append "audited-incomplete" "$gaps"
+  contract_gaps="$gaps"
+
+elif printf '%s\n' "$last_text" | grep -qE '^GOAL_BLOCKED:'; then
+  # ── Blocker claim. The SAME blocker must repeat GOAL_BLOCKER_THRESHOLD times
+  #    in a row to confirm; a different reason restarts the streak.
+  blocker_line=$(printf '%s\n' "$last_text" | grep -E '^GOAL_BLOCKED:' | head -1)
   blocker_text="${blocker_line#GOAL_BLOCKED:}"
   blocker_hash=$(goal_hash "$blocker_text")
   last_hash=$(goal_state_get blocker.last_reason_hash)
   if [[ "$blocker_hash" = "$last_hash" ]]; then
     goal_state_set '.blocker.consecutive_count = (.blocker.consecutive_count + 1)' || true
   else
-    goal_state_set '.blocker.consecutive_count = 1' || true
-    goal_state_set '.blocker.last_reason_hash = $h' --arg h "$blocker_hash" || true
+    goal_state_set '.blocker = {last_reason_hash: $h, consecutive_count: 1}' --arg h "$blocker_hash" || true
   fi
   count=$(goal_state_get blocker.consecutive_count)
   [[ "$count" =~ ^[0-9]+$ ]] || count=0
-  if [[ "$count" -ge 3 ]]; then
+  if [[ "$count" -ge "$GOAL_BLOCKER_THRESHOLD" ]]; then
     goal_state_set '.status = "blocked"' || true
     goal_history_append "blocked-confirmed" "$blocker_text"
     cat >&2 <<EOF
 [GOAL_MODE — BLOCKED CONFIRMED]
-Same blocker reported 3 consecutive turns. Status set to 'blocked'.
-Blocker: ${blocker_text}
+Same blocker reported ${GOAL_BLOCKER_THRESHOLD} consecutive turns. Status set to 'blocked'.
+Blocker:${blocker_text}
 The continuation loop has stopped. User intervention needed.
 EOF
     exit 0
   fi
+  # Not yet at threshold → CONTINUE (no gaps); maybe this turn finds a way.
+
 else
-  # M-1: this turn made progress (no GOAL_BLOCKED line). Reset the blocker streak
-  # so "3 CONSECUTIVE turns" is enforced literally — an intervening working turn
-  # must clear a prior streak, exactly as the contract/README promise.
+  # ── Plain working turn. Reset the blocker streak so the "CONSECUTIVE" in the
+  #    threshold is enforced literally — an intervening working turn clears it.
   goal_state_set '.blocker = {last_reason_hash: null, consecutive_count: 0}' || true
 fi
 
-goal_state_set '.consecutive_blocks = (.consecutive_blocks + 1)' || true
-goal_render_contract "$(goal_state_path)" "$(goal_spec_path)" "" >&2
+# ── CONTINUE path (working turn, not-yet-confirmed block, or incomplete
+#    completion). Bump the streak, then let the periodic breather decide whether
+#    to pause. Applied LAST and uniformly, so an unattended loop always reaches a
+#    natural stop without ever pre-empting the marker handling above. Two tiers:
+#      • soft (>= GOAL_BREATHER_SOFT): yield when in an auto-continuation chain
+#        (stop_hook_active != "false", i.e. true/unknown/absent).
+#      • hard (>= GOAL_BREATHER_HARD): yield unconditionally.
+goal_state_set '.continuation_streak = (.continuation_streak + 1)' || true
+streak=$(goal_state_get continuation_streak)
+[[ "$streak" =~ ^[0-9]+$ ]] || streak=0
+if [[ "$streak" -ge "$GOAL_BREATHER_HARD" ]] \
+   || { [[ "$streak" -ge "$GOAL_BREATHER_SOFT" ]] && [[ "$stop_hook_active" != "false" ]]; }; then
+  goal_state_set '.continuation_streak = 0' || true
+  goal_history_append "batch-paused-near-cap" \
+    "periodic breather (soft ${GOAL_BREATHER_SOFT} / hard ${GOAL_BREATHER_HARD}); still active — /goal resume or just continue. Any auditor gaps are in /goal status." || true
+  exit 0
+fi
+
+goal_render_contract "$(goal_state_path)" "$(goal_spec_path)" "$contract_gaps" >&2
 exit 2

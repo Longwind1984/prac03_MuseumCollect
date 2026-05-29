@@ -75,6 +75,27 @@ Neither touches your working tree — nothing is reverted.
 - `GOAL_BLOCKED: <reason>` repeated for **3 consecutive turns** moves the goal to
   `blocked`. Budgets (`max_turns`, `max_tokens`) move it to `budget-limited`.
 
+## Tuning
+
+The loop's behavior is controlled by environment variables (read by `lib.sh`).
+Defaults are sensible; override if you need different cadence in CI or for an
+unusually large/small goal. Set them in the shell you launch Claude Code from,
+or in your shell rc.
+
+| Variable | Default | Effect |
+| --- | --- | --- |
+| `GOAL_BREATHER_SOFT` | `6` | Pause the loop after this many auto-continuations when `stop_hook_active != false`. |
+| `GOAL_BREATHER_HARD` | `25` | Pause unconditionally after this many auto-continuations. |
+| `GOAL_BLOCKER_THRESHOLD` | `3` | Identical `GOAL_BLOCKED:` reasons this many turns in a row → `blocked`. |
+| `GOAL_DEFAULT_MAX_TURNS` | `200` | Default turn budget for `/goal start`. |
+| `GOAL_DEFAULT_MAX_TOKENS` | `2000000` | Default token budget for `/goal start`. |
+| `GOAL_RESUME_TURN_BUMP` | `100` | Extra turns `/goal resume` adds when re-arming from an exhausted budget. |
+| `GOAL_RESUME_TOKEN_BUMP` | `1000000` | Extra tokens `/goal resume` adds when re-arming. |
+| `GOAL_HISTORY_MAX` | `50` | Keep at most this many history events in `state.json`. |
+| `GOAL_TRANSCRIPT_TAIL_LINES` | `500` | Window scanned for the last assistant message (long-goal performance). |
+| `GOAL_AUDIT_BUDGET_USD` | `1.50` | Per-audit spend cap for the `claude -p` auditor. |
+| `GOAL_AUDIT_TIMEOUT` | `360` | Per-audit wall-clock cap (seconds). |
+
 ## Files
 
 ```

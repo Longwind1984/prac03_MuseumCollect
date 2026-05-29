@@ -75,8 +75,8 @@ cd "$project_dir" || exit 1
 # the blanket `git *` (push/reset/clean/checkout). What remains cannot write.
 audit_status=0
 audit_raw=$(
-  GOAL_AUDITOR_SUBPROCESS=1 timeout 360 claude -p \
-    --max-budget-usd 1.50 \
+  GOAL_AUDITOR_SUBPROCESS=1 timeout "$GOAL_AUDIT_TIMEOUT" claude -p \
+    --max-budget-usd "$GOAL_AUDIT_BUDGET_USD" \
     --disable-slash-commands \
     --output-format json \
     --allowedTools \

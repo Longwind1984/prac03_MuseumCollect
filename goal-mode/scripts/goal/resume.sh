@@ -1,8 +1,9 @@
 #!/bin/bash
 # /goal resume — arm the continuation loop again (-> active).
-# Resets the near-cap batch counter and the blocker counter so the loop
-# gets a fresh run. From budget-limited, extends the budget so the loop
-# can actually proceed instead of immediately re-tripping.
+# Resets the breather streak and the blocker counter. From budget-limited,
+# extends the budget so the loop can actually proceed instead of immediately
+# re-tripping. All per-branch state changes are done in ONE jq program — one
+# atomic write instead of four.
 
 set -uo pipefail
 # shellcheck disable=SC1091
@@ -28,37 +29,35 @@ EOF
     exit 1
     ;;
   paused)
-    goal_state_set '.status = "active"'
-    goal_state_set '.consecutive_blocks = 0'
+    goal_state_set '.status = "active" | .continuation_streak = 0'
     goal_history_append "resumed" "from paused"
     extra=""
     ;;
   blocked)
-    goal_state_set '.status = "active"'
-    goal_state_set '.consecutive_blocks = 0'
-    goal_state_set '.blocker.consecutive_count = 0'
-    goal_state_set '.blocker.last_reason_hash = null'
+    goal_state_set '.status = "active" | .continuation_streak = 0 | .blocker = {last_reason_hash:null, consecutive_count:0}'
     goal_history_append "resumed" "from blocked; blocker counter reset"
-    extra=$'\nBlocker counter reset. If the same blocker recurs 3× again it will re-block.'
+    extra=$'\nBlocker counter reset. If the same blocker recurs '"$GOAL_BLOCKER_THRESHOLD"$'× again it will re-block.'
     ;;
   aborted|budget-limited)
     turn=$(goal_state_get turn_count)
     tokens=$(goal_state_get tokens_estimated)
     [[ "$turn" =~ ^[0-9]+$ ]] || turn=0
     [[ "$tokens" =~ ^[0-9]+$ ]] || tokens=0
-    new_turns=$(( turn + 100 ))
-    new_tokens=$(( tokens + 1000000 ))
-    goal_state_set '.status = "active"'
-    goal_state_set '.consecutive_blocks = 0'
-    goal_state_set '.blocker.consecutive_count = 0'
-    goal_state_set '.budget.max_turns = $v' --argjson v "$new_turns"
-    goal_state_set '.budget.max_tokens = $v' --argjson v "$new_tokens"
+    new_turns=$(( turn + GOAL_RESUME_TURN_BUMP ))
+    new_tokens=$(( tokens + GOAL_RESUME_TOKEN_BUMP ))
+    goal_state_set '
+        .status = "active"
+      | .continuation_streak = 0
+      | .blocker.consecutive_count = 0
+      | .budget.max_turns = $mt
+      | .budget.max_tokens = $mtk
+      ' --argjson mt "$new_turns" --argjson mtk "$new_tokens"
     goal_history_append "resumed" "from $status; budget extended to ${new_turns} turns / ${new_tokens} tokens"
-    extra=$(printf '\nBudget extended: +100 turns (-> %s) / +1M tokens (-> %s).' "$new_turns" "$new_tokens")
+    extra=$(printf '\nBudget extended: +%s turns (-> %s) / +%s tokens (-> %s).' \
+              "$GOAL_RESUME_TURN_BUMP" "$new_turns" "$GOAL_RESUME_TOKEN_BUMP" "$new_tokens")
     ;;
   *)
-    goal_state_set '.status = "active"'
-    goal_state_set '.consecutive_blocks = 0'
+    goal_state_set '.status = "active" | .continuation_streak = 0'
     goal_history_append "resumed" "from $status"
     extra=""
     ;;
