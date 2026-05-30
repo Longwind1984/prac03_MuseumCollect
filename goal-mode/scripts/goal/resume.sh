@@ -29,14 +29,21 @@ EOF
     exit 1
     ;;
   paused)
-    goal_state_set '.status = "active" | .continuation_streak = 0'
+    goal_state_set '.status = "active" | .continuation_streak = 0 | .progress = {last_fingerprint:null, no_progress_count:0}'
     goal_history_append "resumed" "from paused"
     extra=""
     ;;
   blocked)
-    goal_state_set '.status = "active" | .continuation_streak = 0 | .blocker = {last_reason_hash:null, consecutive_count:0}'
+    goal_state_set '.status = "active" | .continuation_streak = 0 | .blocker = {last_reason_hash:null, consecutive_count:0} | .progress = {last_fingerprint:null, no_progress_count:0}'
     goal_history_append "resumed" "from blocked; blocker counter reset"
     extra=$'\nBlocker counter reset. If the same blocker recurs '"$GOAL_BLOCKER_THRESHOLD"$'× again it will re-block.'
+    ;;
+  stalled)
+    # Reset the progress tracker — otherwise the unchanged fingerprint would
+    # re-trip the stall on the very next turn before the agent can act.
+    goal_state_set '.status = "active" | .continuation_streak = 0 | .progress = {last_fingerprint:null, no_progress_count:0}'
+    goal_history_append "resumed" "from stalled; progress tracker reset"
+    extra=$'\nStall tracker reset. If no file/commit change occurs for '"$GOAL_STALL_THRESHOLD"$' more turns it will re-stall.'
     ;;
   aborted|budget-limited)
     turn=$(goal_state_get turn_count)
@@ -49,6 +56,7 @@ EOF
         .status = "active"
       | .continuation_streak = 0
       | .blocker.consecutive_count = 0
+      | .progress = {last_fingerprint:null, no_progress_count:0}
       | .budget.max_turns = $mt
       | .budget.max_tokens = $mtk
       ' --argjson mt "$new_turns" --argjson mtk "$new_tokens"
@@ -57,7 +65,7 @@ EOF
               "$GOAL_RESUME_TURN_BUMP" "$new_turns" "$GOAL_RESUME_TOKEN_BUMP" "$new_tokens")
     ;;
   *)
-    goal_state_set '.status = "active" | .continuation_streak = 0'
+    goal_state_set '.status = "active" | .continuation_streak = 0 | .progress = {last_fingerprint:null, no_progress_count:0}'
     goal_history_append "resumed" "from $status"
     extra=""
     ;;

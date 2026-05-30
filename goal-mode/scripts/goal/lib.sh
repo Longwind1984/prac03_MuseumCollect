@@ -10,6 +10,7 @@ set -uo pipefail
 : "${GOAL_BREATHER_SOFT:=6}"        # yield to user after this many auto-continuations
 : "${GOAL_BREATHER_HARD:=25}"       # ...and ALWAYS yield by this many, unconditionally
 : "${GOAL_BLOCKER_THRESHOLD:=3}"    # identical GOAL_BLOCKED this many times in a row -> blocked
+: "${GOAL_STALL_THRESHOLD:=8}"      # no working-tree/commit change for this many turns -> stalled (0 disables)
 : "${GOAL_DEFAULT_MAX_TURNS:=200}"
 : "${GOAL_DEFAULT_MAX_TOKENS:=2000000}"
 : "${GOAL_RESUME_TURN_BUMP:=100}"   # /goal resume from exhausted budget adds this many turns
@@ -19,6 +20,7 @@ set -uo pipefail
 : "${GOAL_AUDIT_BUDGET_USD:=1.50}"  # per-audit spend cap for the claude -p auditor
 : "${GOAL_AUDIT_TIMEOUT:=360}"      # per-audit wall-clock cap (seconds)
 export GOAL_BREATHER_SOFT GOAL_BREATHER_HARD GOAL_BLOCKER_THRESHOLD \
+       GOAL_STALL_THRESHOLD \
        GOAL_DEFAULT_MAX_TURNS GOAL_DEFAULT_MAX_TOKENS GOAL_RESUME_TURN_BUMP \
        GOAL_RESUME_TOKEN_BUMP GOAL_HISTORY_MAX GOAL_TRANSCRIPT_TAIL_LINES \
        GOAL_AUDIT_BUDGET_USD GOAL_AUDIT_TIMEOUT
@@ -104,6 +106,7 @@ goal_init() {
       budget: { max_turns: $mt, max_tokens: $mtk },
       blocker: { last_reason_hash: null, consecutive_count: 0 },
       continuation_streak: 0,
+      progress: { last_fingerprint: null, no_progress_count: 0 },
       audits: { last_turn_audited: null, last_verdict: null, last_gaps: null },
       history: [{ ts: $ts, turn: 0, event: "goal-started" }]
     }' > "$(goal_state_path)"
@@ -127,6 +130,29 @@ goal_history_append() {
 }
 
 goal_hash() { printf '%s' "$1" | sha256sum | cut -d' ' -f1; }
+
+# A cheap fingerprint of "did the agent actually change anything this turn":
+# the current commit + the set of uncommitted changes. When this is identical
+# turn-over-turn, the agent edited no files and made no commits — a strong
+# signal it is spinning rather than progressing (see GOAL_STALL_THRESHOLD).
+#   • Our own bookkeeping under .claude/goal/ (state.json, audit logs) is
+#     excluded so the per-turn state write never reads as "progress".
+#   • The transcript is NOT included anywhere (it grows every turn and would
+#     mask a stall). Only the project working tree counts.
+#   • Outside a git work tree we can't compute this cheaply/reliably, so we
+#     emit the sentinel "no-git" and the caller leaves stall detection inert
+#     (the breather + budget still bound the loop).
+goal_progress_fingerprint() {
+  local dir="$1"
+  if git -C "$dir" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    {
+      git -C "$dir" rev-parse HEAD 2>/dev/null
+      git -C "$dir" status --porcelain 2>/dev/null | grep -vF '.claude/goal/'
+    } | sha256sum | cut -d' ' -f1
+  else
+    printf 'no-git\n'
+  fi
+}
 
 goal_last_assistant_text() {
   local transcript="$1" out
@@ -173,6 +199,10 @@ goal_render_contract() {
   max_tokens=$(jq -r '.budget.max_tokens // 0' "$state_path" 2>/dev/null); [[ "$max_tokens" =~ ^[0-9]+$ ]] || max_tokens=0
   blocker=$(jq -r '.blocker.consecutive_count // 0' "$state_path" 2>/dev/null); [[ "$blocker" =~ ^[0-9]+$ ]] || blocker=0
   thr="$GOAL_BLOCKER_THRESHOLD"
+  local stall_note=""
+  if [[ "$GOAL_STALL_THRESHOLD" -gt 0 ]] 2>/dev/null; then
+    stall_note=$(printf '\n     The loop also detects %s consecutive no-progress turns and stops on its own.' "$GOAL_STALL_THRESHOLD")
+  fi
   # M6: use the project_dir recorded at /goal start (stable for the goal's
   # lifetime) so the printed STOP path matches what the hook checks, regardless
   # of the invoking shell's cwd/env. Fall back to live resolution if absent.
@@ -231,6 +261,9 @@ FAILURE MODES TO ACTIVELY RESIST:
      find yourself reasoning "this isn't quite what was asked but it's
      good enough", that IS the failure mode. Either meet the spec or
      emit GOAL_BLOCKED with what's missing.
+   • SILENT SPINNING: if you cannot change a single file or make any
+     concrete progress, do NOT keep repeating the same turn. Emit
+     GOAL_BLOCKED with the specific obstacle.${stall_note}
 
 KILL SWITCH (user can stop the loop any time):
    • /goal abort  — orderly stop from the chat

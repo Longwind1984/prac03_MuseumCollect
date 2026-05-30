@@ -24,6 +24,8 @@ tokens=$(goal_state_get tokens_estimated)
 max_tokens=$(goal_state_get budget.max_tokens)
 spec_sha=$(goal_state_get spec_sha256)
 blocker_count=$(goal_state_get blocker.consecutive_count)
+no_progress=$(goal_state_get progress.no_progress_count)
+[[ "$no_progress" =~ ^[0-9]+$ ]] || no_progress=0
 last_audit_turn=$(goal_state_get audits.last_turn_audited)
 last_verdict=$(goal_state_get audits.last_verdict)
 
@@ -33,7 +35,8 @@ STATUS=$status
   created:           $created
   turn:              $turn / $max_turns
   tokens (est):      $tokens / $max_tokens
-  consecutive block: $blocker_count / 3
+  consecutive block: $blocker_count / $GOAL_BLOCKER_THRESHOLD
+  no-progress turns: $no_progress / $GOAL_STALL_THRESHOLD
   spec sha256:       ${spec_sha:0:12}…
   last audit:        ${last_audit_turn:-—} ($last_verdict)
   state file:        $state_path
@@ -58,6 +61,9 @@ case "$status" in
     ;;
   blocked)
     printf '\nBlocked. Review the spec & history, then either /goal abort or /goal resume after the blocker is resolved.\n'
+    ;;
+  stalled)
+    printf '\nStalled — no working-tree/commit change for %s turns. Make a concrete change or unblock it, then /goal resume (or /goal abort).\n' "$no_progress"
     ;;
   complete)
     printf '\nGoal complete (audited). You may /goal start a new one when ready.\n'

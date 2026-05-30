@@ -182,6 +182,47 @@ else
   goal_state_set '.blocker = {last_reason_hash: null, consecutive_count: 0}' || true
 fi
 
+# ── STALL DETECTION (continue path). The breather yields periodically and the
+#    budget bounds the total run, but neither notices an agent that is *spinning*
+#    — re-reading the same files, re-claiming, or thinking in circles — without
+#    changing anything. If the working tree + commits are byte-identical for
+#    GOAL_STALL_THRESHOLD consecutive continue-turns AND no completion/blocker was
+#    declared, the loop is making no progress: stop with a clear, resumable
+#    diagnosis instead of looping to the hard breather (25) or budget (200).
+#    This is the load-bearing guarantee that an unattended-but-stuck loop
+#    interrupts early. Inert outside a git work tree (fingerprint == "no-git").
+if [[ "$GOAL_STALL_THRESHOLD" -gt 0 ]]; then
+  fp=$(goal_progress_fingerprint "$project_dir" 2>/dev/null || echo no-git)
+  if [[ "$fp" != "no-git" && -n "$fp" ]]; then
+    prev_fp=$(goal_state_get progress.last_fingerprint)
+    if [[ "$fp" = "$prev_fp" ]]; then
+      goal_state_set '.progress.no_progress_count = (.progress.no_progress_count + 1)' || true
+    else
+      goal_state_set '.progress = {last_fingerprint: $f, no_progress_count: 0}' --arg f "$fp" || true
+    fi
+    npc=$(goal_state_get progress.no_progress_count)
+    [[ "$npc" =~ ^[0-9]+$ ]] || npc=0
+    if [[ "$npc" -ge "$GOAL_STALL_THRESHOLD" ]]; then
+      goal_state_set '.status = "stalled"' || true
+      goal_history_append "stalled-no-progress" "no working-tree/commit change for $npc consecutive turns"
+      cat >&2 <<EOF
+[GOAL_MODE — STALLED]
+No change to the working tree or git commits for ${npc} consecutive turns, and
+no GOAL_COMPLETE / GOAL_BLOCKED was declared. The loop is spinning without making
+progress, so it stopped to avoid burning the budget.
+
+  /goal status    — review the spec, last auditor gaps, and history
+  /goal resume    — try again (e.g. after you unblock it, or if the agent was
+                    mid-investigation: reading/running tests without editing files)
+  /goal abort     — give up on this goal
+
+(Tune with GOAL_STALL_THRESHOLD; 0 disables this check.)
+EOF
+      exit 0
+    fi
+  fi
+fi
+
 # ── CONTINUE path (working turn, not-yet-confirmed block, or incomplete
 #    completion). Bump the streak, then let the periodic breather decide whether
 #    to pause. Applied LAST and uniformly, so an unattended loop always reaches a

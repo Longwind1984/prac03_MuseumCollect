@@ -74,6 +74,18 @@ Neither touches your working tree — nothing is reverted.
   auditor's gaps are fed back into the contract.
 - `GOAL_BLOCKED: <reason>` repeated for **3 consecutive turns** moves the goal to
   `blocked`. Budgets (`max_turns`, `max_tokens`) move it to `budget-limited`.
+- **Stall detection.** A self-aware agent emits `GOAL_BLOCKED`; a *stuck* one
+  often doesn't — it just keeps re-reading the same files or re-claiming without
+  changing anything. So the loop also watches whether each turn actually changed
+  the project: it fingerprints the git commit + uncommitted changes (excluding
+  the goal's own `.claude/goal/` bookkeeping; the transcript never counts). If
+  that fingerprint is identical for **`GOAL_STALL_THRESHOLD` consecutive turns**
+  (default 8) with no completion/blocker declared, the goal moves to `stalled`
+  and the loop stops with a clear diagnosis instead of spinning to the hard
+  breather or budget. Any real file/commit change resets the counter, so a
+  legitimately-working agent is never interrupted; `/goal resume` re-arms it (and
+  if it was mid-investigation, that's all it takes). Stall detection is inert
+  outside a git work tree, and `GOAL_STALL_THRESHOLD=0` disables it entirely.
 
 ## Tuning
 
@@ -87,6 +99,7 @@ or in your shell rc.
 | `GOAL_BREATHER_SOFT` | `6` | Pause the loop after this many auto-continuations when `stop_hook_active != false`. |
 | `GOAL_BREATHER_HARD` | `25` | Pause unconditionally after this many auto-continuations. |
 | `GOAL_BLOCKER_THRESHOLD` | `3` | Identical `GOAL_BLOCKED:` reasons this many turns in a row → `blocked`. |
+| `GOAL_STALL_THRESHOLD` | `8` | No working-tree/commit change for this many consecutive turns → `stalled`. `0` disables. |
 | `GOAL_DEFAULT_MAX_TURNS` | `200` | Default turn budget for `/goal start`. |
 | `GOAL_DEFAULT_MAX_TOKENS` | `2000000` | Default token budget for `/goal start`. |
 | `GOAL_RESUME_TURN_BUMP` | `100` | Extra turns `/goal resume` adds when re-arming from an exhausted budget. |
@@ -107,8 +120,25 @@ scripts/goal/
   auditor.sh            spawns the clean-context claude -p auditor
   start.sh status.sh pause.sh resume.sh abort.sh show-spec.sh audit-now.sh
 skills/goal/SKILL.md     the /goal slash command
+test/run-qa.sh           portable, hermetic QA harness (see Testing)
 install.sh
 ```
+
+## Testing
+
+```bash
+bash goal-mode/test/run-qa.sh
+```
+
+A self-contained behavioral harness for the Stop-hook state machine. It runs
+from **any directory in any repo** (it locates the scripts relative to itself,
+not via cwd), never touches your real `~/.claude` or any real project (every
+test runs in a throwaway `git init` dir), and is **free** — the auditor is
+stubbed, so there are no `claude -p` calls. It covers start/continue/budget,
+the blocker streak, completion auditing (COMPLETE closes / INCOMPLETE continues
+with gaps), the multi-line marker fix, both kill switches, pause, the recursion
+guard, and stall detection (trip / reset-on-progress / resume). Exit `0` = all
+assertions passed.
 
 ## Uninstall
 
