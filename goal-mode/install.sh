@@ -9,6 +9,21 @@ set -uo pipefail
 
 SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CLAUDE_DIR="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
+
+# M5: with neither CLAUDE_CONFIG_DIR nor HOME set, CLAUDE_DIR collapses to
+# "/.claude" and the installer would scatter files at the filesystem root (or
+# half-install). Refuse any target at root.
+if [[ -z "${CLAUDE_CONFIG_DIR:-}" && -z "${HOME:-}" ]]; then
+  echo "ERROR: neither CLAUDE_CONFIG_DIR nor HOME is set; refusing to install into /.claude. Set one and re-run." >&2
+  exit 1
+fi
+case "$CLAUDE_DIR" in
+  /.claude|/.claude/*)
+    echo "ERROR: install target resolved to '$CLAUDE_DIR' (filesystem root). Set CLAUDE_CONFIG_DIR or HOME and re-run." >&2
+    exit 1
+    ;;
+esac
+
 DISP_CMD="$CLAUDE_DIR/scripts/goal/dispatcher.sh"
 SETTINGS="$CLAUDE_DIR/settings.json"
 
@@ -67,4 +82,7 @@ Usage:
 Kill switch (always works):
   /goal abort
   touch <project>/.claude/goal/STOP
+
+Tip: add '.claude/goal/' to each project's .gitignore — it holds goal state and
+audit logs (which can capture file/test output) and should not be committed.
 EOF

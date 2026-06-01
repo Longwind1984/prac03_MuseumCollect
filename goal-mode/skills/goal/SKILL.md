@@ -11,7 +11,7 @@ The user invoked `/goal` with arguments: `$ARGUMENTS`
 Run the dispatch script and print its output verbatim to the user:
 
 ```bash
-bash "$HOME/.claude/scripts/goal/dispatch.sh" $ARGUMENTS
+bash "${CLAUDE_CONFIG_DIR:-$HOME/.claude}/scripts/goal/dispatch.sh" $ARGUMENTS
 ```
 
 After the script returns:
