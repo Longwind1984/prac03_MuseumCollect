@@ -52,18 +52,25 @@
   }
 
   async function loadAll() {
-    let all = [];
-    for (const path of SEGMENT_PATHS) {
-      try {
+    // v5 ④: parallelize the 5 segment fetches with Promise.allSettled (was a
+    // serial for-await loop — 5x round-trip latency). Results stay in
+    // SEGMENT_PATHS order so cross-dim-wiring's era-sequence logic is stable.
+    const results = await Promise.allSettled(
+      SEGMENT_PATHS.map(async (path) => {
         const r = await fetch(path);
-        if (r.ok) {
-          const data = await r.json();
-          all = all.concat(Array.isArray(data) ? data : [data]);
-        }
-      } catch(e) {
-        console.warn('[data-loader] Could not load', path, e.message);
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        const data = await r.json();
+        return Array.isArray(data) ? data : [data];
+      })
+    );
+    let all = [];
+    results.forEach((r, i) => {
+      if (r.status === 'fulfilled') {
+        all = all.concat(r.value);
+      } else {
+        console.warn('[data-loader] Could not load', SEGMENT_PATHS[i], r.reason && r.reason.message);
       }
-    }
+    });
 
     if (all.length === 0) {
       console.warn('[data-loader] No data loaded; using empty stub');
