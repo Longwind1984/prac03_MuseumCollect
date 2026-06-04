@@ -77,5 +77,25 @@ test('data-integrity: catalog visible card count vs README claim of 277', async 
     type: 'catalog-count',
     description: JSON.stringify({ data_artifacts: total, visible_cards: visible, claimed: 277 }),
   });
-  expect(total, `MuseumData.artifacts.length should be ~277, got ${total}`).toBeGreaterThan(200);
+  expect(total, `MuseumData.artifacts.length should be ~275, got ${total}`).toBeGreaterThan(200);
+});
+
+test('data-integrity: every COLLECTED_IDS entry resolves to a real MuseumData record (v5 ③ regression)', async ({ page }) => {
+  // v5 ③ fixed a hidden bug: state.js had 28/35 IDs that didn't exist in any
+  // segment JSON, so me.html silently showed ~7 collected (not the claimed 35).
+  // This guard catches future ID drift the moment someone introduces a typo.
+  await page.goto(`${BASE}/me.html`);
+  await page.waitForTimeout(2000);
+  const result = await page.evaluate(() => {
+    const w: any = window as any;
+    const ids = Array.from((w.MuseumConstants?.COLLECTED_IDS as Set<string>) || []);
+    const unresolved = ids.filter(id => !w.MuseumData?.get?.(id));
+    return { total: ids.length, unresolved };
+  });
+  test.info().annotations.push({
+    type: 'collected-ids-real',
+    description: JSON.stringify(result),
+  });
+  expect(result.unresolved, `These COLLECTED_IDS don't exist in any segment JSON: ${result.unresolved.join(', ')}`).toEqual([]);
+  expect(result.total, 'COLLECTED_IDS should not be empty').toBeGreaterThan(0);
 });

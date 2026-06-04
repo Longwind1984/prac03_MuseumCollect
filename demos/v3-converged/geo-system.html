@@ -20,23 +20,10 @@
 .overseas-item:hover { background: var(--bg-cream); }
 </style>
 </head>
-<body>
+<body data-page="geo-system">
 
-<nav class="top-nav">
-  <a href="index.html" class="nav-logo">器·<span>集</span></a>
-  <div class="nav-links">
-    <a href="catalog.html" class="nav-link">图鉴</a>
-    <a href="time-pillar.html" class="nav-link">时代柱</a>
-    <a href="geo-system.html" class="nav-link active">地理</a>
-    <a href="pattern-tree.html" class="nav-link">纹饰树</a>
-    <a href="inscription-reader.html" class="nav-link">铭文</a>
-    <a href="purpose-scene.html" class="nav-link">礼制场景</a>
-    <a href="caster-profile.html" class="nav-link">铸主</a>
-    <a href="me.html" class="nav-link">我的图鉴</a>
-    <a href="scan.html" class="nav-link">识别</a>
-  </div>
-  <button class="linkage-toggle"><div class="linkage-dot"></div><span class="linkage-label">穿越模式 ●</span></button>
-</nav>
+<nav id="top-nav-placeholder" class="top-nav"></nav>
+<script src="js/nav.js"></script>
 
 <div class="page-container" style="padding:24px;">
   <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
@@ -89,6 +76,7 @@
   </div>
 </div>
 
+<script src="js/constants.js"></script>
 <script src="js/state.js"></script>
 <script src="js/cross-dim-wiring.js"></script>
 <script>
@@ -132,7 +120,7 @@ const OVERSEAS_ITEMS = [
 
 let currentView = 'excavation';
 const ERA_SEQUENCE = ['夏','商','西周','春秋','战国','秦'];
-const ERA_COLORS = { '夏':'#6e4a2e','商':'#4a5a3a','西周':'#a73a2a','春秋':'#2a2a3a','战国':'#7a3a2a','秦':'#1a1a1a','汉':'#b89046' };
+const ERA_COLORS = window.MuseumConstants.ERA_COLORS;
 let currentEra = '商';
 
 function setView(view) {

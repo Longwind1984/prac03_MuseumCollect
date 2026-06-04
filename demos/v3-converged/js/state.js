@@ -1,50 +1,23 @@
 /**
  * state.js — Collection state manager for MuseumCollect v3
- * Mock: 35 of 277 artifacts collected
+ * Mock: 25 of 275 artifacts collected. IDs/meta sourced from MuseumConstants.
  */
 
 (function() {
   'use strict';
 
-  const COLLECTED_IDS = new Set([
-    'houmuwu_ding', 'simuwu_ding', 'fuhao_owl_zun', 'siyang_fang_zun', 'zilong_ding',
-    'da_yu_ding', 'he_zun', 'li_gui', 'mao_gong_ding', 'da_ke_ding',
-    'san_shi_pan', 'xu_ji_zi_bai_pan', 'da_sheng_pan', 'guoji_zibo_pan',
-    'lian_he_fang_hu', 'yuewang_goujian_jian', 'zeng_houyi_bianzhong', 'zeng_houyi_zunpan',
-    'shangguo_fang_sheng', 'shang_yang_fang_sheng',
-    'cuo_jin_boshanluo', 'changxin_gonglamp',
-    'sanxingdui_bronze_standfigure', 'sanxingdui_zongmu_mask',
-    'met_he_ding', 'british_fang_yi',
-    'erlitou_tong_jue', 'panlongcheng_fang_ding',
-    'zhongshan_wang_ding', 'yuewang_zhouji_jian',
-    'chu_wang_ding', 'jin_hou_su_bian',
-    'ban_gui', 'ling_fang_yi', 'nangong_hu'
-  ]);
-
-  // Collection metadata keyed by id
-  const COLLECTION_META = {
-    'houmuwu_ding': { dynasty: '商', form: '方鼎', date_collected: '2026-01-10', rarity: '国宝' },
-    'fuhao_owl_zun': { dynasty: '商', form: '鸮尊', date_collected: '2026-01-15', rarity: '国宝' },
-    'siyang_fang_zun': { dynasty: '商', form: '方尊', date_collected: '2026-02-01', rarity: '国宝' },
-    'he_zun': { dynasty: '西周', form: '尊', date_collected: '2026-02-08', rarity: '国宝' },
-    'mao_gong_ding': { dynasty: '西周', form: '圆鼎', date_collected: '2026-02-20', rarity: '国宝' },
-    'zeng_houyi_bianzhong': { dynasty: '战国', form: '编钟', date_collected: '2026-03-05', rarity: '国宝' },
-    'yuewang_goujian_jian': { dynasty: '春秋', form: '剑', date_collected: '2026-03-12', rarity: '国宝' },
-    'changxin_gonglamp': { dynasty: '西汉', form: '灯', date_collected: '2026-04-01', rarity: '国宝' },
-    'sanxingdui_bronze_standfigure': { dynasty: '商', form: '立人像', date_collected: '2026-04-15', rarity: '国宝' },
-  };
-
-  // Per-dynasty collected counts (used before data loads)
-  const ERA_COUNTS = {
-    '夏': 1, '商': 10, '西周': 8, '春秋': 4, '战国': 5, '秦': 2, '西汉': 3, '东汉': 2
-  };
+  if (!window.MuseumConstants) {
+    console.error('[state.js] requires constants.js to be loaded first');
+    return;
+  }
+  const { COLLECTED_IDS, COLLECTION_META, ERA_COUNTS } = window.MuseumConstants;
 
   window.CollectionState = {
     collected: COLLECTED_IDS,
     meta: COLLECTION_META,
     eraCounts: ERA_COUNTS,
     total: COLLECTED_IDS.size,
-    maxTotal: 277,
+    maxTotal: 275,
 
     isCollected(id) { return COLLECTED_IDS.has(id); },
 
