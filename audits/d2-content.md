@@ -93,12 +93,12 @@ The `FULL_TEXT` constant in inscription-special-hezun.html contains only ~98 cha
 ## Severity ranking
 
 ### P0 — Factual errors must fix
-- **大克鼎 period 西周晚期 → 西周中期**(self-contradicting with approx_year)
-- **何尊长卷 唐兰 citation 1986 → 1976**
-- **何尊 FULL_TEXT < 122 characters** (counter mismatch)
+- ~~**大克鼎 period 西周晚期 → 西周中期**~~ — **fixed**, locked by `qa/tests/data-integrity.spec.ts::da_ke_ding period`
+- ~~**何尊长卷 唐兰 citation 1986 → 1976**~~ — **fixed**, locked by `qa/tests/data-integrity.spec.ts::he_zun inscription 1976`
+- ~~**何尊 FULL_TEXT < 122 characters**~~ — **fixed**, locked by `qa/tests/data-integrity.spec.ts::FULL_TEXT 122`
 
 ### P1 — Misleading
-- **莲鹤方壶 "疑用失蜡法早期工艺"** — v1 P1 not fixed
+- ~~**莲鹤方壶 "疑用失蜡法早期工艺"**~~ — **fixed** in segment-3 craft field (no longer mentions 失蜡)
 - **史墙盘 "中国第一部史诗"** — wrong term (should be "最早双叙事铭文史学")
 - **何尊 1038 BC lacks Chronology Project qualifier**
 - **散氏盘 矢国/夨/夂 dispute unflagged**
@@ -110,3 +110,15 @@ The `FULL_TEXT` constant in inscription-special-hezun.html contains only ~98 cha
 - 王子午鼎 失蜡法 should hedge
 - `jicheng_id` field exists but null everywhere
 - 散氏盘 has approx_year but 史墙盘 has null — asymmetric
+
+---
+
+## Status as of v5 sprint (2026-06-04)
+
+Reconciled against current code/data + `qa/tests/*.spec.ts`. 3 P0 + 1 P1 above
+are verifiably resolved and have regression tests guarding them. Remaining
+P1/P2 items are open and untracked — a follow-up audit pass (or v5.1 sprint)
+should pick them up. The COLLECTED_IDS-vs-real-data issue (28/35 IDs were
+phantoms) was found during v5 ③ and is now locked by
+`qa/tests/data-integrity.spec.ts::every COLLECTED_IDS entry resolves to a
+real MuseumData record`.
