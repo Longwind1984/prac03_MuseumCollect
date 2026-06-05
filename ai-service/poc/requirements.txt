@@ -1,0 +1,17 @@
+# MuseumCollect CLIP retrieval PoC — Phase 1 stack
+# Pinned to known-good versions as of 2026-06.
+# Total install size: ~2 GB (torch dominates).
+
+torch>=2.1.0,<2.13.0
+open_clip_torch==2.32.0
+pillow>=10.0.0,<12.0.0
+numpy>=1.24.0,<3.0.0
+scikit-learn>=1.3.0,<2.0.0
+requests>=2.31.0,<3.0.0
+
+# Notes:
+# - open_clip_torch carries its own model weight download from HuggingFace Hub.
+#   ViT-B/32 (~600 MB) is fetched lazily on first `create_model_and_transforms`.
+# - For air-gapped runs: pre-stage ~/.cache/clip/ from a reachable host.
+# - We deliberately DO NOT pin to CUDA — CPU inference on ViT-B/32 is ~50ms/image,
+#   sufficient for the 25-item index build + leave-one-out eval (~75 forward passes).

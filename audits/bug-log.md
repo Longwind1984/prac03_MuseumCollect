@@ -1,5 +1,15 @@
 # Bug Log
 
+## DEBT-001 — `ai-service/mock-recognition.js` is dead code (P3, documented not fixed)
+**Discovered**: 2026-06-05 (Plan agent verification during portfolio polish push)
+**Severity**: P3 — 不影响功能,但 14 KB 死代码 + 误导性命名(看起来像在被 scan.html 使用,实际不是)
+**Root cause**: `demos/v3-converged/scan.html` 第 141-147 行内联自己的 5-item `MOCK_ARTIFACTS` 对象,从来不 import `ai-service/mock-recognition.js`。后者由 v1 AI Engineer 写,但 v3 Builder-Converger 写 scan.html 时不知道这个文件存在(典型 cold-context 副产物),自己重新做了一遍小 mock。`scan.html` 的 `<script src>` 列表里**根本没有** mock-recognition.js 的引用。
+**Verification**: `grep -n "mock-recognition" demos/v3-converged/scan.html` returns 0; `grep -n "MOCK_ARTIFACTS" demos/v3-converged/scan.html` returns 2 lines (inline definition).
+**Decision (2026-06-05)**: 不修复。`ai-service/mock-recognition.js` 保留作为 v1 AI Engineer 工件的历史证据;`scan.html` 顶部加注释指向 `ai-service/poc/` 作为真 PoC 入口。影响范围 = 0,清理 ROI 低于"留下 14 KB 作为 'cold-context 重叠重复' 的实证"。
+**Portfolio signal**: 这条 DEBT 文档化本身就是 audit 信号——case-study §3.1 反复强调"cold context 是 feature 不是 bug",这条 debt 是它的代价的具体证据。
+
+---
+
 ## BUG-001 — artifact.html 总跳到后母戊鼎 (P0)
 **Discovered**: 2026-05-21 (user-reported via Vercel preview)
 **Severity**: P0 — 整个 277 件库都不可详情查看,核心 UX 阻塞
