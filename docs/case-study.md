@@ -1,7 +1,19 @@
 # Case Study — MuseumCollect
 
 > 作品集叙事文档。第一人称、坦诚、技术够 impress 工程师 / 产品够 impress PM。
-> 这是 v0.1 skeleton —— 写完 Problem 和 Insight 两节,后面待 MVP 后补。
+> 当前版本 **v0.6**(2026-06-05)—— §0-§5.9 完成,~8200 字。版本演化记录见文末"版本"节。
+
+---
+
+## 0.5. About the builder — 我是谁,为什么做这个
+
+我有 ~8 年 AI/ML 工程背景,做过推荐系统、NLP retrieval、CV embedding pipeline。最近两年我在系统性地往**AI 产品方向**迁移:不是"用 AI 写代码的 PM",而是"用 AI 协助开发 AI 产品的 PM"——这两件事的差别在 §3 和 §5.4 详细展开。
+
+**为什么是博物馆 / 青铜器**:私人 taste,不是市场分析。我一年进 8 次博物馆,看完会忘,试过所有官方 App 都卸了,心里一直憋着"这事可以做更好"。青铜器作为第一垂类的判断标准在 §1.3 和 §2:**体系清晰 / 名品多 / 维度丰富 / 不在 mass market 红海**——同时它也是中国文物最学术的一类(集成号、断代依据、铸主谱系),做好了能落到学术工具,做浅了也是博物馆爱好者的玩具。这种"两头都站得住"的垂类对验证我的核心论点最干净。
+
+**为什么这份 case-study 存在**:它是我**实证**"AI PM 论点"的载体。如果我只是写一篇博客 + 跑一个 hackathon 项目,你看不到我**怎么做 PM 决策**(削减维度 / 收敛 demo / 设计 audit 流程 / 量化 cost-aware routing 等)。这份 case-study 配 11 份 audit + 2 轮闭环兑现 + 5 个 sprint 的 git history,允许任何外部 reviewer 用 grep 验证每条 claim。这是我可以在面试桌上守住的诚实标准。
+
+**这份文档适合的读者**:正在招 AI PM 的 hiring manager(目标读者),或正在思考"AI agent 怎么真用在产品开发流程里"的 PM 同行。如果你只是想看一个 portfolio,30 秒看 `index.html` 即可;5 分钟看 `morning-report.md`;25 分钟读完本文。
 
 ---
 
@@ -405,10 +417,36 @@ Comparative Auditor D2 综合判断:**6.5/10 (v1 composite) → 7.2/10 (v3) = +0
 
 这条 reframing 让 §5.3 "我会重来的事" 从"事后反省"升级为"当场识别"。**这件事过后我对自己 PM 决策的 calibration 提高了一个 step——defer 之前必须用 30 秒算实际成本对比**,不是 vibes。
 
+### 5.9 为什么 AI PoC ship 的是 production-shaped code 而不是漂亮数字
+
+§4.4 我承认了"真实 AI 服务:CLIP 识别还在 mock 阶段"。从 v3 一直到 v4.6 这是 case-study 唯一一条"talented PM who writes specs"的 ceiling 来源。v0.6 的 push 试图收尾这个 ceiling,但**收尾的方式不是造一个 P@5 = 0.55 的玩具数字**,是 ship `ai-service/poc/` 一套 production-shaped Python 代码 + 一份诚实的 `eval-report.md` 模板。
+
+**做了什么**(`ai-service/poc/` 7 文件):
+- `build_index.py` — 读 5 段 segment JSON,按 rarity 选 top-25(国宝+一级),fetch `image_urls[0].direct_url`,OpenCLIP ViT-B/32 编码,产出 `embeddings.npy` + `items.json`
+- `eval.py` — leave-one-out 检索 + P@1/P@5 + intra-class P@1(诚实指出 1-image-per-artifact 下 P@1 退化原因)+ 按朝代分层 + failure case 表
+- `cli.py` — single-image CLI,产出 (id, name, dynasty, cos_dist, confidence_band) — 形状与 `ai-service/api-contract.md §3.1` 一致
+- `requirements.txt` — pinned 版本(torch / open_clip_torch 2.32 / pillow / numpy / sklearn / requests)
+- `README.md` + `IMPLEMENTATION-NOTES.md` + `eval-report.md` 三份文档分别给运行者、阅读者、结果消费者
+
+**为什么没在本次 push 里跑出真数字**:这次 push 在 Claude Code sandbox session 完成,该 sandbox 的出站网络策略 block:
+- `huggingface.co`(OpenCLIP 权重源)
+- `upload.wikimedia.org`(239/277 件文物图源)
+- `download.pytorch.org`、`openaipublic.azureedge.net`
+
+`pip install -r requirements.txt` 通,但 `model = open_clip.create_model_and_transforms('ViT-B-32', pretrained='openai')` 会撞墙。要跑真数字必须在我自己机器上(Wikimedia + HF 都通)1-2 小时跑完,把 embeddings.npy / items.json / 填好的 eval-report.md commit 回来。`ai-service/poc/README.md` 有完整 runbook。
+
+**为什么不在 sandbox 里造一个看着漂亮的数字**:25-item toy demo 跟 `docs/ai-roadmap.md §6.3` 里设的 production target(P@1 ≥ 0.40 / P@5 ≥ 0.60)是两个量级的概念。如果我用 5 张 Wikimedia thumbnail mock 一个"看着合理"的 P@5 = 0.55,这件事会**直接违反** §3.3 "audit-as-iteration-trigger" 这条纪律——audit 的可信度建立在"每个数字 grep 可追"上。一个 fake 数字会让前面 5 个 sprint 11 份 audit 全部 retroactively 失效。
+
+**这条选择的 PM signal**:让 reviewer 看到我**会写、会评估、会诚实说为什么这次没跑**,比看到我跑了一个 10 件 toy demo 招聘信号强。`IMPLEMENTATION-NOTES.md` 写了 8 节架构决策(为什么 ViT-B/32 而不是 ViT-L/14 / 为什么 leave-one-out 而不是 held-out / 为什么 25 件 by rarity / 为什么不接入 scan.html / 等等)——任何外部 reviewer 不用跑代码也能看到我**理解 retrieval 系统**而不是只复述 roadmap。
+
+**§5.9 的更新触发条件**: 我在自己机器上跑完 `build_index.py + eval.py`,把真数字 commit 回来,本节即刻补一段 "Update: 真 P@1 = X.XX, P@5 = Y.YY, intra-class P@1 = Z.ZZ, breakdown: ..." 并指向 `eval-report.md` 完整版。
+
+> **AI PM 的 ship discipline:正确的诚实 > 漂亮的虚假。** 这件事我希望写进面试桌上能背得出的 takeaway。
+
 ---
 
-**Case Study 版本**:v0.5 (v4.6 GeoJSON + Mobile Retrofit 同夜完成)
-**作者**:Product Owner agent (v4 iteration, Opus, cold context) + 项目主理人 (§5.7 §5.8 增补)
-**日期**:2026-05-22
-**字数**:~7900 字(v3+v4+v4.5+v4.6 累计),其中 §3 ~2500 / §4 ~1800 / §5 ~3400
-**下次更新触发条件**:D7-D14 任一 Track 闭环完成,或 v5 真 mobile-first rebuild 启动
+**Case Study 版本**:v0.6 (2026-06-05 portfolio push — §0.5 About the builder + §5.9 PoC ship discipline)
+**作者**:Product Owner agent (v4 iteration, Opus, cold context) + 项目主理人 (§5.7 §5.8 §5.9 + §0.5 增补)
+**日期**:2026-06-05
+**字数**:~8200 字 — §0.5 ~250 / §1-§2 ~1500 / §3 ~2500 / §4 ~1800 / §5 ~3400(含 §5.7-§5.9)
+**下次更新触发条件**:`ai-service/poc/` 在 off-sandbox 跑出真数字 → §5.9 头 + `eval-report.md`;或 D7-D14 任一 Track 闭环完成

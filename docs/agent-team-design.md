@@ -62,7 +62,64 @@
 
 ---
 
-## 2. 拓扑(8 角色)
+## 2. 拓扑(v4.5 后: 6 production roles + 7 audit personas)
+
+### Mermaid 视图(GitHub Markdown 直接渲染)
+
+```mermaid
+graph TD
+  ORCH["🎯 Orchestrator<br/>Opus · 兼架构师<br/>state.md · decision-log.md"]:::orch
+
+  subgraph PRODUCTION["生产角色"]
+    PO["📋 Product Owner<br/>Opus · PRD / case-study"]
+    DR["🔬 Domain Researcher ★<br/>Opus · dimensional-map<br/>motivation-hooks"]
+    VD["🎨 Visualization Designer ★<br/>Opus · component-specs<br/>gamification"]
+    AI["🤖 AI Engineer<br/>Opus · CLIP / OCR / eval"]
+    DE["🔧 Data Engineer ×5<br/>Sonnet · 277 件 11 字段<br/>licensing-log"]
+    BL["💻 Builder ×3 → Converger<br/>Sonnet worktree 并行<br/>v1 A/B/C → v3-converged"]
+  end
+
+  subgraph AUDIT["审计循环 6+1"]
+    AUX["🕵️ UX Auditor · Sonnet"]
+    AAE["🕵️ Aesthetic Auditor · Sonnet"]
+    ACO["🕵️ Content Auditor · Sonnet"]
+    AMO["🕵️ Motivation Auditor ★ · Sonnet"]
+    APM["🕵️ PM Auditor · Opus<br/>作品集招聘视角"]
+    ART["🕵️ Runtime Auditor NEW v4.5<br/>Sonnet + Playwright + axe-core<br/>verdict binding"]
+    ACOMP["🔄 Comparative Auditor · Sonnet<br/>merged-spec"]
+  end
+
+  ORCH --> PO
+  ORCH --> DR
+  ORCH --> VD
+  ORCH --> AI
+  ORCH --> DE
+  DR --> VD
+  VD --> BL
+  DE --> BL
+  AI -. api contract .-> BL
+  BL --> AUX
+  BL --> AAE
+  BL --> ACO
+  BL --> AMO
+  BL --> APM
+  BL --> ART
+  AUX --> ACOMP
+  AAE --> ACOMP
+  ACO --> ACOMP
+  AMO --> ACOMP
+  APM --> ACOMP
+  ART --> ACOMP
+  ACOMP -. next-iteration-brief .-> ORCH
+
+  classDef orch fill:#fff7e6,stroke:#a4732c,stroke-width:2px
+  classDef star fill:#fdf8f0
+  class DR,VD star
+```
+
+★ = v0.2 重头角色 / v4.5 新增 Runtime Auditor(BUG-001 直接产物,唯一强制 tool 执行,verdict 对 Comparative binding)。
+
+### ASCII 视图(terminal-readable fallback)
 
 ```
                 ┌──────────────────────────────────────┐

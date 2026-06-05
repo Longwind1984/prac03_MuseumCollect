@@ -5,6 +5,24 @@
 
 ---
 
+## Executive Summary (2026-06-05 · for cold readers)
+
+**5 sprints, 17 天 elapsed, 1 个项目主理人 + ~32 subagent invocations**:
+
+| Sprint | 日期 | 核心交付 | 关键 emergent |
+|---|---|---|---|
+| **v1** (D0) | 2026-05-20 night | 3 differentiated demo (考据/沉浸/探索 personas) + 6 audit + 1 close-loop iteration | 5/5 auditor 独立收敛到图像供应链 → 12 silhouette SVG ship |
+| **v3** (D1) | 2026-05-21 night | 7+1 维度收敛 + 1 converged demo (12 页 + event bus) + 277 件 11 字段 + 25 pattern SVG | 何尊"中国"二字长卷 → Aesthetic 评设计峰值;BUG-001 silent fallback 暴露 audit-as-read 局限 |
+| **v4.5** | 2026-05-22 | Runtime Auditor 加入(第 7 视角)+ 8-item mandatory checklist + Playwright/axe-core 接入 + BUG-002/003/004 fix | "audit squad audited itself" — case-study §5.7 二阶闭环成立 |
+| **v4.6** | 2026-05-22 | 真实 GeoJSON (d3.geoConicEqualArea) + mobile retrofit (12 页 375px true mobile) + 28/28 Playwright green | "defer 是 PM 工具箱里最危险的动词" — §5.8 reframing |
+| **v5** | 2026-05-22→ | Tailwind CDN removal (13 页) + a11y contrast + data-loader 并行化 + GeoJSON 项目 docs reconciliation | 性能 + 实诚 docs |
+
+**量化产出**: ~32 subagent invocations / ~4.5M tokens / 估 $40-50 USD / 总 wall-clock 横跨多 night-run。277/300 国宝(92%) · 11 audit reports · 2 闭环 iteration · 28/28 Playwright tests green · case-study v0.6 ~8200 字 · 12 silhouette SVG + 25 pattern SVG + 7 GeoJSON。
+
+**如何读懂这个项目的 narrative**:本文件是 append-only event-sourced log,适合追溯**任何决策的因果链**(grep 任意 ID 即可)。但读 narrative 请看 `docs/case-study.md`(v0.6,§0-§5.9 完整)+ `morning-report.md`(D0 5 分钟 TL;DR)+ `docs/agent-team-design.md`(8+ 角色拓扑)。读决策因果链请看 `state/decision-log.md`。
+
+---
+
 ## Status
 
 - **Current Phase**: setup (pre-night-run)
