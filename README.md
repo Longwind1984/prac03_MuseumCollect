@@ -1,6 +1,6 @@
 # MuseumCollect — AI PM 作品集
 
-> 我用 8 个有边界的 AI agent 跑了 5 个 sprint,产出 1 个 converged demo + 11 份多视角 audit + 2 轮 audit-as-iteration-trigger 兑现,以及一份 ~8200 字 case-study。
+> 我用 8 个有边界的 AI agent 跑了 5 个 sprint,产出 1 个 converged demo + 11 份多视角 audit + 2 轮 audit-as-iteration-trigger 兑现,~10500 字 case-study,加 3 份 commercial PM artifact(NSM / 竞品矩阵 / 投资人 1-pager),以及一份 in-sandbox 真跑的 AI baseline。
 > 这不是 "我用 AI 写代码的 PM",是 **"我把 AI 的约束当作产品设计原则"** 的实证。
 
 [![dashboard 三联动](assets/screenshots/dashboard-desktop.jpg)](demos/v3-converged/dashboard.html)
@@ -30,11 +30,14 @@
 |---|---|---|
 | 30 秒 | `index.html` | 项目全景 + 5 张 hero 截图 + 量化 stats |
 | 5 分钟 | `morning-report.md` | D0 night-run 战果(3 demo + 6 audit + close-loop)|
-| 25 分钟 | `docs/case-study.md` v0.7 | **核心文档** — Problem → Insight → Approach → Outcomes → Reflection,8200 字 |
+| 25 分钟 | `docs/case-study.md` v0.8 | **核心文档** — Problem → Insight → Approach → Outcomes → Reflection → Commercial Gap,10500 字 6 节 |
+| 8 分钟 | `docs/one-pager.md` ★ NEW | 投资人/CEO 90 秒版本 — Problem/Solution/Market/GTM/Ask 完整 |
+| 12 分钟 | `docs/north-star.md` ★ NEW | NSM (WAC) + 2 层 metric tree + 6/12/24 月 target + 反指标 |
+| 15 分钟 | `docs/competitive-landscape.md` ★ NEW | 8 个具名竞品 × 4 维矩阵 + moat 假设 + "为什么 X 不会做这个" |
 | 15 分钟 | `docs/agent-team-design.md` | 6+1 audit + 8 role 拓扑 + Mermaid 图 + cost routing |
 | 想看实证 | `audits/iteration-1-changes.md` / `iteration-2-v3-changes.md` | audit → 闭环兑现 cite-trail |
 | 想看运行时 | `audits/d3-runtime.md` + `audits/d3-runtime.json` | v4.5 Runtime Auditor 16-case 真测 |
-| 想看 AI 立场 | `docs/ai-roadmap.md` + `ai-service/poc/` | Phase 1-3 路线 + production-shaped CLIP PoC stub |
+| 想看 AI 立场 | `docs/ai-roadmap.md` + `ai-service/poc/` | Phase 1-3 路线 + CLIP stub + pHash baseline 真数字 P@5=0.667 |
 | 想看成本 | `cost/cost-report.md` | 15 agent × 真 token 数 + 估算 $20-25 |
 
 ## 5 个 Sprint 概览
@@ -45,7 +48,9 @@ v3 (D1, 2026-05-21 night)  7+1 维度收敛 + 277 件 11 字段 (5 DE 并行) + 
 v4.5  (2026-05-22)          第 7 视角 Runtime Auditor 加入 · Playwright + axe-core + 16/16 test green · BUG-002/003/004 fix
 v4.6  (2026-05-22)          真实 GeoJSON (d3.geoConicEqualArea) + mobile retrofit · 28/28 test green
 v5    (2026-05-22→)         Tailwind CDN 卸载 (13 页) · a11y contrast · data-loader 并行化 · GeoJSON docs reconciliation
-v0.6  (2026-06-05 ★ now)    case-study §0.5 + §5.9 + AI PoC stub (ai-service/poc/) + portfolio index/README polish
+v0.6  (2026-06-05)          case-study §0.5 + §5.9 + AI PoC stub (ai-service/poc/) + portfolio index/README polish
+v0.7  (2026-06-05)          §5.9.1 in-sandbox pHash baseline + 真 P@5=0.667 数字
+v0.8  (2026-06-05 ★ now)    cold-audit response — 3 P0 docs (NSM / competitive / one-pager) + case-study §6 commercial gap (10500 字)
 ```
 
 详细日志见 [`state/state.md`](state/state.md)(append-only event log,顶部有 executive summary)。
@@ -57,7 +62,10 @@ prac03_MuseumCollect/
 ├── index.html                    # 作品集入口(打开即看)
 ├── morning-report.md             # D0 night-run 5-min TL;DR
 ├── docs/
-│   ├── case-study.md             # ★ portfolio 核心 narrative · v0.6 ~8200 字
+│   ├── case-study.md             # ★ portfolio 核心 narrative · v0.8 ~10500 字 6 节
+│   ├── one-pager.md              # ★ NEW 投资人 90s + GTM + LTV/CAC
+│   ├── north-star.md             # ★ NEW NSM (WAC) + 2 层 metric tree
+│   ├── competitive-landscape.md  # ★ NEW 8 竞品 × 4 维矩阵 + moat
 │   ├── agent-team-design.md      # 6+1 audit + 8 role topology · Mermaid
 │   ├── dimensional-map-v3.md     # 7+1 维度 · 35K+ 字
 │   ├── motivation-hooks-v3.md    # 动机系统 · 13K+ 字

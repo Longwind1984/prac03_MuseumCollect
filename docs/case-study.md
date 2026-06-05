@@ -1,7 +1,7 @@
 # Case Study — MuseumCollect
 
 > 作品集叙事文档。第一人称、坦诚、技术够 impress 工程师 / 产品够 impress PM。
-> 当前版本 **v0.6**(2026-06-05)—— §0-§5.9 完成,~8200 字。版本演化记录见文末"版本"节。
+> 当前版本 **v0.8**(2026-06-05)—— §0-§6 完成,~10500 字 6 节(含 §5.9.1 in-sandbox baseline + §6 commercial gap)。版本演化记录见文末"版本"节。
 
 ---
 
@@ -475,8 +475,71 @@ Comparative Auditor D2 综合判断:**6.5/10 (v1 composite) → 7.2/10 (v3) = +0
 
 ---
 
-**Case Study 版本**:v0.7 (2026-06-05 portfolio push — §0.5 About the builder + §5.9 ship discipline + §5.9.1 in-sandbox pHash baseline real numbers)
-**作者**:Product Owner agent (v4 iteration, Opus, cold context) + 项目主理人 (§5.7-§5.9.1 + §0.5 增补)
+## 6. About the commercial gap — 一个 senior PM 面试官会怎么拷问我
+
+写到 §5.9.1 我以为这份 case study 已经能交付了。然后我让一个 cold-context agent 假装自己是 senior AI PM 面试官,扫了一遍现有材料,给我 dump 了一份 coverage matrix。**结果是我已经 §4.3 自评里写过的那句话被验证了**:
+
+> "缺增长维度 = 4/10" — `case-study.md §4.3` 早期诚实自评
+
+auditor 用这句话拷问回来:**"the candidate's own §4.3 scorecard literally writes '缺增长维度 = 4/10' for big-company to-C PM fit — they know."** —— 也就是说,我自己已经看到了 gap,但写完 §5 就停了。**写出来 ≠ 补上**。这一节就是补的过程。
+
+### 6.1 auditor 给的 coverage matrix(2026-06-05 cold review)
+
+| Artifact | Pre-§6 score (0-3) | Post-§6 score | 补在哪 |
+|---|---|---|---|
+| Problem statement | 3 | 3 | §1 已 strong |
+| User persona / TAM-SAM-SOM | 2 | 3 | `docs/one-pager.md §3.2` |
+| **North Star Metric + tree** | **0** | **3** | `docs/north-star.md`(2 层 metric tree) |
+| **Competitive landscape** | **1** | **3** | `docs/competitive-landscape.md`(8 个具名竞品 + 6×4 矩阵 + moat 假设 + 为什么 X 不会做) |
+| PRD / scope V1/V2/out | 2 | 2 | demo-night PRD 存在,完整 V1 PRD 待 sprint 6 |
+| **GTM / acquisition** | **0** | **3** | `docs/one-pager.md §5` + `docs/north-star.md §2.1`(渠道+CAC+LTV) |
+| **Cost / ROI / unit economics** | 2 | 3 | `docs/one-pager.md §5.4`(blended CAC ¥12 / LTV ¥60 / 5:1)+ `ai-roadmap §5` infra cost |
+| Risk register / compliance | 2 | 2 | `ai-roadmap §7` + `licensing-log-v3.md`;UGC moderation + PIPL 仍是 V2 gap |
+| Analytics / event taxonomy | 1 | 1 | **仍然是 gap** — sprint 6+ 上线后第一件事 |
+| Scale plan 100k→1M | 2 | 2 | `ai-roadmap §5` 有 cost,架构 scale plan 仍是 V2 gap |
+| **"What I'd do differently"** | 3 | 3 | §5.2 §5.3 §5.8 §6(此节)|
+| **Pitch / 1-pager** | 2 | 3 | `docs/one-pager.md`(8 节投资人格式) |
+| AI model trade-off matrix | 3 | 3 | `ai-roadmap §1-2`(strongest artifact) |
+| Failure case taxonomy | 2 | 2 | `phash-eval-report.md` 有 per-item failure;产品级 failure ladder 仍是 V2 gap |
+
+补完之后 14 项中 **10 项 ≥ 3 / 3 项 ≤ 2(明确 V2 to-do)/ 1 项 = 1(analytics 暂未上线无法做)**。
+
+### 6.2 为什么 auditor 这一轮拷问改变了我对 portfolio 的理解
+
+auditor 的 verdict 原话:
+
+> "This is a portfolio strong on **process narrative + AI engineering depth + reflective senior signal**. It will read as **'talented technical AI lead pretending to be PM'** to a Notion/Linear/Figma hiring manager because the commercial PM artifacts are 0-2/3 across the board."
+
+这句话扎人但准确。Sprint 1-5 我做的全部是"**process + AI engineering**" 类工作 — domain research、维度拆解、agent design、retrieval PoC、in-sandbox baseline。这些都是 senior PM 的 enable 条件,**不是 senior PM 的 deliverable**。
+
+senior PM 的 deliverable 是这一节补的 3 件:**NSM** 决定优化什么、**competitive landscape** 决定为什么有理由赢、**GTM + unit economics** 决定怎么从 0 到 1 万到 100 万。Sprint 1-5 没生成这些不是因为不重要,是因为**这个项目还没到需要它们的阶段(没用户、没营销预算、没 stakeholder 要求)**。但 portfolio purpose 强迫我必须在 ship 之前 anticipate 这些问题 — **portfolio 不是产品,它是 thought process 的 demonstration**。
+
+### 6.3 这次 cold audit 给我的 3 个 takeaway
+
+1. **诚实自评不能停在自评 — 必须接 "what would the harshest interviewer ask"**。§4.3 我打了 4/10 但没问 "那 4/10 的具体提问是什么样"。这次 cold agent 替我问了,我才发现具体题目是 "first 1k 用户从哪来" / "故宫 App 6 个月内 ship 这个怎么办"。Self-criticism 必须落到**具体题目**,不然是表演。
+
+2. **portfolio 项目 vs 真实产品的优先级不同**。真实早期产品可以**晚做 GTM**(先 talk to 10 users),但 portfolio 必须**早 fake 出来 GTM 思考**(否则面试官不知道你能 think about it)。这是 portfolio 的天然 distortion,接受它。
+
+3. **审计-为-迭代-触发 这条 §3.3 的规则,这次又对了一次**。Sprint 6 没必要存在(开发节奏说),但 portfolio 紧迫性触发了一轮 cold audit,cold audit 触发了 3 个 P0 文档,3 个 P0 文档触发了 §6 这一节。**审计的价值不在指出问题,而在不断创造下一次迭代的输入**。
+
+### 6.4 仍然没补的 gap(诚实承认 V2 to-do)
+
+- **Analytics event taxonomy**: scan_completed / collection_added / dimension_unlocked 等事件 schema 没写。理由: 产品没上线,埋点先于产品是 over-engineering。Sprint 6+ 上线第一件事。
+- **PIPL / GDPR 完整 compliance audit**: 现在只有图片 licensing,UGC moderation + 未成年人保护 + 跨境数据 都是空的。理由: 产品没接 UGC,这条不阻塞 V1。
+- **1M MAU scale 架构图**: ai-roadmap §5 只到 cost,没到 sharding / CDN / region 设计。理由: 100k MAU 都没到,1M 是 stretch goal。
+- **Sprint 6 真正的 V1 PRD**: 当前只有 demo-night PRD;V1 PRD 待第一个非 demo 上线 sprint 写。理由: V1 PRD 写得早 = 写错。
+
+这 4 个 gap 我**知道存在 + 知道为什么先不补 + 知道在哪个 trigger 触发要补**。这跟"完全没想过"不是同一个状态。
+
+---
+
+**§6 更新触发条件**:下一次 cold agent audit(可以同一个 audit prompt 跑第二次,看哪些 gap 留得太久)→ 或 Sprint 6 第一次真实上线后(用户事件触发 analytics gap)→ 或我自己跑一次 fundraise pitch rehearsal(发现哪一页 deck 还讲不顺)。
+
+---
+
+**Case Study 版本**:v0.8 (2026-06-05 cold-audit response — §6 commercial gap + 3 个 P0 docs: north-star + competitive-landscape + one-pager)
+**作者**:Product Owner agent (v4 iteration, Opus, cold context) + 项目主理人 (§5.7-§5.9.1 + §0.5 + §6 增补)
 **日期**:2026-06-05
-**字数**:~8600 字 — §0.5 ~250 / §1-§2 ~1500 / §3 ~2500 / §4 ~1800 / §5 ~3800(含 §5.7-§5.9.1)
-**下次更新触发条件**:`ai-service/poc/build_index.py + eval.py` 在 off-sandbox 跑出真 CLIP P@5 → §5.9.2;或 D7-D14 任一 Track 闭环完成
+**字数**:~10500 字 — §0.5 ~250 / §1-§2 ~1500 / §3 ~2500 / §4 ~1800 / §5 ~3800 / §6 ~1900
+**关联新文档**:`docs/north-star.md`(1800字 NSM tree) · `docs/competitive-landscape.md`(2400字 8 竞品矩阵 + moat) · `docs/one-pager.md`(1500字 投资人格式)
+**下次更新触发条件**:`ai-service/poc/build_index.py + eval.py` 在 off-sandbox 跑出真 CLIP P@5 → §5.9.2;或 D7-D14 任一 Track 闭环完成;或下一次 cold audit 揭示新 gap
