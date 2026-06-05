@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MuseumCollect — AI PM 作品集 · 5 sprint · case-study v0.6</title>
-  <meta name="description" content="AI 产品经理作品集:8+ agent / 5 sprint / 277 件结构化数据 / 11 份 audit / 2 轮闭环兑现 / case-study v0.6 ~8200 字。">
+  <title>MuseumCollect — AI PM 作品集 · 5 sprint · case-study v0.7</title>
+  <meta name="description" content="AI 产品经理作品集:8+ agent / 5 sprint / 277 件结构化数据 / 11 份 audit / 2 轮闭环兑现 + 真实 AI baseline (in-sandbox pHash P@1=0.333) / case-study v0.7 ~8600 字。">
   <!-- Open Graph for shareable previews -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="MuseumCollect — AI PM 作品集 · 5 sprint · 8 agent · 277 件 11 字段">
@@ -12,7 +12,7 @@
   <meta property="og:image" content="./assets/screenshots/dashboard-desktop.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="MuseumCollect — AI PM 作品集">
-  <meta name="twitter:description" content="8 agent / 5 sprint / 277 件 / 11 audit / case-study v0.6 · 全证据链 grep-verifiable">
+  <meta name="twitter:description" content="8 agent / 5 sprint / 277 件 / 11 audit / case-study v0.7 · 全证据链 grep-verifiable">
   <meta name="twitter:image" content="./assets/screenshots/dashboard-desktop.jpg">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
@@ -38,7 +38,7 @@
       </h1>
       <p class="text-base md:text-lg text-stone-700 max-w-3xl leading-relaxed mb-5">
         我用 8 个有边界的 AI agent 跑了 5 个 sprint,产出 1 个 converged demo(12 页面 / 277 件 11 字段 / 真 GeoJSON / 28/28 Playwright tests green),
-        11 份多视角 audit,2 轮 audit-as-iteration-trigger 兑现,以及一份 ~8200 字 case-study v0.6。
+        11 份多视角 audit,2 轮 audit-as-iteration-trigger 兑现,以及一份 ~8200 字 case-study v0.7。
         <span class="text-stone-500 italic">这不是 "我用 AI 写代码的 PM",是 "我把 AI 的约束当作产品设计原则" 的实证。</span>
       </p>
       <div class="flex flex-wrap gap-3">
@@ -46,7 +46,7 @@
           ★ 立刻体验 v3 三联动 demo →
         </a>
         <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/case-study.md" class="inline-flex items-center gap-2 px-5 py-2.5 border border-stone-400 text-stone-800 rounded-md text-sm font-medium hover:bg-stone-100">
-          深读 case-study v0.6 (~25 min) →
+          深读 case-study v0.7 (~25 min) →
         </a>
         <a href="./morning-report.md" class="inline-flex items-center gap-2 px-5 py-2.5 text-stone-600 rounded-md text-sm font-medium hover:text-stone-900">
           先扫 morning-report (~5 min) →
@@ -208,20 +208,43 @@
     <section class="mb-12">
       <p class="text-xs uppercase tracking-widest text-stone-500 mb-3">AI credibility · v0.6 push</p>
       <div class="bg-white border border-stone-200 rounded-lg p-5 md:p-6">
-        <h3 class="text-xl font-serif mb-2">🔬 ai-service/poc/ — CLIP retrieval PoC (stub by design)</h3>
+        <h3 class="text-xl font-serif mb-2">🔬 ai-service/poc/ — CLIP stub + 真实 pHash baseline</h3>
         <p class="text-sm text-stone-700 leading-relaxed mb-3 max-w-3xl">
-          Production-shaped Python 实现 ai-roadmap.md §Phase 1: OpenCLIP ViT-B/32 + leave-one-out 评估 + cli.py。
-          沙箱防火墙 block 了 HF + Wikimedia,无法 sandbox 内跑出真数字 ——
-          <span class="font-semibold text-stone-900">case-study §5.9 选择 ship production-shaped code + 诚实 eval-report 模板,而不是 fake P@5 = 0.55</span>。
-          PM judgment > faked metrics。
+          Production-shaped Python 实现 ai-roadmap.md §Phase 1: OpenCLIP ViT-B/32 + leave-one-out + cli.py。
+          沙箱 block 了 HF + Wikimedia,先 ship CLIP stub + 诚实 §5.9。然后 user 反推"多策略试到底",
+          pivot 到本地 12 silhouette + pHash baseline,**in-sandbox 真跑出来**:
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
+          <div class="bg-amber-50 border border-amber-200 rounded p-2 text-center">
+            <div class="text-xl font-serif text-amber-800">12</div>
+            <div class="text-xs text-stone-500 uppercase tracking-wider mt-0.5">silhouettes</div>
+          </div>
+          <div class="bg-amber-50 border border-amber-200 rounded p-2 text-center">
+            <div class="text-xl font-serif text-amber-800">0.333</div>
+            <div class="text-xs text-stone-500 uppercase tracking-wider mt-0.5">intra-family P@1</div>
+          </div>
+          <div class="bg-amber-50 border border-amber-200 rounded p-2 text-center">
+            <div class="text-xl font-serif text-amber-800">0.667</div>
+            <div class="text-xs text-stone-500 uppercase tracking-wider mt-0.5">intra-family P@5</div>
+          </div>
+          <div class="bg-stone-100 border border-stone-200 rounded p-2 text-center">
+            <div class="text-xl font-serif text-stone-700">10/10</div>
+            <div class="text-xs text-stone-500 uppercase tracking-wider mt-0.5">unit tests pass</div>
+          </div>
+        </div>
+        <p class="text-xs text-stone-600 mb-3 max-w-3xl">
+          <span class="font-semibold text-stone-900">PM signal</span>: pHash 不是 CLIP,0.333 不是 ai-roadmap §6.3 target —
+          但它是 <strong>real number</strong>,证明 pipeline 闭合 + 给 CLIP 必须打败的 baseline。CLIP 的 off-sandbox runbook 在 README,user
+          自机器上 1-2h 可跑出真 P@5 → 自动回填 §5.9。
         </p>
         <div class="flex flex-wrap gap-2 text-xs">
-          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/ai-service/poc/README.md" class="px-2.5 py-1 bg-stone-100 rounded font-mono text-stone-700 hover:bg-stone-200">README runbook</a>
-          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/ai-service/poc/IMPLEMENTATION-NOTES.md" class="px-2.5 py-1 bg-stone-100 rounded font-mono text-stone-700 hover:bg-stone-200">8 节架构决策</a>
-          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/ai-service/poc/build_index.py" class="px-2.5 py-1 bg-stone-100 rounded font-mono text-stone-700 hover:bg-stone-200">build_index.py</a>
+          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/ai-service/poc/phash-eval-report.md" class="px-2.5 py-1 bg-amber-100 rounded font-mono text-amber-800 hover:bg-amber-200">★ phash-eval-report.md (real)</a>
+          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/ai-service/poc/phash_baseline.py" class="px-2.5 py-1 bg-stone-100 rounded font-mono text-stone-700 hover:bg-stone-200">phash_baseline.py</a>
+          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/ai-service/poc/IMPLEMENTATION-NOTES.md" class="px-2.5 py-1 bg-stone-100 rounded font-mono text-stone-700 hover:bg-stone-200">IMPLEMENTATION-NOTES (9 节)</a>
+          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/ai-service/poc/build_index.py" class="px-2.5 py-1 bg-stone-100 rounded font-mono text-stone-700 hover:bg-stone-200">build_index.py (CLIP)</a>
           <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/ai-service/poc/eval.py" class="px-2.5 py-1 bg-stone-100 rounded font-mono text-stone-700 hover:bg-stone-200">eval.py</a>
-          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/ai-service/poc/cli.py" class="px-2.5 py-1 bg-stone-100 rounded font-mono text-stone-700 hover:bg-stone-200">cli.py</a>
-          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/case-study.md#59-为什么-ai-poc-ship-的是-production-shaped-code-而不是漂亮数字" class="px-2.5 py-1 bg-amber-100 rounded font-mono text-amber-800 hover:bg-amber-200">→ case-study §5.9</a>
+          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/ai-service/poc/test_eval.py" class="px-2.5 py-1 bg-stone-100 rounded font-mono text-stone-700 hover:bg-stone-200">test_eval.py</a>
+          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/case-study.md" class="px-2.5 py-1 bg-amber-100 rounded font-mono text-amber-800 hover:bg-amber-200">→ case-study §5.9 + §5.9.1</a>
         </div>
       </div>
     </section>
@@ -256,7 +279,7 @@
     <!-- Footer -->
     <footer class="mt-8 pt-6 border-t border-stone-200 text-xs text-stone-500">
       <p class="mb-1">2026-05-20 → 2026-06-05 · 5 sprint · 1 项目主理人 + ~32 subagent invocations · ~4.5M tokens · 估 $40-50 USD</p>
-      <p class="mb-1">读 case-study v0.6 §0.5 了解作者背景 · §3 方法论 · §4 量化产出 · §5 反思(§5.7 二阶闭环 · §5.8 defer 误区 · §5.9 PoC ship discipline)</p>
+      <p class="mb-1">读 case-study v0.7 §0.5 了解作者背景 · §3 方法论 · §4 量化产出 · §5 反思(§5.7 二阶闭环 · §5.8 defer 误区 · §5.9 PoC ship discipline)</p>
       <p><a href="https://github.com/longwind1984/prac03_museumcollect/tree/claude/museum-photo-sharing-8qJiz" class="hover:underline text-stone-700">GitHub repo →</a> · <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/README.md" class="hover:underline text-stone-700">README →</a></p>
     </footer>
 

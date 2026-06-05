@@ -74,6 +74,33 @@ Then `git add embeddings.npy items.json eval-report.md && git commit -m "ai-serv
 
 4. **Cosine distance ≠ confidence.** The `confidence_band` mapping in `cli.py` is a heuristic, not calibrated. Per `ai-service/api-contract.md` §3.1, real production needs temperature-scaled softmax + per-class threshold calibration on a held-out set. Out of scope for Phase 1.
 
+## In-sandbox baseline that DID run — pHash on 12 silhouettes
+
+`phash_baseline.py` is the fallback that **actually ran in the Claude Code sandbox**
+where HuggingFace + Wikimedia are blocked. It uses 100% local data
+(`assets/silhouettes/*.svg`) and zero ML weights (pure-python perceptual hash).
+
+```bash
+pip install cairosvg imagehash pillow numpy
+cd ai-service/poc
+python phash_baseline.py
+```
+
+Result (`phash-eval-report.md`, real numbers, not template):
+
+| Metric | Value |
+|---|---|
+| Items total | 12 silhouettes |
+| Items scorable | 6 (3 two-member families: ding / zun / sanxingdui) |
+| Intra-family P@1 | **0.333** |
+| Intra-family P@5 | **0.667** |
+
+Honest reading: pHash is a shape-pixel-overlap baseline, not semantic retrieval.
+P@1 = 0.33 means 2 of 6 family pairs were correctly matched as nearest neighbor
+(fangding → yuanding ✓, fang_zun → xiao_zun ✓; sanxingdui_dali_ren → some other zun ✗).
+**CLIP must beat this number to be worth deploying.** That's the entire point of
+running a baseline.
+
 ## Verification without running the full pipeline
 
 `test_eval.py` covers the retrieval-math layer with stdlib unittest + numpy only

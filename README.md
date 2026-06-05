@@ -30,7 +30,7 @@
 |---|---|---|
 | 30 秒 | `index.html` | 项目全景 + 5 张 hero 截图 + 量化 stats |
 | 5 分钟 | `morning-report.md` | D0 night-run 战果(3 demo + 6 audit + close-loop)|
-| 25 分钟 | `docs/case-study.md` v0.6 | **核心文档** — Problem → Insight → Approach → Outcomes → Reflection,8200 字 |
+| 25 分钟 | `docs/case-study.md` v0.7 | **核心文档** — Problem → Insight → Approach → Outcomes → Reflection,8200 字 |
 | 15 分钟 | `docs/agent-team-design.md` | 6+1 audit + 8 role 拓扑 + Mermaid 图 + cost routing |
 | 想看实证 | `audits/iteration-1-changes.md` / `iteration-2-v3-changes.md` | audit → 闭环兑现 cite-trail |
 | 想看运行时 | `audits/d3-runtime.md` + `audits/d3-runtime.json` | v4.5 Runtime Auditor 16-case 真测 |
@@ -121,27 +121,43 @@ back-fill the Vercel URL into `index.html` footer and README hero CTA.
 
 ## AI PoC
 
-`ai-service/poc/` ships production-shaped CLIP retrieval as a stub. To populate
-real numbers (off-sandbox, where HuggingFace + Wikimedia are reachable):
+`ai-service/poc/` ships **two retrieval paths**:
+
+**Path 1 (in-sandbox, ran for real): pHash baseline on 12 silhouettes**
+
+```bash
+pip install cairosvg imagehash pillow numpy
+cd ai-service/poc
+python phash_baseline.py
+# → phash-eval-report.md with REAL numbers: intra-family P@1 = 0.333 / P@5 = 0.667
+```
+
+This is the in-sandbox proof that the retrieval pipeline closes end-to-end. Not
+CLIP, not ai-roadmap §6.3 target — but a **real baseline** CLIP must beat. See
+case-study §5.9.1 for the multi-strategy debugging that led to this.
+
+**Path 2 (off-sandbox, populate real CLIP numbers)**
 
 ```bash
 cd ai-service/poc
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 python build_index.py --segments ../../data/curated --top-k 25
-python eval.py   # writes real headline numbers to eval-report.md
-python cli.py cache/<some-id>.jpg   # smoke-test single retrieval
+python eval.py            # writes headline numbers to eval-report.md
+python cli.py cache/<some-id>.jpg
 ```
 
-Tests (no torch / HF required):
+Requires HuggingFace + Wikimedia reachable (off Claude Code sandbox).
+
+**Tests (no torch / HF required)**:
 
 ```bash
 pip install numpy
 python -m unittest ai-service/poc/test_eval.py -v   # 10 tests, ~12ms
 ```
 
-See `ai-service/poc/README.md` for full runbook + `IMPLEMENTATION-NOTES.md`
-for 8-section architecture walkthrough.
+See `ai-service/poc/README.md` for full runbook + `IMPLEMENTATION-NOTES.md` for
+9-section architecture walkthrough (incl. §8 the in-sandbox baseline strategy).
 
 ## About the author
 

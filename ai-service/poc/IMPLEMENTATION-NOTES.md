@@ -72,7 +72,50 @@ Confidence band mapping is **uncalibrated heuristic**. For production, the bands
 
 5. **No Qdrant.** ai-roadmap.md Phase 2 calls for Qdrant vector DB. PoC uses raw `corpus @ query` — at 25-1000 items this is faster than network round-trip to Qdrant. Reason: Phase 1 doesn't need it, and adding it just to look professional would be cargo-culting.
 
-## 8. How a reader can verify each of the above without running it
+## 8. The in-sandbox pHash baseline (`phash_baseline.py`) — added after user pushback
+
+User on 2026-06-05: *"想办法解决,重复尝试,直到成功。如果在多轮尝试之后仍然不成功,那么就先按照 A 方案执行"*
+("Find a way. Try multiple times. If after multiple attempts it still fails, then go with plan A.")
+
+What we tried, in order:
+
+1. **`pip install torch open_clip_torch` → load OpenAI / LAION weights from HuggingFace** —
+   FAILED. HF host blocked. Confirmed via `curl -v https://huggingface.co` → 403.
+2. **`pip install timm` → load ImageNet ViT weights** — FAILED. Same HF Hub backend.
+3. **Probed HF mirrors (`hf-mirror.com`, `hf.co`, `hub-mirror.huggingface.co`)** — ALL BLOCKED.
+4. **GitHub API search for github-hosted CLIP weight mirrors** — rate-limited; no obvious
+   mirror exists for the standard ViT-B/32 weights.
+5. **Pivoted to pHash baseline on local SVG silhouettes** — SUCCESS.
+
+The `phash_baseline.py` script:
+
+- Renders 12 SVG silhouettes (`assets/silhouettes/*.svg`) via `cairosvg` (pure Python, no HF)
+- Computes `imagehash.phash` (8×8 DCT, pure Python) → 64-bit hash per image
+- Does leave-one-out retrieval over the 12 hashes
+- Scores intra-family matches on 6 scorable items (3 two-member families: ding / zun / sanxingdui;
+  6 singletons can't have intra-family matches by definition)
+
+Result: **Intra-family P@1 = 0.333, P@5 = 0.667** (`phash-eval-report.md`).
+
+Why this is meaningful even though it's not CLIP:
+
+1. **Pipeline closure**: load → encode → index → query → eval all work end-to-end in-sandbox.
+   The CLIP eval (when run off-sandbox) plugs into the same plumbing — `eval.py` was already
+   designed to take any encoder's `embeddings.npy`.
+2. **Real baseline number** for CLIP to beat. If off-sandbox CLIP eval produces P@5 < 0.667
+   on a comparable task, we'd know CLIP is **not** adding value over a trivial baseline,
+   and Phase 2 (DINOv2 ensemble) wouldn't be worth the investment.
+3. **Honest signal**: pHash is the simplest possible image retrieval; reporting its actual
+   numbers proves we're shipping evaluation discipline, not handwaving.
+
+What this PoC explicitly *doesn't* claim:
+
+- That pHash on silhouettes is comparable to CLIP on real artifact photos (it isn't)
+- That P@1 = 0.333 meets ai-roadmap §6.3 target (it doesn't; target is for CLIP on photos)
+- That the test set is large enough to draw confident conclusions (n=6 scorable; treat as
+  smoke test, not benchmark)
+
+## 9. How a reader can verify each of the above without running it
 
 - §1 ViT-B/32 choice → `requirements.txt` pin, `build_index.py:147`
 - §2 L2-norm → `build_index.py:84-85`

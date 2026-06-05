@@ -17,7 +17,7 @@
 | **v4.6** | 2026-05-22 | 真实 GeoJSON (d3.geoConicEqualArea) + mobile retrofit (12 页 375px true mobile) + 28/28 Playwright green | "defer 是 PM 工具箱里最危险的动词" — §5.8 reframing |
 | **v5** | 2026-05-22→ | Tailwind CDN removal (13 页) + a11y contrast + data-loader 并行化 + GeoJSON 项目 docs reconciliation | 性能 + 实诚 docs |
 
-**量化产出**: ~32 subagent invocations / ~4.5M tokens / 估 $40-50 USD / 总 wall-clock 横跨多 night-run。277/300 国宝(92%) · 11 audit reports · 2 闭环 iteration · 28/28 Playwright tests green · case-study v0.6 ~8200 字 · 12 silhouette SVG + 25 pattern SVG + 7 GeoJSON。
+**量化产出**: ~32 subagent invocations / ~4.5M tokens / 估 $40-50 USD / 总 wall-clock 横跨多 night-run。277/300 国宝(92%) · 11 audit reports · 2 闭环 iteration · 28/28 Playwright tests green · case-study v0.7 ~8600 字 · 12 silhouette SVG + 25 pattern SVG + 7 GeoJSON。
 
 **如何读懂这个项目的 narrative**:本文件是 append-only event-sourced log,适合追溯**任何决策的因果链**(grep 任意 ID 即可)。但读 narrative 请看 `docs/case-study.md`(v0.6,§0-§5.9 完整)+ `morning-report.md`(D0 5 分钟 TL;DR)+ `docs/agent-team-design.md`(8+ 角色拓扑)。读决策因果链请看 `state/decision-log.md`。
 

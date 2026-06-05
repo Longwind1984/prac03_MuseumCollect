@@ -441,12 +441,42 @@ Comparative Auditor D2 综合判断:**6.5/10 (v1 composite) → 7.2/10 (v3) = +0
 
 **§5.9 的更新触发条件**: 我在自己机器上跑完 `build_index.py + eval.py`,把真数字 commit 回来,本节即刻补一段 "Update: 真 P@1 = X.XX, P@5 = Y.YY, intra-class P@1 = Z.ZZ, breakdown: ..." 并指向 `eval-report.md` 完整版。
 
-> **AI PM 的 ship discipline:正确的诚实 > 漂亮的虚假。** 这件事我希望写进面试桌上能背得出的 takeaway。
+#### 5.9.1 in-sandbox 实际跑出来的 pHash baseline(2026-06-05 update)
+
+写完上面几段后,user 反推了我一句:"想办法解决,直接在我本地开一个分支,调用 Claude Code CLI 去跑。重复尝试,直到成功。如果在多轮尝试之后仍然不成功,那么就先按照 A 方案执行。" 这条反推让我在 ship 完 CLIP stub 之后又做了一轮**多策略 in-sandbox 攻防**:
+
+1. **`pip install torch open_clip_torch`** + 加载 `ViT-B-32 pretrained=openai/laion2b`:**FAIL** — HF 域名 block,403
+2. **`pip install timm`** + 加载 ImageNet ViT-B-16:**FAIL** — 同样走 HF Hub backend
+3. **试 HF mirrors**(`hf-mirror.com`, `hf.co`, `hub-mirror.huggingface.co`):**全 BLOCK**
+4. **GitHub API 搜 CLIP weights mirror**:rate-limited;没有 obvious 的 ViT-B/32 mirror
+5. **pivot 到本地 SVG silhouettes + pHash baseline**:**SUCCESS**
+
+第 5 步产物 `ai-service/poc/phash_baseline.py` 用了 `cairosvg`(纯 Python SVG → PNG)+ `imagehash`(纯 Python 8×8 DCT pHash)+ `assets/silhouettes/` 的 12 个本地 SVG,**完全 in-sandbox 跑出来的真数字**:
+
+| 度量 | 值 | 说明 |
+|---|---|---|
+| Items total | 12 | local SVG silhouettes,无 network |
+| Items scorable | 6 | 3 个 two-member family (ding / zun / sanxingdui),6 个 singleton 无 ground truth |
+| **Intra-family P@1** | **0.333** | top-1 近邻同 family 的命中率 |
+| **Intra-family P@5** | **0.667** | family member 在 top-5 |
+
+成功 case: `fangding → yuanding (top-1, dist=27, ✓)`、`fang_zun → xiao_zun (top-1, dist=24, ✓)`。失败 case: 三星堆纵目面具与大立人在 pHash 空间是 dist=26(被 pan 截胡)。完整 per-item retrieval 表见 `ai-service/poc/phash-eval-report.md`。
+
+**这个数字意味着什么 / 不意味着什么**:
+
+- ✓ 它意味着 **retrieval pipeline 闭合**:load → encode → index → query → eval 在沙箱内**真跑通了**,`eval.py` 的代码 plugin-shaped(只要给它任意 encoder 的 `embeddings.npy` 就工作)
+- ✓ 它给出 CLIP 必须打败的 baseline:任何 CLIP eval 如果 P@5 < 0.667 on comparable task,Phase 2 (DINOv2 ensemble) 投资不值
+- ✗ 它**不是** ai-roadmap §6.3 的 P@1 ≥ 0.40 target — 那个 target 是给 CLIP on real artifact photos 的,silhouette + pHash 是另一码事
+- ✗ n=6 scorable 是 smoke test 规模,不是 benchmark — 但是它**是真数字**
+
+**这次 user 反推给我的 PM lesson**:Plan A(只 ship 代码、诚实说没跑)和 Plan B(off-sandbox 跑出真 CLIP 数字)之间还有 Plan A.5(in-sandbox 用 next-best-available-data 跑出 honest baseline)。**default 到 Plan A 的诱惑是"infrastructure constraint 是合理 excuse";Plan A.5 的本质是"对每一个 constraint,再问一次 'what's the next thing I can actually do?'"**。这是比 Plan A 单独 ship 更强的 PM signal,因为它证明我**会顺着约束推到底**而不是停在第一个"做不了"。
+
+> **AI PM 的 ship discipline:正确的诚实 > 漂亮的虚假;而 ≥ 1 个真 baseline > 0 个真 baseline。** 这件事我希望写进面试桌上能背得出的 takeaway。
 
 ---
 
-**Case Study 版本**:v0.6 (2026-06-05 portfolio push — §0.5 About the builder + §5.9 PoC ship discipline)
-**作者**:Product Owner agent (v4 iteration, Opus, cold context) + 项目主理人 (§5.7 §5.8 §5.9 + §0.5 增补)
+**Case Study 版本**:v0.7 (2026-06-05 portfolio push — §0.5 About the builder + §5.9 ship discipline + §5.9.1 in-sandbox pHash baseline real numbers)
+**作者**:Product Owner agent (v4 iteration, Opus, cold context) + 项目主理人 (§5.7-§5.9.1 + §0.5 增补)
 **日期**:2026-06-05
-**字数**:~8200 字 — §0.5 ~250 / §1-§2 ~1500 / §3 ~2500 / §4 ~1800 / §5 ~3400(含 §5.7-§5.9)
-**下次更新触发条件**:`ai-service/poc/` 在 off-sandbox 跑出真数字 → §5.9 头 + `eval-report.md`;或 D7-D14 任一 Track 闭环完成
+**字数**:~8600 字 — §0.5 ~250 / §1-§2 ~1500 / §3 ~2500 / §4 ~1800 / §5 ~3800(含 §5.7-§5.9.1)
+**下次更新触发条件**:`ai-service/poc/build_index.py + eval.py` 在 off-sandbox 跑出真 CLIP P@5 → §5.9.2;或 D7-D14 任一 Track 闭环完成
