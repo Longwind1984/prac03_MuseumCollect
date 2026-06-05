@@ -105,6 +105,44 @@ prac03_MuseumCollect/
 
 详细诚实清单见 [`docs/case-study.md` §4.4 "诚实说没做到的"](docs/case-study.md) + §5 反思全节。
 
+## Deploy
+
+`vercel.json` is configured for Vercel static hosting (cleanUrls: false,
+trailingSlash: true). Deploy by:
+
+```bash
+# From your local machine (vercel CLI not pre-installed in this sandbox)
+npm i -g vercel
+vercel --prod
+```
+
+Static hosting + SVG cache headers — no build step needed. After deploy,
+back-fill the Vercel URL into `index.html` footer and README hero CTA.
+
+## AI PoC
+
+`ai-service/poc/` ships production-shaped CLIP retrieval as a stub. To populate
+real numbers (off-sandbox, where HuggingFace + Wikimedia are reachable):
+
+```bash
+cd ai-service/poc
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+python build_index.py --segments ../../data/curated --top-k 25
+python eval.py   # writes real headline numbers to eval-report.md
+python cli.py cache/<some-id>.jpg   # smoke-test single retrieval
+```
+
+Tests (no torch / HF required):
+
+```bash
+pip install numpy
+python -m unittest ai-service/poc/test_eval.py -v   # 10 tests, ~12ms
+```
+
+See `ai-service/poc/README.md` for full runbook + `IMPLEMENTATION-NOTES.md`
+for 8-section architecture walkthrough.
+
 ## About the author
 
 我有 ~8 年 AI/ML 工程背景(推荐系统 / NLP retrieval / CV embedding)。最近两年系统性往 AI 产品方向迁移 —— 这份作品集是我的实证。**不是用 AI 写代码的 PM,是用 AI 协助开发 AI 产品的 PM**。这两件事的差别在 case-study §3 / §5.4 详细展开。

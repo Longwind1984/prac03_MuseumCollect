@@ -74,6 +74,28 @@ Then `git add embeddings.npy items.json eval-report.md && git commit -m "ai-serv
 
 4. **Cosine distance ≠ confidence.** The `confidence_band` mapping in `cli.py` is a heuristic, not calibrated. Per `ai-service/api-contract.md` §3.1, real production needs temperature-scaled softmax + per-class threshold calibration on a held-out set. Out of scope for Phase 1.
 
+## Verification without running the full pipeline
+
+`test_eval.py` covers the retrieval-math layer with stdlib unittest + numpy only
+(no torch / HF required). Synthetic 6-item / 2-dynasty / clustered-by-dynasty
+index proves:
+
+- `cosine_topk` ranks correctly + truncates to k + finds self at top-1
+- `evaluate` reports P@1 = 0 under leave-one-out + 1-image-per-id (documented
+  degeneration, not a bug)
+- `evaluate` reports intra-class P@1 ≈ 1.0 when synthetic data clusters
+  cleanly by dynasty
+- Per-dynasty breakdown sums to total
+- Edge cases (empty corpus, k > N-1) handled
+
+```bash
+pip install numpy   # only dep needed for tests
+cd ai-service/poc
+python -m unittest test_eval.py -v   # 10 tests, ~12ms
+```
+
+This is the AI-eval rigor `qa/tests/` doesn't cover (qa/ is all HTML-page tests).
+
 ## See also
 
 - `docs/ai-roadmap.md` §6 — full eval methodology this PoC implements

@@ -287,7 +287,7 @@ Comparative Auditor D2 综合判断:**6.5/10 (v1 composite) → 7.2/10 (v3) = +0
 - **300 件目标 277/300 = 92%**:差 23 件,DE-4 秦汉段缩减 55→45 是因为 token 上限被击穿,做了 incremental mitigation 但没补齐。
 - **跨维度联动**:event bus 协议完成,**同一文档内三组件联动**实现(time-pillar.html 内 hover 朝代触发本页响应),但 **跨页面联动** 没实现——`document.dispatchEvent(CustomEvent)` 不能跨 tab。5/5 Auditor 独立标注这是 v3 最重要的没兑现。修复路径在 `audits/merged-spec-v3.md`:要么建 dashboard.html 同屏页面(选项 A,推荐),要么用 BroadcastChannel 真跨页面(选项 B)。v4 close-loop 必做。
 - **移动端**:v3 主体是 desktop,mobile 推迟到 v4。
-- **真实 AI 服务**:CLIP 识别还在 mock 阶段,真实服务在 `docs/ai-roadmap.md` 已经 phase 化(Phase 1 PoC / Phase 2 Hybrid / Phase 3 LoRA fine-tune),但本案例研究范围内未实现。
+- **真实 AI 服务**:CLIP 识别 v0.6 之前还在 mock 阶段。v0.6 ship 了 `ai-service/poc/`(7 文件 production-shaped Python stub)+ `IMPLEMENTATION-NOTES.md`(8 节架构决策)。真数字未跑(沙箱 firewall 限制),见 §5.9 完整解释。Phase 2 Hybrid + Phase 3 LoRA fine-tune 仍在 `docs/ai-roadmap.md` 路线。
 - **真实用户测试**:9 个粗访朋友(in §1.3),没做 N=20+ 的结构化访谈;motivation-hooks 里所有 KPI 是 hypothesis,未验证。
 - **case-study §3-§5**:本文档完成之前,这是 v3 唯一未兑现的 P0(从 D1 至 D2 一直 4/10)。本次 v4 Phase E Track A 即在交付这部分。
 
