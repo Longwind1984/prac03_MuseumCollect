@@ -1,7 +1,7 @@
 # Case Study — MuseumCollect
 
 > 作品集叙事文档。第一人称、坦诚、技术够 impress 工程师 / 产品够 impress PM。
-> 当前版本 **v0.8**(2026-06-05)—— §0-§6 完成,~10500 字 6 节(含 §5.9.1 in-sandbox baseline + §6 commercial gap)。版本演化记录见文末"版本"节。
+> 当前版本 **v0.8**(2026-06-05)—— §0-§6 完成,~9000 汉字 6 节(含 §5.9.1 in-sandbox baseline + §6 commercial gap → 5 个 commercial PM artifacts)。版本演化记录见文末"版本"节。
 
 ---
 
@@ -494,15 +494,19 @@ auditor 用这句话拷问回来:**"the candidate's own §4.3 scorecard literall
 | PRD / scope V1/V2/out | 2 | 2 | demo-night PRD 存在,完整 V1 PRD 待 sprint 6 |
 | **GTM / acquisition** | **0** | **3** | `docs/one-pager.md §5` + `docs/north-star.md §2.1`(渠道+CAC+LTV) |
 | **Cost / ROI / unit economics** | 2 | 3 | `docs/one-pager.md §5.4`(blended CAC ¥12 / LTV ¥60 / 5:1)+ `ai-roadmap §5` infra cost |
-| Risk register / compliance | 2 | 2 | `ai-roadmap §7` + `licensing-log-v3.md`;UGC moderation + PIPL 仍是 V2 gap |
-| Analytics / event taxonomy | 1 | 1 | **仍然是 gap** — sprint 6+ 上线后第一件事 |
+| **Risk register / compliance** | **2** | **3** | `docs/product-policy-and-risks.md`(8 行 risk × Sev×Prob × mitigation + 4 product policy framework,~2200 字)+ `ai-roadmap §7`(AI 工程层 risk)+ `licensing-log-v3.md`(图源)|
+| **Analytics / event taxonomy** | **1** | **3** | `docs/analytics-event-taxonomy.md`(11 V1 必埋 events · 5 类 · SQL 计算 NSM/D7/W2 · ~1700 字)· 直接回应 auditor 拷问 #5 |
 | Scale plan 100k→1M | 2 | 2 | `ai-roadmap §5` 有 cost,架构 scale plan 仍是 V2 gap |
 | **"What I'd do differently"** | 3 | 3 | §5.2 §5.3 §5.8 §6(此节)|
 | **Pitch / 1-pager** | 2 | 3 | `docs/one-pager.md`(8 节投资人格式) |
 | AI model trade-off matrix | 3 | 3 | `ai-roadmap §1-2`(strongest artifact) |
 | Failure case taxonomy | 2 | 2 | `phash-eval-report.md` 有 per-item failure;产品级 failure ladder 仍是 V2 gap |
 
-补完之后 14 项中 **10 项 ≥ 3 / 3 项 ≤ 2(明确 V2 to-do)/ 1 项 = 1(analytics 暂未上线无法做)**。
+补完之后 14 项中 **12 项 ≥ 3 / 2 项 = 2(明确 V2 to-do)/ 0 项 = 1**。
+
+后续追加(本节同一轮): `docs/product-policy-and-risks.md` 把 risk register 从 2→3,直接回应 auditor 拷问 #4 ("AI 说 85% 后母戊鼎然后错了的 legal exposure")。再加 `docs/analytics-event-taxonomy.md` 把 analytics 从 1→3,直接回应 auditor 拷问 #5 ("event schema · activated vs churned 怎么算")。这是 "cold-audit 拷问 → 1:1 对应新 artifact" 的连续 mapping,**audit-as-iteration-trigger §3.3 规则又一次兑现**。
+
+剩余 2 项 ≤ 2 是 V1 PRD(2/3,demo-night 版本存在,完整 V1 PRD 待 Sprint 6 真正首发)和 Scale plan 100k→1M(2/3,`ai-roadmap §5` 有 cost,缺架构图)— 这两项**留在 2/3 是经过判断的**,理由见 §6.4。
 
 ### 6.2 为什么 auditor 这一轮拷问改变了我对 portfolio 的理解
 
@@ -524,8 +528,8 @@ senior PM 的 deliverable 是这一节补的 3 件:**NSM** 决定优化什么、
 
 ### 6.4 仍然没补的 gap(诚实承认 V2 to-do)
 
-- **Analytics event taxonomy**: scan_completed / collection_added / dimension_unlocked 等事件 schema 没写。理由: 产品没上线,埋点先于产品是 over-engineering。Sprint 6+ 上线第一件事。
-- **PIPL / GDPR 完整 compliance audit**: 现在只有图片 licensing,UGC moderation + 未成年人保护 + 跨境数据 都是空的。理由: 产品没接 UGC,这条不阻塞 V1。
+- ~~**Analytics event taxonomy**~~ → **已升级**: `docs/analytics-event-taxonomy.md` v0 ship(11 events · 5 类 · 完整 SQL 计算 NSM/D7/W2 · `scan_completed.scan_id ↔ collection_added.scan_id` join 算 in-the-wild P@5)。code-level instrumentation 在 Sprint 6+。
+- ~~**PIPL / GDPR 完整 compliance audit**~~ → **已升级**: `docs/product-policy-and-risks.md` v1 ship(8 行 risk × 4 product policy framework)。完整 BD-stage audit + 法律顾问 review 在 Sprint 6+。
 - **1M MAU scale 架构图**: ai-roadmap §5 只到 cost,没到 sharding / CDN / region 设计。理由: 100k MAU 都没到,1M 是 stretch goal。
 - **Sprint 6 真正的 V1 PRD**: 当前只有 demo-night PRD;V1 PRD 待第一个非 demo 上线 sprint 写。理由: V1 PRD 写得早 = 写错。
 
@@ -540,6 +544,6 @@ senior PM 的 deliverable 是这一节补的 3 件:**NSM** 决定优化什么、
 **Case Study 版本**:v0.8 (2026-06-05 cold-audit response — §6 commercial gap + 3 个 P0 docs: north-star + competitive-landscape + one-pager)
 **作者**:Product Owner agent (v4 iteration, Opus, cold context) + 项目主理人 (§5.7-§5.9.1 + §0.5 + §6 增补)
 **日期**:2026-06-05
-**字数**:~10500 字 — §0.5 ~250 / §1-§2 ~1500 / §3 ~2500 / §4 ~1800 / §5 ~3800 / §6 ~1900
+**字数**:~9000 汉字(实测 9034 via `grep -oE '[一-鿿]'`)— §0.5 ~250 / §1-§2 ~1500 / §3 ~2200 / §4 ~1600 / §5 ~2200 / §6 ~1300
 **关联新文档**:`docs/north-star.md`(1800字 NSM tree) · `docs/competitive-landscape.md`(2400字 8 竞品矩阵 + moat) · `docs/one-pager.md`(1500字 投资人格式)
 **下次更新触发条件**:`ai-service/poc/build_index.py + eval.py` 在 off-sandbox 跑出真 CLIP P@5 → §5.9.2;或 D7-D14 任一 Track 闭环完成;或下一次 cold audit 揭示新 gap

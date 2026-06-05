@@ -66,7 +66,7 @@
 我**不是博物馆专家**,我是会做产品的人。这个项目把**博物馆领域知识 × 产品设计 × AI 工程**三件事 stitch 起来,**结构本身就是 IP**:
 
 - 8 周 / 5 sprint / 6+ agent / 277 件 metadata / 11 份 audit / 4 个 Mermaid 流程图 / 真 in-sandbox AI baseline P@5 = 0.667
-- 全过程透明、可审计、可复制 — 见 `docs/case-study.md`(10500 字 6 节)
+- 全过程透明、可审计、可复制 — 见 `docs/case-study.md`(9000 汉字 6 节)
 
 如果未来需要联合创始人/团队,博物馆领域专家 + 内容策展 + 增长 marketing 是补的。**我提供的是 0→1 的产品+ AI engineering judgment**(case-study §0.5 + §5)。
 

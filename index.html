@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MuseumCollect — AI PM 作品集 · 5 sprint · case-study v0.8 (10500 字 6 节)</title>
-  <meta name="description" content="AI 产品经理作品集:8+ agent / 5 sprint / 277 件结构化数据 / 11 份 audit / 2 轮闭环兑现 + 真实 AI baseline (in-sandbox pHash P@5=0.667) + 3 份 commercial PM artifact (NSM / 竞品矩阵 / 投资人 1-pager) / case-study v0.8 ~10500 字 6 节。">
+  <title>MuseumCollect — AI PM 作品集 · 5 sprint · case-study v0.8 (9000 汉字 6 节)</title>
+  <meta name="description" content="AI 产品经理作品集:8+ agent / 5 sprint / 277 件结构化数据 / 11 份 audit / 2 轮闭环兑现 + 真实 AI baseline (in-sandbox pHash P@5=0.667) + 3 份 commercial PM artifact (NSM / 竞品矩阵 / 投资人 1-pager) / case-study v0.8 ~9000 汉字 6 节。">
   <!-- Open Graph for shareable previews -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="MuseumCollect — AI PM 作品集 · 5 sprint · 8 agent · 277 件 11 字段">
@@ -12,7 +12,7 @@
   <meta property="og:image" content="./assets/screenshots/dashboard-desktop.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="MuseumCollect — AI PM 作品集">
-  <meta name="twitter:description" content="8 agent / 5 sprint / 277 件 / 11 audit / case-study v0.8 (10500 字 6 节) + NSM + 竞品矩阵 + 1-pager · 全证据链 grep-verifiable">
+  <meta name="twitter:description" content="8 agent / 5 sprint / 277 件 / 11 audit / case-study v0.8 (9000 汉字 6 节) + NSM + 竞品矩阵 + 1-pager · 全证据链 grep-verifiable">
   <meta name="twitter:image" content="./assets/screenshots/dashboard-desktop.jpg">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
@@ -38,7 +38,7 @@
       </h1>
       <p class="text-base md:text-lg text-stone-700 max-w-3xl leading-relaxed mb-5">
         我用 8 个有边界的 AI agent 跑了 5 个 sprint,产出 1 个 converged demo(12 页面 / 277 件 11 字段 / 真 GeoJSON / 28/28 Playwright tests green),
-        11 份多视角 audit,2 轮 audit-as-iteration-trigger 兑现,~10500 字 case-study v0.8 (6 节,含 cold-audit response §6),
+        11 份多视角 audit,2 轮 audit-as-iteration-trigger 兑现,~9000 汉字 case-study v0.8 (6 节,含 cold-audit response §6),
         3 份 commercial PM artifact (NSM / 竞品矩阵 / 投资人 1-pager),以及一份 in-sandbox 真跑出来的 AI baseline。
         <span class="text-stone-500 italic">这不是 "我用 AI 写代码的 PM",是 "我把 AI 的约束当作产品设计原则" 的实证。</span>
       </p>
@@ -277,6 +277,16 @@
             <div class="text-xs text-stone-600 leading-relaxed">Problem / Solution / Market / Why-now / GTM (CAC ¥12, LTV ¥60, 5:1) / Ask / Risk · 投资人 90s 版 · 1500 字</div>
           </a>
         </div>
+        <div class="bg-stone-50 border border-stone-200 rounded p-3 mb-3">
+          <p class="text-xs text-stone-600 leading-relaxed mb-2">
+            <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/product-policy-and-risks.md" class="font-mono text-stone-900 hover:underline">📋 docs/product-policy-and-risks.md</a>
+            <span class="text-stone-500">— v0.8 后续追加</span>:8 行 risk × Sev × Prob × Mitigation + 4 product policy framework(AI 输出可信度 / UGC moderation / 隐私分层 / 删号导出)· 回应 auditor 拷问 #4 "AI 误识别 legal exposure" · ~2200 字
+          </p>
+          <p class="text-xs text-stone-600 leading-relaxed">
+            <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/analytics-event-taxonomy.md" class="font-mono text-stone-900 hover:underline">📊 docs/analytics-event-taxonomy.md</a>
+            <span class="text-stone-500">— v0.8 后续追加</span>:11 V1 必埋 events × 5 类 · 完整 SQL 算 NSM/D7/W2 · `scan_id` join 计算 in-the-wild P@5 · 回应 auditor 拷问 #5 "event schema + activated vs churned" · ~1700 字
+          </p>
+        </div>
         <p class="text-xs text-stone-600 mb-3 max-w-3xl">
           <span class="font-semibold text-stone-900">PM signal</span>: senior PM 不只回应"我做了什么",还回应"我没做什么 + 为什么"。
           case-study §6 写了完整 cold-audit verdict + coverage matrix + 仍然 V2 to-do (analytics / PIPL / 1M scale / V1 PRD)。
@@ -295,10 +305,12 @@
       <p class="text-sm text-stone-500 mb-5">这个项目的核心论点不是 demo 本身,是<strong>过程证据链可被任何外部 reviewer 用 grep 验证</strong>。每条 claim 都有对应 artifact 文件。</p>
 
       <div class="grid md:grid-cols-2 gap-x-8 gap-y-1.5 text-sm">
-        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/case-study.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ <strong>docs/case-study.md</strong>(v0.8 portfolio narrative · ~10500 字 6 节)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/case-study.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ <strong>docs/case-study.md</strong>(v0.8 portfolio narrative · ~9000 汉字 6 节)</a>
         <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/one-pager.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ <strong>docs/one-pager.md</strong> ★ NEW(投资人 90s + GTM + LTV/CAC)</a>
         <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/north-star.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ <strong>docs/north-star.md</strong> ★ NEW(NSM + 2 层 metric tree)</a>
         <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/competitive-landscape.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ <strong>docs/competitive-landscape.md</strong> ★ NEW(8 竞品 × 4 维矩阵)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/product-policy-and-risks.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ <strong>docs/product-policy-and-risks.md</strong> ★ NEW(8 risk + 4 product policy)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/analytics-event-taxonomy.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ <strong>docs/analytics-event-taxonomy.md</strong> ★ NEW(11 V1 events + SQL 计算 NSM/D7/W2)</a>
         <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/agent-team-design.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ docs/agent-team-design.md(6+1 audit + 8 role topology + Mermaid)</a>
         <a href="./morning-report.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ morning-report.md(D0 night-run 5-min TL;DR)</a>
         <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/state/state.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ state/state.md(event-sourced log + exec summary)</a>
