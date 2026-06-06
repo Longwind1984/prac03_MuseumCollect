@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MuseumCollect v3 — 青铜器知识宇宙</title>
-<script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="css/converged.css">
 <style>
 .hero-bg {
@@ -46,28 +45,10 @@
 .stat-label { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
 </style>
 </head>
-<body>
+<body data-page="index">
 
-<!-- Nav -->
-<nav class="top-nav">
-  <a href="index.html" class="nav-logo">器·<span>集</span></a>
-  <div class="nav-links">
-    <a href="catalog.html" class="nav-link">图鉴</a>
-    <a href="time-pillar.html" class="nav-link">时代柱</a>
-    <a href="geo-system.html" class="nav-link">地理</a>
-    <a href="pattern-tree.html" class="nav-link">纹饰树</a>
-    <a href="inscription-reader.html" class="nav-link">铭文</a>
-    <a href="purpose-scene.html" class="nav-link">礼制场景</a>
-    <a href="caster-profile.html" class="nav-link">铸主</a>
-    <a href="me.html" class="nav-link">我的图鉴</a>
-    <a href="scan.html" class="nav-link">识别</a>
-    <a href="dashboard.html" class="nav-link" style="color:#d4a857;font-weight:600;border-bottom:2px solid #d4a857;padding-left:20px;">★ 三联动</a>
-  </div>
-  <button class="linkage-toggle" title="穿越模式：开启后各维度组件联动响应">
-    <div class="linkage-dot"></div>
-    <span class="linkage-label">穿越模式 ●</span>
-  </button>
-</nav>
+<nav id="top-nav-placeholder" class="top-nav"></nav>
+<script src="js/nav.js"></script>
 
 <!-- Hero -->
 <div class="hero-bg">
@@ -295,6 +276,7 @@
   MuseumCollect v3 · 学术级青铜器知识系统 · 数据来源: 国家博物馆 / 考古报告 / 《殷周金文集成》
 </footer>
 
+<script src="js/constants.js"></script>
 <script src="js/state.js"></script>
 <script src="../../demos/v3-shared/time-pillar/event-bus.js" type="module"></script>
 <script>

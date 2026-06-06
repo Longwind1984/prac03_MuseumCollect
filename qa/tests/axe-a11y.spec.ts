@@ -40,8 +40,9 @@ test.describe('axe-a11y: accessibility scan', () => {
         }),
       });
 
-      // Color-contrast violations are widespread but cosmetic; track but don't fail.
-      // Fail only on non-color-contrast serious/critical violations.
+      // v5 ② fixed --text-muted on cream (~92 contrast violations → 0 from this token).
+      // Remaining contrast violations are from --accent-bronze (#a4732c) and --text-gold (#d4a857)
+      // used on white/cream — deferred to v5.1. Track but don't block until that sprint lands.
       const blockers = severe.filter(v => v.id !== 'color-contrast');
       expect(blockers, `Blocking a11y violations on ${p.name}: ${blockers.map(v => v.id).join(', ')}`).toHaveLength(0);
     });

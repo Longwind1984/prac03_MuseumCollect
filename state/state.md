@@ -5,6 +5,24 @@
 
 ---
 
+## Executive Summary (2026-06-05 · for cold readers)
+
+**5 sprints, 17 天 elapsed, 1 个项目主理人 + ~32 subagent invocations**:
+
+| Sprint | 日期 | 核心交付 | 关键 emergent |
+|---|---|---|---|
+| **v1** (D0) | 2026-05-20 night | 3 differentiated demo (考据/沉浸/探索 personas) + 6 audit + 1 close-loop iteration | 5/5 auditor 独立收敛到图像供应链 → 12 silhouette SVG ship |
+| **v3** (D1) | 2026-05-21 night | 7+1 维度收敛 + 1 converged demo (12 页 + event bus) + 277 件 11 字段 + 25 pattern SVG | 何尊"中国"二字长卷 → Aesthetic 评设计峰值;BUG-001 silent fallback 暴露 audit-as-read 局限 |
+| **v4.5** | 2026-05-22 | Runtime Auditor 加入(第 7 视角)+ 8-item mandatory checklist + Playwright/axe-core 接入 + BUG-002/003/004 fix | "audit squad audited itself" — case-study §5.7 二阶闭环成立 |
+| **v4.6** | 2026-05-22 | 真实 GeoJSON (d3.geoConicEqualArea) + mobile retrofit (12 页 375px true mobile) + 28/28 Playwright green | "defer 是 PM 工具箱里最危险的动词" — §5.8 reframing |
+| **v5** | 2026-05-22→ | Tailwind CDN removal (13 页) + a11y contrast + data-loader 并行化 + GeoJSON 项目 docs reconciliation | 性能 + 实诚 docs |
+
+**量化产出**: ~32 subagent invocations / ~4.5M tokens / 估 $40-50 USD / 总 wall-clock 横跨多 night-run。277/300 国宝(92%) · 11 audit reports · 2 闭环 iteration · **2 轮 portfolio cold-audit(coverage + credibility)** · 28/28 Playwright tests green · case-study v0.9 ~10600 汉字 7 节 · 6 商业 PM 文档(含 assumptions-register)· 12 silhouette SVG + 25 pattern SVG + 7 GeoJSON。
+
+**如何读懂这个项目的 narrative**:本文件是 append-only event-sourced log,适合追溯**任何决策的因果链**(grep 任意 ID 即可)。但读 narrative 请看 `docs/case-study.md`(v0.9,§0-§7 完整,§7 是 round-2 双标修复)+ `docs/assumptions-register.md`(每个数字 [M]/[B]/[A] 打标)+ `morning-report.md`(D0 5 分钟 TL;DR)。读决策因果链请看 `state/decision-log.md`。
+
+---
+
 ## Status
 
 - **Current Phase**: setup (pre-night-run)
@@ -178,3 +196,28 @@ Total active background agents: 9 (5 DE + 4 Phase B)
 [2026-05-22 H6] [auditor-rewriter] DONE — auditor.md v4.5 + auditor-runtime.md + 8-item mandatory checklist
 
 [2026-05-22 H7] [tools-integrator] DONE — qa/ scaffold (Playwright 1.56 + axe-core 4.11 + lost-pixel 3.22), 6 specs / 16 cases written, 14 passed / 2 skipped (D3 CDN), visual baseline 12/12 via fallback (lost-pixel CLI's --headless=old broken with modern Chromium). BUG-001 confirmed fixed via 3 routing tests. Real findings: (P1) d3 jsdelivr CDN is SPOF — 5 pages render empty shell offline; (P2) catalog.html has 3 stale ids not in data; (P2) color-contrast WCAG fails on 92 nodes across 5 pages. Reports: audits/d3-runtime.md + audits/d3-runtime.json. ~90 min.
+
+[2026-05-22 H8] [main-thread] DONE — v4.5 polish + v4.6 GeoJSON & mobile retrofit (8 commits)
+  - `a1bda2b`: vendor d3.v7.9.0 to assets/vendor/ (274K) + rewire 6 v3 pages from jsdelivr/d3js.org → local. Fixed P1 SPOF.
+  - `a1bda2b` (same): catalog.html stops hardcoding 33 mock items (3 invalid) → derives from window.MuseumData.artifacts (277) via buildCatalogItemsFromMuseumData() on museum-data-ready. data-loader.js MOCK_COLLECTED_IDS cleaned too. BUG-002/003/004 fixed (caster-profile zhoukangwang dangling LINK; dashboard click-lock .active class missing; dashboard scrollable-region-focusable a11y).
+  - `01aaffb`: case-study v0.3 → v0.4 — added §5.7 "audit squad audited itself" (v4.5 二阶闭环 narrative). audits/d3-runtime.json is "last evidence piece" for §3-§5 thesis.
+  - `499cb12`: dashboard real GeoJSON. _mapProjection: linear → d3.geoConicEqualArea(parallels=[25,47], rotate=[-105,0]). loadRealGeoData() fetches china-terrain + 4 ancient-states. 39 regions render with real geography (Shang 8 features incl 鬼方/羌方/古蜀/盘龙城).
+  - `2f346b7`: geo-system real GeoJSON (matching dashboard pattern). 30 excavation sites + 24 museums real lon/lat. China terrain 197 points (was 24). DEFERRED-001 FULLY CLOSED.
+  - `dec08f2`: mobile retrofit via converged.css @media (max-width: 768px). Root cause was top-nav 11 links overflowing → viewport scaled up to 855. Fixed with nav-links horizontal-scroll + html/body overflow-x:hidden + max-width:100vw guard. 12 pages now report 375px true mobile width.
+  - `ebe4408`: 12-case mobile-viewport.spec.ts Playwright regression test.
+  - `573afd4`: catalog 2-col 小红书 grid + [style*="grid-template-columns"]:not(...) override for inline grids across 13 pages.
+  - `ab56205`: svg[width] max-width 100% scale-to-fit for SVG-heavy pages (time-pillar / caster-profile / pattern-tree / inscription-hezun).
+  - `3cdc539`: case-study v0.5 — §5.8 "defer 是 PM 工具箱里最危险的动词" reflection on the user-prompted "立马开始" reversal.
+  - Tests: 28/28 green (16 original + 12 mobile-viewport).
+  - DEFERRED-001: FULLY CLOSED. DEFERRED-002: PARTIALLY CLOSED (pragmatic retrofit done; true mobile-first rebuild still v5).
+  - Files: assets/vendor/d3.v7.min.js, audits/bug-log.md (updated), docs/case-study.md (v0.5), qa/tests/mobile-viewport.spec.ts, converged.css (+125 lines mobile block).
+
+[2026-06-05 P1] [portfolio-cold-audit-round-1] DONE — coverage audit (PM artifact 存不存在). Cold agent 假装 senior PM 面试官扫前 5 节,verdict: "strong on process+AI eng, but commercial PM artifacts 0-2/3 across board." Ship 5 docs (north-star NSM tree / competitive-landscape 8 竞品 / one-pager 投资人格式 / product-policy-and-risks 8 risk / analytics-event-taxonomy 11 events) + case-study §6. Commits 05c25e8, 466c3e2.
+
+[2026-06-06 P2] [portfolio-cold-audit-round-2] DONE — credibility audit (artifact 可不可信). Cold agent 假装已读完文档的面试官,抓到核心双标:"refused to fabricate 1 AI metric (§5.9), then fabricated 9 load-bearing business metrics with zero citations same week — honesty is selective performance not discipline." 指控成立。修复(非忏悔,是 diff):
+  - NEW docs/assumptions-register.md: 24 个 load-bearing 数字打 [M](6)/[B](6)/[A](12) 标。铁律: [A] 不许裸奔成事实。
+  - 去 web 抓真锚点: activation 30% → 真实中位25%/均值34%(Business of Apps/Plotline);CAC ¥12 → 全球 CPI iOS$3.6/Android$1.22;小红书 → MAU 3.5亿+广东省博物馆话题9134万(替换编造的"100M+/+47%");故宫"MAU~150k"承认是猜的并降级。
+  - 修 6 处跨文档矛盾(register §4): C1 维度数 5→7+1(投资文档原在卖我最自豪砍掉的旧 schema 工艺!) / C2 WAC 月周算错 / C3 activation 既知又未知 / C4 两套成本模型 / C5 P@5 0.60vs0.55 / C6 pHash 当 CLIP 卖。
+  - pHash 降级: 承认 0.333=6里命中2、三星堆0/2、自绘SVG、n=6 与批判的 CLIP n=25 同样弱。从 headline 拼图 → "几乎不构成 retrieval evidence 的 toy"。
+  - case-study §7 (~2300字): 直面双标,真正 lesson = "我只有'在熟悉领域不造假'的习惯,纪律的考验在不擅长且没人会立刻 check 的地方"。
+  - case-study v0.8 → v0.9 (~10600 汉字 7 节). index/README/state 同步.

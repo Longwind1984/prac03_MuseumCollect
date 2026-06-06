@@ -1,0 +1,151 @@
+{
+  "desktop": [
+    {
+      "name": "index",
+      "url": "/demos/v3-converged/index.html",
+      "ok": true,
+      "bytes": 334531
+    },
+    {
+      "name": "catalog",
+      "url": "/demos/v3-converged/catalog.html",
+      "ok": true,
+      "bytes": 1138050
+    },
+    {
+      "name": "artifact-he-zun",
+      "url": "/demos/v3-converged/artifact.html?id=he_zun",
+      "ok": true,
+      "bytes": 369596
+    },
+    {
+      "name": "artifact-houmuwu",
+      "url": "/demos/v3-converged/artifact.html?id=houmuwu_ding",
+      "ok": true,
+      "bytes": 460717
+    },
+    {
+      "name": "dashboard",
+      "url": "/demos/v3-converged/dashboard.html",
+      "ok": true,
+      "bytes": 138585
+    },
+    {
+      "name": "me",
+      "url": "/demos/v3-converged/me.html",
+      "ok": true,
+      "bytes": 376058
+    },
+    {
+      "name": "time-pillar",
+      "url": "/demos/v3-converged/time-pillar.html",
+      "ok": true,
+      "bytes": 108254
+    },
+    {
+      "name": "geo-system",
+      "url": "/demos/v3-converged/geo-system.html",
+      "ok": true,
+      "bytes": 131902
+    },
+    {
+      "name": "pattern-tree",
+      "url": "/demos/v3-converged/pattern-tree.html",
+      "ok": true,
+      "bytes": 139346
+    },
+    {
+      "name": "inscription-reader",
+      "url": "/demos/v3-converged/inscription-reader.html",
+      "ok": true,
+      "bytes": 165187
+    },
+    {
+      "name": "caster-profile",
+      "url": "/demos/v3-converged/caster-profile.html",
+      "ok": true,
+      "bytes": 173850
+    },
+    {
+      "name": "purpose-scene",
+      "url": "/demos/v3-converged/purpose-scene.html",
+      "ok": true,
+      "bytes": 172105
+    }
+  ],
+  "mobile": [
+    {
+      "name": "index",
+      "url": "/demos/v3-converged/index.html",
+      "ok": true,
+      "bytes": 879624
+    },
+    {
+      "name": "catalog",
+      "url": "/demos/v3-converged/catalog.html",
+      "ok": true,
+      "bytes": 3373500
+    },
+    {
+      "name": "artifact-he-zun",
+      "url": "/demos/v3-converged/artifact.html?id=he_zun",
+      "ok": true,
+      "bytes": 789386
+    },
+    {
+      "name": "artifact-houmuwu",
+      "url": "/demos/v3-converged/artifact.html?id=houmuwu_ding",
+      "ok": true,
+      "bytes": 1129209
+    },
+    {
+      "name": "dashboard",
+      "url": "/demos/v3-converged/dashboard.html",
+      "ok": true,
+      "bytes": 132569
+    },
+    {
+      "name": "me",
+      "url": "/demos/v3-converged/me.html",
+      "ok": true,
+      "bytes": 835200
+    },
+    {
+      "name": "time-pillar",
+      "url": "/demos/v3-converged/time-pillar.html",
+      "ok": true,
+      "bytes": 240719
+    },
+    {
+      "name": "geo-system",
+      "url": "/demos/v3-converged/geo-system.html",
+      "ok": true,
+      "bytes": 224637
+    },
+    {
+      "name": "pattern-tree",
+      "url": "/demos/v3-converged/pattern-tree.html",
+      "ok": true,
+      "bytes": 203583
+    },
+    {
+      "name": "inscription-reader",
+      "url": "/demos/v3-converged/inscription-reader.html",
+      "ok": true,
+      "bytes": 389848
+    },
+    {
+      "name": "caster-profile",
+      "url": "/demos/v3-converged/caster-profile.html",
+      "ok": true,
+      "bytes": 387937
+    },
+    {
+      "name": "purpose-scene",
+      "url": "/demos/v3-converged/purpose-scene.html",
+      "ok": true,
+      "bytes": 402554
+    }
+  ],
+  "captured_at": "2026-05-22T14:05:20.365Z"
+}

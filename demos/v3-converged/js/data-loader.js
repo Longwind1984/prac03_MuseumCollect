@@ -12,23 +12,14 @@
 (function() {
   'use strict';
 
-  // Mock collected artifact IDs (representative sample across eras).
-  // Removed da_sheng_pan / guoji_zibo_pan / yuewang_zhouji_jian / simuwu_ding /
-  // shangguo_fang_sheng — they aren't in any segment JSON (BUG-001 cousin).
-  const MOCK_COLLECTED_IDS = new Set([
-    'houmuwu_ding', 'fuhao_owl_zun', 'siyang_fang_zun', 'zilong_ding',
-    'da_yu_ding', 'he_zun', 'li_gui', 'mao_gong_ding', 'da_ke_ding',
-    'san_shi_pan', 'xu_ji_zi_bai_pan',
-    'lian_he_fang_hu', 'yuewang_goujian_jian', 'zeng_houyi_bianzhong', 'zeng_houyi_zunpan',
-    'shang_yang_fang_sheng',
-    'cuo_jin_boshanluo', 'changxin_gonglamp',
-    'sanxingdui_bronze_standfigure', 'sanxingdui_zongmu_mask',
-    'met_he_ding', 'british_fang_yi',
-    'erlitou_tong_jue', 'panlongcheng_fang_ding',
-    'zhongshan_wang_ding',
-    'chu_wang_ding', 'jin_hou_su_bian',
-    'ban_gui', 'ling_fang_yi', 'nangong_hu'
-  ]);
+  // Single source of truth: MuseumConstants.COLLECTED_IDS (loaded by constants.js).
+  // Previously this file kept its own MOCK_COLLECTED_IDS (30 IDs, also full of
+  // typos). v5 ③ unified the two lists onto real-data IDs.
+  const MOCK_COLLECTED_IDS = (window.MuseumConstants && window.MuseumConstants.COLLECTED_IDS)
+    || new Set();
+  if (!window.MuseumConstants) {
+    console.error('[data-loader.js] requires constants.js to be loaded first');
+  }
 
   // Segment file paths (relative to html pages in demos/v3-converged/)
   const SEGMENT_PATHS = [
@@ -61,18 +52,25 @@
   }
 
   async function loadAll() {
-    let all = [];
-    for (const path of SEGMENT_PATHS) {
-      try {
+    // v5 ④: parallelize the 5 segment fetches with Promise.allSettled (was a
+    // serial for-await loop — 5x round-trip latency). Results stay in
+    // SEGMENT_PATHS order so cross-dim-wiring's era-sequence logic is stable.
+    const results = await Promise.allSettled(
+      SEGMENT_PATHS.map(async (path) => {
         const r = await fetch(path);
-        if (r.ok) {
-          const data = await r.json();
-          all = all.concat(Array.isArray(data) ? data : [data]);
-        }
-      } catch(e) {
-        console.warn('[data-loader] Could not load', path, e.message);
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        const data = await r.json();
+        return Array.isArray(data) ? data : [data];
+      })
+    );
+    let all = [];
+    results.forEach((r, i) => {
+      if (r.status === 'fulfilled') {
+        all = all.concat(r.value);
+      } else {
+        console.warn('[data-loader] Could not load', SEGMENT_PATHS[i], r.reason && r.reason.message);
       }
-    }
+    });
 
     if (all.length === 0) {
       console.warn('[data-loader] No data loaded; using empty stub');

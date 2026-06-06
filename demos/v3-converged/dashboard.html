@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>维度全景 · 三联动 Dashboard — MuseumCollect v3</title>
-<script src="https://cdn.tailwindcss.com"></script>
 <script src="../../assets/vendor/d3.v7.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
@@ -16,7 +15,7 @@
   --text-gold:     #d4a857;
   --text-bronze:   #a4732c;
   --text-cream:    #e8dcc8;
-  --text-muted:    #8a7a5a;
+  --text-muted:    #b0a070;
   --border-dim:    rgba(164,115,44,0.18);
   --border-bright: rgba(212,168,87,0.45);
   --accent-red:    #c04030;
@@ -80,6 +79,29 @@ body {
   grid-template-columns: 240px 1fr;
   grid-template-rows: 1fr;
   gap: 0;
+}
+
+/* Mobile: single column, vertical stack (time-pillar → map → bottom-panel) */
+@media (max-width: 768px) {
+  body, html { height: auto !important; overflow-y: auto !important; }
+  .dashboard-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+  }
+  .left-col {
+    border-right: none !important;
+    border-bottom: 1px solid var(--border-dim);
+    flex: none !important;
+  }
+  .pillar-section { max-height: 360px; overflow-y: auto !important; }
+  .pattern-strip-section { padding: 8px 12px; }
+  .right-col { flex: none !important; min-height: 0; }
+  .map-section { height: 280px !important; min-height: 280px; }
+  .bottom-panel { flex-direction: column !important; }
+  .era-big-badge { width: 100% !important; }
+  .era-separator { display: none; }
+  .artifact-cards { flex-wrap: nowrap; overflow-x: auto !important; }
 }
 
 /* Left column: time-pillar + pattern strip stacked */
@@ -313,6 +335,7 @@ body {
 .debug-bar.visible { display: block; }
 #debug-log { color: #7a9060; }
 </style>
+<script src="js/constants.js"></script>
 <script src="js/data-loader.js"></script>
 </head>
 <body>

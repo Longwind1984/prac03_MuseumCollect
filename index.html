@@ -3,126 +3,378 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MuseumCollect — 青铜器图鉴 · 3 个 persona 的 3 个答案</title>
-  <meta name="description" content="一夜跑,8 角色 AI agent team,3 differentiated persona,3 高保真原型 + 1 轮 audit 闭环。">
+  <title>MuseumCollect — AI PM 作品集 · 5 sprint · case-study v0.9 (10600 汉字 7 节)</title>
+  <meta name="description" content="AI 产品经理作品集:8+ agent / 5 sprint / 277 件结构化数据 / 11 份 audit / 2 轮 cold-audit 拷问与修复 / 6 份 commercial PM artifact (NSM / 竞品 / 1-pager / 风险 / 埋点 / 假设登记册) / case-study v0.9 ~10600 汉字 7 节。">
+  <!-- Open Graph for shareable previews -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MuseumCollect — AI PM 作品集 · 5 sprint · 8 agent · 277 件 11 字段">
+  <meta property="og:description" content="一个 AI 产品经理的实证作品集:不是 '用 AI 写代码的 PM',是 '把 AI 的约束当作产品设计原则' 的 5 sprint 实证。">
+  <meta property="og:image" content="./assets/screenshots/dashboard-desktop.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MuseumCollect — AI PM 作品集">
+  <meta name="twitter:description" content="8 agent / 5 sprint / 277 件 / 11 audit / case-study v0.9 (10600 汉字 7 节) + 6 商业 PM 文档 + assumptions-register · 全证据链 grep-verifiable">
+  <meta name="twitter:image" content="./assets/screenshots/dashboard-desktop.jpg">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Source Han Serif SC", "Songti SC", serif; }
     .card { transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
-    .card:hover { transform: translateY(-4px); }
+    .card:hover { transform: translateY(-3px); }
+    .hero-strip img { transition: transform .25s ease, box-shadow .25s ease; }
+    .hero-strip img:hover { transform: scale(1.02); box-shadow: 0 8px 24px rgba(60,40,20,.18); }
+    .sprint-rail { position: relative; }
+    .sprint-rail::before { content: ''; position: absolute; left: 0; right: 0; top: 16px; height: 2px; background: linear-gradient(90deg, #d6c9b3, #a4732c, #d6c9b3); z-index: 0; }
+    .sprint-node { position: relative; z-index: 1; background: #faf6ed; }
   </style>
 </head>
 <body class="bg-stone-50 text-stone-900">
-  <div class="max-w-6xl mx-auto px-6 py-12 md:py-20">
+  <div class="max-w-6xl mx-auto px-6 py-10 md:py-16">
 
     <!-- Header -->
-    <header class="mb-12 md:mb-16">
-      <p class="text-xs uppercase tracking-widest text-stone-500 mb-3">MuseumCollect · v1 demos</p>
-      <h1 class="text-3xl md:text-5xl font-serif mb-4 leading-tight">青铜器图鉴<br class="md:hidden"><span class="text-stone-500"> — </span>3 个 persona 的 3 个答案</h1>
-      <p class="text-base md:text-lg text-stone-600 max-w-3xl leading-relaxed">
-        一夜跑,15 个 AI agent 调用,3 个差异化用户画像,3 版高保真 HTML 原型 + 6 视角 audit + 1 轮 close-loop iteration。
-        每个 demo 对同一个产品愿景给出不同的回答 — 任选一个开始浏览。
+    <header class="mb-10 md:mb-12">
+      <p class="text-xs uppercase tracking-widest text-stone-500 mb-3">MuseumCollect · AI PM portfolio · 2026-05-20 → 2026-06-05</p>
+      <h1 class="text-3xl md:text-5xl font-serif mb-4 leading-tight">
+        青铜器图鉴<br class="md:hidden"><span class="text-stone-400 hidden md:inline"> · </span>
+        <span class="text-stone-600 text-2xl md:text-3xl block md:inline mt-2 md:mt-0">AI agent 协作产出的高保真原型 + 全证据链作品集</span>
+      </h1>
+      <p class="text-base md:text-lg text-stone-700 max-w-3xl leading-relaxed mb-5">
+        我用 8 个有边界的 AI agent 跑了 5 个 sprint,产出 1 个 converged demo(12 页面 / 277 件 11 字段 / 真 GeoJSON / 28/28 Playwright tests green),
+        11 份多视角 audit,**2 轮 cold-audit 拷问与修复**(round-1 查 coverage、round-2 查 credibility),~10600 汉字 case-study v0.9 (7 节),
+        6 份 commercial PM artifact(NSM / 竞品 / 1-pager / 风险 / 埋点 / ★假设登记册),以及一份 in-sandbox 真跑出来的检索 pipeline。
+        <span class="text-stone-500 italic">这不是 "我用 AI 写代码的 PM",是 "我把 AI 的约束当作产品设计原则" 的实证。</span>
       </p>
+      <div class="flex flex-wrap gap-3">
+        <a href="./demos/v3-converged/dashboard.html" class="inline-flex items-center gap-2 px-5 py-2.5 bg-stone-900 text-stone-50 rounded-md text-sm font-medium hover:bg-stone-700">
+          ★ 立刻体验 v3 三联动 demo →
+        </a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/case-study.md" class="inline-flex items-center gap-2 px-5 py-2.5 border border-stone-400 text-stone-800 rounded-md text-sm font-medium hover:bg-stone-100">
+          深读 case-study v0.9 (~28 min) →
+        </a>
+        <a href="./morning-report.md" class="inline-flex items-center gap-2 px-5 py-2.5 text-stone-600 rounded-md text-sm font-medium hover:text-stone-900">
+          先扫 morning-report (~5 min) →
+        </a>
+      </div>
     </header>
 
-    <!-- Demo cards -->
-    <div class="grid md:grid-cols-3 gap-6 mb-16">
-
-      <!-- Card A: 考据派 -->
-      <a href="./demos/v1-A-textual-research/" class="card block bg-white rounded-lg p-7 border border-stone-200 hover:border-stone-500 hover:shadow-xl">
-        <div class="flex items-center gap-2 mb-3">
-          <span class="text-xs uppercase tracking-wider text-stone-500 font-mono">Version A</span>
-          <span class="text-xs px-2 py-0.5 rounded-full bg-stone-100 text-stone-700">Composite 7.8</span>
-        </div>
-        <h2 class="text-2xl font-serif mb-1">考据派</h2>
-        <p class="text-sm text-stone-500 mb-5 italic">for 陈翊安 · 北大考古博士</p>
-        <p class="text-stone-700 leading-relaxed text-sm mb-6">
-          青铜器是"证据链"。学术期刊电子版美学,段位用篆刻印章而非游戏 UI,artifact 详情页一屏集成 6 个维度形态,出处可复制 BibTeX。
-        </p>
-        <div class="text-xs text-stone-500 border-t border-stone-100 pt-3">
-          ★ 杀手锏: <code class="text-stone-700">artifact.html</code><br>
-          <span class="text-stone-400">Audit:Content / Aesthetic / Motivation 三冠</span>
-        </div>
-      </a>
-
-      <!-- Card B: 沉浸派 -->
-      <a href="./demos/v1-B-immersive/" class="card block bg-stone-900 text-stone-100 rounded-lg p-7 border border-stone-900 hover:shadow-2xl">
-        <div class="flex items-center gap-2 mb-3">
-          <span class="text-xs uppercase tracking-wider text-stone-400 font-mono">Version B</span>
-          <span class="text-xs px-2 py-0.5 rounded-full bg-stone-800 text-amber-200">Composite 6.2</span>
-        </div>
-        <h2 class="text-2xl font-serif mb-1 text-amber-100">沉浸派</h2>
-        <p class="text-sm text-stone-400 mb-5 italic">for 苏念 · 《国家宝藏》圈粉</p>
-        <p class="text-stone-300 leading-relaxed text-sm mb-6">
-          青铜器是"穿越的入口"。墨色烛火氛围 + 国宝独白(诗化 200-300 字/件) + 等距宗庙礼器归位场景(22 位置 / 士→大夫→诸侯→天子等级判定)。
-        </p>
-        <div class="text-xs text-stone-400 border-t border-stone-700 pt-3">
-          ★ 杀手锏: <code class="text-amber-200">purpose-scene.html</code><br>
-          <span class="text-stone-500">上限最高 · Playwright 8/8 pages 0 errors</span>
-        </div>
-      </a>
-
-      <!-- Card C: 探索派 -->
-      <a href="./demos/v1-C-explorer/" class="card block bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 rounded-lg p-7 border border-amber-200 hover:border-amber-500 hover:shadow-xl">
-        <div class="flex items-center gap-2 mb-3">
-          <span class="text-xs uppercase tracking-wider text-amber-700 font-mono">Version C</span>
-          <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">Composite 6.8</span>
-        </div>
-        <h2 class="text-2xl font-serif mb-1">探索派</h2>
-        <p class="text-sm text-stone-500 mb-5 italic">for 阿K · 21 岁美院生 Z 世代</p>
-        <p class="text-stone-700 leading-relaxed text-sm mb-6">
-          青铜器是"PVE 副本里的稀有掉落"。Pokédex 风形制谱系 + 梗卡片 modal + 稀有度光晕(只给国宝)+ anti-Skinner "不必每天打开" banner。
-        </p>
-        <div class="text-xs text-stone-600 border-t border-amber-200 pt-3">
-          ★ 杀手锏: <code class="text-stone-800">me.html</code><br>
-          <span class="text-stone-500">Audit UX 第一 · K-factor 落地</span>
-        </div>
-      </a>
-    </div>
-
-    <!-- Stats strip -->
-    <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 text-center">
-      <div class="bg-white p-4 rounded border border-stone-200">
-        <div class="text-2xl font-serif text-stone-900">15</div>
-        <div class="text-xs text-stone-500 uppercase tracking-wider mt-1">subagent 调用</div>
-      </div>
-      <div class="bg-white p-4 rounded border border-stone-200">
-        <div class="text-2xl font-serif text-stone-900">2.4M</div>
-        <div class="text-xs text-stone-500 uppercase tracking-wider mt-1">tokens 用量</div>
-      </div>
-      <div class="bg-white p-4 rounded border border-stone-200">
-        <div class="text-2xl font-serif text-stone-900">2h 7m</div>
-        <div class="text-xs text-stone-500 uppercase tracking-wider mt-1">compute 时间</div>
-      </div>
-      <div class="bg-white p-4 rounded border border-stone-200">
-        <div class="text-2xl font-serif text-stone-900">25</div>
-        <div class="text-xs text-stone-500 uppercase tracking-wider mt-1">国宝结构化</div>
+    <!-- Hero screenshot strip -->
+    <section class="mb-12 hero-strip">
+      <p class="text-xs uppercase tracking-wider text-stone-500 mb-3">v3-converged · desktop screenshots</p>
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-2 md:gap-3">
+        <a href="./demos/v3-converged/dashboard.html" class="block">
+          <img src="./assets/screenshots/dashboard-desktop.jpg" alt="dashboard 三联动" class="w-full h-auto rounded border border-stone-200 shadow-sm" loading="lazy">
+          <p class="text-xs text-stone-500 mt-1.5 text-center">★ dashboard · 三联动</p>
+        </a>
+        <a href="./demos/v3-converged/inscription-special-hezun.html" class="block">
+          <img src="./assets/screenshots/inscription-hezun-desktop.jpg" alt="何尊 中国 二字长卷" class="w-full h-auto rounded border border-stone-200 shadow-sm" loading="lazy">
+          <p class="text-xs text-stone-500 mt-1.5 text-center">何尊 · 中国二字长卷</p>
+        </a>
+        <a href="./demos/v3-converged/time-pillar.html" class="block">
+          <img src="./assets/screenshots/time-pillar-desktop.jpg" alt="time-pillar D3 vertical" class="w-full h-auto rounded border border-stone-200 shadow-sm" loading="lazy">
+          <p class="text-xs text-stone-500 mt-1.5 text-center">time-pillar · D3</p>
+        </a>
+        <a href="./demos/v3-converged/geo-system.html" class="block">
+          <img src="./assets/screenshots/geo-system-desktop.jpg" alt="geo-system 真 GeoJSON" class="w-full h-auto rounded border border-stone-200 shadow-sm" loading="lazy">
+          <p class="text-xs text-stone-500 mt-1.5 text-center">geo-system · 真 GeoJSON</p>
+        </a>
+        <a href="./demos/v3-converged/me.html" class="block">
+          <img src="./assets/screenshots/me-desktop.jpg" alt="me.html 35/277 收藏" class="w-full h-auto rounded border border-stone-200 shadow-sm" loading="lazy">
+          <p class="text-xs text-stone-500 mt-1.5 text-center">me · 35/277 anti-Skinner</p>
+        </a>
       </div>
     </section>
 
-    <!-- Process artifacts (link to GitHub for markdown rendering) -->
-    <section class="border-t border-stone-200 pt-10">
-      <h3 class="text-xl font-serif mb-2">作品集过程文档</h3>
-      <p class="text-sm text-stone-500 mb-6">这个项目的产出不只是 demo,更是 agent team 协作的完整证据链。下列文档在 GitHub 上以 Markdown 渲染。</p>
+    <!-- Stats strip — v5+ -->
+    <section class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-12 text-center">
+      <div class="bg-white p-4 rounded border border-stone-200">
+        <div class="text-2xl font-serif text-stone-900">~32</div>
+        <div class="text-xs text-stone-500 uppercase tracking-wider mt-1">subagent 调用</div>
+      </div>
+      <div class="bg-white p-4 rounded border border-stone-200">
+        <div class="text-2xl font-serif text-stone-900">~4.5M</div>
+        <div class="text-xs text-stone-500 uppercase tracking-wider mt-1">tokens / ~$45 USD</div>
+      </div>
+      <div class="bg-white p-4 rounded border border-stone-200">
+        <div class="text-2xl font-serif text-stone-900">277</div>
+        <div class="text-xs text-stone-500 uppercase tracking-wider mt-1">国宝 11 字段 (92%)</div>
+      </div>
+      <div class="bg-white p-4 rounded border border-stone-200">
+        <div class="text-2xl font-serif text-stone-900">11</div>
+        <div class="text-xs text-stone-500 uppercase tracking-wider mt-1">audit · 2 闭环</div>
+      </div>
+      <div class="bg-white p-4 rounded border border-stone-200">
+        <div class="text-2xl font-serif text-stone-900">28/28</div>
+        <div class="text-xs text-stone-500 uppercase tracking-wider mt-1">Playwright green</div>
+      </div>
+    </section>
 
-      <div class="grid md:grid-cols-2 gap-x-8 gap-y-2 text-sm">
-        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/morning-report.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ morning-report.md(一页扫完所有结果)</a>
-        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/agent-team-design.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ agent-team-design.md(8 角色拓扑)</a>
-        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/case-study.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ case-study.md(portfolio narrative)</a>
-        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/dimensional-map.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ dimensional-map.md(10 维度 × 形态)</a>
-        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/motivation-hooks.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ motivation-hooks.md(6 动机系统)</a>
-        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/gamification-mechanics.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ gamification-mechanics.md(游戏化系统)</a>
-        <a href="https://github.com/longwind1984/prac03_museumcollect/tree/claude/museum-photo-sharing-8qJiz/docs/component-specs" class="text-stone-700 hover:text-stone-900 hover:underline">→ 10 component specs(组件规格)</a>
-        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/audits/merged-spec.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ merged-spec.md(v2 综合最优 spec)</a>
-        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/audits/iteration-1-changes.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ iteration-1-changes.md(audit 闭环实证)</a>
-        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/cost/cost-report.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ cost-report.md(token 用量)</a>
+    <!-- Main demo card: v3-converged -->
+    <section class="mb-12">
+      <p class="text-xs uppercase tracking-widest text-stone-500 mb-3">main demo · current</p>
+      <a href="./demos/v3-converged/dashboard.html" class="card block bg-gradient-to-br from-amber-50 via-stone-50 to-stone-100 rounded-xl p-7 md:p-9 border-2 border-amber-200 hover:border-amber-500 hover:shadow-2xl">
+        <div class="flex flex-wrap items-baseline gap-3 mb-3">
+          <h2 class="text-3xl font-serif">v3-converged</h2>
+          <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-mono">12 pages</span>
+          <span class="text-xs px-2 py-0.5 rounded-full bg-stone-100 text-stone-700 font-mono">event-bus wired</span>
+          <span class="text-xs px-2 py-0.5 rounded-full bg-stone-100 text-stone-700 font-mono">mobile 375px ✓</span>
+          <span class="text-xs px-2 py-0.5 rounded-full bg-stone-100 text-stone-700 font-mono">真 GeoJSON</span>
+        </div>
+        <p class="text-stone-700 leading-relaxed mb-5 max-w-3xl">
+          v1 的 3 个 differentiated demo(考据/沉浸/探索)收敛而成的 polished demo —— 7+1 维度,A 的 scholar 排版 + B 的 hezun 长卷 + C 的 sticky nav 工程化,加上 v4.5 / v4.6 / v5 的 Runtime Auditor / GeoJSON / Mobile Retrofit / 性能优化的累积。亮点页:
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
+          <a href="./demos/v3-converged/dashboard.html" class="px-3 py-2 bg-white rounded border border-stone-200 hover:border-amber-500 hover:bg-amber-50 font-mono text-xs">★ dashboard.html</a>
+          <a href="./demos/v3-converged/inscription-special-hezun.html" class="px-3 py-2 bg-white rounded border border-stone-200 hover:border-amber-500 hover:bg-amber-50 font-mono text-xs">inscription-hezun</a>
+          <a href="./demos/v3-converged/time-pillar.html" class="px-3 py-2 bg-white rounded border border-stone-200 hover:border-amber-500 hover:bg-amber-50 font-mono text-xs">time-pillar</a>
+          <a href="./demos/v3-converged/geo-system.html" class="px-3 py-2 bg-white rounded border border-stone-200 hover:border-amber-500 hover:bg-amber-50 font-mono text-xs">geo-system</a>
+          <a href="./demos/v3-converged/catalog.html" class="px-3 py-2 bg-white rounded border border-stone-200 hover:border-amber-500 hover:bg-amber-50 font-mono text-xs">catalog</a>
+          <a href="./demos/v3-converged/artifact.html?id=he_zun" class="px-3 py-2 bg-white rounded border border-stone-200 hover:border-amber-500 hover:bg-amber-50 font-mono text-xs">artifact (何尊)</a>
+          <a href="./demos/v3-converged/me.html" class="px-3 py-2 bg-white rounded border border-stone-200 hover:border-amber-500 hover:bg-amber-50 font-mono text-xs">me · 35/277</a>
+          <a href="./demos/v3-converged/" class="px-3 py-2 bg-stone-100 rounded border border-stone-300 hover:bg-stone-200 font-mono text-xs">→ 12 页全 index</a>
+        </div>
+      </a>
+    </section>
+
+    <!-- Sprint timeline -->
+    <section class="mb-12">
+      <p class="text-xs uppercase tracking-widest text-stone-500 mb-4">sprint 时间线</p>
+      <div class="sprint-rail grid grid-cols-2 md:grid-cols-6 gap-2 md:gap-3">
+        <div class="sprint-node bg-white border border-stone-200 rounded p-3">
+          <div class="w-3 h-3 rounded-full bg-stone-400 mb-2 mx-auto"></div>
+          <p class="text-xs font-mono text-stone-500 text-center mb-1">v1 · D0</p>
+          <p class="text-xs text-stone-700 text-center">3 personas<br>(考据/沉浸/探索)</p>
+        </div>
+        <div class="sprint-node bg-white border border-stone-200 rounded p-3">
+          <div class="w-3 h-3 rounded-full bg-amber-500 mb-2 mx-auto"></div>
+          <p class="text-xs font-mono text-stone-500 text-center mb-1">v3 · D1</p>
+          <p class="text-xs text-stone-700 text-center">7+1 维度<br>1 converged demo</p>
+        </div>
+        <div class="sprint-node bg-white border border-stone-200 rounded p-3">
+          <div class="w-3 h-3 rounded-full bg-stone-700 mb-2 mx-auto"></div>
+          <p class="text-xs font-mono text-stone-500 text-center mb-1">v4.5</p>
+          <p class="text-xs text-stone-700 text-center">Runtime Auditor<br>+ Playwright</p>
+        </div>
+        <div class="sprint-node bg-white border border-stone-200 rounded p-3">
+          <div class="w-3 h-3 rounded-full bg-stone-700 mb-2 mx-auto"></div>
+          <p class="text-xs font-mono text-stone-500 text-center mb-1">v4.6</p>
+          <p class="text-xs text-stone-700 text-center">真 GeoJSON<br>+ mobile retrofit</p>
+        </div>
+        <div class="sprint-node bg-white border border-stone-200 rounded p-3">
+          <div class="w-3 h-3 rounded-full bg-stone-700 mb-2 mx-auto"></div>
+          <p class="text-xs font-mono text-stone-500 text-center mb-1">v5</p>
+          <p class="text-xs text-stone-700 text-center">perf (CDN)<br>+ parallel fetch</p>
+        </div>
+        <div class="sprint-node bg-amber-50 border border-amber-300 rounded p-3">
+          <div class="w-3 h-3 rounded-full bg-amber-600 mb-2 mx-auto"></div>
+          <p class="text-xs font-mono text-amber-700 text-center mb-1">v0.9 ★ now</p>
+          <p class="text-xs text-stone-700 text-center">case-study + AI PoC<br>+ portfolio polish</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- v1 process trajectory (demoted but preserved) -->
+    <section class="mb-12">
+      <p class="text-xs uppercase tracking-widest text-stone-500 mb-3">v1 探索过程 · 3 differentiated personas (sprint v1, D0)</p>
+      <p class="text-sm text-stone-600 mb-4 max-w-3xl">v1 阶段刻意用 3 个 Builder 并行做 3 版差异化 demo,每个对应一个用户画像。这套 differentiation 是 v3 收敛的前提 —— A 的 scholar 排版 + B 的 hezun 长卷情感 + C 的 sticky nav 工程化,都成了 v3-converged 的素材。<span class="text-stone-500 italic">这些 demo 现在是过程证据,不是产品。</span></p>
+      <div class="grid md:grid-cols-3 gap-3">
+        <a href="./demos/v1-A-textual-research/" class="card block bg-white rounded-lg p-4 border border-stone-200 hover:border-stone-500">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs uppercase tracking-wider text-stone-500 font-mono">v1-A</span>
+            <span class="text-xs px-1.5 py-0.5 rounded bg-stone-100 text-stone-700 font-mono">7.8</span>
+          </div>
+          <h3 class="text-lg font-serif mb-1">考据派</h3>
+          <p class="text-xs text-stone-500 italic mb-2">for 陈翊安 · 北大考古博士</p>
+          <p class="text-xs text-stone-600 leading-relaxed">学术期刊电子版 · 一屏集成 6 维度 · 段位篆刻印章 · BibTeX 导出</p>
+        </a>
+        <a href="./demos/v1-B-immersive/" class="card block bg-stone-900 text-stone-100 rounded-lg p-4 border border-stone-900">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs uppercase tracking-wider text-stone-400 font-mono">v1-B</span>
+            <span class="text-xs px-1.5 py-0.5 rounded bg-stone-800 text-amber-200 font-mono">6.2</span>
+          </div>
+          <h3 class="text-lg font-serif mb-1 text-amber-100">沉浸派</h3>
+          <p class="text-xs text-stone-400 italic mb-2">for 苏念 · 内容运营</p>
+          <p class="text-xs text-stone-300 leading-relaxed">墨色烛火 · 国宝独白 · 等距宗庙礼器归位 · 22 位置等级判定</p>
+        </a>
+        <a href="./demos/v1-C-explorer/" class="card block bg-gradient-to-br from-amber-50 to-rose-50 rounded-lg p-4 border border-amber-200 hover:border-amber-500">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs uppercase tracking-wider text-amber-700 font-mono">v1-C</span>
+            <span class="text-xs px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 font-mono">6.8</span>
+          </div>
+          <h3 class="text-lg font-serif mb-1">探索派</h3>
+          <p class="text-xs text-stone-500 italic mb-2">for 阿K · Z 世代美院生</p>
+          <p class="text-xs text-stone-600 leading-relaxed">Pokédex 形制谱系 · 梗卡片 modal · anti-Skinner banner</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- AI PoC card -->
+    <section class="mb-12">
+      <p class="text-xs uppercase tracking-widest text-stone-500 mb-3">AI credibility · v0.6→v0.7 push</p>
+      <div class="bg-white border border-stone-200 rounded-lg p-5 md:p-6">
+        <h3 class="text-xl font-serif mb-2">🔬 ai-service/poc/ — CLIP stub + 真实 pHash baseline</h3>
+        <p class="text-sm text-stone-700 leading-relaxed mb-3 max-w-3xl">
+          Production-shaped Python 实现 ai-roadmap.md §Phase 1: OpenCLIP ViT-B/32 + leave-one-out + cli.py。
+          沙箱 block 了 HF + Wikimedia,先 ship CLIP stub + 诚实 §5.9。然后 user 反推"多策略试到底",
+          pivot 到本地 12 silhouette + pHash baseline,**in-sandbox 真跑出来**:
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
+          <div class="bg-amber-50 border border-amber-200 rounded p-2 text-center">
+            <div class="text-xl font-serif text-amber-800">12</div>
+            <div class="text-xs text-stone-500 uppercase tracking-wider mt-0.5">silhouettes</div>
+          </div>
+          <div class="bg-amber-50 border border-amber-200 rounded p-2 text-center">
+            <div class="text-xl font-serif text-amber-800">0.333</div>
+            <div class="text-xs text-stone-500 uppercase tracking-wider mt-0.5">intra-family P@1</div>
+          </div>
+          <div class="bg-amber-50 border border-amber-200 rounded p-2 text-center">
+            <div class="text-xl font-serif text-amber-800">0.667</div>
+            <div class="text-xs text-stone-500 uppercase tracking-wider mt-0.5">intra-family P@5</div>
+          </div>
+          <div class="bg-stone-100 border border-stone-200 rounded p-2 text-center">
+            <div class="text-xl font-serif text-stone-700">10/10</div>
+            <div class="text-xs text-stone-500 uppercase tracking-wider mt-0.5">unit tests pass</div>
+          </div>
+        </div>
+        <p class="text-xs text-stone-600 mb-3 max-w-3xl">
+          <span class="font-semibold text-stone-900">PM signal</span>: pHash 不是 CLIP,0.333 不是 ai-roadmap §6.3 target —
+          但它是 <strong>real number</strong>,证明 pipeline 闭合 + 给 CLIP 必须打败的 baseline。CLIP 的 off-sandbox runbook 在 README,user
+          自机器上 1-2h 可跑出真 P@5 → 自动回填 §5.9。
+        </p>
+        <div class="flex flex-wrap gap-2 text-xs">
+          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/ai-service/poc/phash-eval-report.md" class="px-2.5 py-1 bg-amber-100 rounded font-mono text-amber-800 hover:bg-amber-200">★ phash-eval-report.md (real)</a>
+          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/ai-service/poc/phash_baseline.py" class="px-2.5 py-1 bg-stone-100 rounded font-mono text-stone-700 hover:bg-stone-200">phash_baseline.py</a>
+          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/ai-service/poc/IMPLEMENTATION-NOTES.md" class="px-2.5 py-1 bg-stone-100 rounded font-mono text-stone-700 hover:bg-stone-200">IMPLEMENTATION-NOTES (9 节)</a>
+          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/ai-service/poc/build_index.py" class="px-2.5 py-1 bg-stone-100 rounded font-mono text-stone-700 hover:bg-stone-200">build_index.py (CLIP)</a>
+          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/ai-service/poc/eval.py" class="px-2.5 py-1 bg-stone-100 rounded font-mono text-stone-700 hover:bg-stone-200">eval.py</a>
+          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/ai-service/poc/test_eval.py" class="px-2.5 py-1 bg-stone-100 rounded font-mono text-stone-700 hover:bg-stone-200">test_eval.py</a>
+          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/case-study.md" class="px-2.5 py-1 bg-amber-100 rounded font-mono text-amber-800 hover:bg-amber-200">→ case-study §5.9 + §5.9.1</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Round-2 credibility audit card · v0.9 push -->
+    <section class="mb-12">
+      <p class="text-xs uppercase tracking-widest text-stone-500 mb-3">★ Round-2 credibility audit · v0.9 — 自己抓自己的双标</p>
+      <div class="bg-stone-900 text-stone-100 rounded-lg p-5 md:p-6 mb-6">
+        <h3 class="text-xl font-serif mb-2 text-white">🔍 第二轮拷问:我对 AI 数字严格,对商业数字裸奔</h3>
+        <p class="text-sm leading-relaxed mb-3 max-w-3xl text-stone-300">
+          round-1 查"PM artifact 存不存在",round-2 让 cold agent 假装<strong class="text-white">已读完所有文档</strong>的面试官,查"可不可信"。它给了最重一击:
+        </p>
+        <blockquote class="border-l-2 border-amber-500 pl-3 text-sm italic text-stone-300 mb-3 max-w-3xl">
+          "你围绕'拒绝伪造一个 AI 指标'(§5.9)建立道德品牌,却在同一周伪造了 <strong class="text-amber-300">9 个 load-bearing 商业指标、零引用</strong> —— 证明这种诚实是选择性表演,不是纪律。"
+        </blockquote>
+        <p class="text-sm leading-relaxed mb-3 max-w-3xl text-stone-300">
+          <strong class="text-white">指控成立,我不辩护。</strong> 修复不是再写一段"诚实承认"(那恰是 auditor 同时点名的 "honesty as a shield"),而是<strong class="text-white">可被 diff 验证的实际修改</strong>:
+        </p>
+        <div class="grid md:grid-cols-2 gap-3 mb-3 text-xs">
+          <div class="bg-stone-800 rounded p-3">
+            <div class="text-amber-300 font-semibold mb-1">① assumptions-register.md(★ 核心产物)</div>
+            <div class="text-stone-300 leading-relaxed">24 个 load-bearing 数字逐个打标:6 [M]easured · 6 [B]enchmarked(去 web 抓真锚点)· 12 [A]ssumed(明确降级 + 给验证方法)。铁律:[A] 不许裸奔成事实。</div>
+          </div>
+          <div class="bg-stone-800 rounded p-3">
+            <div class="text-amber-300 font-semibold mb-1">② 修 6 处跨文档矛盾</div>
+            <div class="text-stone-300 leading-relaxed">最尴尬的 C1:投资文档卖"5 维度(含工艺)",而我最自豪的 PM 决策是"砍掉工艺、提铸主为 7+1"——投资文档在卖我引以为傲砍掉的旧 schema。全部对齐 canonical 7+1。</div>
+          </div>
+          <div class="bg-stone-800 rounded p-3">
+            <div class="text-amber-300 font-semibold mb-1">③ 去 web 抓真锚点</div>
+            <div class="text-stone-300 leading-relaxed">activation 30% → 锚定真实中位 25%/均值 34%,删掉编造的"小红书22%/B站28%";小红书数据换真引用(MAU 3.5亿);故宫"MAU~150k"承认是猜的并降级。</div>
+          </div>
+          <div class="bg-stone-800 rounded p-3">
+            <div class="text-amber-300 font-semibold mb-1">④ pHash baseline 降级</div>
+            <div class="text-stone-300 leading-relaxed">承认 0.333 = 6 里命中 2、三星堆 0/2、自绘 SVG,且 n=6 与我批判的 CLIP n=25 同样弱。从"headline 拼图"降为"几乎不构成 retrieval evidence 的 toy"。</div>
+          </div>
+        </div>
+        <p class="text-xs leading-relaxed max-w-3xl text-stone-400 mb-3">
+          <strong class="text-stone-200">真正的 lesson(比 §6 更扎人)</strong>:我以为我有"不造假"的纪律,其实只有"在我熟悉的领域(AI 工程)不造假"的习惯。纪律的考验不在你擅长的地方,在你不擅长、且没人会立刻 check 的地方。AI 数字工程师会 check 所以我严格,商业数字面试官未必当场 check 所以我松懈——这个"按被抓概率调节诚实度"的潜意识,比任何单个 fake 数字更值得警惕。
+        </p>
+        <div class="flex flex-wrap gap-2 text-xs">
+          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/assumptions-register.md" class="px-2.5 py-1 bg-amber-500 text-stone-900 rounded font-mono font-semibold hover:bg-amber-400">★ docs/assumptions-register.md</a>
+          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/case-study.md#7-第二轮拷问我自己的双标round-2-cold-audit-response" class="px-2.5 py-1 bg-stone-700 text-stone-100 rounded font-mono hover:bg-stone-600">→ case-study §7</a>
+        </div>
+      </div>
+      <p class="text-xs uppercase tracking-widest text-stone-500 mb-3">Round-1 coverage audit · v0.8 — 5 份商业 PM 文档</p>
+      <div class="bg-white border border-stone-200 rounded-lg p-5 md:p-6">
+        <h3 class="text-xl font-serif mb-2">📈 商业 PM artifact · 回应 senior PM 面试官拷问</h3>
+        <p class="text-sm text-stone-700 leading-relaxed mb-3 max-w-3xl">
+          一个 cold-context agent 假装 senior AI PM 面试官,扫完前 5 节给 verdict:
+          <em class="text-stone-600">"strong on process narrative + AI engineering depth, but commercial PM artifacts are 0-2/3 across the board"</em>。
+          §4.3 我自己早写过 "缺增长维度 = 4/10" 但没补 — round-1 ship 这些文档把它补齐(数字在 round-2 全部打了 [M]/[B]/[A] 标):
+        </p>
+        <div class="grid md:grid-cols-3 gap-3 mb-4">
+          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/north-star.md" class="bg-amber-50 border border-amber-200 rounded p-3 hover:bg-amber-100">
+            <div class="font-mono text-xs text-amber-700 mb-1">docs/north-star.md</div>
+            <div class="font-serif text-base text-stone-900 mb-1">North Star Metric</div>
+            <div class="text-xs text-stone-600 leading-relaxed">WAC (Weekly Active Collectors) · 2 层 metric tree · 6/12/24 月 target · 反指标 + 切换触发条件 · 1800 字</div>
+          </a>
+          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/competitive-landscape.md" class="bg-amber-50 border border-amber-200 rounded p-3 hover:bg-amber-100">
+            <div class="font-mono text-xs text-amber-700 mb-1">docs/competitive-landscape.md</div>
+            <div class="font-serif text-base text-stone-900 mb-1">Competitive Landscape</div>
+            <div class="text-xs text-stone-600 leading-relaxed">8 个具名竞品 (故宫 / Google Lens / 小红书 / Pokémon GO ...) × 4 维矩阵 · moat 假设 · "为什么 X 不会做这个" · 2400 字</div>
+          </a>
+          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/one-pager.md" class="bg-amber-50 border border-amber-200 rounded p-3 hover:bg-amber-100">
+            <div class="font-mono text-xs text-amber-700 mb-1">docs/one-pager.md</div>
+            <div class="font-serif text-base text-stone-900 mb-1">Investor 1-pager</div>
+            <div class="text-xs text-stone-600 leading-relaxed">Problem / Solution / Market / Why-now / GTM / Ask / Risk · 投资人 90s 版 · 数字全部打 [M]/[B]/[A] 标 · 1500 字</div>
+          </a>
+        </div>
+        <div class="bg-stone-50 border border-stone-200 rounded p-3 mb-3">
+          <p class="text-xs text-stone-600 leading-relaxed mb-2">
+            <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/product-policy-and-risks.md" class="font-mono text-stone-900 hover:underline">📋 docs/product-policy-and-risks.md</a>
+            <span class="text-stone-500">— v0.8 后续追加</span>:8 行 risk × Sev × Prob × Mitigation + 4 product policy framework(AI 输出可信度 / UGC moderation / 隐私分层 / 删号导出)· 回应 auditor 拷问 #4 "AI 误识别 legal exposure" · ~2200 字
+          </p>
+          <p class="text-xs text-stone-600 leading-relaxed">
+            <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/analytics-event-taxonomy.md" class="font-mono text-stone-900 hover:underline">📊 docs/analytics-event-taxonomy.md</a>
+            <span class="text-stone-500">— v0.8 后续追加</span>:11 V1 必埋 events × 5 类 · 完整 SQL 算 NSM/D7/W2 · `scan_id` join 计算 in-the-wild P@5 · 回应 auditor 拷问 #5 "event schema + activated vs churned" · ~1700 字
+          </p>
+        </div>
+        <p class="text-xs text-stone-600 mb-3 max-w-3xl">
+          <span class="font-semibold text-stone-900">PM signal</span>: senior PM 不只回应"我做了什么",还回应"我没做什么 + 为什么"。
+          case-study §6 写了完整 cold-audit verdict + coverage matrix + 仍然 V2 to-do (analytics / PIPL / 1M scale / V1 PRD)。
+          <strong>诚实自评不能停在自评 — 必须接 "what would the harshest interviewer ask"</strong>。
+        </p>
+        <div class="flex flex-wrap gap-2 text-xs">
+          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/case-study.md#6-about-the-commercial-gap--一个-senior-pm-面试官会怎么拷问我" class="px-2.5 py-1 bg-amber-100 rounded font-mono text-amber-800 hover:bg-amber-200">→ case-study §6 commercial gap</a>
+          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/case-study.md#43-vs-招聘信号" class="px-2.5 py-1 bg-stone-100 rounded font-mono text-stone-700 hover:bg-stone-200">§4.3 自评 (诚实 4/10)</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process artifact links -->
+    <section class="border-t border-stone-200 pt-8 mb-12">
+      <h3 class="text-xl font-serif mb-2">作品集过程文档 · 全部 grep-verifiable</h3>
+      <p class="text-sm text-stone-500 mb-5">这个项目的核心论点不是 demo 本身,是<strong>过程证据链可被任何外部 reviewer 用 grep 验证</strong>。每条 claim 都有对应 artifact 文件。</p>
+
+      <div class="grid md:grid-cols-2 gap-x-8 gap-y-1.5 text-sm">
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/case-study.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ <strong>docs/case-study.md</strong>(v0.9 portfolio narrative · ~10600 汉字 7 节)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/assumptions-register.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ <strong>docs/assumptions-register.md</strong> ★ NEW(★ 每个数字打 [M]/[B]/[A] 标)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/one-pager.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ <strong>docs/one-pager.md</strong>(投资人 90s + GTM,数字打标)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/north-star.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ <strong>docs/north-star.md</strong> ★ NEW(NSM + 2 层 metric tree)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/competitive-landscape.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ <strong>docs/competitive-landscape.md</strong> ★ NEW(8 竞品 × 4 维矩阵)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/product-policy-and-risks.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ <strong>docs/product-policy-and-risks.md</strong> ★ NEW(8 risk + 4 product policy)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/analytics-event-taxonomy.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ <strong>docs/analytics-event-taxonomy.md</strong> ★ NEW(11 V1 events + SQL 计算 NSM/D7/W2)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/agent-team-design.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ docs/agent-team-design.md(6+1 audit + 8 role topology + Mermaid)</a>
+        <a href="./morning-report.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ morning-report.md(D0 night-run 5-min TL;DR)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/state/state.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ state/state.md(event-sourced log + exec summary)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/dimensional-map-v3.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ dimensional-map-v3.md(7+1 维度)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/motivation-hooks-v3.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ motivation-hooks-v3.md(动机系统)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/gamification-mechanics-v3.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ gamification-mechanics-v3.md(游戏化 + event bus 协议)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/tree/claude/museum-photo-sharing-8qJiz/docs/component-specs-v3" class="text-stone-700 hover:text-stone-900 hover:underline">→ component-specs-v3/ (7 specs · v3)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/ai-roadmap.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ ai-roadmap.md(Phase 1-3 + 评估方法论)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/audits/merged-spec-v3.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ audits/merged-spec-v3.md(综合最优 spec)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/audits/iteration-1-changes.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ audits/iteration-1-changes.md(v1→v2 闭环兑现)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/audits/iteration-2-v3-changes.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ audits/iteration-2-v3-changes.md(v2→v3 闭环兑现)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/audits/d3-runtime.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ audits/d3-runtime.md(v4.5 runtime audit · JSON + narrative)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/audits/d4-mobile-runtime.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ audits/d4-mobile-runtime.md(v4.6 mobile 12/12 green)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/audits/bug-log.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ audits/bug-log.md(BUG-001/002/003/004 + DEBT-001)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/cost/cost-report.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ cost/cost-report.md(token + 真金估算)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/state/decision-log.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ state/decision-log.md(自主决策记录)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/data/licensing-log-v3.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ data/licensing-log-v3.md(图源 license 全表)</a>
       </div>
     </section>
 
     <!-- Footer -->
-    <footer class="mt-16 pt-6 border-t border-stone-200 text-xs text-stone-500">
-      <p class="mb-1">2026-05-20 night run · Generated by an 8-role AI agent team (Orchestrator / PM / Researcher / Designer / Builder×3 / AI Engineer / Data Engineer / Auditor×6)</p>
-      <p><a href="https://github.com/longwind1984/prac03_museumcollect" class="hover:underline text-stone-700">GitHub 仓库 →</a></p>
+    <footer class="mt-8 pt-6 border-t border-stone-200 text-xs text-stone-500">
+      <p class="mb-1">2026-05-20 → 2026-06-05 · 5 sprint · 1 项目主理人 + ~32 subagent invocations · ~4.5M tokens · 估 $40-50 USD</p>
+      <p class="mb-1">读 case-study v0.9 §0.5 作者背景 · §3 方法论 · §4 量化产出 · §5 反思 · §6 round-1 commercial gap · ★§7 round-2 双标修复(assumptions-register)</p>
+      <p><a href="https://github.com/longwind1984/prac03_museumcollect/tree/claude/museum-photo-sharing-8qJiz" class="hover:underline text-stone-700">GitHub repo →</a> · <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/README.md" class="hover:underline text-stone-700">README →</a></p>
     </footer>
 
   </div>

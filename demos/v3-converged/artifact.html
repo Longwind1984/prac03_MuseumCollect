@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>文物详情 — MuseumCollect v3</title>
-<script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="css/converged.css">
 <style>
 .artifact-image-box {
@@ -54,29 +53,17 @@
 .dim-accordion details[open] > summary::before { transform: rotate(90deg); }
 </style>
 </head>
-<body>
+<body data-page="">
 
-<nav class="top-nav">
-  <a href="index.html" class="nav-logo">器·<span>集</span></a>
-  <div class="nav-links">
-    <a href="catalog.html" class="nav-link">图鉴</a>
-    <a href="time-pillar.html" class="nav-link">时代柱</a>
-    <a href="geo-system.html" class="nav-link">地理</a>
-    <a href="pattern-tree.html" class="nav-link">纹饰树</a>
-    <a href="inscription-reader.html" class="nav-link">铭文</a>
-    <a href="purpose-scene.html" class="nav-link">礼制场景</a>
-    <a href="caster-profile.html" class="nav-link">铸主</a>
-    <a href="me.html" class="nav-link">我的图鉴</a>
-    <a href="scan.html" class="nav-link">识别</a>
-  </div>
-  <button class="linkage-toggle"><div class="linkage-dot"></div><span class="linkage-label">穿越模式 ●</span></button>
-</nav>
+<nav id="top-nav-placeholder" class="top-nav"></nav>
+<script src="js/nav.js"></script>
 
 <div id="artifact-content">
   <!-- Rendered by JS -->
   <div style="text-align:center; padding:80px; color:var(--text-muted);">加载中...</div>
 </div>
 
+<script src="js/constants.js"></script>
 <script src="js/state.js"></script>
 <script src="js/cross-dim-wiring.js"></script>
 <script src="js/data-loader.js"></script>
@@ -136,17 +123,8 @@ function getRarityClass(level) {
   return '';
 }
 
-function getSilhouetteFor(form_subtype) {
-  const map = {
-    '方鼎': 'fangding', '圆鼎': 'yuanding', '簋': 'gui', '尊': 'fang_zun',
-    '方尊': 'fang_zun', '鸮尊': 'xiao_zun', '剑': 'yuewang_jian',
-    '编钟': 'bianzhong', '灯': 'changxin_gongdeng', '壶': 'fanghu',
-    '方壶': 'fanghu', '盘': 'pan',
-    '人像': 'sanxingdui_dali_ren', '立人像': 'sanxingdui_dali_ren',
-    '面具': 'sanxingdui_zongmu', '纵目面具': 'sanxingdui_zongmu',
-  };
-  return map[form_subtype] || 'fangding';
-}
+// Silhouette helper: delegate to MuseumConstants (defined in constants.js)
+const getSilhouetteFor = (form_subtype) => window.MuseumConstants.getSilhouette(form_subtype);
 
 function renderArtifact(data) {
   const isCollected = window.CollectionState && window.CollectionState.isCollected(data.id);

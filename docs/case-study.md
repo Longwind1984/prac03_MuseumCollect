@@ -1,7 +1,19 @@
 # Case Study — MuseumCollect
 
 > 作品集叙事文档。第一人称、坦诚、技术够 impress 工程师 / 产品够 impress PM。
-> 这是 v0.1 skeleton —— 写完 Problem 和 Insight 两节,后面待 MVP 后补。
+> 当前版本 **v0.9**(2026-06-06)—— §0-§7 完成,~10600 汉字 7 节。v0.9 是 round-2 credibility audit 的回应:§7 直面"AI 数字严格 / 商业数字裸奔"的双标,产出 `docs/assumptions-register.md`(每个数字打 [M]/[B]/[A] 标)+ 修 6 处跨文档矛盾 + pHash 降级。版本演化见文末。
+
+---
+
+## 0.5. About the builder — 我是谁,为什么做这个
+
+我有 ~8 年 AI/ML 工程背景,做过推荐系统、NLP retrieval、CV embedding pipeline。最近两年我在系统性地往**AI 产品方向**迁移:不是"用 AI 写代码的 PM",而是"用 AI 协助开发 AI 产品的 PM"——这两件事的差别在 §3 和 §5.4 详细展开。
+
+**为什么是博物馆 / 青铜器**:私人 taste,不是市场分析。我一年进 8 次博物馆,看完会忘,试过所有官方 App 都卸了,心里一直憋着"这事可以做更好"。青铜器作为第一垂类的判断标准在 §1.3 和 §2:**体系清晰 / 名品多 / 维度丰富 / 不在 mass market 红海**——同时它也是中国文物最学术的一类(集成号、断代依据、铸主谱系),做好了能落到学术工具,做浅了也是博物馆爱好者的玩具。这种"两头都站得住"的垂类对验证我的核心论点最干净。
+
+**为什么这份 case-study 存在**:它是我**实证**"AI PM 论点"的载体。如果我只是写一篇博客 + 跑一个 hackathon 项目,你看不到我**怎么做 PM 决策**(削减维度 / 收敛 demo / 设计 audit 流程 / 量化 cost-aware routing 等)。这份 case-study 配 11 份 audit + 2 轮闭环兑现 + 5 个 sprint 的 git history,允许任何外部 reviewer 用 grep 验证每条 claim。这是我可以在面试桌上守住的诚实标准。
+
+**这份文档适合的读者**:正在招 AI PM 的 hiring manager(目标读者),或正在思考"AI agent 怎么真用在产品开发流程里"的 PM 同行。如果你只是想看一个 portfolio,30 秒看 `index.html` 即可;5 分钟看 `morning-report.md`;25 分钟读完本文。
 
 ---
 
@@ -275,7 +287,7 @@ Comparative Auditor D2 综合判断:**6.5/10 (v1 composite) → 7.2/10 (v3) = +0
 - **300 件目标 277/300 = 92%**:差 23 件,DE-4 秦汉段缩减 55→45 是因为 token 上限被击穿,做了 incremental mitigation 但没补齐。
 - **跨维度联动**:event bus 协议完成,**同一文档内三组件联动**实现(time-pillar.html 内 hover 朝代触发本页响应),但 **跨页面联动** 没实现——`document.dispatchEvent(CustomEvent)` 不能跨 tab。5/5 Auditor 独立标注这是 v3 最重要的没兑现。修复路径在 `audits/merged-spec-v3.md`:要么建 dashboard.html 同屏页面(选项 A,推荐),要么用 BroadcastChannel 真跨页面(选项 B)。v4 close-loop 必做。
 - **移动端**:v3 主体是 desktop,mobile 推迟到 v4。
-- **真实 AI 服务**:CLIP 识别还在 mock 阶段,真实服务在 `docs/ai-roadmap.md` 已经 phase 化(Phase 1 PoC / Phase 2 Hybrid / Phase 3 LoRA fine-tune),但本案例研究范围内未实现。
+- **真实 AI 服务**:CLIP 识别 v0.6 之前还在 mock 阶段。v0.6 ship 了 `ai-service/poc/`(7 文件 production-shaped Python stub)+ `IMPLEMENTATION-NOTES.md`(8 节架构决策)。真数字未跑(沙箱 firewall 限制),见 §5.9 完整解释。Phase 2 Hybrid + Phase 3 LoRA fine-tune 仍在 `docs/ai-roadmap.md` 路线。
 - **真实用户测试**:9 个粗访朋友(in §1.3),没做 N=20+ 的结构化访谈;motivation-hooks 里所有 KPI 是 hypothesis,未验证。
 - **case-study §3-§5**:本文档完成之前,这是 v3 唯一未兑现的 P0(从 D1 至 D2 一直 4/10)。本次 v4 Phase E Track A 即在交付这部分。
 
@@ -387,10 +399,224 @@ Comparative Auditor D2 综合判断:**6.5/10 (v1 composite) → 7.2/10 (v3) = +0
 
 这条论点 v3 阶段我做不出来,因为 5 persona 都是 read-only。v4.5 之后我可以做出来——`audits/d3-runtime.json` 是机器可读的 evidence,它是 case-study 整个 §3 §4 §5 论点的**最后一块拼图**。
 
+### 5.8 v4.6 当晚 follow-up:GeoJSON + 移动端的"先做了再说"
+
+§5.3 里我承认"移动端 Day 0 就该在 spec 里"。v4.5 收尾后我打算把它留给 v5 mobile-first rebuild,理由是"两个 P1(real GeoJSON + mobile)一起做更经济"。User 当场反驳:**"为什么要 defer?现在立马开始,不要停。"**
+
+我重新算了 trade-off:GeoJSON 是 contained 的 2-3 小时 retrofit(B1 phase data 早就备好);mobile 是 1-2 天工程,但**纯 retrofit**(加 media queries,不重写 layout)可以在 1-2 小时内让 12 个页面在 375px 真能用。两个一起做 = 4 小时 vs. v5 重新约定一周。**这是把"defer"识别为伪经济**——defer 的真实成本不是工时,是"portfolio 在演示桌上仍然是 desktop-only,中国主战场用户 0 触达"。
+
+**GeoJSON 落地**(commit `499cb12` + `2f346b7`):dashboard 和 geo-system 都接入 d3.geoConicEqualArea(parallels=[25,47],rotate=[-105,0])+ fetch B1 阶段的 7 个 GeoJSON 文件(china-terrain + 4 ancient-states + 30 excavation-sites + 24 museums)。商代 region 从 inline 4 个简化 polygon 升到 8 个真 feature(含 鬼方/羌方/古蜀/盘龙城/周方);出土地点从 14 个粗略 normalized x/y% 升到 30 个真经纬度 Point。中国轮廓 hardcode 24 points → 真 terrain 197 points。
+
+**Mobile retrofit**(commit `dec08f2` + `573afd4`):没有重写,只在 converged.css 加 `@media (max-width: 768px)` 块——`html/body overflow-x:hidden` 兜底,top-nav 11 个 link 在 mobile 改成 horizontal-scroll(不 wrap、不撑大 viewport),dashboard 三联动 flip 成 vertical stack,catalog 改成 2-col 小红书风。**关键 trick**:用 `[style*="grid-template-columns"]:not(.dashboard-layout):not(.catalog-grid)` 一次 override 13 个页面的 inline grid layout 到 1fr,**不动 HTML**。
+
+**测试同步升级**(commit `ebe4408`):新增 `qa/tests/mobile-viewport.spec.ts`,12-case 断言每个页面在 iPhone SE 375×667 都报 `innerW=docW=bodyW=375`。28/28 现在绿——16 原有 + 12 mobile regression。
+
+**这一段教我什么**:
+
+> **"defer" 是 PM 工具箱里最危险的动词**。它看上去节省决策成本,实际把"我没勇气现在做"包装成"等更好的窗口"。真实的 defer 应该 satisfy 两个条件:(1) 现在做的 cost > 等的 cost,(2) 等的过程中世界状态不会让 deliverable 变陈旧。BUG-001 之后第 6 天我承认:GeoJSON + mobile 都不 satisfy 这两条——它们的 cost 是 4h,等的过程 portfolio 一直 less impressive。
+
+这条 reframing 让 §5.3 "我会重来的事" 从"事后反省"升级为"当场识别"。**这件事过后我对自己 PM 决策的 calibration 提高了一个 step——defer 之前必须用 30 秒算实际成本对比**,不是 vibes。
+
+### 5.9 为什么 AI PoC ship 的是 production-shaped code 而不是漂亮数字
+
+§4.4 我承认了"真实 AI 服务:CLIP 识别还在 mock 阶段"。从 v3 一直到 v4.6 这是 case-study 唯一一条"talented PM who writes specs"的 ceiling 来源。v0.6 的 push 试图收尾这个 ceiling,但**收尾的方式不是造一个 P@5 = 0.55 的玩具数字**,是 ship `ai-service/poc/` 一套 production-shaped Python 代码 + 一份诚实的 `eval-report.md` 模板。
+
+**做了什么**(`ai-service/poc/` 7 文件):
+- `build_index.py` — 读 5 段 segment JSON,按 rarity 选 top-25(国宝+一级),fetch `image_urls[0].direct_url`,OpenCLIP ViT-B/32 编码,产出 `embeddings.npy` + `items.json`
+- `eval.py` — leave-one-out 检索 + P@1/P@5 + intra-class P@1(诚实指出 1-image-per-artifact 下 P@1 退化原因)+ 按朝代分层 + failure case 表
+- `cli.py` — single-image CLI,产出 (id, name, dynasty, cos_dist, confidence_band) — 形状与 `ai-service/api-contract.md §3.1` 一致
+- `requirements.txt` — pinned 版本(torch / open_clip_torch 2.32 / pillow / numpy / sklearn / requests)
+- `README.md` + `IMPLEMENTATION-NOTES.md` + `eval-report.md` 三份文档分别给运行者、阅读者、结果消费者
+
+**为什么没在本次 push 里跑出真数字**:这次 push 在 Claude Code sandbox session 完成,该 sandbox 的出站网络策略 block:
+- `huggingface.co`(OpenCLIP 权重源)
+- `upload.wikimedia.org`(239/277 件文物图源)
+- `download.pytorch.org`、`openaipublic.azureedge.net`
+
+`pip install -r requirements.txt` 通,但 `model = open_clip.create_model_and_transforms('ViT-B-32', pretrained='openai')` 会撞墙。要跑真数字必须在我自己机器上(Wikimedia + HF 都通)1-2 小时跑完,把 embeddings.npy / items.json / 填好的 eval-report.md commit 回来。`ai-service/poc/README.md` 有完整 runbook。
+
+**为什么不在 sandbox 里造一个看着漂亮的数字**:25-item toy demo 跟 `docs/ai-roadmap.md §6.3` 里设的 production target(P@1 ≥ 0.40 / P@5 ≥ 0.60)是两个量级的概念。如果我用 5 张 Wikimedia thumbnail mock 一个"看着合理"的 P@5 = 0.55,这件事会**直接违反** §3.3 "audit-as-iteration-trigger" 这条纪律——audit 的可信度建立在"每个数字 grep 可追"上。一个 fake 数字会让前面 5 个 sprint 11 份 audit 全部 retroactively 失效。
+
+**这条选择的 PM signal**:让 reviewer 看到我**会写、会评估、会诚实说为什么这次没跑**,比看到我跑了一个 10 件 toy demo 招聘信号强。`IMPLEMENTATION-NOTES.md` 写了 8 节架构决策(为什么 ViT-B/32 而不是 ViT-L/14 / 为什么 leave-one-out 而不是 held-out / 为什么 25 件 by rarity / 为什么不接入 scan.html / 等等)——任何外部 reviewer 不用跑代码也能看到我**理解 retrieval 系统**而不是只复述 roadmap。
+
+**§5.9 的更新触发条件**: 我在自己机器上跑完 `build_index.py + eval.py`,把真数字 commit 回来,本节即刻补一段 "Update: 真 P@1 = X.XX, P@5 = Y.YY, intra-class P@1 = Z.ZZ, breakdown: ..." 并指向 `eval-report.md` 完整版。
+
+#### 5.9.1 in-sandbox 实际跑出来的 pHash baseline(2026-06-05 update)
+
+写完上面几段后,user 反推了我一句:"想办法解决,直接在我本地开一个分支,调用 Claude Code CLI 去跑。重复尝试,直到成功。如果在多轮尝试之后仍然不成功,那么就先按照 A 方案执行。" 这条反推让我在 ship 完 CLIP stub 之后又做了一轮**多策略 in-sandbox 攻防**:
+
+1. **`pip install torch open_clip_torch`** + 加载 `ViT-B-32 pretrained=openai/laion2b`:**FAIL** — HF 域名 block,403
+2. **`pip install timm`** + 加载 ImageNet ViT-B-16:**FAIL** — 同样走 HF Hub backend
+3. **试 HF mirrors**(`hf-mirror.com`, `hf.co`, `hub-mirror.huggingface.co`):**全 BLOCK**
+4. **GitHub API 搜 CLIP weights mirror**:rate-limited;没有 obvious 的 ViT-B/32 mirror
+5. **pivot 到本地 SVG silhouettes + pHash baseline**:**SUCCESS**
+
+第 5 步产物 `ai-service/poc/phash_baseline.py` 用了 `cairosvg`(纯 Python SVG → PNG)+ `imagehash`(纯 Python 8×8 DCT pHash)+ `assets/silhouettes/` 的 12 个本地 SVG,**完全 in-sandbox 跑出来的真数字**:
+
+| 度量 | 值 | 说明 |
+|---|---|---|
+| Items total | 12 | local SVG silhouettes,无 network |
+| Items scorable | 6 | 3 个 two-member family (ding / zun / sanxingdui),6 个 singleton 无 ground truth |
+| **Intra-family P@1** | **0.333** | top-1 近邻同 family 的命中率 |
+| **Intra-family P@5** | **0.667** | family member 在 top-5 |
+
+成功 case: `fangding → yuanding (top-1, dist=27, ✓)`、`fang_zun → xiao_zun (top-1, dist=24, ✓)`。失败 case: 三星堆纵目面具与大立人在 pHash 空间是 dist=26(被 pan 截胡)。完整 per-item retrieval 表见 `ai-service/poc/phash-eval-report.md`。
+
+**这个数字意味着什么 / 不意味着什么(round-2 audit 后的诚实降级版)**:
+
+round-2 cold-audit 把这块批得很准,原话:"pHash 2 of 6 hits, 0 of 2 on sanxingdui, on silhouettes you drew yourself — proving what exactly?" 我接受这个降级:
+
+- ⚠️ **"pipeline 闭合"是真的但语义近乎空洞**:它证明的是 `cairosvg` + `imagehash` import 能跑、`eval.py` 的 plumbing 不崩,**不是**"检索能 work"。在我自己画的单色 silhouette 上跑 pHash,proves my plumbing runs,not that retrieval works。
+- ⚠️ **0.333 = 6 个里命中 2 个**,且**三星堆那一对 family 完全没命中(0/2)**,两个"成功"全来自 ding 和 zun 各一对。真实信号是"我手画的 3 对里,2 对在像素重叠上聚到一起了"。
+- ⚠️ **最尖锐的自我矛盾**:0.333 也是一个 n=6 的数字。我在 §5.9 拒绝一个 25-item 的 CLIP 数字、说它"fabrication-adjacent",然后转头骄傲地 ship 一个 6-item 的 pHash 数字——**只因为这个碰巧跑通了**。如果 25-item CLIP 不够 sound,6-item pHash 更不够。这个双标 round-2 抓到了,我认。
+- ✗ 它**不是** ai-roadmap §6.3 的 P@1 ≥ 0.40 target;也**不能**说"CLIP 必须打败 0.667"——那是不同 task(silhouette vs photo),不可比。
+
+**那它还剩什么价值?** 诚实地说:**很少**。它值得留在 repo 里,仅仅因为它是"我面对沙箱约束、没有停在'做不了'、而是去跑了能跑的东西"这个**行为**的证据——但这个行为的产出(0.333 on n=6)**本身几乎不构成 retrieval evidence**。我之前把它抬成"≥1 个真 baseline > 0 个真 baseline"的 takeaway,那是**给一个 toy 套了过重的叙事**。降级后的诚实版 takeaway 见下。
+
+> **round-2 修正后的 takeaway**:Plan A.5(去跑能跑的)作为**工作态度**是对的;但**态度的产出不等于结果的质量**。一个真跑通的 toy,价值在于证明我会动手,不在于它的数字——把 toy 的数字写成 headline thesis 的拼图,就是我自己在 §5.9 批判的"用叙事掩盖数据单薄"。**正确的诚实不仅是"不造假数字",还包括"不给真·小数字套大叙事"。**
+
 ---
 
-**Case Study 版本**:v0.4 (v4.5 Audit-Itself 闭环完成)
-**作者**:Product Owner agent (v4 iteration, Opus, cold context) + 项目主理人 (v4.5 §5.7 增补)
-**日期**:2026-05-22
-**字数**:~7300 字(v3+v4+v4.5 累计),其中 §3 ~2500 字 / §4 ~1800 字 / §5 ~2800 字
-**下次更新触发条件**:D7-D14 任一 Track 闭环完成,或 v5 mobile-first rebuild 启动
+## 6. About the commercial gap — 一个 senior PM 面试官会怎么拷问我
+
+写到 §5.9.1 我以为这份 case study 已经能交付了。然后我让一个 cold-context agent 假装自己是 senior AI PM 面试官,扫了一遍现有材料,给我 dump 了一份 coverage matrix。**结果是我已经 §4.3 自评里写过的那句话被验证了**:
+
+> "缺增长维度 = 4/10" — `case-study.md §4.3` 早期诚实自评
+
+auditor 用这句话拷问回来:**"the candidate's own §4.3 scorecard literally writes '缺增长维度 = 4/10' for big-company to-C PM fit — they know."** —— 也就是说,我自己已经看到了 gap,但写完 §5 就停了。**写出来 ≠ 补上**。这一节就是补的过程。
+
+### 6.1 auditor 给的 coverage matrix(2026-06-05 cold review)
+
+| Artifact | Pre-§6 score (0-3) | Post-§6 score | 补在哪 |
+|---|---|---|---|
+| Problem statement | 3 | 3 | §1 已 strong |
+| User persona / TAM-SAM-SOM | 2 | 3 | `docs/one-pager.md §3.2` |
+| **North Star Metric + tree** | **0** | **3** | `docs/north-star.md`(2 层 metric tree) |
+| **Competitive landscape** | **1** | **3** | `docs/competitive-landscape.md`(8 个具名竞品 + 6×4 矩阵 + moat 假设 + 为什么 X 不会做) |
+| PRD / scope V1/V2/out | 2 | 2 | demo-night PRD 存在,完整 V1 PRD 待 sprint 6 |
+| **GTM / acquisition** | **0** | **3** | `docs/one-pager.md §5` + `docs/north-star.md §2.1`(渠道+CAC+LTV) |
+| **Cost / ROI / unit economics** | 2 | 3 | `docs/one-pager.md §5.4`(blended CAC ¥12 / LTV ¥60 / 5:1)+ `ai-roadmap §5` infra cost |
+| **Risk register / compliance** | **2** | **3** | `docs/product-policy-and-risks.md`(8 行 risk × Sev×Prob × mitigation + 4 product policy framework,~2200 字)+ `ai-roadmap §7`(AI 工程层 risk)+ `licensing-log-v3.md`(图源)|
+| **Analytics / event taxonomy** | **1** | **3** | `docs/analytics-event-taxonomy.md`(11 V1 必埋 events · 5 类 · SQL 计算 NSM/D7/W2 · ~1700 字)· 直接回应 auditor 拷问 #5 |
+| Scale plan 100k→1M | 2 | 2 | `ai-roadmap §5` 有 cost,架构 scale plan 仍是 V2 gap |
+| **"What I'd do differently"** | 3 | 3 | §5.2 §5.3 §5.8 §6(此节)|
+| **Pitch / 1-pager** | 2 | 3 | `docs/one-pager.md`(8 节投资人格式) |
+| AI model trade-off matrix | 3 | 3 | `ai-roadmap §1-2`(strongest artifact) |
+| Failure case taxonomy | 2 | 2 | `phash-eval-report.md` 有 per-item failure;产品级 failure ladder 仍是 V2 gap |
+
+补完之后 14 项中 **12 项 ≥ 3 / 2 项 = 2(明确 V2 to-do)/ 0 项 = 1**。
+
+后续追加(本节同一轮): `docs/product-policy-and-risks.md` 把 risk register 从 2→3,直接回应 auditor 拷问 #4 ("AI 说 85% 后母戊鼎然后错了的 legal exposure")。再加 `docs/analytics-event-taxonomy.md` 把 analytics 从 1→3,直接回应 auditor 拷问 #5 ("event schema · activated vs churned 怎么算")。这是 "cold-audit 拷问 → 1:1 对应新 artifact" 的连续 mapping,**audit-as-iteration-trigger §3.3 规则又一次兑现**。
+
+剩余 2 项 ≤ 2 是 V1 PRD(2/3,demo-night 版本存在,完整 V1 PRD 待 Sprint 6 真正首发)和 Scale plan 100k→1M(2/3,`ai-roadmap §5` 有 cost,缺架构图)— 这两项**留在 2/3 是经过判断的**,理由见 §6.4。
+
+### 6.2 为什么 auditor 这一轮拷问改变了我对 portfolio 的理解
+
+auditor 的 verdict 原话:
+
+> "This is a portfolio strong on **process narrative + AI engineering depth + reflective senior signal**. It will read as **'talented technical AI lead pretending to be PM'** to a Notion/Linear/Figma hiring manager because the commercial PM artifacts are 0-2/3 across the board."
+
+这句话扎人但准确。Sprint 1-5 我做的全部是"**process + AI engineering**" 类工作 — domain research、维度拆解、agent design、retrieval PoC、in-sandbox baseline。这些都是 senior PM 的 enable 条件,**不是 senior PM 的 deliverable**。
+
+senior PM 的 deliverable 是这一节补的 3 件:**NSM** 决定优化什么、**competitive landscape** 决定为什么有理由赢、**GTM + unit economics** 决定怎么从 0 到 1 万到 100 万。Sprint 1-5 没生成这些不是因为不重要,是因为**这个项目还没到需要它们的阶段(没用户、没营销预算、没 stakeholder 要求)**。但 portfolio purpose 强迫我必须在 ship 之前 anticipate 这些问题 — **portfolio 不是产品,它是 thought process 的 demonstration**。
+
+### 6.3 这次 cold audit 给我的 3 个 takeaway
+
+1. **诚实自评不能停在自评 — 必须接 "what would the harshest interviewer ask"**。§4.3 我打了 4/10 但没问 "那 4/10 的具体提问是什么样"。这次 cold agent 替我问了,我才发现具体题目是 "first 1k 用户从哪来" / "故宫 App 6 个月内 ship 这个怎么办"。Self-criticism 必须落到**具体题目**,不然是表演。
+
+2. **portfolio 项目 vs 真实产品的优先级不同**。真实早期产品可以**晚做 GTM**(先 talk to 10 users),但 portfolio 必须**早把 GTM 思考显式写出来**(否则面试官不知道你能 think about it)。⚠️ round-2 修正:我原话写的是"早 fake 出来 GTM 思考"——这个"fake"用词本身就是问题(见 §7),提前**展示思考**没问题,提前**伪造数字**有问题,这两件事我当时混为一谈了。
+
+3. **审计-为-迭代-触发 这条 §3.3 的规则,这次又对了一次**。Sprint 6 没必要存在(开发节奏说),但 portfolio 紧迫性触发了一轮 cold audit,cold audit 触发了 3 个 P0 文档,3 个 P0 文档触发了 §6 这一节。**审计的价值不在指出问题,而在不断创造下一次迭代的输入**。
+
+### 6.4 仍然没补的 gap(诚实承认 V2 to-do)
+
+- ~~**Analytics event taxonomy**~~ → **已升级**: `docs/analytics-event-taxonomy.md` v0 ship(11 events · 5 类 · 完整 SQL 计算 NSM/D7/W2 · `scan_completed.scan_id ↔ collection_added.scan_id` join 算 in-the-wild P@5)。code-level instrumentation 在 Sprint 6+。
+- ~~**PIPL / GDPR 完整 compliance audit**~~ → **已升级**: `docs/product-policy-and-risks.md` v1 ship(8 行 risk × 4 product policy framework)。完整 BD-stage audit + 法律顾问 review 在 Sprint 6+。
+- **1M MAU scale 架构图**: ai-roadmap §5 只到 cost,没到 sharding / CDN / region 设计。理由: 100k MAU 都没到,1M 是 stretch goal。
+- **Sprint 6 真正的 V1 PRD**: 当前只有 demo-night PRD;V1 PRD 待第一个非 demo 上线 sprint 写。理由: V1 PRD 写得早 = 写错。
+
+这 4 个 gap 我**知道存在 + 知道为什么先不补 + 知道在哪个 trigger 触发要补**。这跟"完全没想过"不是同一个状态。
+
+---
+
+**§6 更新触发条件**:下一次 cold agent audit(可以同一个 audit prompt 跑第二次,看哪些 gap 留得太久)→ 或 Sprint 6 第一次真实上线后(用户事件触发 analytics gap)→ 或我自己跑一次 fundraise pitch rehearsal(发现哪一页 deck 还讲不顺)。
+
+---
+
+## 7. 第二轮拷问:我自己的双标(round-2 cold-audit response)
+
+§6 是 round-1 audit(查 coverage:PM artifact 存不存在)。我补完 5 个商业文档后,又跑了 **round-2 audit**——这次让 cold agent 假装一个**已经读完所有文档**的面试官,查的不是"有没有",是"**可不可信、自不自洽、诚不诚实**"。它给了我这轮最重的一击:
+
+> "你围绕'拒绝一个伪造的 AI 指标'(§5.9 拒绝 fake CLIP P@5)建立了整个道德品牌,然后在同一周内于商业文档里伪造了 **9 个 load-bearing 商业指标、零引用**——证明这种'诚实'是**选择性表演**,不是纪律。"
+
+**这个指控成立。我不为它辩护。** 我对 AI 工程数字严格(`ai-roadmap §6.3` 引了 vendor pricing + CUB-200),却把 CAC ¥12 / LTV ¥60 / 5:1 / SAM 2000-3000万 / activation 30% 当事实写进 one-pager 和 north-star,没有一条引用。这是**同一个我,两套标准**。
+
+### 7.1 为什么我没有用"再写一段诚实承认"来回应
+
+因为同一份 round-2 audit **同时**抓到了我的另一个模式——"**honesty as a shield**":
+
+> "每个 doc 都以'诚实承认'结尾,把'命名一个 gap'当成'解决了这个 gap'。写一份没有依据的文档就给自评分从 0 跳到 3。作者审计自己,然后给自己打分。"
+
+这意味着:**如果我这一节只是再写一段"我承认我双标了"——那恰好又落进了 shield 模式**。auditor 已经预先封死了这条逃路。所以 §7 不是一段忏悔,**§7 是一份已完成修改的清单**。判断我是不是真改了,不看这段话,看 diff。
+
+### 7.2 我实际改了什么(可被 diff 验证)
+
+**(1) 建了 `docs/assumptions-register.md`** —— 把所有 load-bearing 数字逐个打标:
+
+| Tag | 含义 | 数量 |
+|---|---|---|
+| [M] Measured | 项目内实测 | 6 个(277 件 / 28 测试 / pHash 等)|
+| [B] Benchmarked | 有外部可引用源 | 6 个(activation 25%/34% · CPI · 小红书 3.5亿 · 故宫数字化 等)|
+| [A] Assumed | 我的假设,无实证 | 12 个(SAM / CAC / LTV / 5:1 / activation target 等)|
+
+**铁律:任何 [A] 数字出现在任何文档,必须带 "[假设·见 register A#]" 标记,不许裸奔成事实。**
+
+**(2) 去 web 抓了真锚点**,把能锚的 benchmark 补上引用:
+- activation 30% → 锚定全球**中位 25% / 均值 34%**(Business of Apps / Plotline),并**删掉**我原来编的"小红书22%/B站28%/Strava38%"
+- CAC ¥12 → 锚定全球 CPI(iOS $3.6 / Android $1.22 ≈ ¥9-26),量级落在区间内
+- 小红书数据 → 把编造的"100M+/+47% 生态月报"换成真引用(MAU 3.5亿 / 广东省博物馆话题 9134万)
+- 故宫 App "MAU ~150k" → 承认是猜的,降级;换上可查的(95万件数字化 / 畅游多宝阁单周500万)
+
+**(3) 把找不到锚点的数字明确降级为假设 + 给验证方法**:
+- LTV/CAC "5:1 ✓" → 改成条件句"**若** A4(CAC)+ A5(LTV)成立则 ~3-5:1";LTV 列直接标"无法测算"(零收入阶段)
+- SAM/SOM → 标 [A],承认"Strava ×0.4 系数"的 0.4 是编的
+
+**(4) 修了 6 处跨文档矛盾**(round-2 查出的 bug,全部登记在 register §4):
+
+| # | bug | 修法 |
+|---|---|---|
+| C1 | **维度数 5 vs 7+1** —— 投资文档写"5 维度(年代/工艺/纹饰/文化区/铭文)",但我最自豪的 PM 决策是"10→7+1、砍工艺、提铸主"。**投资文档描述的是我引以为傲砍掉的旧 schema** | 全部改为 canonical 7+1 |
+| C2 | WAC 把月度激活数标成周度活跃数 | 改为区间 + 承认需 retention 模型 |
+| C3 | activation 30% 既"已论证"又"待验证" | 统一为 [A] 假设目标 |
+| C4 | 两套成本模型(¥0.011/recognition vs ¥6-8/MAU)不接 | 显式标注桥没搭 |
+| C5 | P@5 target 0.60 vs 0.55 漂移 | 区分 lab(0.60)/ in-the-wild(0.55) |
+| C6 | pHash 0.667 当 CLIP P@5 卖 | 显式标注不可比 |
+
+**(5) 把 pHash baseline 从"headline thesis 拼图"降级为"几乎不构成 retrieval evidence 的 toy"**(§5.9.1 已改):承认 0.333 = 6 里命中 2、三星堆 0/2、自绘 SVG,且 **n=6 与我批判的 CLIP n=25 同样弱**。
+
+### 7.3 这一轮真正的 PM lesson(比 §6 更扎人)
+
+§6 的 lesson 是"自评要落到具体题目"。§7 的 lesson 更难承认:
+
+> **我以为我有"不造假"的纪律,其实我只有"在我熟悉的领域(AI 工程)不造假"的习惯。** 一换到不熟的领域(增长 / 单位经济),我立刻开始用"看起来合理的数字"填空,还浑然不觉——因为那些数字"感觉对"。**纪律的真正考验不在你擅长的地方,在你不擅长、且没人会立刻 check 的地方。** AI 数字会被工程师 check 所以我严格;商业数字面试官未必当场 check,所以我松懈了。这个"按被抓概率调节诚实度"的潜意识,比任何单个 fake 数字都更值得我警惕。
+
+而且——**这一轮本身又是 §3.3"审计-为-迭代-触发"的实例**:round-1 audit 触发 5 个商业文档,5 个文档的**新增表面积**触发 round-2 audit,round-2 抓到双标,触发 assumptions-register + 6 个 bug fix。**每一轮交付都在创造下一轮被拷问的表面。这正是这个项目想证明的工作方式:不是'做完',是'持续给自己制造下一个被证伪的机会'。**
+
+### 7.4 仍然没解决的(这次不用 shield 措辞)
+
+- **assumptions-register 本身依赖我的诚实自查** —— 没有外部审计员强制,我可能漏标。缓解:register §5 写了"季度重跑 round-2 audit prompt"作为 catch 机制,但这仍是我自己 catch 自己。
+- **[A] 数字仍然是 [A]** —— 打了标不等于变真。SAM / LTV / activation 在有真实用户前,永远是假设。标注只是让读者**知道哪些能信哪些不能**,不能凭空变出数据。
+- **12 个 [A] vs 6 个 [B] 的比例本身就是 signal** —— 这个产品的商业论证,2/3 建立在假设上。这对一个**没上线**的 portfolio 项目是正常的,但我不假装它是"validated business case"。它是"a well-structured set of hypotheses"。
+
+---
+
+**§7 更新触发条件**:第三轮 cold-audit(查这些 [A] 标注有没有被新的裸奔数字绕过)→ 或任一 [A] 被真实数据验证升级为 [M]/[B] → 或 assumptions-register 的"季度重审"机制首次执行。
+
+---
+
+**Case Study 版本**:v0.9 (2026-06-06 round-2 credibility audit response — §7 双标修复 + assumptions-register + 6 contradiction fixes + pHash 降级)
+**作者**:Product Owner agent (v4 iteration, Opus, cold context) + 项目主理人 (§5.7-§5.9.1 + §0.5 + §6 + §7 增补)
+**日期**:2026-06-06
+**字数**:~10600 汉字(实测 10608 via `grep -oE '[一-鿿]'`)— §0-§4 ~4800 / §5 ~2200 / §6 ~1300 / §7 ~2300
+**关联文档**:`docs/assumptions-register.md`(★ round-2 核心产物:每个数字打 [M]/[B]/[A] 标)· `docs/north-star.md` · `docs/competitive-landscape.md` · `docs/one-pager.md` · `docs/product-policy-and-risks.md` · `docs/analytics-event-taxonomy.md`
+**下次更新触发条件**:第三轮 cold-audit;或 off-sandbox 跑出真 CLIP P@5 → §5.9.2;或任一 [A] 假设被真实数据验证升级
