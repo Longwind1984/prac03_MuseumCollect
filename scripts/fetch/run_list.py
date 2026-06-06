@@ -26,6 +26,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -58,6 +59,13 @@ def main(argv: list[str] | None = None) -> int:
     if isinstance(items, dict):  # allow {"candidates": [...]} or a bare list
         items = items.get("candidates", [])
 
+    proxy_url = os.environ.get("MUSEUM_PROXY")
+    if proxy_url:
+        print(f"[proxy] MUSEUM_PROXY={proxy_url}  → used for via_vpn=true items only")
+    else:
+        print("[proxy] MUSEUM_PROXY not set → all items fetched direct. "
+              "Overseas / GFW-blocked items will likely fail; export MUSEUM_PROXY=http://127.0.0.1:<port> first.")
+
     planned = 0
     for it in items:
         if args.artifact and it.get("artifact_id") != args.artifact:
@@ -70,8 +78,11 @@ def main(argv: list[str] | None = None) -> int:
             continue
         planned += 1
         flags = HINT_FLAGS.get(hint, {})
+        needs_vpn = bool(it.get("via_vpn"))
+        proxy = proxy_url if (needs_vpn and proxy_url) else None
+        vpn_tag = "VPN" if needs_vpn else "CN "
         if not args.go:
-            print(f"[PLAN] {it.get('source_class')} {hint:18} {it['url']}")
+            print(f"[PLAN] {vpn_tag} {it.get('source_class')} {hint:18} {it['url']}")
             continue
         F.fetch_one(
             it["url"], it["artifact_id"], it.get("source_class", "C"),
@@ -79,7 +90,8 @@ def main(argv: list[str] | None = None) -> int:
             tier="mid",
             title=it.get("source_title") or it.get("rationale"),
             polite_delay=args.delay,
-            notes=f"hint={hint}; {it.get('rationale','')}"[:240],
+            notes=f"hint={hint}; via_vpn={needs_vpn}; {it.get('rationale','')}"[:240],
+            proxy=proxy,
             **flags,
         )
 

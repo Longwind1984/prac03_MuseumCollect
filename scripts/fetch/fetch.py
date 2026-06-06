@@ -32,27 +32,34 @@ failure_reason="needs_login_or_paywall" and tell the PM. Do not work around it.
 from __future__ import annotations
 
 import argparse
+import os
 import sys
 import time
 
 import _common as C
 
 
-def _http_get(url: str, timeout: int = 30) -> tuple[bytes, str]:
+def _http_get(url: str, timeout: int = 30, proxy: str | None = None) -> tuple[bytes, str]:
     import httpx
 
     headers = {"User-Agent": C.USER_AGENT, "Accept-Language": "zh-CN,zh,en"}
-    with httpx.Client(follow_redirects=True, timeout=timeout, headers=headers) as client:
+    kwargs = dict(follow_redirects=True, timeout=timeout, headers=headers)
+    if proxy:
+        kwargs["proxy"] = proxy
+    with httpx.Client(**kwargs) as client:
         resp = client.get(url)
         resp.raise_for_status()
         return resp.content, resp.headers.get("content-type", "")
 
 
-def _js_get(url: str, timeout: int = 45) -> tuple[bytes, str]:
+def _js_get(url: str, timeout: int = 45, proxy: str | None = None) -> tuple[bytes, str]:
     from playwright.sync_api import sync_playwright
 
     with sync_playwright() as p:
-        browser = p.chromium.launch()
+        launch_kwargs = {}
+        if proxy:
+            launch_kwargs["proxy"] = {"server": proxy}
+        browser = p.chromium.launch(**launch_kwargs)
         try:
             page = browser.new_page(user_agent=C.USER_AGENT)
             page.goto(url, wait_until="networkidle", timeout=timeout * 1000)
@@ -106,13 +113,16 @@ def fetch_one(
     tier: str = "mid",
     polite_delay: float = 1.0,
     notes: str = "",
+    proxy: str | None = None,
 ) -> dict:
     """Fetch one URL, build + persist a chunk, return it."""
     method = "playwright" if use_js else "httpx"
+    if proxy:
+        method += "+proxy"
     try:
         if polite_delay:
             time.sleep(polite_delay)
-        raw, ctype = (_js_get(url) if use_js else _http_get(url))
+        raw, ctype = (_js_get(url, proxy=proxy) if use_js else _http_get(url, proxy=proxy))
     except Exception as exc:  # noqa: BLE001 — we WANT to record any failure
         reason = type(exc).__name__
         msg = str(exc)
@@ -168,13 +178,16 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--year", default=None)
     ap.add_argument("--delay", type=float, default=1.0, help="polite delay before request (s)")
     ap.add_argument("--notes", default="")
+    ap.add_argument("--proxy", default=os.environ.get("MUSEUM_PROXY"),
+                    help="HTTP proxy URL for this fetch, e.g. http://127.0.0.1:7890 "
+                         "(defaults to env MUSEUM_PROXY). For overseas/GFW-blocked URLs only.")
     args = ap.parse_args(argv)
 
     fetch_one(
         args.url, args.artifact, args.source_class,
         use_js=args.js, force_pdf=args.pdf, license=args.license, tier=args.tier,
         title=args.title, author=args.author, year=args.year,
-        polite_delay=args.delay, notes=args.notes,
+        polite_delay=args.delay, notes=args.notes, proxy=args.proxy,
     )
     return 0
 

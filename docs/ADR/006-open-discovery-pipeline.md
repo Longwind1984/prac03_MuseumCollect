@@ -1,6 +1,6 @@
 # ADR-006:开放式发现管道(Open Discovery Pipeline)
 
-- **状态**:**Draft · 待 PM 签字**(Builder 不主动 commit;本文件由 Orchestrator 起,等 PM review 后定稿)
+- **状态**:**Accepted**(PM 2026-06-06 逐条签字;含五条具体 ruling 见下方"PM 签字附录")
 - **日期**:2026-06-06
 - **决策者**:项目作者(PM)
 - **相关章节**:PRD §1.4 founding insight、§10 内容与知识源、§14.1 需求附录(将新增 F-18/F-19/F-20)、§14.3 ADR 索引
@@ -128,16 +128,17 @@ Pipeline 内每个 chunk 都有状态机:
                                 - 用其它源"脑补"该类
 ```
 
-**硬约束**:
+**硬约束**(PM 2026-06-06 选"严格门"):
 - 没有 `url` 字段的 chunk → 拒绝入册
-- 没有 `content_hash` 的 chunk → 不能进 high tier
-- license 字段在 schema 内做 enum 校验:`CC0 / CC-BY / CC-BY-NC-SA / © all-rights / unknown`,**unknown** 默认走 low tier
+- 没有 `content_hash` 的 chunk → **强制 low tier 且不得作全文引用**
+- license 字段在 schema 内做 enum 校验:`CC0 / CC-BY / CC-BY-NC-SA / © all-rights / unknown`;**unknown** **封顶 low tier**(不得全文向量化,只留 URL + 标题)
+- 找不到时**严禁**用旁证补足代写——必须显式写"X 类源未到手,原因 Y";"用其它源近似拼合"不允许
 - 来源类 A/B/C/D/E 必须明示;不能写"综合"
 
 ### 5. 人在回路边界(明确什么不让 agent 做)
 
 **必须 PM 决策 / 执行的**:
-1. **T3 红线**:任何 agent 不得自主注册账号 / 充值 / 绑卡 / 对外发邮件 / 联系馆方 / 在社交平台以项目名义发帖。涉及 T3 的步骤,Pipeline 必须 escalate 到 PM 签字
+1. **T3 红线**(PM 2026-06-06 加强):任何 agent 不得自主注册账号 / 充值 / 绑卡 / 对外发邮件 / 发送表单 / 联系馆方 / 在社交平台以项目名义发帖。**"申请免费 API key" 也算红线**,理由:(a) 申请代表项目身份,需 PM 判断;(b) 通宵彻夜执行场景下东八区无人回复,等不来。**任何需要 email / 表单获取凭证的源 → Pipeline 直接记 `failed`,失败原因 `needs_email_or_form_application`,不申请、不绕过、不暂存等回信**
 2. **微信公众号订阅 + 文章摘抄**:Pipeline **不抓**;只列文章索引,人工读
 3. **馆方 3D / 数字敦煌实名注册申请**:Pipeline **不申请**;ADR-006 Phase 1 不动,Phase 2 决定
 4. **大陆媒体长文 + 馆方策展声明 + 真伪争议 chunk 的最终人格化措辞**:agent 起草,**PM 最终签字**(原则 C 落地的最敏感环节)
@@ -189,6 +190,8 @@ Pipeline 内每个 chunk 都有状态机:
 - ❌ V&A main index 扩量、Met / 明清 / 占位源扩量(Curator 已 flag,需 KPI 命中论证 + Curator 签字)
 - ❌ agent 自决"是否申请 API key / 注册账号"(T3 红线,必须 escalate PM)
 - ❌ 把 [discovered] 状态的 chunk 直接交付 Compiler(状态机硬约束)
+- ❌ 迁 `prac_Museum` 仓库的 `data/sources/*.json` 离线 dump(PM 2026-06-06 决:B 类源全部走单件 API 现抓,不迁 dump)
+- ❌ 中间走"10 件先跑、再上 20 件"的阶梯(PM 2026-06-06 决:pilot 验完直接 30 件一次上,不分两批)
 
 ## 与 PRD 的同步项(待 v1 revise 时落实)
 
@@ -233,13 +236,12 @@ Pipeline 内每个 chunk 都有状态机:
 
 ## 验收条件(本 ADR 签字后,Builder 启动门槛)
 
-- [ ] PM 签字本 ADR(状态由 Draft → Accepted)
-- [ ] PM 切 P2(本地 Claude Code CLI),并跑通 3 个 curl 自验(AIC + Harvard + Penn 中任一 1 200 即可)
-- [ ] Curator 校准 30 件清单,B 类源命中分布出来(Phase A 在沙箱内可独立交付)
-- [ ] Builder 起草 3 个 sub-agent prompt + hand-off schema v1,提 PR
-- [ ] Researcher + Curator + User-voice 三角色 review
-- [ ] 用 1–2 件样本跑双环境完整一遍,确认 hand-off 跑通
-- [ ] 进入 30 件 batch
+- [x] PM 签字本 ADR(Accepted 2026-06-06)
+- [ ] PM 切 P2(本地 Claude Code CLI),按 docs/LOCAL-SETUP.md 装环境 + 配 VPN(`MUSEUM_PROXY`)
+- [ ] **pilot:3 件样本 28 条候选**跑完整双环境一遍,产出 verified_chunks.json + 本机可达性地图
+- [ ] Curator 据 pilot 结果填 30 件清单(山博 15 + 上博 5 + 上博东馆 5 + 震旦 5)
+- [ ] **进入 30 件 batch · 一次性上**(PM 2026-06-06 决:不走 10 件中间节)
+- [ ] 30 件 batch 跑完,产出 verified_chunks.json + Compiler 装订 bundle
 
 ## 相关 ADR
 
@@ -247,4 +249,21 @@ Pipeline 内每个 chunk 都有状态机:
 - [ADR-003:一期切片调整与知识源使用许可](./003-knowledge-sources.md) - 已签发(本 ADR 在其六层基础上加 Pipeline)
 - [ADR-005:展品发现自动化(三层管道)](./005-exhibit-discovery.md) - 已签发(本 ADR 处理"哪些件已知"之后的"每件怎么填" 问题,与 ADR-005 不重叠)
 
-[ Draft 完 · 2026-06-06 · 等 PM 签字 ]
+## PM 签字附录(2026-06-06)
+
+PM 在 ADR-006 草稿审议中,对 Orchestrator 提出的 5 项开放问题逐条裁决:
+
+| # | 议题 | PM ruling | 落地 |
+|---|---|---|---|
+| 1 | 反幻觉门松紧 | **严格门**(宁缺毋滥) | §决策-4 硬约束已写死:`unknown` license 封顶 low tier;无 hash 不可全文;不许旁证补足代写 |
+| 2 | "发邮件申请免费 API key" 是否红线 | **是 T3 红线**。理由:(a) 申请代表项目身份,需 PM 判断;(b) 夜跑场景东八区无人回信,等不来 | §决策-5 已加严:任何需 email/form 凭证 → `failed`,`failure_reason=needs_email_or_form_application` |
+| 3 | 30 件分批 vs 一次上 | **pilot 验完直接 30 件一次上**,不走 10 件中间节 | §验收条件 + §反模式 已写;Compiler 不分批 |
+| 4 | B 类源:迁 `prac_Museum` dump 还是本地现抓 | **本地现抓单件 API**,不迁 dump | §反模式 已写;Discovery agent 用 Met/CMA/V&A search API 现查候选 |
+| 5 | VPN 配置(海外/大陆分流) | PM 本地配 → `MUSEUM_PROXY` 环境变量 | 不在 ADR 范畴;落到 `docs/LOCAL-SETUP.md` §1.5 + scripts 已支持 `via_vpn` |
+
+新增 ruling 6(夜跑模式,2026-06-06 PM 追加诉求):
+- **本 ADR 的 Phase B 执行模式 = 通宵无人值守自动跑**。Orchestrator 据此追加产出 `handoff/2026-06-06-night-run-prompt.md`(autonomous prompt)+ 配套报告模板。
+- Phase B agent **不许 escalate 中断 PM** —— 一切边界情况按本 ADR 既定规则 fall-safe(失败记录、跳过、继续下一项)。
+- agent **可起草** 27 件 candidate list 标 `DRAFT — pending PM review`,**不视为已签字 30 件清单**;PM 早晨 review 拥有最终增删权。
+
+[ Accepted · 2026-06-06 ]

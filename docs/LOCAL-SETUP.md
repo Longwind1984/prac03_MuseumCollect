@@ -2,6 +2,8 @@
 
 > 这份文档**两个读者**:你(PM,照着装环境)+ 你本地那个 Claude Code 会话(它读这份就知道自己要干嘛)。
 > 配套:`docs/ADR/006-open-discovery-pipeline.md`(设计)、`handoff/2026-06-06-local-verifier-handoff.json`(交接包)。
+>
+> **要夜跑无人值守?** → 直接看 [`handoff/2026-06-06-night-run-prompt.md`](../handoff/2026-06-06-night-run-prompt.md)。本文只用来装环境 + 配 VPN(§1+§1.5),装完直接进夜跑模式。
 
 ---
 
@@ -37,6 +39,74 @@ playwright install chromium
 ```
 
 依赖都是开源免费、**不需要注册/付费/绑卡**(不踩 T3 红线)。
+
+---
+
+## 1.5 配 VPN(关键:大陆/海外两类源,绝不能用同一路由)
+
+你有 VPN,但**不能简单一开了之**——大陆站点(上博/澎湃/知乎/dpm.org.cn)从海外 IP 走会**慢、限速、甚至被反爬挡掉**;海外站点(Met/V&A/CMA/archive.org)从国内 IP 又**慢或被墙**。所以两类源**必须分开路由**:大陆直连、海外走 VPN。
+
+清单里每条 candidate 都标了 `via_vpn: true/false`。脚本通过**环境变量 `MUSEUM_PROXY`** + 这个字段自动决定:`via_vpn=true 且 MUSEUM_PROXY 已设` → 走代理;否则直连。
+
+下面两种配法,选你自己 VPN 客户端**支持的那种**。
+
+### 方式 A · 客户端自带规则(Clash / Surge / Stash / Shadowrocket / V2RayN 等)·**推荐**
+
+这类客户端内置"GeoIP 规则":大陆域名直连、其它走代理,**默认就是对的**。你只要打开"系统代理 / HTTP 代理"那个开关,它会在本地起一个 HTTP 端口(常见是 `7890`、`7891`、`1087`、`6152`),然后:
+
+```bash
+# 假设你客户端的本地 HTTP 端口是 7890,用前 curl 试一下:
+curl -x http://127.0.0.1:7890 -I https://www.google.com    # 应该通
+curl -x http://127.0.0.1:7890 -I https://www.dpm.org.cn    # 也应该通(GeoIP 规则会直连)
+
+# 通了就 export(每个新终端都要,或写进 ~/.zshrc):
+export MUSEUM_PROXY=http://127.0.0.1:7890
+```
+
+这种客户端**对 via_vpn=true 和 via_vpn=false 都用这个 proxy**,**由客户端自己判断**该不该走代理——这是最稳的。
+
+### 方式 B · 全局 VPN(无规则,如裸 OpenVPN / WireGuard / 公司 VPN)
+
+这种 VPN 一开,**全部流量都走出去**,大陆站点会变慢或被反爬。所以**不能开全局**,改成:**只在跑海外那批时打开 / 设代理**,跑大陆时关掉。
+
+最简单的办法:把 VPN 改成 SOCKS5 或 HTTP 代理模式(很多 VPN 客户端都有"仅代理模式"开关),拿到本地端口,然后:
+
+```bash
+# 第一次跑大陆那批(不设代理)
+unset MUSEUM_PROXY
+python scripts/fetch/run_list.py data/pipeline/in/sources_candidates.pilot.json --go
+
+# 第二次跑海外那批(via_vpn=true 项)——只这次设代理
+export MUSEUM_PROXY=socks5://127.0.0.1:1080   # 或你的代理端口
+python scripts/fetch/run_list.py data/pipeline/in/sources_candidates.pilot.json --go --artifact aurora-hongshan-jade
+```
+
+脚本会**只对清单里 `via_vpn=true` 的项**用代理,`via_vpn=false` 即使设了 MUSEUM_PROXY 也直连——所以方式 A 和 B 在脚本侧**行为完全一致**,差别只在客户端能不能自己分流。
+
+### 怎么验证代理通
+
+```bash
+# 通过代理打海外
+curl -x $MUSEUM_PROXY -sI https://collectionapi.metmuseum.org/public/collection/v1/objects/42704 | head -1
+# 期望:HTTP/2 200
+
+# 不走代理打大陆
+curl -sI https://www.dpm.org.cn/ | head -1
+# 期望:HTTP/1.1 200 或 301/302
+```
+
+两条都 200 就齐活了。
+
+### 哪些清单项走 VPN(已分好,你不用思考)
+
+- **`via_vpn: true`(走 VPN)**:Met / CMA / V&A / 芝大响堂山 / archive.org / wordpress(Childs-Johnson) / MDPI / OCS / 台湾 NHU
+- **`via_vpn: false`(直连)**:上博 / 山博 / 震旦 / 故宫院刊 / 澎湃 / 知乎 / 国博 / 山大云冈学 / 腾讯新闻 / 社科院考古所
+
+跑批量时,脚本会在每行计划前打 `[PLAN] VPN ...` 或 `[PLAN] CN  ...` 标签,你能看到每条该怎么走。
+
+### Playwright 也用同一个代理
+
+脚本里 Playwright(无头浏览器)也接 `MUSEUM_PROXY`——`via_vpn=true` 的 SPA 页面(比如 V&A 单件页)会自动通过代理开浏览器。不用你额外配。
 
 ---
 
@@ -95,8 +165,9 @@ scripts/fetch/
 
 ```bash
 source .venv/bin/activate
+export MUSEUM_PROXY=http://127.0.0.1:7890   # 你 VPN 客户端的本地端口
 
-# A) 先看计划(不抓任何东西)——确认清单读得对
+# A) 先看计划(不抓任何东西)——确认清单读得对、VPN/CN 标签分对了
 python scripts/fetch/run_list.py data/pipeline/in/sources_candidates.pilot.json
 
 # B) 真抓,但建议先只抓最值的那件(上博白石佛,大陆源最多、wow 最清楚)
@@ -104,6 +175,7 @@ python scripts/fetch/run_list.py data/pipeline/in/sources_candidates.pilot.json 
     --go --artifact shanghai-white-marble-buddha
 
 # C) 抓单个 URL(想精细控制 / 重试某条时)
+#    脚本默认读 MUSEUM_PROXY;海外源会自动走代理。要强制直连就 --proxy ""
 python scripts/fetch/fetch.py \
     --url https://www.mdpi.com/2076-0752/12/5/206 \
     --artifact aurora-hongshan-jade --source-class C --license CC-BY --tier high \
@@ -126,9 +198,12 @@ cat data/pipeline/out/verified_chunks.json | python -m json.tool | head -60
 
 ## 6. 红线(T3 — 碰到就停,问 PM,别绕)
 
-- **不**注册账号、**不**付费、**不**绑卡、**不**给馆方/任何人发邮件申请、**不**签约、**不**以项目名义发帖。
-- 页面要登录 / 是付费墙 → 记成 `failed`,`failure_reason="needs_login_or_paywall"`,**留给 PM 决定**,不要找绕过办法。
-- **哈佛接口要免费 key**:这是边界情况——**由你(PM)亲自去申请**(你的邮箱、你的决定),拿到后放进本地环境变量 `HARVARD_API_KEY`,脚本只读环境变量、**不**替你注册。
+- **不**注册账号、**不**付费、**不**绑卡、**不**签约、**不**以项目名义发帖。
+- **不发邮件 / 不填表申请任何 API key 或权限**——**包括免费的**(如哈佛 API key、天龙山 3D 数据)。PM 决策:免费 key 也算红线,理由有二:
+  1. 申请本身需要 PM 的判断(代表项目身份对外联络);
+  2. 通宵彻夜执行场景下东八区无人回复,等不来。
+  → 任何需要 email/表单获取凭证的源 → 直接记 `failed`,`failure_reason="needs_email_or_form_application"`,**不申请、不绕过**。
+- 页面要登录 / 是付费墙 → 同上,记 `failed`,`failure_reason="needs_login_or_paywall"`。
 - 微信公众号:**不抓**(平台条款 + 一直封)。只把文章链接列出来,人工读。
 - 礼貌抓取:脚本已设 UA + 每条间隔延迟;**别把频率开太高**,先 `curl <站点>/robots.txt` 看规矩。
 

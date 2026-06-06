@@ -1,13 +1,15 @@
 {
   "handoff_meta": {
-    "title": "本地 Verifier(核源/抓取)交接包 · Phase B",
+    "title": "本地交接包 · Phase B(2026-06-06 升级为夜跑模式)",
     "from": "云端 Orchestrator (web sandbox, egress-blocked)",
     "to": "PM 本地 Claude Code 会话 (mainland-CN network, full internet)",
     "date": "2026-06-06",
     "repo": "longwind1984/prac03_museumcollect",
     "branch": "claude/museum-photo-sharing-8qJiz",
-    "role_for_this_session": "Verifier — 拿网址清单去真抓、核对、留证、记录;不做选品(Curator)、不做装订(Compiler 在云端)",
-    "human_summary": "你本地的 Claude:你的工作是把 data/pipeline/in/sources_candidates.pilot.json 里的网址一条条抓下来,核对内容、记下来源/版权/指纹,写进 data/pipeline/out/verified_chunks.json,推回仓库。你不需要决定抓哪些(清单给好了),也不需要写成最终条目(那步在云端)。先读 docs/LOCAL-SETUP.md。"
+    "MODE": "AUTONOMOUS NIGHT-RUN — 不挂起等 PM,8 小时跑完所有能跑的、写报告、推分支",
+    "primary_artifact_to_use": "handoff/2026-06-06-night-run-prompt.md(把里面那段长 prompt 整段贴给本地 Claude 即可)",
+    "role_for_this_session": "Discovery + Verifier + Compiler 三角色一肩挑,夜班无人值守",
+    "human_summary": "PM 操作:cd 到 repo / export MUSEUM_PROXY / 启动 Claude Code / 贴 night-run-prompt.md 里那段 / 睡。早晨看 docs/NIGHT-RUN-REPORT.md。"
   },
 
   "project_background_one_paragraph": "这是给「一起看」博物馆 AI 同伴 APP 建的 RAG 知识库。目标:挑 30 件文物(山博 15 + 上博 5 + 上博东馆 5 + 震旦 5),给每件从 5 类源(A 馆方一手 / B 海外开放博物馆对照 / C 学术论文 / D 现场与媒体 / E 数字人文项目)凑资料。产品哲学:找不到的来源就如实标'没找到+原因',绝不编造——'找不到一手叙事'本身就是中国文博数字化现状的产品素材(user-voice 原则 C)。",
@@ -104,13 +106,15 @@
     ]
   },
 
-  "open_questions_for_PM": [
-    {"id": "Q-gate", "q": "反幻觉门要'严格(宁缺毋滥)'还是'中等(允许标注下用旁证补)'?", "context": "直接决定 bundle 看起来多丰满 vs 多干净;默认走严格,可后调"},
-    {"id": "Q-email-key", "q": "'发邮件/填表申请免费 API key'(如哈佛)算不算红线、每次都停下问你?", "context": "默认算红线,由 PM 本人申请;你可放行'免费不签约'类"},
-    {"id": "Q-scope", "q": "30 件一次上,还是先做 10 件跑通看效果?", "context": "小范围起步更稳;pilot 跑完会有真实工时数据再定"},
-    {"id": "Q-bclass-dump", "q": "B 类源:把 prac_Museum 那批 data/sources/*.json(Met/CMA/FSG dump)迁过来,还是本地现抓单件 API?", "context": "pilot 先现抓;全量 30 件可能值得迁 dump 省事"},
-    {"id": "Q-proxy", "q": "你本地有没有可用的代理/VPN 给 archive.org + 海外 OA?", "context": "决定 archive.org(Met Wisdom Embodied 等)这条源对你是否可靠"}
-  ],
+  "open_questions_for_PM": "全部 5 条已 PM 2026-06-06 裁决(见 PM_rulings 字段),夜跑指令已落地",
+
+  "PM_rulings_2026_06_06": {
+    "Q-gate": "严格门(宁缺毋滥);unknown license 封顶 low tier;无 hash 不可全文;不许旁证补足",
+    "Q-email-key": "T3 红线,免费 key 也禁;理由:申请代表项目身份需 PM 判断 + 夜跑场景东八区无人回信。直接记 failed/needs_email_or_form_application,不绕过、不等回信",
+    "Q-scope": "pilot 验完直接 30 件一次上,不走 10 件中间节",
+    "Q-bclass-dump": "不迁 prac_Museum dump;B 类源全部走单件 search/object API 现抓",
+    "Q-proxy": "PM 本地配 → MUSEUM_PROXY 环境变量;scripts 已支持 via_vpn 字段自动按域名分流;配法见 docs/LOCAL-SETUP.md §1.5"
+  },
 
   "do_not_do": [
     "不要选品 / 不要改 30 件清单(那是 Curator + PM)",
@@ -120,5 +124,5 @@
     "不要把抓失败伪装成成功"
   ],
 
-  "starter_prompt_for_local_session": "你是这个项目的 Verifier(核源/抓取)。先按顺序读 docs/LOCAL-SETUP.md → docs/ADR/006-open-discovery-pipeline.md → docs/ADR/003-knowledge-sources.md → data/pipeline/in/sources_candidates.pilot.json → 三份 agents/researcher/sample-bundles/*.md。然后:(1) 按 docs/LOCAL-SETUP.md 第1节装好环境(venv + requirements-fetch.txt + playwright install chromium);(2) 先 dry-run `python scripts/fetch/run_list.py data/pipeline/in/sources_candidates.pilot.json` 确认清单读得对;(3) 真抓 shanghai-white-marble-buddha 这一件(`--go --artifact shanghai-white-marble-buddha`),抓完打开 data/pipeline/out/verified_chunks.json 检查;(4) 把结果跟 sample-bundle 对照,确认没有凭空内容;(5) 产出一张'本机可达性地图'(哪些大陆站点通、archive.org/海外通不通)。严守 T3 红线:不注册/不付费/不发邮件申请/不绕登录墙——碰到就记 failed 并问 PM。抓失败如实记 failure_reason,绝不假装成功。完成后 git add 仅 data/pipeline/out/verified_chunks.json 并推回 claude/museum-photo-sharing-8qJiz 分支。"
+  "starter_prompt_for_local_session": "夜跑模式:整段 prompt 在 handoff/2026-06-06-night-run-prompt.md;PM 粘贴那一份即可,无需用本字段。本 JSON 留作 AI 结构化参考,自取所需。"
 }
