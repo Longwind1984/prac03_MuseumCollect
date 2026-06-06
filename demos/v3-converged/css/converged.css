@@ -377,6 +377,12 @@ h3, .h3 { font-size: var(--text-h3); line-height: var(--lh-snug); font-weight: 6
   pointer-events: none;
 }
 .artifact-hero > *, .hero-dark > * { position: relative; }
+/* Artifact hero: image + title side-by-side on desktop, stacked on mobile */
+.artifact-hero-flex { display: flex; gap: var(--space-7); align-items: flex-start; }
+@media (max-width: 680px) {
+  .artifact-hero-flex { flex-direction: column; gap: var(--space-4); align-items: stretch; }
+  .artifact-hero-flex > div:first-child { align-self: center; }
+}
 
 /* ── 12. SCROLLBAR / DEBUG PANEL ────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 8px; height: 8px; }
