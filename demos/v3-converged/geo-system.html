@@ -49,6 +49,8 @@
       </div>
       <div id="map-container" style="height:520px;">
         <svg id="map-svg" width="100%" height="100%"></svg>
+        <div style="position:absolute; left:10px; bottom:10px; font-size:11px; color:#6a7a72; background:rgba(255,255,255,0.7); padding:3px 8px; border-radius:6px; pointer-events:none;">⛰ 山脉 · 〜 河流 · 滚轮缩放 · 拖动平移</div>
+        <button id="map-reset" onclick="_mapZoomReset && _mapZoomReset()" style="position:absolute; right:10px; bottom:10px; font-size:11px; color:var(--text-muted); background:white; border:1px solid var(--border-light); border-radius:6px; padding:4px 10px; cursor:pointer;">⤢ 重置视图</button>
       </div>
     </div>
 
@@ -148,19 +150,22 @@ function onEraSlider(val) {
 let _realGeo = {}; // { terrain, shang, xizhou, chunqiu, zhanguo, excavation, museums }
 let _mapProjection = null;
 let _mapGeoPath = null;
+let _mapZoomReset = null;
 
 async function loadRealGeoData() {
   const eras = ['shang', 'xizhou', 'chunqiu', 'zhanguo'];
   try {
-    const [terrain, rivers, excavation, museums, ...states] = await Promise.all([
+    const [terrain, rivers, physio, excavation, museums, ...states] = await Promise.all([
       fetch('../../assets/geo/china-provinces-highres.geojson').then(r => r.json()),
       fetch('../../assets/geo/rivers-major.geojson').then(r => r.json()).catch(() => null),
+      fetch('../../assets/geo/physio-features.geojson').then(r => r.json()).catch(() => null),
       fetch('../../assets/geo/excavation-sites.geojson').then(r => r.json()),
       fetch('../../assets/geo/museums.geojson').then(r => r.json()),
       ...eras.map(e => fetch(`../../assets/geo/ancient-states-${e}.geojson`).then(r => r.json()))
     ]);
     _realGeo.terrain = terrain;
     _realGeo.rivers = rivers;
+    _realGeo.physio = physio;
     _realGeo.excavation = excavation;
     _realGeo.museums = museums;
     eras.forEach((e, i) => { _realGeo[e] = states[i]; });
@@ -182,212 +187,187 @@ function renderMap() {
   svg.attr('width', W).attr('height', H);
   svg.selectAll('*').remove();
 
-  // Build projection: real China-friendly conic if terrain loaded, else legacy linear [0,1]→px
-  const padX = 30, padY = 20;
+  const padX = 40, padY = 30;
   if (_realGeo.terrain) {
+    // Frame the BRONZE-AGE HEARTLAND (sites + basins + ranges), not all of modern
+    // China — otherwise Xinjiang/Tibet waste the canvas and the relevant terrain
+    // (秦岭 between 关中 & 蜀, 太行/吕梁 around 晋) shrinks to illegibility.
+    // Build the projection by fitting the WHOLE-China FeatureCollection (this is the
+    // proven path — fitExtent on a small/point object degenerates with conic+rotate).
+    // We then focus the bronze heartland via an initial d3.zoom transform (see below).
     _mapProjection = d3.geoConicEqualArea()
-      .parallels([25, 47])
-      .rotate([-105, 0])
+      .parallels([25, 47]).rotate([-105, 0])
       .fitExtent([[padX, padY], [W - padX, H - padY]], _realGeo.terrain);
     _mapGeoPath = d3.geoPath(_mapProjection);
+  } else { _mapProjection = null; _mapGeoPath = null; }
+
+  // Static background (does NOT pan/zoom)
+  svg.append('rect').attr('width', W).attr('height', H).attr('fill', '#e9eef0');
+
+  // Everything geographic lives in this layer so d3.zoom can pan/zoom it.
+  const layer = svg.append('g').attr('class', 'zoom-layer');
+  const NS = 'non-scaling-stroke';
+
+  if (!_mapGeoPath) {
+    layer.append('text').attr('x', W/2).attr('y', H/2).attr('text-anchor','middle')
+      .attr('fill','#999').text('地图数据加载中…');
   } else {
-    // Legacy normalized [0,1] → px (sites still use x/y percent)
-    _mapProjection = null;
-    _mapGeoPath = null;
+    const path = _mapGeoPath, proj = _mapProjection;
+
+    // 1. Land backdrop — ONLY the provinces overlapping the bronze heartland, as a
+    //    faint silhouette for orientation (coast, river mouths). Far-west provinces
+    //    (Tibet/Xinjiang/Inner Mongolia) are dropped so they don't dominate the frame.
+    //    This is NOT a political map — internal borders are nearly invisible.
+    const inHeartland = f => { const c = d3.geoCentroid(f); return c[0] >= 100 && c[0] <= 123 && c[1] >= 22 && c[1] <= 43; };
+    layer.append('g').selectAll('path').data(_realGeo.terrain.features.filter(inHeartland)).enter().append('path')
+      .attr('d', path).attr('fill', '#eef1e8').attr('stroke', '#e2e6da')
+      .attr('stroke-width', 0.4).style('vector-effect', NS);
+
+    // 2. Basins / plains — the habitable cores where civilizations clustered.
+    if (_realGeo.physio) {
+      const basins = _realGeo.physio.features.filter(f => f.properties.kind === 'basin');
+      layer.append('g').selectAll('path').data(basins).enter().append('path')
+        .attr('d', path).attr('fill', '#e3ead0').attr('fill-opacity', 0.75)
+        .attr('stroke', '#cfd5b2').attr('stroke-width', 0.5).style('vector-effect', NS);
+      basins.forEach(f => { const p = proj(d3.geoCentroid(f)); if (p) _label(layer, p, f.properties.name, {color:'#7e8556', size:9, italic:true}); });
+    }
+
+    // 3. Mountain ranges — the BARRIERS that explain why sites sit where they do
+    //    (秦岭+大巴山 isolate 古蜀; 太行+吕梁 frame the 汾河 valley of 晋, etc.).
+    if (_realGeo.physio) {
+      const ranges = _realGeo.physio.features.filter(f => f.properties.kind === 'range');
+      const rg = layer.append('g');
+      ranges.forEach(f => {
+        rg.append('path').datum(f).attr('d', path).attr('fill','none').attr('stroke','#a98e60')
+          .attr('stroke-width',6).attr('stroke-linecap','round').attr('stroke-linejoin','round')
+          .attr('opacity',0.5).style('vector-effect', NS);
+        rg.append('path').datum(f).attr('d', path).attr('fill','none').attr('stroke','#6f5b34')
+          .attr('stroke-width',1.2).attr('stroke-dasharray','0.5,5').attr('stroke-linecap','round')
+          .attr('opacity',0.7).style('vector-effect', NS);
+        const cs = f.geometry.coordinates; const mid = cs[Math.floor(cs.length/2)];
+        const p = proj(mid); if (p) _label(layer, p, '⛰ '+f.properties.name, {color:'#6f5b34', size:9, weight:600});
+      });
+      _realGeo.physio.features.filter(f=>f.properties.kind==='peak').forEach(f=>{
+        const p = proj(f.geometry.coordinates); if (p) _label(layer, [p[0],p[1]+3], '▲ '+f.properties.name, {color:'#6f5b34', size:8});
+      });
+    }
+
+    // 4. Rivers — the arteries (黄河/长江 + 渭/汾/洛伊/汉) along which settlement strung.
+    if (_realGeo.rivers) {
+      const rv = layer.append('g');
+      _realGeo.rivers.features.forEach(f => {
+        const major = f.properties.tier === 'major';
+        rv.append('path').datum(f).attr('d', path).attr('fill','none').attr('stroke','#5b91ad')
+          .attr('stroke-width', major?2.2:1.3).attr('stroke-linejoin','round').attr('stroke-linecap','round')
+          .attr('opacity', major?0.85:0.65).style('vector-effect', NS);
+        const cs = f.geometry.coordinates; const p = proj(cs[Math.floor(cs.length*0.55)]);
+        if (p) _label(layer, p, f.properties.name, {color:'#3f7593', size: major?9:8, italic:true});
+      });
+    }
+
+    // 5. Era overlay (ancient states / 古国疆域) for the selected era.
+    const eraKey = ERA_TO_GEO_KEY[currentEra];
+    if (eraKey && _realGeo[eraKey]) {
+      _realGeo[eraKey].features.forEach(f => {
+        const pp = f.properties || {};
+        const color = pp.color || ERA_COLORS[currentEra] || '#888';
+        const opacity = pp.opacity != null ? pp.opacity : 0.25;
+        layer.append('path').datum(f).attr('d', path).attr('fill', color).attr('fill-opacity', opacity*0.5)
+          .attr('stroke', color).attr('stroke-opacity', 0.5).attr('stroke-width', 1)
+          .attr('stroke-dasharray', '4,3').style('vector-effect', NS);
+        const p = proj(d3.geoCentroid(f)); if (p) _label(layer, p, pp.name||'', {color: color, size:9});
+      });
+    }
+
+    // 6. Sites (excavation / museums) — projected from real lon/lat.
+    _renderSites(layer, proj, W, H);
   }
 
-  // Background
-  svg.append('rect').attr('width', W).attr('height', H).attr('fill', '#e7eef0');
+  // North indicator (static, outside the zoom layer)
+  svg.append('text').attr('x', W - 28).attr('y', 26).attr('font-size', 15).attr('fill', '#8a9088').text('N↑');
 
-  // China boundary: real high-res provinces (34 features) — internal province
-  // borders render as subtle subdivisions; outer ring is the national outline.
-  if (_realGeo.terrain && _mapGeoPath) {
-    svg.append('g').selectAll('path')
-      .data(_realGeo.terrain.features)
-      .enter().append('path')
-      .attr('d', _mapGeoPath)
-      .attr('fill', '#ece3cf')
-      .attr('stroke', '#cdbf9e')
-      .attr('stroke-width', 0.6)
-      .attr('stroke-linejoin', 'round');
-  } else {
-    const chinaOutline = [
-      [0.35,0.05],[0.50,0.02],[0.60,0.04],[0.72,0.08],[0.80,0.12],
-      [0.85,0.20],[0.82,0.28],[0.88,0.38],[0.85,0.46],[0.80,0.52],
-      [0.72,0.58],[0.68,0.68],[0.70,0.80],[0.62,0.88],[0.55,0.90],
-      [0.48,0.88],[0.42,0.80],[0.35,0.72],[0.28,0.65],[0.20,0.60],
-      [0.15,0.50],[0.12,0.40],[0.15,0.30],[0.20,0.22],[0.28,0.15],
-      [0.35,0.05]
-    ].map(([px,py]) => [px*W, py*H]);
-    svg.append('path')
-      .datum(chinaOutline)
-      .attr('d', d3.line()(chinaOutline) + 'Z')
-      .attr('fill', '#f0e6d0')
-      .attr('stroke', '#c8b890')
-      .attr('stroke-width', 1.5);
-  }
-
-  // Rivers: prefer real lon/lat courses projected through the map projection;
-  // fall back to normalized screen-space curves only when no projection exists.
-  if (_realGeo.rivers && _mapGeoPath) {
-    svg.append('g').selectAll('path')
-      .data(_realGeo.rivers.features)
-      .enter().append('path')
-      .attr('d', _mapGeoPath)
-      .attr('fill', 'none')
-      .attr('stroke', '#7fa8b8')
-      .attr('stroke-width', 1.6)
-      .attr('stroke-linejoin', 'round')
-      .attr('stroke-linecap', 'round')
-      .attr('opacity', 0.7);
-  } else if (!_mapGeoPath) {
-    const rivers = [
-      [[0.35,0.38],[0.48,0.40],[0.58,0.42],[0.68,0.48],[0.72,0.55]],
-      [[0.32,0.52],[0.45,0.50],[0.56,0.52],[0.64,0.56],[0.70,0.60]],
-    ];
-    rivers.forEach(r => {
-      svg.append('path')
-        .datum(r.map(([px,py]) => [px*W, py*H]))
-        .attr('d', d3.line().curve(d3.curveCatmullRom)(r.map(([px,py]) => [px*W, py*H])))
-        .attr('fill', 'none').attr('stroke', '#7fa8b8').attr('stroke-width', 1.5).attr('opacity', 0.6);
-    });
-  }
-
-  // Era overlay: prefer real ancient-states-{era}.geojson, else legacy 7-point polygon.
-  const eraKey = ERA_TO_GEO_KEY[currentEra];
-  if (eraKey && _realGeo[eraKey] && _mapGeoPath) {
-    // Render each ancient-state feature for this era
-    _realGeo[eraKey].features.forEach(f => {
-      const p = f.properties || {};
-      const color = p.color || ERA_COLORS[currentEra] || '#888';
-      const opacity = p.opacity != null ? p.opacity : 0.25;
-      svg.append('path').datum(f)
-        .attr('d', _mapGeoPath)
-        .attr('fill', color)
-        .attr('fill-opacity', opacity * 0.6)
-        .attr('stroke', color)
-        .attr('stroke-opacity', 0.5)
-        .attr('stroke-width', 1)
-        .attr('stroke-dasharray', '4,3');
-      // Label at centroid
-      const c = d3.geoCentroid(f);
-      const [lx, ly] = _mapProjection(c);
-      if (lx >= 0 && lx <= W && ly >= 0 && ly <= H) {
-        svg.append('text')
-          .attr('x', lx).attr('y', ly)
-          .attr('text-anchor', 'middle')
-          .attr('fill', color)
-          .attr('fill-opacity', 0.75)
-          .attr('font-size', 10)
-          .attr('font-family', 'Noto Serif SC, serif')
-          .style('pointer-events', 'none')
-          .text(p.name || '');
-      }
-    });
-  } else {
-    const eraOverlays = {
-      '商': [[0.44,0.30],[0.62,0.30],[0.68,0.40],[0.65,0.52],[0.50,0.55],[0.42,0.48],[0.40,0.38]],
-      '西周': [[0.38,0.28],[0.68,0.28],[0.75,0.45],[0.65,0.58],[0.48,0.60],[0.35,0.52],[0.32,0.40]],
-      '春秋': [[0.30,0.25],[0.72,0.25],[0.78,0.48],[0.68,0.62],[0.50,0.66],[0.33,0.58],[0.25,0.45]],
-      '战国': [[0.28,0.22],[0.75,0.22],[0.80,0.50],[0.70,0.65],[0.52,0.68],[0.30,0.62],[0.22,0.48]],
-    };
-    if (eraOverlays[currentEra]) {
-      const pts = eraOverlays[currentEra].map(([px,py]) => [px*W, py*H]);
-      svg.append('path')
-        .datum(pts)
-        .attr('d', d3.line()(pts) + 'Z')
-        .attr('fill', ERA_COLORS[currentEra] || '#888')
-        .attr('opacity', 0.08)
-        .attr('stroke', ERA_COLORS[currentEra] || '#888')
-        .attr('stroke-width', 1.5)
-        .attr('stroke-dasharray', '6,4')
-        .attr('opacity', 0.3);
+  // Compute an initial transform that FOCUSES the bronze heartland (lon 100-123,
+  // lat 22-42) within the whole-China projection — this is how we "zoom in" to the
+  // relevant region without the degenerate small-extent fit.
+  let focusT = d3.zoomIdentity;
+  if (_mapProjection) {
+    const c1 = _mapProjection([100, 42]), c2 = _mapProjection([123, 22]);
+    if (c1 && c2) {
+      const bx0 = Math.min(c1[0],c2[0]), bx1 = Math.max(c1[0],c2[0]);
+      const by0 = Math.min(c1[1],c2[1]), by1 = Math.max(c1[1],c2[1]);
+      const bw = Math.max(1, bx1-bx0), bh = Math.max(1, by1-by0);
+      const k = Math.max(1, Math.min(8, Math.min((W-2*padX)/bw, (H-2*padY)/bh) * 0.95));
+      const tx = W/2 - k*(bx0+bx1)/2, ty = H/2 - k*(by0+by1)/2;
+      focusT = d3.zoomIdentity.translate(tx, ty).scale(k);
     }
   }
 
-  // Sites: prefer real GeoJSON (Point features with [lon,lat]) projected; fallback to inline x/y%.
-  const useRealSites = !!(_mapProjection && (
+  // Pan / zoom
+  const maxK = Math.max(14, (focusT.k || 1) + 6);
+  const zoom = d3.zoom().scaleExtent([1, maxK])
+    .translateExtent([[0,0],[W,H]]).extent([[0,0],[W,H]])
+    .on('zoom', (ev) => { layer.attr('transform', ev.transform); _applyZoomScale(ev.transform.k); });
+  svg.call(zoom).style('cursor', 'grab');
+  svg.on('mousedown.cursor', () => svg.style('cursor','grabbing'))
+     .on('mouseup.cursor', () => svg.style('cursor','grab'));
+  _mapZoomReset = () => svg.transition().duration(450).call(zoom.transform, focusT);
+  // apply initial focus
+  svg.call(zoom.transform, focusT);
+}
+
+// Counter-scale labels & markers so they stay a constant screen size while zooming.
+function _applyZoomScale(k) {
+  const svg = d3.select('#map-svg');
+  svg.selectAll('text.zlabel').attr('font-size', function(){ return (+this.getAttribute('data-size')||10)/k; });
+  svg.selectAll('.zdot').attr('r', function(){ return (+this.getAttribute('data-r')||6)/k; });
+  svg.selectAll('.zglow').attr('r', function(){ return (+this.getAttribute('data-r')||10)/k; });
+  svg.selectAll('text.zsite').attr('font-size', function(){ return (+this.getAttribute('data-size')||11)/k; })
+     .attr('x', function(){ return (+this.getAttribute('data-x')) + ((+this.getAttribute('data-r'))+4)/k; });
+}
+
+function _label(layer, p, text, opt) {
+  opt = opt || {};
+  layer.append('text').attr('class','zlabel').attr('data-size', opt.size||10)
+    .attr('x', p[0]).attr('y', p[1]).attr('text-anchor','middle')
+    .attr('font-size', opt.size||10).attr('fill', opt.color||'#555')
+    .attr('font-weight', opt.weight||400).attr('font-style', opt.italic?'italic':'normal')
+    .attr('font-family','Noto Serif SC, serif').style('pointer-events','none')
+    .style('paint-order','stroke').style('stroke','rgba(255,255,255,0.75)').style('stroke-width','2px')
+    .text(text);
+}
+
+function _renderSites(layer, proj, W, H) {
+  const useRealSites = !!(proj && (
     (currentView === 'museum' && _realGeo.museums) ||
-    (currentView !== 'museum' && _realGeo.excavation)
-  ));
+    (currentView !== 'museum' && _realGeo.excavation)));
   let sites;
   if (useRealSites) {
     const fc = currentView === 'museum' ? _realGeo.museums : _realGeo.excavation;
-    sites = fc.features.map(f => {
-      const p = f.properties || {};
-      const [lon, lat] = f.geometry.coordinates;
-      return {
-        name: p.name,
-        dynasty: p.dynasty || '',
-        desc: p.brief || p.description || '',
-        count: p.artifact_count || p.bronze_count_approx || p.user_collected || 1,
-        artifacts: p.key_artifacts || [],
-        lit: p.user_collected !== undefined ? p.user_collected > 0 : true,
-        _lon: lon, _lat: lat,
-      };
-    });
-  } else {
-    sites = currentView === 'museum' ? MUSEUM_SITES : EXCAVATION_SITES;
-  }
+    sites = fc.features.map(f => { const p = f.properties || {}; const [lon, lat] = f.geometry.coordinates;
+      return { name:p.name, dynasty:p.dynasty||'', desc:p.brief||p.description||'',
+        count:p.artifact_count||p.bronze_count_approx||p.user_collected||1, artifacts:p.key_artifacts||[],
+        lit:p.user_collected!==undefined?p.user_collected>0:true, _lon:lon, _lat:lat }; });
+  } else { sites = currentView === 'museum' ? MUSEUM_SITES : EXCAVATION_SITES; }
 
   sites.forEach(site => {
     let cx, cy;
-    if (useRealSites && _mapProjection) {
-      const proj = _mapProjection([site._lon, site._lat]);
-      if (!proj || isNaN(proj[0])) return;
-      [cx, cy] = proj;
-    } else {
-      cx = site.x / 100 * W;
-      cy = site.y / 100 * H;
-    }
+    if (useRealSites && proj) { const pr = proj([site._lon, site._lat]); if (!pr || isNaN(pr[0])) return; [cx, cy] = pr; }
+    else { cx = site.x/100*W; cy = site.y/100*H; }
     const isLit = currentView === 'museum' ? true : (site.lit && (site.dynasty === currentEra || currentView === 'excavation'));
     const color = ERA_COLORS[site.dynasty] || ERA_COLORS[currentEra] || '#888';
-    // Real GeoJSON counts are 10-500+ (artifact_count or bronze_count_approx);
-    // inline counts are 2-85. Use sqrt with a per-mode multiplier so both fit nicely.
     const radMult = useRealSites ? 1.0 : 2.5;
-    const r = Math.max(5, Math.min(22, Math.sqrt(site.count) * radMult));
-
-    const g = svg.append('g').attr('class', 'site-circle');
-
-    if (isLit && site.count > 0) {
-      // Glow for lit sites
-      g.append('circle').attr('cx', cx).attr('cy', cy)
-        .attr('r', r + 4).attr('fill', color).attr('opacity', 0.15);
-    }
-
-    g.append('circle')
-      .attr('cx', cx).attr('cy', cy).attr('r', r)
-      .attr('fill', isLit ? color : '#ccc')
-      .attr('opacity', isLit ? 0.85 : 0.4)
-      .attr('stroke', isLit ? 'white' : 'none')
-      .attr('stroke-width', 1);
-
-    // Count label inside circle
-    if (r > 10) {
-      g.append('text').attr('x', cx).attr('y', cy + 3)
-        .attr('text-anchor', 'middle').attr('font-size', 9)
-        .attr('fill', 'white').attr('font-weight', '600').text(site.count);
-    }
-
-    // Site name label
-    g.append('text')
-      .attr('class', 'site-label')
-      .attr('x', cx + r + 4).attr('y', cy + 3)
-      .attr('fill', isLit ? '#333' : '#aaa')
-      .attr('font-size', 11).attr('font-weight', isLit ? '600' : '400')
-      .text(site.name);
-
+    const r = Math.max(5, Math.min(20, Math.sqrt(site.count) * radMult));
+    const g = layer.append('g').attr('class', 'site-circle').style('cursor','pointer');
+    if (isLit && site.count > 0)
+      g.append('circle').attr('class','zglow').attr('data-r', r+4).attr('cx',cx).attr('cy',cy).attr('r',r+4).attr('fill',color).attr('opacity',0.15);
+    g.append('circle').attr('class','zdot').attr('data-r', r).attr('cx',cx).attr('cy',cy).attr('r',r)
+      .attr('fill', isLit?color:'#bbb').attr('opacity', isLit?0.9:0.4).attr('stroke','white').attr('stroke-width',1).style('vector-effect','non-scaling-stroke');
+    g.append('text').attr('class','zsite').attr('data-x',cx).attr('data-r',r).attr('data-size',11)
+      .attr('x', cx+r+4).attr('y', cy+3).attr('fill', isLit?'#2a2620':'#999').attr('font-size',11)
+      .attr('font-weight', isLit?600:400).attr('font-family','Noto Serif SC, serif').style('pointer-events','none')
+      .style('paint-order','stroke').style('stroke','rgba(255,255,255,0.85)').style('stroke-width','2.5px').text(site.name);
     g.on('click', () => showSiteDetail(site));
-    g.on('mouseenter', function() {
-      d3.select(this).select('circle').attr('stroke-width', 2).attr('stroke', ERA_COLORS[site.dynasty] || 'var(--accent-bronze)');
-    });
-    g.on('mouseleave', function() {
-      d3.select(this).select('circle').attr('stroke-width', 1).attr('stroke', 'white');
-    });
   });
-
-  // North indicator
-  svg.append('text').attr('x', W - 30).attr('y', 25).attr('font-size', 16).attr('fill', '#888').text('N↑');
 }
 
 function showSiteDetail(site) {
