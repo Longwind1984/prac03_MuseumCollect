@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>青铜器知识库 — MuseumCollect</title>
+<link rel="stylesheet" href="css/converged.css">
+<style>
+  .wiki-entry-card {
+    display: block; background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--radius-lg); padding: var(--space-4); margin-bottom: var(--space-3);
+    transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+    cursor: pointer;
+  }
+  .wiki-entry-card:hover { border-color: var(--patina); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+  .wiki-entry-card.active { border-color: var(--patina); border-left: 3px solid var(--patina); box-shadow: var(--shadow-md); }
+  .wiki-entry-title { font-size: var(--text-lg); font-weight: 600; color: var(--ink); margin-bottom: var(--space-1); }
+  .wiki-entry-summary { font-size: var(--text-sm); color: var(--ink-2); line-height: var(--lh-snug); }
+  .wiki-entry-meta { display: flex; gap: var(--space-2); margin-top: var(--space-2); font-size: var(--text-xs); color: var(--ink-3); flex-wrap: wrap; }
+  .dispute-badge { background: var(--cinnabar-soft); color: var(--cinnabar); padding: 1px 7px; border-radius: var(--radius-pill); font-weight: 500; }
+
+  /* Article (rendered markdown) */
+  .wiki-article { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: clamp(var(--space-5), 4vw, var(--space-7)); box-shadow: var(--shadow-sm); }
+  .wiki-article h1 { font-size: var(--text-h1); margin-bottom: var(--space-4); padding-bottom: var(--space-3); border-bottom: 2px solid var(--patina); }
+  .wiki-article h2 { font-size: var(--text-h2); margin: var(--space-6) 0 var(--space-3); color: var(--patina-deep); display: flex; align-items: center; gap: var(--space-2); }
+  .wiki-article h2::before { content: ''; width: 4px; height: 0.9em; background: var(--patina); border-radius: 2px; display: inline-block; }
+  .wiki-article h3 { font-size: var(--text-h3); margin: var(--space-5) 0 var(--space-2); color: var(--bronze); }
+  .wiki-article p { margin: var(--space-3) 0; line-height: var(--lh-normal); color: var(--ink); }
+  .wiki-article ul, .wiki-article ol { margin: var(--space-3) 0 var(--space-3) var(--space-5); }
+  .wiki-article li { margin: var(--space-2) 0; line-height: var(--lh-snug); }
+  .wiki-article strong { color: var(--ink); font-weight: 600; }
+  .wiki-article code { font-family: var(--font-mono); font-size: 0.9em; background: var(--surface-sunken); padding: 1px 5px; border-radius: var(--radius-sm); color: var(--bronze); }
+  .wiki-article blockquote {
+    margin: var(--space-4) 0; padding: var(--space-3) var(--space-4);
+    background: var(--patina-soft); border-left: 3px solid var(--patina);
+    border-radius: 0 var(--radius) var(--radius) 0; color: var(--ink-2); font-size: var(--text-sm);
+  }
+  .wiki-article hr { border: none; border-top: 1px solid var(--line); margin: var(--space-6) 0; }
+  .wiki-article table { width: 100%; border-collapse: collapse; margin: var(--space-4) 0; font-size: var(--text-sm); }
+  .wiki-article th { background: var(--patina-soft); color: var(--patina-deep); font-weight: 600; text-align: left; padding: var(--space-2) var(--space-3); border: 1px solid var(--line-strong); }
+  .wiki-article td { padding: var(--space-2) var(--space-3); border: 1px solid var(--line); vertical-align: top; }
+  .wiki-article tr:nth-child(even) td { background: color-mix(in srgb, var(--surface-sunken) 40%, transparent); }
+  .wiki-article .table-scroll { overflow-x: auto; }
+
+  /* Perspective tags — the user's "不同版本/争议" ask, color-coded */
+  .persp { display: inline-block; padding: 0 6px; border-radius: var(--radius-sm); font-size: 0.85em; font-weight: 500; white-space: nowrap; }
+  .persp-cn  { background: var(--patina-soft); color: var(--patina-deep); }
+  .persp-intl{ background: #e6edf3; color: #3a5a7a; }
+  .persp-new { background: var(--cinnabar-soft); color: var(--cinnabar); }
+  .persp-folk{ background: var(--surface-sunken); color: var(--ink-3); font-style: italic; }
+
+  .related-chips { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--line); }
+  .related-chip { font-size: var(--text-xs); padding: 3px 10px; border-radius: var(--radius-pill); background: var(--bronze-soft); color: var(--bronze); border: 1px solid transparent; transition: border-color var(--dur) var(--ease); cursor: pointer; }
+  .related-chip:hover { border-color: var(--bronze); }
+</style>
+</head>
+<body data-page="wiki">
+
+<nav id="top-nav-placeholder" class="top-nav"></nav>
+<script src="js/nav.js"></script>
+
+<div class="page-container" style="padding-top: var(--space-5);">
+  <div class="page-header">
+    <h1 class="page-title">青铜器知识库</h1>
+    <p class="page-subtitle">器物档案之外的「后台档案」— 通论 · 工艺 · 纹饰 · 铭文 · 学者著作,每篇标注学术分歧与不同解说</p>
+  </div>
+
+  <div class="with-sidebar left">
+    <!-- Sidebar: entry list -->
+    <div class="sidebar">
+      <div id="wiki-list"></div>
+      <div style="font-size:var(--text-xs); color:var(--ink-3); margin-top:var(--space-4); line-height:var(--lh-snug);">
+        ℹ️ 本知识库为公开资料 + 学界著作整理,标注 <span class="persp persp-cn">中文主流</span> <span class="persp persp-intl">海外主流</span> <span class="persp persp-new">新近争论</span> <span class="persp persp-folk">民间传说</span> 四类视角,与器物单件档案互补。
+      </div>
+    </div>
+
+    <!-- Main: rendered article -->
+    <div>
+      <div class="wiki-article" id="wiki-article">
+        <p style="color:var(--ink-3);">载入中…</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Minimal Markdown → HTML renderer (no CDN; handles the subset the wiki uses:
+//    h1-h3, bold, italic, inline code, links, ul/ol, blockquote, hr, tables, paragraphs). ──
+function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function inline(s){
+  return escapeHtml(s)
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/(?<!\*)\*(?!\*)([^*]+)\*(?!\*)/g, '<em>$1</em>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color:var(--patina);text-decoration:underline;">$1</a>');
+}
+function renderMarkdown(md){
+  const lines = md.replace(/\r/g,'').split('\n');
+  let html = '', i = 0;
+  while (i < lines.length) {
+    let line = lines[i];
+    // table block
+    if (/^\s*\|/.test(line) && i+1 < lines.length && /^\s*\|?[\s:|-]+\|/.test(lines[i+1])) {
+      const head = line.split('|').filter(c=>c.trim()!=='').map(c=>`<th>${inline(c.trim())}</th>`).join('');
+      i += 2; let rows='';
+      while (i < lines.length && /^\s*\|/.test(lines[i])) {
+        const cells = lines[i].split('|').filter((c,idx,arr)=>!(idx===0&&c.trim()==='')&&!(idx===arr.length-1&&c.trim()==='')).map(c=>`<td>${inline(c.trim())}</td>`).join('');
+        rows += `<tr>${cells}</tr>`; i++;
+      }
+      html += `<div class="table-scroll"><table><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table></div>`;
+      continue;
+    }
+    if (/^###\s+/.test(line)) { html += `<h3>${inline(line.replace(/^###\s+/,''))}</h3>`; i++; continue; }
+    if (/^##\s+/.test(line))  { html += `<h2>${inline(line.replace(/^##\s+/,''))}</h2>`; i++; continue; }
+    if (/^#\s+/.test(line))   { html += `<h1>${inline(line.replace(/^#\s+/,''))}</h1>`; i++; continue; }
+    if (/^---+\s*$/.test(line)) { html += '<hr>'; i++; continue; }
+    if (/^>\s?/.test(line)) {
+      let q=''; while (i<lines.length && /^>\s?/.test(lines[i])) { q += inline(lines[i].replace(/^>\s?/,'')) + '<br>'; i++; }
+      html += `<blockquote>${q.replace(/<br>$/,'')}</blockquote>`; continue;
+    }
+    if (/^\s*[-*]\s+/.test(line)) {
+      let items=''; while (i<lines.length && /^\s*[-*]\s+/.test(lines[i])) { items += `<li>${inline(lines[i].replace(/^\s*[-*]\s+/,''))}</li>`; i++; }
+      html += `<ul>${items}</ul>`; continue;
+    }
+    if (/^\s*\d+\.\s+/.test(line)) {
+      let items=''; while (i<lines.length && /^\s*\d+\.\s+/.test(lines[i])) { items += `<li>${inline(lines[i].replace(/^\s*\d+\.\s+/,''))}</li>`; i++; }
+      html += `<ol>${items}</ol>`; continue;
+    }
+    if (line.trim()==='') { i++; continue; }
+    // paragraph (merge consecutive non-empty non-special lines)
+    let para = line;
+    i++;
+    while (i<lines.length && lines[i].trim()!=='' && !/^[#>|]|^\s*[-*]\s|^\s*\d+\.\s|^---+\s*$/.test(lines[i])) { para += ' ' + lines[i]; i++; }
+    html += `<p>${inline(para)}</p>`;
+  }
+  // Color-code perspective tags (the 争议/不同解说 signal)
+  html = html
+    .replace(/\[中文学界主流\]/g, '<span class="persp persp-cn">中文主流</span>')
+    .replace(/\[海外学界主流\]/g, '<span class="persp persp-intl">海外主流</span>')
+    .replace(/\[新近争论\]/g, '<span class="persp persp-new">新近争论</span>')
+    .replace(/民间传说/g, '<span class="persp persp-folk">民间传说</span>');
+  return html;
+}
+
+const WIKI_BASE = '../../wiki/bronzeware/';
+let ENTRIES = [];
+
+async function loadIndex() {
+  try {
+    ENTRIES = await fetch(WIKI_BASE + 'index.json').then(r => r.json());
+  } catch(e) {
+    document.getElementById('wiki-article').innerHTML = '<p style="color:var(--cinnabar);">知识库索引载入失败。</p>';
+    return;
+  }
+  renderList();
+  const slug = new URLSearchParams(location.search).get('entry') || ENTRIES[0].slug;
+  loadEntry(slug);
+}
+
+function renderList() {
+  const cur = new URLSearchParams(location.search).get('entry') || (ENTRIES[0] && ENTRIES[0].slug);
+  document.getElementById('wiki-list').innerHTML = ENTRIES.map(e => `
+    <div class="wiki-entry-card ${e.slug===cur?'active':''}" onclick="loadEntry('${e.slug}')">
+      <div class="wiki-entry-title">${e.title}</div>
+      <div class="wiki-entry-summary">${(e.summary||'').slice(0,70)}…</div>
+      <div class="wiki-entry-meta">
+        <span>${e.word_count} 字</span>
+        ${e.dispute_count?`<span class="dispute-badge">${e.dispute_count} 处学术分歧</span>`:''}
+      </div>
+    </div>`).join('');
+}
+
+async function loadEntry(slug) {
+  const entry = ENTRIES.find(e => e.slug === slug) || ENTRIES[0];
+  history.replaceState(null, '', '?entry=' + entry.slug);
+  document.querySelectorAll('.wiki-entry-card').forEach((c,idx) => c.classList.toggle('active', ENTRIES[idx] && ENTRIES[idx].slug===entry.slug));
+  const art = document.getElementById('wiki-article');
+  art.innerHTML = '<p style="color:var(--ink-3);">载入中…</p>';
+  let md = '';
+  try { md = await fetch(WIKI_BASE + entry.slug + '.md').then(r => r.text()); }
+  catch(e) { art.innerHTML = '<p style="color:var(--cinnabar);">条目载入失败。</p>'; return; }
+  let html = renderMarkdown(md);
+  // related artifacts chips
+  if (entry.related_artifact_ids && entry.related_artifact_ids.length) {
+    const chips = entry.related_artifact_ids.map(id =>
+      `<span class="related-chip" onclick="location.href='artifact.html?id=${encodeURIComponent(id)}'">🏺 ${id}</span>`).join('');
+    html += `<div class="related-chips"><span style="font-size:var(--text-xs); color:var(--ink-3); align-self:center;">相关器物:</span>${chips}</div>`;
+  }
+  art.innerHTML = html;
+  // resolve related-chip ids → names once data is available
+  resolveChipNames();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resolveChipNames() {
+  if (!(window.MuseumData && window.MuseumData.get)) return;
+  document.querySelectorAll('.related-chip').forEach(chip => {
+    const m = chip.getAttribute('onclick').match(/id=([^']+)'/);
+    if (!m) return;
+    const rec = window.MuseumData.get(decodeURIComponent(m[1]));
+    if (rec) chip.innerHTML = '🏺 ' + rec.name_zh;
+  });
+}
+document.addEventListener('museum-data-ready', resolveChipNames);
+
+loadIndex();
+</script>
+<script src="js/constants.js"></script>
+<script src="js/data-loader.js"></script>
+</body>
+</html>

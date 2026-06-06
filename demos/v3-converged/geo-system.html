@@ -7,7 +7,7 @@
 <script src="../../assets/vendor/d3.v7.min.js"></script>
 <link rel="stylesheet" href="css/converged.css">
 <style>
-#map-container { background: #f4ebd9; border-radius: 12px; border: 1px solid var(--border-light); overflow: hidden; position: relative; }
+#map-container { background: #e7eef0; border-radius: 12px; border: 1px solid var(--border-light); overflow: hidden; position: relative; }
 .site-circle { cursor: pointer; transition: all .3s; }
 .site-circle:hover { filter: brightness(1.4); }
 .site-label { font-size: 10px; pointer-events: none; }
@@ -38,7 +38,7 @@
     </div>
   </div>
 
-  <div style="display:grid; grid-template-columns:1fr 320px; gap:20px;">
+  <div class="with-sidebar">
     <!-- Map -->
     <div>
       <!-- Era slider -->
@@ -152,13 +152,15 @@ let _mapGeoPath = null;
 async function loadRealGeoData() {
   const eras = ['shang', 'xizhou', 'chunqiu', 'zhanguo'];
   try {
-    const [terrain, excavation, museums, ...states] = await Promise.all([
-      fetch('../../assets/geo/china-terrain.geojson').then(r => r.json()),
+    const [terrain, rivers, excavation, museums, ...states] = await Promise.all([
+      fetch('../../assets/geo/china-provinces-highres.geojson').then(r => r.json()),
+      fetch('../../assets/geo/rivers-major.geojson').then(r => r.json()).catch(() => null),
       fetch('../../assets/geo/excavation-sites.geojson').then(r => r.json()),
       fetch('../../assets/geo/museums.geojson').then(r => r.json()),
       ...eras.map(e => fetch(`../../assets/geo/ancient-states-${e}.geojson`).then(r => r.json()))
     ]);
     _realGeo.terrain = terrain;
+    _realGeo.rivers = rivers;
     _realGeo.excavation = excavation;
     _realGeo.museums = museums;
     eras.forEach((e, i) => { _realGeo[e] = states[i]; });
@@ -195,15 +197,19 @@ function renderMap() {
   }
 
   // Background
-  svg.append('rect').attr('width', W).attr('height', H).attr('fill', '#f4ebd9');
+  svg.append('rect').attr('width', W).attr('height', H).attr('fill', '#e7eef0');
 
-  // China boundary: prefer real terrain GeoJSON, fallback to normalized inline polygon.
+  // China boundary: real high-res provinces (34 features) — internal province
+  // borders render as subtle subdivisions; outer ring is the national outline.
   if (_realGeo.terrain && _mapGeoPath) {
-    svg.append('path').datum(_realGeo.terrain)
+    svg.append('g').selectAll('path')
+      .data(_realGeo.terrain.features)
+      .enter().append('path')
       .attr('d', _mapGeoPath)
-      .attr('fill', '#f0e6d0')
-      .attr('stroke', '#c8b890')
-      .attr('stroke-width', 1.5);
+      .attr('fill', '#ece3cf')
+      .attr('stroke', '#cdbf9e')
+      .attr('stroke-width', 0.6)
+      .attr('stroke-linejoin', 'round');
   } else {
     const chinaOutline = [
       [0.35,0.05],[0.50,0.02],[0.60,0.04],[0.72,0.08],[0.80,0.12],
@@ -221,20 +227,31 @@ function renderMap() {
       .attr('stroke-width', 1.5);
   }
 
-  // Rivers (simplified)
-  const rivers = [
-    [[0.35,0.38],[0.48,0.40],[0.58,0.42],[0.68,0.48],[0.72,0.55]],  // Yellow River (simplified)
-    [[0.32,0.52],[0.45,0.50],[0.56,0.52],[0.64,0.56],[0.70,0.60]],  // Yangtze (simplified)
-  ];
-  rivers.forEach(r => {
-    svg.append('path')
-      .datum(r.map(([px,py]) => [px*W, py*H]))
-      .attr('d', d3.line().curve(d3.curveCatmullRom)(r.map(([px,py]) => [px*W, py*H])))
+  // Rivers: prefer real lon/lat courses projected through the map projection;
+  // fall back to normalized screen-space curves only when no projection exists.
+  if (_realGeo.rivers && _mapGeoPath) {
+    svg.append('g').selectAll('path')
+      .data(_realGeo.rivers.features)
+      .enter().append('path')
+      .attr('d', _mapGeoPath)
       .attr('fill', 'none')
-      .attr('stroke', '#98b8c8')
-      .attr('stroke-width', 1.5)
-      .attr('opacity', 0.6);
-  });
+      .attr('stroke', '#7fa8b8')
+      .attr('stroke-width', 1.6)
+      .attr('stroke-linejoin', 'round')
+      .attr('stroke-linecap', 'round')
+      .attr('opacity', 0.7);
+  } else if (!_mapGeoPath) {
+    const rivers = [
+      [[0.35,0.38],[0.48,0.40],[0.58,0.42],[0.68,0.48],[0.72,0.55]],
+      [[0.32,0.52],[0.45,0.50],[0.56,0.52],[0.64,0.56],[0.70,0.60]],
+    ];
+    rivers.forEach(r => {
+      svg.append('path')
+        .datum(r.map(([px,py]) => [px*W, py*H]))
+        .attr('d', d3.line().curve(d3.curveCatmullRom)(r.map(([px,py]) => [px*W, py*H])))
+        .attr('fill', 'none').attr('stroke', '#7fa8b8').attr('stroke-width', 1.5).attr('opacity', 0.6);
+    });
+  }
 
   // Era overlay: prefer real ancient-states-{era}.geojson, else legacy 7-point polygon.
   const eraKey = ERA_TO_GEO_KEY[currentEra];

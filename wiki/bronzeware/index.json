@@ -1,0 +1,42 @@
+[
+  {
+    "slug": "overview",
+    "title": "青铜器总论",
+    "summary": "中国青铜器的起源（齐家文化→二里头→商周巅峰→春秋战国→秦汉衰落）、五段分期及判定依据、马承源系器型分类（炊/食/酒/水/乐/兵器）。含夏代青铜是否成熟、商代铸造是否独立起源、青铜时代下限等多处学术争议。",
+    "word_count": 2069,
+    "dispute_count": 4,
+    "related_artifact_ids": ["houmuwu_ding", "fuhao_gui", "he_zun", "maogong_ding", "zenghouyi_bianzhong"]
+  },
+  {
+    "slug": "casting-techniques",
+    "title": "青铜器铸造工艺",
+    "summary": "范铸法（块范/浑铸/分铸）、失蜡法（含曾侯乙尊盘是否失蜡的传入与工艺之争）、错金银、鎏金。每节含技术要点、代表器与学术分歧。",
+    "word_count": 1708,
+    "dispute_count": 4,
+    "related_artifact_ids": ["houmuwu_ding", "zenghouyi_zunpan", "cuojin_xiyun_xizun", "cuojinyin_niaoshu_tonghu", "changxin_gongdeng", "nanyuewang_liujinhu"]
+  },
+  {
+    "slug": "patterns-evolution",
+    "title": "青铜器纹饰演变",
+    "summary": "兽面纹（饕餮）起源的图腾说/神格说/装饰说之争、夔龙凤鸟雷纹的时代特征、西周中期礼制改革后的简化、Max Loehr 五期风格分式，附纹饰断代速查表。",
+    "word_count": 1688,
+    "dispute_count": 4,
+    "related_artifact_ids": ["shang_you_taotie", "longhu_wen_zun", "fuhao_you_owl", "zenghouyi_zunpan", "cuojin_xiyun_xizun"]
+  },
+  {
+    "slug": "inscriptions-paleography",
+    "title": "青铜器铭文与金文学",
+    "summary": "金文从图形符号到成熟文字的演进、何尊“宅兹中国”释读、大盂鼎/毛公鼎/散氏盘/史墙盘内容精读、王国维二重证据法、郭沫若/容庚/唐兰的现代释读分歧。",
+    "word_count": 1593,
+    "dispute_count": 5,
+    "related_artifact_ids": ["he_zun", "da_yu_ding", "maogong_ding", "sanshi_pan", "shi_qiang_pan"]
+  },
+  {
+    "slug": "scholars-and-books",
+    "title": "青铜器研究的关键著作与学者",
+    "summary": "宋代金石学（吕大临《考古图》《宣和博古图》）、清代（阮元）、现代（容庚、陈梦家、马承源、李学勤、朱凤瀚）、海外（Max Loehr、张光直、Jessica Rawson 西周礼制变革论）。每条含一句话评价与一个争议点。",
+    "word_count": 1853,
+    "dispute_count": 3,
+    "related_artifact_ids": ["he_zun", "houmuwu_ding", "maogong_ding", "shi_qiang_pan", "zenghouyi_zunpan"]
+  }
+]

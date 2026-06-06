@@ -1,0 +1,33 @@
+{
+  "type": "FeatureCollection",
+  "note": "Simplified courses of the 黄河 (Yellow River) and 长江 (Yangtze) in lon/lat (WGS84), hand-traced through major cities for cartographic context on the bronze-age map. Not survey-grade; ~20-30 vertices each. Project through the same d3 projection as the terrain.",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "黄河", "name_en": "Yellow River" },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [95.9, 34.9], [98.2, 34.3], [100.9, 34.8], [102.2, 36.1], [103.8, 36.05],
+          [104.6, 36.6], [105.9, 37.5], [106.8, 38.5], [106.6, 39.3], [107.4, 40.3],
+          [109.5, 40.5], [111.1, 40.0], [110.5, 38.3], [110.4, 36.9], [110.6, 35.6],
+          [111.2, 34.9], [112.6, 34.8], [113.6, 34.8], [114.5, 35.5], [116.0, 35.8],
+          [116.9, 36.3], [118.0, 37.0], [118.9, 37.4], [119.1, 37.8]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "长江", "name_en": "Yangtze River" },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [90.9, 33.4], [94.0, 32.5], [97.2, 31.3], [99.0, 28.2], [100.2, 26.9],
+          [101.5, 26.6], [103.6, 28.8], [104.6, 29.6], [106.5, 29.6], [107.4, 30.7],
+          [109.5, 30.9], [111.3, 30.7], [112.9, 30.6], [114.3, 30.6], [115.9, 29.7],
+          [117.2, 30.5], [118.8, 32.0], [119.8, 31.9], [120.7, 32.0], [121.5, 31.4]
+        ]
+      }
+    }
+  ]
+}

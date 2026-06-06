@@ -221,3 +221,28 @@ Total active background agents: 9 (5 DE + 4 Phase B)
   - pHash 降级: 承认 0.333=6里命中2、三星堆0/2、自绘SVG、n=6 与批判的 CLIP n=25 同样弱。从 headline 拼图 → "几乎不构成 retrieval evidence 的 toy"。
   - case-study §7 (~2300字): 直面双标,真正 lesson = "我只有'在熟悉领域不造假'的习惯,纪律的考验在不擅长且没人会立刻 check 的地方"。
   - case-study v0.8 → v0.9 (~10600 汉字 7 节). index/README/state 同步.
+
+[2026-06-06 V1.0] [main-thread] DONE — v1.0 product upgrade (4 user-directed tracks)
+  Goal: ① mobile adaptation ② design overhaul ③ knowledge base ④ real photos + real terrain.
+  Orchestration: 1 design-inventory agent (done) + re-spawned 3 content agents after an
+  interrupt killed the first batch; photo + archive agents stalled/failed → authored those
+  deliverables directly. Design/mobile/integration done in main thread for coherence.
+
+  ① MOBILE: rewrote converged.css as a real mobile-first system (8pt grid, clamp() fluid
+     type, auto-fit grids, .with-sidebar/.tp-layout collapse) replacing v4.6's !important
+     retrofit. All 13 pages 0px overflow @375px (was 8/13 broken). 29/29 Playwright green.
+  ② DESIGN: signature hue amber → patina-green (oxidized bronze) + bronze/cinnabar/gold;
+     consolidated tokens; era palette brightened; backward-compat alias layer re-hues all
+     13 pages' inline styles. Research-anchored (British Museum / Cooper Hewitt / 8pt grid).
+  ③ KNOWLEDGE: wiki/bronzeware/ (5 entries ~8900字, 20 disputes) + wiki.html (inline
+     markdown renderer, perspective-tag coloring) + data/curated/artifact-archives.json
+     (14 国宝 后台档案: name_versions/dating_debate/interpretation_disputes/…) rendered as
+     artifact ⑫ 后台档案 section.
+  ④ PHOTOS+TERRAIN: maps → china-provinces-highres.geojson (34 provinces, ~13× detail) +
+     rivers-major.geojson (黄河/长江 real lon/lat). Photos: sandbox blocks all CDNs →
+     scripts/fetch-photos.mjs fetches 24 国宝 from Wikimedia at Vercel build time (vercel.json
+     buildCommand); centralized getPhotoUrl + silhouette onerror fallback. data id _v3
+     reconciliation (data-loader loads only v3 segments).
+  Bug fixes: artifact 相关器物 [object Object]; ②出土信息 "undefined" (flat vs nested
+     excavation shape); 6 _v3 id mismatches across PHOTO_IDS/manifest/archives.
+  Commits: 3796468 / 2814970 / 87a317a / 0db9a59 (+ index.html v1.0 callout).

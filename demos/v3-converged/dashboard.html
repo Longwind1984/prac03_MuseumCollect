@@ -913,7 +913,7 @@ async function loadRealGeoData() {
   const eras = ['shang', 'xizhou', 'chunqiu', 'zhanguo'];
   try {
     const [terrain, ...states] = await Promise.all([
-      fetch('../../assets/geo/china-terrain.geojson').then(r => r.json()),
+      fetch('../../assets/geo/china-provinces-highres.geojson').then(r => r.json()),
       ...eras.map(e => fetch(`../../assets/geo/ancient-states-${e}.geojson`).then(r => r.json()))
     ]);
     _realGeo.terrain = terrain;
@@ -974,11 +974,13 @@ function buildMap() {
     [96,40.5],[94,41],[92,42],[90,43],[88,44],[85,44.5],[82,44],[80,43.5],
     [78,42],[76,41],[73.5,41],[73.5,39.5]
   ];
-  // Use real China terrain if loaded; else linear-projected inline polygon.
+  // Use real high-res provinces if loaded (subtle internal borders); else inline polygon.
   if (_realGeo.terrain && _mapGeoPath) {
-    svg.append('path').datum(_realGeo.terrain).attr('d', _mapGeoPath)
-      .attr('fill', '#1a1f14').attr('stroke', '#3a4a2a').attr('stroke-width', 1)
-      .attr('fill-opacity', 0.6);
+    svg.append('g').selectAll('path')
+      .data(_realGeo.terrain.features)
+      .enter().append('path').attr('d', _mapGeoPath)
+      .attr('fill', '#1a1f14').attr('stroke', '#33402450').attr('stroke-width', 0.5)
+      .attr('fill-opacity', 0.6).attr('stroke-linejoin', 'round');
   } else {
     const chinaPath = 'M' + chinaOutlineCoords.map(c => _mapProjection(c).map(v=>v.toFixed(1)).join(',')).join(' L') + ' Z';
     svg.append('path').attr('d', chinaPath)
@@ -1259,14 +1261,8 @@ function updateBottomPanel(dynasty) {
       };
       const rarityColor = rarityColors[artifact.rarity] || '#666';
 
-      // Photo-first: use MuseumData direct_url if available, fallback to silhouette
-      const photoUrl = (function(){
-        if (!window.MuseumData) return null;
-        const rec = window.MuseumData.get(artifact.id);
-        if (!rec) return null;
-        const img = rec.image_urls && rec.image_urls[0];
-        return img ? (img.direct_url || (img.local_path ? '../../' + img.local_path : null)) : null;
-      })();
+      // Photo-first: real photo at assets/photos/<id>.jpg if available, else silhouette
+      const photoUrl = (window.MuseumData && window.MuseumData.getPhotoUrl) ? window.MuseumData.getPhotoUrl(artifact.id, '../../') : null;
       const imgSrc = photoUrl || (SILHOUETTE_PATH + artifact.silhouette + '.svg');
       const imgStyle = photoUrl ? 'width:100%;height:100%;object-fit:cover;' : '';
       card.innerHTML = `

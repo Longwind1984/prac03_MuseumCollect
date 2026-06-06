@@ -20,6 +20,7 @@
     { href: 'inscription-reader.html', page: 'inscription-reader', label: '铭文' },
     { href: 'purpose-scene.html',      page: 'purpose-scene',      label: '礼制场景' },
     { href: 'caster-profile.html',     page: 'caster-profile',     label: '铸主' },
+    { href: 'wiki.html',               page: 'wiki',               label: '知识库' },
     { href: 'me.html',                 page: 'me',                 label: '我的图鉴' },
     { href: 'scan.html',               page: 'scan',               label: '识别' },
   ];
