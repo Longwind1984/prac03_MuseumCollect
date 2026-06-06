@@ -140,6 +140,7 @@ function renderArtifact(data) {
   const silhouette = getSilhouetteFor(data.form_subtype);
   const inscChars = data.inscription.text ? data.inscription.text.split('') : [];
   const archive = (window.ARTIFACT_ARCHIVES || {})[data.id];
+  const hasWiki = (window.WIKI_ARTIFACT_SLUGS || new Set()).has(data.id);
 
   // Photo-first: real photo at assets/photos/<id>.jpg (build-time fetched) if this
   // id is in PHOTO_IDS, else null → silhouette. <img onerror> below also guards 404.
@@ -309,6 +310,10 @@ function renderArtifact(data) {
 
       <!-- Right column: scholarly + provenance + related -->
       <div>
+        ${hasWiki ? `<a class="dim-card" href="wiki.html?entry=${encodeURIComponent(data.id)}" style="display:block; margin-bottom:16px; text-decoration:none; border-left:3px solid var(--accent-bronze);">
+          <div class="dim-card-title" style="color:var(--accent-bronze);">📖 完整百科档案</div>
+          <div style="font-size:13px; color:var(--text-muted); line-height:1.6;">深度档案:版本 / 断代 / 释读争议 · 出土流传 · 学者视角 →</div>
+        </a>` : ''}
         <!-- Scholarly status -->
         <div class="dim-card" style="margin-bottom:16px;">
           <div class="dim-card-title">⑦ 学术地位</div>
@@ -542,6 +547,13 @@ window.ARTIFACT_ARCHIVES = window.ARTIFACT_ARCHIVES || {};
 fetch('../../data/curated/artifact-archives.json')
   .then(r => r.ok ? r.json() : {})
   .then(a => { window.ARTIFACT_ARCHIVES = a || {}; tryRender(); })
+  .catch(() => {});
+
+// Which artifacts have a full wiki deep-archive (wiki.html?entry=<id>)
+window.WIKI_ARTIFACT_SLUGS = window.WIKI_ARTIFACT_SLUGS || new Set();
+fetch('../../wiki/index.json')
+  .then(r => r.ok ? r.json() : null)
+  .then(idx => { if (idx && idx.entries) { window.WIKI_ARTIFACT_SLUGS = new Set(idx.entries.filter(e => e.category === '文物').map(e => e.slug)); tryRender(); } })
   .catch(() => {});
 
 // Render now if data already loaded, otherwise wait for the ready event
