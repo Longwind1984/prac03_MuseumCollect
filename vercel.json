@@ -1,6 +1,4 @@
 {
-  "buildCommand": "node scripts/fetch-photos.mjs || true",
-  "outputDirectory": ".",
   "cleanUrls": false,
   "trailingSlash": true,
   "headers": [
