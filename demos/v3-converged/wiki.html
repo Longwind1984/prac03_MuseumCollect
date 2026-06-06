@@ -6,52 +6,54 @@
 <title>青铜器知识库 — MuseumCollect</title>
 <link rel="stylesheet" href="css/converged.css">
 <style>
-  .wiki-entry-card {
-    display: block; background: var(--surface); border: 1px solid var(--line);
-    border-radius: var(--radius-lg); padding: var(--space-4); margin-bottom: var(--space-3);
-    transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
-    cursor: pointer;
-  }
-  .wiki-entry-card:hover { border-color: var(--patina); box-shadow: var(--shadow-md); transform: translateY(-2px); }
-  .wiki-entry-card.active { border-color: var(--patina); border-left: 3px solid var(--patina); box-shadow: var(--shadow-md); }
-  .wiki-entry-title { font-size: var(--text-lg); font-weight: 600; color: var(--ink); margin-bottom: var(--space-1); }
-  .wiki-entry-summary { font-size: var(--text-sm); color: var(--ink-2); line-height: var(--lh-snug); }
-  .wiki-entry-meta { display: flex; gap: var(--space-2); margin-top: var(--space-2); font-size: var(--text-xs); color: var(--ink-3); flex-wrap: wrap; }
-  .dispute-badge { background: var(--cinnabar-soft); color: var(--cinnabar); padding: 1px 7px; border-radius: var(--radius-pill); font-weight: 500; }
+  .wiki-toolbar { display:flex; flex-wrap:wrap; gap:var(--space-3); align-items:center; margin-bottom:var(--space-4); }
+  .wiki-search { flex:1; min-width:200px; padding:var(--space-2) var(--space-3); border:1px solid var(--line-strong); border-radius:var(--radius); font-family:inherit; font-size:var(--text-sm); background:var(--surface); color:var(--ink); }
+  .wiki-search:focus-visible { border-color:var(--patina); }
+  .cat-chips { display:flex; flex-wrap:wrap; gap:var(--space-1); }
+  .cat-chip { padding:4px 12px; border-radius:var(--radius-pill); font-size:var(--text-sm); border:1px solid var(--line-strong); background:var(--surface); color:var(--ink-2); cursor:pointer; transition:all var(--dur) var(--ease); white-space:nowrap; }
+  .cat-chip:hover { border-color:var(--patina); }
+  .cat-chip.active { background:var(--patina); color:#fff; border-color:var(--patina); }
 
-  /* Article (rendered markdown) */
-  .wiki-article { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: clamp(var(--space-5), 4vw, var(--space-7)); box-shadow: var(--shadow-sm); }
-  .wiki-article h1 { font-size: var(--text-h1); margin-bottom: var(--space-4); padding-bottom: var(--space-3); border-bottom: 2px solid var(--patina); }
-  .wiki-article h2 { font-size: var(--text-h2); margin: var(--space-6) 0 var(--space-3); color: var(--patina-deep); display: flex; align-items: center; gap: var(--space-2); }
-  .wiki-article h2::before { content: ''; width: 4px; height: 0.9em; background: var(--patina); border-radius: 2px; display: inline-block; }
-  .wiki-article h3 { font-size: var(--text-h3); margin: var(--space-5) 0 var(--space-2); color: var(--bronze); }
-  .wiki-article p { margin: var(--space-3) 0; line-height: var(--lh-normal); color: var(--ink); }
-  .wiki-article ul, .wiki-article ol { margin: var(--space-3) 0 var(--space-3) var(--space-5); }
-  .wiki-article li { margin: var(--space-2) 0; line-height: var(--lh-snug); }
-  .wiki-article strong { color: var(--ink); font-weight: 600; }
-  .wiki-article code { font-family: var(--font-mono); font-size: 0.9em; background: var(--surface-sunken); padding: 1px 5px; border-radius: var(--radius-sm); color: var(--bronze); }
-  .wiki-article blockquote {
-    margin: var(--space-4) 0; padding: var(--space-3) var(--space-4);
-    background: var(--patina-soft); border-left: 3px solid var(--patina);
-    border-radius: 0 var(--radius) var(--radius) 0; color: var(--ink-2); font-size: var(--text-sm);
-  }
-  .wiki-article hr { border: none; border-top: 1px solid var(--line); margin: var(--space-6) 0; }
-  .wiki-article table { width: 100%; border-collapse: collapse; margin: var(--space-4) 0; font-size: var(--text-sm); }
-  .wiki-article th { background: var(--patina-soft); color: var(--patina-deep); font-weight: 600; text-align: left; padding: var(--space-2) var(--space-3); border: 1px solid var(--line-strong); }
-  .wiki-article td { padding: var(--space-2) var(--space-3); border: 1px solid var(--line); vertical-align: top; }
-  .wiki-article tr:nth-child(even) td { background: color-mix(in srgb, var(--surface-sunken) 40%, transparent); }
-  .wiki-article .table-scroll { overflow-x: auto; }
+  .wiki-list { display:flex; flex-direction:column; gap:var(--space-2); max-height:calc(100vh - 220px); overflow-y:auto; padding-right:var(--space-1); }
+  @media (max-width: 860px) { .wiki-list { max-height:none; } }
+  .wiki-cat-head { font-size:var(--text-xs); text-transform:uppercase; letter-spacing:var(--tracking-wide); color:var(--ink-3); margin:var(--space-3) 0 var(--space-1); font-family:var(--font-sans); }
+  .wiki-entry-card { display:block; background:var(--surface); border:1px solid var(--line); border-left:3px solid transparent; border-radius:var(--radius); padding:var(--space-3); cursor:pointer; transition:border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease); }
+  .wiki-entry-card:hover { border-color:var(--line-strong); box-shadow:var(--shadow-sm); transform:translateY(-1px); }
+  .wiki-entry-card.active { border-left-color:var(--patina); box-shadow:var(--shadow-sm); }
+  .wiki-entry-title { font-size:var(--text-base); font-weight:600; color:var(--ink); margin-bottom:2px; }
+  .wiki-entry-summary { font-size:var(--text-xs); color:var(--ink-2); line-height:var(--lh-snug); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .wiki-entry-meta { margin-top:var(--space-1); font-size:10px; color:var(--ink-3); }
 
-  /* Perspective tags — the user's "不同版本/争议" ask, color-coded */
-  .persp { display: inline-block; padding: 0 6px; border-radius: var(--radius-sm); font-size: 0.85em; font-weight: 500; white-space: nowrap; }
-  .persp-cn  { background: var(--patina-soft); color: var(--patina-deep); }
-  .persp-intl{ background: #e6edf3; color: #3a5a7a; }
-  .persp-new { background: var(--cinnabar-soft); color: var(--cinnabar); }
-  .persp-folk{ background: var(--surface-sunken); color: var(--ink-3); font-style: italic; }
+  .wiki-article { background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); padding:clamp(var(--space-5), 4vw, var(--space-7)); box-shadow:var(--shadow-sm); min-height:60vh; }
+  .wiki-article .cat-tag { display:inline-block; font-size:var(--text-xs); padding:2px 10px; border-radius:var(--radius-pill); background:var(--patina-soft); color:var(--patina-deep); margin-bottom:var(--space-3); font-family:var(--font-sans); }
+  .wiki-article h1 { font-size:var(--text-h1); margin-bottom:var(--space-4); padding-bottom:var(--space-3); border-bottom:2px solid var(--patina); }
+  .wiki-article h2 { font-size:var(--text-h2); margin:var(--space-6) 0 var(--space-3); color:var(--patina-deep); display:flex; align-items:center; gap:var(--space-2); }
+  .wiki-article h2::before { content:''; width:4px; height:0.9em; background:var(--patina); border-radius:2px; display:inline-block; flex-shrink:0; }
+  .wiki-article h3 { font-size:var(--text-h3); margin:var(--space-5) 0 var(--space-2); color:var(--bronze); }
+  .wiki-article p { margin:var(--space-3) 0; line-height:var(--lh-normal); }
+  .wiki-article ul, .wiki-article ol { margin:var(--space-3) 0 var(--space-3) var(--space-5); }
+  .wiki-article li { margin:var(--space-2) 0; line-height:var(--lh-snug); }
+  .wiki-article strong { color:var(--ink); font-weight:600; }
+  .wiki-article code { font-family:var(--font-mono); font-size:0.9em; background:var(--surface-sunken); padding:1px 5px; border-radius:var(--radius-sm); color:var(--bronze); }
+  .wiki-article blockquote { margin:var(--space-4) 0; padding:var(--space-3) var(--space-4); background:var(--patina-soft); border-left:3px solid var(--patina); border-radius:0 var(--radius) var(--radius) 0; color:var(--ink-2); font-size:var(--text-sm); }
+  .wiki-article hr { border:none; border-top:1px solid var(--line); margin:var(--space-6) 0; }
+  .wiki-article a { color:var(--patina); text-decoration:underline; }
+  .wiki-article .table-scroll { overflow-x:auto; }
+  .wiki-article table { width:100%; border-collapse:collapse; margin:var(--space-4) 0; font-size:var(--text-sm); }
+  .wiki-article th { background:var(--patina-soft); color:var(--patina-deep); font-weight:600; text-align:left; padding:var(--space-2) var(--space-3); border:1px solid var(--line-strong); }
+  .wiki-article td { padding:var(--space-2) var(--space-3); border:1px solid var(--line); vertical-align:top; }
+  .wiki-article tr:nth-child(even) td { background:color-mix(in srgb, var(--surface-sunken) 40%, transparent); }
 
-  .related-chips { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--line); }
-  .related-chip { font-size: var(--text-xs); padding: 3px 10px; border-radius: var(--radius-pill); background: var(--bronze-soft); color: var(--bronze); border: 1px solid transparent; transition: border-color var(--dur) var(--ease); cursor: pointer; }
-  .related-chip:hover { border-color: var(--bronze); }
+  .persp { display:inline-block; padding:0 6px; border-radius:var(--radius-sm); font-size:0.85em; font-weight:500; white-space:nowrap; }
+  .persp-cn { background:var(--patina-soft); color:var(--patina-deep); }
+  .persp-intl { background:#e6edf3; color:#3a5a7a; }
+  .persp-new { background:var(--cinnabar-soft); color:var(--cinnabar); }
+  .persp-folk { background:var(--surface-sunken); color:var(--ink-3); font-style:italic; }
+
+  .related-chips { display:flex; flex-wrap:wrap; gap:var(--space-2); margin-top:var(--space-4); padding-top:var(--space-4); border-top:1px solid var(--line); }
+  .related-chip { font-size:var(--text-xs); padding:3px 10px; border-radius:var(--radius-pill); background:var(--bronze-soft); color:var(--bronze); border:1px solid transparent; cursor:pointer; transition:border-color var(--dur) var(--ease); }
+  .related-chip.site { background:var(--patina-soft); color:var(--patina-deep); }
+  .related-chip:hover { border-color:currentColor; }
 </style>
 </head>
 <body data-page="wiki">
@@ -62,147 +64,135 @@
 <div class="page-container" style="padding-top: var(--space-5);">
   <div class="page-header">
     <h1 class="page-title">青铜器知识库</h1>
-    <p class="page-subtitle">器物档案之外的「后台档案」— 通论 · 工艺 · 纹饰 · 铭文 · 学者著作,每篇标注学术分歧与不同解说</p>
+    <p class="page-subtitle" id="wiki-sub">器物档案之外的「后台档案」与百科底座 — 通论 · 专题 · 遗址 · 发掘事件 · 逐件文物档案</p>
+  </div>
+
+  <div class="wiki-toolbar">
+    <input type="search" class="wiki-search" id="wiki-search" placeholder="搜索 文物 / 遗址 / 专题 / 学者 / 关键词…" oninput="applyFilter()">
+    <div class="cat-chips" id="cat-chips"></div>
   </div>
 
   <div class="with-sidebar left">
-    <!-- Sidebar: entry list -->
     <div class="sidebar">
-      <div id="wiki-list"></div>
-      <div style="font-size:var(--text-xs); color:var(--ink-3); margin-top:var(--space-4); line-height:var(--lh-snug);">
-        ℹ️ 本知识库为公开资料 + 学界著作整理,标注 <span class="persp persp-cn">中文主流</span> <span class="persp persp-intl">海外主流</span> <span class="persp persp-new">新近争论</span> <span class="persp persp-folk">民间传说</span> 四类视角,与器物单件档案互补。
+      <div class="wiki-list" id="wiki-list"></div>
+      <div style="font-size:var(--text-xs); color:var(--ink-3); margin-top:var(--space-3); line-height:var(--lh-snug);">
+        视角标注 <span class="persp persp-cn">中文主流</span> <span class="persp persp-intl">海外主流</span> <span class="persp persp-new">新近争论</span> <span class="persp persp-folk">民间传说</span>
       </div>
     </div>
-
-    <!-- Main: rendered article -->
     <div>
-      <div class="wiki-article" id="wiki-article">
-        <p style="color:var(--ink-3);">载入中…</p>
-      </div>
+      <div class="wiki-article" id="wiki-article"><p style="color:var(--ink-3);">载入中…</p></div>
     </div>
   </div>
 </div>
 
 <script>
-// ── Minimal Markdown → HTML renderer (no CDN; handles the subset the wiki uses:
-//    h1-h3, bold, italic, inline code, links, ul/ol, blockquote, hr, tables, paragraphs). ──
+// ── Minimal Markdown → HTML (no CDN) ──
 function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function inline(s){
   return escapeHtml(s)
-    .replace(/`([^`]+)`/g, '<code>$1</code>')
-    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-    .replace(/(?<!\*)\*(?!\*)([^*]+)\*(?!\*)/g, '<em>$1</em>')
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color:var(--patina);text-decoration:underline;">$1</a>');
+    .replace(/`([^`]+)`/g,'<code>$1</code>')
+    .replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>')
+    .replace(/(?<!\*)\*(?!\*)([^*]+)\*(?!\*)/g,'<em>$1</em>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');
 }
 function renderMarkdown(md){
-  const lines = md.replace(/\r/g,'').split('\n');
-  let html = '', i = 0;
-  while (i < lines.length) {
-    let line = lines[i];
-    // table block
-    if (/^\s*\|/.test(line) && i+1 < lines.length && /^\s*\|?[\s:|-]+\|/.test(lines[i+1])) {
-      const head = line.split('|').filter(c=>c.trim()!=='').map(c=>`<th>${inline(c.trim())}</th>`).join('');
-      i += 2; let rows='';
-      while (i < lines.length && /^\s*\|/.test(lines[i])) {
-        const cells = lines[i].split('|').filter((c,idx,arr)=>!(idx===0&&c.trim()==='')&&!(idx===arr.length-1&&c.trim()==='')).map(c=>`<td>${inline(c.trim())}</td>`).join('');
-        rows += `<tr>${cells}</tr>`; i++;
+  const lines = md.replace(/\r/g,'').split('\n'); let html=''; let i=0;
+  while(i<lines.length){
+    let line=lines[i];
+    if(/^\s*\|/.test(line) && i+1<lines.length && /^\s*\|?[\s:|-]+\|/.test(lines[i+1])){
+      const head=line.split('|').filter(c=>c.trim()!=='').map(c=>`<th>${inline(c.trim())}</th>`).join('');
+      i+=2; let rows='';
+      while(i<lines.length && /^\s*\|/.test(lines[i])){
+        const cells=lines[i].split('|').filter((c,idx,arr)=>!(idx===0&&c.trim()==='')&&!(idx===arr.length-1&&c.trim()==='')).map(c=>`<td>${inline(c.trim())}</td>`).join('');
+        rows+=`<tr>${cells}</tr>`; i++;
       }
-      html += `<div class="table-scroll"><table><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table></div>`;
-      continue;
+      html+=`<div class="table-scroll"><table><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table></div>`; continue;
     }
-    if (/^###\s+/.test(line)) { html += `<h3>${inline(line.replace(/^###\s+/,''))}</h3>`; i++; continue; }
-    if (/^##\s+/.test(line))  { html += `<h2>${inline(line.replace(/^##\s+/,''))}</h2>`; i++; continue; }
-    if (/^#\s+/.test(line))   { html += `<h1>${inline(line.replace(/^#\s+/,''))}</h1>`; i++; continue; }
-    if (/^---+\s*$/.test(line)) { html += '<hr>'; i++; continue; }
-    if (/^>\s?/.test(line)) {
-      let q=''; while (i<lines.length && /^>\s?/.test(lines[i])) { q += inline(lines[i].replace(/^>\s?/,'')) + '<br>'; i++; }
-      html += `<blockquote>${q.replace(/<br>$/,'')}</blockquote>`; continue;
-    }
-    if (/^\s*[-*]\s+/.test(line)) {
-      let items=''; while (i<lines.length && /^\s*[-*]\s+/.test(lines[i])) { items += `<li>${inline(lines[i].replace(/^\s*[-*]\s+/,''))}</li>`; i++; }
-      html += `<ul>${items}</ul>`; continue;
-    }
-    if (/^\s*\d+\.\s+/.test(line)) {
-      let items=''; while (i<lines.length && /^\s*\d+\.\s+/.test(lines[i])) { items += `<li>${inline(lines[i].replace(/^\s*\d+\.\s+/,''))}</li>`; i++; }
-      html += `<ol>${items}</ol>`; continue;
-    }
-    if (line.trim()==='') { i++; continue; }
-    // paragraph (merge consecutive non-empty non-special lines)
-    let para = line;
-    i++;
-    while (i<lines.length && lines[i].trim()!=='' && !/^[#>|]|^\s*[-*]\s|^\s*\d+\.\s|^---+\s*$/.test(lines[i])) { para += ' ' + lines[i]; i++; }
-    html += `<p>${inline(para)}</p>`;
+    if(/^###\s+/.test(line)){html+=`<h3>${inline(line.replace(/^###\s+/,''))}</h3>`;i++;continue;}
+    if(/^##\s+/.test(line)){html+=`<h2>${inline(line.replace(/^##\s+/,''))}</h2>`;i++;continue;}
+    if(/^#\s+/.test(line)){html+=`<h1>${inline(line.replace(/^#\s+/,''))}</h1>`;i++;continue;}
+    if(/^---+\s*$/.test(line)){html+='<hr>';i++;continue;}
+    if(/^>\s?/.test(line)){let q='';while(i<lines.length&&/^>\s?/.test(lines[i])){q+=inline(lines[i].replace(/^>\s?/,''))+'<br>';i++;}html+=`<blockquote>${q.replace(/<br>$/,'')}</blockquote>`;continue;}
+    if(/^\s*[-*]\s+/.test(line)){let it='';while(i<lines.length&&/^\s*[-*]\s+/.test(lines[i])){it+=`<li>${inline(lines[i].replace(/^\s*[-*]\s+/,''))}</li>`;i++;}html+=`<ul>${it}</ul>`;continue;}
+    if(/^\s*\d+\.\s+/.test(line)){let it='';while(i<lines.length&&/^\s*\d+\.\s+/.test(lines[i])){it+=`<li>${inline(lines[i].replace(/^\s*\d+\.\s+/,''))}</li>`;i++;}html+=`<ol>${it}</ol>`;continue;}
+    if(line.trim()===''){i++;continue;}
+    let para=line; i++;
+    while(i<lines.length && lines[i].trim()!=='' && !/^[#>|]|^\s*[-*]\s|^\s*\d+\.\s|^---+\s*$/.test(lines[i])){para+=' '+lines[i];i++;}
+    html+=`<p>${inline(para)}</p>`;
   }
-  // Color-code perspective tags (the 争议/不同解说 signal)
-  html = html
-    .replace(/\[中文学界主流\]/g, '<span class="persp persp-cn">中文主流</span>')
-    .replace(/\[海外学界主流\]/g, '<span class="persp persp-intl">海外主流</span>')
-    .replace(/\[新近争论\]/g, '<span class="persp persp-new">新近争论</span>')
-    .replace(/民间传说/g, '<span class="persp persp-folk">民间传说</span>');
-  return html;
+  return html
+    .replace(/\[中文学界主流\]/g,'<span class="persp persp-cn">中文主流</span>')
+    .replace(/\[海外学界主流\]/g,'<span class="persp persp-intl">海外主流</span>')
+    .replace(/\[新近争论\]/g,'<span class="persp persp-new">新近争论</span>')
+    .replace(/民间传说/g,'<span class="persp persp-folk">民间传说</span>');
+}
+// Strip the meta header block (# title / **类别** / **关联…**) — shown separately as chips.
+function stripMeta(md){
+  return md.split('\n').filter(l =>
+    !/^#\s+/.test(l) && !/^\*\*(类别|关联文物|关联遗址)\*\*/.test(l)
+  ).join('\n').replace(/^\s+/, '');
 }
 
-const WIKI_BASE = '../../wiki/bronzeware/';
-let ENTRIES = [];
+const WIKI_BASE = '../../wiki/';
+let INDEX = null, CUR_CAT = '全部', CUR_SLUG = null, BY_SLUG = {};
 
-async function loadIndex() {
-  try {
-    ENTRIES = await fetch(WIKI_BASE + 'index.json').then(r => r.json());
-  } catch(e) {
-    document.getElementById('wiki-article').innerHTML = '<p style="color:var(--cinnabar);">知识库索引载入失败。</p>';
-    return;
-  }
-  renderList();
-  const slug = new URLSearchParams(location.search).get('entry') || ENTRIES[0].slug;
+async function loadIndex(){
+  try { INDEX = await fetch(WIKI_BASE + 'index.json').then(r=>r.json()); }
+  catch(e){ document.getElementById('wiki-article').innerHTML='<p style="color:var(--cinnabar);">知识库索引载入失败。</p>'; return; }
+  BY_SLUG = {}; INDEX.entries.forEach(e => BY_SLUG[e.slug] = e);
+  document.getElementById('wiki-sub').textContent =
+    `${INDEX.count} 个条目 · 约 ${(INDEX.total_chars/10000).toFixed(1)} 万字 — 通论 · 专题 · 遗址 · 发掘事件 · 逐件文物档案`;
+  // category chips
+  const cats = ['全部', ...INDEX.categories];
+  document.getElementById('cat-chips').innerHTML = cats.map(c =>
+    `<span class="cat-chip ${c==='全部'?'active':''}" data-cat="${c}" onclick="setCat('${c}')">${c}${c==='全部'?'':' '+INDEX.entries.filter(e=>e.category===c).length}</span>`).join('');
+  applyFilter();
+  const slug = new URLSearchParams(location.search).get('entry') || (INDEX.entries[0] && INDEX.entries[0].slug);
   loadEntry(slug);
 }
-
-function renderList() {
-  const cur = new URLSearchParams(location.search).get('entry') || (ENTRIES[0] && ENTRIES[0].slug);
-  document.getElementById('wiki-list').innerHTML = ENTRIES.map(e => `
-    <div class="wiki-entry-card ${e.slug===cur?'active':''}" onclick="loadEntry('${e.slug}')">
+function setCat(c){ CUR_CAT=c; document.querySelectorAll('.cat-chip').forEach(x=>x.classList.toggle('active', x.dataset.cat===c)); applyFilter(); }
+function applyFilter(){
+  const q = (document.getElementById('wiki-search').value||'').trim().toLowerCase();
+  const list = document.getElementById('wiki-list');
+  let items = INDEX.entries.filter(e => (CUR_CAT==='全部'||e.category===CUR_CAT) &&
+    (!q || e.title.toLowerCase().includes(q) || (e.summary||'').toLowerCase().includes(q) || e.slug.includes(q)));
+  // group by category
+  let html=''; let lastCat=null;
+  items.forEach(e => {
+    if(e.category!==lastCat){ html+=`<div class="wiki-cat-head">${e.category}</div>`; lastCat=e.category; }
+    html += `<div class="wiki-entry-card ${e.slug===CUR_SLUG?'active':''}" data-slug="${e.slug}" onclick="loadEntry('${e.slug}')">
       <div class="wiki-entry-title">${e.title}</div>
-      <div class="wiki-entry-summary">${(e.summary||'').slice(0,70)}…</div>
-      <div class="wiki-entry-meta">
-        <span>${e.word_count} 字</span>
-        ${e.dispute_count?`<span class="dispute-badge">${e.dispute_count} 处学术分歧</span>`:''}
-      </div>
-    </div>`).join('');
+      <div class="wiki-entry-summary">${(e.summary||'').slice(0,64)}</div>
+      <div class="wiki-entry-meta">${e.chars} 字</div></div>`;
+  });
+  list.innerHTML = html || '<p style="color:var(--ink-3); font-size:var(--text-sm);">无匹配条目</p>';
 }
-
-async function loadEntry(slug) {
-  const entry = ENTRIES.find(e => e.slug === slug) || ENTRIES[0];
-  history.replaceState(null, '', '?entry=' + entry.slug);
-  document.querySelectorAll('.wiki-entry-card').forEach((c,idx) => c.classList.toggle('active', ENTRIES[idx] && ENTRIES[idx].slug===entry.slug));
+async function loadEntry(slug){
+  const e = BY_SLUG[slug] || INDEX.entries[0]; if(!e) return;
+  CUR_SLUG = e.slug;
+  history.replaceState(null,'','?entry='+e.slug);
+  document.querySelectorAll('.wiki-entry-card').forEach(c=>c.classList.toggle('active', c.dataset.slug===e.slug));
   const art = document.getElementById('wiki-article');
-  art.innerHTML = '<p style="color:var(--ink-3);">载入中…</p>';
-  let md = '';
-  try { md = await fetch(WIKI_BASE + entry.slug + '.md').then(r => r.text()); }
-  catch(e) { art.innerHTML = '<p style="color:var(--cinnabar);">条目载入失败。</p>'; return; }
-  let html = renderMarkdown(md);
-  // related artifacts chips
-  if (entry.related_artifact_ids && entry.related_artifact_ids.length) {
-    const chips = entry.related_artifact_ids.map(id =>
-      `<span class="related-chip" onclick="location.href='artifact.html?id=${encodeURIComponent(id)}'">🏺 ${id}</span>`).join('');
-    html += `<div class="related-chips"><span style="font-size:var(--text-xs); color:var(--ink-3); align-self:center;">相关器物:</span>${chips}</div>`;
-  }
+  art.innerHTML='<p style="color:var(--ink-3);">载入中…</p>';
+  let md=''; try{ md = await fetch(WIKI_BASE + e.path).then(r=>r.text()); }catch(err){ art.innerHTML='<p style="color:var(--cinnabar);">条目载入失败。</p>'; return; }
+  let html = `<span class="cat-tag">${e.category}</span><h1>${e.title}</h1>` + renderMarkdown(stripMeta(md));
+  // related chips
+  const chips = [];
+  (e.related_artifacts||[]).forEach(id => chips.push(`<span class="related-chip" data-aid="${id}" onclick="location.href='artifact.html?id=${encodeURIComponent(id)}'">🏺 ${id}</span>`));
+  (e.related_sites||[]).forEach(s => { const se=BY_SLUG[s]; if(se) chips.push(`<span class="related-chip site" onclick="loadEntry('${s}')">📍 ${se.title}</span>`); });
+  if(chips.length) html += `<div class="related-chips"><span style="font-size:var(--text-xs); color:var(--ink-3); align-self:center;">关联:</span>${chips.join('')}</div>`;
   art.innerHTML = html;
-  // resolve related-chip ids → names once data is available
   resolveChipNames();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({top:0, behavior:'smooth'});
 }
-
-function resolveChipNames() {
-  if (!(window.MuseumData && window.MuseumData.get)) return;
-  document.querySelectorAll('.related-chip').forEach(chip => {
-    const m = chip.getAttribute('onclick').match(/id=([^']+)'/);
-    if (!m) return;
-    const rec = window.MuseumData.get(decodeURIComponent(m[1]));
-    if (rec) chip.innerHTML = '🏺 ' + rec.name_zh;
+function resolveChipNames(){
+  if(!(window.MuseumData && window.MuseumData.get)) return;
+  document.querySelectorAll('.related-chip[data-aid]').forEach(chip=>{
+    const rec = window.MuseumData.get(chip.dataset.aid);
+    if(rec) chip.innerHTML = '🏺 ' + rec.name_zh;
   });
 }
 document.addEventListener('museum-data-ready', resolveChipNames);
-
 loadIndex();
 </script>
 <script src="js/constants.js"></script>

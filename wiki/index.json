@@ -1,0 +1,716 @@
+{
+  "generated": "2026-06-06",
+  "count": 56,
+  "total_chars": 77215,
+  "categories": [
+    "通论",
+    "专题",
+    "遗址",
+    "事件",
+    "文物"
+  ],
+  "entries": [
+    {
+      "slug": "inscriptions-paleography",
+      "dir": "bronzeware",
+      "category": "通论",
+      "title": "青铜器铭文与金文学",
+      "summary": "标签：`[中文学界主流]` / `[海外学界主流]` / `[新近争论]`。",
+      "related_artifacts": [],
+      "related_sites": [],
+      "path": "bronzeware/inscriptions-paleography.md",
+      "chars": 1593
+    },
+    {
+      "slug": "patterns-evolution",
+      "dir": "bronzeware",
+      "category": "通论",
+      "title": "青铜器纹饰演变",
+      "summary": "标签：`[中文学界主流]` / `[海外学界主流]` / `[新近争论]` / `民间传说`。",
+      "related_artifacts": [],
+      "related_sites": [],
+      "path": "bronzeware/patterns-evolution.md",
+      "chars": 1688
+    },
+    {
+      "slug": "scholars-and-books",
+      "dir": "bronzeware",
+      "category": "通论",
+      "title": "青铜器研究的关键著作与学者",
+      "summary": "标签：`[中文学界主流]` / `[海外学界主流]` / `[新近争论]`。",
+      "related_artifacts": [],
+      "related_sites": [],
+      "path": "bronzeware/scholars-and-books.md",
+      "chars": 1853
+    },
+    {
+      "slug": "casting-techniques",
+      "dir": "bronzeware",
+      "category": "通论",
+      "title": "青铜器铸造工艺",
+      "summary": "标签：`[中文学界主流]` / `[海外学界主流]` / `[新近争论]`。",
+      "related_artifacts": [],
+      "related_sites": [],
+      "path": "bronzeware/casting-techniques.md",
+      "chars": 1708
+    },
+    {
+      "slug": "overview",
+      "dir": "bronzeware",
+      "category": "通论",
+      "title": "青铜器总论",
+      "summary": "补充：另有一套**\"礼器 vs 用器\"**的功能二分。同一器形（如鼎）既可是炊具也可是礼器，区分要看出土语境（墓葬/窖藏/居址）与组合，故分类边界本身就是研究课题，不存在唯一正确答案。",
+      "related_artifacts": [],
+      "related_sites": [],
+      "path": "bronzeware/overview.md",
+      "chars": 2069
+    },
+    {
+      "slug": "authentication-and-dispersal",
+      "dir": "topics",
+      "category": "专题",
+      "title": "辨伪与海外流散",
+      "summary": "自宋代金石学以降的青铜器辨伪传统，与清末以来名器流散海外、追索回归的双重历史。",
+      "related_artifacts": [
+        "maogong_ding"
+      ],
+      "related_sites": [],
+      "path": "topics/authentication-and-dispersal.md",
+      "chars": 2443
+    },
+    {
+      "slug": "mining-metallurgy",
+      "dir": "topics",
+      "category": "专题",
+      "title": "矿冶、合金与铜料来源",
+      "summary": "从铜锡铅三元合金原理、《考工记》\"六齐\"到铜绿山古矿与铅同位素溯源，串起中国青铜的物质来源。",
+      "related_artifacts": [
+        "houmuwu_ding"
+      ],
+      "related_sites": [],
+      "path": "topics/mining-metallurgy.md",
+      "chars": 2052
+    },
+    {
+      "slug": "ritual-system",
+      "dir": "topics",
+      "category": "专题",
+      "title": "礼制与列鼎制度",
+      "summary": "青铜器即\"藏礼于器\"：从商重酒到周重食，列鼎列簋以鼎数标定身份等级，鼎更成为王权象征。",
+      "related_artifacts": [
+        "houmuwu_ding",
+        "da_ke_ding",
+        "maogong_ding"
+      ],
+      "related_sites": [],
+      "path": "topics/ritual-system.md",
+      "chars": 2393
+    },
+    {
+      "slug": "regional-bronze-cultures",
+      "dir": "topics",
+      "category": "专题",
+      "title": "区域青铜文明:中原之外的多元",
+      "summary": "青铜文明非中原独占:古蜀、长江中游、楚、滇、北方草原、巴蜀各放异彩,共同织就\"多元一体\"。",
+      "related_artifacts": [
+        "sanxingdui_dali_ren_v3",
+        "yuewang_goujian_jian"
+      ],
+      "related_sites": [
+        "sanxingdui",
+        "jinsha"
+      ],
+      "path": "topics/regional-bronze-cultures.md",
+      "chars": 2359
+    },
+    {
+      "slug": "bells-music-archaeology",
+      "dir": "topics",
+      "category": "专题",
+      "title": "钟鼓乐悬与音乐考古",
+      "summary": "从铙到甬钟、钮钟、镈的青铜乐器谱系，到曾侯乙编钟\"一钟双音\"与十二律铭文，钟磬之乐撑起周代礼乐文明。",
+      "related_artifacts": [
+        "zenghouyi_bianzhong"
+      ],
+      "related_sites": [],
+      "path": "topics/bells-music-archaeology.md",
+      "chars": 1975
+    },
+    {
+      "slug": "erlitou",
+      "dir": "sites",
+      "category": "遗址",
+      "title": "二里头遗址",
+      "summary": "洛阳盆地的\"华夏第一王都\"，被许宏称为\"最早的中国\"，是东亚最早的广域王权国家中心，夏文化探索的核心。",
+      "related_artifacts": [],
+      "related_sites": [
+        "yinxu"
+      ],
+      "path": "sites/erlitou.md",
+      "chars": 2013
+    },
+    {
+      "slug": "houma-jin",
+      "dir": "sites",
+      "category": "遗址",
+      "title": "侯马晋国(新田)与晋侯墓地",
+      "summary": "汾河谷地\"两山夹一川\"孕育晋国六百年:北赵晋侯墓地溯其源头,侯马新田证其鼎盛。",
+      "related_artifacts": [],
+      "related_sites": [],
+      "path": "sites/houma-jin.md",
+      "chars": 1962
+    },
+    {
+      "slug": "jiangling-chu",
+      "dir": "sites",
+      "category": "遗址",
+      "title": "江陵楚都(纪南城)与望山楚墓",
+      "summary": "楚国郢都所在的江汉平原核心，纪南城为东周南方第一大都；近郊望山一号楚墓出土越王勾践剑。",
+      "related_artifacts": [
+        "yuewang_goujian_jian"
+      ],
+      "related_sites": [],
+      "path": "sites/jiangling-chu.md",
+      "chars": 1739
+    },
+    {
+      "slug": "jinsha",
+      "dir": "sites",
+      "category": "遗址",
+      "title": "金沙遗址",
+      "summary": "三星堆衰落后古蜀文明的新中心，2001年偶然发现，出土中国文化遗产标志\"太阳神鸟\"金箔。",
+      "related_artifacts": [],
+      "related_sites": [
+        "sanxingdui"
+      ],
+      "path": "sites/jinsha.md",
+      "chars": 1595
+    },
+    {
+      "slug": "panlongcheng-xingan",
+      "dir": "sites",
+      "category": "遗址",
+      "title": "盘龙城与新干大洋洲",
+      "summary": "商代长江流域两大青铜重镇：盘龙城为商文化南渐据点，新干大洋洲见证地方化的发达青铜传统。",
+      "related_artifacts": [],
+      "related_sites": [
+        "zhengzhou-shangcheng"
+      ],
+      "path": "sites/panlongcheng-xingan.md",
+      "chars": 2139
+    },
+    {
+      "slug": "sanxingdui",
+      "dir": "sites",
+      "category": "遗址",
+      "title": "三星堆遗址",
+      "summary": "成都平原商代古蜀都城，群山环绕中独立生长的青铜文明，1986年与2019—2022年两度\"惊天下\"。",
+      "related_artifacts": [
+        "sanxingdui_dali_ren_v3",
+        "sanxingdui_zongmu_mianju_v3",
+        "sanxingdui_shenshu_v3"
+      ],
+      "related_sites": [
+        "jinsha"
+      ],
+      "path": "sites/sanxingdui.md",
+      "chars": 2818
+    },
+    {
+      "slug": "zhenghan-gucheng",
+      "dir": "sites",
+      "category": "遗址",
+      "title": "新郑郑韩故城",
+      "summary": "春秋郑国与战国韩国相继建都之地，位于河南新郑双洎河、黄水河交汇处，李家楼郑公大墓出土莲鹤方壶于此。",
+      "related_artifacts": [
+        "lianhe_fanghu"
+      ],
+      "related_sites": [],
+      "path": "sites/zhenghan-gucheng.md",
+      "chars": 1997
+    },
+    {
+      "slug": "yinxu",
+      "dir": "sites",
+      "category": "遗址",
+      "title": "殷墟",
+      "summary": "商代晚期王都遗址，位于河南安阳洹河两岸，甲骨文与青铜重器的故乡，中国考古学的发祥地。",
+      "related_artifacts": [
+        "houmuwu_ding",
+        "fuhao_xiaozun",
+        "siyang_fangzun"
+      ],
+      "related_sites": [],
+      "path": "sites/yinxu.md",
+      "chars": 1876
+    },
+    {
+      "slug": "zhengzhou-shangcheng",
+      "dir": "sites",
+      "category": "遗址",
+      "title": "郑州商城(二里岗)",
+      "summary": "距今约3600年的商代前期都城,二里岗文化命名地与早商断代标尺。",
+      "related_artifacts": [],
+      "related_sites": [
+        "yinxu",
+        "erlitou"
+      ],
+      "path": "sites/zhengzhou-shangcheng.md",
+      "chars": 1569
+    },
+    {
+      "slug": "zhouyuan-fenghao",
+      "dir": "sites",
+      "category": "遗址",
+      "title": "周原与丰镐",
+      "summary": "周人龙兴之地周原与西周国都丰镐，同在关中沃野，出土西周青铜重器与窖藏群最丰之地。",
+      "related_artifacts": [
+        "he_zun",
+        "da_ke_ding",
+        "maogong_ding"
+      ],
+      "related_sites": [],
+      "path": "sites/zhouyuan-fenghao.md",
+      "chars": 2223
+    },
+    {
+      "slug": "zenghouyi-tomb-1978",
+      "dir": "events",
+      "category": "事件",
+      "title": "曾侯乙墓发掘(1978)",
+      "summary": "1978年湖北随州擂鼓墩发现战国早期曾侯乙墓,出土青铜器约10吨,含65件一钟双音的曾侯乙编钟,震惊世界。",
+      "related_artifacts": [
+        "zenghouyi_bianzhong",
+        "zenghouyi_zunpan"
+      ],
+      "related_sites": [],
+      "path": "events/zenghouyi-tomb-1978.md",
+      "chars": 1718
+    },
+    {
+      "slug": "fuhao-tomb-1976",
+      "dir": "events",
+      "category": "事件",
+      "title": "妇好墓发掘(1976)",
+      "summary": "1976 年安阳殷墟出土的商代王室墓，墓主身份明确、未经盗扰，是青铜与甲骨互证的考古孤例。",
+      "related_artifacts": [
+        "fuhao_xiaozun"
+      ],
+      "related_sites": [
+        "yinxu"
+      ],
+      "path": "events/fuhao-tomb-1976.md",
+      "chars": 1652
+    },
+    {
+      "slug": "hezun-discovery-1963",
+      "dir": "events",
+      "category": "事件",
+      "title": "何尊的发现与\"中国\"二字(1963)",
+      "summary": "1963年宝鸡出土西周何尊,曾险被当废铜卖掉,1975年清锈见底部122字铭文,内含已知最早的\"中国\"二字。",
+      "related_artifacts": [
+        "he_zun"
+      ],
+      "related_sites": [
+        "zhouyuan-fenghao"
+      ],
+      "path": "events/hezun-discovery-1963.md",
+      "chars": 1268
+    },
+    {
+      "slug": "zenghouyi_bianzhong",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "曾侯乙编钟",
+      "summary": "战国早期曾国大型青铜编钟，1978年出土于湖北随州擂鼓墩，65件三层八组，\"一钟双音\"震惊世界。",
+      "related_artifacts": [],
+      "related_sites": [],
+      "path": "artifacts/zenghouyi_bianzhong.md",
+      "chars": 966
+    },
+    {
+      "slug": "zenghouyi_zunpan",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "曾侯乙尊盘",
+      "summary": "战国早期曾国青铜酒水器组合，1978年出土于湖北随州，透空蟠龙纹叠绕如云，被视为中国早期失蜡法代表作。",
+      "related_artifacts": [],
+      "related_sites": [],
+      "path": "artifacts/zenghouyi_zunpan.md",
+      "chars": 975
+    },
+    {
+      "slug": "cuojin_xiyun_xizun",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "错金银云纹犀尊",
+      "summary": "西汉错金银青铜犀牛形盛酒器，1963年出土于陕西兴平，写实犀牛身披流动金银云纹，汉代兽形尊精品。",
+      "related_artifacts": [],
+      "related_sites": [],
+      "path": "artifacts/cuojin_xiyun_xizun.md",
+      "chars": 912
+    },
+    {
+      "slug": "da_ke_ding",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "大克鼎",
+      "summary": "西周中晚期巨鼎，290字铭文记膳夫克册命赏赐，\"海内三宝\"之一，现藏上海博物馆。",
+      "related_artifacts": [],
+      "related_sites": [
+        "zhouyuan-fenghao"
+      ],
+      "path": "artifacts/da_ke_ding.md",
+      "chars": 926
+    },
+    {
+      "slug": "da_yu_ding",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "大盂鼎",
+      "summary": "西周康王时巨鼎，291字铭文记\"殷鉴\"酒戒与册命赏赐，\"海内三宝\"之一，现藏国博。",
+      "related_artifacts": [],
+      "related_sites": [
+        "zhouyuan-fenghao"
+      ],
+      "path": "artifacts/da_yu_ding.md",
+      "chars": 972
+    },
+    {
+      "slug": "fuhao_ou_fangyi",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "妇好偶方彝",
+      "summary": "迄今已知最早、形制最特殊的双联方彝，盖如宫殿庑殿顶，是商代大型盛酒礼器的孤例式杰作。",
+      "related_artifacts": [],
+      "related_sites": [
+        "yinxu"
+      ],
+      "path": "artifacts/fuhao_ou_fangyi.md",
+      "chars": 963
+    },
+    {
+      "slug": "fuhao_xiaozun",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "妇好鸮尊",
+      "summary": "迄今所见最早的鸟形青铜礼器，商王武丁之妻、女将军妇好的身份与权力象征，一对两件分藏两馆。",
+      "related_artifacts": [],
+      "related_sites": [
+        "yinxu"
+      ],
+      "path": "artifacts/fuhao_xiaozun.md",
+      "chars": 1050
+    },
+    {
+      "slug": "guoji_zibai_pan",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "虢季子白盘",
+      "summary": "西周宣王时巨型水器，现存最大青铜盘，111字铭文记伐玁狁之功，藏中国国家博物馆。",
+      "related_artifacts": [],
+      "related_sites": [
+        "zhouyuan-fenghao"
+      ],
+      "path": "artifacts/guoji_zibai_pan.md",
+      "chars": 967
+    },
+    {
+      "slug": "he_zun",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "何尊",
+      "summary": "西周成王时酒器，底铸122字铭文，\"宅兹中国\"为\"中国\"二字作为合成词的最早出处。",
+      "related_artifacts": [],
+      "related_sites": [
+        "zhouyuan-fenghao"
+      ],
+      "path": "artifacts/he_zun.md",
+      "chars": 1020
+    },
+    {
+      "slug": "houmuwu_ding",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "后母戊鼎",
+      "summary": "迄今出土最大最重的商代青铜礼器，世界古代铸铜之最，殷商王权与孝祭观念的物化象征。",
+      "related_artifacts": [],
+      "related_sites": [
+        "yinxu"
+      ],
+      "path": "artifacts/houmuwu_ding.md",
+      "chars": 1173
+    },
+    {
+      "slug": "lai_pan",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "逨盘",
+      "summary": "西周宣王时水器，373字铭文历叙十二代周王与单氏家史，补史墙盘后的王朝史缺环，藏宝鸡。",
+      "related_artifacts": [],
+      "related_sites": [
+        "zhouyuan-fenghao"
+      ],
+      "path": "artifacts/lai_pan.md",
+      "chars": 969
+    },
+    {
+      "slug": "li_gui",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "利簋",
+      "summary": "西周武王时簋，32字铭文记\"甲子朝、岁鼎\"，为牧野之战唯一直接物证，藏中国国家博物馆。",
+      "related_artifacts": [],
+      "related_sites": [
+        "zhouyuan-fenghao"
+      ],
+      "path": "artifacts/li_gui.md",
+      "chars": 919
+    },
+    {
+      "slug": "lianhe_fanghu",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "莲鹤方壶",
+      "summary": "春秋中期郑国青铜方壶，1923年出土于河南新郑郑公大墓，盖顶立鹤展翅，被郭沫若誉为\"时代精神之象征\"。",
+      "related_artifacts": [],
+      "related_sites": [],
+      "path": "artifacts/lianhe_fanghu.md",
+      "chars": 952
+    },
+    {
+      "slug": "longhu_wen_zun",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "龙虎纹尊",
+      "summary": "商代南方方国青铜艺术的最高代表，腹部\"虎噬人\"纹震撼诡谲，淮河流域青铜文明的杰作。",
+      "related_artifacts": [],
+      "related_sites": [],
+      "path": "artifacts/longhu_wen_zun.md",
+      "chars": 956
+    },
+    {
+      "slug": "matafeiyan_v3",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "马踏飞燕",
+      "summary": "东汉青铜奔马，1969年出土于甘肃武威雷台汉墓，三足腾空、一蹄踏鸟，为中国旅游标志，学界正名\"铜奔马\"。",
+      "related_artifacts": [],
+      "related_sites": [],
+      "path": "artifacts/matafeiyan_v3.md",
+      "chars": 937
+    },
+    {
+      "slug": "maogong_ding",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "毛公鼎",
+      "summary": "西周宣王时圆鼎，腹铸约499字铭文，为现存最长青铜器铭文，\"海内三宝\"之一，藏台北故宫。",
+      "related_artifacts": [],
+      "related_sites": [
+        "zhouyuan-fenghao"
+      ],
+      "path": "artifacts/maogong_ding.md",
+      "chars": 981
+    },
+    {
+      "slug": "qin_tongchema",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "秦陵铜车马",
+      "summary": "秦代大型彩绘错金银青铜车马，1980年出土于秦始皇陵封土西侧，两乘按真车1∶2制成，誉为\"青铜之冠\"。",
+      "related_artifacts": [],
+      "related_sites": [],
+      "path": "artifacts/qin_tongchema.md",
+      "chars": 987
+    },
+    {
+      "slug": "sanxingdui_dali_ren_v3",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "三星堆青铜大立人",
+      "summary": "同时期世界上最大、最高、最完整的青铜人像，被誉为\"世界铜像之王\"，古蜀神权文明的最高标志。",
+      "related_artifacts": [],
+      "related_sites": [
+        "sanxingdui"
+      ],
+      "path": "artifacts/sanxingdui_dali_ren_v3.md",
+      "chars": 1077
+    },
+    {
+      "slug": "sanxingdui_shenshu_v3",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "三星堆青铜神树",
+      "summary": "迄今出土最大的单体青铜文物，三层九枝九鸟一龙下行，古蜀通天神话的实物化身。",
+      "related_artifacts": [],
+      "related_sites": [
+        "sanxingdui"
+      ],
+      "path": "artifacts/sanxingdui_shenshu_v3.md",
+      "chars": 1052
+    },
+    {
+      "slug": "sanxingdui_zongmu_mianju_v3",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "三星堆纵目面具",
+      "summary": "双眼柱状外凸达十六厘米的巨型青铜面具，世界青铜器中绝无仅有的造型，古蜀文明最具辨识度的形象符号。",
+      "related_artifacts": [],
+      "related_sites": [
+        "sanxingdui"
+      ],
+      "path": "artifacts/sanxingdui_zongmu_mianju_v3.md",
+      "chars": 975
+    },
+    {
+      "slug": "sanshi_pan",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "散氏盘",
+      "summary": "西周晚期水器，357字铭文记矢、散两国划界赔田，为现存最早土地契约，藏台北故宫。",
+      "related_artifacts": [],
+      "related_sites": [
+        "zhouyuan-fenghao"
+      ],
+      "path": "artifacts/sanshi_pan.md",
+      "chars": 972
+    },
+    {
+      "slug": "shangyang_fangsheng",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "商鞅方升",
+      "summary": "战国秦国法定量器，公元前344年商鞅督造，后加刻秦始皇统一度量衡诏书，是中国标准化制度的独一无二实证。",
+      "related_artifacts": [],
+      "related_sites": [],
+      "path": "artifacts/shangyang_fangsheng.md",
+      "chars": 953
+    },
+    {
+      "slug": "shi_qiang_pan",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "史墙盘",
+      "summary": "西周恭王时水器，284字铭文颂七代周王、述微氏家史，为金文史学第一篇，藏宝鸡。",
+      "related_artifacts": [],
+      "related_sites": [
+        "zhouyuan-fenghao"
+      ],
+      "path": "artifacts/shi_qiang_pan.md",
+      "chars": 935
+    },
+    {
+      "slug": "simuxin_ding",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "司母辛鼎",
+      "summary": "妇好之子为祭祀母亲妇好（庙号\"辛\"）所铸的方鼎，与后母戊鼎\"祭母作鼎\"的题材互为印证。",
+      "related_artifacts": [],
+      "related_sites": [
+        "yinxu"
+      ],
+      "path": "artifacts/simuxin_ding.md",
+      "chars": 948
+    },
+    {
+      "slug": "siyang_fangzun",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "四羊方尊",
+      "summary": "现存商代青铜方尊中最大者，四肩立体卷角羊浑然天成，湘江流域青铜文明的巅峰代表作。",
+      "related_artifacts": [],
+      "related_sites": [],
+      "path": "artifacts/siyang_fangzun.md",
+      "chars": 1098
+    },
+    {
+      "slug": "song_hu",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "颂壶",
+      "summary": "西周宣王时盛酒礼器，与颂簋同铭152字，是\"颂器组\"成套礼器配置的完整案例之一，藏北京故宫。",
+      "related_artifacts": [],
+      "related_sites": [],
+      "path": "artifacts/song_hu.md",
+      "chars": 906
+    },
+    {
+      "slug": "yachou_yue",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "亚醜钺",
+      "summary": "商代东方方国\"亚醜\"族首领的军权象征，钺面一张\"憨笑人面\"使其成为近年网络最火的\"萌系国宝\"。",
+      "related_artifacts": [],
+      "related_sites": [],
+      "path": "artifacts/yachou_yue.md",
+      "chars": 960
+    },
+    {
+      "slug": "zhanguo_yanle_yulie_gongzhan_tonghu",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "宴乐渔猎攻战纹铜壶",
+      "summary": "战国早中期嵌错图像铜壶，壶身分层刻绘采桑、宴乐、弋射、攻战、渔猎，是先秦社会生活的\"百科图卷\"。",
+      "related_artifacts": [],
+      "related_sites": [],
+      "path": "artifacts/zhanguo_yanle_yulie_gongzhan_tonghu.md",
+      "chars": 1030
+    },
+    {
+      "slug": "yuewang_goujian_jian",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "越王勾践剑",
+      "summary": "春秋晚期越国青铜复合剑，1965年出土于湖北江陵望山一号楚墓，埋地2400余年寒光不锈、锋利如新。",
+      "related_artifacts": [],
+      "related_sites": [],
+      "path": "artifacts/yuewang_goujian_jian.md",
+      "chars": 1096
+    },
+    {
+      "slug": "changxin_gongdeng_v3",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "长信宫灯",
+      "summary": "西汉鎏金青铜人形灯，1968年出土于河北满城窦绾墓，宫女执灯、烟入体内，被誉为\"中华第一灯\"。",
+      "related_artifacts": [],
+      "related_sites": [],
+      "path": "artifacts/changxin_gongdeng_v3.md",
+      "chars": 947
+    },
+    {
+      "slug": "zhongshan_wang_cuo_ding",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "中山王厝鼎",
+      "summary": "战国晚期中山国铁足铜鼎，1977年出土于河北平山，腹刻铭469字，是现存战国铜器中铭文最长的圆鼎。",
+      "related_artifacts": [],
+      "related_sites": [],
+      "path": "artifacts/zhongshan_wang_cuo_ding.md",
+      "chars": 944
+    },
+    {
+      "slug": "zilong_ding",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "子龙鼎",
+      "summary": "现存最大的商代青铜圆鼎，与方形的后母戊鼎并称\"圆鼎、方鼎双璧\"，铭\"龙\"字为鼎类所见最早。",
+      "related_artifacts": [],
+      "related_sites": [],
+      "path": "artifacts/zilong_ding.md",
+      "chars": 978
+    },
+    {
+      "slug": "hu_gui",
+      "dir": "artifacts",
+      "category": "文物",
+      "title": "㝬簋（穆公簋）",
+      "summary": "西周穆王时食器，又称穆公簋，50字铭文记穆王册命㝬为郑地军事长官，藏上海博物馆。",
+      "related_artifacts": [],
+      "related_sites": [],
+      "path": "artifacts/hu_gui.md",
+      "chars": 1017
+    }
+  ]
+}
