@@ -48,12 +48,29 @@
     '夏': 0, '商': 6, '西周': 10, '春秋': 2, '战国': 5, '秦': 0, '西汉': 2, '东汉': 0,
   };
 
-  // Era → swatch (cream-page palette). dashboard.html uses its own dark-theme
-  // versions inline because they're tuned to the dark bg.
+  // Era → swatch. v2 design overhaul: matches CSS --era-* tokens (patina-harmonized,
+  // brightened 春秋/秦 for legibility). dashboard.html may tune its own dark-bg variants.
   const ERA_COLORS = {
-    '夏':'#6e4a2e', '商':'#4a5a3a', '西周':'#a73a2a',
-    '春秋':'#2a2a3a', '战国':'#7a3a2a', '秦':'#1a1a1a', '汉':'#b89046',
+    '夏':'#7a6336', '商':'#4f7163', '西周':'#b23a2e',
+    '春秋':'#46688f', '战国':'#8a5a3c', '秦':'#565049', '汉':'#c2a14e',
   };
+
+  // ── Real photos ───────────────────────────────────────────────────────
+  // Artifact ids with a real Wikimedia-sourced photo at assets/photos/<id>.jpg.
+  // Populated by scripts/fetch-photos.mjs (run on Vercel CI / locally where
+  // upload.wikimedia.org is reachable). In the sandbox the files don't exist
+  // yet, so <img> 404s → code falls back to the silhouette. Set derived from
+  // data/photo-manifest.json (24 国宝 with confirmed/plausible Commons files).
+  const PHOTO_IDS = new Set([
+    'houmuwu_ding','siyang_fangzun','fuhao_xiaozun','da_yu_ding','da_ke_ding',
+    'maogong_ding','sanshi_pan','he_zun','li_gui','guoji_zibai_pan','lianhe_fanghu',
+    'yuewang_goujian_jian','zenghouyi_bianzhong','zenghouyi_zunpan','cuojin_boshanlu',
+    'changxin_gongdeng','matafeiyan','sanxingdui_dali_ren','sanxingdui_zongmu_mianju',
+    'sanxingdui_shenshu','zilong_ding','longxing_gong','qin_tongchema','shangyang_fangsheng',
+  ]);
+  const PHOTO_PATH = '../../assets/photos/';
+  function hasPhoto(id) { return PHOTO_IDS.has(id); }
+  function getPhotoPath(id) { return PHOTO_PATH + id + '.jpg'; }
 
   // form_subtype/type → silhouette slug under assets/silhouettes/<slug>.svg
   const FORM_SILHOUETTE_MAP = {
@@ -79,5 +96,9 @@
     FORM_SILHOUETTE_MAP,
     SILHOUETTE_PATH,
     getSilhouette,
+    PHOTO_IDS,
+    PHOTO_PATH,
+    hasPhoto,
+    getPhotoPath,
   };
 })();

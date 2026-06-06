@@ -132,9 +132,9 @@ function renderArtifact(data) {
   const silhouette = getSilhouetteFor(data.form_subtype);
   const inscChars = data.inscription.text ? data.inscription.text.split('') : [];
 
-  // Photo-first: use direct_url or local_path if available, else fall back to silhouette
-  const imgData = data.image_urls && data.image_urls[0];
-  const photoUrl = imgData && (imgData.direct_url || (imgData.local_path ? `../../${imgData.local_path}` : null));
+  // Photo-first: real photo at assets/photos/<id>.jpg (build-time fetched) if this
+  // id is in PHOTO_IDS, else null → silhouette. <img onerror> below also guards 404.
+  const photoUrl = (window.MuseumData && window.MuseumData.getPhotoUrl) ? window.MuseumData.getPhotoUrl(data.id, '../../') : null;
   const silhouetteUrl = `../../assets/silhouettes/${silhouette}.svg`;
   const hasPhoto = !!photoUrl;
   const initSrc = hasPhoto ? photoUrl : silhouetteUrl;
@@ -324,11 +324,17 @@ function renderArtifact(data) {
         <div class="dim-card" style="margin-bottom:16px;">
           <div class="dim-card-title">⑨ 相关器物</div>
           <div style="display:flex; flex-direction:column; gap:6px;">
-            ${(data.related_artifacts||[]).map(name => `
-              <div style="padding:8px; background:var(--bg-cream); border-radius:6px; font-size:13px; cursor:pointer; display:flex; align-items:center; gap:6px;" onclick="location.href='catalog.html?search=${encodeURIComponent(name)}'">
-                <span>🏺</span> ${name}
-              </div>
-            `).join('')}
+            ${(data.related_artifacts||[]).map(rel => {
+              const rid = typeof rel === 'string' ? rel : (rel.id || '');
+              const rec = (window.MuseumData && window.MuseumData.get) ? window.MuseumData.get(rid) : null;
+              const label = rec ? rec.name_zh : (typeof rel === 'string' ? rel : (rel.name_zh || rid));
+              const relation = (rel && typeof rel === 'object' && rel.relation) ? rel.relation : '';
+              return `
+              <div style="padding:8px 10px; background:var(--surface-sunken); border-radius:var(--radius); cursor:pointer; display:flex; align-items:flex-start; gap:8px;" onclick="location.href='artifact.html?id=${encodeURIComponent(rid)}'">
+                <span>🏺</span>
+                <div><div style="font-weight:600; font-size:13px;">${label}</div>${relation?`<div style="font-size:11px; color:var(--ink-3); line-height:1.4;">${relation}</div>`:''}</div>
+              </div>`;
+            }).join('')}
           </div>
         </div>
 

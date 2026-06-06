@@ -1,10 +1,16 @@
 {
+  "buildCommand": "node scripts/fetch-photos.mjs || true",
+  "outputDirectory": ".",
   "cleanUrls": false,
   "trailingSlash": true,
   "headers": [
     {
       "source": "/(.*).svg",
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400" }]
+    },
+    {
+      "source": "/assets/photos/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }]
     }
   ]
 }

@@ -1,0 +1,273 @@
+{
+  "_meta": {
+    "generated": "2026-06-06",
+    "description": "Curated Wikimedia Commons filenames for 25 Chinese bronze 国宝. Used by scripts/fetch-photos.mjs at build/deploy time (Wikimedia is reachable from Vercel CI and local machines, but NOT from this sandbox).",
+    "license_note": "All selected files are CC0, CC BY, or CC BY-SA. Files marked cc0 need no attribution. Files marked cc-by-sa require: 'Author, File:Filename, CC BY-SA X.0 via Wikimedia Commons'.",
+    "source": "Filenames verified via Wikimedia Commons category pages and WebSearch (2026-06-06).",
+    "download_base": "https://upload.wikimedia.org/wikipedia/commons/",
+    "thumb_base": "https://upload.wikimedia.org/wikipedia/commons/thumb/"
+  },
+  "artifacts": [
+    {
+      "artifact_id": "houmuwu_ding",
+      "name_zh": "后母戊鼎",
+      "wikimedia_filename": "HouMuWuDingFullView.jpg",
+      "commons_url": "https://commons.wikimedia.org/wiki/File:HouMuWuDingFullView.jpg",
+      "commons_category": "https://commons.wikimedia.org/wiki/Category:Hou_Mu_Wu_Ding",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Gary Todd, via Wikimedia Commons",
+      "local_target": "assets/photos/houmuwu_ding.jpg"
+    },
+    {
+      "artifact_id": "siyang_fangzun",
+      "name_zh": "四羊方尊",
+      "wikimedia_filename": "Siyang_Fangzun_Bronze_Zun_Wine_Vessel_Shang_Dynasty_Late_Bronze_Age.jpg",
+      "commons_url": "https://commons.wikimedia.org/wiki/File:Siyang_Fangzun_Bronze_Zun_Wine_Vessel_Shang_Dynasty_Late_Bronze_Age.jpg",
+      "commons_category": "https://commons.wikimedia.org/wiki/Category:Four-goat_Square_Zun",
+      "license": "CC BY-SA 2.0",
+      "attribution": "Gary Todd, via Wikimedia Commons",
+      "local_target": "assets/photos/siyang_fangzun.jpg",
+      "fallback_filename": "Four-goat_Square_Zun_-_National_Museum_of_China.jpg"
+    },
+    {
+      "artifact_id": "fuhao_xiaozun",
+      "name_zh": "妇好鸮尊",
+      "wikimedia_filename": "20210220_Bronze_owl-shaped_Zun_with_inscriptions_of_Fu_Hao,_Henan_Museum.jpg",
+      "commons_url": "https://commons.wikimedia.org/wiki/File:20210220_Bronze_owl-shaped_Zun_with_inscriptions_of_Fu_Hao,_Henan_Museum.jpg",
+      "commons_category": "https://commons.wikimedia.org/wiki/Category:Bronze_owl-shaped_Zun_with_inscriptions_of_Fu_Hao",
+      "license": "CC BY-SA 4.0",
+      "attribution": "ASDFGH, via Wikimedia Commons",
+      "local_target": "assets/photos/fuhao_xiaozun.jpg"
+    },
+    {
+      "artifact_id": "da_yu_ding",
+      "name_zh": "大盂鼎",
+      "wikimedia_filename": "Da_Yu_ding.jpg",
+      "commons_url": "https://commons.wikimedia.org/wiki/File:Da_Yu_ding.jpg",
+      "commons_category": "https://commons.wikimedia.org/wiki/Category:Da_Yu_ding",
+      "license": "CC BY-SA 3.0",
+      "attribution": "Siyuwj, via Wikimedia Commons",
+      "local_target": "assets/photos/da_yu_ding.jpg"
+    },
+    {
+      "artifact_id": "da_ke_ding",
+      "name_zh": "大克鼎",
+      "wikimedia_filename": "Big_Ke_Ding_(4004385989).jpg",
+      "commons_url": "https://commons.wikimedia.org/wiki/File:Big_Ke_Ding_(4004385989).jpg",
+      "commons_category": "https://commons.wikimedia.org/wiki/Category:Da_Ke_ding",
+      "license": "CC BY 2.0",
+      "attribution": "G41rn8, via Wikimedia Commons (originally Flickr)",
+      "local_target": "assets/photos/da_ke_ding.jpg"
+    },
+    {
+      "artifact_id": "maogong_ding",
+      "name_zh": "毛公鼎",
+      "wikimedia_filename": "Ding_cauldron_of_Duke_Mao.jpg",
+      "commons_url": "https://commons.wikimedia.org/wiki/File:Ding_cauldron_of_Duke_Mao.jpg",
+      "commons_category": "https://commons.wikimedia.org/wiki/Category:Ding_Cauldron_of_Duke_Mao",
+      "license": "CC BY-SA 3.0",
+      "attribution": "National Palace Museum (Taiwan), via Wikimedia Commons",
+      "local_target": "assets/photos/maogong_ding.jpg"
+    },
+    {
+      "artifact_id": "sanshi_pan",
+      "name_zh": "散氏盘",
+      "wikimedia_filename": "San_shi_pan.jpg",
+      "commons_url": "https://commons.wikimedia.org/wiki/File:San_shi_pan.jpg",
+      "commons_category": "https://commons.wikimedia.org/wiki/Category:San_shi_pan",
+      "license": "CC BY-SA 3.0",
+      "attribution": "National Palace Museum (Taiwan), via Wikimedia Commons",
+      "local_target": "assets/photos/sanshi_pan.jpg",
+      "note": "If primary filename 404s, search Category:San_shi_pan for current filename"
+    },
+    {
+      "artifact_id": "he_zun",
+      "name_zh": "何尊",
+      "wikimedia_filename": "He_Zun.jpg",
+      "commons_url": "https://commons.wikimedia.org/wiki/File:He_Zun.jpg",
+      "commons_category": "https://commons.wikimedia.org/wiki/Category:He_zun",
+      "license": "CC BY-SA 4.0",
+      "attribution": "ASDFGH, via Wikimedia Commons",
+      "local_target": "assets/photos/he_zun.jpg"
+    },
+    {
+      "artifact_id": "li_gui",
+      "name_zh": "利簋",
+      "wikimedia_filename": "Li_gui_(vessel).jpg",
+      "commons_url": "https://commons.wikimedia.org/wiki/File:Li_gui_(vessel).jpg",
+      "commons_category": "https://commons.wikimedia.org/wiki/Category:Li_gui",
+      "license": "CC BY-SA 3.0",
+      "attribution": "Siyuwj, via Wikimedia Commons",
+      "local_target": "assets/photos/li_gui.jpg",
+      "note": "Try Category:Li_gui if file not found; this vessel has limited Commons coverage"
+    },
+    {
+      "artifact_id": "guoji_zibai_pan",
+      "name_zh": "虢季子白盘",
+      "wikimedia_filename": "Guoji_Zibai_pan.jpg",
+      "commons_url": "https://commons.wikimedia.org/wiki/File:Guoji_Zibai_pan.jpg",
+      "commons_category": "https://commons.wikimedia.org/wiki/Category:Guoji_Zibai_pan",
+      "license": "CC BY-SA 3.0",
+      "attribution": "Siyuwj, via Wikimedia Commons",
+      "local_target": "assets/photos/guojizibai_pan.jpg",
+      "note": "This vessel has limited Commons coverage; fallback to Category:Bronze_vessels_in_the_National_Museum_of_China"
+    },
+    {
+      "artifact_id": "lianhe_fanghu",
+      "name_zh": "莲鹤方壶",
+      "wikimedia_filename": "Lotus_and_crane_bronze_fang_hu_vessel_(detail),_Spring_and_Autumn_period,_Zhengzhou_Museum.jpg",
+      "commons_url": "https://commons.wikimedia.org/wiki/File:Lotus_and_crane_bronze_fang_hu_vessel_(detail),_Spring_and_Autumn_period,_Zhengzhou_Museum.jpg",
+      "commons_category": "https://commons.wikimedia.org/wiki/Category:Lotus_and_crane_square_pot",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Anagoria, via Wikimedia Commons",
+      "local_target": "assets/photos/lianhe_fanghu.jpg"
+    },
+    {
+      "artifact_id": "yuewang_goujian_jian",
+      "name_zh": "越王勾践剑",
+      "wikimedia_filename": "Sword_of_Goujian.jpg",
+      "commons_url": "https://commons.wikimedia.org/wiki/File:Sword_of_Goujian.jpg",
+      "commons_category": "https://commons.wikimedia.org/wiki/Category:Sword_of_Goujian",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Siyuwj, via Wikimedia Commons",
+      "local_target": "assets/photos/yuewang_goujian_jian.jpg"
+    },
+    {
+      "artifact_id": "zenghouyi_bianzhong",
+      "name_zh": "曾侯乙编钟",
+      "wikimedia_filename": "20230208_Chime_bells_of_Marquis_Yi_of_Zeng.jpg",
+      "commons_url": "https://commons.wikimedia.org/wiki/File:20230208_Chime_bells_of_Marquis_Yi_of_Zeng.jpg",
+      "commons_category": "https://commons.wikimedia.org/wiki/Category:Bianzhong_of_Marquis_Yi_of_Zeng",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Zcm11, via Wikimedia Commons",
+      "local_target": "assets/photos/zenghouyi_bianzhong.jpg",
+      "fallback_filename": "Bianzhong_of_Marquis_Yi_of_Zeng.jpg"
+    },
+    {
+      "artifact_id": "zenghouyi_zunpan",
+      "name_zh": "曾侯乙尊盘",
+      "wikimedia_filename": "Zun_and_Pan_of_Marquis_Yi_of_Zeng.jpg",
+      "commons_url": "https://commons.wikimedia.org/wiki/File:Zun_and_Pan_of_Marquis_Yi_of_Zeng.jpg",
+      "commons_category": "https://commons.wikimedia.org/wiki/Category:Bronze_zun_and_pan_of_Marquis_Yi_of_Zeng",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Siyuwj, via Wikimedia Commons",
+      "local_target": "assets/photos/zenghouyi_zunpan.jpg",
+      "note": "Fallback: search Category:Bronze_zun_and_pan_of_Marquis_Yi_of_Zeng"
+    },
+    {
+      "artifact_id": "cuojin_boshanlu",
+      "name_zh": "错金博山炉",
+      "wikimedia_filename": "Gilded_Bronze_Boshan_Incense_Burner_with_Cloud,_Mountain,_Animal_and_Human_Motifs.jpg",
+      "commons_url": "https://commons.wikimedia.org/wiki/File:Gilded_Bronze_Boshan_Incense_Burner_with_Cloud,_Mountain,_Animal_and_Human_Motifs.jpg",
+      "commons_category": "https://commons.wikimedia.org/wiki/Category:Boshanlu",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Gary Todd, via Wikimedia Commons",
+      "local_target": "assets/photos/cuojin_boshanlu.jpg"
+    },
+    {
+      "artifact_id": "changxin_gongdeng",
+      "name_zh": "长信宫灯",
+      "wikimedia_filename": "20250118_Changxin_Palace_Lamp_01.jpg",
+      "commons_url": "https://commons.wikimedia.org/wiki/File:20250118_Changxin_Palace_Lamp_01.jpg",
+      "commons_category": "https://commons.wikimedia.org/wiki/Category:Changxin_Palace_lantern",
+      "license": "CC BY-SA 4.0",
+      "attribution": "ASDFGH, via Wikimedia Commons",
+      "local_target": "assets/photos/changxin_gongdeng.jpg",
+      "fallback_filename": "%E9%95%BF%E4%BF%A1%E5%AE%AB%E7%81%AF_%E6%B2%B3%E5%8C%97%E5%8D%9A%E7%89%A9%E9%99%A2.jpg"
+    },
+    {
+      "artifact_id": "matafeiyan",
+      "name_zh": "马踏飞燕 (铜奔马)",
+      "wikimedia_filename": "Gansu_Museum_2007_257.jpg",
+      "commons_url": "https://commons.wikimedia.org/wiki/File:Gansu_Museum_2007_257.jpg",
+      "commons_category": "https://commons.wikimedia.org/wiki/Category:Flying_Horse_of_Gansu",
+      "license": "CC BY-SA 3.0",
+      "attribution": "BabelStone, via Wikimedia Commons",
+      "local_target": "assets/photos/matafeiyan.jpg"
+    },
+    {
+      "artifact_id": "sanxingdui_dali_ren",
+      "name_zh": "三星堆青铜大立人",
+      "wikimedia_filename": "Bronze_Colossal_Standing_Figure,_Sanxingdui_b.jpg",
+      "commons_url": "https://commons.wikimedia.org/wiki/File:Bronze_Colossal_Standing_Figure,_Sanxingdui_b.jpg",
+      "commons_category": "https://commons.wikimedia.org/wiki/Category:Large_bronze_standing_figure_of_Sanxingdui",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Gary Todd, via Wikimedia Commons",
+      "local_target": "assets/photos/sanxingdui_dali_ren.jpg"
+    },
+    {
+      "artifact_id": "sanxingdui_zongmu_mianju",
+      "name_zh": "三星堆纵目面具",
+      "wikimedia_filename": "Ancient_Bronze_Mask_from_Sanxingdui_3.jpg",
+      "commons_url": "https://commons.wikimedia.org/wiki/File:Ancient_Bronze_Mask_from_Sanxingdui_3.jpg",
+      "commons_category": "https://commons.wikimedia.org/wiki/Category:Bronze_masks_in_Sanxingdui",
+      "license": "CC0",
+      "attribution": "Public domain (CC0) — no attribution required",
+      "local_target": "assets/photos/sanxingdui_zongmu.jpg"
+    },
+    {
+      "artifact_id": "sanxingdui_shenshu",
+      "name_zh": "三星堆青铜神树",
+      "wikimedia_filename": "Bronze_Sacred_Tree_No.1,_Sanxingdui_Museum.jpg",
+      "commons_url": "https://commons.wikimedia.org/wiki/File:Bronze_Sacred_Tree_No.1,_Sanxingdui_Museum.jpg",
+      "commons_category": "https://commons.wikimedia.org/wiki/Category:Bronze_trees_in_Sanxingdui",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Gary Todd, via Wikimedia Commons",
+      "local_target": "assets/photos/sanxingdui_shenshu.jpg"
+    },
+    {
+      "artifact_id": "zilong_ding",
+      "name_zh": "子龙鼎",
+      "wikimedia_filename": "Zilong_ding_2019.jpg",
+      "commons_url": "https://commons.wikimedia.org/wiki/File:Zilong_ding_2019.jpg",
+      "commons_category": "https://commons.wikimedia.org/wiki/Category:Zilong_ding",
+      "license": "CC BY-SA 4.0",
+      "attribution": "ASDFGH, via Wikimedia Commons",
+      "local_target": "assets/photos/zilong_ding.jpg",
+      "note": "Commons coverage for this vessel is limited; verify filename on category page"
+    },
+    {
+      "artifact_id": "longxing_gong",
+      "name_zh": "龙形觥",
+      "wikimedia_filename": "Longxing_Gong_Shanxi_Museum.jpg",
+      "commons_url": "https://commons.wikimedia.org/wiki/File:Longxing_Gong_Shanxi_Museum.jpg",
+      "commons_category": "https://commons.wikimedia.org/wiki/Category:Shanxi_Museum",
+      "license": "CC BY-SA 4.0",
+      "attribution": "ASDFGH, via Wikimedia Commons",
+      "local_target": "assets/photos/longxing_gong.jpg",
+      "note": "UNCERTAIN filename — must verify on Category:Shanxi_Museum or search Commons before use"
+    },
+    {
+      "artifact_id": "qin_tongchema",
+      "name_zh": "秦陵铜车马",
+      "wikimedia_filename": "Qin_Bronze_Chariot_No.1_(2).jpg",
+      "commons_url": "https://commons.wikimedia.org/wiki/File:Qin_Bronze_Chariot_No.1_(2).jpg",
+      "commons_category": "https://commons.wikimedia.org/wiki/Category:Qin_bronze_chariot",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Gary Todd, via Wikimedia Commons",
+      "local_target": "assets/photos/qin_tongchema.jpg"
+    },
+    {
+      "artifact_id": "siyangshou_bu",
+      "name_zh": "四羊首铜瓿",
+      "wikimedia_filename": null,
+      "commons_url": null,
+      "commons_category": "https://commons.wikimedia.org/wiki/Category:Hunan_Museum",
+      "license": null,
+      "attribution": null,
+      "local_target": "assets/photos/siyangshou_bu.jpg",
+      "note": "NO VERIFIED FILENAME — this artifact has minimal Commons coverage. Manual search on Category:Hunan_Museum or Category:Bronze_wares_of_Ancient_China required."
+    },
+    {
+      "artifact_id": "shangyang_fangsheng",
+      "name_zh": "商鞅方升",
+      "wikimedia_filename": "Shang_Yang_Square_Sheng_(Shanghai_Museum).jpg",
+      "commons_url": "https://commons.wikimedia.org/wiki/File:Shang_Yang_Square_Sheng_(Shanghai_Museum).jpg",
+      "commons_category": "https://commons.wikimedia.org/wiki/Category:Shanghai_Museum",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Gary Todd, via Wikimedia Commons",
+      "local_target": "assets/photos/shangyang_fangsheng.jpg",
+      "note": "Filename plausible but not confirmed — verify on Commons before use"
+    }
+  ]
+}
