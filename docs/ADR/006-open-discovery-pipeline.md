@@ -267,3 +267,19 @@ PM 在 ADR-006 草稿审议中,对 Orchestrator 提出的 5 项开放问题逐�
 - agent **可起草** 27 件 candidate list 标 `DRAFT — pending PM review`,**不视为已签字 30 件清单**;PM 早晨 review 拥有最终增删权。
 
 [ Accepted · 2026-06-06 ]
+
+---
+
+## Night-Run Log(2026-06-07,夜班 agent 追加,仅记录不改主体)
+
+> 本章为 Phase B 首次完整无人值守执行的记录,挂在 ADR 末尾。**不修改上方任何决策/约束条款。** 详细报告见 `docs/NIGHT-RUN-REPORT.md`。
+
+- **执行**:夜班 agent(Discovery+Verifier+Compiler 合一)在 PM 本机一次走通 Phase A↔B。约 1 小时。
+- **结果**:`verified_chunks.json` 累计 **104 chunk(100 ok / 4 failed)**,覆盖 36 域名、28 件;起草 **25 件 DRAFT**(`exhibit-list.md`);装订 **28 个 `.bundle.md`**(平均 3.6 类/件,印证 §风险二)。
+- **验证 §验收条件第 3 项(pilot 28 候选双环境走一遍 + 可达性地图)= ✅ 达成**;第 4 项(Curator 填 30 件清单)= **DRAFT 已起草,待 PM 核签**。
+- **对 §风险一(PM 本机也可能卡大陆馆)的实锤**:stock macOS Python(LibreSSL 2.8.3)无法与 `dpm.org.cn` 完成 TLS 握手;系统 curl(LibreSSL 3.3.6)可以。已加 `scripts/fetch/refetch_curl.py` 兜底。**建议 amendment:把"httpx TLS 失败 → curl 重试"并入 Verifier 默认链。**
+- **新发现 3 个管线 bug(留 Builder)**:① 落库 charset(GB18030)丢字符;② 共享 URL 的 chunk→artifact 单一归属导致跨件缺源;③ 反爬"软封禁"(知乎 200+占位 JSON)被误判 ok。
+- **反幻觉门 working as intended**:Discovery 主动剔除 3 处幻觉源、如实记多条 API 零命中;Compiler 28 件抽审无一引用未抓到的内容,并据实抓字段改写了 1 处 researcher 旧样本的产地结论。**未为达标把被墙的 MDPI challenge 页伪标 high-tier。**
+- **T3 / main / 主体改动**:0 / 0 / 0(见报告"没踩红线证明")。
+
+[ Night-Run Log 完 · 2026-06-07 ]
