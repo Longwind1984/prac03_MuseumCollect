@@ -1,0 +1,124 @@
+{
+  "handoff_meta": {
+    "title": "本地 Verifier(核源/抓取)交接包 · Phase B",
+    "from": "云端 Orchestrator (web sandbox, egress-blocked)",
+    "to": "PM 本地 Claude Code 会话 (mainland-CN network, full internet)",
+    "date": "2026-06-06",
+    "repo": "longwind1984/prac03_museumcollect",
+    "branch": "claude/museum-photo-sharing-8qJiz",
+    "role_for_this_session": "Verifier — 拿网址清单去真抓、核对、留证、记录;不做选品(Curator)、不做装订(Compiler 在云端)",
+    "human_summary": "你本地的 Claude:你的工作是把 data/pipeline/in/sources_candidates.pilot.json 里的网址一条条抓下来,核对内容、记下来源/版权/指纹,写进 data/pipeline/out/verified_chunks.json,推回仓库。你不需要决定抓哪些(清单给好了),也不需要写成最终条目(那步在云端)。先读 docs/LOCAL-SETUP.md。"
+  },
+
+  "project_background_one_paragraph": "这是给「一起看」博物馆 AI 同伴 APP 建的 RAG 知识库。目标:挑 30 件文物(山博 15 + 上博 5 + 上博东馆 5 + 震旦 5),给每件从 5 类源(A 馆方一手 / B 海外开放博物馆对照 / C 学术论文 / D 现场与媒体 / E 数字人文项目)凑资料。产品哲学:找不到的来源就如实标'没找到+原因',绝不编造——'找不到一手叙事'本身就是中国文博数字化现状的产品素材(user-voice 原则 C)。",
+
+  "the_one_fact_that_changes_everything": {
+    "what": "云端沙箱连不上任何馆网/图库/archive.org(实测全部 HTTP 403 host_not_allowed,白名单只剩 github.com / raw.githubusercontent.com / pypi.org)。",
+    "so": "所有真实抓取必须在你本地跑。你人在国内,大陆站点(dpm.org.cn/澎湃/知乎/上博官网)你能开、沙箱开不了;但 archive.org / 部分海外 OA 你可能慢或被墙。",
+    "evidence": "agents/researcher/reports/2026-06-06-od2-overseas-oa-reachability.md"
+  },
+
+  "must_read_in_order": [
+    {"path": "docs/LOCAL-SETUP.md", "why": "你这个会话的操作手册:装环境、工具、跑法、交回流程", "key_takeaway": "先装环境再动手;清单里 fetch_hint 决定用 httpx 还是 --js"},
+    {"path": "docs/ADR/006-open-discovery-pipeline.md", "why": "整条管道的设计 + 你(Verifier)的职责契约 + 反幻觉状态机", "key_takeaway": "你只产 verified_chunks;无 url 的 chunk 拒收,无 hash 不能 high tier"},
+    {"path": "docs/ADR/003-knowledge-sources.md", "why": "六层知识源 + 学术7字段入库格式 + 图像分层(≤512/≤1024px) + 反幻觉三条", "key_takeaway": "学术只存'标题+作者+出处+年+摘要+≤100字短引+URL',不全文向量化;CC-BY/OA 例外可全文"},
+    {"path": "data/pipeline/in/sources_candidates.pilot.json", "why": "你的实际工作清单(28 条真实网址,横跨 3 件样本)", "key_takeaway": "建议先抓 shanghai-white-marble-buddha 一件"},
+    {"path": "data/pipeline/out/verified_chunks.schema.json", "why": "你产出的字段规范", "key_takeaway": "每条带 url/fetched_at/content_hash/license_observed/confidence_tier"},
+    {"path": "agents/researcher/sample-bundles/shanghai-northern-qi-white-marble-buddha.md", "why": "最完整的样本=你抓的内容的对照标准(ground truth)", "key_takeaway": "wow moment: 上博'可能响堂山' × V&A O129249 'probably Xiangtangshan' → 同窟流散两件虚拟拼合"},
+    {"path": "agents/researcher/sample-bundles/shanxi-northern-qi-guanyin-pentad.md", "why": "中等密度样本(山博)", "key_takeaway": "山博 ID 顺序可枚举;但官网 SPA 要 --js"},
+    {"path": "agents/researcher/sample-bundles/aurora-hongshan-jade-anthropomorphic-figure.md", "why": "最稀样本(震旦,故意选的难件)", "key_takeaway": "B类源 0 命中;靠 MDPI(CC-BY)+OCS 撑;'红山玉神人从未经科学发掘出土'=原则C最强落地"},
+    {"path": "agents/user-voice/principles.md", "why": "若你顺手摘了叙述,语气得符合的 4 条原则", "key_takeaway": "同行资深爱好者,不是讲解员;觉察权力结构;诚实标边界"},
+    {"path": "agents/researcher/reports/2026-05-18-discovery-pipeline-feasibility.md", "why": "5 类源可行度 + 30 件诚实工时的由来", "key_takeaway": "30件=110-150h;PM国内IP段30-40h压不掉"}
+  ],
+  "optional_reference": [
+    {"path": "docs/PRD.md", "note": "大而全;只在需要时查 §1.4(founding insight)、§6(AI人格)、§10(知识源)、§12(边界)"}
+  ],
+
+  "your_inputs": {
+    "primary": "data/pipeline/in/sources_candidates.pilot.json",
+    "shape": "{ candidates: [ {artifact_id, source_class, url, fetch_hint, expected_license, rationale, ...} ], search_targets: [...], ... }",
+    "b_class_caveat": "data/sources/*.json(海外 OA dump)不在本仓库,B 类源改成现抓单件 API。要不要迁整批 dump 是给 PM 的 open question。"
+  },
+
+  "your_output_contract": {
+    "file": "data/pipeline/out/verified_chunks.json",
+    "schema": "data/pipeline/out/verified_chunks.schema.json",
+    "how": "跑 scripts/fetch/fetch.py 或 run_list.py 会自动追加;也可手工补字段",
+    "hard_rules": [
+      "无 url → 拒收",
+      "fetch_status=ok 但无 content_hash → 自动降为 low tier",
+      "license_observed=unknown → 不得作全文向量化,tier 封顶 low",
+      "失败要如实记 failure_reason,不要假装成功",
+      "绝不凭空生成 chunk —— 没抓到就是没抓到"
+    ]
+  },
+
+  "where_to_store": {
+    "raw_evidence": "data/raw/<artifact>/<class>-<hash8>.<ext> —— 大文件+版权料,.gitignore 了,只留本地",
+    "deliverable": "data/pipeline/out/verified_chunks.json —— 结构化、小、提交回仓库",
+    "images_policy": "海外 CC0 可入;未授权项目图≤512px+跳转源站;馆方现场图≤1024px+文字描述(ADR-003)。pilot 阶段先不处理图,专注文本。"
+  },
+
+  "tools_required": {
+    "python_deps": "scripts/fetch/requirements-fetch.txt (httpx/trafilatura/pdfplumber/Pillow/playwright)",
+    "install": ["python3 -m venv .venv && source .venv/bin/activate", "pip install -r scripts/fetch/requirements-fetch.txt", "playwright install chromium"],
+    "all_free_no_t3": true
+  },
+
+  "claude_code_skills_plugins": {
+    "needed": "无强制插件。内置 WebFetch/WebSearch + 这套 Python 脚本覆盖 90%。",
+    "builtin_webfetch": "本地有网时可快速看一眼某页;但正式抓取走 Python 脚本(留指纹/存原文/可复现)",
+    "optional_recommended": "Playwright MCP(claude mcp add playwright npx '@playwright/mcp@latest')—— 让 Claude 自己开浏览器点最刁钻的大陆 SPA;装它不踩红线但非必须",
+    "anti_advice": "别过度装插件;抓取主力是 curl/python/WebFetch"
+  },
+
+  "hard_constraints_T3_red_lines": [
+    "不注册账号 / 不付费 / 不绑卡 / 不发邮件申请 / 不签约 / 不以项目名义发帖",
+    "页面要登录或付费墙 → 记 failed(needs_login_or_paywall),留给 PM,不绕过",
+    "哈佛免费 key 由 PM 亲自申请,放环境变量 HARVARD_API_KEY,脚本只读不注册",
+    "微信公众号不抓(平台条款+封杀),只列链接人工读",
+    "礼貌抓取:先看 robots.txt,限速,带可识别 UA"
+  ],
+
+  "anti_hallucination_rules": {
+    "from": "ADR-006 反幻觉状态机",
+    "rules": ["每 chunk 必须能追到一个真实 url + 抓取时间 + 内容指纹", "找不到→显式写'X类源未到手,原因Y',不用别的源脑补", "license 不明的内容默认低可信、不全文入库"]
+  },
+
+  "how_to_hand_back": {
+    "commit_scope": "只 git add data/pipeline/out/verified_chunks.json(必要时 data/curated/images/)",
+    "do_not_commit": "data/raw/(已 gitignore)",
+    "command": "git add data/pipeline/out/verified_chunks.json && git commit -m 'data(rag): local Verifier pilot' && git push origin claude/museum-photo-sharing-8qJiz",
+    "then": "告诉云端'pilot 跑完',云端拉下来跑 Compiler 装订 + 校准 30 件工时"
+  },
+
+  "pilot_first": {
+    "why": "ADR-006 要求先用 1-2 件走完整一遍,测出 hand-off 痛点再放大到 30 件",
+    "recommended_first_item": "shanghai-white-marble-buddha(大陆源最多、wow 最清楚)",
+    "success_criteria": [
+      "每条清单都有记录(ok 或 failed+reason)",
+      "≥1 条 CC-BY 全文(MDPI)落地 tier=high",
+      "≥1 个 dpm.org.cn PDF 抽出正文",
+      "产出'本机可达性地图'",
+      "与 sample-bundle 对照确认无凭空内容"
+    ]
+  },
+
+  "open_questions_for_PM": [
+    {"id": "Q-gate", "q": "反幻觉门要'严格(宁缺毋滥)'还是'中等(允许标注下用旁证补)'?", "context": "直接决定 bundle 看起来多丰满 vs 多干净;默认走严格,可后调"},
+    {"id": "Q-email-key", "q": "'发邮件/填表申请免费 API key'(如哈佛)算不算红线、每次都停下问你?", "context": "默认算红线,由 PM 本人申请;你可放行'免费不签约'类"},
+    {"id": "Q-scope", "q": "30 件一次上,还是先做 10 件跑通看效果?", "context": "小范围起步更稳;pilot 跑完会有真实工时数据再定"},
+    {"id": "Q-bclass-dump", "q": "B 类源:把 prac_Museum 那批 data/sources/*.json(Met/CMA/FSG dump)迁过来,还是本地现抓单件 API?", "context": "pilot 先现抓;全量 30 件可能值得迁 dump 省事"},
+    {"id": "Q-proxy", "q": "你本地有没有可用的代理/VPN 给 archive.org + 海外 OA?", "context": "决定 archive.org(Met Wisdom Embodied 等)这条源对你是否可靠"}
+  ],
+
+  "do_not_do": [
+    "不要选品 / 不要改 30 件清单(那是 Curator + PM)",
+    "不要写最终 bundle markdown(那是云端 Compiler)",
+    "不要扩 Met / 明清 / V&A main index / 占位源(Curator 已 flag)",
+    "不要在 web 沙箱假装能验证大陆 API(那是另一个环境的事)",
+    "不要把抓失败伪装成成功"
+  ],
+
+  "starter_prompt_for_local_session": "你是这个项目的 Verifier(核源/抓取)。先按顺序读 docs/LOCAL-SETUP.md → docs/ADR/006-open-discovery-pipeline.md → docs/ADR/003-knowledge-sources.md → data/pipeline/in/sources_candidates.pilot.json → 三份 agents/researcher/sample-bundles/*.md。然后:(1) 按 docs/LOCAL-SETUP.md 第1节装好环境(venv + requirements-fetch.txt + playwright install chromium);(2) 先 dry-run `python scripts/fetch/run_list.py data/pipeline/in/sources_candidates.pilot.json` 确认清单读得对;(3) 真抓 shanghai-white-marble-buddha 这一件(`--go --artifact shanghai-white-marble-buddha`),抓完打开 data/pipeline/out/verified_chunks.json 检查;(4) 把结果跟 sample-bundle 对照,确认没有凭空内容;(5) 产出一张'本机可达性地图'(哪些大陆站点通、archive.org/海外通不通)。严守 T3 红线:不注册/不付费/不发邮件申请/不绕登录墙——碰到就记 failed 并问 PM。抓失败如实记 failure_reason,绝不假装成功。完成后 git add 仅 data/pipeline/out/verified_chunks.json 并推回 claude/museum-photo-sharing-8qJiz 分支。"
+}

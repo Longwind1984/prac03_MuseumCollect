@@ -33,3 +33,8 @@ venv/
 ai-service/poc/cache/
 ai-service/poc/embeddings.npy
 ai-service/poc/items.json
+
+# RAG pipeline · Phase B local Verifier (see docs/ADR/006 + docs/LOCAL-SETUP.md)
+# Raw fetched evidence (HTML/PDF/images) is bulky + copyright-laden → local-only.
+# data/pipeline/out/verified_chunks.json IS committed — it is the deliverable.
+data/raw/

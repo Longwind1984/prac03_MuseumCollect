@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "verified_chunks",
+  "description": "Local Verifier (Phase B) deliverable. A flat list of fetched-and-verified source chunks, one per (url, content_hash). Handed back to the cloud Compiler. See docs/ADR/006-open-discovery-pipeline.md.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["artifact_id", "source_class", "url", "fetched_at", "fetch_status"],
+    "additionalProperties": true,
+    "properties": {
+      "artifact_id": {"type": "string", "description": "which of the 30 (or pilot) items this belongs to"},
+      "source_class": {"enum": ["A", "B", "C", "D", "E"], "description": "A museum-first-party / B overseas-OA / C academic / D field-and-media / E digital-humanities"},
+      "url": {"type": "string", "format": "uri", "description": "MANDATORY. A chunk with no url is rejected (anti-hallucination)."},
+      "fetched_at": {"type": "string", "description": "ISO-8601 UTC timestamp"},
+      "fetch_status": {"enum": ["ok", "failed"]},
+      "fetch_method": {"type": "string", "description": "e.g. httpx->html, playwright->html, httpx->pdf, httpx->json"},
+      "content_hash": {"type": "string", "description": "sha256 of the raw fetched bytes. Required for confidence_tier=high."},
+      "license_observed": {"enum": ["CC0", "CC-BY", "CC-BY-NC-SA", "(c)all-rights", "unknown"], "description": "what the page/record actually states. unknown defaults to low tier."},
+      "confidence_tier": {"enum": ["high", "mid", "low"], "description": "high=full quote/text allowed (needs hash + permissive license); mid=≤100-char quote + metadata; low=url+title only"},
+      "source_title": {"type": ["string", "null"]},
+      "author": {"type": ["string", "null"]},
+      "publish_year": {"type": ["string", "integer", "null"]},
+      "excerpt_or_metadata": {"type": "string", "description": "inline preview, capped (full text lives in raw_path)"},
+      "excerpt_truncated": {"type": "boolean"},
+      "raw_path": {"type": "string", "description": "repo-relative path to raw evidence under data/raw/ (gitignored, local-only)"},
+      "failure_reason": {"type": "string", "description": "when fetch_status=failed: http_403 / http_404 / timeout / needs_login_or_paywall / ..."},
+      "notes": {"type": "string"}
+    }
+  },
+  "_hard_rules_enforced_downstream": [
+    "no url  -> rejected entirely",
+    "fetch_status=ok but no content_hash -> auto-downgraded to tier=low",
+    "license_observed=unknown -> may not be embedded as full text; tier capped at low",
+    "Compiler must NOT synthesize a chunk that has no verified source here"
+  ]
+}
