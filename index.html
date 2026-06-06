@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MuseumCollect — AI PM 作品集 · 5 sprint · case-study v0.8 (9000 汉字 6 节)</title>
-  <meta name="description" content="AI 产品经理作品集:8+ agent / 5 sprint / 277 件结构化数据 / 11 份 audit / 2 轮闭环兑现 + 真实 AI baseline (in-sandbox pHash P@5=0.667) + 3 份 commercial PM artifact (NSM / 竞品矩阵 / 投资人 1-pager) / case-study v0.8 ~9000 汉字 6 节。">
+  <title>MuseumCollect — AI PM 作品集 · 5 sprint · case-study v0.9 (10600 汉字 7 节)</title>
+  <meta name="description" content="AI 产品经理作品集:8+ agent / 5 sprint / 277 件结构化数据 / 11 份 audit / 2 轮 cold-audit 拷问与修复 / 6 份 commercial PM artifact (NSM / 竞品 / 1-pager / 风险 / 埋点 / 假设登记册) / case-study v0.9 ~10600 汉字 7 节。">
   <!-- Open Graph for shareable previews -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="MuseumCollect — AI PM 作品集 · 5 sprint · 8 agent · 277 件 11 字段">
@@ -12,7 +12,7 @@
   <meta property="og:image" content="./assets/screenshots/dashboard-desktop.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="MuseumCollect — AI PM 作品集">
-  <meta name="twitter:description" content="8 agent / 5 sprint / 277 件 / 11 audit / case-study v0.8 (9000 汉字 6 节) + NSM + 竞品矩阵 + 1-pager · 全证据链 grep-verifiable">
+  <meta name="twitter:description" content="8 agent / 5 sprint / 277 件 / 11 audit / case-study v0.9 (10600 汉字 7 节) + 6 商业 PM 文档 + assumptions-register · 全证据链 grep-verifiable">
   <meta name="twitter:image" content="./assets/screenshots/dashboard-desktop.jpg">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
@@ -38,8 +38,8 @@
       </h1>
       <p class="text-base md:text-lg text-stone-700 max-w-3xl leading-relaxed mb-5">
         我用 8 个有边界的 AI agent 跑了 5 个 sprint,产出 1 个 converged demo(12 页面 / 277 件 11 字段 / 真 GeoJSON / 28/28 Playwright tests green),
-        11 份多视角 audit,2 轮 audit-as-iteration-trigger 兑现,~9000 汉字 case-study v0.8 (6 节,含 cold-audit response §6),
-        3 份 commercial PM artifact (NSM / 竞品矩阵 / 投资人 1-pager),以及一份 in-sandbox 真跑出来的 AI baseline。
+        11 份多视角 audit,**2 轮 cold-audit 拷问与修复**(round-1 查 coverage、round-2 查 credibility),~10600 汉字 case-study v0.9 (7 节),
+        6 份 commercial PM artifact(NSM / 竞品 / 1-pager / 风险 / 埋点 / ★假设登记册),以及一份 in-sandbox 真跑出来的检索 pipeline。
         <span class="text-stone-500 italic">这不是 "我用 AI 写代码的 PM",是 "我把 AI 的约束当作产品设计原则" 的实证。</span>
       </p>
       <div class="flex flex-wrap gap-3">
@@ -47,7 +47,7 @@
           ★ 立刻体验 v3 三联动 demo →
         </a>
         <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/case-study.md" class="inline-flex items-center gap-2 px-5 py-2.5 border border-stone-400 text-stone-800 rounded-md text-sm font-medium hover:bg-stone-100">
-          深读 case-study v0.8 (~25 min) →
+          深读 case-study v0.9 (~28 min) →
         </a>
         <a href="./morning-report.md" class="inline-flex items-center gap-2 px-5 py-2.5 text-stone-600 rounded-md text-sm font-medium hover:text-stone-900">
           先扫 morning-report (~5 min) →
@@ -164,7 +164,7 @@
         </div>
         <div class="sprint-node bg-amber-50 border border-amber-300 rounded p-3">
           <div class="w-3 h-3 rounded-full bg-amber-600 mb-2 mx-auto"></div>
-          <p class="text-xs font-mono text-amber-700 text-center mb-1">v0.8 ★ now</p>
+          <p class="text-xs font-mono text-amber-700 text-center mb-1">v0.9 ★ now</p>
           <p class="text-xs text-stone-700 text-center">case-study + AI PoC<br>+ portfolio polish</p>
         </div>
       </div>
@@ -250,15 +250,53 @@
       </div>
     </section>
 
-    <!-- Commercial PM artifacts card · v0.8 push -->
+    <!-- Round-2 credibility audit card · v0.9 push -->
     <section class="mb-12">
-      <p class="text-xs uppercase tracking-widest text-stone-500 mb-3">Commercial PM artifacts · v0.8 cold-audit response</p>
+      <p class="text-xs uppercase tracking-widest text-stone-500 mb-3">★ Round-2 credibility audit · v0.9 — 自己抓自己的双标</p>
+      <div class="bg-stone-900 text-stone-100 rounded-lg p-5 md:p-6 mb-6">
+        <h3 class="text-xl font-serif mb-2 text-white">🔍 第二轮拷问:我对 AI 数字严格,对商业数字裸奔</h3>
+        <p class="text-sm leading-relaxed mb-3 max-w-3xl text-stone-300">
+          round-1 查"PM artifact 存不存在",round-2 让 cold agent 假装<strong class="text-white">已读完所有文档</strong>的面试官,查"可不可信"。它给了最重一击:
+        </p>
+        <blockquote class="border-l-2 border-amber-500 pl-3 text-sm italic text-stone-300 mb-3 max-w-3xl">
+          "你围绕'拒绝伪造一个 AI 指标'(§5.9)建立道德品牌,却在同一周伪造了 <strong class="text-amber-300">9 个 load-bearing 商业指标、零引用</strong> —— 证明这种诚实是选择性表演,不是纪律。"
+        </blockquote>
+        <p class="text-sm leading-relaxed mb-3 max-w-3xl text-stone-300">
+          <strong class="text-white">指控成立,我不辩护。</strong> 修复不是再写一段"诚实承认"(那恰是 auditor 同时点名的 "honesty as a shield"),而是<strong class="text-white">可被 diff 验证的实际修改</strong>:
+        </p>
+        <div class="grid md:grid-cols-2 gap-3 mb-3 text-xs">
+          <div class="bg-stone-800 rounded p-3">
+            <div class="text-amber-300 font-semibold mb-1">① assumptions-register.md(★ 核心产物)</div>
+            <div class="text-stone-300 leading-relaxed">24 个 load-bearing 数字逐个打标:6 [M]easured · 6 [B]enchmarked(去 web 抓真锚点)· 12 [A]ssumed(明确降级 + 给验证方法)。铁律:[A] 不许裸奔成事实。</div>
+          </div>
+          <div class="bg-stone-800 rounded p-3">
+            <div class="text-amber-300 font-semibold mb-1">② 修 6 处跨文档矛盾</div>
+            <div class="text-stone-300 leading-relaxed">最尴尬的 C1:投资文档卖"5 维度(含工艺)",而我最自豪的 PM 决策是"砍掉工艺、提铸主为 7+1"——投资文档在卖我引以为傲砍掉的旧 schema。全部对齐 canonical 7+1。</div>
+          </div>
+          <div class="bg-stone-800 rounded p-3">
+            <div class="text-amber-300 font-semibold mb-1">③ 去 web 抓真锚点</div>
+            <div class="text-stone-300 leading-relaxed">activation 30% → 锚定真实中位 25%/均值 34%,删掉编造的"小红书22%/B站28%";小红书数据换真引用(MAU 3.5亿);故宫"MAU~150k"承认是猜的并降级。</div>
+          </div>
+          <div class="bg-stone-800 rounded p-3">
+            <div class="text-amber-300 font-semibold mb-1">④ pHash baseline 降级</div>
+            <div class="text-stone-300 leading-relaxed">承认 0.333 = 6 里命中 2、三星堆 0/2、自绘 SVG,且 n=6 与我批判的 CLIP n=25 同样弱。从"headline 拼图"降为"几乎不构成 retrieval evidence 的 toy"。</div>
+          </div>
+        </div>
+        <p class="text-xs leading-relaxed max-w-3xl text-stone-400 mb-3">
+          <strong class="text-stone-200">真正的 lesson(比 §6 更扎人)</strong>:我以为我有"不造假"的纪律,其实只有"在我熟悉的领域(AI 工程)不造假"的习惯。纪律的考验不在你擅长的地方,在你不擅长、且没人会立刻 check 的地方。AI 数字工程师会 check 所以我严格,商业数字面试官未必当场 check 所以我松懈——这个"按被抓概率调节诚实度"的潜意识,比任何单个 fake 数字更值得警惕。
+        </p>
+        <div class="flex flex-wrap gap-2 text-xs">
+          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/assumptions-register.md" class="px-2.5 py-1 bg-amber-500 text-stone-900 rounded font-mono font-semibold hover:bg-amber-400">★ docs/assumptions-register.md</a>
+          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/case-study.md#7-第二轮拷问我自己的双标round-2-cold-audit-response" class="px-2.5 py-1 bg-stone-700 text-stone-100 rounded font-mono hover:bg-stone-600">→ case-study §7</a>
+        </div>
+      </div>
+      <p class="text-xs uppercase tracking-widest text-stone-500 mb-3">Round-1 coverage audit · v0.8 — 5 份商业 PM 文档</p>
       <div class="bg-white border border-stone-200 rounded-lg p-5 md:p-6">
-        <h3 class="text-xl font-serif mb-2">📈 3 份 P0 商业 PM artifact · 回应 senior PM 面试官拷问</h3>
+        <h3 class="text-xl font-serif mb-2">📈 商业 PM artifact · 回应 senior PM 面试官拷问</h3>
         <p class="text-sm text-stone-700 leading-relaxed mb-3 max-w-3xl">
           一个 cold-context agent 假装 senior AI PM 面试官,扫完前 5 节给 verdict:
           <em class="text-stone-600">"strong on process narrative + AI engineering depth, but commercial PM artifacts are 0-2/3 across the board"</em>。
-          §4.3 我自己早写过 "缺增长维度 = 4/10" 但没补 — 这次 ship 3 个 P0 文档把它补到 3/3:
+          §4.3 我自己早写过 "缺增长维度 = 4/10" 但没补 — round-1 ship 这些文档把它补齐(数字在 round-2 全部打了 [M]/[B]/[A] 标):
         </p>
         <div class="grid md:grid-cols-3 gap-3 mb-4">
           <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/north-star.md" class="bg-amber-50 border border-amber-200 rounded p-3 hover:bg-amber-100">
@@ -274,7 +312,7 @@
           <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/one-pager.md" class="bg-amber-50 border border-amber-200 rounded p-3 hover:bg-amber-100">
             <div class="font-mono text-xs text-amber-700 mb-1">docs/one-pager.md</div>
             <div class="font-serif text-base text-stone-900 mb-1">Investor 1-pager</div>
-            <div class="text-xs text-stone-600 leading-relaxed">Problem / Solution / Market / Why-now / GTM (CAC ¥12, LTV ¥60, 5:1) / Ask / Risk · 投资人 90s 版 · 1500 字</div>
+            <div class="text-xs text-stone-600 leading-relaxed">Problem / Solution / Market / Why-now / GTM / Ask / Risk · 投资人 90s 版 · 数字全部打 [M]/[B]/[A] 标 · 1500 字</div>
           </a>
         </div>
         <div class="bg-stone-50 border border-stone-200 rounded p-3 mb-3">
@@ -293,7 +331,7 @@
           <strong>诚实自评不能停在自评 — 必须接 "what would the harshest interviewer ask"</strong>。
         </p>
         <div class="flex flex-wrap gap-2 text-xs">
-          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/case-study.md#6-about-the-commercial-gap--一个-senior-pm-面试官会怎么拷问我" class="px-2.5 py-1 bg-amber-100 rounded font-mono text-amber-800 hover:bg-amber-200">★ case-study §6 commercial gap</a>
+          <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/case-study.md#6-about-the-commercial-gap--一个-senior-pm-面试官会怎么拷问我" class="px-2.5 py-1 bg-amber-100 rounded font-mono text-amber-800 hover:bg-amber-200">→ case-study §6 commercial gap</a>
           <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/case-study.md#43-vs-招聘信号" class="px-2.5 py-1 bg-stone-100 rounded font-mono text-stone-700 hover:bg-stone-200">§4.3 自评 (诚实 4/10)</a>
         </div>
       </div>
@@ -305,8 +343,9 @@
       <p class="text-sm text-stone-500 mb-5">这个项目的核心论点不是 demo 本身,是<strong>过程证据链可被任何外部 reviewer 用 grep 验证</strong>。每条 claim 都有对应 artifact 文件。</p>
 
       <div class="grid md:grid-cols-2 gap-x-8 gap-y-1.5 text-sm">
-        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/case-study.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ <strong>docs/case-study.md</strong>(v0.8 portfolio narrative · ~9000 汉字 6 节)</a>
-        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/one-pager.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ <strong>docs/one-pager.md</strong> ★ NEW(投资人 90s + GTM + LTV/CAC)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/case-study.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ <strong>docs/case-study.md</strong>(v0.9 portfolio narrative · ~10600 汉字 7 节)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/assumptions-register.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ <strong>docs/assumptions-register.md</strong> ★ NEW(★ 每个数字打 [M]/[B]/[A] 标)</a>
+        <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/one-pager.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ <strong>docs/one-pager.md</strong>(投资人 90s + GTM,数字打标)</a>
         <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/north-star.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ <strong>docs/north-star.md</strong> ★ NEW(NSM + 2 层 metric tree)</a>
         <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/competitive-landscape.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ <strong>docs/competitive-landscape.md</strong> ★ NEW(8 竞品 × 4 维矩阵)</a>
         <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/docs/product-policy-and-risks.md" class="text-stone-700 hover:text-stone-900 hover:underline">→ <strong>docs/product-policy-and-risks.md</strong> ★ NEW(8 risk + 4 product policy)</a>
@@ -334,7 +373,7 @@
     <!-- Footer -->
     <footer class="mt-8 pt-6 border-t border-stone-200 text-xs text-stone-500">
       <p class="mb-1">2026-05-20 → 2026-06-05 · 5 sprint · 1 项目主理人 + ~32 subagent invocations · ~4.5M tokens · 估 $40-50 USD</p>
-      <p class="mb-1">读 case-study v0.8 §0.5 作者背景 · §3 方法论 · §4 量化产出 · §5 反思(§5.7 二阶闭环 · §5.8 defer 误区 · §5.9 PoC ship discipline · §5.9.1 in-sandbox pHash)· §6 cold-audit response</p>
+      <p class="mb-1">读 case-study v0.9 §0.5 作者背景 · §3 方法论 · §4 量化产出 · §5 反思 · §6 round-1 commercial gap · ★§7 round-2 双标修复(assumptions-register)</p>
       <p><a href="https://github.com/longwind1984/prac03_museumcollect/tree/claude/museum-photo-sharing-8qJiz" class="hover:underline text-stone-700">GitHub repo →</a> · <a href="https://github.com/longwind1984/prac03_museumcollect/blob/claude/museum-photo-sharing-8qJiz/README.md" class="hover:underline text-stone-700">README →</a></p>
     </footer>
 

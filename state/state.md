@@ -17,9 +17,9 @@
 | **v4.6** | 2026-05-22 | 真实 GeoJSON (d3.geoConicEqualArea) + mobile retrofit (12 页 375px true mobile) + 28/28 Playwright green | "defer 是 PM 工具箱里最危险的动词" — §5.8 reframing |
 | **v5** | 2026-05-22→ | Tailwind CDN removal (13 页) + a11y contrast + data-loader 并行化 + GeoJSON 项目 docs reconciliation | 性能 + 实诚 docs |
 
-**量化产出**: ~32 subagent invocations / ~4.5M tokens / 估 $40-50 USD / 总 wall-clock 横跨多 night-run。277/300 国宝(92%) · 11 audit reports · 2 闭环 iteration · 28/28 Playwright tests green · case-study v0.8 ~9000 汉字 6 节 · 12 silhouette SVG + 25 pattern SVG + 7 GeoJSON。
+**量化产出**: ~32 subagent invocations / ~4.5M tokens / 估 $40-50 USD / 总 wall-clock 横跨多 night-run。277/300 国宝(92%) · 11 audit reports · 2 闭环 iteration · **2 轮 portfolio cold-audit(coverage + credibility)** · 28/28 Playwright tests green · case-study v0.9 ~10600 汉字 7 节 · 6 商业 PM 文档(含 assumptions-register)· 12 silhouette SVG + 25 pattern SVG + 7 GeoJSON。
 
-**如何读懂这个项目的 narrative**:本文件是 append-only event-sourced log,适合追溯**任何决策的因果链**(grep 任意 ID 即可)。但读 narrative 请看 `docs/case-study.md`(v0.8,§0-§6 完整)+ `docs/one-pager.md`(投资人 90s)+ `morning-report.md`(D0 5 分钟 TL;DR)+ `docs/agent-team-design.md`(8+ 角色拓扑)。读决策因果链请看 `state/decision-log.md`。
+**如何读懂这个项目的 narrative**:本文件是 append-only event-sourced log,适合追溯**任何决策的因果链**(grep 任意 ID 即可)。但读 narrative 请看 `docs/case-study.md`(v0.9,§0-§7 完整,§7 是 round-2 双标修复)+ `docs/assumptions-register.md`(每个数字 [M]/[B]/[A] 打标)+ `morning-report.md`(D0 5 分钟 TL;DR)。读决策因果链请看 `state/decision-log.md`。
 
 ---
 
@@ -211,3 +211,13 @@ Total active background agents: 9 (5 DE + 4 Phase B)
   - Tests: 28/28 green (16 original + 12 mobile-viewport).
   - DEFERRED-001: FULLY CLOSED. DEFERRED-002: PARTIALLY CLOSED (pragmatic retrofit done; true mobile-first rebuild still v5).
   - Files: assets/vendor/d3.v7.min.js, audits/bug-log.md (updated), docs/case-study.md (v0.5), qa/tests/mobile-viewport.spec.ts, converged.css (+125 lines mobile block).
+
+[2026-06-05 P1] [portfolio-cold-audit-round-1] DONE — coverage audit (PM artifact 存不存在). Cold agent 假装 senior PM 面试官扫前 5 节,verdict: "strong on process+AI eng, but commercial PM artifacts 0-2/3 across board." Ship 5 docs (north-star NSM tree / competitive-landscape 8 竞品 / one-pager 投资人格式 / product-policy-and-risks 8 risk / analytics-event-taxonomy 11 events) + case-study §6. Commits 05c25e8, 466c3e2.
+
+[2026-06-06 P2] [portfolio-cold-audit-round-2] DONE — credibility audit (artifact 可不可信). Cold agent 假装已读完文档的面试官,抓到核心双标:"refused to fabricate 1 AI metric (§5.9), then fabricated 9 load-bearing business metrics with zero citations same week — honesty is selective performance not discipline." 指控成立。修复(非忏悔,是 diff):
+  - NEW docs/assumptions-register.md: 24 个 load-bearing 数字打 [M](6)/[B](6)/[A](12) 标。铁律: [A] 不许裸奔成事实。
+  - 去 web 抓真锚点: activation 30% → 真实中位25%/均值34%(Business of Apps/Plotline);CAC ¥12 → 全球 CPI iOS$3.6/Android$1.22;小红书 → MAU 3.5亿+广东省博物馆话题9134万(替换编造的"100M+/+47%");故宫"MAU~150k"承认是猜的并降级。
+  - 修 6 处跨文档矛盾(register §4): C1 维度数 5→7+1(投资文档原在卖我最自豪砍掉的旧 schema 工艺!) / C2 WAC 月周算错 / C3 activation 既知又未知 / C4 两套成本模型 / C5 P@5 0.60vs0.55 / C6 pHash 当 CLIP 卖。
+  - pHash 降级: 承认 0.333=6里命中2、三星堆0/2、自绘SVG、n=6 与批判的 CLIP n=25 同样弱。从 headline 拼图 → "几乎不构成 retrieval evidence 的 toy"。
+  - case-study §7 (~2300字): 直面双标,真正 lesson = "我只有'在熟悉领域不造假'的习惯,纪律的考验在不擅长且没人会立刻 check 的地方"。
+  - case-study v0.8 → v0.9 (~10600 汉字 7 节). index/README/state 同步.

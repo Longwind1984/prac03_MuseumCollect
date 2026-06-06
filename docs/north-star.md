@@ -2,8 +2,10 @@
 
 **Doc owner**: 项目主理人 / Product Owner agent
 **Last updated**: 2026-06-05
-**Status**: v1 working draft — to be re-validated after Sprint 6 (first usable shipped product)
-**Word count**: ~1800
+**Status**: v1.1 — round-2 audit 后修订:所有数字打 [M]/[B]/[A] 标,WAC 月/周算法修正(C2),activation 编造 benchmark 删除(C3),指向 `docs/assumptions-register.md`
+**Word count**: ~2000
+
+> ⚠️ **本文所有量化 target 是 [A] 假设,不是测算结果。** 每个数字的认知状态(measured / benchmarked / assumed)+ 验证方法见 `docs/assumptions-register.md`。这是 round-2 cold-audit 抓到"伪造确信"后的系统性修复。
 
 ---
 
@@ -19,9 +21,13 @@
 - Scan count 太前置,识别完没收藏 = 价值未兑现;
 - **"Collected"** 是用户**愿意做出价值判断**的行为 — 他认为这件东西值得进入他的 collection。这才是 product-market-fit 的核心信号。
 
-**6 个月 target (D180 from Sprint 6 launch)**: WAC = 3,000(月度新用户 ~10,000,activation 30%)
-**12 个月 target**: WAC = 25,000(MAU ~120,000,activation 30%)
-**24 个月 stretch**: WAC = 200,000(MAU ~1M,activation 30%,触发 Phase 2 AI 投资)
+**全部 target 是 [A] 假设,见 `docs/assumptions-register.md` A3。** round-2 audit 抓到我原来"把月度激活数标成周度活跃数"(C2),这里修正口径:
+
+- **6 个月 target (D180)**: WAC ≈ **2,000-3,000**。⚠️ 不能简单用"月新增 10k × 30%"——那是**月度**新激活数(~3k/月 ≈ 750/周 来自新用户),WAC 还要叠加**accumulated 留存基数**的回访收藏者。准确的 signups→WAC 桥需要一个我**还没有**的 retention 模型,所以这里给区间不给精确点。
+- **12 个月 target**: WAC ≈ **20,000-25,000**(对应 MAU ~120k 量级)
+- **24 个月 stretch**: WAC ≈ **150,000-200,000**(MAU ~1M,触发 Phase 2 AI 投资)
+
+> 为什么给区间而非精确数:WAC 是 flow 指标,= 新激活 + 留存回访。在没有真实 retention 曲线前,任何精确到个位的 WAC target 都是伪精确。**这正是 round-2 audit 教我的:宁可诚实给区间,不要伪造精确。**
 
 ---
 
@@ -30,7 +36,7 @@
 ### 1.1 用户行为时序与产品形态错配
 
 博物馆访问是**低频高强度**事件:
-- 平均博物馆爱好者一年 5-12 次实地访问(国博 2024 数据);
+- 平均博物馆爱好者一年 5-12 次实地访问([A 假设]——这个频次我没有可引用来源,粗估,待用户调研验证);
 - 每次访问后 1-3 天的"消化期"会回看照片、查资料;
 - 之后可能 2-4 周低活跃;
 - 大展开幕 / 特展 巡展会触发集中爆发期。
@@ -102,33 +108,38 @@ Funnel:    打开 App → 扫码 → 识别成功 → 阅读卡片 → 【收藏
 | B 站/小红书文博 UP 合作 | 4,000 | ¥15-30/install | M2+ |
 | 小红书 SEO(国宝关键词) | 2,000 | ~¥0(内容运营) | M3+ |
 | 朋友圈 / 小程序裂变 | 1,000 | ~¥5/install(分享奖励) | M4+ |
-| **合计** | **10,000/月** | **blended ≈ ¥12** | — |
+| **合计** | **10,000/月** [A] | **blended ≈ ¥12** [A·量级有 B2 锚点] | — |
+
+> ⚠️ 渠道月新增、per-channel CAC 均为 [A] 假设。blended ¥12 的**量级**有锚点(B2:全球 CPI iOS $3.6 / Android $1.22 ≈ ¥9-26),但精确值待真实投放验证。见 `docs/assumptions-register.md` A4。
 
 ### 2.2 Activation 层 — 注册→首藏率
 
-**D7 Activation Rate** target = **30%**
+**D7 Activation Rate** target = **30%** [A 假设·见 assumptions-register A3]
 
 **定义**: 注册后 7 天内至少完成 1 次收藏(扫码 / 手动添加 / 编辑器创作均算)
 
-**关键输入 metrics**:
+**关键输入 metrics**(均为 [A] 目标,待 Beta 验证):
 - **首扫识别成功率** ≥ 70%(AI 识别返回 ≥ 1 候选,用户接受其中一个)
 - **首次推荐藏品的接受率** ≥ 40%(对纯探索用户,不带照片的"猜你喜欢")
 - **注册→首藏中位时延** ≤ 5 分钟(目前 demo 实测 ~90 秒)
 
-为什么 30%: 业内 social/utility hybrid product activation benchmarks(小红书早期 ~22%, Bilibili 早期 ~28%, Strava 早期 ~38%)。我们的 niche 度高、用户自筛后转化预期偏高,30% 是 "比平均偏好但低于硬核 niche tooling" 的合理 target。
+**为什么 30%(诚实版,round-2 audit 修正后)**: 锚定真实行业 benchmark [B1] —— 全球 app activation **中位 ~25% / 均值 ~34%**(Business of Apps 2024-26;Plotline by-industry)。30% 落在中位与均值之间,可辩护为"略高于中位"。
+> ⚠️ 原文写的"小红书早期22%/Bilibili早期28%/Strava早期38%"这三个数是**我编的**,无来源,已删除。这是 round-2 audit 命中的"裸奔的伪 benchmark"典型。
+> ⚠️ 注意 §6.1 把"activation 能否稳定 25-35%"列为待验证 hypothesis —— 那才是它真实的认知状态:30% 是**假设目标**,不是已论证结论(C3 修正)。
 
 ### 2.3 Habit 层 — W2 returning + collect
 
-**W2 Returning Collector Rate** target = **40%** of activated users
+**W2 Returning Collector Rate** target = **40%** of activated users [A 假设·见 assumptions-register A6]
 
 **定义**: 在 activation 后 14 天内**再次新增至少 1 件藏品**
 
-**关键输入 metrics**:
+**关键输入 metrics**(均为 [A] 目标):
 - 每周大展展讯推送 CTR ≥ 15%
 - "你的博物馆"完成度 progress bar 触达(case-study §3 时间轴)→ "下一件能填的空位"提示 CTR ≥ 8%
 - 朋友圈/小程序分享回流率 ≥ 5%
 
-40% W2 retention 是 collection-game (Pokémon GO / Animal Crossing) habit 行业的合理上限。社交产品类(微博 / 抖音)能做到 60%+ 但靠的是 attention loop,跟我们价值观矛盾。
+**40% 的依据(诚实版)**: [B5] 真实锚点只能说明**方向**——团队制收集挑战(Pokémon GO 型)比个人目标制 30天 retention 高 38%;Strava 新注册用户 Day-4 流失 61%(Amplitude / SurveyMonkey Intelligence 2023)。这些**不能**证明我们能到 40%。
+> ⚠️ 原文"40% 是 collection-game 行业合理上限"是无来源断言,已降级为 [A] 目标。40% 是我**希望**达到的目标,验证在 §6.1 Beta cohort。
 
 ---
 
@@ -170,21 +181,21 @@ P@5 ≥ 0.60  →  首扫识别成功率 ≥ 70%  →  D7 Activation ≥ 30%  �
 
 ### 5.1 D180 (6 个月)
 
-- **WAC = 3,000** (月新增 10k × activation 30% = 3k weekly cohort)
+- **WAC ≈ 2,000-3,000** [A·A3]。⚠️ **C2 修正**:原文"月新增10k × 30% = 3k weekly cohort"是错的——月新增 10k × activation 30% = 3k **月度**新激活,≈ 750/周来自新用户;WAC 还要加 accumulated 留存回访,精确值需 retention 模型,故给区间
 - 主要 channel: 国博/上博 partnership (assume signed by M2) + B 站文博 UP 3-5 个合作
-- 内容覆盖: 277 → 500+ 件结构化数据,covering 商周青铜 / 唐三彩 / 宋瓷 三大主类
+- 内容覆盖: 277 → 500+ 件结构化数据 [A·A11],covering 商周青铜 / 唐三彩 / 宋瓷 三大主类
 
 **关键假设**:
 - 至少 1 个一级博物馆愿意做二维码线下试点(M1-M2 BD 优先级)
-- AI P@5 ≥ 0.55 in-the-wild(off-sandbox eval 后,见 case-study §5.9.1)
+- AI in-the-wild P@5 ≈ 0.55(lab target 0.60,off-sandbox eval 后,见 assumptions-register C5)
 - 没有大展期 = 平台期 baseline;真实增长靠 大展 spike
 
 ### 5.2 D360 (12 个月)
 
-- **WAC = 25,000** (MAU ~120k × activation 30% × 7/4 W-to-M 转换)
+- **WAC ≈ 20,000-25,000** [A·A3](对应 MAU ~120k 量级,7/4 周月转换)
 - Phase 2 AI 投资触发(DINOv2 ensemble,见 ai-roadmap §3)
 - Track D 小程序版本上线(case-study §3 时间轴)
-- 单位经济: ¥6-8/MAU/月成本(ai-roadmap §5),需要至少 ¥10-15/MAU/月 monetization 路径
+- 单位经济 [A·A12]: **⚠️ C4 未解** —— `ai-roadmap §5` 给的是 ¥0.011/recognition,本文用的是 ¥6-8/MAU/月,**两套成本模型之间的桥我还没搭**(per-MAU = 月人均 recognition 次数 × 单价 + 存储/CDN/带宽分摊)。在有真实流量前,¥6-8/MAU 是粗估;需要 ¥10-15/MAU/月 monetization 路径才 viable
 
 **关键假设**:
 - 已建立可重复 UP 主合作 motion(每月 1-2 个新 UP)
@@ -193,14 +204,14 @@ P@5 ≥ 0.60  →  首扫识别成功率 ≥ 70%  →  D7 Activation ≥ 30%  �
 
 ### 5.3 D720 (24 个月) — Stretch
 
-- **WAC = 200,000** (MAU ~1M)
+- **WAC ≈ 150,000-200,000** [A·A3](MAU ~1M)
 - 触发 Phase 3 AI(case-study §3.3 multimodal RAG,artifact-knowledge LLM)
 - 多 vertical (青铜 → 瓷器 → 书画 → 唐三彩) 都完成 domain-research → 标注 → onboard
 
 **关键假设**:
 - 至少 3 个一级博物馆完成深度 partnership(数据双向同步)
-- LTV/CAC ≥ 3:1(从单位经济到 sustainable growth)
-- 行业类比 reach: 类似 Strava 2014→2017 增长曲线(150万→500万 MAU)
+- **若** A4(CAC)+ A5(LTV)被验证,LTV/CAC ≥ 3:1(条件句,见 assumptions-register A8——不是结论)
+- 行业类比 reach: 类似 Strava 2014→2017 增长曲线(150万→500万 MAU)[A·类比,非预测]
 
 ---
 

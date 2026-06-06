@@ -1,6 +1,6 @@
 # MuseumCollect — AI PM 作品集
 
-> 我用 8 个有边界的 AI agent 跑了 5 个 sprint,产出 1 个 converged demo + 11 份多视角 audit + 2 轮 audit-as-iteration-trigger 兑现,~9000 汉字 case-study,加 3 份 commercial PM artifact(NSM / 竞品矩阵 / 投资人 1-pager),以及一份 in-sandbox 真跑的 AI baseline。
+> 我用 8 个有边界的 AI agent 跑了 5 个 sprint,产出 1 个 converged demo + 11 份多视角 audit + **2 轮 cold-audit 拷问与修复**(round-1 查 coverage、round-2 查 credibility 抓出我自己的双标),~10600 汉字 case-study,加 6 份 commercial PM artifact(NSM / 竞品 / 1-pager / 风险 / 埋点 / ★假设登记册),以及一份 in-sandbox 真跑的检索 pipeline。
 > 这不是 "我用 AI 写代码的 PM",是 **"我把 AI 的约束当作产品设计原则"** 的实证。
 
 [![dashboard 三联动](assets/screenshots/dashboard-desktop.jpg)](demos/v3-converged/dashboard.html)
@@ -30,7 +30,8 @@
 |---|---|---|
 | 30 秒 | `index.html` | 项目全景 + 5 张 hero 截图 + 量化 stats |
 | 5 分钟 | `morning-report.md` | D0 night-run 战果(3 demo + 6 audit + close-loop)|
-| 25 分钟 | `docs/case-study.md` v0.8 | **核心文档** — Problem → Insight → Approach → Outcomes → Reflection → Commercial Gap,9000 汉字 6 节 |
+| 28 分钟 | `docs/case-study.md` v0.9 | **核心文档** — Problem → Insight → Approach → Outcomes → Reflection → §6 commercial gap → §7 round-2 双标修复,10600 汉字 7 节 |
+| 10 分钟 | `docs/assumptions-register.md` ★ NEW | **round-2 核心产物** — 24 个 load-bearing 数字打 [M]/[B]/[A] 标 + 6 处跨文档矛盾修复登记 |
 | 8 分钟 | `docs/one-pager.md` ★ NEW | 投资人/CEO 90 秒版本 — Problem/Solution/Market/GTM/Ask 完整 |
 | 12 分钟 | `docs/north-star.md` ★ NEW | NSM (WAC) + 2 层 metric tree + 6/12/24 月 target + 反指标 |
 | 15 分钟 | `docs/competitive-landscape.md` ★ NEW | 8 个具名竞品 × 4 维矩阵 + moat 假设 + "为什么 X 不会做这个" |
@@ -52,7 +53,8 @@ v4.6  (2026-05-22)          真实 GeoJSON (d3.geoConicEqualArea) + mobile retro
 v5    (2026-05-22→)         Tailwind CDN 卸载 (13 页) · a11y contrast · data-loader 并行化 · GeoJSON docs reconciliation
 v0.6  (2026-06-05)          case-study §0.5 + §5.9 + AI PoC stub (ai-service/poc/) + portfolio index/README polish
 v0.7  (2026-06-05)          §5.9.1 in-sandbox pHash baseline + 真 P@5=0.667 数字
-v0.8  (2026-06-05 ★ now)    cold-audit response — 3 P0 docs (NSM / competitive / one-pager) + case-study §6 commercial gap (9000 汉字)
+v0.8  (2026-06-05)          round-1 cold-audit (coverage) — 5 商业 PM docs (NSM / competitive / one-pager / risk / analytics) + case-study §6
+v0.9  (2026-06-06 ★ now)    round-2 cold-audit (credibility) — 抓出"AI 数字严格/商业数字裸奔"双标 → assumptions-register (24 数字打标) + 6 矛盾修复 + pHash 降级 + case-study §7
 ```
 
 详细日志见 [`state/state.md`](state/state.md)(append-only event log,顶部有 executive summary)。
@@ -64,10 +66,11 @@ prac03_MuseumCollect/
 ├── index.html                    # 作品集入口(打开即看)
 ├── morning-report.md             # D0 night-run 5-min TL;DR
 ├── docs/
-│   ├── case-study.md             # ★ portfolio 核心 narrative · v0.8 ~9000 汉字 6 节
-│   ├── one-pager.md              # ★ NEW 投资人 90s + GTM + LTV/CAC
-│   ├── north-star.md             # ★ NEW NSM (WAC) + 2 层 metric tree
-│   ├── competitive-landscape.md  # ★ NEW 8 竞品 × 4 维矩阵 + moat
+│   ├── case-study.md             # ★ portfolio 核心 narrative · v0.9 ~10600 汉字 7 节
+│   ├── assumptions-register.md   # ★ NEW round-2 核心 · 每个数字 [M]/[B]/[A] 打标
+│   ├── one-pager.md              # 投资人 90s + GTM(数字打标)
+│   ├── north-star.md             # NSM (WAC) + 2 层 metric tree(数字打标)
+│   ├── competitive-landscape.md  # 8 竞品 × 4 维矩阵 + moat(MAU 降级为猜测)
 │   ├── product-policy-and-risks.md  # ★ NEW 8 risk + 4 product policy framework
 │   ├── analytics-event-taxonomy.md  # ★ NEW 11 V1 events + SQL 算 NSM/D7/W2
 │   ├── agent-team-design.md      # 6+1 audit + 8 role topology · Mermaid

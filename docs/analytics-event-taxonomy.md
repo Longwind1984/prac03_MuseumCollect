@@ -164,7 +164,7 @@ Product event 跟 UI event 的差别:
 - **用于**: 内容消费 · cohort engagement · "外部分享回流"归因
 
 #### `dimension_browsed`
-- **Trigger**: 用户浏览某个维度页(年代 / 工艺 / 纹饰 / 文化区 / 铭文)
+- **Trigger**: 用户浏览某个维度页(形制 / 时代 / 地理 / 纹饰 / 铭文 / 用途 / 铸主——canonical 7+1,见 dimensional-map-v3)
 - **Properties**: `user_id`, `dimension_id`, `dimension_type`, `browse_mode` (`timeline | grid | map`), `ts`
 - **用于**: 维度 popularity · cohort discovery 路径
 
