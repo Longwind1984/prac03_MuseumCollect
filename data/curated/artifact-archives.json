@@ -1,0 +1,869 @@
+{
+  "_meta": {
+    "note": "后台档案 — per-artifact backend archive of versions / dating debates / interpretation disputes, beyond the basic display record. Authored from established scholarship (real scholars/works cited); where consensus exists with no genuine dispute, that is stated honestly rather than manufacturing controversy.",
+    "schema": "artifact_id → {name_versions, dating_debate, interpretation_disputes, discovery_story, scholarly_perspectives, extended_narrative, sources}",
+    "coverage": "14 most-famous 国宝; expand over time"
+  },
+  "houmuwu_ding": {
+    "artifact_id": "houmuwu_ding",
+    "name_versions": [
+      {
+        "name": "后母戊鼎",
+        "status": "现行主流",
+        "rationale": "腹内铭三字,'后'指君王/王后,'戊'为商王武丁配偶妇妌的庙号;铭文为祖庚或祖甲为祭母'戊'所铸。",
+        "advocates": "中国国家博物馆 2011 年正式更名"
+      },
+      {
+        "name": "司母戊鼎",
+        "status": "旧称(1959–2011 沿用)",
+        "rationale": "郭沫若早年释首字为'司',解作'祭祀'之动词,即'祭祀母戊'。此读法沿用半世纪。",
+        "advocates": "郭沫若等"
+      },
+      {
+        "name": "司母戊大方鼎",
+        "status": "俗称",
+        "rationale": "强调其方鼎形制与体量的通俗叫法。",
+        "advocates": "早期教科书"
+      }
+    ],
+    "dating_debate": {
+      "consensus": "商代晚期(殷墟二期前后,约前 13–前 11 世纪),学界基本无争议。",
+      "alternatives": []
+    },
+    "interpretation_disputes": [
+      {
+        "topic": "首字'后'还是'司'",
+        "views": [
+          {
+            "reading": "后(王后/母后)",
+            "by": "李学勤等及国博正名",
+            "argument": "商代文字左右无别,'后''司'同源;结合'母戊'庙号,释'后母戊'(给母后戊的鼎)文义更顺。"
+          },
+          {
+            "reading": "司(祭祀)",
+            "by": "郭沫若",
+            "argument": "释'司'为祭祀动词,全铭为'祭祀母戊'。"
+          }
+        ]
+      },
+      {
+        "topic": "铸造工艺",
+        "views": [
+          {
+            "reading": "鼎身浑铸、双耳后铸",
+            "by": "学界通说",
+            "argument": "经合金与铸痕分析,器身一次浑铸,耳部后铸接合,用陶范二十余块,代表商代范铸法巅峰。"
+          }
+        ]
+      }
+    ],
+    "discovery_story": {
+      "official": "1939 年河南安阳武官村吴希增等于田间发现。因正值抗战、恐为日军劫掠,曾就地回埋;1946 年重新掘出,辗转至南京,1959 年入藏中国历史博物馆(今国博)。",
+      "controversies": [
+        "出土后曾有古董商欲锯解分卖、未果之说,细节版本不一。"
+      ],
+      "rumors_vs_fact": [
+        {
+          "rumor": "重达一吨。",
+          "fact": "实测 832.84 公斤,是迄今出土最大最重的商代青铜礼器,但非一吨。"
+        }
+      ]
+    },
+    "scholarly_perspectives": [
+      {
+        "scholar": "李学勤",
+        "school": "中文主流",
+        "position": "支持'后母戊'读法,强调商代字形正反无别。"
+      },
+      {
+        "scholar": "郭沫若",
+        "school": "中文(早期)",
+        "position": "主'司母戊',释'司'为祭祀。"
+      }
+    ],
+    "extended_narrative": "后母戊鼎不仅是体量之最,更是商王室祭祀制度的物证。其器主'戊'即武丁三大配偶之一妇妌(另有妇好),由其子辈商王铸造,反映商代'藏礼于器'与母系祭祀的并重。鼎耳饰虎噬人头纹,腹部饕餮为地纹云雷烘托,工艺上以二十余块陶范分铸合范,需数百工匠协同,是青铜冶铸组织化的极致体现。",
+    "sources": [
+      {
+        "author": "李学勤",
+        "year": "2010s",
+        "title": "新出青铜器研究(增订本)"
+      },
+      {
+        "author": "中国国家博物馆",
+        "year": "2011",
+        "title": "'后母戊鼎'正名说明"
+      }
+    ]
+  },
+  "he_zun": {
+    "artifact_id": "he_zun",
+    "name_versions": [
+      {
+        "name": "何尊",
+        "status": "现行主流",
+        "rationale": "铭文末记作器者为'何',故名何尊。",
+        "advocates": "马承源命名"
+      },
+      {
+        "name": "饕餮纹铜尊",
+        "status": "出土初期称谓",
+        "rationale": "入藏初未识铭文,按纹饰定名。",
+        "advocates": "宝鸡市博物馆早期"
+      }
+    ],
+    "dating_debate": {
+      "consensus": "西周成王时期(约前 11 世纪),铭文'唯王初迁宅于成周'与营建洛邑史事吻合,断代明确。",
+      "alternatives": []
+    },
+    "interpretation_disputes": [
+      {
+        "topic": "'宅兹中国'之'中国'何解",
+        "views": [
+          {
+            "reading": "天下之中/成周洛邑",
+            "by": "中文学界主流",
+            "argument": "此处'中国'指以洛邑为天下地理与政治中心,意为'居于天下之中',是'中国'二字最早的实物连用,但非现代国家概念。"
+          },
+          {
+            "reading": "泛指中原王畿",
+            "by": "部分学者",
+            "argument": "强调指周人统治核心区域。"
+          }
+        ]
+      }
+    ],
+    "discovery_story": {
+      "official": "1963 年陕西宝鸡贾村塬出土。",
+      "controversies": [
+        "1965 年一度被当作废铜以约 30 元卖至废品收购站,后由宝鸡市博物馆佟太放识出抢救入藏;清锈后方在 1975 年由马承源发现底部 122 字铭文及'宅兹中国'。"
+      ],
+      "rumors_vs_fact": [
+        {
+          "rumor": "何尊一出土即知是国宝。",
+          "fact": "出土后险些被熔毁,'中国'二字十余年后才被释读发现。"
+        }
+      ]
+    },
+    "scholarly_perspectives": [
+      {
+        "scholar": "马承源",
+        "school": "中文主流",
+        "position": "识读底铭、定名何尊,揭示'宅兹中国'。"
+      }
+    ],
+    "extended_narrative": "何尊以一篇 122 字铭文,把'中国'二字的最早连用定格在西周成王营建成周(洛邑)的历史现场。铭文记成王训诫宗族小子'何',追述武王克商后'宅兹中国'的政治理想——以洛邑居天下之中而统御四方。器以高浮雕饕餮、四道扉棱见雄浑,是西周早期礼器的代表。它的'死里逃生'(险作废铜)也成为文物保护史上的著名一课。",
+    "sources": [
+      {
+        "author": "马承源",
+        "year": "1976",
+        "title": "何尊铭文初释(《文物》)"
+      }
+    ]
+  },
+  "maogong_ding": {
+    "artifact_id": "maogong_ding",
+    "name_versions": [
+      {
+        "name": "毛公鼎",
+        "status": "主流",
+        "rationale": "作器者为周宣王时大臣毛公(厝),故名。",
+        "advocates": "学界通称"
+      }
+    ],
+    "dating_debate": {
+      "consensus": "西周晚期宣王时期(约前 9–前 8 世纪),铭文内容与宣王中兴史事相合。",
+      "alternatives": []
+    },
+    "interpretation_disputes": [
+      {
+        "topic": "铭文字数",
+        "views": [
+          {
+            "reading": "约 497 字",
+            "by": "部分释文",
+            "argument": "因残泐与合文计法不同,字数统计有出入。"
+          },
+          {
+            "reading": "约 499 字",
+            "by": "另一些释文",
+            "argument": "无论 497 还是 499,均为现存西周青铜器中最长的铭文。"
+          }
+        ]
+      },
+      {
+        "topic": "真伪曾有疑议",
+        "views": [
+          {
+            "reading": "真器",
+            "by": "学界主流",
+            "argument": "经字体、铸工、流传谱系考订,公认真品。"
+          },
+          {
+            "reading": "早年个别质疑",
+            "by": "少数清末民初藏家",
+            "argument": "因其铭文长、出于市肆,曾被个别人怀疑,后被否定。"
+          }
+        ]
+      }
+    ],
+    "discovery_story": {
+      "official": "清道光年间(约 1843)陕西岐山出土,历经陈介祺等名家递藏,今藏台北故宫博物院。",
+      "controversies": [
+        "流传中曾屡易其主、险遭变卖出境,陈介祺秘藏以护之的故事广为流传。"
+      ]
+    },
+    "scholarly_perspectives": [
+      {
+        "scholar": "陈介祺",
+        "school": "清代金石",
+        "position": "重要藏家,以拓本传世推动毛公鼎研究。"
+      }
+    ],
+    "extended_narrative": "毛公鼎以近五百字的鸿篇巨制,记周宣王诰命毛公厝总理国政、并赐车马兵器之事,被誉为'抵得一篇《尚书》'。它与大盂鼎、大克鼎并称清季出土'海内三宝'(均曾归潘祖荫)。其铭文是研究西周晚期政治制度、册命礼与金文书法的顶级标本。",
+    "sources": [
+      {
+        "author": "容庚",
+        "year": "1941",
+        "title": "商周彝器通考"
+      }
+    ]
+  },
+  "sanshi_pan": {
+    "artifact_id": "sanshi_pan",
+    "name_versions": [
+      {
+        "name": "散氏盘",
+        "status": "主流",
+        "rationale": "依铭文中受田一方'散'国得名。",
+        "advocates": "学界通称"
+      },
+      {
+        "name": "夨人盘",
+        "status": "异称",
+        "rationale": "另据立约一方'夨'国得名,故亦称夨人盘。",
+        "advocates": "部分著录"
+      }
+    ],
+    "dating_debate": {
+      "consensus": "西周晚期(厉王前后),约 357 字,记夨、散两国土地纠纷的划界契约。",
+      "alternatives": []
+    },
+    "interpretation_disputes": [
+      {
+        "topic": "性质",
+        "views": [
+          {
+            "reading": "土地转让/赔偿契约",
+            "by": "学界主流",
+            "argument": "铭文详列勘界路线、证人与盟誓,是中国最早的'地契'实物之一,具法律史价值。"
+          }
+        ]
+      }
+    ],
+    "discovery_story": {
+      "official": "清康熙年间出土,今藏台北故宫博物院。",
+      "controversies": [
+        "流传中曾摹刻多本,真伪拓本之辨为金石学一课题。"
+      ]
+    },
+    "scholarly_perspectives": [
+      {
+        "scholar": "王国维",
+        "school": "中文主流",
+        "position": "以二重证据法治金文,散氏盘为其地理考证素材之一。"
+      }
+    ],
+    "extended_narrative": "散氏盘的价值不在体量而在其铭文的'契约'属性:它把西周晚期一桩国与国之间的土地纠纷,以勘界、立证、盟誓的完整程序铸于盘底,是研究西周土地制度、法律与地理的孤本级文献。其金文体势恣肆奇崛,亦为书法史名品。",
+    "sources": [
+      {
+        "author": "王国维",
+        "year": "1917",
+        "title": "古史新证(二重证据法)"
+      }
+    ]
+  },
+  "yuewang_goujian_jian": {
+    "artifact_id": "yuewang_goujian_jian",
+    "name_versions": [
+      {
+        "name": "越王勾践剑",
+        "status": "主流",
+        "rationale": "剑身鸟虫书铭'越王鸠浅自作用剑','鸠浅'即'勾践'之异写。",
+        "advocates": "唐兰、郭沫若等据鸟虫书释读"
+      }
+    ],
+    "dating_debate": {
+      "consensus": "春秋晚期越国(约前 5 世纪)。",
+      "alternatives": [
+        {
+          "view": "剑主是否确为勾践本人,抑或越王室通称,曾有讨论",
+          "by": "少数学者",
+          "basis": "'越王'名号与陪葬于楚墓的流转关系。"
+        }
+      ]
+    },
+    "interpretation_disputes": [
+      {
+        "topic": "千年不锈之因",
+        "views": [
+          {
+            "reading": "墓葬密封 + 合金 + 硫化处理",
+            "by": "现行主流",
+            "argument": "出土于密封性极好的楚墓,含锡铜合金表面经硫化处理形成保护层,故历两千余年仍寒光烁烁。"
+          },
+          {
+            "reading": "表面镀铬(早期说)",
+            "by": "20 世纪 70 年代初检测推测",
+            "argument": "早年检测曾推测含铬氧化层并轰动一时,但'人工镀铬'之说后被多数学者质疑,倾向于硫化与环境共同作用。"
+          }
+        ]
+      },
+      {
+        "topic": "为何越剑出于楚墓",
+        "views": [
+          {
+            "reading": "联姻/战利/馈赠",
+            "by": "学界",
+            "argument": "越楚关系密切,或经联姻陪嫁、或为战利、或为外交馈赠流入楚地,具体路径无定论。"
+          }
+        ]
+      }
+    ],
+    "discovery_story": {
+      "official": "1965 年湖北江陵望山一号楚墓出土,出土时拔剑试纸,二十余层一划而破,锋利如新。",
+      "rumors_vs_fact": [
+        {
+          "rumor": "采用了现代镀铬技术。",
+          "fact": "'人工镀铬'说证据不足、争议很大;不锈更可能源于密封环境、合金成分与表面硫化。"
+        }
+      ]
+    },
+    "scholarly_perspectives": [
+      {
+        "scholar": "唐兰",
+        "school": "中文主流",
+        "position": "据鸟虫书考定剑主为越王勾践。"
+      }
+    ],
+    "extended_narrative": "越王勾践剑以'天下第一剑'之名,凝结春秋吴越铸剑的技术神话。剑格嵌蓝色琉璃与绿松石,剑身满布菱形暗格纹,铭文以华美的鸟虫书写就。它的两大谜题——出于楚墓与千年不锈——至今仍是冶金考古与历史地理交叉讨论的热点。",
+    "sources": [
+      {
+        "author": "唐兰",
+        "year": "1960s",
+        "title": "越王勾践剑铭考释"
+      }
+    ]
+  },
+  "da_yu_ding": {
+    "artifact_id": "da_yu_ding",
+    "name_versions": [
+      {
+        "name": "大盂鼎",
+        "status": "主流",
+        "rationale": "作器者为周康王时大臣盂,与'小盂鼎'相别故称大盂鼎。",
+        "advocates": "学界通称"
+      }
+    ],
+    "dating_debate": {
+      "consensus": "西周早期康王时期,铭 291 字,记康王诰盂、追述文武受命与告诫戒酒。",
+      "alternatives": []
+    },
+    "interpretation_disputes": [
+      {
+        "topic": "铭文主旨",
+        "views": [
+          {
+            "reading": "册命 + 殷鉴戒酒",
+            "by": "学界主流",
+            "argument": "康王以殷因酗酒亡国为戒训诫盂,反映西周初年的政治伦理。"
+          }
+        ]
+      }
+    ],
+    "discovery_story": {
+      "official": "清道光初年陕西岐山礼村出土,历经多手,潘祖荫曾藏'海内三宝'之一,后捐归国家,今藏中国国家博物馆。"
+    },
+    "scholarly_perspectives": [
+      {
+        "scholar": "潘祖荫",
+        "school": "清代藏家",
+        "position": "曾同藏大盂鼎、大克鼎、毛公鼎,合称海内三宝。"
+      }
+    ],
+    "extended_narrative": "大盂鼎是西周早期册命金文的典范,291 字铭文以凝重的笔势记录康王对盂的训诫,其中'殷鉴'戒酒之说与《尚书·酒诰》互证,是'藏礼于器'与周初政治思想的双重标本。",
+    "sources": [
+      {
+        "author": "陈梦家",
+        "year": "1955-1956",
+        "title": "西周铜器断代"
+      }
+    ]
+  },
+  "da_ke_ding": {
+    "artifact_id": "da_ke_ding",
+    "name_versions": [
+      {
+        "name": "大克鼎",
+        "status": "主流",
+        "rationale": "作器者膳夫克,与一组小克鼎相别,故称大克鼎。",
+        "advocates": "学界通称"
+      }
+    ],
+    "dating_debate": {
+      "consensus": "西周中期孝王前后,铭 290 字,记膳夫克受王册命与赏赐。",
+      "alternatives": []
+    },
+    "interpretation_disputes": [
+      {
+        "topic": "断代王世",
+        "views": [
+          {
+            "reading": "孝王说",
+            "by": "多数",
+            "argument": "据字体与人物系联多定于孝王。"
+          },
+          {
+            "reading": "夷王前后说",
+            "by": "部分学者",
+            "argument": "西周中期王序与历谱本身有争议,克鼎的具体王世随之浮动。"
+          }
+        ]
+      }
+    ],
+    "discovery_story": {
+      "official": "清光绪中期陕西扶风法门寺任村出土,潘祖荫递藏,后由潘氏后人潘达于 1951 年捐献,今藏上海博物馆。",
+      "controversies": [
+        "抗战期间潘氏将鼎埋藏宅中以避日军搜劫,护宝故事流传甚广。"
+      ]
+    },
+    "scholarly_perspectives": [
+      {
+        "scholar": "潘达于",
+        "school": "藏家后人",
+        "position": "1951 年将大克鼎、大盂鼎捐献国家。"
+      }
+    ],
+    "extended_narrative": "大克鼎以宏大端庄著称,口沿下饰变形兽面与波曲纹,是西周中期'转变期'礼器趋于规整的代表。其铭文记膳夫克得王重用、追述祖父师华父之功,是研究西周官制与册命礼的重要文献;潘达于捐宝则为近代文物保护的佳话。",
+    "sources": [
+      {
+        "author": "马承源",
+        "year": "1988",
+        "title": "中国青铜器"
+      }
+    ]
+  },
+  "zenghouyi_bianzhong": {
+    "artifact_id": "zenghouyi_bianzhong",
+    "name_versions": [
+      {
+        "name": "曾侯乙编钟",
+        "status": "主流",
+        "rationale": "墓主为战国早期曾国国君乙。",
+        "advocates": "学界通称"
+      }
+    ],
+    "dating_debate": {
+      "consensus": "战国早期(约前 433 年前后),据楚惠王所赠镈钟铭'唯王五十又六祀'等纪年推定。",
+      "alternatives": [
+        {
+          "view": "'曾'即文献中的'随'(曾随之谜)",
+          "by": "李学勤等",
+          "basis": "曾国不见于传世文献,学界多认为'曾'即'随',后经叶家山、文峰塔等新出材料渐成主流。"
+        }
+      ]
+    },
+    "interpretation_disputes": [
+      {
+        "topic": "一钟双音",
+        "views": [
+          {
+            "reading": "确为一钟双音",
+            "by": "音乐考古实测",
+            "argument": "合瓦形钟体正鼓与侧鼓可发两个相差三度的乐音,音律铭文与实测吻合,改写了对先秦乐律的认识。"
+          }
+        ]
+      },
+      {
+        "topic": "件数",
+        "views": [
+          {
+            "reading": "65 件",
+            "by": "常见统计",
+            "argument": "含楚惠王所赠镈钟一件共 65 件;若不计该镈钟则为 64 件,故有 64/65 之异。"
+          }
+        ]
+      }
+    ],
+    "discovery_story": {
+      "official": "1978 年湖北随州擂鼓墩曾侯乙墓出土,钟架与全套钟保存完好,出土即可演奏。"
+    },
+    "scholarly_perspectives": [
+      {
+        "scholar": "李学勤",
+        "school": "中文主流",
+        "position": "主'曾随一国'说,解决曾国身份之谜。"
+      }
+    ],
+    "extended_narrative": "曾侯乙编钟是战国早期音乐与铸造的双重奇迹:全套钟横跨五个半八度、十二律俱全,钟体与钟架满布约 3700 字错金乐律铭文,'一钟双音'更以实物证明了中国先秦乐律的高度。它也牵出'曾随之谜'——文献无载的曾国,经学界考订即是随国。",
+    "sources": [
+      {
+        "author": "湖北省博物馆",
+        "year": "1989",
+        "title": "曾侯乙墓(发掘报告)"
+      },
+      {
+        "author": "李学勤",
+        "year": "1980s",
+        "title": "曾国之谜诸论"
+      }
+    ]
+  },
+  "fuhao_xiaozun": {
+    "artifact_id": "fuhao_xiaozun",
+    "name_versions": [
+      {
+        "name": "妇好鸮尊",
+        "status": "主流",
+        "rationale": "出于妇好墓、作鸮(鸱鸮/猫头鹰)形的盛酒尊。",
+        "advocates": "学界通称"
+      },
+      {
+        "name": "妇好鸱鸮尊",
+        "status": "异写",
+        "rationale": "'鸮'即鸱鸮,故亦写作鸱鸮尊。",
+        "advocates": "部分著录"
+      }
+    ],
+    "dating_debate": {
+      "consensus": "商代晚期武丁时期,妇好墓出土,断代明确。",
+      "alternatives": []
+    },
+    "interpretation_disputes": [
+      {
+        "topic": "妇好身份",
+        "views": [
+          {
+            "reading": "武丁配偶、女将与主祭",
+            "by": "学界主流",
+            "argument": "甲骨文中妇好屡见,既统兵征伐又主持祭祀,是已知最早的女性军事统帅之一。"
+          }
+        ]
+      },
+      {
+        "topic": "鸮形寓意",
+        "views": [
+          {
+            "reading": "勇武/通灵/辟邪",
+            "by": "多说并存",
+            "argument": "鸮在商人观念中或象征勇武与夜之神性,具体寓意尚无定论。"
+          }
+        ]
+      }
+    ],
+    "discovery_story": {
+      "official": "1976 年河南安阳殷墟妇好墓出土,为一对,分藏国博与河南博物院。该墓是殷墟唯一未被盗、且能与甲骨文记载墓主对应的商王室墓。"
+    },
+    "scholarly_perspectives": [
+      {
+        "scholar": "郑振香",
+        "school": "考古",
+        "position": "主持妇好墓发掘,确认墓主即甲骨文之妇好。"
+      }
+    ],
+    "extended_narrative": "妇好鸮尊以一只昂首挺胸的猫头鹰,凝固了商代'第一夫人'妇好的传奇——她是武丁的配偶,也是统兵逾万的女将与大祭司。妇好墓出土青铜器逾 460 件,是商代女性地位与王室生活的稀世断面,鸮尊则以其满身繁复的兽面、夔龙与造型张力,成为商代鸟兽尊的巅峰之一。",
+    "sources": [
+      {
+        "author": "中国社科院考古所",
+        "year": "1980",
+        "title": "殷墟妇好墓(发掘报告)"
+      }
+    ]
+  },
+  "siyang_fangzun": {
+    "artifact_id": "siyang_fangzun",
+    "name_versions": [
+      {
+        "name": "四羊方尊",
+        "status": "主流",
+        "rationale": "方尊四隅铸四只大卷角羊。",
+        "advocates": "学界通称"
+      }
+    ],
+    "dating_debate": {
+      "consensus": "商代晚期,湖南宁乡出土,属南方'宁乡铜器群',断代明确。",
+      "alternatives": []
+    },
+    "interpretation_disputes": [
+      {
+        "topic": "铸造工艺",
+        "views": [
+          {
+            "reading": "二次分铸合范",
+            "by": "学界主流",
+            "argument": "羊角等突出部分先分铸,再与器体合范浇铸,是商代分铸法的精妙范例。"
+          }
+        ]
+      },
+      {
+        "topic": "南方出土的文化归属",
+        "views": [
+          {
+            "reading": "受商影响的地方青铜文明",
+            "by": "多数",
+            "argument": "宁乡铜器群风格独特,反映商文化向长江以南的传播与地方再创造,与中原既联系又有别。"
+          }
+        ]
+      }
+    ],
+    "discovery_story": {
+      "official": "1938 年湖南宁乡黄材出土。",
+      "controversies": [
+        "抗战转运途中被炸碎成数十块,1950 年代由文物修复家张欣如等耗时数月复原,几不见接痕。"
+      ],
+      "rumors_vs_fact": [
+        {
+          "rumor": "出土即完整。",
+          "fact": "曾在战乱中碎为二十余块,后经精心修复才得复原。"
+        }
+      ]
+    },
+    "scholarly_perspectives": [
+      {
+        "scholar": "张欣如",
+        "school": "文物修复",
+        "position": "主持四羊方尊的碎片复原。"
+      }
+    ],
+    "extended_narrative": "四羊方尊将四只卷角巨羊与方尊器体浑然合铸,既庄重又充满张力,是商代分铸法的技术高峰,也是南方'宁乡铜器群'的代表。它的'碎而复原'更是中国文物修复史上的标志性案例。",
+    "sources": [
+      {
+        "author": "马承源",
+        "year": "1988",
+        "title": "中国青铜器"
+      }
+    ]
+  },
+  "guoji_zibai_pan": {
+    "artifact_id": "guoji_zibai_pan",
+    "name_versions": [
+      {
+        "name": "虢季子白盘",
+        "status": "主流",
+        "rationale": "作器者为虢国贵族季子白。",
+        "advocates": "学界通称"
+      }
+    ],
+    "dating_debate": {
+      "consensus": "西周晚期宣王时期,铭文记季子白伐玁狁有功受赏,与宣王御戎史事相合。",
+      "alternatives": []
+    },
+    "interpretation_disputes": [
+      {
+        "topic": "铭文文体",
+        "views": [
+          {
+            "reading": "押韵的颂体",
+            "by": "学界主流",
+            "argument": "111 字铭文句式整饬、隔句用韵,近于《诗经》雅颂,是金文文学化的代表。"
+          }
+        ]
+      }
+    ],
+    "discovery_story": {
+      "official": "清道光年间陕西宝鸡出土,曾为刘铭传所得,几经辗转,1950 年代捐归国家,今藏中国国家博物馆。"
+    },
+    "scholarly_perspectives": [
+      {
+        "scholar": "郭沫若",
+        "school": "中文主流",
+        "position": "重视其铭文的史料与文学价值。"
+      }
+    ],
+    "extended_narrative": "虢季子白盘是现存最大的西周青铜水器之一,长篇押韵铭文记述季子白率军北伐玁狁、斩获献俘受赏的功业,既是西周与北方游牧族关系的史证,也是金文向《诗经》式韵文靠拢的文学标本。",
+    "sources": [
+      {
+        "author": "郭沫若",
+        "year": "1957",
+        "title": "两周金文辞大系图录考释"
+      }
+    ]
+  },
+  "lianhe_fanghu": {
+    "artifact_id": "lianhe_fanghu",
+    "name_versions": [
+      {
+        "name": "莲鹤方壶",
+        "status": "主流",
+        "rationale": "壶盖作双层莲瓣、中立一展翅之鹤。",
+        "advocates": "学界通称"
+      }
+    ],
+    "dating_debate": {
+      "consensus": "春秋中期郑国,1923 年河南新郑李家楼郑公大墓出土,断代明确。",
+      "alternatives": []
+    },
+    "interpretation_disputes": [
+      {
+        "topic": "艺术史意义",
+        "views": [
+          {
+            "reading": "'时代精神之象征'",
+            "by": "郭沫若",
+            "argument": "郭沫若称壶顶之鹤'踌躇满志,睥睨一切',标志青铜艺术由商周的狞厉神秘转向春秋的清新写实,是'时代精神之象征'。"
+          }
+        ]
+      }
+    ],
+    "discovery_story": {
+      "official": "1923 年新郑李家楼出土一对。今一件藏故宫博物院(北京),一件藏河南博物院,分处京豫。"
+    },
+    "scholarly_perspectives": [
+      {
+        "scholar": "郭沫若",
+        "school": "中文主流",
+        "position": "以'时代精神之象征'高度评价莲鹤方壶的艺术转向意义。"
+      }
+    ],
+    "extended_narrative": "莲鹤方壶以盖顶振翅欲飞的仙鹤,宣告了青铜艺术从商周'狞厉之美'向春秋'清新之风'的转折。壶身蟠螭缠绕、龙耳兽足,既承旧制又透新意。一对双壶分藏北京与郑州,本身也成为一段'双壁分处'的文物佳话。",
+    "sources": [
+      {
+        "author": "郭沫若",
+        "year": "1950s",
+        "title": "青铜时代"
+      }
+    ]
+  },
+  "sanxingdui_dali_ren_v3": {
+    "artifact_id": "sanxingdui_dali_ren_v3",
+    "name_versions": [
+      {
+        "name": "青铜大立人像",
+        "status": "主流",
+        "rationale": "三星堆出土的大型青铜立人造像。",
+        "advocates": "学界通称"
+      }
+    ],
+    "dating_debate": {
+      "consensus": "约商代晚期(三星堆二期,前 12 世纪前后),属独立的古蜀文明。",
+      "alternatives": [
+        {
+          "view": "三星堆器物坑性质(祭祀坑/亡国掩埋/失火封埋)众说纷纭",
+          "by": "多家",
+          "basis": "坑内器物多遭焚毁砸碎,埋藏原因尚无定论,直接影响年代与事件解读。"
+        }
+      ]
+    },
+    "interpretation_disputes": [
+      {
+        "topic": "立人身份",
+        "views": [
+          {
+            "reading": "群巫之长/大祭司",
+            "by": "多数学者",
+            "argument": "高冠华服、双手环握(似持物),应是主持祭祀的最高神职或政教合一的王者。"
+          },
+          {
+            "reading": "所握为何物",
+            "by": "悬而未决",
+            "argument": "双手中空,或握象牙、或权杖、或玉琮,无定论。"
+          }
+        ]
+      },
+      {
+        "topic": "古蜀文明来源",
+        "views": [
+          {
+            "reading": "本土独立起源为主、与中原及周边交流",
+            "by": "学界主流",
+            "argument": "三星堆既有独特面具神树,也见与中原青铜礼制的间接联系。"
+          },
+          {
+            "reading": "西亚/外来影响说",
+            "by": "少数及网络流传",
+            "argument": "因造型奇异,坊间有近东乃至域外影响之说,主流学界证据不足、持审慎态度。"
+          }
+        ]
+      }
+    ],
+    "discovery_story": {
+      "official": "1986 年四川广汉三星堆二号祭祀坑出土;2019 年起新发现六座器物坑,出土材料持续刷新认识。",
+      "rumors_vs_fact": [
+        {
+          "rumor": "三星堆是外星文明。",
+          "fact": "三星堆是中国境内独立发展的古蜀青铜文明,'外星说'无任何考古依据。"
+        }
+      ]
+    },
+    "scholarly_perspectives": [
+      {
+        "scholar": "张光直",
+        "school": "海外/华裔",
+        "position": "从'萨满式'政教结构理解中国早期文明,为解读三星堆神权提供框架。"
+      }
+    ],
+    "extended_narrative": "青铜大立人高约 2.6 米(含基座),是三星堆最具统摄力的造像。他可能是古蜀'群巫之长'或政教合一的王者,双手夸张环握的中空,留下了'究竟持何物'的千古悬念。三星堆的器物坑性质、文明来源,至今仍是中国考古最大的开放课题之一,而'外星说'纯属附会。",
+    "sources": [
+      {
+        "author": "四川省文物考古研究院",
+        "year": "1999/2022",
+        "title": "三星堆祭祀坑发掘报告 / 新坑简报"
+      }
+    ]
+  },
+  "sanxingdui_zongmu_mianju_v3": {
+    "artifact_id": "sanxingdui_zongmu_mianju_v3",
+    "name_versions": [
+      {
+        "name": "青铜纵目面具",
+        "status": "主流",
+        "rationale": "双眼呈柱状外凸('纵目')的大型青铜面具。",
+        "advocates": "学界通称"
+      },
+      {
+        "name": "'千里眼/蚕丛'面具",
+        "status": "通俗附会",
+        "rationale": "因《华阳国志》记古蜀先王蚕丛'纵目',民间附会面具即蚕丛形象。",
+        "advocates": "民间传说"
+      }
+    ],
+    "dating_debate": {
+      "consensus": "约商代晚期,三星堆二号坑出土。",
+      "alternatives": []
+    },
+    "interpretation_disputes": [
+      {
+        "topic": "'纵目'寓意",
+        "views": [
+          {
+            "reading": "神性夸张(通天/超凡视听)",
+            "by": "学界主流",
+            "argument": "柱状凸目与大耳是对'超凡视听'神性的夸张表现,属神祇或祖先神像。"
+          },
+          {
+            "reading": "蚕丛'纵目'的写照",
+            "by": "援引文献的推测",
+            "argument": "据《华阳国志》蚕丛'其目纵'之记,有学者推测与古蜀始祖传说相关,但属推测非定论。"
+          }
+        ]
+      }
+    ],
+    "discovery_story": {
+      "official": "1986 年四川广汉三星堆二号祭祀坑出土,造型震撼世界。"
+    },
+    "scholarly_perspectives": [
+      {
+        "scholar": "段渝",
+        "school": "中文(古蜀史)",
+        "position": "从古蜀神权与神话角度阐释三星堆造像。"
+      }
+    ],
+    "extended_narrative": "纵目面具以柱状外凸的双眼与舒展的大耳,把古蜀人对'通天通神'的想象推向极致。它究竟是神祇、祖先神,还是文献中'纵目'的蜀王蚕丛之写照,至今聚讼;但可以确定的是,它代表了一个与中原迥异、却同样辉煌的青铜神权世界。",
+    "sources": [
+      {
+        "author": "段渝",
+        "year": "2000s",
+        "title": "古蜀文明研究"
+      }
+    ]
+  }
+}

@@ -61,12 +61,14 @@
   // upload.wikimedia.org is reachable). In the sandbox the files don't exist
   // yet, so <img> 404s → code falls back to the silhouette. Set derived from
   // data/photo-manifest.json (24 国宝 with confirmed/plausible Commons files).
+  // NB: ids must match the LOADED v3-segment records (data-loader loads only the
+  // 5 v3 segments, not v1). Six v1-upgraded pieces carry a _v3 suffix.
   const PHOTO_IDS = new Set([
     'houmuwu_ding','siyang_fangzun','fuhao_xiaozun','da_yu_ding','da_ke_ding',
     'maogong_ding','sanshi_pan','he_zun','li_gui','guoji_zibai_pan','lianhe_fanghu',
-    'yuewang_goujian_jian','zenghouyi_bianzhong','zenghouyi_zunpan','cuojin_boshanlu',
-    'changxin_gongdeng','matafeiyan','sanxingdui_dali_ren','sanxingdui_zongmu_mianju',
-    'sanxingdui_shenshu','zilong_ding','longxing_gong','qin_tongchema','shangyang_fangsheng',
+    'yuewang_goujian_jian','zenghouyi_bianzhong','zenghouyi_zunpan','cuojin_boshanlu_v3',
+    'changxin_gongdeng_v3','matafeiyan_v3','sanxingdui_dali_ren_v3','sanxingdui_zongmu_mianju_v3',
+    'sanxingdui_shenshu_v3','zilong_ding','longxing_gong','qin_tongchema','shangyang_fangsheng',
   ]);
   const PHOTO_PATH = '../../assets/photos/';
   function hasPhoto(id) { return PHOTO_IDS.has(id); }

@@ -85,7 +85,15 @@ function normalizeRecord(r) {
     period: r.period || '',
     approx_year: r.approx_year || '',
     rarity_level: r.rarity_level || '一般',
-    excavation: r.excavation || {},
+    // v3 data is inconsistent: shang segment nests these under `excavation`,
+    // other segments keep them flat. Read both shapes so neither shows "undefined".
+    excavation: (function(){ const e = r.excavation || {}; return {
+      year:          e.year || r.excavation_year || '',
+      site:          e.site || r.excavation_site || '',
+      ancient_state: e.ancient_state || r.ancient_state || '',
+      dating_method: e.dating_method || r.dating_method || '',
+      significance:  e.significance || r.excavation_significance || ''
+    }; })(),
     current_museum: r.current_museum || '不详',
     size: r.size || {},
     type: r.type || '',
@@ -131,6 +139,7 @@ function renderArtifact(data) {
   const rarityClass = getRarityClass(data.rarity_level);
   const silhouette = getSilhouetteFor(data.form_subtype);
   const inscChars = data.inscription.text ? data.inscription.text.split('') : [];
+  const archive = (window.ARTIFACT_ARCHIVES || {})[data.id];
 
   // Photo-first: real photo at assets/photos/<id>.jpg (build-time fetched) if this
   // id is in PHOTO_IDS, else null → silhouette. <img onerror> below also guards 404.
@@ -214,14 +223,14 @@ function renderArtifact(data) {
           <summary>② 出土信息</summary>
           <div style="padding-top:12px;">
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-              <div><div class="field-label">出土年份</div><div class="field-value">${data.excavation.year} 年</div></div>
-              <div><div class="field-label">出土地点</div><div class="field-value">${data.excavation.site}</div></div>
-              <div><div class="field-label">古国归属</div><div class="field-value">${data.excavation.ancient_state}</div></div>
-              <div><div class="field-label">断代方法</div><div class="field-value">${data.excavation.dating_method}</div></div>
+              <div><div class="field-label">出土年份</div><div class="field-value">${data.excavation.year ? data.excavation.year + ' 年' : '—'}</div></div>
+              <div><div class="field-label">出土地点</div><div class="field-value">${data.excavation.site || '—'}</div></div>
+              <div><div class="field-label">古国归属</div><div class="field-value">${data.excavation.ancient_state || '—'}</div></div>
+              <div><div class="field-label">断代方法</div><div class="field-value">${data.excavation.dating_method || '—'}</div></div>
             </div>
-            <div style="margin-top:10px; padding:10px; background:var(--bg-cream); border-radius:6px; font-size:13px; color:var(--text-muted);">
+            ${data.excavation.significance ? `<div style="margin-top:10px; padding:10px; background:var(--bg-cream); border-radius:6px; font-size:13px; color:var(--text-muted);">
               ${data.excavation.significance}
-            </div>
+            </div>` : ''}
           </div>
         </details>
 
@@ -357,9 +366,104 @@ function renderArtifact(data) {
         </div>
       </div>
     </div>
+
+    ${archive ? renderArchive(archive) : ''}
   </div>`;
 
   document.getElementById('artifact-content').innerHTML = html;
+}
+
+// ── Backend archive (后台档案) — versions / disputes / interpretations ──────
+function renderArchive(a) {
+  if (!a) return '';
+  const esc = s => String(s==null?'':s);
+  const blocks = [];
+
+  // Name versions (名称/释读版本)
+  if (Array.isArray(a.name_versions) && a.name_versions.length) {
+    blocks.push(`
+      <div style="margin-bottom:var(--space-5);">
+        <h3 style="font-size:var(--text-h3); color:var(--bronze); margin-bottom:var(--space-3);">名称与版本之争</h3>
+        <div style="display:flex; flex-direction:column; gap:var(--space-2);">
+          ${a.name_versions.map(v => `
+            <div style="padding:var(--space-3); background:var(--surface-sunken); border-radius:var(--radius); border-left:3px solid var(--bronze);">
+              <span style="font-weight:600; font-size:var(--text-lg);">${esc(v.name)}</span>
+              ${v.status?`<span class="chop chop-bronze" style="margin-left:8px;">${esc(v.status)}</span>`:''}
+              ${v.rationale?`<div style="font-size:var(--text-sm); color:var(--ink-2); margin-top:4px;">${esc(v.rationale)}</div>`:''}
+              ${v.advocates?`<div style="font-size:var(--text-xs); color:var(--ink-3); margin-top:2px;">主张:${esc(v.advocates)}</div>`:''}
+            </div>`).join('')}
+        </div>
+      </div>`);
+  }
+
+  // Dating debate (断代之争)
+  if (a.dating_debate && (a.dating_debate.consensus || (a.dating_debate.alternatives||[]).length)) {
+    const d = a.dating_debate;
+    blocks.push(`
+      <div style="margin-bottom:var(--space-5);">
+        <h3 style="font-size:var(--text-h3); color:var(--bronze); margin-bottom:var(--space-3);">断代之争</h3>
+        ${d.consensus?`<p style="font-size:var(--text-sm); margin-bottom:var(--space-2);"><span class="persp-cn" style="padding:0 6px;border-radius:4px;">主流</span> ${esc(d.consensus)}</p>`:''}
+        ${(d.alternatives||[]).map(alt => `<p style="font-size:var(--text-sm); color:var(--ink-2); margin-bottom:4px;">↔ ${esc(alt.view)}${alt.by?` <span style="color:var(--ink-3);">— ${esc(alt.by)}</span>`:''}${alt.basis?`<br><span style="color:var(--ink-3); font-size:var(--text-xs);">依据:${esc(alt.basis)}</span>`:''}</p>`).join('')}
+      </div>`);
+  }
+
+  // Interpretation disputes (释读/解说分歧)
+  if (Array.isArray(a.interpretation_disputes) && a.interpretation_disputes.length) {
+    blocks.push(`
+      <div style="margin-bottom:var(--space-5);">
+        <h3 style="font-size:var(--text-h3); color:var(--bronze); margin-bottom:var(--space-3);">不同解说</h3>
+        ${a.interpretation_disputes.map(disp => `
+          <div style="margin-bottom:var(--space-3);">
+            <div style="font-weight:600; font-size:var(--text-sm); margin-bottom:var(--space-1);">${esc(disp.topic)}</div>
+            ${(disp.views||[]).map(v => `<div style="font-size:var(--text-sm); color:var(--ink-2); padding:4px 0 4px var(--space-3); border-left:2px solid var(--line-strong); margin-bottom:4px;">「${esc(v.reading||v.view)}」${v.by?` <span style="color:var(--ink-3);">— ${esc(v.by)}</span>`:''}${v.argument?`<br><span style="color:var(--ink-3); font-size:var(--text-xs);">${esc(v.argument)}</span>`:''}</div>`).join('')}
+          </div>`).join('')}
+      </div>`);
+  }
+
+  // Scholarly perspectives
+  if (Array.isArray(a.scholarly_perspectives) && a.scholarly_perspectives.length) {
+    blocks.push(`
+      <div style="margin-bottom:var(--space-5);">
+        <h3 style="font-size:var(--text-h3); color:var(--bronze); margin-bottom:var(--space-3);">学者视角</h3>
+        <div style="display:flex; flex-direction:column; gap:var(--space-2);">
+          ${a.scholarly_perspectives.map(s => `<div style="font-size:var(--text-sm);"><strong>${esc(s.scholar)}</strong>${s.school?` <span class="chop chop-patina" style="font-size:var(--text-2xs);">${esc(s.school)}</span>`:''}:${esc(s.position)}</div>`).join('')}
+        </div>
+      </div>`);
+  }
+
+  // Discovery story / controversies
+  if (a.discovery_story && (a.discovery_story.official || (a.discovery_story.controversies||[]).length || (a.discovery_story.rumors_vs_fact||[]).length)) {
+    const ds = a.discovery_story;
+    blocks.push(`
+      <div style="margin-bottom:var(--space-5);">
+        <h3 style="font-size:var(--text-h3); color:var(--bronze); margin-bottom:var(--space-3);">出土/流传考</h3>
+        ${ds.official?`<p style="font-size:var(--text-sm); margin-bottom:var(--space-2);">${esc(ds.official)}</p>`:''}
+        ${(ds.controversies||[]).map(c=>`<p style="font-size:var(--text-sm); color:var(--ink-2);">· ${esc(c)}</p>`).join('')}
+        ${(ds.rumors_vs_fact||[]).map(rf=>`<p style="font-size:var(--text-sm); color:var(--ink-2); margin-top:4px;"><span class="persp-folk" style="padding:0 6px;border-radius:4px;">传说</span> ${esc(rf.rumor)} <span class="persp-cn" style="padding:0 6px;border-radius:4px;">考</span> ${esc(rf.fact)}</p>`).join('')}
+      </div>`);
+  }
+
+  // Extended narrative
+  if (a.extended_narrative) {
+    blocks.push(`<div style="margin-bottom:var(--space-5);"><h3 style="font-size:var(--text-h3); color:var(--bronze); margin-bottom:var(--space-3);">深度背景</h3><p style="font-size:var(--text-sm); line-height:var(--lh-normal); color:var(--ink);">${esc(a.extended_narrative)}</p></div>`);
+  }
+
+  // Sources
+  if (Array.isArray(a.sources) && a.sources.length) {
+    blocks.push(`<div><h3 style="font-size:var(--text-h3); color:var(--bronze); margin-bottom:var(--space-3);">考据来源</h3>${a.sources.map(s=>`<div style="font-size:var(--text-xs); color:var(--ink-3); padding:3px 0; border-bottom:1px solid var(--line);">${esc(s.author)}${s.year?` (${esc(s.year)})`:''} 《${esc(s.title)}》</div>`).join('')}</div>`);
+  }
+
+  if (!blocks.length) return '';
+  return `
+    <section class="section" style="margin-top:var(--space-6);">
+      <div class="dim-card" style="border-top:3px solid var(--cinnabar);">
+        <div style="display:flex; align-items:center; gap:var(--space-2); margin-bottom:var(--space-4);">
+          <h2 style="font-size:var(--text-h2); color:var(--ink);">⑫ 后台档案 · 争议与考据</h2>
+          <span class="chop chop-cinnabar">不同版本 · 不同解说</span>
+        </div>
+        ${blocks.join('')}
+      </div>
+    </section>`;
 }
 
 function switchView(mode) {
@@ -431,6 +535,14 @@ function tryRender() {
   }, 500);
   return true;
 }
+
+// Backend archive (后台档案): fetch once, then (re-)render so the 争议/解说
+// section appears. Graceful no-op if the file is absent.
+window.ARTIFACT_ARCHIVES = window.ARTIFACT_ARCHIVES || {};
+fetch('../../data/curated/artifact-archives.json')
+  .then(r => r.ok ? r.json() : {})
+  .then(a => { window.ARTIFACT_ARCHIVES = a || {}; tryRender(); })
+  .catch(() => {});
 
 // Render now if data already loaded, otherwise wait for the ready event
 if (!tryRender()) {

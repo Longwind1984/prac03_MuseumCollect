@@ -155,7 +155,7 @@
       "note": "Fallback: search Category:Bronze_zun_and_pan_of_Marquis_Yi_of_Zeng"
     },
     {
-      "artifact_id": "cuojin_boshanlu",
+      "artifact_id": "cuojin_boshanlu_v3",
       "name_zh": "错金博山炉",
       "wikimedia_filename": "Gilded_Bronze_Boshan_Incense_Burner_with_Cloud,_Mountain,_Animal_and_Human_Motifs.jpg",
       "commons_url": "https://commons.wikimedia.org/wiki/File:Gilded_Bronze_Boshan_Incense_Burner_with_Cloud,_Mountain,_Animal_and_Human_Motifs.jpg",
@@ -165,7 +165,7 @@
       "local_target": "assets/photos/cuojin_boshanlu.jpg"
     },
     {
-      "artifact_id": "changxin_gongdeng",
+      "artifact_id": "changxin_gongdeng_v3",
       "name_zh": "长信宫灯",
       "wikimedia_filename": "20250118_Changxin_Palace_Lamp_01.jpg",
       "commons_url": "https://commons.wikimedia.org/wiki/File:20250118_Changxin_Palace_Lamp_01.jpg",
@@ -176,7 +176,7 @@
       "fallback_filename": "%E9%95%BF%E4%BF%A1%E5%AE%AB%E7%81%AF_%E6%B2%B3%E5%8C%97%E5%8D%9A%E7%89%A9%E9%99%A2.jpg"
     },
     {
-      "artifact_id": "matafeiyan",
+      "artifact_id": "matafeiyan_v3",
       "name_zh": "马踏飞燕 (铜奔马)",
       "wikimedia_filename": "Gansu_Museum_2007_257.jpg",
       "commons_url": "https://commons.wikimedia.org/wiki/File:Gansu_Museum_2007_257.jpg",
@@ -186,7 +186,7 @@
       "local_target": "assets/photos/matafeiyan.jpg"
     },
     {
-      "artifact_id": "sanxingdui_dali_ren",
+      "artifact_id": "sanxingdui_dali_ren_v3",
       "name_zh": "三星堆青铜大立人",
       "wikimedia_filename": "Bronze_Colossal_Standing_Figure,_Sanxingdui_b.jpg",
       "commons_url": "https://commons.wikimedia.org/wiki/File:Bronze_Colossal_Standing_Figure,_Sanxingdui_b.jpg",
@@ -196,7 +196,7 @@
       "local_target": "assets/photos/sanxingdui_dali_ren.jpg"
     },
     {
-      "artifact_id": "sanxingdui_zongmu_mianju",
+      "artifact_id": "sanxingdui_zongmu_mianju_v3",
       "name_zh": "三星堆纵目面具",
       "wikimedia_filename": "Ancient_Bronze_Mask_from_Sanxingdui_3.jpg",
       "commons_url": "https://commons.wikimedia.org/wiki/File:Ancient_Bronze_Mask_from_Sanxingdui_3.jpg",
@@ -206,7 +206,7 @@
       "local_target": "assets/photos/sanxingdui_zongmu.jpg"
     },
     {
-      "artifact_id": "sanxingdui_shenshu",
+      "artifact_id": "sanxingdui_shenshu_v3",
       "name_zh": "三星堆青铜神树",
       "wikimedia_filename": "Bronze_Sacred_Tree_No.1,_Sanxingdui_Museum.jpg",
       "commons_url": "https://commons.wikimedia.org/wiki/File:Bronze_Sacred_Tree_No.1,_Sanxingdui_Museum.jpg",
