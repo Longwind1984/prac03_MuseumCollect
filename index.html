@@ -108,27 +108,32 @@
 
     <!-- Main demo card: v3-converged -->
     <section class="mb-12">
-      <p class="text-xs uppercase tracking-widest text-stone-500 mb-3">main demo · current</p>
-      <a href="./demos/v3-converged/dashboard.html" class="card block bg-gradient-to-br from-amber-50 via-stone-50 to-stone-100 rounded-xl p-7 md:p-9 border-2 border-amber-200 hover:border-amber-500 hover:shadow-2xl">
+      <p class="text-xs uppercase tracking-widest text-stone-500 mb-3">main demo · current · ★ v1.0 大改版</p>
+      <a href="./demos/v3-converged/dashboard.html" class="card block bg-gradient-to-br from-emerald-50 via-stone-50 to-stone-100 rounded-xl p-7 md:p-9 border-2 border-emerald-200 hover:border-emerald-600 hover:shadow-2xl">
         <div class="flex flex-wrap items-baseline gap-3 mb-3">
-          <h2 class="text-3xl font-serif">v3-converged</h2>
-          <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-mono">12 pages</span>
-          <span class="text-xs px-2 py-0.5 rounded-full bg-stone-100 text-stone-700 font-mono">event-bus wired</span>
-          <span class="text-xs px-2 py-0.5 rounded-full bg-stone-100 text-stone-700 font-mono">mobile 375px ✓</span>
-          <span class="text-xs px-2 py-0.5 rounded-full bg-stone-100 text-stone-700 font-mono">真 GeoJSON</span>
+          <h2 class="text-3xl font-serif">v3-converged <span class="text-base text-emerald-800">· v1.0</span></h2>
+          <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 font-mono">13 pages</span>
+          <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 font-mono">青铜锈色设计系统</span>
+          <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 font-mono">真·移动优先 375px</span>
+          <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 font-mono">真实地形(34 省)</span>
+          <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 font-mono">build-time 真照片</span>
+          <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 font-mono">知识库 + 后台档案</span>
         </div>
         <p class="text-stone-700 leading-relaxed mb-5 max-w-3xl">
-          v1 的 3 个 differentiated demo(考据/沉浸/探索)收敛而成的 polished demo —— 7+1 维度,A 的 scholar 排版 + B 的 hezun 长卷 + C 的 sticky nav 工程化,加上 v4.5 / v4.6 / v5 的 Runtime Auditor / GeoJSON / Mobile Retrofit / 性能优化的累积。亮点页:
+          <strong>v1.0 四大升级</strong>:① 全站真·移动优先重构(13 页 0 横向溢出,弃 v4.6 的 !important retrofit);
+          ② 设计系统大改版 —— 签名色由琥珀转<strong>青铜锈绿 patina</strong>,8pt 网格 + clamp() 流式字阶 + focus-visible(研究 British Museum / Cooper Hewitt 定调);
+          ③ <strong>知识库</strong>:5 篇青铜器通论 wiki(20 处学术争议)+ 14 件国宝<strong>后台档案</strong>(名称版本/断代/不同解说);
+          ④ 地图换<strong>真实中国地形</strong>(34 省 + 黄河长江),真实文物照片经 Vercel build 自 Wikimedia 拉取(沙箱防火墙下的诚实方案)。
         </p>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
-          <a href="./demos/v3-converged/dashboard.html" class="px-3 py-2 bg-white rounded border border-stone-200 hover:border-amber-500 hover:bg-amber-50 font-mono text-xs">★ dashboard.html</a>
-          <a href="./demos/v3-converged/inscription-special-hezun.html" class="px-3 py-2 bg-white rounded border border-stone-200 hover:border-amber-500 hover:bg-amber-50 font-mono text-xs">inscription-hezun</a>
-          <a href="./demos/v3-converged/time-pillar.html" class="px-3 py-2 bg-white rounded border border-stone-200 hover:border-amber-500 hover:bg-amber-50 font-mono text-xs">time-pillar</a>
-          <a href="./demos/v3-converged/geo-system.html" class="px-3 py-2 bg-white rounded border border-stone-200 hover:border-amber-500 hover:bg-amber-50 font-mono text-xs">geo-system</a>
-          <a href="./demos/v3-converged/catalog.html" class="px-3 py-2 bg-white rounded border border-stone-200 hover:border-amber-500 hover:bg-amber-50 font-mono text-xs">catalog</a>
-          <a href="./demos/v3-converged/artifact.html?id=he_zun" class="px-3 py-2 bg-white rounded border border-stone-200 hover:border-amber-500 hover:bg-amber-50 font-mono text-xs">artifact (何尊)</a>
-          <a href="./demos/v3-converged/me.html" class="px-3 py-2 bg-white rounded border border-stone-200 hover:border-amber-500 hover:bg-amber-50 font-mono text-xs">me · 35/277</a>
-          <a href="./demos/v3-converged/" class="px-3 py-2 bg-stone-100 rounded border border-stone-300 hover:bg-stone-200 font-mono text-xs">→ 12 页全 index</a>
+          <a href="./demos/v3-converged/dashboard.html" class="px-3 py-2 bg-white rounded border border-stone-200 hover:border-emerald-600 hover:bg-emerald-50 font-mono text-xs">★ dashboard(真地形)</a>
+          <a href="./demos/v3-converged/wiki.html" class="px-3 py-2 bg-white rounded border border-stone-200 hover:border-emerald-600 hover:bg-emerald-50 font-mono text-xs">★ 知识库 wiki</a>
+          <a href="./demos/v3-converged/artifact.html?id=he_zun" class="px-3 py-2 bg-white rounded border border-stone-200 hover:border-emerald-600 hover:bg-emerald-50 font-mono text-xs">artifact 何尊(后台档案)</a>
+          <a href="./demos/v3-converged/geo-system.html" class="px-3 py-2 bg-white rounded border border-stone-200 hover:border-emerald-600 hover:bg-emerald-50 font-mono text-xs">geo-system(真地形)</a>
+          <a href="./demos/v3-converged/time-pillar.html" class="px-3 py-2 bg-white rounded border border-stone-200 hover:border-emerald-600 hover:bg-emerald-50 font-mono text-xs">time-pillar</a>
+          <a href="./demos/v3-converged/catalog.html" class="px-3 py-2 bg-white rounded border border-stone-200 hover:border-emerald-600 hover:bg-emerald-50 font-mono text-xs">catalog · 277</a>
+          <a href="./demos/v3-converged/me.html" class="px-3 py-2 bg-white rounded border border-stone-200 hover:border-emerald-600 hover:bg-emerald-50 font-mono text-xs">me · 我的图鉴</a>
+          <a href="./demos/v3-converged/" class="px-3 py-2 bg-stone-100 rounded border border-stone-300 hover:bg-stone-200 font-mono text-xs">→ 13 页全 index</a>
         </div>
       </a>
     </section>
