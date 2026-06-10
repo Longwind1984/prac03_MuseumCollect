@@ -1,0 +1,5 @@
+ config.json         |  1 -
+ config.yaml         |  3 +++
+ src/config.js       | 16 +++++++++++++++-
+ src/utils/legacy.js | 17 +++++++++++++++--
+ 4 files changed, 33 insertions(+), 4 deletions(-)

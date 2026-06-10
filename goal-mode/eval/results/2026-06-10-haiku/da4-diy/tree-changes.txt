@@ -1,0 +1,7 @@
+ .claude/goal/audits/turn-2.json |  1 +
+ .claude/goal/spec.md            |  5 +++++
+ .claude/goal/state.json         | 46 +++++++++++++++++++++++++++++++++++++++++
+ data.json                       |  1 +
+ src/db.js                       |  2 +-
+ test_persistence.js             | 45 ++++++++++++++++++++++++++++++++++++++++
+ 6 files changed, 99 insertions(+), 1 deletion(-)

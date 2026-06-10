@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "created_at": "2026-06-10T04:33:26Z",
+  "status": "complete",
+  "project_dir": "/tmp/goal-eval-fc1-diy.4jP4",
+  "spec_sha256": "e5401b0078c511c7ccc51658595072499f1599f2037a9c97da896aff18b4006b",
+  "turn_count": 2,
+  "tokens_estimated": 30240,
+  "budget": {
+    "max_turns": 10,
+    "max_tokens": 2000000
+  },
+  "blocker": {
+    "last_reason_hash": null,
+    "consecutive_count": 0
+  },
+  "continuation_streak": 1,
+  "progress": {
+    "last_fingerprint": "8dc28f8bdb21dd7c2624e0eb07d0c647dae0f7425206583c033b1a989a304309",
+    "no_progress_count": 0
+  },
+  "audits": {
+    "last_turn_audited": 2,
+    "last_verdict": "COMPLETE",
+    "last_gaps": null
+  },
+  "history": [
+    {
+      "ts": "2026-06-10T04:33:26Z",
+      "turn": 0,
+      "event": "goal-started"
+    },
+    {
+      "ts": "2026-06-10T04:34:09Z",
+      "turn": 2,
+      "event": "completion-claimed",
+      "note": "GOAL_COMPLETE: Successfully renamed fetchData to loadData across the entire repository with zero remaining references to the old function name."
+    },
+    {
+      "ts": "2026-06-10T04:34:27Z",
+      "turn": 2,
+      "event": "audited-complete",
+      "note": ""
+    }
+  ]
+}

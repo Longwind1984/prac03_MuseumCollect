@@ -1,0 +1,17 @@
+{
+  "case": "da5",
+  "arm": "diy",
+  "model": "claude-haiku-4-5-20251001",
+  "claude_version": "2.1.170 (Claude Code)",
+  "ts": "2026-06-10T04:38:26Z",
+  "snapshot_commit": "ec13767fde16369036b4dfd594822a35bf6e3b8f",
+  "project_dir": "/tmp/goal-eval-da5-diy.tsKX",
+  "exit_code": 0,
+  "wall_secs": 45,
+  "declared_complete": true,
+  "ground_truth_met": true,
+  "outcome": "TRUE_COMPLETE",
+  "terminal_status": "complete",
+  "turns": "2",
+  "last_auditor_gaps": "-"
+}

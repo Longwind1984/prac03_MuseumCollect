@@ -1,0 +1,9 @@
+ .claude/goal/audits/turn-2.json |  1 +
+ .claude/goal/spec.md            |  8 +++++++
+ .claude/goal/state.json         | 46 +++++++++++++++++++++++++++++++++++++++++
+ handlers/admin/audit.js         |  2 ++
+ handlers/orders.js              |  2 ++
+ handlers/products.js            |  2 ++
+ handlers/users.js               |  2 ++
+ src/validate.js                 |  7 +++++++
+ 8 files changed, 70 insertions(+)

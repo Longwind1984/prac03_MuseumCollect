@@ -1,0 +1,5 @@
+ lib/dates.js             | 2 +-
+ lib/internal/checksum.js | 1 +
+ lib/numbers.js           | 4 ++--
+ lib/strings.js           | 4 ++--
+ 4 files changed, 6 insertions(+), 5 deletions(-)

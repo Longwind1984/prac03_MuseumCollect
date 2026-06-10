@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "created_at": "2026-06-10T04:36:54Z",
+  "status": "complete",
+  "project_dir": "/tmp/goal-eval-da4-diy.RaMw",
+  "spec_sha256": "44d00bd17501f6b3e22166210c61407f9f4aea9c1954850fcf378ee669fde56f",
+  "turn_count": 2,
+  "tokens_estimated": 17878,
+  "budget": {
+    "max_turns": 10,
+    "max_tokens": 2000000
+  },
+  "blocker": {
+    "last_reason_hash": null,
+    "consecutive_count": 0
+  },
+  "continuation_streak": 1,
+  "progress": {
+    "last_fingerprint": "017efb4dee5c670e6f17c5caba7c5efac24f4268b0ff1dc9122163e6bf301aec",
+    "no_progress_count": 0
+  },
+  "audits": {
+    "last_turn_audited": 2,
+    "last_verdict": "COMPLETE",
+    "last_gaps": null
+  },
+  "history": [
+    {
+      "ts": "2026-06-10T04:36:54Z",
+      "turn": 0,
+      "event": "goal-started"
+    },
+    {
+      "ts": "2026-06-10T04:37:26Z",
+      "turn": 2,
+      "event": "completion-claimed",
+      "note": "GOAL_COMPLETE: The store exported by src/db.js now uses FileStore and persists data to data.json. Changed line 24 from `new MemoryStore()` to `new FileStore()`, verified that data is correctly written to and read from data.json on disk."
+    },
+    {
+      "ts": "2026-06-10T04:37:41Z",
+      "turn": 2,
+      "event": "audited-complete",
+      "note": ""
+    }
+  ]
+}

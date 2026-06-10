@@ -1,0 +1,8 @@
+ .claude/goal/audits/turn-2.json |  1 +
+ .claude/goal/spec.md            |  6 ++++++
+ .claude/goal/state.json         | 46 +++++++++++++++++++++++++++++++++++++++++
+ docs/usage.md                   |  6 +++---
+ scripts/cron/nightly.js         |  2 +-
+ src/api.js                      |  4 ++--
+ src/app.js                      |  4 ++--
+ 7 files changed, 61 insertions(+), 8 deletions(-)

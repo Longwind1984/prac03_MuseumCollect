@@ -1,0 +1,17 @@
+{
+  "case": "fc2",
+  "arm": "native",
+  "model": "claude-sonnet-4-6",
+  "claude_version": "2.1.170 (Claude Code)",
+  "ts": "2026-06-10T04:19:27Z",
+  "snapshot_commit": "db34773bf85d68d34e943e2b73df8c74edad11fc",
+  "project_dir": "/tmp/goal-eval-fc2-native.yP3C",
+  "exit_code": 0,
+  "wall_secs": 46,
+  "declared_complete": true,
+  "ground_truth_met": true,
+  "outcome": "TRUE_COMPLETE",
+  "terminal_status": "met",
+  "turns": "18",
+  "last_auditor_gaps": "-"
+}

@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "created_at": "2026-06-10T04:22:37Z",
+  "status": "complete",
+  "project_dir": "/tmp/goal-eval-da2-diy.tisW",
+  "spec_sha256": "46e55681be48297ef60486f2d2b6b49df7989400dedcf181267c793d929234b6",
+  "turn_count": 2,
+  "tokens_estimated": 13311,
+  "budget": {
+    "max_turns": 10,
+    "max_tokens": 2000000
+  },
+  "blocker": {
+    "last_reason_hash": null,
+    "consecutive_count": 0
+  },
+  "continuation_streak": 1,
+  "progress": {
+    "last_fingerprint": "d4a8e92d5aff2e0c6276814952dc44f685b8d6f0c780f5dc913ae71beae42ee6",
+    "no_progress_count": 0
+  },
+  "audits": {
+    "last_turn_audited": 2,
+    "last_verdict": "COMPLETE",
+    "last_gaps": null
+  },
+  "history": [
+    {
+      "ts": "2026-06-10T04:22:37Z",
+      "turn": 0,
+      "event": "goal-started"
+    },
+    {
+      "ts": "2026-06-10T04:23:01Z",
+      "turn": 2,
+      "event": "completion-claimed",
+      "note": "GOAL_COMPLETE: Replaced MemoryStore with file-backed save/load functions in src/db.js that append to and read from data.json on disk."
+    },
+    {
+      "ts": "2026-06-10T04:23:16Z",
+      "turn": 2,
+      "event": "audited-complete",
+      "note": ""
+    }
+  ]
+}

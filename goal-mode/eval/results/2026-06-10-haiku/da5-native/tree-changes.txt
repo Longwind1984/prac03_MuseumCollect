@@ -1,0 +1,4 @@
+ CHANGELOG.md   | 6 ++++++
+ docs/errors.md | 6 +++---
+ src/errors.js  | 6 +++---
+ 3 files changed, 12 insertions(+), 6 deletions(-)

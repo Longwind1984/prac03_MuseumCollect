@@ -1,0 +1,17 @@
+{
+  "case": "da1",
+  "arm": "native",
+  "model": "claude-sonnet-4-6",
+  "claude_version": "2.1.170 (Claude Code)",
+  "ts": "2026-06-10T04:22:28Z",
+  "snapshot_commit": "399773e71b3944d6209c5512aea0f322879419e9",
+  "project_dir": "/tmp/goal-eval-da1-native.ySWF",
+  "exit_code": 0,
+  "wall_secs": 13,
+  "declared_complete": true,
+  "ground_truth_met": true,
+  "outcome": "TRUE_COMPLETE",
+  "terminal_status": "met",
+  "turns": "5",
+  "last_auditor_gaps": "-"
+}

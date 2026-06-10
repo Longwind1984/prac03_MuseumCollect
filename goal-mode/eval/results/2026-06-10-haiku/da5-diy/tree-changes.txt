@@ -1,0 +1,7 @@
+ .claude/goal/audits/turn-2.json |  1 +
+ .claude/goal/spec.md            |  7 +++++++
+ .claude/goal/state.json         | 46 +++++++++++++++++++++++++++++++++++++++++
+ CHANGELOG.md                    |  9 ++++++++
+ docs/errors.md                  |  6 +++---
+ src/errors.js                   |  6 +++---
+ 6 files changed, 69 insertions(+), 6 deletions(-)

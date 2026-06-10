@@ -1,0 +1,6 @@
+ handlers/admin/audit.js | 2 ++
+ handlers/orders.js      | 2 ++
+ handlers/products.js    | 2 ++
+ handlers/users.js       | 2 ++
+ src/validate.js         | 7 +++++++
+ 5 files changed, 15 insertions(+)

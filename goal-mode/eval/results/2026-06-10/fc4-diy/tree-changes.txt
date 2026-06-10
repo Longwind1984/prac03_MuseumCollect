@@ -1,0 +1,8 @@
+ .claude/goal/audits/turn-2.json |  1 +
+ .claude/goal/spec.md            |  5 +++++
+ .claude/goal/state.json         | 46 +++++++++++++++++++++++++++++++++++++++++
+ lib/dates.js                    |  5 ++++-
+ lib/internal/checksum.js        |  1 +
+ lib/numbers.js                  | 10 +++++++--
+ lib/strings.js                  | 10 +++++++--
+ 7 files changed, 73 insertions(+), 5 deletions(-)

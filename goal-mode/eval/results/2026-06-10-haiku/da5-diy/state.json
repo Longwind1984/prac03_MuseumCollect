@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "created_at": "2026-06-10T04:37:41Z",
+  "status": "complete",
+  "project_dir": "/tmp/goal-eval-da5-diy.tsKX",
+  "spec_sha256": "2f9c8666b2b827bb3754931344e0d9c2fc86ed4f87a46d81dc2e416ec2c79338",
+  "turn_count": 2,
+  "tokens_estimated": 21356,
+  "budget": {
+    "max_turns": 10,
+    "max_tokens": 2000000
+  },
+  "blocker": {
+    "last_reason_hash": null,
+    "consecutive_count": 0
+  },
+  "continuation_streak": 1,
+  "progress": {
+    "last_fingerprint": "46505cda0ac2df7657f653b7f48fb9f6821602dc88da71fc7de9f6ddbe8f62d1",
+    "no_progress_count": 0
+  },
+  "audits": {
+    "last_turn_audited": 2,
+    "last_verdict": "COMPLETE",
+    "last_gaps": null
+  },
+  "history": [
+    {
+      "ts": "2026-06-10T04:37:41Z",
+      "turn": 0,
+      "event": "goal-started"
+    },
+    {
+      "ts": "2026-06-10T04:38:13Z",
+      "turn": 2,
+      "event": "completion-claimed",
+      "note": "GOAL_COMPLETE: Error catalog successfully localized to Simplified Chinese (zh-CN) with all three requirements verified in working tree."
+    },
+    {
+      "ts": "2026-06-10T04:38:26Z",
+      "turn": 2,
+      "event": "audited-complete",
+      "note": ""
+    }
+  ]
+}

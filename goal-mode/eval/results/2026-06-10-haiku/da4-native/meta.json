@@ -1,0 +1,17 @@
+{
+  "case": "da4",
+  "arm": "native",
+  "model": "claude-haiku-4-5-20251001",
+  "claude_version": "2.1.170 (Claude Code)",
+  "ts": "2026-06-10T04:38:56Z",
+  "snapshot_commit": "046c8c2101c7562874b3c92d484cf433975be49f",
+  "project_dir": "/tmp/goal-eval-da4-native.p5QI",
+  "exit_code": 0,
+  "wall_secs": 28,
+  "declared_complete": true,
+  "ground_truth_met": true,
+  "outcome": "TRUE_COMPLETE",
+  "terminal_status": "met",
+  "turns": "20",
+  "last_auditor_gaps": "-"
+}

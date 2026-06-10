@@ -1,0 +1,17 @@
+{
+  "case": "fc2",
+  "arm": "diy",
+  "model": "claude-sonnet-4-6",
+  "claude_version": "2.1.170 (Claude Code)",
+  "ts": "2026-06-10T04:18:39Z",
+  "snapshot_commit": "b0da284ff74a245b09466ea761bcae152c368dc3",
+  "project_dir": "/tmp/goal-eval-fc2-diy.Tatq",
+  "exit_code": 0,
+  "wall_secs": 215,
+  "declared_complete": true,
+  "ground_truth_met": true,
+  "outcome": "TRUE_COMPLETE",
+  "terminal_status": "complete",
+  "turns": "2",
+  "last_auditor_gaps": "-"
+}

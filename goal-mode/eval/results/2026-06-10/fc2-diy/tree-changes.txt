@@ -1,0 +1,8 @@
+ .claude/goal/audits/turn-2.json |  1 +
+ .claude/goal/spec.md            |  8 +++++++
+ .claude/goal/state.json         | 46 +++++++++++++++++++++++++++++++++++++++++
+ config.json                     |  1 -
+ config.yaml                     |  3 +++
+ src/config.js                   |  8 ++++++-
+ src/utils/legacy.js             |  7 +++++--
+ 7 files changed, 70 insertions(+), 4 deletions(-)

@@ -1,0 +1,17 @@
+{
+  "case": "da1",
+  "arm": "diy",
+  "model": "claude-sonnet-4-6",
+  "claude_version": "2.1.170 (Claude Code)",
+  "ts": "2026-06-10T04:22:13Z",
+  "snapshot_commit": "a969d66bf90fe08d8494f1b67f3311150fbb41af",
+  "project_dir": "/tmp/goal-eval-da1-diy.XxNZ",
+  "exit_code": 0,
+  "wall_secs": 37,
+  "declared_complete": true,
+  "ground_truth_met": true,
+  "outcome": "TRUE_COMPLETE",
+  "terminal_status": "complete",
+  "turns": "2",
+  "last_auditor_gaps": "-"
+}

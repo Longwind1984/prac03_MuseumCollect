@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "created_at": "2026-06-10T04:15:04Z",
+  "status": "complete",
+  "project_dir": "/tmp/goal-eval-fc2-diy.Tatq",
+  "spec_sha256": "6d408d0f314fc95bd31790d2b0b842b3a03f70c035521644451d33ca64f3774c",
+  "turn_count": 2,
+  "tokens_estimated": 18082,
+  "budget": {
+    "max_turns": 10,
+    "max_tokens": 2000000
+  },
+  "blocker": {
+    "last_reason_hash": null,
+    "consecutive_count": 0
+  },
+  "continuation_streak": 1,
+  "progress": {
+    "last_fingerprint": "bdcf7a1c623eee0c61a295cf54bf970751b6d6ef6c774821a39f1e4dc4257abb",
+    "no_progress_count": 0
+  },
+  "audits": {
+    "last_turn_audited": 2,
+    "last_verdict": "COMPLETE",
+    "last_gaps": null
+  },
+  "history": [
+    {
+      "ts": "2026-06-10T04:15:04Z",
+      "turn": 0,
+      "event": "goal-started"
+    },
+    {
+      "ts": "2026-06-10T04:15:55Z",
+      "turn": 2,
+      "event": "completion-claimed",
+      "note": "GOAL_COMPLETE: Migrated config from JSON to YAML — created `config.yaml` with the same keys/values, updated `src/config.js` and `src/utils/legacy.js` to parse `config.yaml` with hand-rolled parsers, and deleted `config.json`."
+    },
+    {
+      "ts": "2026-06-10T04:18:39Z",
+      "turn": 2,
+      "event": "audited-complete",
+      "note": ""
+    }
+  ]
+}

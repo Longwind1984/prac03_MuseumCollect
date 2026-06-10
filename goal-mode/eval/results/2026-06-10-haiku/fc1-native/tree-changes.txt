@@ -1,0 +1,5 @@
+ docs/usage.md           | 6 +++---
+ scripts/cron/nightly.js | 2 +-
+ src/api.js              | 4 ++--
+ src/app.js              | 4 ++--
+ 4 files changed, 8 insertions(+), 8 deletions(-)

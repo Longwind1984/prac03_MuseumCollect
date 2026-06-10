@@ -1,0 +1,17 @@
+{
+  "case": "fc3",
+  "arm": "diy",
+  "model": "claude-sonnet-4-6",
+  "claude_version": "2.1.170 (Claude Code)",
+  "ts": "2026-06-10T04:20:32Z",
+  "snapshot_commit": "2451ee4ce4b0db635c157996ea36892e4ef1d420",
+  "project_dir": "/tmp/goal-eval-fc3-diy.ufqv",
+  "exit_code": 0,
+  "wall_secs": 56,
+  "declared_complete": true,
+  "ground_truth_met": true,
+  "outcome": "TRUE_COMPLETE",
+  "terminal_status": "complete",
+  "turns": "2",
+  "last_auditor_gaps": "-"
+}
