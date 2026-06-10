@@ -1,5 +1,5 @@
 #!/bin/bash
-# /goal pause — pause the continuation loop (active -> paused).
+# /mygoal pause — pause the continuation loop (active -> paused).
 # The Stop hook exits 0 for any non-active status, so pausing stops re-prompting.
 
 set -uo pipefail
@@ -20,17 +20,17 @@ case "$status" in
 STATUS=paused
 Continuation loop paused. The Stop hook will no longer re-prompt.
 In-flight work is untouched; nothing is lost.
-Resume with: /goal resume
+Resume with: /mygoal resume
 EOF
     ;;
   paused)
-    printf 'STATUS=paused\nAlready paused. Resume with: /goal resume\n'
+    printf 'STATUS=paused\nAlready paused. Resume with: /mygoal resume\n'
     ;;
   *)
     cat <<EOF
 STATUS=$status
 Cannot pause — goal is '$status', not 'active'.
-  /goal status   # see full state
+  /mygoal status   # see full state
 EOF
     exit 1
     ;;

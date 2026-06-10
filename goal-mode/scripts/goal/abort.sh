@@ -1,5 +1,5 @@
 #!/bin/bash
-# /goal abort — orderly kill switch. Terminates the current goal from any state.
+# /mygoal abort — orderly kill switch. Terminates the current goal from any state.
 # Idempotent: safe to run even if already stopped.
 
 set -uo pipefail
@@ -20,7 +20,7 @@ if [[ "$status" = "aborted" ]]; then
   # Ensure the jq-independent sentinel exists even for goals aborted by an
   # older version, so the loop can't slip back to active if jq is later repaired.
   : > "$(goal_aborted_path)" 2>/dev/null || true
-  printf 'STATUS=aborted\nGoal already aborted. Start a new one with: /goal start "<spec>"\n'
+  printf 'STATUS=aborted\nGoal already aborted. Start a new one with: /mygoal start "<spec>"\n'
   exit 0
 fi
 
@@ -41,7 +41,7 @@ if [[ "$persisted" -eq 1 ]]; then
 STATUS=aborted
 Goal terminated (was: $status). The continuation loop will not re-prompt.
 Your working tree is untouched — nothing was reverted.
-Start a fresh goal with: /goal start "<spec>"
+Start a fresh goal with: /mygoal start "<spec>"
 EOF
 else
   cat <<EOF
@@ -50,6 +50,6 @@ Goal terminated (was: $status) via the ABORTED sentinel file. NOTE: state.json
 could not be updated (jq error or corrupt state), so its recorded status may be
 stale — but the continuation loop is stopped (the hook checks the sentinel
 before any jq). Your working tree is untouched.
-Start a fresh goal with: /goal start "<spec>"
+Start a fresh goal with: /mygoal start "<spec>"
 EOF
 fi

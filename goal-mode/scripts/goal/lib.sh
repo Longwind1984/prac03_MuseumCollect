@@ -1,5 +1,5 @@
 #!/bin/bash
-# Shared helpers for /goal mode. Sourced by other scripts.
+# Shared helpers for /mygoal mode. Sourced by other scripts.
 
 set -uo pipefail
 
@@ -13,7 +13,7 @@ set -uo pipefail
 : "${GOAL_STALL_THRESHOLD:=8}"      # no working-tree/commit change for this many turns -> stalled (0 disables)
 : "${GOAL_DEFAULT_MAX_TURNS:=200}"
 : "${GOAL_DEFAULT_MAX_TOKENS:=2000000}"
-: "${GOAL_RESUME_TURN_BUMP:=100}"   # /goal resume from exhausted budget adds this many turns
+: "${GOAL_RESUME_TURN_BUMP:=100}"   # /mygoal resume from exhausted budget adds this many turns
 : "${GOAL_RESUME_TOKEN_BUMP:=1000000}"
 : "${GOAL_HISTORY_MAX:=50}"         # keep at most this many history events in state.json
 : "${GOAL_TRANSCRIPT_TAIL_LINES:=500}"  # window scanned for the last assistant message
@@ -203,7 +203,7 @@ goal_render_contract() {
   if [[ "$GOAL_STALL_THRESHOLD" -gt 0 ]] 2>/dev/null; then
     stall_note=$(printf '\n     The loop also detects %s consecutive no-progress turns and stops on its own.' "$GOAL_STALL_THRESHOLD")
   fi
-  # M6: use the project_dir recorded at /goal start (stable for the goal's
+  # M6: use the project_dir recorded at /mygoal start (stable for the goal's
   # lifetime) so the printed STOP path matches what the hook checks, regardless
   # of the invoking shell's cwd/env. Fall back to live resolution if absent.
   project_dir=$(jq -r '.project_dir // empty' "$state_path" 2>/dev/null)
@@ -266,7 +266,7 @@ FAILURE MODES TO ACTIVELY RESIST:
      GOAL_BLOCKED with the specific obstacle.${stall_note}
 
 KILL SWITCH (user can stop the loop any time):
-   • /goal abort  — orderly stop from the chat
+   • /mygoal abort  — orderly stop from the chat
    • touch ${project_dir}/.claude/goal/STOP  — emergency stop from any shell
 
 Continue.

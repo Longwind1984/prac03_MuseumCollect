@@ -1,5 +1,5 @@
 #!/bin/bash
-# /goal continuation hook — called from the Stop-hook dispatcher.
+# /mygoal continuation hook — called from the Stop-hook dispatcher.
 # Input: Stop-event JSON on stdin.
 # Output: exit 2 with stderr reason to keep Claude going; exit 0 to let it stop.
 #
@@ -66,7 +66,7 @@ fi
 # full disk, read-only fs) the budget never advances and the loop could run
 # unbounded. Fail safe: stop the loop (exit 0) instead of re-prompting blindly.
 if ! goal_state_set '.turn_count = (.turn_count + 1)'; then
-  echo "[GOAL_MODE] state write failed (turn increment); stopping loop to fail safe. Run /goal status." >&2
+  echo "[GOAL_MODE] state write failed (turn increment); stopping loop to fail safe. Run /mygoal status." >&2
   exit 0
 fi
 turn=$(goal_state_get turn_count)
@@ -85,7 +85,7 @@ max_tokens=$(goal_state_get budget.max_tokens)
 
 # H1: the budget is a POST-TURN ceiling. On exhaustion, STOP (exit 0) rather
 # than exit 2 — exit 2 would force one more billable "summary" turn. The user
-# can /goal resume to extend the budget and continue.
+# can /mygoal resume to extend the budget and continue.
 if [[ "$turn" -gt "$max_turns" ]]; then
   goal_state_set '.status = "budget-limited"' || true
   goal_history_append "budget-exhausted-turns" "$turn > $max_turns" || true
@@ -136,7 +136,7 @@ EOF
       exit 0
     fi
     # M2: audit said COMPLETE but we couldn't persist it — stop rather than loop.
-    echo "[GOAL_MODE] audit COMPLETE but state write failed; stopping loop. Run /goal status." >&2
+    echo "[GOAL_MODE] audit COMPLETE but state write failed; stopping loop. Run /mygoal status." >&2
     exit 0
   fi
 
@@ -211,10 +211,10 @@ No change to the working tree or git commits for ${npc} consecutive turns, and
 no GOAL_COMPLETE / GOAL_BLOCKED was declared. The loop is spinning without making
 progress, so it stopped to avoid burning the budget.
 
-  /goal status    — review the spec, last auditor gaps, and history
-  /goal resume    — try again (e.g. after you unblock it, or if the agent was
+  /mygoal status    — review the spec, last auditor gaps, and history
+  /mygoal resume    — try again (e.g. after you unblock it, or if the agent was
                     mid-investigation: reading/running tests without editing files)
-  /goal abort     — give up on this goal
+  /mygoal abort     — give up on this goal
 
 (Tune with GOAL_STALL_THRESHOLD; 0 disables this check.)
 EOF
@@ -237,7 +237,7 @@ if [[ "$streak" -ge "$GOAL_BREATHER_HARD" ]] \
    || { [[ "$streak" -ge "$GOAL_BREATHER_SOFT" ]] && [[ "$stop_hook_active" != "false" ]]; }; then
   goal_state_set '.continuation_streak = 0' || true
   goal_history_append "batch-paused-near-cap" \
-    "periodic breather (soft ${GOAL_BREATHER_SOFT} / hard ${GOAL_BREATHER_HARD}); still active — /goal resume or just continue. Any auditor gaps are in /goal status." || true
+    "periodic breather (soft ${GOAL_BREATHER_SOFT} / hard ${GOAL_BREATHER_HARD}); still active — /mygoal resume or just continue. Any auditor gaps are in /mygoal status." || true
   exit 0
 fi
 

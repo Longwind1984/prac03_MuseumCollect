@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ─────────────────────────────────────────────────────────────────────────────
-# /goal mode — portable QA harness
+# /mygoal mode — portable QA harness
 #
 # Runs ANYWHERE: it locates the goal scripts relative to THIS file (not via cwd),
 # so a fresh clone of this repo can run it from any directory, on any machine.
@@ -108,7 +108,7 @@ fire_env(){
     | env "$@" CLAUDE_PROJECT_DIR="$proj" bash "$GH/continuation-hook.sh" >/dev/null 2>&1
 }
 
-printf '\n=== /goal mode QA — scripts under test: %s ===\n\n' "$SRC"
+printf '\n=== /mygoal mode QA — scripts under test: %s ===\n\n' "$SRC"
 
 # ── T1: start initializes a valid, well-shaped state ─────────────────────────
 printf 'T1  start -> active, state seeded\n'

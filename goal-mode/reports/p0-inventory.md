@@ -15,7 +15,7 @@
 | 原生 /goal headless | **实测可用**:`claude -p "/goal <条件>"` 直接驱动工作至条件满足 | 对照评测可全自动执行 |
 | jq | jq-1.7 | 满足 |
 | DIY 安装态 | `/root/.claude` 已装且 Stop hook 已注册;**但落后仓库一个 commit**(c8ce628 的 stall 检测未安装,4 个脚本有差异) | 用户本机使用前需重跑 `install.sh` |
-| ⚠️ 同名冲突(实测) | 装有 DIY skill 的配置下,`/goal` 被 **DIY skill 接管**,原生命令被遮蔽(实测返回 dispatch.sh 输出而非原生 usage) | 双方共存时原生不可达;评测中原生臂使用无 skill 的干净配置隔离 |
+| ⚠️ 同名冲突(实测,**已于 2026-06-10 解决**) | 装有 DIY skill 的配置下,`/goal` 被 **DIY skill 接管**,原生命令被遮蔽(实测返回 dispatch.sh 输出而非原生 usage) | 双方共存时原生不可达;评测中原生臂使用无 skill 的干净配置隔离。**修复**:DIY 命令已重命名为 `/mygoal`(skill 目录 `skills/mygoal/`,内部脚本路径不变);同配置下 `/mygoal` 走 DIY、`/goal` 走原生,实测共存(三件套通过:`/mygoal` 端到端闭环;裸 `/goal` 返回原生 usage;`/goal <spec>` headless 完成工作)。 |
 
 ## 2. 实现定位(全部文件级确认)
 

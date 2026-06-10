@@ -1,5 +1,5 @@
 #!/bin/bash
-# /goal resume — arm the continuation loop again (-> active).
+# /mygoal resume — arm the continuation loop again (-> active).
 # Resets the breather streak and the blocker counter. From budget-limited,
 # extends the budget so the loop can actually proceed instead of immediately
 # re-tripping. All per-branch state changes are done in ONE jq program — one
@@ -10,7 +10,7 @@ set -uo pipefail
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib.sh"
 
 if ! goal_is_initialized; then
-  printf 'STATUS=none\nNo goal initialized in %s.\nStart one with: /goal start "<spec>"\n' "$(goal_project_dir)"
+  printf 'STATUS=none\nNo goal initialized in %s.\nStart one with: /mygoal start "<spec>"\n' "$(goal_project_dir)"
   exit 1
 fi
 
@@ -24,7 +24,7 @@ case "$status" in
     cat <<EOF
 STATUS=complete
 This goal was audited complete. Refusing to re-open it.
-Start a new goal with: /goal start "<spec>"
+Start a new goal with: /mygoal start "<spec>"
 EOF
     exit 1
     ;;
@@ -79,5 +79,5 @@ rm -f "$(goal_aborted_path)" "$(goal_stop_path)" 2>/dev/null || true
 cat <<EOF
 STATUS=active
 Continuation loop re-armed. On your next stop the goal contract is re-injected.${extra}
-Kill switch: /goal abort   OR   touch $(goal_stop_path)
+Kill switch: /mygoal abort   OR   touch $(goal_stop_path)
 EOF

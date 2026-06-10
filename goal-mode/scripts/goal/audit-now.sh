@@ -1,5 +1,5 @@
 #!/bin/bash
-# /goal audit — run the clean-context auditor against the spec right now.
+# /mygoal audit — run the clean-context auditor against the spec right now.
 # Diagnostic only: reports the verdict and updates the recorded audit fields,
 # but does NOT change goal status (the Stop hook owns auto-completion).
 
@@ -54,7 +54,7 @@ if [[ "$audit_exit" -eq 0 && "$verdict" = "COMPLETE" ]]; then
   cat <<EOF
 Auditor says COMPLETE. This manual audit does not auto-close the goal.
 If the loop is still active, emit a line beginning with GOAL_COMPLETE: and the
-Stop hook will re-audit and close it; or /goal abort if you're satisfied.
+Stop hook will re-audit and close it; or /mygoal abort if you're satisfied.
 EOF
 else
   printf 'Gaps for main agent:\n%s\n' "$gaps"

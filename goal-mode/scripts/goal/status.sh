@@ -1,5 +1,5 @@
 #!/bin/bash
-# /goal status — print human-readable state of the current goal.
+# /mygoal status — print human-readable state of the current goal.
 
 set -uo pipefail
 # shellcheck disable=SC1091
@@ -10,7 +10,7 @@ if ! goal_is_initialized; then
 STATUS=none
 No goal initialized in $(goal_project_dir).
 Start one with:
-  /goal start "<spec text>"
+  /mygoal start "<spec text>"
 EOF
   exit 0
 fi
@@ -54,21 +54,21 @@ jq -r '.history | (if length > 5 then .[-5:] else . end) | .[] | "  [\(.ts)] tur
 
 case "$status" in
   active)
-    printf '\nKill switches: /goal abort   OR   touch %s\n' "$(goal_stop_path)"
+    printf '\nKill switches: /mygoal abort   OR   touch %s\n' "$(goal_stop_path)"
     ;;
   paused)
-    printf '\nPaused. Resume with: /goal resume\n'
+    printf '\nPaused. Resume with: /mygoal resume\n'
     ;;
   blocked)
-    printf '\nBlocked. Review the spec & history, then either /goal abort or /goal resume after the blocker is resolved.\n'
+    printf '\nBlocked. Review the spec & history, then either /mygoal abort or /mygoal resume after the blocker is resolved.\n'
     ;;
   stalled)
-    printf '\nStalled — no working-tree/commit change for %s turns. Make a concrete change or unblock it, then /goal resume (or /goal abort).\n' "$no_progress"
+    printf '\nStalled — no working-tree/commit change for %s turns. Make a concrete change or unblock it, then /mygoal resume (or /mygoal abort).\n' "$no_progress"
     ;;
   complete)
-    printf '\nGoal complete (audited). You may /goal start a new one when ready.\n'
+    printf '\nGoal complete (audited). You may /mygoal start a new one when ready.\n'
     ;;
   aborted|budget-limited)
-    printf '\nLoop is stopped. Start a fresh goal with /goal start "<spec>".\n'
+    printf '\nLoop is stopped. Start a fresh goal with /mygoal start "<spec>".\n'
     ;;
 esac

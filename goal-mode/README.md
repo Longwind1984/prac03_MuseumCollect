@@ -1,4 +1,4 @@
-# `/goal` — long-running goal mode for Claude Code
+# `/mygoal` — long-running goal mode for Claude Code
 
 A user-level Claude Code tool that turns a one-shot request into a **self-driving,
 budget-bounded loop** with an independent, clean-context auditor. You hand it a
@@ -9,6 +9,15 @@ or it runs out of budget.
 It installs into `~/.claude`, so once installed it works in **any project and any
 conversation** for your user — each project tracks its own goal under
 `<project>/.claude/goal/`.
+
+> **Why `/mygoal` and not `/goal`?** This tool was originally written as `/goal`,
+> before Claude Code 2.1.139 shipped a built-in `/goal` command of the same name.
+> A user-level skill named `goal` would shadow the built-in one, leaving the
+> native command unreachable. Renaming the slash command to `/mygoal` lets both
+> coexist in the same `~/.claude` config: `/mygoal` runs this DIY semantic-audit
+> loop; `/goal` runs the built-in checker. The internal scripts directory is
+> still `scripts/goal/` (path unchanged → in-place upgrades and any existing
+> per-project `.claude/goal/` state migrate without changes).
 
 ## Install
 
@@ -27,13 +36,13 @@ set `CLAUDE_CONFIG_DIR`.
 ## Usage
 
 ```
-/goal start "<spec text>"   initialize a goal in the current project
-/goal status                show state (turn/token budget, last audit, history)
-/goal pause                 stop the loop re-prompting (work is untouched)
-/goal resume                re-arm the loop (extends budget if it was exhausted)
-/goal abort                 terminate the current goal (a later /goal resume re-opens it)
-/goal show-spec             print the verbatim spec driving the loop
-/goal audit                 run the clean-context auditor against the spec now
+/mygoal start "<spec text>"   initialize a goal in the current project
+/mygoal status                show state (turn/token budget, last audit, history)
+/mygoal pause                 stop the loop re-prompting (work is untouched)
+/mygoal resume                re-arm the loop (extends budget if it was exhausted)
+/mygoal abort                 terminate the current goal (a later /mygoal resume re-opens it)
+/mygoal show-spec             print the verbatim spec driving the loop
+/mygoal audit                 run the clean-context auditor against the spec now
 ```
 
 Write the spec like you're briefing a fresh agent: **what to build, what "done"
@@ -41,7 +50,7 @@ means, what constraints apply.** The auditor verifies against this text
 literally, so be concrete about acceptance criteria.
 
 ```
-/goal start "Add a /health endpoint returning {status:'ok'} as JSON.
+/mygoal start "Add a /health endpoint returning {status:'ok'} as JSON.
 Done means: route registered, returns 200 with that body, and a passing test
 exists. Constraint: no new dependencies."
 ```
@@ -50,7 +59,7 @@ exists. Constraint: no new dependencies."
 
 Two independent ways to stop the loop at any time:
 
-- **`/goal abort`** — orderly stop from the chat.
+- **`/mygoal abort`** — orderly stop from the chat.
 - **`touch <project>/.claude/goal/STOP`** — emergency stop from any shell; the
   next `Stop` hook sees the file, marks the goal aborted, and removes it.
 
@@ -58,7 +67,7 @@ Neither touches your working tree — nothing is reverted.
 
 ## How it works
 
-- **`/goal start`** writes `<project>/.claude/goal/spec.md` + `state.json`
+- **`/mygoal start`** writes `<project>/.claude/goal/spec.md` + `state.json`
   (status `active`, turn/token budget).
 - The **`Stop` hook** (`dispatcher.sh` → `continuation-hook.sh`) fires when Claude
   would stop. While the goal is `active` it re-injects the full goal **contract**
@@ -83,7 +92,7 @@ Neither touches your working tree — nothing is reverted.
   (default 8) with no completion/blocker declared, the goal moves to `stalled`
   and the loop stops with a clear diagnosis instead of spinning to the hard
   breather or budget. Any real file/commit change resets the counter, so a
-  legitimately-working agent is never interrupted; `/goal resume` re-arms it (and
+  legitimately-working agent is never interrupted; `/mygoal resume` re-arms it (and
   if it was mid-investigation, that's all it takes). Stall detection is inert
   outside a git work tree, and `GOAL_STALL_THRESHOLD=0` disables it entirely.
 
@@ -100,10 +109,10 @@ or in your shell rc.
 | `GOAL_BREATHER_HARD` | `25` | Pause unconditionally after this many auto-continuations. |
 | `GOAL_BLOCKER_THRESHOLD` | `3` | Identical `GOAL_BLOCKED:` reasons this many turns in a row → `blocked`. |
 | `GOAL_STALL_THRESHOLD` | `8` | No working-tree/commit change for this many consecutive turns → `stalled`. `0` disables. |
-| `GOAL_DEFAULT_MAX_TURNS` | `200` | Default turn budget for `/goal start`. |
-| `GOAL_DEFAULT_MAX_TOKENS` | `2000000` | Default token budget for `/goal start`. |
-| `GOAL_RESUME_TURN_BUMP` | `100` | Extra turns `/goal resume` adds when re-arming from an exhausted budget. |
-| `GOAL_RESUME_TOKEN_BUMP` | `1000000` | Extra tokens `/goal resume` adds when re-arming. |
+| `GOAL_DEFAULT_MAX_TURNS` | `200` | Default turn budget for `/mygoal start`. |
+| `GOAL_DEFAULT_MAX_TOKENS` | `2000000` | Default token budget for `/mygoal start`. |
+| `GOAL_RESUME_TURN_BUMP` | `100` | Extra turns `/mygoal resume` adds when re-arming from an exhausted budget. |
+| `GOAL_RESUME_TOKEN_BUMP` | `1000000` | Extra tokens `/mygoal resume` adds when re-arming. |
 | `GOAL_HISTORY_MAX` | `50` | Keep at most this many history events in `state.json`. |
 | `GOAL_TRANSCRIPT_TAIL_LINES` | `500` | Window scanned for the last assistant message (long-goal performance). |
 | `GOAL_AUDIT_BUDGET_USD` | `1.50` | Per-audit spend cap for the `claude -p` auditor. |
@@ -114,12 +123,12 @@ or in your shell rc.
 ```
 scripts/goal/
   lib.sh                shared state/path/contract helpers
-  dispatch.sh           /goal subcommand router (called by the skill)
+  dispatch.sh           /mygoal subcommand router (called by the skill)
   dispatcher.sh         Stop-hook entry: goal continuation, then git-check
   continuation-hook.sh  the re-prompt / completion / blocker / budget logic
   auditor.sh            spawns the clean-context claude -p auditor
   start.sh status.sh pause.sh resume.sh abort.sh show-spec.sh audit-now.sh
-skills/goal/SKILL.md     the /goal slash command
+skills/mygoal/SKILL.md   the /mygoal slash command
 test/run-qa.sh           portable, hermetic QA harness (see Testing)
 install.sh
 ```
@@ -142,6 +151,6 @@ assertions passed.
 
 ## Uninstall
 
-Remove `~/.claude/scripts/goal/` and `~/.claude/skills/goal/`, and delete the
+Remove `~/.claude/scripts/goal/` and `~/.claude/skills/mygoal/`, and delete the
 `dispatcher.sh` `Stop` hook entry from `~/.claude/settings.json` (a `.bak.*`
 copy from install time sits next to it).

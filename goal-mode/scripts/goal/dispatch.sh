@@ -1,5 +1,5 @@
 #!/bin/bash
-# Router for /goal slash command. Called from skills/goal/SKILL.md.
+# Router for /mygoal slash command. Called from skills/mygoal/SKILL.md.
 set -uo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -16,7 +16,7 @@ case "$sub" in
   audit)     bash "$SCRIPT_DIR/audit-now.sh" ;;
   help|-h|--help)
     cat <<'EOF'
-/goal subcommands:
+/mygoal subcommands:
   start "<spec text>"   initialize a new goal (writes .claude/goal/spec.md + state.json)
   status                show current goal state
   pause                 pause continuation loop (status -> paused)
@@ -26,7 +26,7 @@ case "$sub" in
   audit                 run the clean-context auditor against the spec now
 
 Kill switches (always work):
-  /goal abort
+  /mygoal abort
   touch <project>/.claude/goal/STOP
 EOF
     ;;

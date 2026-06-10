@@ -1,7 +1,9 @@
 #!/bin/bash
-# Installer for /goal mode — a user-level Claude Code tool.
+# Installer for /mygoal — this repo's DIY "goal mode" reimplementation,
+# renamed from the original /goal so it coexists with the built-in /goal
+# command introduced in Claude Code 2.1.139+.
 # Copies the scripts + skill into ~/.claude and registers the Stop hook,
-# so /goal works in ANY project and ANY conversation for this user.
+# so /mygoal works in ANY project and ANY conversation for this user.
 #
 # Idempotent: safe to re-run (e.g. after pulling an update).
 
@@ -29,15 +31,26 @@ SETTINGS="$CLAUDE_DIR/settings.json"
 
 command -v jq >/dev/null 2>&1 || { echo "ERROR: jq is required (the tool uses it for state). Install jq and re-run." >&2; exit 1; }
 
-echo "Installing /goal mode into: $CLAUDE_DIR"
+echo "Installing /mygoal into: $CLAUDE_DIR"
 
-# 1. Scripts + skill.
-mkdir -p "$CLAUDE_DIR/scripts/goal" "$CLAUDE_DIR/skills/goal"
+# 1. Scripts + skill. The slash command is /mygoal so it coexists with the
+# native /goal command shipped in Claude Code 2.1.139+. The internal scripts
+# directory is still scripts/goal/ (unchanged path keeps in-place upgrades and
+# any existing per-project .claude/goal/ state usable without migration).
+mkdir -p "$CLAUDE_DIR/scripts/goal" "$CLAUDE_DIR/skills/mygoal"
 cp "$SRC"/scripts/goal/*.sh "$CLAUDE_DIR/scripts/goal/"
-cp "$SRC"/skills/goal/SKILL.md "$CLAUDE_DIR/skills/goal/SKILL.md"
+cp "$SRC"/skills/mygoal/SKILL.md "$CLAUDE_DIR/skills/mygoal/SKILL.md"
 chmod +x "$CLAUDE_DIR"/scripts/goal/*.sh
 echo "  • scripts  -> $CLAUDE_DIR/scripts/goal/"
-echo "  • skill    -> $CLAUDE_DIR/skills/goal/SKILL.md"
+echo "  • skill    -> $CLAUDE_DIR/skills/mygoal/SKILL.md"
+
+# Clean up the OLD skill location from any prior install so /goal isn't
+# shadowed any longer (this is what made the native command unreachable when
+# the DIY skill was still named "goal").
+if [[ -d "$CLAUDE_DIR/skills/goal" ]]; then
+  rm -rf "$CLAUDE_DIR/skills/goal"
+  echo "  • removed legacy $CLAUDE_DIR/skills/goal/ (so the native /goal is no longer shadowed)"
+fi
 
 # 2. Register the Stop hook (append if absent), backing up settings first.
 [[ -f "$SETTINGS" ]] || printf '{}\n' > "$SETTINGS"
@@ -74,14 +87,17 @@ cat <<EOF
 Done. Restart Claude Code (or start a new session) so the Stop hook loads.
 
 Usage:
-  /goal start "<spec text>"   start a self-driving goal in the current project
-  /goal status                show state
-  /goal pause | resume | abort
-  /goal show-spec | audit
+  /mygoal start "<spec text>"   start a self-driving goal in the current project
+  /mygoal status                show state
+  /mygoal pause | resume | abort
+  /mygoal show-spec | audit
 
 Kill switch (always works):
-  /goal abort
+  /mygoal abort
   touch <project>/.claude/goal/STOP
+
+Note: this tool is called /mygoal to coexist with the built-in /goal in
+Claude Code 2.1.139+. Both commands now work side-by-side.
 
 Tip: add '.claude/goal/' to each project's .gitignore — it holds goal state and
 audit logs (which can capture file/test output) and should not be committed.
