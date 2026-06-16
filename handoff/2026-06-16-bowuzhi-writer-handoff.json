@@ -1,0 +1,352 @@
+{
+  "handoff_meta": {
+    "title": "博物志 APP · 项目写作交接包 (writer handoff)",
+    "purpose": "把『博物志』整个开发过程——产品决策、迭代、设计思路(产品+技术)、方法论——完整、准确地交给下一个负责页面创作的写作 pipeline AI。",
+    "scope_directive_from_PM": "完整描述全过程,不预设写作风格/叙事风格(那是写作 pipeline 的工作)。本文件只提供结构化事实素材。",
+    "for": "personal website / 简历扩展页 的项目介绍创作",
+    "date": "2026-06-16",
+    "source_repo": "longwind1984/prac03_museumcollect (branch claude/museum-photo-sharing-8qJiz)",
+    "how_to_use": "本文件是事实底座。每条都尽量带具体数字/日期/文件路径,便于写作者核实与取材。读 critical_framing_notes 先,它决定怎么不误述这个项目。",
+    "compiled_from": "对仓库 50+ 份文档(PRD/ADR×4/case-study/北极星/竞品/假设登记/agent宪法×6/审计×18/成本/决策日志/researcher reports×5/sample bundles×3 等)的系统抽取 + 本会话亲手构建的 RAG Open Discovery Pipeline。"
+  },
+
+  "critical_framing_notes": {
+    "naming": {
+      "brand_for_this_writeup": "博物志 (PM 为这篇作品集新起的对外品牌名)",
+      "important": "『博物志』这个名字在仓库任何文件里都不出现。它是 PM 给写作用的统一品牌。内部历史名称见 aliases。写作者可自由使用『博物志』,但不要声称仓库里就叫这个名。",
+      "internal_aliases": ["一起看 / Alongside (AI 伴游产品愿景线)", "MuseumCollect (作品集仓库名 + 扫描收藏产品线)", "青铜器图鉴 (青铜垂类 demo 的口语名)"]
+    },
+    "structural_truth_do_not_misrepresent": "仓库里其实存在三条没有完全合并的线,写作者要么把它们讲成『同一产品的演化/不同侧面』,要么诚实并列,但不要假装它们从头就是一个统一规格。三条线见 the_three_workstreams。",
+    "the_three_workstreams": [
+      {"id": "L1-companion", "name": "「一起看」AI 伴游愿景", "date": "2026-05-16 起", "essence": "AI 原生的博物馆陪看者:克制、有立场、像同行的资深爱好者,而不是讲解员。给『中度爱好者』。", "key_docs": "docs/PRD.md, docs/ADR/001-form-factor.md, agents/user-voice/*"},
+      {"id": "L2-collect", "name": "青铜器图鉴 / MuseumCollect 扫描收藏 demo", "date": "2026-05-20 起(D0/D1 夜跑)", "essence": "拍一下展品→AI 识别→7+1 文化维度结构化→收进『个人博物馆』。文博版 Pokédex/eBird。这是作品集真正跑出来的 demo + 商业 PM 文档层。", "key_docs": "docs/case-study.md, demos/v3-converged/*, docs/dimensional-map-v3.md, docs/north-star.md, docs/assumptions-register.md"},
+      {"id": "L3-rag", "name": "Open Discovery Pipeline (RAG 知识库基础设施)", "date": "2026-06-06 起(本会话构建)", "essence": "用 AI agent 从分散、版权不一、可达性不一的中外文博源里,为每件展品自动拼出跨馆/学术/现场多维 bundle。是 L1/L2 共同需要的知识底座。", "key_docs": "docs/ADR/003,005,006, agents/researcher/reports/*, agents/researcher/sample-bundles/*, scripts/fetch/*, handoff/2026-06-06-*"}
+    ],
+    "relationship_recommendation": "最自洽的讲法:博物志是一个『AI 原生文博陪伴产品』的探索;青铜器图鉴是它落地的第一个垂类 demo;一起看是产品哲学/人格层;Open Discovery Pipeline 是知识基础设施。三者由同一 founding insight(海外流散文物的开放数据是中文文博 AI 最稳的底座)和同一方法论(有边界的 agent 团队 + 审计驱动迭代)串起。写作者可决定是否如此统一。",
+    "pervading_DNA": "这个项目最强的气质是『诚实纪律』:拒绝伪造数字、把找不到当产品哲学、主动抓自己的双标。写作者应让这条贯穿,而不是把它写成一个『功能很全的 demo』。",
+    "known_inconsistencies_to_avoid_tripping_on": [
+      "版本号有两套:demo 线 v1→v3→v4.5→v4.6→v5;作品集打磨线 v0.6→v0.9(还有会话里用过 v1.0/v1.1 指知识库扩充+真实地形那批)。同一批活在不同文档里编号不同。建议写作者按『做了什么』讲,少纠缠版本号。",
+      "academic 入库格式:ADR-003 同时出现『四件套』和『七字段』两种说法,七字段(标题+作者+出处+发表年+摘要+≤100字短引+URL)是规范版。",
+      "30件工时:feasibility 报告 TL;DR 写 80-120h,§3 推导写 110-150h;110-150h 是细算版。",
+      "decision-log 只写到 D0-001..005;morning-report 提到的 D0-006..009 实际没写进 decision-log(文档与实际的 gap,本身可作为『诚实』素材)。",
+      "demo 页数:README/case-study 口径『12 个核心维度页』;demos/v3-converged/ 实际 14 个 .html(含 index/scan/catalog/wiki/artifact)。",
+      "wiki『20 个并行 agent 扩充』的过程在会话历史里发生过,文档未记;但产出 56 条/77,215 汉字 已由 wiki/index.json 证实。"
+    ]
+  },
+
+  "project_identity": {
+    "one_liner_candidates_factual": [
+      "一个 AI PM 作品集:用 8 个有边界的 AI agent、跑 5 个 sprint,从零做出一个文博陪伴产品的设计+demo+知识基础设施。",
+      "给博物馆中度爱好者的 AI 原生陪看/收藏产品——不是给你讲文物,是和你一起看。"
+    ],
+    "what_it_is": "一个以青铜器为首个垂类的文博 AI 产品的完整 PM 作品集:产品定位/PRD/ADR、可跑的 12+ 页 web demo、277 件结构化文物数据、一套 RAG 知识库发现管道,以及把这一切做出来的『AI agent 团队 + 审计驱动迭代』方法论。",
+    "what_it_is_NOT": "不是已上线产品。MVP 未发布、真实 CLIP 识别未端到端跑通(沙箱防火墙)、无真实用户 beta(仅 9 人粗访)。README 自己把这些局限写在最顶部。",
+    "status": "作品集/原型阶段。Demo 可跑(28/28 Playwright 绿)。RAG 管道设计完成、本地夜跑待执行。",
+    "author_bio_facts": "约 8 年 AI/ML 工程背景(推荐系统 / NLP 检索 / CV embedding),正转型 AI 产品经理。这个作品集是其『能否把 AI 产品从零做出来』的实证。",
+    "positioning_thesis_verbatim": "这不是『我用 AI 写代码的 PM』,是『我把 AI 的约束当作产品设计原则』的实证。"
+  },
+
+  "the_core_thesis": {
+    "AI_PM_thesis": "AI PM 的关键不是用 AI 写代码,是把 AI 的约束(角色有边界 / 上下文冷启动 / 文件系统即状态)当作产品与协作的设计原则。",
+    "three_AI_constraints_turned_into_principles": [
+      "角色有边界 → 用 6-8 个职责单一、互相制衡的 agent,而非一个全能助手。",
+      "上下文冷启动 → 每个被召唤的 agent 是『无记忆新人线程』;新人视角反而成了审计特性(能抓到设计者盲区),坏掉的回合可以重启。",
+      "文件系统即状态 → 用 append-only 事件日志 + git trace 做协调与可追溯,任何决策都能 grep 到来源。"
+    ],
+    "product_founding_insight": {
+      "title": "流散海外的中国文物,是中文 AI 文博产品最稳的底座。",
+      "promoted": "2026-05-17 从 ADR-003 附录提升为 PRD §1.4 founding insight。",
+      "reasoning": "国内没有任何一家馆达到 Met/V&A/Smithsonian 的开放度(无公开 API、无 CC0);立体文物高清摄影在国内受著作权保护,商业 RAG 处灰区。但中国文物(北朝佛造像/青铜/玉/瓷)约 1900±大量流散海外,近十年被 Met/克利夫兰/Freer-Sackler/Nelson-Atkins/宾大/V&A 等以 CC0 释出高清图+元数据。",
+      "the_irony_verbatim": "做一个面向中国大陆用户的 AI 文博产品,最稳、最干净、最可放心向量化的图像底座,不是任何一家国内馆,而是这些海外馆的 CC0 数据集。",
+      "drives": "一期切片定为『天龙山:从晋阳到世界——北朝佛造像的流散与数字回归』,以山西博物院『佛风遗韵』为现场锚点。流散叙事本身就是产品的内容(承认争议、多视角、跨馆),不是被叙事服务的题材。"
+    }
+  },
+
+  "chronology": {
+    "version_numbering_note": "见 critical_framing_notes;以下按时间+做了什么组织。",
+    "timeline": [
+      {"date": "2026-05-16", "phase": "产品愿景成形(一起看)", "what": "写出 PRD v0;敲定 ADR-001(形态=屏为主,语音为辅)、ADR-003(知识源六层+许可分层)、ADR-005(展品发现三层管道)。", "why_decisions": "先把『是什么产品/在哪用/用什么数据/怎么知道哪件在展』四个根问题用 ADR 锁住。", "artifacts": "docs/PRD.md, docs/ADR/001,003,005"},
+      {"date": "2026-05-17", "phase": "研究 + 团队成形", "what": "founding insight 升级到 PRD §1.4;Track 1/2/3 三路研究(大陆馆/海外OA/学术);确认 user-voice 三个用户实例;授权 Orchestrator 自主跑零成本只读测试;组建常驻 6 角色 agent 团队(因为 PM 单人『既出方案又评方案,没有制衡』)。", "why_decisions": "把『海外CC0最稳』从直觉变成被研究证实的立论;建立制衡机制。", "artifacts": "agents/README.md, agents/*/constitution.md, agents/researcher/reports/2026-05-17-track1/2/3"},
+      {"date": "2026-05-18", "phase": "RAG 可行性 de-risk", "what": "对 3 件样本实测 Open Discovery 可行性;实测国内 6 家 LLM API 可达性。结论:沙箱对所有外网 403;真瓶颈是执行环境不是 agent 设计;30 件诚实工时 110-150h。", "artifacts": "agents/researcher/reports/2026-05-18-discovery-pipeline-feasibility.md, 2026-05-18-cn-llm-api-reachability.md, sample-bundles/*"},
+      {"date": "2026-05-20 (D0 夜跑, 8 小时)", "phase": "青铜器 demo v1", "what": "3 个按用户人格分化的 demo(A 考据派陈翊安 / B 沉浸派苏念 / C 探索派阿K),每个 8 页;25 件×6-7 字段;5+1 审计小队;v2 闭环(12 个剪影 SVG + 4 个内容修复,Playwright 验证)。15 个子 agent / ~2.4M tokens / ~$20-25 / ~2h7m 计算时间。", "why_decisions": "用人格分化的多 demo 探索可能性空间(D0-003);游戏化设为一等公民(D0-005,加 Motivation Auditor)。", "artifacts": "morning-report.md, cost/cost-report.md, state/decision-log.md(D0-001..005), audits/d1-*"},
+      {"date": "2026-05-21 (D1 夜跑)", "phase": "v3 收敛", "what": "用户反馈『知识库太薄/视觉太粗/维度该重审』→ AskUserQuestion → 4 决策(7+1 维度 / 300 件 / 单一收敛 demo / 一夜建成)。3 个 Builder 坍缩成 1 个 Builder-Converger(融合 A 的考据排版 + B 的何尊情感 + C 的吸顶导航工程);277 件×11 字段(5 个 Data Engineer 并行);12 页收敛 demo;事件总线协议。D2 审计。", "artifacts": "demos/v3-converged/, docs/data-schema-v3.md, docs/dimensional-map-v3.md, audits/d2-*"},
+      {"date": "2026-05-22", "phase": "v4.5 审计自审 + v4.6 真实地图/移动端 + v5 性能", "what": "v4.5:加第 7 个 Runtime Auditor(唯一强制执行工具的审计)+ 8 项强制验证清单——因为 BUG-001(28 个详情页静默回退到后母戊鼎)被 5 个只读审计全部漏过,『审计小队审计了审计小队』。v4.6:真实 GeoJSON(d3.geoConicEqualArea)+ 移动端适配(375px,纯 @media 改造);28/28 测试绿。v5:卸载 Tailwind CDN、本地化 d3、a11y 对比度、data-loader 并行化。", "artifacts": "audits/d3-runtime.{md,json}, audits/d4-mobile-runtime.md, audits/bug-log.md"},
+      {"date": "2026-06-05", "phase": "AI 可信度 + 商业覆盖(v0.6-v0.8)", "what": "case-study 加 §0.5 作者 + §5.9『PoC stub 而非假数字』;ai-service/poc/ 生产形态 stub(CLIP/eval/cli);沙箱多策略尝试后 pivot 到 in-sandbox pHash 基线(真但近乎无用:intra-family P@1=0.333 / P@5=0.667)。round-1 冷审计(覆盖度)→ 发现商业文档缺位 → 补 5 份商业 PM 文档(北极星/竞品/one-pager/风险/分析事件)。", "artifacts": "ai-service/poc/, docs/ai-roadmap.md, docs/north-star.md, docs/competitive-landscape.md, docs/product-policy-and-risks.md"},
+      {"date": "2026-06-06", "phase": "可信度自审(v0.9)+ RAG 主线", "what": "round-2 冷审计(可信度)抓出 PM 自己的双标:『§5.9 拒绝伪造 CLIP P@5、说假数字直接 disqualify,同周却在商业文档伪造 9 个 load-bearing 商业指标、零引用』→ 建 assumptions-register(24 个数字打 [M]/[B]/[A] 标签)+ 修 6 处跨文档矛盾 + pHash 降级。同时:RAG 主线——起草并签发 ADR-006(Open Discovery Pipeline);OD-2 海外 OA 可达性实测(也全 403);产出本地 Verifier 交接包 + 夜跑指令 + VPN 分流;PM 对 5 个开放问题逐条裁决。", "artifacts": "docs/assumptions-register.md, docs/ADR/006-open-discovery-pipeline.md, handoff/2026-06-06-night-run-prompt.md, scripts/fetch/*, data/pipeline/in/sources_candidates.pilot.json"},
+      {"date": "约 2026-06(会话内)", "phase": "知识库扩充 + 真实地形(会话称 v1.0/v1.1)", "what": "20 个并行 research agent 把知识库扩到 56 条 wiki 词条 / 77,215 汉字(Wikipedia 级);真实地理地形图重做——12 条山脉(秦岭/大巴山/太行/吕梁/中条/嵩山/燕山/大别/阴山/祁连+太白山峰)+ 6 大河 + 盆地,可缩放平移,用来解释『为什么遗址在它所在的地方』(如三星堆与中原之间隔着整个秦岭+大巴山)。移动端适配、设计大改(主色转青铜锈色)。", "artifacts": "wiki/index.json(count:56, total_chars:77215), assets/geo/*.geojson(10 个), demos/v3-converged/geo-system.html"},
+      {"date": "2026-06-07(夜跑)", "phase": "RAG 管道首次端到端实跑(无人值守)", "what": "PM 在本机贴夜跑prompt后睡觉,夜班agent(Discovery+Verifier+Compiler三合一)约1小时跑完:pilot 28候选 + 25件DRAFT全量。本机网络远好于沙箱(沙箱当初100%403,本机几乎全直连)。产出 verified_chunks.json 104条(100 ok/4 failed,36域名28件文物,按类 A15/B48/C11/D19/E7)+ 28个.bundle.md(平均3.6类源/件,分布5/5×1·4/5×2·3/5×7·2/5×11·1.5/5×2·1/5×5)+ 本机可达性地图。反幻觉硬门当场把白石佛bundle从『闭环』自我纠偏成『张力件』;主动剔3处幻觉源;MDPI被Akamai墙拦时按failed如实记而非伪标达标;发现macOS LibreSSL无法握手dpm.org.cn的真bug并加curl兜底。0次注册/0封邮件/0次绕过。", "artifacts": "docs/NIGHT-RUN-REPORT.md, data/pipeline/out/verified_chunks.json, data/pipeline/in/sources_candidates.full30.json, agents/researcher/sample-bundles/*.bundle.md(28个), agents/strategy-curator/exhibit-list.md(25 DRAFT), scripts/fetch/refetch_curl.py"}
+    ]
+  },
+
+  "product_design_thinking": {
+    "form_factor_ADR_001": {"decision": "屏为主,语音为辅(语音是『屏的影子能力』)。", "rejected": "语音优先 / 可穿戴AR / 多模态。", "four_reasons": ["可交付性:Figma 表达屏比表达耳机里发生什么容易一个量级", "设备覆盖:目标用户都有手机,可穿戴渗透率太低", "克制×屏的张力本身是亮点:在屏上做克制更难,做到了才显 PM 功力;若语音,克制几乎免费", "约一半场景需要高清细节图(看这只手),耳机做不到"], "re_review_trigger": "AR 眼镜消费级渗透 >5%,或用户反复出现『想合上手机又怕错过 AI 提示』的张力。"},
+    "ai_companion_personality_PRD_6": {
+      "positioning": "同行的资深爱好者(peer senior enthusiast),不是导览员/老学究/跨界文化人。",
+      "six_speech_rules": ["自称我/咱们,不用您,绝不自称助手/AI/导览", "短句口语,不用『学术界普遍认为』,用『我一直觉得』『上次看到一篇文章说』", "默认不教学,先反问/共情:你站在这件前面多久了?", "有立场不傲慢:我倾向认为是X,但你也可以从Y角度反驳", "诚实:承认不知道、承认学界有争议、承认说明牌可能写得保守", "自暴露:主动说自己的偏好,我去年在云冈也看了一圈,这种风格我私心更喜欢"],
+      "engineering": "system prompt = 人格+6规则;回复后自检违禁词(您好/敬请/为您介绍);长度上限 ≤80 汉字(屏) / ≤30s(语音)。",
+      "refuses": "默认不讲解、不自称权威官方、不一键讲完整馆、不替用户选立场、不做反向宣传(原则C:只 surface 叙事性,不反着宣传)。"
+    },
+    "restraint_philosophy_克制基因": {
+      "where": "PRD §8.2 克制式屏幕设计六条 + ADR-001 + 产品魂第5条『懂得克制:默认沉默,不抢文物的光』。",
+      "six_rules": ["默认低亮/单点强光", "零滚动零层级(一屏一句话+至多一图,切卡不滚动)", "零push零红点零徽章零连胜:App 不主动找你", "黑底巨大留白,视觉重心永远是文物图不是UI", "每张卡有『合上手机』按钮把人推回实物", "插耳机即转单耳语音,屏切为最小引用层"],
+      "anti_metric": "AI 主动:用户主动 说话比 ≤0.5;AI 单句 ≤80字;屏幕亮起时长 ≤参观时长30%。",
+      "inspiration": "Cal Newport《数字极简主义》、Tristan Harris『time well spent』。",
+      "tension_with_collect_line": "注意:扫描收藏线(MuseumCollect)恰恰建立在收集/打卡机制上,而一起看 §9 Reject List 明确拒绝打卡/集章/排行榜。这是两条线最大的未合并点,写作者需有意识处理。"
+    },
+    "user_voice_4_principles": {
+      "A": "反对『博物馆=超市』式浅层窥探(看懂朝代+想象古人生活就完事=逛超市)。",
+      "B": "对照本宣科讲解员的直觉反感(AI 默认不是讲解员;讲解可作可选工具档非默认人格)。",
+      "C": "觉察博物馆叙事背后的权力结构(明确点名:中国大陆体制下博物馆作为权力机器的叙事运作;产品只诚实 surface 叙事性/视角性/权力性,不做反向宣传;这是必须诚实面对的合规边界,不是回避话题)。",
+      "D": "目的是阅读知识结构的网络而非消遣(四层:布展者意图/用户自我认同的知识结构/结构性批判/跨展览跨馆的网络连接)。质量度量=是否触发了用户本不会有的结构性认知,而非停留时长。",
+      "relationship": "A+B+C 是三个前置条件,都汇入 D(终点)。",
+      "instances": "用 林知白(30,北京互联网技术PM,PM 自己的镜像=过拟合风险)、陈砚秋(24,上海艺术史研究生,把权力叙事当日常词汇)、周允(42,广州PE,跨场域沉默,资源高耐心低=克制压力测试)三个异质实例反向校验,每次评审必须用≥2个不同实例。"
+    },
+    "target_users": "核心=中度爱好者(主动逛馆、知道些朝代风格但不能系统分辨);次要=深度爱好者、艺术史/考古学生、长途文化旅行者。明确不服务:打卡客、亲子家庭、轻娱乐(需求相反,一款产品不可能同时服务)。用户研究诚实标注=桌面研究+作者一手观察,无一手访谈(标为 v2 优先;所有 persona/journey 标『设计假设』)。",
+    "competitive_positioning": {
+      "companion_line": "三类现有产品(馆方App/聚合器Smartify/语音导览市集三毛游izi.TRAVEL)都假设『馆是权威讲者、用户是被讲对象』。2D矩阵=信息密度×关系姿态,目标占据右上空白象限(高密度+平等姿态)。最大对手=2026 年用户直接对着文物开 ChatGPT/Gemini Live。5 护城河:领域深度/空间时间感/跨次记忆/策展人格/克制。",
+      "collect_line": "4 类玩家(馆方App/通用AI识别Google Lens/文博内容平台B站小红书/收集游戏化Pokémon GO Strava)。楔子=四者交集的空白。最大威胁=Google Lens(做80%就停,剩20%个人收藏Google不做因为它不想黏人);真正6-12月威胁=一个文博 PM 离职做垂类(我自己就是case)。护城河诚实从★★★★★降到★★★(承认是自利/循环论证),唯一可验证护城河=馆方合作+用户数据切换成本。"
+    },
+    "reject_list_PRD_9": ["打卡/集章/徽章/通关(对立克制基因)", "AR合成/复原动画(喧宾夺主)", "社交分享/UGC广场(会变成小红书,毁掉私密对话氛围)", "行程规划/票务/餐饮(OTA的事)", "儿童版(相反方向)", "一键讲完整馆(违反克制)", "文物百科长文(违反克制式屏幕设计)", "排行榜/热门Top10(喂养打卡心态)"],
+    "boundaries_PRD_12": "隐私:位置/停留/语音/跨次记忆默认本地存储,云同步opt-in,一键导出+一键擦除,不向馆方给个体数据;版权:优先馆方开放数据高清,学术只短引用+链接不存全文,明确是独立第三方非任何馆官方;AI立场:有立场≠替代学术权威,永远以『我倾向』开头+附学界争议链接;商业:side project 不假设回报,若假设则 B2B 授权地方馆>C端订阅,坚决不做广告流量变现(违反产品魂)。",
+    "north_star_metric": {
+      "collect_line": "WAC = Weekly Active Collectors(过去7天往个人博物馆加过≥1件的注册用户)。为何不用DAU/MAU/时长/扫描数:DAU奖励『打开即计数』会逼出打卡推送=用DAU当北极星会做坏产品;时长与核心价值负相关(快速解决=更短);『收藏』=用户做了价值判断=PMF信号。目标全是[A]假设、给区间不给点:D180 WAC≈2000-3000,D360≈2-2.5万,D720 stretch≈15-20万。5个反指标(会话时长/人均扫描数/推送量/邀请数/虚荣NPS)。§6『prepared to be wrong』列了3个会切换北极星的触发条件。",
+      "companion_line": "用户主动发起对话次数/参观时长(次/小时),目标>4/小时。"
+    },
+    "self_critique_assumptions_register": {
+      "what": "round-2 冷审计响应。核心=[M]Measured/[B]Benchmarked/[A]Assumed 标签系统,铁律:任何 [A] 数字出现处必须带『[假设·见 assumptions-register A#]』,不允许裸奔成事实。",
+      "headline_self_critique_verbatim": "你在 §5.9 拒绝伪造一个 CLIP P@5 数字、说『假数字直接 disqualify』,然后在同一周内于商业文档里伪造了 9 个 load-bearing 商业指标、零引用——证明这种『诚实』是选择性表演,不是纪律。",
+      "PM_response": "这个指控成立。这是双标。修法不是道歉,是上标签纪律。",
+      "tracked": "24 个数字:6 [M](277件/pHash P@1=0.333/P@5=0.667/28测试/7+1维度/10单测)、6 [B]、12 [A](SAM 2000-3000万/CAC¥12/LTV¥40-80/LTV-CAC 5:1 等,各带『这系数是我编的』式诚实标注)。还修了6处跨文档矛盾(维度数5vs7+1、周/月活混淆的数学错、P@5目标漂移0.60vs0.55、pHash P@5冒充CLIP可比等)。"
+    }
+  },
+
+  "technical_design_thinking": {
+    "demo_architecture": {
+      "what": "demos/v3-converged/ 单一收敛 demo,14 个 HTML(README 口径12个核心维度页)。",
+      "pages": "index, dashboard(三联动 wow 页), time-pillar, geo-system, pattern-tree, inscription-reader, inscription-special-hezun(何尊『中国』长卷,审计评设计峰值+最强动机), purpose-scene, caster-profile, catalog, me, artifact, scan, wiki。",
+      "event_bus": "6 个 window CustomEvent(era-focus/form-select/pattern-focus/caster-focus/site-focus/position-need),每个带 typed payload + source 字段(防环+调试),监听幂等,era-focus debounce 100ms,有『穿越模式』开关。诚实约束:跨页联动未实现(CustomEvent 不能跨标签页),dashboard.html 是解决它的同屏三联动页——这点被 5/5 审计和 D2 共同标为 P0(claimed-but-not-implemented)。",
+      "dataset": "277 件文物 × 11 字段,5 段朝代分片 JSON(商60/西周62/东周61/秦汉-三星堆39/边远-海外55=277,即 300 的 92%,DE-4 撞 token 上限少了23件)。",
+      "geojson_map": "真实地理:assets/geo/ 10 个文件;投影 d3.geoConicEqualArea(parallels[25,47], rotate[-105,0], fitExtent 框青铜时代核心区而非整个现代中国);physio-features=12山脉+盆地共18个命名地物;6 大河。商代区从4个内联多边形→8个真实地物;出土点14个归一化x/y%→30个真实经纬度;中国轮廓24个硬编码点→197个真实地形点。可滚动缩放拖拽。目的=解释『为什么遗址在那里』(三星堆与中原隔着整个秦岭+大巴山)。",
+      "mobile": "纯 @media(max-width:768px)改造(不重写HTML);用属性选择器覆盖13页内联grid为1fr;顶导11链接转横滚;catalog转2列小红书式。改造前11/12页因顶导溢出被浏览器缩放(innerW 502-1266),改造后全部375px,点击目标≥44px。"
+    },
+    "data_schema": {
+      "shape": "11 个字段组扩展 v1(向后兼容、加子对象):basic/excavation_detail/form_detail(含craft)/patterns_detail(5层:主纹secondary地纹local edge)/inscription_detail(逐字+jicheng_id集成号)/usage_history/academic_status/provenance_timeline/related_artifacts(≥3,12种typed relation)/image_urls/media_3d_video,外加每条 data_sources(≥3)。",
+      "dimensions": "7+1:形制/时代/地理系统/纹饰/铭文/用途礼制/铸主 + ★稀有度。从 v1 的10维裁到7+1:工艺降为形制属性、出土地+馆藏地合并为地理双视图、铸主升一等公民、稀有度降为全局视觉乘数。原则:spec for coherence not completeness(为连贯而非完整)。",
+      "anti_hallucination": "3 规则:每个找到的字段带 source URL / 缺失的填 null+TODO / 有争议的标 confidence(确认|争议|推测)+学派。约30/277 件有填不出的字段(多为传世品出土年),明确 TODO 而非编造。",
+      "7_long_inscriptions": "何尊(122字,集成06014)/大盂鼎/毛公鼎/史墙盘/大克鼎/散氏盘/虢季子白盘,带 jicheng_id 逐字释读。"
+    },
+    "design_system": {
+      "signature_color": "青铜锈色/铜色:纹样线稿 #7a5a3a,商代色 #4a5a3a,稀有金 #d4a857,AIGC 画布底 #1a1a1f(展厅黑底)。",
+      "dynasty_palette": "夏#6e4a2e 商#4a5a3a 西周#a73a2a(周朱) 春秋#2a2a3a(春墨) 战国#7a3a2a(战赭) 秦#1a1a1a(秦玄) 汉#b89046(汉黄)。",
+      "design_brief_philosophy": "设计简报刻意不规定产品形态/IA/配色,只锁『灵魂』(让被青铜器击中的人把心动收下来、养大、变成自己的东西)+3人格光谱(求知者/共鸣者/收集者)+红线(淘宝网格/满屏术语/丑分享卡=秒卸载)。",
+      "note": "8pt 栅格 / clamp() 流体排版 的细节在 docs/component-specs-v3/(7份spec),本次未展开但存在。"
+    },
+    "dimensional_map_and_motivation_hooks": {
+      "concept": "每个青铜器意义维度映射到(a)一个承载它的产品形态 +(b)一个驱动收集的动机钩子。这是产品的概念内核。",
+      "mappings": [
+        "形制→Pokédex谱系树+实景⇄线稿toggle+尺寸对照墙 / 钩子:Completion+Connection",
+        "时代→真比例垂直时间柱+朝代配色+事件刻度+收藏密度+缩放下钻 / Temporal Completion(空白段呼吸动效)",
+        "地理→真实地形GeoJSON+古国疆域overlay+出土/馆藏/海外流散三视图+时代滑块 / Spatial Completion+Story(海外流散『本应在家』情绪)",
+        "纹饰→演化树+15-25 SVG图标+拓片放大镜+跨器纹饰族 / Identity(饕餮鉴定师/凤鸟收藏家)+Story(神→礼→写实)",
+        "铭文→字字交互释读器+段位制+何尊『中国』长卷专题 / Identity(段位初窥→大宗师)+Story(何尊wow)",
+        "用途→礼器归位场景×5(太牢/燕飨/朝聘/军礼/葬礼)+等级判定 / Spatial Completion+Story(集齐九鼎→天子之礼)",
+        "铸主→列传卡(史记列传体例)+D3力导向关系图谱 / Story+Connection(动机审计的惊喜:铸主>铭文对长期留存)",
+        "★稀有度→全局光晕层(4级:禁出境195/一级/二级/三级)跨所有7维渲染"
+      ],
+      "6_motivation_types": "Completion(蔡格尼克)/Connection/Rarity/Story/Identity/Spatial-Temporal Completion。Day1→Year1 收藏旅程 0→1→5→30→80→150→300 件被明确映射。"
+    },
+    "gamification": {
+      "thesis": "形态=进度条 / 空白>填满 / 认知能力=奖励(时间柱本身就是进度条;奖励是『你现在能分辨饕餮和窃曲了』而非+1000XP)。",
+      "anti_skinner": "30+ 称号做成隐藏线(头像角标max3+分享卡水印,无成就墙页);红线:无每日打卡积分、无『差N件解锁X』红字紧迫、无排行榜、无虚荣指标(『国宝率100%行业4%』被删)、无XP-HUD、无体力/广告/抽卡;『almost there』每页最多1次且仅用户操作后;首件庆祝3s但必须有[关闭]按钮;给流失/疲劳/刷称号用户留 off-ramp(无推送,无『欢迎回来已离开N天』)。"
+    },
+    "ai_recognition_roadmap_and_poc": {
+      "roadmap": "Phase0 mock→Phase1 CLIP-ViT-B/32 zero-shot+Qdrant(25件,目标P@1≥0.40/P@5≥0.60,~¥40-80/月,<1.5s)→Phase2 CLIP+DINOv2 ensemble+腾讯OCR+YOLOv8裁剪(100件,P@5≥0.80洁净/0.75现场)→Phase3 LoRA微调+青铜PaddleOCR+主动学习(500件,P@5≥0.92/0.85)。3个图像层级(参考/测试洁净/测试现场)——关键洞察:demo 在洁净图上 benchmark,生产在现场图上失败。",
+      "the_poc_decision": "决定:发布生产形态 stub(build_index.py/eval.py 留一法P@1/P@5/cli.py 返回id/name/dynasty/cos_dist/confidence_band),而不是假数字。",
+      "reasoning_verbatim": "一个沙箱 mock 的『P@5=0.55』会直接违反 §3.3 audit-as-iteration-trigger 纪律——audit 的可信度建立在每个数字 grep 可追上。一个 fake 数字会让前面 5 个 sprint 11 份 audit 全部 retroactively 失效。",
+      "sandbox_block": "沙箱防火墙挡 huggingface.co + upload.wikimedia.org(239/277 图源)+ download.pytorch.org。多策略尝试(CLIP/timm/HF镜像/GitHub)全失败后 pivot 到 in-sandbox pHash(12 个本地 SVG 剪影,cairosvg+imagehash)→ 真但近乎无用:intra-family P@1=0.333/P@5=0.667(6个可评分,2命中,三星堆对0/2)。round-2 审计抓双标后从『thesis拼图』降级为『只证明我会在约束下行动的玩具』。"
+    },
+    "aigc_pipeline": "做的是图像风格统一(不是生成艺术):所有文物照统一底色/清晰度/色调(对标MoMA/Smithsonian)同时保留差异。规格:底#1a1a1f ΔE<3、干净抠图、模拟三点博物馆打光2800K、青铜真色、≥1000px、JPG q85 sRGB、4:5+1:1裁剪。硬红线:无『想象式补全』——三星堆缺失的眼柱保持缺失(补全=文物造假)。",
+    "image_api_evaluation": "评了~16个工具×5轴(成本/视觉一致/中国可达/红线合规/实现门槛)。结论(并列21/25):Photoroom API($0.10×277≈$27.7,一站式去背+重打光+AI阴影,generative=false 保红线)为主,本地 Real-ESRGAN 超分;备选本地 ComfyUI+BiRefNet+IC-Light v2+Real-ESRGAN($0-1.7,最安全门槛最高)。拒绝:Adobe Firefly(贵+补全)、Nano Banana Pro/通义万相(LLM驱动会重绘主体像素=红线高风险)。核心原则:任何『生成』默认关闭,只允许分割+滤镜+重打光+超分。",
+    "knowledge_base_wiki": "wiki/index.json 证实 56 词条 / 77,215 汉字,5 类(通论/专题/遗址/事件/文物),由 scripts/build-wiki-index.mjs 索引,wiki.html 展示。会话内由约20个并行 research agent 扩充而成(过程未入文档,产出已证实)。"
+  },
+
+  "the_rag_open_discovery_pipeline": {
+    "what": "用 AI agent 自动为每件展品从 5 类源拼出跨馆/学术/现场多维 bundle 的发现管道。这是本会话(2026-06-06)亲手构建并签发的主线。",
+    "knowledge_source_model_ADR_003": {
+      "six_layers": "L1 半OA故宫院刊PDF(dpm.org.cn直链) / L2 CNKI付费墙刊物(文物/考古/敦煌研究) / L3 海外馆CC0图像元数据(Met/V&A/Smithsonian/Cleveland/台北故宫) / L4 高校仓储PDF(北大考古/央美/山西大学) / L5 拍卖图录(嘉德/苏富比/佳士得) / L6 用户现场拍摄。",
+      "licensing_stratification": "海外CC0→可全量入库;主题项目(未授权,如芝大3D/敦煌)→≤512px缩略图+跳转源站;馆方现场展品→≤1024px低清示意+文字;用户自拍→端侧识别不入主库。",
+      "7_field_academic_format": "标题+作者+出处+发表年+摘要+≤100字短引用+URL;不存全文、不向量化全文(CC-BY/OA 例外可全文)。",
+      "我倾向_threshold": "AI 涉及断代/工坊归属/风格归类时必须引≥1篇CNKI或故宫院刊;命中≥2篇结论相左时强制走『观点对照层』。",
+      "hidden_conclusion": "任何大陆切片的 RAG 图像底座,最稳的不是国内馆而是 L3 海外馆 CC0(尤其 Met/Freer/Cleveland 的中国古代艺术)——中文文博 AI 被严重低估的资源。"
+    },
+    "exhibit_discovery_ADR_005": {
+      "gap": "哪些件今天在哪个展厅,没人知道:无任何大陆馆有『在展』API;馆藏≠在展(比例常1-5%);展品每周因借展/修复/轮换变动。",
+      "three_tier": "Tier0 无人冷启动(目标50-70%,通用爬虫+LLM抽schema)→Tier1 用户无感众包(80-90%,展板OCR+位置数据,核心约束:不出现任何『协助标注』按钮)→Tier2 规模化(95%+,视觉SLAM+蓝牙信标)。",
+      "reframe": "馆方不开放≠产品不能扩展;B2B 姿态从『求馆方给数据』转为『我们已收集,请馆方背书』;运营手抄展品到第30馆破产。"
+    },
+    "reachability_research_track123": {
+      "track1_mainland": "核心发现『有展示·无接入』:7家馆都有C端检索/数字展厅但无API/批量/CC0;无馆有在展API。山博URL可枚举 shanximuseum.com/sx/collection/detail/id/{N}(顺序整数,二分探测)=补『大陆馆0条』缺口的单一来源。馆方策展声明=最高ROI源(可枚举/无反爬/无版权,半天就能做)。微信公众号不可程序化抓(ToS+持续封杀)。",
+      "track2_overseas_oa": "真CC0小圈子:Met/Smithsonian/CMA/Harvard/AIC/Yale/Brooklyn/Walters/NGA。灰区:V&A(图非商业用)、宾大(CC BY 4.0,138MB CSV无图)、台北故宫(CC BY 4.0)、大英(CC BY-NC-SA+SPARQL不稳)。跳过:MFA波士顿($50/图)、旧金山亚洲艺术、Nelson-Atkins(无API但藏天龙山/龙门散件→把缺口变叙事诚实)、ROM(OpenROM是装修不是数据)、Guimet。Top3新源:AIC(P0,实体藏天龙山佛首+叙事核心芝大项目在芝加哥)+Harvard(P0,Winthrop藏)+宾大CSV。关键反向洞察:『海外』≠『CC0』,『亚洲艺术powerhouse』≠『开放数据powerhouse』。",
+      "track3_academic": "最大新发现:芝大响堂山项目 xts.uchicago.edu(天龙山姊妹项目,所有先前报告都漏了);BMFEA瑞典远东古物馆通讯(1929至今75+卷,全OA+CC-BY,少数允许全文RAG向量化的学术源);山西大学云冈学知识库 ygx.sxu.edu.cn(博硕论文PDF直下)。山博有0篇馆方一手策展声明PDF(只能从二手报道反推,稀缺性本身是叙事结构的一部分)。"
+    },
+    "feasibility_and_environment": {
+      "3_sample_result": "管道跑5类源平均2.2/5实际到手(样本1=2/5,样本2=3/5,样本3=1.5/5);缺的卡在沙箱不可达大陆域名,不是管道设计错。",
+      "real_bottleneck": "ADR-006 的P0不是『agent怎么写』,是『执行环境怎么定』。",
+      "honest_time": "单件~7h;30件gross 210h→复用-30%→150h→agent深做-25%→110-115h;PM国内IP段30-40h不可压缩;基线6-8周(PM每天1.5h)。绝不承诺『agent一周搞定30件』。",
+      "automation_matrix": "B跨馆海外OA=100% agent(管道默认起点) / E数字人文=80% / C学术=60%(URL发现100%,PDF下载需国内IP) / D现场媒体=40%(只URL发现,内容人在回路) / A馆方一手=大陆20%(必须PM国内IP)。",
+      "sandbox_403": "沙箱出口对所有外网返回 403 host_not_allowed(含OpenAI/Anthropic/Google/故宫/上博);OD-2 实测海外OA(AIC/Harvard/Penn)也全403。白名单只剩 github.com/raw.githubusercontent.com/pypi.org。→ 强制双环境分体:Phase A 沙箱(Discovery+B类grep+Compiler装订)/ Phase B PM本地(所有抓取)。",
+      "cn_llm_apis": "测了DeepSeek/智谱/通义/百度/火山/Kimi;5/6 自带联网搜索(DeepSeek唯一没有);推荐智谱BigModel(搜索栈最全+GLM-4-Flash永久免费);注册任何账号触发T3需先escalate。"
+    },
+    "open_discovery_pipeline_ADR_006": {
+      "status": "Accepted 2026-06-06,PM逐条签字。",
+      "three_sub_agents": "Discovery 探源(只列URL候选+论证,不抓)/ Verifier 核源(逐URL抓+hash+license,出沙箱在PM本地)/ Compiler 编册(模板装订+反幻觉硬门)。三角色不能合并,因为3件样本暴露的是3种不同幻觉。",
+      "anti_hallucination_state_machine": "每chunk必带{url,fetched_at,content_hash,license_observed,confidence_tier};无url拒收;无hash强制low且不可全文引用;license=unknown封顶low不向量化;找不到必须显式写『X类源未到手,原因Y』,严禁旁证补足代写。",
+      "dual_environment": "Phase A(任何环境含沙箱)+ Phase B(PM本地Claude Code CLI,国内IP+VPN)。hand-off契约=两份JSON schema(sources_candidates / verified_chunks)。",
+      "night_run_mode": "PM 诉求从『当操作员』改成『贴一段就睡』:一段长prompt贴给本地Claude,7阶段(自检环境/跑pilot/起草27件DRAFT/跑27件/Compiler装订/写报告/push)各带时间盒+失败自动跳过,总预算8h硬截止,不escalate中断PM,早晨看NIGHT-RUN-REPORT.md。",
+      "vpn_routing": "清单每条标 via_vpn:海外(Met/V&A/CMA/芝大/archive.org/MDPI)走VPN,大陆(上博/山博/震旦/故宫/澎湃/知乎)直连(海外IP会被大陆站反爬挡)。脚本按 MUSEUM_PROXY 环境变量自动分流。",
+      "5_pm_rulings_2026_06_06": "①反幻觉=严格门 ②发邮件申请免费key=红线(夜跑东八区无人回信) ③pilot后30件一次上不分批 ④B类源不迁dump本地现抓单件API ⑤VPN海外/大陆分流。"
+    },
+    "three_sample_bundles_and_wow_moments": [
+      {"bundle": "山博·北齐观音五尊像(贴金彩绘砂石,1954太原华塔村出土)", "sources": "2/5", "density": "medium", "wow": "华塔村件+海外6+4件不是『相似』而是『同一皇家工坊圈的流散网络』:晋阳(北齐别都)↔邺城(国都)↔响堂山(皇家石窟);出土地是晋阳—邺城轴的晋阳端。"},
+      {"bundle": "上博东馆·北齐白石佛立像", "sources": "夜跑实抓后≈4/5", "density": "dense", "wow": "★头条wow(2026-06-07夜跑后修正,比原版更好):同一件展品三套互相打架的产地叙事被AI叠在一起——上博挂牌写『响堂山系』,但夜跑实抓的上博藏品库一手字段写产地『山西·山西省博物院调拨』,而V&A O129249/Met 42704的同窗口北齐佛头出处写『probably Xiangtangshan(河北响堂山)』。三方不一致。反幻觉硬门据此把旧样本『馆方自标响堂山→V&A闭环』改写成『馆方山西 vs 海外响堂山』张力件——因为实抓字段不支持原说法。这是状态机『拒绝脑补、只认抓到的』最干净的一次自我纠偏(写作者注:不要再用旧的『头在伦敦身在上海虚拟拼合』说法,那是被实测推翻的版本)。"},
+      {"bundle": "震旦·红山玉神人兽像", "sources": "夜跑实抓 5/5 全到手", "density": "hard(故意挑的难件,却拼全了)", "wow": "★最强原则C/诚实落地:三块说明牌三种底气、互不提及——震旦说它是红山;国博用牛河梁科学发掘背书『红山五千年』;瑞典策展人在OCS讲座里说博物馆里这类『玉神人』没有一件经科学发掘出土。本件5/5类源全到手(A馆方/B CMA CC0/C OCS+台湾玉龙PDF/D澎湃/E国博专题)。founding insight『海外CC0最稳底座』在新石器窗口的B类原本0命中,夜跑靠CMA单件现抓救回。馆方说明牌不会写『从未科学出土』这句,但AI可以surface。"}
+    ],
+    "data_relevance_numbers": "15,299条统一schema元数据+4,466本地图。强支撑窗口=北朝—初唐287 chunks+143图(平均每件5-7个海外对照角度);明清9,604条(62.8%)=Phase1几乎无用的无支撑长尾;『0条大陆馆方原数据』=最严重缺口(demo主体是上博东馆但上博数据=0)。结论:仅约2%是Phase1强支撑核心,~63%是无支撑明清长尾——不删但冻结(禁扩)并诚实描述。"
+  },
+
+  "the_agent_team_methodology": {
+    "headline": "8 个有边界的 AI agent 跑了 5 个 sprint(这是 README hero 数字)。",
+    "two_topologies": {
+      "night_run": "夜跑拓扑(8生产角色+6→7审计人格+Comparative):🎯Orchestrator(Opus,兼架构师)/📋Product Owner(Opus)/🔬Domain Researcher★(Opus)/🎨Visualization Designer★(Opus)/🤖AI Engineer(Opus)/🔧Data Engineer×5(Sonnet)/💻Builder×3→Converger(Sonnet,worktree并行)。★=两个『重』角色,产品创新内核(维度-形态映射+游戏化)在这里。",
+      "standing_team": "常驻6角色(白天一起看Phase工作):Orchestrator/PM-Critic/Strategy-Curator/Builder/User-Voice/Researcher。起源:PM单人『既出方案又评方案,没有制衡』→建团队强制 Builder 产出需 PM-Critic+Strategy-Curator 双签才能合并,每次交互留git trace,repo=团队大脑。"
+    },
+    "constitutions": {
+      "Builder": "执行者。不决定做什么(只从已签的inbox取)、不决定是否合并(commit后留review请求等Critic)。不在approve前合主分支、不评自己产出、不顺手扩scope(顺手优化别的=新任务回backlog)、第三个僵持回合→T4。",
+      "PM-Critic": "首席批评者,有block权。不是PM本人,是PM聘的外部评审,不会因为Builder熬夜下了4466张图就放低标准。双镜头:主=高标准AI-PM招聘经理,辅=投资人(只因招聘者想看候选人能否从零做项目);冲突时偏招聘层但要求Builder显式承认trade-off,藏trade-off=block。输出APPROVE/BLOCK/REDIRECT,不『建议性补一句看着办』。",
+      "Strategy-Curator": "一个反复问题『这件事推进什么?推进多强?』。有任务准入一票否决:每个进inbox的任务需签(推进KPI/强度强中弱/合理性≤30字)。不否决方向,否决模糊。Curator=值不值得做(策略),Critic=做得好不好(质量)。",
+      "Researcher": "只供信息,不写产品文档、不评产出。每条断言带来源,无源标『经验性观察』。可免费搜索/读公开文献/试免费产品,但不可付费买报告/联系馆方学者/注册付费服务/以项目名发帖——全是T3,先escalate。",
+      "User-Voice": "多实例代表目标用户(明确不是单一persona,为对冲对林知白的过拟合)。每次评审用≥2不同实例,『如果只对林知白成立=危险信号』。建议性(原则违反flag是给Critic的红旗,不是否决权)。"
+    },
+    "escalation_triggers": "只有三种打断人类PM:T2边界违反(违反PRD §6人格/§9 Reject List/§12边界)/ T3外部资源(花钱/对外发信/联系馆方/签约/公开承诺,任何agent的提议就escalate,签字前不执行)/ T4僵局(同一产出Critic↔Builder 3回合无果)。escalations.md 当前0条目=团队从未需要打断人类。Orchestrator自主权(2026-05-17授权)=可跑零成本/非破坏/只读测试(可达性/读ToS/沙箱curl/1-2件mini-PoC)而不问,但明确不延伸到T2/T3。",
+    "audit_as_trigger": {
+      "core": "审计者不只是评审,是迭代触发器——写完audit report就同时产出next-iteration-brief,Orchestrator直接驱动下一轮;严重问题可推翻整轮(回到Researcher/Designer级重做,不只在Builder级打补丁);有界循环避免无限烧token。",
+      "cold_context_premise": "每个agent是无记忆新人线程;新人视角是审计特性(抓设计者盲区),坏掉的回合可重启;审计刻意『假装第一次看』。",
+      "6_personas": "UX(初次硬核观众)/Aesthetic(讲究设计师『配得上国宝吗』)/Content(青铜学研究生)/Motivation★(早期重度用户『我为什么会一直打开』)/PM(字节腾讯小红书招聘官)/Comparative(综合5个,出merged-spec,最后跑)。",
+      "runtime_auditor": "v4.5第7个,唯一强制执行工具的审计(不是读和看,是真点击/导航/开DevTools/查network)。双产出:runtime.json(机器可读、binding)+runtime.md(人类叙事)。binding规则:Runtime说『坏了』,Content/Aesthetic不能用『截图看着没问题』推翻。名言:Persona Auditor 判demo好不好,Runtime Auditor 判demo存不存在。",
+      "8_item_checklist": "每个审计写报告前强制执行:①多ID压测(≥5随机ID各导航验证渲染)②控制台0错误③端到端走≥1条用户旅程④声明vs现实对照表(README/case-study每条声明在跑起来的app上测✅⚠️❌)⑤移动端375px截图⑥死按钮审计⑦路由对等(每个URL参数页≥3有效+1无效)⑧数据依赖证明(每个『N件』声明数实际渲染条数)。Runtime额外做⑨network检查⑩localStorage清理测试⑪事件emit→listen延迟<200ms。"
+    },
+    "the_BUG_001_origin_story": "v3评审中5个persona审计+Comparative全部通过 demos/v3-converged/。然后用户点了后母戊鼎/何尊以外任何一件,每次都跳回后母戊鼎。根因:2条硬编码MOCK_ARTIFACTS+静默回退,覆盖其余275/277件。系统性gap:5个只读审计都是『近视读者』(读源码、看一两页)。→『审计小队审计了审计小队,v4.5就是结果』。这成了作品集最强的反思信号。",
+    "close_loop_iterations": "iteration-1(2026-05-20,~120min):5/5审计独立标了图像供应链→产出12个剪影SVG+4个内容P0修复(每个改动带审计cite-trail,Playwright验证)。iteration-2(2026-05-22):D2 P0/P1→10个修复(大克鼎断代纠正/何尊唐兰引文1976而非1986/何尊全文校正为122字/莲鹤方壶工艺去掉无支撑失蜡法/8个emoji图标转SVG/Day-0零状态引导等)。Comparative评:Loop1完全兑现可验证,Loop2有记录但没进case-study,Loop3待做;『这已不是文档问题,是叙事打包问题』。"
+  },
+
+  "key_decisions_adrs": [
+    {"id": "ADR-001", "title": "形态=屏为主语音为辅", "date": "2026-05-16", "status": "Accepted"},
+    {"id": "ADR-003", "title": "知识源六层+许可分层+一期切片(天龙山×山博)", "date": "2026-05-16", "status": "Accepted"},
+    {"id": "ADR-005", "title": "展品发现三层管道(Tier0/1/2)", "date": "2026-05-16", "status": "Accepted"},
+    {"id": "ADR-006", "title": "Open Discovery Pipeline(3子agent+双环境+反幻觉状态机)", "date": "2026-06-06", "status": "Accepted"},
+    {"id": "D0-001..005", "title": "夜跑前5个联合决策(垂类=青铜器单一/技术栈=HTML+Tailwind+vanilla+D3/3个人格分化Builder/Orchestrator自主权/游戏化一等公民)", "date": "2026-05-20", "status": "Recorded"}
+  ],
+
+  "decision_iterations_and_pivots": [
+    "从『单馆切片』(上博东馆/山博)pivot 到『主题切片』(天龙山数字回归×山博锚点)——因为单馆开放度不足,主题切片让数据层不依赖任何单馆API/CC0,且流散叙事天然命中产品基因。",
+    "3 个人格分化 demo → 收敛成 1 个 demo:用户反馈知识库太薄/视觉太粗/维度该重审,AskUserQuestion 后 4 决策,3 Builder 坍缩成 1 Converger 融合三者所长。",
+    "10 维 → 7+1 维:为连贯而非完整裁维度(工艺降属性、出土+馆藏合并、铸主升一等、稀有度降乘数)。",
+    "defer → 立即做:用户质疑『为什么要defer真实地图/移动端』,识别出defer是假经济(4h成本 vs 一周重scope),当场做掉 v4.6。",
+    "审计自审:5只读审计漏掉BUG-001 → 加Runtime Auditor+8项强制清单(v4.5)。",
+    "AI数字 vs 商业数字双标自审:round-2冷审计抓出『拒绝伪造CLIP数字却伪造9个商业指标』→建assumptions-register上标签纪律(v0.9)。",
+    "执行环境 pivot:实测沙箱对所有外网403(连海外OA都403)→ 放弃『先沙箱跑海外OA』路径,改双环境分体+PM本地夜跑。",
+    "操作模式 pivot:PM 不想当操作员逐条跑 → 改成『贴一段prompt给本地Claude,通宵无人值守自动跑』的夜跑模式。"
+  ],
+
+  "wow_moments_and_anecdotes": [
+    "白石佛立像的『叙事打架』(2026-06-07夜跑实测版,取代旧的虚拟拼合说法):上博挂牌『响堂山系』、上博藏品库一手字段却写『山西调拨』、V&A/Met海外著录写『probably Xiangtangshan』——三方产地叙事互相矛盾,AI把它们叠在一起呈现张力,而不是挑一个当真相。反幻觉硬门当场把旧样本的『闭环』说法改写成『张力件』,因为实抓字段不支持原说法。这是『状态机拒绝脑补、只认抓到的』最干净的自证。",
+    "夜跑诚实大于达标:MDPI 那篇 CC-BY 全文本是『最该 high-tier 全文入库』的源,但实测被 Akamai 边缘墙拦死(httpx+无头Chrome都只拿到challenge页)。夜班 agent 没有为了凑成功标准『≥1条CC-BY全文』而把101字的报错页伪标成 high-tier——按硬门记 failed,如实写进报告。",
+    "Discovery 主动剔除3处幻觉源:网传『太和元年鎏金释迦』实为台北故宫藏、CMA『jade cong』实为商代非良渚、Met 61052 实为清代仿件——零编造ID,并如实记多条API零命中(V&A Hongshan jade / Tianlongshan=0)。",
+    "夜跑撞到一个会卡PM本机的真bug:stock macOS Python 的 LibreSSL 2.8.3 无法和 dpm.org.cn 完成 TLS 握手(故宫院刊PDF全握手失败),系统curl(LibreSSL 3.3.6)可以——新增 refetch_curl.py 兜底救回2篇院刊正文。这实锤了 ADR-006 §风险一『PM本机也可能卡某些大陆馆』。",
+    "『红山玉神人从未经科学发掘出土』——馆方说明牌不会写,AI 可以 surface;克制+诚实变成产品哲学,『找不到一手叙事本身就是产品素材』。",
+    "BUG-001:5个只读审计全部通过的 demo,用户一点就发现28个详情页全跳回后母戊鼎——催生了『审计小队审计自己』的 Runtime Auditor。",
+    "PM 单人下了 4,466 张 MET 图、写了 800 行 chunks pipeline 后才意识到没人制衡——于是建了会否决他的 agent 团队(Curator 不为感情让步)。",
+    "沙箱对所有外网返回 21 字节『Host not in allowlist』——逼出了整个双环境分体架构;白名单只剩 GitHub+pypi。",
+    "round-2 冷审计逐字抓 PM 双标:『这种诚实是选择性表演,不是纪律』——PM 回应『指控成立,这是双标』,然后给24个数字上 [M]/[B]/[A] 标签。",
+    "in-sandbox pHash 真跑出 P@5=0.667——一个故意诚实的、近乎无用的真数字,作为『CLIP 必须打败的下限』,而不是一个好看的假数字。",
+    "真实地形图回答『为什么三星堆在那里』:三星堆与中原之间隔着整个秦岭+大巴山,地图上一眼可见。"
+  ],
+
+  "quantitative_outcomes": {
+    "agents": "~32 次子agent调用(D0 ~15 + D1 ~17);headline『8个有边界的agent』。",
+    "tokens": "~4.5M(D0 ~2.4M + D1 ~2.0M+)。",
+    "cost": "~$40-50 USD 全程(D0 夜跑 ~$20-25 有账)。成本感知路由:Opus 给判断重的角色,Sonnet 给执行,全Opus要≥3×。",
+    "artifacts": "277/300 件(92%)× 11 字段。",
+    "tests": "28/28 Playwright 绿(16原+12移动);PoC 10 单测。",
+    "audits": "11 份多视角 audit(5 D1+5 D2+1 Comparative)+2轮 cold-audit + 2份 merged-spec + 2份iteration-changes闭环 + runtime审计。",
+    "wiki": "56 词条 / 77,215 汉字。",
+    "geo": "10 个 GeoJSON;12 山脉+6河;商区4→8地物,出土点14→30,轮廓24→197点。",
+    "case_study": "~10,600 汉字,7 节(v0.9)。",
+    "data_asset": "15,299 条统一schema RAG chunks + 4,466 本地图(6源,其中3主语料3占位)。",
+    "night_run_2026_06_07": "约1小时跑完;verified_chunks.json 104条(100 ok/4 failed),覆盖36域名、28件文物;ok按类 A15/B48/C11/D19/E7(B海外OA最厚,符合ADR-006矩阵);28个.bundle.md平均3.6类源/件;反幻觉抽审28件全过(无bundle引用未抓到的URL);T3零违反(0注册/0邮件/0绕过)。",
+    "scorecard": "PM Auditor 招聘信号 D1 7.0→D2 7.8;Comparative 综合 6.5(v1)→7.2(v3);天花板9.0。",
+    "leverage": "~8-9 人周的活在 2 个夜班完成 ≈ 30-40×。"
+  },
+
+  "honest_constraints": [
+    "MVP 未发布(无 Taro 小程序移植)。",
+    "真实 CLIP 识别未端到端跑通——沙箱防火墙挡 HF+Wikimedia+pytorch;PoC 是 stub,真 P@1/P@5 待作者本机跑(1-2h)。",
+    "真实照片被挡:239/277 图源是 upload.wikimedia.org(沙箱403);AIGC canonical 目录空。",
+    "跨页事件总线联动未实现(CustomEvent不能跨标签页),dashboard 同屏三联动是 workaround——被5/5审计标P0。",
+    "无真实用户 beta(仅9人粗访,所有KPI是假设);用户研究无一手访谈(标v2优先)。",
+    "商业数字大量是 [A] 假设(12/24),已上标签但未验证;1M MAU 规模架构、真V1 PRD 待 Sprint-6。",
+    "RAG 30 件知识库:管道设计完成、本地夜跑待执行;exhibit-list 30件清单仍是空架(待夜跑起草DRAFT)。",
+    "decision-log 只写到 D0-005;case-study Loop2/Loop3 叙事未补全。"
+  ],
+
+  "glossary": {
+    "克制基因": "产品刻意不做打卡/推送/排行榜/徽章,默认沉默把人推回实物的设计哲学。",
+    "founding insight": "海外流散文物的 CC0 开放数据是中文文博 AI 最稳的图像/元数据底座。",
+    "7+1 维度": "形制/时代/地理/纹饰/铭文/用途/铸主 + 稀有度,文物意义的结构化拆解。",
+    "事件总线": "demo 各维度页之间用 window CustomEvent 联动的协议(穿越模式)。",
+    "Open Discovery Pipeline": "用 Discovery/Verifier/Compiler 三子agent自动为每件展品拼多源bundle的发现管道(ADR-006)。",
+    "反幻觉状态机": "每条资料必须带真实url+内容指纹+版权+可信度,找不到就如实标,绝不脑补的硬约束。",
+    "双环境分体": "沙箱(动脑:列URL+本地grep+装订)/ PM本地(动手:真抓取),因为沙箱连不上任何外网。",
+    "夜跑模式": "贴一段prompt给本地Claude,通宵无人值守自动跑、早晨看报告的执行方式。",
+    "audit-as-trigger": "审计者不只评审,写完报告同时产出下一轮迭代brief,直接驱动迭代;严重问题可推翻整轮。",
+    "Runtime Auditor": "唯一真执行工具(点击/DevTools/network)的审计,verdict对其他审计binding。",
+    "T2/T3/T4": "三种打断人类的升级:边界违反/外部资源(花钱发信)/Critic-Builder僵局。",
+    "in-sandbox pHash 基线": "沙箱里用感知哈希在12个剪影上真跑的识别基线(P@5=0.667),CLIP必须打败的下限。",
+    "有展示·无接入": "大陆馆都有C端展示界面但无任何机器可读API/CC0的行业现状。",
+    "[M]/[B]/[A]": "数字来源标签:实测/有benchmark/纯假设;任何假设数字出现处必须带标签不许裸奔。"
+  },
+
+  "artifacts_and_links_for_writer": {
+    "note": "写作者可引用/截图/取材的仓库文件。",
+    "narrative_spine": ["docs/case-study.md(~10600字,最丰富单一来源)", "README.md(项目门面+诚实局限表+30秒入口)", "morning-report.md(D0夜跑5分钟战果)"],
+    "product_docs": ["docs/PRD.md", "docs/one-pager.md", "docs/north-star.md", "docs/competitive-landscape.md", "docs/assumptions-register.md(双标自审)", "docs/product-policy-and-risks.md"],
+    "design_tech_docs": ["docs/dimensional-map-v3.md", "docs/motivation-hooks-v3.md", "docs/gamification-mechanics-v3.md", "docs/data-schema-v3.md", "docs/ai-roadmap.md", "docs/aigc-pipeline.md", "docs/image-processing-api-evaluation.md", "docs/design-brief.md"],
+    "adrs": ["docs/ADR/001-form-factor.md", "docs/ADR/003-knowledge-sources.md", "docs/ADR/005-exhibit-discovery.md", "docs/ADR/006-open-discovery-pipeline.md"],
+    "methodology": ["docs/agent-team-design.md", "agents/README.md", "agents/*/constitution.md", "audits/iteration-1-changes.md", "audits/iteration-2-v3-changes.md", "audits/d3-runtime.md", "audits/bug-log.md", "audits/d1-pm.md", "audits/d2-pm.md", "cost/cost-report.md"],
+    "rag_pipeline": ["agents/researcher/reports/2026-05-17-track1/2/3-*.md", "agents/researcher/reports/2026-05-18-discovery-pipeline-feasibility.md", "agents/researcher/sample-bundles/*.md", "agents/strategy-curator/data-relevance.md", "handoff/2026-06-06-night-run-prompt.md", "scripts/fetch/*"],
+    "demos_for_screenshot": ["demos/v3-converged/dashboard.html(三联动wow)", "demos/v3-converged/inscription-special-hezun.html(何尊中国长卷,设计峰值)", "demos/v3-converged/time-pillar.html", "demos/v3-converged/geo-system.html(真实地形)", "demos/v3-converged/me.html(个人博物馆+反Skinner)"],
+    "visual_assets": ["assets/screenshots/(5张hero)", "assets/geo/*.geojson", "assets/silhouettes/(12 SVG)", "assets/patterns/(25-26 SVG)", "wiki/(56词条)"]
+  },
+
+  "page_section_candidates_factual_not_stylistic": {
+    "note": "可能的内容分块(供写作者组织,排序/语气/取舍由写作 pipeline 决定;这里只提供『有哪些料可讲』)。",
+    "blocks": [
+      "项目是什么 + 一句话定位 + 它不是什么(诚实局限)",
+      "founding insight:为什么海外流散文物是中文文博AI最稳底座",
+      "产品设计:克制人格 / 7+1维度 / 收集动机 / 拒绝清单 / 北极星",
+      "技术设计:可跑demo(事件总线/真实地形/移动端)/ 数据schema / AI识别roadmap+诚实stub决策 / 图像处理管道",
+      "RAG 知识基础设施:Open Discovery Pipeline / 双环境 / 反幻觉 / 三件样本wow / 夜跑模式",
+      "方法论:8个有边界的agent团队 / 审计驱动迭代 / 审计自审(BUG-001→Runtime Auditor) / 升级触发器",
+      "决策迭代史:cold-audit两轮 / 双标自审 / 收敛与pivot",
+      "量化成果 + 诚实约束",
+      "作者背景与AI-PM论点(把AI约束当设计原则)"
+    ]
+  },
+
+  "open_threads_current_state": {
+    "rag_night_run": "已于 2026-06-07 完成(约1小时,远低于8h预算)。产出:verified_chunks.json 104条chunk(100 ok/4 failed,覆盖36域名28件文物)+ 25件DRAFT清单 + 28个.bundle.md(3 pilot+25 DRAFT,平均3.6类源/件)+ 本机可达性地图 + 新工具 refetch_curl.py。本机网络远好于沙箱:Met/CMA/V&A/上博/山西/震旦/澎湃/archive.org/uchicago 几乎全直连可达。0次注册/0封邮件/0次绕过(T3全守)。详见 docs/NIGHT-RUN-REPORT.md。待PM:核签30件清单 + 处理报告里7条待决(山博补2件/thin件去留/震旦补汉代玉/MDPI被墙/curl兜底是否并入默认链 等)。",
+    "rag_pipeline_bugs_found_by_night_run": "夜跑顺带发现4个管线层问题(留给Builder):①大陆页GB18030字符集丢失成乱码 ②共享URL在dedup后串号致bundle凭空缺源(建议chunk支持多归属) ③知乎『软封禁』(200+反爬占位JSON)被误判ok ④license=unknown是当前最大产能瓶颈(不是沙箱403)——学者站/院校库PDF卡在license未核定→封顶low只能挂URL。",
+    "pending_30_items": "exhibit-list 30件清单待夜跑起草DRAFT,PM早晨review增删后进batch。",
+    "this_branch": "claude/museum-photo-sharing-8qJiz;本writer handoff提交于此。"
+  }
+}
